@@ -153,7 +153,7 @@ namespace Jastech.Framework.Winform.Forms
             {
                 MessageYesNoForm form = new MessageYesNoForm();
                 form.Message = "Do you want to Program Exit?";
-                if (form.ShowDialog() == DialogResult.OK)
+                if (form.ShowDialog() == DialogResult.Yes)
                     StopProgram?.Invoke();
             }
         }
