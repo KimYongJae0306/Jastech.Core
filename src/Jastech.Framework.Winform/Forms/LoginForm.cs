@@ -14,11 +14,14 @@ namespace Jastech.Framework.Winform.Forms
         #endregion
 
         #region 이벤트
-        public event StopProgramDelegate StopProgramEvent;
+        public event StopProgramRequestDelegate StopProgramRequest;
+        public event StopProgramDelegate StopProgram;
         #endregion
 
         #region 델리게이트
+        public delegate bool StopProgramRequestDelegate();
         public delegate void StopProgramDelegate();
+
         #endregion
 
         #region 생성자
@@ -146,12 +149,12 @@ namespace Jastech.Framework.Winform.Forms
 
         private void pbxExit_Click(object sender, EventArgs e)
         {
-            MessageYesNoForm form = new MessageYesNoForm();
-            form.Message = "Do you want to Program Exit?";
-
-            if (form.ShowDialog() == DialogResult.Yes)
+            if (StopProgramRequest?.Invoke() == true)
             {
-                StopProgramEvent?.Invoke();
+                MessageYesNoForm form = new MessageYesNoForm();
+                form.Message = "Do you want to Program Exit?";
+                if (form.ShowDialog() == DialogResult.OK)
+                    StopProgram?.Invoke();
             }
         }
 
