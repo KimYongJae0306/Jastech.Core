@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.FrameWork.Device.Cameras
 {
-    public class VieworksVTCamera : Camera
+    public class CameraVieworksVT : Camera
     {
         #region 필드
         const string SetSensorModeCmd = "som";            // Set Sensor Mode Command (0 : TDI 1 : AREA)
@@ -61,8 +61,8 @@ namespace Jastech.FrameWork.Device.Cameras
         #endregion
 
         #region 생성자
-        public VieworksVTCamera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat)
-           : base(name, imageWidth, imageHeight, colorFormat, SensorType.Line)
+        public CameraVieworksVT(CameraInfo cameraInfo)
+           : base(cameraInfo)
         {
         }
         #endregion
@@ -85,6 +85,11 @@ namespace Jastech.FrameWork.Device.Cameras
         {
             _serialComm.DataReceived -= SerialComm_DataReceived;
             _serialComm.Close();
+        }
+
+        public override byte[] GetGrabbedImage(IntPtr ptr)
+        {
+            return null;
         }
 
         private void SerialComm_DataReceived(ReceivedPacket receivedPacket)

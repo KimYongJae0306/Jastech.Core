@@ -50,7 +50,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ACS.SPiiPlusNET">
+    <Reference Include="ACS.SPiiPlusNET, Version=2.50.0.26599, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Jastech.Library\ACS\ACS.SPiiPlusNET.dll</HintPath>
     </Reference>
     <Reference Include="Matrox.MatroxImagingLibrary">
@@ -58,6 +59,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,9 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cameras\Camera.cs" />
-    <Compile Include="Cameras\VieworksVTCamera.cs" />
+    <Compile Include="Cameras\CameraInfo.cs" />
+    <Compile Include="Cameras\CameraMil.cs" />
+    <Compile Include="Cameras\CameraVieworksVT.cs" />
     <Compile Include="Grabbers\Grabber.cs" />
-    <Compile Include="Grabbers\MILFrameGrabber.cs" />
+    <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Motion.cs" />
     <Compile Include="Motions\MovingParam.cs" />

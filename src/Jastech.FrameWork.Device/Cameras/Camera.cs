@@ -11,36 +11,21 @@ namespace Jastech.FrameWork.Device.Cameras
     {
         #region 속성
         [JsonProperty]
-        public string Name { get; private set; }
-
-        [JsonProperty]
-        public int ImageWidth { get; protected set; }
-
-        [JsonProperty]
-        public int ImageHeight { get; protected set; }
-
-        [JsonProperty]
-        public ColorFormat ColorFormat { get; protected set; }
-
-        [JsonProperty]
-        public SensorType SensorType { get; protected set; }
+        public CameraInfo CameraInfo { get; set; }
         #endregion
 
         #region 이벤트
-
+        public event CameraEventDelegate ImageGrabbed;
         #endregion
 
         #region 델리게이트
+        public delegate void CameraEventDelegate(Camera camera);
         #endregion
 
         #region 생성자
-        public Camera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+        public Camera(CameraInfo cameraInfo)
         {
-            Name = name;
-            ImageWidth = imageWidth;
-            ImageHeight = imageHeight;
-            ColorFormat = colorFormat;
-            SensorType = sensorType;
+            CameraInfo = cameraInfo;
         }
         #endregion
 
@@ -62,6 +47,22 @@ namespace Jastech.FrameWork.Device.Cameras
         public abstract void SetOffsetX(int value);
 
         public abstract void SetImageWidth(int value);
+
+        public abstract byte[] GetGrabbedImage();
+
+        public abstract void GrabOnce();
+
+        public abstract void GrabMuti(int grabCount);
+
+        public abstract void Stop();
+
+        protected void ImageGrabbedCallback()
+        {
+            if (ImageGrabbed != null)
+            {
+                ImageGrabbed.Invoke(this);
+            }
+        }
         #endregion
     }
 
@@ -74,5 +75,17 @@ namespace Jastech.FrameWork.Device.Cameras
     {
         Gray,
         RGB24
+    }
+
+    public enum CameraType
+    {
+        VT_6k35c_trigger,
+    }
+
+    public enum TriggerMode
+    {
+        Software,
+        Hardware,
+        Off
     }
 }
