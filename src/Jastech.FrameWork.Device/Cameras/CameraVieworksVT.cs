@@ -87,11 +87,6 @@ namespace Jastech.FrameWork.Device.Cameras
             _serialComm.Close();
         }
 
-        public override byte[] GetGrabbedImage(IntPtr ptr)
-        {
-            return null;
-        }
-
         private void SerialComm_DataReceived(ReceivedPacket receivedPacket)
         {
             _lastReceivedPacket = receivedPacket;
@@ -261,6 +256,26 @@ namespace Jastech.FrameWork.Device.Cameras
             _serialComm.SendPacket(message);
             //ResponseReceivedEvent.WaitOne()
         }
+
+        public override byte[] GetGrabbedImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void GrabOnce()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void GrabMuti(int grabCount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Stop()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 
@@ -278,11 +293,11 @@ namespace Jastech.FrameWork.Device.Cameras
         Line1 = 2,
     }
 
-    public enum TriggerMode
-    {
-        FreeRun = 0,
-        TriggerMode = 1,
-    }
+    //public enum TriggerMode
+    //{
+    //    FreeRun = 0,
+    //    TriggerMode = 1,
+    //}
 
     public enum TriggerSource
     {
