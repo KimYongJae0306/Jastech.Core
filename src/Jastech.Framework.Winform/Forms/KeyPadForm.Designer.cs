@@ -1,4 +1,4 @@
-﻿namespace Jastech.Framework.Util.Forms
+﻿namespace Jastech.Framework.Winform.Forms
 {
     partial class KeyPadForm
     {
