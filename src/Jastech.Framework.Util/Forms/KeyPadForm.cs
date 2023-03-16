@@ -8,12 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jastech.Framework.Winform.VisionPro.Forms
+namespace Jastech.Framework.Util.Forms
 {
     public partial class KeyPadForm : Form
     {
-        private string TempMessage { get; set; } = "";
-
         public double PadValue { get; set; }
 
         public KeyPadForm()
@@ -27,8 +25,8 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
 
             if (lblTextMessage.Text == "")
             {
-                if(button.Text == "0" || button.Text == ".")
-                return;
+                if (button.Text == "0" || button.Text == ".")
+                    return;
             }
             lblTextMessage.Text += button.Text;
         }
@@ -65,7 +63,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
 
         private void btnCanel_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Do you want cancel?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Do you want cancel?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.DialogResult = DialogResult.No;
                 Close();
