@@ -63,6 +63,16 @@ namespace Jastech.Framework.Winform.VisionPro.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Arrows {
+            get {
+                object obj = ResourceManager.GetObject("Arrows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap CrossLine {
             get {
                 object obj = ResourceManager.GetObject("CrossLine", resourceCulture);
@@ -76,6 +86,16 @@ namespace Jastech.Framework.Winform.VisionPro.Properties {
         internal static System.Drawing.Bitmap CrossLineCustom {
             get {
                 object obj = ResourceManager.GetObject("CrossLineCustom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Diameter {
+            get {
+                object obj = ResourceManager.GetObject("Diameter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +136,16 @@ namespace Jastech.Framework.Winform.VisionPro.Properties {
         internal static System.Drawing.Bitmap PointToPoint {
             get {
                 object obj = ResourceManager.GetObject("PointToPoint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rectangle {
+            get {
+                object obj = ResourceManager.GetObject("Rectangle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

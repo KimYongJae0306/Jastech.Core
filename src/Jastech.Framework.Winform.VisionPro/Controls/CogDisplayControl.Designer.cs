@@ -38,12 +38,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnPointToPoint = new System.Windows.Forms.Button();
             this.btnCustomCrossLine = new System.Windows.Forms.Button();
             this.btnCrossLine = new System.Windows.Forms.Button();
             this.btnPanning = new System.Windows.Forms.Button();
             this.btnFitZoom = new System.Windows.Forms.Button();
             this.btnFileOpen = new System.Windows.Forms.Button();
-            this.btnPointToPoint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cogDisplay)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -81,7 +84,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(57, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -141,10 +144,10 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 1, 0);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -158,17 +161,20 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.btnPointToPoint, 0, 5);
-            this.tableLayoutPanel4.Controls.Add(this.btnCustomCrossLine, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.btnCrossLine, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.btnPanning, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.btnFitZoom, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.button3, 0, 8);
             this.tableLayoutPanel4.Controls.Add(this.btnFileOpen, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnFitZoom, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.button2, 0, 7);
+            this.tableLayoutPanel4.Controls.Add(this.btnPanning, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.button1, 0, 6);
+            this.tableLayoutPanel4.Controls.Add(this.btnPointToPoint, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.btnCrossLine, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.btnCustomCrossLine, 0, 4);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(724, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 11;
+            this.tableLayoutPanel4.RowCount = 12;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
@@ -177,11 +183,58 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(57, 722);
             this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(0, 496);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(57, 63);
+            this.button3.TabIndex = 8;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(0, 434);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(57, 62);
+            this.button2.TabIndex = 7;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Arrows;
+            this.button1.Location = new System.Drawing.Point(0, 372);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 62);
+            this.button1.TabIndex = 6;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnPointToPoint
+            // 
+            this.btnPointToPoint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPointToPoint.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.PointToPoint;
+            this.btnPointToPoint.Location = new System.Drawing.Point(0, 310);
+            this.btnPointToPoint.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPointToPoint.Name = "btnPointToPoint";
+            this.btnPointToPoint.Size = new System.Drawing.Size(57, 62);
+            this.btnPointToPoint.TabIndex = 5;
+            this.btnPointToPoint.UseVisualStyleBackColor = true;
+            this.btnPointToPoint.Click += new System.EventHandler(this.btnPointToPoint_Click);
             // 
             // btnCustomCrossLine
             // 
@@ -209,7 +262,7 @@
             // 
             // btnPanning
             // 
-            this.btnPanning.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnPanning.BackColor = System.Drawing.SystemColors.Control;
             this.btnPanning.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPanning.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Panning;
             this.btnPanning.Location = new System.Drawing.Point(0, 124);
@@ -244,22 +297,11 @@
             this.btnFileOpen.UseVisualStyleBackColor = true;
             this.btnFileOpen.Click += new System.EventHandler(this.btnFileOpen_Click);
             // 
-            // btnPointToPoint
-            // 
-            this.btnPointToPoint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPointToPoint.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.PointToPoint;
-            this.btnPointToPoint.Location = new System.Drawing.Point(0, 310);
-            this.btnPointToPoint.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPointToPoint.Name = "btnPointToPoint";
-            this.btnPointToPoint.Size = new System.Drawing.Size(57, 62);
-            this.btnPointToPoint.TabIndex = 5;
-            this.btnPointToPoint.UseVisualStyleBackColor = true;
-            this.btnPointToPoint.Click += new System.EventHandler(this.btnPointToPoint_Click);
-            // 
             // CogDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel3);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CogDisplayControl";
@@ -286,11 +328,14 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Button btnFileOpen;
         private System.Windows.Forms.Button btnFitZoom;
         private System.Windows.Forms.Button btnPanning;
         private System.Windows.Forms.Button btnCrossLine;
         private System.Windows.Forms.Button btnCustomCrossLine;
         private System.Windows.Forms.Button btnPointToPoint;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnFileOpen;
     }
 }
