@@ -1,5 +1,6 @@
 ﻿using Jastech.Framework.Device.Grabbers;
 using Matrox.MatroxImagingLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Cameras
 {
-    public class CameraMil : Camera
+    public partial class CameraMil : Camera, ICameraTriggerable
     {
-
         #region 필드
         const int BufferPoolCount = 10;
 
@@ -32,13 +32,19 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 속성
+        [JsonProperty]
         public MilSystemType MilSystemType { get; set; } = MilSystemType.Solios;
 
         public uint SystemNum { get; set; } = 1; // 설치된 Frame Grabber Index
 
+        [JsonProperty]
         public int NumOfBand { get; set; }
 
+        [JsonProperty]
         public int ImagePitch { get; set; }
+
+        [JsonProperty]
+        public CameraType CameraType { get; set; }
         #endregion
 
         #region 이벤트
@@ -48,43 +54,35 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public CameraMil(CameraInfo cameraInfo)
-          : base(cameraInfo)
+        public CameraMil(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+          : base(name, imageWidth, imageHeight, colorFormat, sensorType)
         {
         }
         #endregion
 
         #region 메서드
-
         public override bool Initialize()
         {
+            base.Initialize();
+
             MilSystem = GrabberMil.GetMilSystem(MilSystemType, SystemNum);
 
             if (MilSystem == null)
                 return false;
 
-            MilCameraInfo milCameraInfo = CameraInfo as MilCameraInfo;
-
-
-            string dcfFile = GetDcfFile(milCameraInfo.CameraType);
+            string dcfFile = GetDcfFile(CameraType);
             if (dcfFile == "")
                 return false;
 
             if (CreateDigitizerId(dcfFile) == false)
                 return false;
 
-            //ImageWidth = (int)MIL.MdigInquire(MilDigitizerId, MIL.M_SIZE_X, MIL.M_NULL);
-            //ImageHeight = (int)MIL.MdigInquire(MilDigitizerId, MIL.M_SIZE_Y, MIL.M_NULL);
-
-            //if (IsContinuous)
-            //    MIL.MappControl(MIL.M_GRAB_MODE, MIL.M_CONTIGUOUS);
-
             MIL.MappControl(MIL.M_ERROR, MIL.M_PRINT_ENABLE);
 
 #if DEBUG
             MIL.MdigControl(DigitizerId, MIL.M_GRAB_TIMEOUT, MIL.M_INFINITE);
 #elif RELEASE
-            MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
+                        MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
             // MIL M_GRAB_END 콜백 등록
             //ThisHandle = GCHandle.Alloc(this);
@@ -102,34 +100,31 @@ namespace Jastech.Framework.Device.Cameras
 
             ImagePitch = (int)width * NumOfBand;
 
-            if(NumOfBand == 1)
+            if (NumOfBand == 1)
             {
                 for (int i = 0; i < BufferPoolCount; i++)
-                {
                     _grabImageBuffer[i] = MIL.MbufAlloc2d(MilSystem.SystemId, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
-                }
             }
             else
             {
                 for (int i = 0; i < BufferPoolCount; i++)
-                {
                     _grabImageBuffer[i] = MIL.MbufAllocColor(MilSystem.SystemId, 3, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
-                }
             }
-
             return true;
         }
 
-        public override void Release()
+        public override bool Release()
         {
+            base.Release();
             MIL.MdigFree(DigitizerId);
 
             MIL.MdigFree(LastGrabImage);
 
             for (int i = 0; i < BufferPoolCount; i++)
             {
-                MIL.MdigFree(_grabImageBuffer[i]); 
+                MIL.MdigFree(_grabImageBuffer[i]);
             }
+            return true;
         }
 
         private bool CreateDigitizerId(string dcfFile)
@@ -179,7 +174,7 @@ namespace Jastech.Framework.Device.Cameras
                 var pitch = MIL.MbufInquire(LastGrabImage, MIL.M_PITCH, ptr);
 
                 //byte[] UserArrayPtr = new byte[CameraInfo.ImageWidth * CameraInfo.ImageHeight];
-                byte[] dataArray = new byte[pitch * CameraInfo.ImageHeight];
+                byte[] dataArray = new byte[pitch * ImageHeight];
 
                 MIL.MbufGet(LastGrabImage, dataArray);
 
@@ -198,11 +193,11 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabMuti(int grabCount)
         {
-            if (CameraInfo.TriggerMode == TriggerMode.Software)
+            if (TriggerMode == TriggerMode.Software)
             {
                 MIL.MdigGrabContinuous(DigitizerId, LastGrabImage);
             }
-            else if(grabCount < 0)
+            else if (grabCount < 0)
             {
                 if (processingFunctionPtr != null)
                     processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
@@ -221,6 +216,19 @@ namespace Jastech.Framework.Device.Cameras
             }
         }
 
+        public override void Stop()
+        {
+            if (TriggerMode == TriggerMode.Software)
+            {
+                MIL.MdigHalt(DigitizerId);
+            }
+            else
+            {
+                MIL.MdigProcess(DigitizerId, _grabImageBuffer, 2, MIL.M_STOP, MIL.M_DEFAULT, processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
+            }
+            Thread.Sleep(50);
+        }
+
         static MIL_INT ProcessingFunction(MIL_INT HookType, MIL_ID HookId, IntPtr HookDataPtr)
         {
             if (IntPtr.Zero.Equals(HookDataPtr) == true)
@@ -235,21 +243,8 @@ namespace Jastech.Framework.Device.Cameras
             CameraMil cameraMil = hUserData.Target as CameraMil;
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
-            
-            return MIL.M_NULL;
-        }
 
-        public override void Stop()
-        {
-            if (CameraInfo.TriggerMode == TriggerMode.Software)
-            {
-                MIL.MdigHalt(DigitizerId);
-            }
-            else
-            {
-                MIL.MdigProcess(DigitizerId, _grabImageBuffer, 2, MIL.M_STOP, MIL.M_DEFAULT, processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-            }
-            Thread.Sleep(50);
+            return MIL.M_NULL;
         }
 
         public override void SetExposureTime(double value)
@@ -286,6 +281,29 @@ namespace Jastech.Framework.Device.Cameras
         public override void SetImageWidth(int value)
         {
             // dcf 파일에서 설정함
+        }
+        #endregion
+    }
+
+    public partial class CameraMil : ICameraTriggerable
+    {
+        #region 속성
+        public int TriggerChannel { get; private set; }
+
+        public TriggerMode TriggerMode { get; private set; }
+
+        public TriggerSource TriggerSource { get; private set; }
+        #endregion
+
+        #region 메서드
+        public void SetTriggerMode(TriggerMode triggerMode)
+        {
+            TriggerMode = triggerMode;
+        }
+
+        public void SetTriggerSource(TriggerSource triggerSource)
+        {
+            TriggerSource = triggerSource;
         }
         #endregion
     }

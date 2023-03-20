@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Cameras
 {
-    public class CameraVieworksVT : Camera
+    public partial class CameraVieworksVT : Camera, ICameraTDIavailable, ICameraTriggerable, ICameraPRNUavailable
     {
         #region 필드
         const string SetSensorModeCmd = "som";            // Set Sensor Mode Command (0 : TDI 1 : AREA)
@@ -61,8 +61,8 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public CameraVieworksVT(CameraInfo cameraInfo)
-           : base(cameraInfo)
+        public CameraVieworksVT(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+           : base(name, imageWidth, imageHeight, colorFormat, sensorType)
         {
         }
         #endregion
@@ -70,6 +70,8 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public override bool Initialize()
         {
+            base.Initialize();
+
             _serialComm.Initialize(SerialPortInfo, new VieworksVTCameraPortocol());
 
             if (_serialComm.Open())
@@ -81,34 +83,17 @@ namespace Jastech.Framework.Device.Cameras
                 return false;
         }
 
-        public override void Release()
+        public override bool Release()
         {
             _serialComm.DataReceived -= SerialComm_DataReceived;
             _serialComm.Close();
+
+            return true;
         }
 
         private void SerialComm_DataReceived(ReceivedPacket receivedPacket)
         {
             _lastReceivedPacket = receivedPacket;
-        }
-
-        private string MakeSetCommand(string command, double value1, double value2 = nullCommand)
-        {
-            if (value2 == nullCommand)
-                return string.Format(command + " " + value1 + "\r");
-            else
-                return string.Format(command + " " + value1 + " " + value2 + "\r");
-        }
-
-        private string MakeGetCommand(string command)
-        {
-            return string.Format(command + " " + "\r" + "\n");
-        }
-
-        public void SetSensorMode(VT_Camera_Link_OperationMode mode)
-        {
-            string message = MakeSetCommand(SetSensorModeCmd, (int)mode);
-            SendMessage(message);
         }
 
         public override void SetExposureTime(double value)
@@ -171,24 +156,103 @@ namespace Jastech.Framework.Device.Cameras
             SendMessage(message);
         }
 
-        public void SetTDIScanDriection(TDI_DirectionType direction)
+        public override byte[] GetGrabbedImage()
         {
-            string message = MakeSetCommand(SetScanDirectionCmd, (int)direction);
+            return null;
+        }
+
+        public override void GrabOnce()
+        {
+        }
+
+        public override void GrabMuti(int grabCount)
+        {
+        }
+
+        public override void Stop()
+        {
+        }
+
+        public void SendMessage(string message)
+        {
+            ResponseReceivedEvent.Reset();
+            _serialComm.SendPacket(message);
+        }
+
+        private string MakeSetCommand(string command, double value1, double value2 = nullCommand)
+        {
+            if (value2 == nullCommand)
+                return string.Format(command + " " + value1 + "\r");
+            else
+                return string.Format(command + " " + value1 + " " + value2 + "\r");
+        }
+
+        private string MakeGetCommand(string command)
+        {
+            return string.Format(command + " " + "\r" + "\n");
+        }
+        #endregion
+    }
+
+    public partial class CameraVieworksVT : ICameraTDIavailable
+    {
+        #region 속성
+        public TDIOperationMode TDIOperationMode { get; private set; }
+
+        public TDIDirectionType TDIDirection { get; private set; }
+        #endregion
+
+        #region 메서드
+        public void SetTDISensorMode(TDIOperationMode mode)
+        {
+            TDIOperationMode = mode;
+
+            string message = MakeSetCommand(SetSensorModeCmd, (int)mode);
             SendMessage(message);
         }
 
+        public void SetTDIScanDriection(TDIDirectionType direction)
+        {
+            TDIDirection = direction;
+
+            string message = MakeSetCommand(SetScanDirectionCmd, (int)direction);
+            SendMessage(message);
+        }
+        #endregion
+    }
+
+    public partial class CameraVieworksVT : ICameraTriggerable
+    {
+        #region 속성
+        public int TriggerChannel { get; private set; }
+
+        public TriggerMode TriggerMode { get; private set; }
+
+        public TriggerSource TriggerSource { get; private set; }
+        #endregion
+
+        #region 메서드
         public void SetTriggerMode(TriggerMode triggerMode)
         {
+            TriggerMode = triggerMode;
+
             string message = MakeSetCommand(SetTroggerModeCmd, (int)triggerMode);
             SendMessage(message);
         }
 
         public void SetTriggerSource(TriggerSource triggerSource)
         {
+            TriggerSource = triggerSource;
+
             string message = MakeSetCommand(SetTriggerSourceCmd, (int)triggerSource);
             SendMessage(message);
         }
+        #endregion
+    }
 
+    public partial class CameraVieworksVT : ICameraPRNUavailable
+    {
+        #region 메서드
         public void SetStrobeMode(StrobeMode mode)
         {
             string message = MakeSetCommand(SetStrobeModeCmd, (int)mode);
@@ -242,74 +306,6 @@ namespace Jastech.Framework.Device.Cameras
             string message = MakeSetCommand(PRNUCalibrationCmd, value);
             SendMessage(message);
         }
-
-        public void SetTriggerPreset(int value)
-        {
-            // Document 상 TriggerPresetCmd 가 존재하지 않음(확인 필요)
-            string message = MakeSetCommand(TriggerPresetCmd, value);
-            SendMessage(message);
-        }
-
-        public void SendMessage(string message)
-        {
-            ResponseReceivedEvent.Reset();
-            _serialComm.SendPacket(message);
-            //ResponseReceivedEvent.WaitOne()
-        }
-
-        public override byte[] GetGrabbedImage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void GrabOnce()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void GrabMuti(int grabCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Stop()
-        {
-            throw new NotImplementedException();
-        }
         #endregion
-    }
-
-    public enum VT_Camera_Link_OperationMode
-    {
-        TDI = 0,
-        Area = 1,
-    }
-
-    //TDI 모드에서만 적용 됨
-    public enum TDI_DirectionType
-    {
-        Forward = 0,
-        Reverse = 1,
-        Line1 = 2,
-    }
-
-    //public enum TriggerMode
-    //{
-    //    FreeRun = 0,
-    //    TriggerMode = 1,
-    //}
-
-    public enum TriggerSource
-    {
-        CC1_Port = 1, // CameraLink
-        External_Port = 5, // Line1
-    }
-
-    public enum StrobeMode
-    {
-        Off = 0,
-        StrobeDuration = 1,
-        TriggerPulse = 2,
-        SuccessiveHighPulse = 3,
     }
 }

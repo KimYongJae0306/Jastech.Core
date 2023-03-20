@@ -7,11 +7,34 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Cameras
 {
-    public  abstract class Camera
+    public abstract partial class Camera : IDevice
     {
+        #region 생성자
+        public Camera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+        {
+            Name = name;
+            ImageWidth = imageWidth;
+            ImageHeight = imageHeight;
+            ColorFormat = colorFormat;
+            SensorType = sensorType;
+        }
+        #endregion
+
+
         #region 속성
         [JsonProperty]
-        public CameraInfo CameraInfo { get; set; }
+        public int ImageWidth { get; protected set; }
+
+        [JsonProperty]
+        public int ImageHeight { get; protected set; }
+
+        public int ImageChannel { get => ColorFormat == ColorFormat.RGB24 ? 3 : 1; }
+
+        [JsonProperty]
+        public ColorFormat ColorFormat { get; protected set; }
+
+        [JsonProperty]
+        public SensorType SensorType { get; protected set; }
         #endregion
 
         #region 이벤트
@@ -22,18 +45,7 @@ namespace Jastech.Framework.Device.Cameras
         public delegate void CameraEventDelegate(Camera camera);
         #endregion
 
-        #region 생성자
-        public Camera(CameraInfo cameraInfo)
-        {
-            CameraInfo = cameraInfo;
-        }
-        #endregion
-
         #region 메서드
-        public abstract bool Initialize();
-
-        public abstract void Release();
-
         public abstract void SetExposureTime(double value);
 
         public abstract double GetExposureTime();
@@ -64,11 +76,33 @@ namespace Jastech.Framework.Device.Cameras
             }
         }
         #endregion
+
+    }
+
+    public abstract partial class Camera : IDevice
+    {
+        #region 속성
+        public string Name { get; protected set; }
+        #endregion
+
+        #region 메서드
+        public virtual bool Initialize()
+        {
+            return true;
+        }
+
+        public virtual bool Release()
+        {
+            //Stop();
+            return true;
+        }
+        #endregion
     }
 
     public enum SensorType
     {
-        Area, Line
+        Area,
+        Line
     }
 
     public enum ColorFormat
@@ -86,6 +120,11 @@ namespace Jastech.Framework.Device.Cameras
     {
         Software,
         Hardware,
-        Off
+    }
+
+    public enum TriggerSource
+    {
+        CC1_Port = 1, // CameraLink
+        External_Port = 5, // Line1
     }
 }
