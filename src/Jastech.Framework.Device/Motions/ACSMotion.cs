@@ -33,6 +33,11 @@ namespace Jastech.Framework.Device.Motions
         #endregion
 
         #region 생성자
+        public ACSMotion(string name, int axisNumber)
+            : base(name, axisNumber)
+        {
+
+        }
         #endregion
 
         #region 메서드
@@ -68,32 +73,38 @@ namespace Jastech.Framework.Device.Motions
             }
         }
 
-        public override MotionErrorStatus Initialize(IProtocol protocolType)
+        public override bool Initialize()
         {
-            if(_motion != null && _motion.IsConnected)
-                return MotionErrorStatus.Already_Connected;
+            base.Initialize();
+
+            if (_motion != null && _motion.IsConnected)
+                return false;
 
             CreateObject();
 
-            if (protocolType is ACSSerialProtocol)
+            if (Protocol is ACSSerialProtocol)
             {
                 if (OpenSerialPort())
-                    return MotionErrorStatus.Initialize_Succssed;
+                    return true;
             }
-            else if (protocolType is ACSTcpIpProtocol)
+            else if (Protocol is ACSTcpIpProtocol)
             {
                 if (ConectEthernet())
-                    return MotionErrorStatus.Initialize_Succssed;
+                    return true;
             }
-            return MotionErrorStatus.Initialize_Fail;
+            return false;
         }
 
-        public override void Release()
+        public override bool Release()
         {
+            base.Release();
+
             if (_motion.IsConnected)
                 _motion.KillAll();
 
             _motion?.CloseComm();
+
+            return true;
         }
 
         public override bool IsConnected()
@@ -104,14 +115,12 @@ namespace Jastech.Framework.Device.Motions
             return _motion.IsConnected;
         }
 
-        public override void ServoOn(AxisType axis)
+        public override void TurnOnServo(int axisNo, bool bOnOff)
         {
-            _motion.Enable(SetBufferNumberFromAxis(axis));
-        }
-
-        public override void ServoOff(AxisType axis)
-        {
-            _motion.Disable(SetBufferNumberFromAxis(axis));
+            if(bOnOff)
+                _motion.Enable((Axis)axisNo);
+            else
+                _motion.Disable((Axis)axisNo);
         }
 
         public override void AllServoOff()
@@ -119,54 +128,54 @@ namespace Jastech.Framework.Device.Motions
             _motion.DisableAll();
         }
 
-        public override void StopMove(AxisType axis)
+        public override void StopMove(int axisNo)
         {
-            _motion.Kill(SetBufferNumberFromAxis(axis));
+            _motion.Kill((Axis)axisNo);
         }
 
-        public override void JogMove(AxisType axis, Direction direction)
+        public override void JogMove(int axisNo, Direction direction)
         {
-            _motion.Jog(MotionFlags.ACSC_NONE, SetBufferNumberFromAxis(axis), (double)direction);
+            _motion.Jog(MotionFlags.ACSC_NONE, (Axis)axisNo, (double)direction);
         }
 
-        public override double GetActualPosition(AxisType axis)
+        public override double GetActualPosition(int axisNo)
         {
-            return _motion.GetFPosition(SetBufferNumberFromAxis(axis));
+            return _motion.GetFPosition((Axis)axisNo);
         }
 
-        public override void MoveTo(AxisType axis, double targetPosition, double velocity, double accdec)
+        public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
         {
-            SetBasicParameter(axis, velocity, accdec);
+            SetBasicParameter((Axis)axisNo, velocity, accdec);
 
-            if (ReadyToMove(axis, targetPosition))
-                _motion.ToPointAsync(MotionFlags.ACSC_NONE, SetBufferNumberFromAxis(axis), targetPosition);
+            if (ReadyToMove((Axis)axisNo, targetPosition))
+                _motion.ToPointAsync(MotionFlags.ACSC_NONE, (Axis)axisNo, targetPosition);
         }
 
-        public override void SetDefaultParameter(AxisType axis, double velocity = 10, double accdec = 10)
+        public override void SetDefaultParameter(int axisNo, double velocity = 10, double accdec = 10)
         {
-            SetBasicParameter(axis, velocity, accdec);
+            SetBasicParameter((Axis)axisNo, velocity, accdec);
         }
 
-        public override bool WaitForDone(AxisType axis)
+        public override bool WaitForDone(int axisNo)
         {
-            if (WaitForDone(axis))
+            if (WaitForDone(axisNo))
                 return true;
             else
                 return false;
         }
 
-        public override void StartHome(AxisType axis)
+        public override void StartHome(int axisNo)
         {
-            Home(axis);
+            Home(axisNo);
         }
 
-        public override string GetCurrentMotionStatus(AxisType axis)
+        public override string GetCurrentMotionStatus(int axisNo)
         {
             if (!_motion.IsConnected)
                 return null;
 
             //모터 상태 읽음
-            var state = _motion.GetMotorState(SetBufferNumberFromAxis(axis));
+            var state = _motion.GetMotorState((Axis)axisNo);
             string strMotorStates = "";
 
             //사용가능 상태인지, 멈춘 상태인지, 이동중이 아닌지 확인
@@ -182,24 +191,24 @@ namespace Jastech.Framework.Device.Motions
             return strMotorStates;
         }
 
-        public override bool IsNegativeLimit(MovingParam.AxisType axis)
+        public override bool IsNegativeLimit(int axisNo)
         {
             if (!_motion.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault(SetBufferNumberFromAxis(axis));
+            var saftyFlag = _motion.GetFault((Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_LL)
                 return true;
 
             return false;
         }
 
-        public override bool IsPositiveLimit(MovingParam.AxisType axis)
+        public override bool IsPositiveLimit(int axisNo)
         {
             if (!_motion.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault(SetBufferNumberFromAxis(axis));
+            var saftyFlag = _motion.GetFault((Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_RL)
                 return true;
 
@@ -209,66 +218,38 @@ namespace Jastech.Framework.Device.Motions
 
     public partial class ACSMotion
     {
-        private Axis SetBufferNumberFromAxis(AxisType axis)
-        {
-            Axis convertAxis = Axis.ACSC_AXIS_0;
-
-            switch (axis)
-            {
-                case AxisType.None:
-                    break;
-
-                case AxisType.X:
-                    convertAxis = Axis.ACSC_AXIS_0;
-                    break;
-
-                case AxisType.Y:
-                    convertAxis = Axis.ACSC_AXIS_8;
-                    break;
-
-                case AxisType.Z:
-                    break;
-
-                default:
-                    break;
-            }
-
-            return convertAxis;
-        }
-
-        private void SetBasicParameter(AxisType axis, double velocity, double accdec)
+        private void SetBasicParameter(Axis axis, double velocity, double accdec)
         {
             // Acceleration & Deceleration : 90%, Jerk : 10%
             // Convert Acc & Dec to rate
-            Axis acsAxis = SetBufferNumberFromAxis(axis);
             double jogAcceleration = Math.Abs(velocity / ((accdec * 0.9) / 1000.0));
 
             // Convert Jerk time to rate
             double jogJerk = Math.Abs(jogAcceleration / ((accdec * 0.1) / 1000.0));
 
-            _motion.SetVelocity(acsAxis, velocity);
-            _motion.SetAcceleration(acsAxis, jogAcceleration);
-            _motion.SetDeceleration(acsAxis, jogAcceleration);
-            _motion.SetKillDeceleration(acsAxis, jogAcceleration * 2);
-            _motion.SetJerk(acsAxis, jogJerk);
+            _motion.SetVelocity(axis, velocity);
+            _motion.SetAcceleration(axis, jogAcceleration);
+            _motion.SetDeceleration(axis, jogAcceleration);
+            _motion.SetKillDeceleration(axis, jogAcceleration * 2);
+            _motion.SetJerk(axis, jogJerk);
         }
 
-        private bool ReadyToMove(AxisType axis, double targetPosition)
+        private bool ReadyToMove(Axis axis, double targetPosition)
         {
             // Release axis event
-            _motion.FaultClear(SetBufferNumberFromAxis(axis));
+            _motion.FaultClear(axis);
 
             Thread.Sleep(100);
 
             // Read motor status
-            var state = _motion.GetMotorState(SetBufferNumberFromAxis(axis));
+            var state = _motion.GetMotorState(axis);
 
             // Check enable to move
             if (Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE) || !Convert.ToBoolean(state & MotorStates.ACSC_MST_INPOS) || !Convert.ToBoolean(state & MotorStates.ACSC_MST_ENABLE))
                 return false;
 
             // Check motor's error status
-            var error = _motion.GetMotorError(SetBufferNumberFromAxis(axis));
+            var error = _motion.GetMotorError(axis);
             if (error != (int)MotorStates.ACSC_NONE)
             {
                 Console.WriteLine("Motor error has occurred.");
@@ -291,7 +272,7 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private bool WaitForDone(AxisType axis, int timeOut = 10)
+        private bool WaitForDone(Axis axis, int timeOut = 10)
         {
             Stopwatch timeoutChecker = new Stopwatch();
 
@@ -309,13 +290,13 @@ namespace Jastech.Framework.Device.Motions
                 //}
 
                 //Amp Fault 확인
-                var safetyFlag = _motion.GetFault(SetBufferNumberFromAxis(axis));
+                var safetyFlag = _motion.GetFault(axis);
                 if (safetyFlag != SafetyControlMasks.ACSC_NONE)
                 {
                     //Amp Fault 발생
                     //####ESTOP!!####
                     _motion.KillAll();
-                    _motion.Disable(SetBufferNumberFromAxis(axis));
+                    _motion.Disable(axis);
 
                     Console.WriteLine("Fault occurs in axis Amp.");
 
@@ -338,10 +319,10 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private bool IsAxisDone(AxisType axis)
+        private bool IsAxisDone(Axis axis)
         {
-            var state = _motion.GetMotorState(SetBufferNumberFromAxis(axis));
-            var position = _motion.GetFPosition(SetBufferNumberFromAxis(axis));
+            var state = _motion.GetMotorState(axis);
+            var position = _motion.GetFPosition(axis);
 
             if (!Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE) && Convert.ToBoolean(state & MotorStates.ACSC_MST_INPOS))
                 return true;
@@ -349,46 +330,13 @@ namespace Jastech.Framework.Device.Motions
                 return false;
         }
 
-        private void Home(AxisType axis)
+        private void Home(int axisNo)
         {
             if (!_motion.IsConnected)
                 return;
 
-            _motion.RunBuffer((ProgramBuffer)SetBufferNumberFromAxis(axis), null);
+            Axis axis = (Axis)axisNo;
+            _motion.RunBuffer((ProgramBuffer)axis, null);
         }
-
-        //private void MoveRepeatCommand(AxisType axis, double startPos, double endPos, int repeatCount)
-        //{
-        //    while (IsRepeat)
-        //    {
-        //        _motion.ToPointAsync(MotionFlags.ACSC_NONE, SetBufferNumberFromAxis(enumAxis), _startPosition);
-        //        while (!WaitForDone(axis))
-        //            Thread.Sleep(1);
-        //        int Scanid = 1, TabCnt = 1;
-        //        double dist = Math.Abs(endPos - startPos);
-        //        Main.MilFrameGrabber.GrabLineScan(Scanid, TabCnt, 0, dist);
-        //        _motion.ToPointAsync(MotionFlags.ACSC_NONE, SetBufferNumberFromAxis(enumAxis), _endPosition);
-        //        while (!WaitForDone((eAxis)axis))
-        //            Thread.Sleep(1);
-
-        //        _motion.ToPointAsync(MotionFlags.ACSC_NONE, SetBufferNumberFromAxis(enumAxis), _startPosition);
-        //        while (!WaitForDone((eAxis)axis))
-        //            Thread.Sleep(1);
-
-        //        _remainRepeatCount--;
-
-        //        if (_setRepeatCount == ++_repeatCount)
-        //            _isRepeat = false;
-
-        //        if (_infiniteRepeat)
-        //        {
-        //            _isRepeat = true;
-        //            _remainRepeatCount = 0;
-        //        }
-
-        //        Console.WriteLine("Set Repeat Count : " + _setRepeatCount.ToString() + " / " + "Remain Count : " + _remainRepeatCount.ToString() + " / " + "Repeat Count : " + _repeatCount.ToString());
-        //    }
-        //}
     }
-
 }

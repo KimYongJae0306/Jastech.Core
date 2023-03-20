@@ -93,7 +93,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public virtual bool Release()
         {
-            //Stop();
+            Stop();
             return true;
         }
         #endregion

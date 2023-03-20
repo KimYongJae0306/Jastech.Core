@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cameras\Camera.cs" />
+    <Compile Include="Cameras\CameraHandler.cs" />
     <Compile Include="Cameras\CameraInfo.cs" />
     <Compile Include="Cameras\CameraMil.cs" />
     <Compile Include="Cameras\CameraVieworksVT.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="IDevice.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Motion.cs" />
+    <Compile Include="Motions\MotionHandler.cs" />
     <Compile Include="Motions\MovingParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

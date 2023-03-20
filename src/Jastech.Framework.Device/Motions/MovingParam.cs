@@ -49,12 +49,6 @@ namespace Jastech.Framework.Device.Motions
     public partial class MovingParam
     {
         #region 열거형
-        public enum MotionMakerType
-        {
-            None,
-            ACS,
-        }
-
         public enum Direction
         {
             CW = -1,
@@ -73,26 +67,6 @@ namespace Jastech.Framework.Device.Motions
             Jog,
             Increase
         }
-
-        public enum AxisType
-        {
-            None = -1,
-            X,
-            Y,
-            Z,
-        }
-
-        public enum MotionErrorStatus
-        {
-            None,
-            Initialize_Fail,
-            Initialize_Succssed,
-            Connection_Error,
-            Already_Connected,
-            Error_NotExist_MotionLibraryObject,
-            Error_NotExsit_MotionAxisConfiguration,
-        }
-
         #endregion
     }
 }

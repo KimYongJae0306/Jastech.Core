@@ -80,7 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\CSVHelper.cs" />
     <Compile Include="Helper\JsonConvertHelper.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
