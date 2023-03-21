@@ -13,24 +13,16 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class EditModelForm : Form
     {
+        #region 필드
+        InspModelFileService _inspModelFileService = new InspModelFileService();
+        #endregion
+
         #region 속성
         public string PrevModelName { get; set; }
 
         public string ModelPath { get; set; }
 
         public string PrevDescription { get; set; }
-        #endregion
-
-        #region 이벤트
-        public EditModelEventHandler EditModelHandler;
-
-        public IsExistModelEventHandler IsExistModelHandler;
-        #endregion
-
-        #region 델리게이트
-        public delegate void EditModelEventHandler(string modelName, string description);
-
-        public delegate bool IsExistModelEventHandler(string modelName);
         #endregion
 
         #region 생성자
@@ -49,22 +41,18 @@ namespace Jastech.Framework.Winform.Forms
         #region 메서드
         private void lblOK_Click(object sender, EventArgs e)
         {
-            if (IsExistModelHandler != null)
+            if (PrevModelName != txtModelName.Text)
             {
-                if (PrevModelName != txtModelName.Text)
+                if (_inspModelFileService.IsExistModel(ModelPath, txtModelName.Text))
                 {
-                    if (IsExistModelHandler.Invoke(txtModelName.Text))
-                    {
-                        MessageConfirmForm form = new MessageConfirmForm();
-                        form.Message = "동일한 모델이 존재 합니다.";
-                        form.ShowDialog();
-                        return;
-                    }
+                    MessageConfirmForm form = new MessageConfirmForm();
+                    form.Message = "동일한 모델이 존재 합니다.";
+                    form.ShowDialog();
+                    return;
                 }
             }
 
-            EditModelHandler?.Invoke(txtModelName.Text, txtDescription.Text);
-
+            _inspModelFileService.Edit(ModelPath, PrevModelName, txtModelName.Text, txtDescription.Text);
             DialogResult = DialogResult.OK;
             Close();
         }

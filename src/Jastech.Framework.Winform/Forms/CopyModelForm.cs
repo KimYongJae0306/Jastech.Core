@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Structure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,20 +13,14 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class CopyModelForm : Form
     {
+        #region 필드
+        InspModelFileService _inspModelFileService = new InspModelFileService();
+        #endregion
+
         #region 속성
         public string PrevModelName { get; set; }
-        #endregion
 
-        #region 이벤트
-        public CopyModelEventHandler CopyModelHandler;
-
-        public IsExistModelEventHandler IsExistModelHandler;
-        #endregion
-
-        #region 델리게이트
-        public delegate void CopyModelEventHandler(string newModelName);
-
-        public delegate bool IsExistModelEventHandler(string modelName);
+        public string ModelPath { get; set; }
         #endregion
 
         public CopyModelForm()
@@ -40,21 +35,18 @@ namespace Jastech.Framework.Winform.Forms
 
         private void lblOK_Click(object sender, EventArgs e)
         {
-            if (IsExistModelHandler != null)
+            if (PrevModelName != txtModelName.Text)
             {
-                if (PrevModelName != txtModelName.Text)
+                if (_inspModelFileService.IsExistModel(ModelPath, txtModelName.Text))
                 {
-                    if (IsExistModelHandler.Invoke(txtModelName.Text))
-                    {
-                        MessageConfirmForm form = new MessageConfirmForm();
-                        form.Message = "동일한 모델이 존재 합니다.";
-                        form.ShowDialog();
-                        return;
-                    }
+                    MessageConfirmForm form = new MessageConfirmForm();
+                    form.Message = "동일한 모델이 존재 합니다.";
+                    form.ShowDialog();
+                    return;
                 }
             }
 
-            CopyModelHandler?.Invoke(txtModelName.Text);
+            _inspModelFileService.Copy(ModelPath, PrevModelName, txtModelName.Text);
 
             DialogResult = DialogResult.OK;
             Close();

@@ -39,6 +39,19 @@ namespace Jastech.Framework.Structure
             return false;
         }
 
+        public void CreateModel(string modelPath, InspModel inspModel)
+        {
+            if (modelPath == "")
+                return;
+
+            string folderPath = Path.Combine(modelPath, inspModel.Name);
+
+            if (Directory.Exists(folderPath) == false)
+                Directory.CreateDirectory(folderPath);
+
+            Save(modelPath, inspModel);
+        }
+
         public bool Save(string modelPath, InspModel model)
         {
             if (model == null)

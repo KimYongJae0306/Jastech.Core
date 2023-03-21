@@ -52,34 +52,12 @@ namespace Jastech.Framework.Winform.Forms
             CreateModelForm form = new CreateModelForm();
 
             form.ModelPath = ModelPath;
-            form.IsExistModelHandler = IsExistModel;
-            form.CreateModelHandler = CreateModel;
-            form.ShowDialog();
+            if(form.ShowDialog() == DialogResult.OK)
+            {
+                UpdateModelList();
+            }
         }
-
-        private void CreateModel(InspModel inspModel)
-        {
-            if (ModelPath == "")
-                return;
-
-            string folderPath = Path.Combine(ModelPath, inspModel.Name);
-
-            if (Directory.Exists(folderPath) == false)
-                Directory.CreateDirectory(folderPath);
-
-            InspModelFileService.Save(ModelPath, inspModel);
-
-            UpdateModelList();
-        }
-
-        private bool IsExistModel(string name)
-        {
-            if (ModelPath == "")
-                return false;
-
-            return InspModelFileService.IsExistModel(ModelPath, name);
-        }
-
+     
         private void lblEditModel_Click(object sender, EventArgs e)
         {
             if (ModelPath == "" || gvModelList.SelectedRows.Count <= 0)
@@ -89,8 +67,6 @@ namespace Jastech.Framework.Winform.Forms
             form.PrevModelName = lblSelectedName.Text;
             form.PrevDescription = lblSelectedDescription.Text;
             form.ModelPath = ModelPath;
-            form.IsExistModelHandler = IsExistModel;
-            form.EditModelHandler = EditModel;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -158,8 +134,7 @@ namespace Jastech.Framework.Winform.Forms
 
             CopyModelForm form = new CopyModelForm();
             form.PrevModelName = lblSelectedName.Text;
-            form.IsExistModelHandler = IsExistModel;
-            form.CopyModelHandler = CopyModel;
+            form.ModelPath = ModelPath;
 
             if (form.ShowDialog() == DialogResult.OK)
             {

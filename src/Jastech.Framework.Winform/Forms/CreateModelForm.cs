@@ -13,23 +13,12 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class CreateModelForm : Form
     {
+        #region 필드
+        InspModelFileService _inspModelFileService = new InspModelFileService();
+        #endregion
+
         #region 속성
         public string ModelPath { get; set; } = "";
-        #endregion
-
-        #region 속성
-        #endregion
-
-        #region 이벤트
-        public IsExistModelEventHandler IsExistModelHandler;
-
-        public CreateModelEventHandler CreateModelHandler;
-        #endregion
-
-        #region 델리게이트
-        public delegate void CreateModelEventHandler(InspModel inspModel);
-
-        public delegate bool IsExistModelEventHandler(string modelName);
         #endregion
 
         #region 생성자
@@ -55,13 +44,10 @@ namespace Jastech.Framework.Winform.Forms
                 return;
             }
            
-            if(IsExistModelHandler != null)
+            if (_inspModelFileService.IsExistModel(ModelPath,modelName))
             {
-                if (IsExistModelHandler(modelName))
-                {
-                    ShowMessageBox("동일한 이름의 모델이 존재합니다.");
-                    return;
-                }
+                ShowMessageBox("동일한 이름의 모델이 존재합니다.");
+                return;
             }
          
             InspModel model = new InspModel
@@ -75,7 +61,7 @@ namespace Jastech.Framework.Winform.Forms
             DialogResult = DialogResult.OK;
             Close();
 
-            CreateModelHandler?.Invoke(model);
+            _inspModelFileService.CreateModel(ModelPath, model);
         }
 
         private void lblCancel_Click(object sender, EventArgs e)
