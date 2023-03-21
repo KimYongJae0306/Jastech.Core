@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.panel6 = new System.Windows.Forms.Panel();
+            this.txtModelDescription = new System.Windows.Forms.TextBox();
+            this.txtModelName = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblCancel = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblOK = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.lblOK = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
@@ -62,8 +62,8 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.textBox2);
-            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.txtModelDescription);
+            this.panel6.Controls.Add(this.txtModelName);
             this.panel6.Controls.Add(this.panel12);
             this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.panel7);
@@ -74,6 +74,24 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(614, 551);
             this.panel6.TabIndex = 1;
+            // 
+            // txtModelDescription
+            // 
+            this.txtModelDescription.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtModelDescription.Location = new System.Drawing.Point(8, 229);
+            this.txtModelDescription.Multiline = true;
+            this.txtModelDescription.Name = "txtModelDescription";
+            this.txtModelDescription.Size = new System.Drawing.Size(599, 317);
+            this.txtModelDescription.TabIndex = 11;
+            // 
+            // txtModelName
+            // 
+            this.txtModelName.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtModelName.Location = new System.Drawing.Point(8, 120);
+            this.txtModelName.Multiline = true;
+            this.txtModelName.Name = "txtModelName";
+            this.txtModelName.Size = new System.Drawing.Size(599, 25);
+            this.txtModelName.TabIndex = 10;
             // 
             // panel12
             // 
@@ -130,7 +148,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel8, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -139,6 +156,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 677);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("돋움", 16F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(614, 50);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "모델 생성";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel8
             // 
@@ -185,6 +214,16 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel11.TabIndex = 0;
             // 
+            // label13
+            // 
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 62);
+            this.label13.TabIndex = 1;
+            this.label13.Click += new System.EventHandler(this.lblCancel_Click);
+            // 
             // lblCancel
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -223,6 +262,16 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
+            // label9
+            // 
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 62);
+            this.label9.TabIndex = 1;
+            this.label9.Click += new System.EventHandler(this.lblOK_Click);
+            // 
             // lblOK
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -235,35 +284,6 @@
             this.lblOK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblOK.Click += new System.EventHandler(this.lblOK_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.textBox1.Location = new System.Drawing.Point(8, 120);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(599, 34);
-            this.textBox1.TabIndex = 10;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.textBox2.Location = new System.Drawing.Point(8, 229);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(599, 317);
-            this.textBox2.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("돋움", 16F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(614, 50);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "모델 생성";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -273,26 +293,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(622, 679);
             this.panel1.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 62);
-            this.label13.TabIndex = 1;
-            this.label13.Click += new System.EventHandler(this.lblCancel_Click);
-            // 
-            // label9
-            // 
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 62);
-            this.label9.TabIndex = 1;
-            this.label9.Click += new System.EventHandler(this.lblOK_Click);
             // 
             // CreateModelForm
             // 
@@ -337,8 +337,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblOK;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtModelDescription;
+        private System.Windows.Forms.TextBox txtModelName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
     }

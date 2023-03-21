@@ -33,21 +33,21 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblCancel = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
             this.lblOK = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtModelName = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -132,6 +132,16 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel11.TabIndex = 0;
             // 
+            // label13
+            // 
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 62);
+            this.label13.TabIndex = 1;
+            this.label13.Click += new System.EventHandler(this.lblCancel_Click);
+            // 
             // lblCancel
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -170,6 +180,16 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
+            // label9
+            // 
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 62);
+            this.label9.TabIndex = 1;
+            this.label9.Click += new System.EventHandler(this.lblOK_Click);
+            // 
             // lblOK
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -186,8 +206,8 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.textBox2);
-            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.txtDescription);
+            this.panel6.Controls.Add(this.txtModelName);
             this.panel6.Controls.Add(this.panel12);
             this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.panel7);
@@ -199,22 +219,22 @@
             this.panel6.Size = new System.Drawing.Size(614, 551);
             this.panel6.TabIndex = 1;
             // 
-            // textBox2
+            // txtDescription
             // 
-            this.textBox2.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.textBox2.Location = new System.Drawing.Point(8, 229);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(599, 317);
-            this.textBox2.TabIndex = 11;
+            this.txtDescription.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtDescription.Location = new System.Drawing.Point(8, 229);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(599, 317);
+            this.txtDescription.TabIndex = 11;
             // 
-            // textBox1
+            // txtModelName
             // 
-            this.textBox1.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.textBox1.Location = new System.Drawing.Point(8, 120);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(599, 34);
-            this.textBox1.TabIndex = 10;
+            this.txtModelName.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtModelName.Location = new System.Drawing.Point(8, 120);
+            this.txtModelName.Name = "txtModelName";
+            this.txtModelName.Size = new System.Drawing.Size(599, 34);
+            this.txtModelName.TabIndex = 10;
             // 
             // panel12
             // 
@@ -274,26 +294,6 @@
             this.panel1.Size = new System.Drawing.Size(622, 679);
             this.panel1.TabIndex = 4;
             // 
-            // label13
-            // 
-            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 62);
-            this.label13.TabIndex = 1;
-            this.label13.Click += new System.EventHandler(this.lblCancel_Click);
-            // 
-            // label9
-            // 
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 62);
-            this.label9.TabIndex = 1;
-            this.label9.Click += new System.EventHandler(this.lblOK_Click);
-            // 
             // EditModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -305,6 +305,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditModelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Load += new System.EventHandler(this.EditModelForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
@@ -332,8 +333,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblOK;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtModelName;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel7;

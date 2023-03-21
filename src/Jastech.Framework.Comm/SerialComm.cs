@@ -57,7 +57,7 @@ namespace Jastech.Framework.Comm
             {
                 _serialPort.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

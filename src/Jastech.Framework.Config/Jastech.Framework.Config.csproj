@@ -80,11 +80,16 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="ConfigSet.cs" />
-    <Compile Include="OperationConfig.cs" />
+    <Compile Include="LightConfig.cs" />
+    <Compile Include="MachineConfig.cs" />
     <Compile Include="PathConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Jastech.FrameWork.Device\Jastech.Framework.Device.csproj">
+      <Project>{F43DDCCA-E65C-4131-B789-DB4109E91B68}</Project>
+      <Name>Jastech.Framework.Device</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jastech.FrameWork.Util\Jastech.Framework.Util.csproj">
       <Project>{07ef86cc-ac6a-454e-b12b-eb63454a1dca}</Project>
       <Name>Jastech.Framework.Util</Name>

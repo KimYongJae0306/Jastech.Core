@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Structure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,31 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class CreateModelForm : Form
     {
+        #region 속성
+        public string ModelPath { get; set; } = "";
+        #endregion
+
+        #region 속성
+        #endregion
+
+        #region 이벤트
+        public IsExistModelEventHandler IsExistModelHandler;
+
+        public CreateModelEventHandler CreateModelHandler;
+        #endregion
+
+        #region 델리게이트
+        public delegate void CreateModelEventHandler(InspModel inspModel);
+
+        public delegate bool IsExistModelEventHandler(string modelName);
+        #endregion
+
+        #region 생성자
+        #endregion
+
+        #region 메서드
+        #endregion
+
         public CreateModelForm()
         {
             InitializeComponent();
@@ -19,14 +45,50 @@ namespace Jastech.Framework.Winform.Forms
 
         private void lblOK_Click(object sender, EventArgs e)
         {
+            string modelName = txtModelName.Text;
+            string description = txtModelDescription.Text;
+            DateTime time = DateTime.Now;
+
+            if(modelName == "")
+            {
+                ShowMessageBox("모델 이름을 입력해 주시기 바랍니다.");
+                return;
+            }
+           
+            if(IsExistModelHandler != null)
+            {
+                if (IsExistModelHandler(modelName))
+                {
+                    ShowMessageBox("동일한 이름의 모델이 존재합니다.");
+                    return;
+                }
+            }
+         
+            InspModel model = new InspModel
+            {
+                Name = modelName,
+                Description = description,
+                CreateDate = time,
+                ModifiedDate = time,
+            };
+
             DialogResult = DialogResult.OK;
             Close();
+
+            CreateModelHandler?.Invoke(model);
         }
 
         private void lblCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ShowMessageBox(string message)
+        {
+            MessageConfirmForm form = new MessageConfirmForm();
+            form.Message = message;
+            form.ShowDialog();
         }
     }
 }
