@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ModelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModelControl.Designer.cs">
+      <DependentUpon>ModelControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CopyModelForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ModelControl.resx">
+      <DependentUpon>ModelControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CopyModelForm.resx">
       <DependentUpon>CopyModelForm.cs</DependentUpon>
     </EmbeddedResource>
