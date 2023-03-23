@@ -93,7 +93,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                ICogImage cogImage = CogImageHelper.Open(dialog.FileName);
+                ICogImage cogImage = CogImageHelper.Load(dialog.FileName);
 
                 CogImage8Grey cog = (CogImage8Grey)cogImage;
                 ICogImage8PixelMemory memory= cog.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, cogImage.Width, cogImage.Height);
@@ -126,8 +126,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 _displayMode = DisplayMode.None;
             }
         }
-
-        
 
         private void btnFitZoom_Click(object sender, EventArgs e)
         {
@@ -176,7 +174,24 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-      
+        public void ClearGraphic()
+        {
+            cogDisplay.StaticGraphics.Clear();
+            cogDisplay.InteractiveGraphics.Clear();
+        }
+
+        public PointF GetPan()
+        {
+            return new PointF((float)cogDisplay.PanX, (float)cogDisplay.PanY);
+        }
+
+        public void AddGraphics(string groupName, ICogRegion cogRegion, bool checkForDuplicates = false)
+        {
+            if (cogDisplay.Image == null)
+                return;
+            
+            cogDisplay.InteractiveGraphics.Add(cogRegion as ICogGraphicInteractive, groupName, false);
+        }
         #endregion
 
         private void btnCustomCrossLine_Click(object sender, EventArgs e)

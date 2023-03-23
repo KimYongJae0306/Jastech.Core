@@ -12,7 +12,7 @@ namespace Jastech.Framework.Imaging.VisionPro
 {
     public static class CogImageHelper
     {
-        public static ICogImage Open(string fileName)
+        public static ICogImage Load(string fileName)
         {
             CogImageFile cogImageFile = new CogImageFile();
 
@@ -84,6 +84,17 @@ namespace Jastech.Framework.Imaging.VisionPro
             regionTool.Run();
 
             regionTool.Dispose();
+        }
+
+        public static CogRectangle CreateRectangle(double centerX, double centerY, double width, double height, bool interactive = true, CogRectangleDOFConstants constants = CogRectangleDOFConstants.All)
+        {
+            CogRectangle roi = new CogRectangle();
+
+            roi.SetCenterWidthHeight(centerX, centerY, width, height);
+            roi.Interactive = interactive;
+            roi.GraphicDOFEnable = constants;
+
+            return roi;
         }
     }
 }
