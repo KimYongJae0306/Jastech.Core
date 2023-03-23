@@ -86,14 +86,6 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
 
-        //private void EditModel(string newModelName, string newDescription)
-        //{
-        //    if (ModelPath == "")
-        //        return;
-
-        //    InspModelFileService.Edit(ModelPath, lblSelectedName.Text, newModelName, newDescription);
-        //}
-
         private void lblDeleteModel_Click(object sender, EventArgs e)
         {
             if (ModelPath == "" || gvModelList.SelectedRows.Count <= 0)
@@ -124,11 +116,6 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
 
-        //private void CopyModel(string newModelName)
-        //{
-        //    InspModelFileService.Copy(ModelPath, lblSelectedName.Text, newModelName);
-        //}
-
         private void gvModelList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0)
@@ -146,6 +133,31 @@ namespace Jastech.Framework.Winform.Controls
             lblSelectedCreateDate.Text = gvModelList.Rows[selectIndex].Cells[1].Value.ToString();
             lblSelectedModifiedDate.Text = gvModelList.Rows[selectIndex].Cells[2].Value.ToString();
             lblSelectedDescription.Text = gvModelList.Rows[selectIndex].Cells[3].Value.ToString();
+        }
+
+        private void lblApply_Click(object sender, EventArgs e)
+        {
+            InspModel selectedModel = new InspModel
+            {
+                Name = lblSelectedName.Text,
+                Description = lblSelectedDescription.Text,
+                CreateDate = DateTime.Parse(lblSelectedCreateDate.Text),
+                ModifiedDate = DateTime.Parse(lblSelectedModifiedDate.Text),
+            };
+
+            tt(selectedModel);
+        }
+
+        public delegate void ApplyModelHandler(InspModel model);
+        public static event ApplyModelHandler ApplyModelDelegate;
+        public static void tt(InspModel model)
+        {
+            ApplyModelDelegate(model);
+        }
+
+        private void lblCancel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
