@@ -26,7 +26,7 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static void Save(ICogImage image, string fileName)
         {
-            if(Path.GetExtension(fileName) == ".bmp")
+            if (Path.GetExtension(fileName) == ".bmp")
             {
                 CogImageFileBMP bmp = new CogImageFileBMP();
                 bmp.Open(fileName, CogImageFileModeConstants.Write);
@@ -44,7 +44,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             {
                 byte data = mapArray[i];
                 if (i >= threshold)
-                    mapArray[i] = isInvert ? (byte)0 : (byte)maxValue; 
+                    mapArray[i] = isInvert ? (byte)0 : (byte)maxValue;
                 else
                     mapArray[i] = isInvert ? (byte)maxValue : (byte)0;
             }

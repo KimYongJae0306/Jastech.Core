@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro;
 using Jastech.Framework.Imaging.VisionPro;
+using Cognex.VisionPro.Dimensioning;
+using Cognex.VisionPro.Implementation;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -20,13 +22,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CrossLine,
             CustomCrossLine,
             PointToPoint,
+            PointToLine,
         }
 
         public enum StepPointToPoint
         {
             Start,
             End,
-            Mesasure,
+            Measure,
             Complete,
         }
 
@@ -50,6 +53,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         #region 속성
         public double PixelResolution { get; set; } = 1.0;
+
+        private CogDistancePointPointTool TrackingCogDistanceTool = new CogDistancePointPointTool();
+
+        private List<CogToolBase> DrawToolList = new List<CogToolBase>();
         #endregion
 
         #region 이벤트
@@ -130,6 +137,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void btnFitZoom_Click(object sender, EventArgs e)
         {
             cogDisplay.Fit(true);
+
+            //CogDistanceTool.InputImage = cogDisplay.Image;
+            //CogDistanceTool.StartX = 0;
+            //CogDistanceTool.StartY = 0;
+
+            //CogDistanceTool.EndX = 10000;
+            //CogDistanceTool.EndY = 1000 ;
+            //CogDistanceTool.Run();
+            //SetGraphics("Cog", CogDistanceTool.CreateLastRunRecord());
         }
 
         private void btnPanning_Click(object sender, EventArgs e)
@@ -221,6 +237,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
 
+            ClearSelect();
+
             if (btnPointToPoint.BackColor == _selectedColor)
             {
                 DeleteStaticGraphics("Tracking");
@@ -240,29 +258,42 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (cogDisplay.Image == null)
                 return;
+         
 
-            if(_displayMode == DisplayMode.CustomCrossLine)
+            if (_displayMode == DisplayMode.CustomCrossLine)
             {
                 DrawCustomCrossLine(e.X, e.Y);
             }
             else if(_displayMode == DisplayMode.PointToPoint)
             {
-                if(_stepPointToPoint == StepPointToPoint.Start)
+                PointF mappingPoint = MappingPoint(e.X, e.Y);
+
+                if (_stepPointToPoint == StepPointToPoint.Start)
                 {
-                    StartPoint = new Point(e.X, e.Y);
+                    TrackingCogDistanceTool.InputImage = cogDisplay.Image;
+
+                    StartPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
+
                     _stepPointToPoint = StepPointToPoint.End;
                 }
                 else if(_stepPointToPoint == StepPointToPoint.End)
                 {
-                    EndPoint = new Point(e.X, e.Y);
+                    EndPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
+
                     Distance = CogMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length;
-                    _stepPointToPoint = StepPointToPoint.Mesasure;
+                    _stepPointToPoint = StepPointToPoint.Measure;
                 }
-                else if(_stepPointToPoint == StepPointToPoint.Mesasure)
+                else if(_stepPointToPoint == StepPointToPoint.Measure)
                 {
-                    DrawText(e.X, e.Y, Distance.ToString("00.00"));
+                    DeleteStaticGraphics("Tracking");
+
+                    DrawToolList.Add(TrackingCogDistanceTool);
+                    SetGraphics(DrawToolList.Count.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
+
+                    Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
+                    DrawText(DrawToolList.Count.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
+
                     _stepPointToPoint = StepPointToPoint.Start;
-                    //DrawText(e.X, e.Y, Distance.ToString("00.00"));
                 }
                 else if(_stepPointToPoint == StepPointToPoint.Complete)
                 {
@@ -276,18 +307,48 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (cogDisplay.Image == null)
                 return;
-            if(_displayMode == DisplayMode.CustomCrossLine)
-            {
-            }
-            else if (_displayMode == DisplayMode.PointToPoint)
-            {
-                double cursorSizeY = 20;
-                string groupName = _stepPointToPoint.ToString();
 
-                if(_stepPointToPoint == StepPointToPoint.Mesasure)
+            if (_displayMode == DisplayMode.PointToPoint)
+            {
+                if(_stepPointToPoint == StepPointToPoint.End || _stepPointToPoint == StepPointToPoint.Measure)
                 {
-                    //DrawTrackingText(e.X, e.Y, 0, Distance.ToString("00.00"), CogGraphicLabelAlignmentConstants.BaselineCenter);
+                    PointF mappingPoint = MappingPoint(e.X, e.Y);
+
+                    TrackingCogDistanceTool.StartX = StartPoint.X;
+                    TrackingCogDistanceTool.StartY = StartPoint.Y;
+
+                    if(_stepPointToPoint == StepPointToPoint.End)
+                    {
+                        TrackingCogDistanceTool.EndX = mappingPoint.X;
+                        TrackingCogDistanceTool.EndY = mappingPoint.Y;
+                    }
+                    else if(_stepPointToPoint == StepPointToPoint.Measure)
+                    {
+                        TrackingCogDistanceTool.EndX = EndPoint.X;
+                        TrackingCogDistanceTool.EndY = EndPoint.Y;
+                    }
+                    TrackingCogDistanceTool.Run();
+
+                    string groupName = "Tracking";
+                    if (IsContainGroupNameInStaticGraphics(groupName))
+                        cogDisplay.StaticGraphics.Remove(groupName);
+
+                    SetGraphics(groupName, TrackingCogDistanceTool.CreateLastRunRecord());
+
+                    Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
+                    DrawText(groupName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
                 }
+                else if(_stepPointToPoint == StepPointToPoint.Measure)
+                {
+
+                }
+                //double cursorSizeY = 20;
+                //string groupName = _stepPointToPoint.ToString();
+
+                //if(_stepPointToPoint == StepPointToPoint.Mesasure)
+                //{
+                //    //DrawTrackingText(e.X, e.Y, 0, Distance.ToString("00.00"), CogGraphicLabelAlignmentConstants.BaselineCenter);
+                //}
             }
         }
 
@@ -335,13 +396,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogSegment.Dispose();
         }
 
-        public void DrawText(double x, double y, string message)
+        public void DrawText(string groupName, double calcX, double calcY, string message)
         {
-            string  groupName = "Text";
-
-            double calcX, calcY;
-            cogDisplay.GetTransform("#", "*").MapPoint(x, y, out calcX, out calcY);
-
             CogGraphicLabel cogLabel = new CogGraphicLabel();
             cogLabel.BackgroundColor = CogColorConstants.Black;
             cogLabel.Color = CogColorConstants.Green;
@@ -368,6 +424,73 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     return true;
             }
             return false;
+        }
+
+        private PointF MappingPoint(double x, double y)
+        {
+            double calcX, calcY;
+
+            cogDisplay.GetTransform("#", "*").MapPoint(x, y, out calcX, out calcY);
+
+            return new PointF((float)calcX, (float)calcY);
+        }
+
+        private void SetGraphics(string groupName, ICogRecord record)
+        {
+            foreach (CogRecord subRecord in record.SubRecords)
+            {
+                if (typeof(ICogGraphic).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                        cogDisplay.StaticGraphics.Add(subRecord.Content as ICogGraphicInteractive, groupName);
+                }
+                else if (typeof(CogGraphicCollection).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                    {
+                        CogGraphicCollection graphics = subRecord.Content as CogGraphicCollection;
+                        foreach (ICogGraphic graphic in graphics)
+                        {
+                            cogDisplay.StaticGraphics.Add(graphic as ICogGraphicInteractive, groupName);
+                        }
+                    }
+                }
+                else if (typeof(CogGraphicInteractiveCollection).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                    {
+                        cogDisplay.StaticGraphics.AddList(subRecord.Content as CogGraphicCollection, groupName);
+                    }
+                }
+                SetGraphics(groupName, subRecord);
+            }
+        }
+
+        private void btnPointToLine_Click(object sender, EventArgs e)
+        {
+            if (cogDisplay.Image == null)
+                return;
+            ClearSelect();
+
+            if (btnPointToLine.BackColor == _selectedColor)
+            {
+                DeleteStaticGraphics("Tracking");
+                btnPointToLine.BackColor = _noneSelectColor;
+                _stepPointToPoint = StepPointToPoint.Start;
+                _displayMode = DisplayMode.None;
+            }
+            else
+            {
+                btnPointToLine.BackColor = _selectedColor;
+                _stepPointToPoint = StepPointToPoint.Start;
+                _displayMode = DisplayMode.PointToLine;
+            }
+        }
+
+        private void ClearSelect()
+        {
+            btnPointToPoint.BackColor = _noneSelectColor;
+            btnPointToLine.BackColor = _noneSelectColor;
         }
     }
 }

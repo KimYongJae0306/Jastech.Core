@@ -1,5 +1,6 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    public class CogPatternMatching
+    public class CogPatternMatching : CogVision
     {
         #region 필드
         public CogPMAlignTool MatchingTool { get; set; } = new CogPMAlignTool();
         #endregion
 
         #region 속성
+        public ICogImage PatternImage { get; set; } = null;
+
         public ICogImage TrainImage { get; set; } = null;
         #endregion
 
@@ -45,15 +48,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             return MatchingTool;
         }
 
-        public ICogRegion GetTrainRegion()
-        {
-            // 임시
-            //if (_cogPMAlignTool.Pattern.Trained == false)
-            //    return null;
-
-            return MatchingTool.Pattern.TrainRegion;
-        }
-
         public CogPMAlignTool SetSearchRegion(CogRectangle roi)
         {
             CogRectangle rect = new CogRectangle(roi);
@@ -64,9 +58,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             MatchingTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.InputImage |
                                                   CogPMAlignCurrentRecordConstants.SearchRegion;
             //_cogPMAlignTool.SearchRegion
-
-            
             return MatchingTool;
+        }
+
+        public ICogRegion GetTrainRegion()
+        {
+            return MatchingTool.Pattern.TrainRegion;
         }
 
         public ICogRegion GetSearchRegion()
@@ -89,6 +86,18 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         {
 
         }
+
+        public override void Save(string filePath)
+        {
+            CogFileHelper.SaveTool<CogPMAlignTool>(filePath, MatchingTool);
+        }
+
+        public override void Load(string filePath)
+        {
+            MatchingTool = CogFileHelper.LoadTool(filePath) as CogPMAlignTool;
+        }
+
+
         #endregion
     }
 }

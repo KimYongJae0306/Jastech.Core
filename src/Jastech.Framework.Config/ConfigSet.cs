@@ -18,7 +18,7 @@ namespace Jastech.Framework.Config
         #endregion
 
         #region 메서드
-        public void Initialize()
+        public virtual void Initialize()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";
@@ -26,7 +26,7 @@ namespace Jastech.Framework.Config
             Path.Load(configPath, PathConfigCreated);
         }
 
-        public void Save()
+        public virtual void Save()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";
@@ -34,7 +34,7 @@ namespace Jastech.Framework.Config
             Path.Save(configPath);
         }
             
-        public bool Load()
+        public virtual bool Load()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";

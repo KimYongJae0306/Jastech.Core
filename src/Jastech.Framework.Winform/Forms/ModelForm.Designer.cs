@@ -37,23 +37,29 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblEditModel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblCreateModelImage = new System.Windows.Forms.Label();
             this.lblCreateModel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.gvModelList = new System.Windows.Forms.DataGridView();
@@ -62,6 +68,10 @@
             this.ColumnCamAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCamStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.lblSelectedDescription = new System.Windows.Forms.Label();
+            this.lblSelectedModifiedDate = new System.Windows.Forms.Label();
+            this.lblSelectedCreateDate = new System.Windows.Forms.Label();
+            this.lblSelectedName = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -71,16 +81,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblSelectedName = new System.Windows.Forms.Label();
-            this.lblSelectedCreateDate = new System.Windows.Forms.Label();
-            this.lblSelectedModifiedDate = new System.Windows.Forms.Label();
-            this.lblSelectedDescription = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCreateModelImage = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -167,6 +167,16 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Image = global::Jastech.Framework.Winform.Properties.Resources.Copy;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 62);
+            this.label5.TabIndex = 1;
+            this.label5.Click += new System.EventHandler(this.lblCopyModel_Click);
+            // 
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -204,6 +214,16 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Image = global::Jastech.Framework.Winform.Properties.Resources.Delete;
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 62);
+            this.label3.TabIndex = 1;
+            this.label3.Click += new System.EventHandler(this.lblDeleteModel_Click);
             // 
             // label4
             // 
@@ -243,6 +263,16 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Image = global::Jastech.Framework.Winform.Properties.Resources.Edit;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 62);
+            this.label1.TabIndex = 1;
+            this.label1.Click += new System.EventHandler(this.lblEditModel_Click);
+            // 
             // lblEditModel
             // 
             this.lblEditModel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -280,6 +310,16 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(192, 62);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // lblCreateModelImage
+            // 
+            this.lblCreateModelImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCreateModelImage.Image = global::Jastech.Framework.Winform.Properties.Resources.New;
+            this.lblCreateModelImage.Location = new System.Drawing.Point(3, 0);
+            this.lblCreateModelImage.Name = "lblCreateModelImage";
+            this.lblCreateModelImage.Size = new System.Drawing.Size(44, 62);
+            this.lblCreateModelImage.TabIndex = 1;
+            this.lblCreateModelImage.Click += new System.EventHandler(this.lblCreateModel_Click);
             // 
             // lblCreateModel
             // 
@@ -347,6 +387,15 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(192, 56);
             this.tableLayoutPanel11.TabIndex = 0;
             // 
+            // label13
+            // 
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 56);
+            this.label13.TabIndex = 1;
+            // 
             // label14
             // 
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -383,6 +432,15 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(192, 56);
             this.tableLayoutPanel9.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 56);
+            this.label9.TabIndex = 1;
             // 
             // label10
             // 
@@ -517,6 +575,45 @@
             this.panel6.Size = new System.Drawing.Size(294, 652);
             this.panel6.TabIndex = 0;
             // 
+            // lblSelectedDescription
+            // 
+            this.lblSelectedDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedDescription.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.lblSelectedDescription.Location = new System.Drawing.Point(7, 390);
+            this.lblSelectedDescription.Name = "lblSelectedDescription";
+            this.lblSelectedDescription.Size = new System.Drawing.Size(277, 260);
+            this.lblSelectedDescription.TabIndex = 13;
+            // 
+            // lblSelectedModifiedDate
+            // 
+            this.lblSelectedModifiedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedModifiedDate.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.lblSelectedModifiedDate.Location = new System.Drawing.Point(7, 297);
+            this.lblSelectedModifiedDate.Name = "lblSelectedModifiedDate";
+            this.lblSelectedModifiedDate.Size = new System.Drawing.Size(277, 37);
+            this.lblSelectedModifiedDate.TabIndex = 12;
+            this.lblSelectedModifiedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedCreateDate
+            // 
+            this.lblSelectedCreateDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedCreateDate.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.lblSelectedCreateDate.Location = new System.Drawing.Point(7, 208);
+            this.lblSelectedCreateDate.Name = "lblSelectedCreateDate";
+            this.lblSelectedCreateDate.Size = new System.Drawing.Size(277, 37);
+            this.lblSelectedCreateDate.TabIndex = 11;
+            this.lblSelectedCreateDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedName
+            // 
+            this.lblSelectedName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedName.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.lblSelectedName.Location = new System.Drawing.Point(7, 117);
+            this.lblSelectedName.Name = "lblSelectedName";
+            this.lblSelectedName.Size = new System.Drawing.Size(277, 37);
+            this.lblSelectedName.TabIndex = 10;
+            this.lblSelectedName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -602,103 +699,6 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "모델 정보";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSelectedName
-            // 
-            this.lblSelectedName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedName.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.lblSelectedName.Location = new System.Drawing.Point(7, 117);
-            this.lblSelectedName.Name = "lblSelectedName";
-            this.lblSelectedName.Size = new System.Drawing.Size(277, 37);
-            this.lblSelectedName.TabIndex = 10;
-            this.lblSelectedName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSelectedCreateDate
-            // 
-            this.lblSelectedCreateDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedCreateDate.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.lblSelectedCreateDate.Location = new System.Drawing.Point(7, 208);
-            this.lblSelectedCreateDate.Name = "lblSelectedCreateDate";
-            this.lblSelectedCreateDate.Size = new System.Drawing.Size(277, 37);
-            this.lblSelectedCreateDate.TabIndex = 11;
-            this.lblSelectedCreateDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSelectedModifiedDate
-            // 
-            this.lblSelectedModifiedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedModifiedDate.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.lblSelectedModifiedDate.Location = new System.Drawing.Point(7, 297);
-            this.lblSelectedModifiedDate.Name = "lblSelectedModifiedDate";
-            this.lblSelectedModifiedDate.Size = new System.Drawing.Size(277, 37);
-            this.lblSelectedModifiedDate.TabIndex = 12;
-            this.lblSelectedModifiedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSelectedDescription
-            // 
-            this.lblSelectedDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedDescription.Font = new System.Drawing.Font("돋움", 13.8F);
-            this.lblSelectedDescription.Location = new System.Drawing.Point(7, 390);
-            this.lblSelectedDescription.Name = "lblSelectedDescription";
-            this.lblSelectedDescription.Size = new System.Drawing.Size(277, 260);
-            this.lblSelectedDescription.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Image = global::Jastech.Framework.Winform.Properties.Resources.Copy;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 62);
-            this.label5.TabIndex = 1;
-            this.label5.Click += new System.EventHandler(this.lblCopyModel_Click);
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Image = global::Jastech.Framework.Winform.Properties.Resources.Delete;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 62);
-            this.label3.TabIndex = 1;
-            this.label3.Click += new System.EventHandler(this.lblDeleteModel_Click);
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Image = global::Jastech.Framework.Winform.Properties.Resources.Edit;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 62);
-            this.label1.TabIndex = 1;
-            this.label1.Click += new System.EventHandler(this.lblEditModel_Click);
-            // 
-            // lblCreateModelImage
-            // 
-            this.lblCreateModelImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCreateModelImage.Image = global::Jastech.Framework.Winform.Properties.Resources.New;
-            this.lblCreateModelImage.Location = new System.Drawing.Point(3, 0);
-            this.lblCreateModelImage.Name = "lblCreateModelImage";
-            this.lblCreateModelImage.Size = new System.Drawing.Size(44, 62);
-            this.lblCreateModelImage.TabIndex = 1;
-            this.lblCreateModelImage.Click += new System.EventHandler(this.lblCreateModel_Click);
-            // 
-            // label13
-            // 
-            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 56);
-            this.label13.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 56);
-            this.label9.TabIndex = 1;
             // 
             // ModelForm
             // 

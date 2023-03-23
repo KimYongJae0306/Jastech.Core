@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro;
 using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -16,7 +17,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     {
         public ICogImage TargetImage { get; set; } = null;
 
-        public CogPMAlignTool Tool { get; set; } = null;
+        public CogPatternMatching algorithm { get; set; } = null;
 
         public CogPatternMatchingParamControl()
         {
@@ -25,10 +26,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void lblAddPattern_Click(object sender, EventArgs e)
         {
-            if (TargetImage == null || Tool == null)
+            if (TargetImage == null || algorithm == null)
                 return;
 
-
+            //algorithm.SetTrainRegion()
+            //algorithm.Train();
         }
     }
 }
