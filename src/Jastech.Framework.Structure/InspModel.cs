@@ -20,5 +20,7 @@ namespace Jastech.Framework.Structure
 
         [JsonProperty]
         public string Description { get; set; } = "";
+
+        public static string FileName { get; } = "InspModel.json";
     }
 }

@@ -32,5 +32,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             //algorithm.SetTrainRegion()
             //algorithm.Train();
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

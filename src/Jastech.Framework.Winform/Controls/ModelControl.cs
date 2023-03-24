@@ -9,18 +9,48 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Structure;
 using Jastech.Framework.Winform.Forms;
+using static Jastech.Framework.Winform.Forms.CreateModelForm;
+using Jastech.Framework.Structure.Service;
+using System.IO;
+using Jastech.Framework.Util.Helper;
+using Jastech.Framework.Structure.Helper;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class ModelControl : UserControl
     {
-        private InspModelFileService InspModelFileService { get; set; } = new InspModelFileService();
+        #region 속성
         public string ModelPath { get; set; } = "";
+        #endregion
+
+        #region 이벤트
+        public event ModelDelegate CreateModelEventHandler;
+
+        public event EditModelDelegate EditModelEventHandler;
+
+        public event CopyModelDelegate CopyModelEventHandler;
+
+        public event ApplyModelDelegate ApplyModelEventHandler;
+        #endregion
+
+        #region 델리게이트
+        public delegate void ModelDelegate(InspModel model);
+
+        public delegate void EditModelDelegate(string prevModelName, InspModel inspModel);
+
+        public delegate void CopyModelDelegate(string prevModelName, string newModelName);
+
+        public delegate void ApplyModelDelegate(string modelName);
+        #endregion
+
+        #region 생성자
         public ModelControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void ModelControl_Load(object sender, EventArgs e)
         {
             UpdateModelList();
@@ -31,7 +61,7 @@ namespace Jastech.Framework.Winform.Controls
             if (ModelPath == "")
                 return;
 
-            List<InspModel> models = InspModelFileService.GetModelList(ModelPath);
+            List<InspModel> models = GetModelList(ModelPath);
 
             gvModelList.Rows.Clear();
 
@@ -62,12 +92,13 @@ namespace Jastech.Framework.Winform.Controls
                 return;
 
             CreateModelForm form = new CreateModelForm();
-
             form.ModelPath = ModelPath;
+            form.CreateModelEvent += CreateModelEventHandler;
             if (form.ShowDialog() == DialogResult.OK)
             {
                 UpdateModelList();
             }
+            form.CreateModelEvent -= CreateModelEventHandler;
         }
 
         private void lblEditModel_Click(object sender, EventArgs e)
@@ -79,11 +110,13 @@ namespace Jastech.Framework.Winform.Controls
             form.PrevModelName = lblSelectedName.Text;
             form.PrevDescription = lblSelectedDescription.Text;
             form.ModelPath = ModelPath;
+            form.EditModelEvent += EditModelEventHandler;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
                 UpdateModelList();
             }
+            form.EditModelEvent += EditModelEventHandler;
         }
 
         private void lblDeleteModel_Click(object sender, EventArgs e)
@@ -109,6 +142,7 @@ namespace Jastech.Framework.Winform.Controls
             CopyModelForm form = new CopyModelForm();
             form.PrevModelName = lblSelectedName.Text;
             form.ModelPath = ModelPath;
+            form.CopyModelEvent += CopyModelEventHandler;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -137,27 +171,42 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblApply_Click(object sender, EventArgs e)
         {
-            InspModel selectedModel = new InspModel
+            ApplyModel();
+        }
+
+        private void ApplyModel()
+        {
+            if (lblSelectedName.Text == "")
+                return;
+
+            ApplyModelEventHandler?.Invoke(lblSelectedName.Text);
+        }
+
+        public List<InspModel> GetModelList(string modelPath)
+        {
+            List<InspModel> modelList = new List<InspModel>();
+
+            string[] dirs = Directory.GetDirectories(modelPath);
+            for (int i = 0; i < dirs.Length; i++)
             {
-                Name = lblSelectedName.Text,
-                Description = lblSelectedDescription.Text,
-                CreateDate = DateTime.Parse(lblSelectedCreateDate.Text),
-                ModifiedDate = DateTime.Parse(lblSelectedModifiedDate.Text),
-            };
+                InspModel inspModel = new InspModel();
+                string path = Path.Combine(dirs[i], InspModel.FileName);
+                JsonConvertHelper.LoadToExistingTarget<InspModel>(path, inspModel);
+                modelList.Add(inspModel);
+            }
 
-            tt(selectedModel);
+            return modelList;
         }
+        #endregion
 
-        public delegate void ApplyModelHandler(InspModel model);
-        public static event ApplyModelHandler ApplyModelDelegate;
-        public static void tt(InspModel model)
+        private void gvModelList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ApplyModelDelegate(model);
-        }
+            if (e.ColumnIndex < 0)
+                return;
 
-        private void lblCancel_Click(object sender, EventArgs e)
-        {
+            UpdateSelectedModel(e.RowIndex);
 
+            ApplyModel();
         }
     }
 }

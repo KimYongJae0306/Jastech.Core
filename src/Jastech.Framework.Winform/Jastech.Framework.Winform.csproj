@@ -170,6 +170,10 @@
       <Project>{dcff7b48-8df8-4ed9-9f0f-f11c2ccb7547}</Project>
       <Name>Jastech.Framework.Structure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
+      <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
+      <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warning.png" />

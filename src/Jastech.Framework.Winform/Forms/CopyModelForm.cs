@@ -1,4 +1,6 @@
 ﻿using Jastech.Framework.Structure;
+using Jastech.Framework.Structure.Helper;
+using Jastech.Framework.Structure.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,19 +10,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Jastech.Framework.Winform.Controls.ModelControl;
 
 namespace Jastech.Framework.Winform.Forms
 {
     public partial class CopyModelForm : Form
     {
         #region 필드
-        InspModelFileService _inspModelFileService = new InspModelFileService();
         #endregion
 
         #region 속성
         public string PrevModelName { get; set; }
 
         public string ModelPath { get; set; }
+        #endregion
+
+        #region 이벤트
+        public event CopyModelDelegate CopyModelEvent;
         #endregion
 
         public CopyModelForm()
@@ -37,19 +43,18 @@ namespace Jastech.Framework.Winform.Forms
         {
             if (PrevModelName != txtModelName.Text)
             {
-                if (_inspModelFileService.IsExistModel(ModelPath, txtModelName.Text))
+                if (InspModelFileService.IsExistModel(ModelPath, txtModelName.Text))
                 {
                     MessageConfirmForm form = new MessageConfirmForm();
                     form.Message = "동일한 모델이 존재 합니다.";
                     form.ShowDialog();
                     return;
                 }
+
+                DialogResult = DialogResult.OK;
+                Close();
+                CopyModelEvent?.Invoke(PrevModelName, txtModelName.Text);
             }
-
-            _inspModelFileService.Copy(ModelPath, PrevModelName, txtModelName.Text);
-
-            DialogResult = DialogResult.OK;
-            Close();
         }
 
         private void lblCancel_Click(object sender, EventArgs e)
