@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Structure.Helper
 {
-    public static class InspModelFileService
+    public static class ModelFileHelper
     {
         public static bool IsExistModel(string modelPath, string modelName)
         {

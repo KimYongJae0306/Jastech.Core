@@ -53,7 +53,7 @@ namespace Jastech.Framework.Winform.Forms
             bool isEdit = false;
             if (PrevModelName != txtModelName.Text)
             {
-                if (InspModelFileService.IsExistModel(ModelPath, txtModelName.Text))
+                if (ModelFileHelper.IsExistModel(ModelPath, txtModelName.Text))
                 {
                     MessageConfirmForm form = new MessageConfirmForm();
                     form.Message = "동일한 모델이 존재 합니다.";

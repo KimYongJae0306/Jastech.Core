@@ -51,7 +51,7 @@ namespace Jastech.Framework.Winform.Forms
                 return;
             }
 
-            if (InspModelFileService.IsExistModel(ModelPath, modelName))
+            if (ModelFileHelper.IsExistModel(ModelPath, modelName))
             {
                 ShowMessageBox("동일한 이름의 모델이 존재합니다.");
                 return;

@@ -129,7 +129,7 @@ namespace Jastech.Framework.Winform.Controls
 
             if (form.ShowDialog() == DialogResult.Yes)
             {
-                InspModelFileService.Delete(ModelPath, lblSelectedName.Text);
+                ModelFileHelper.Delete(ModelPath, lblSelectedName.Text);
                 UpdateModelList();
             }
         }
