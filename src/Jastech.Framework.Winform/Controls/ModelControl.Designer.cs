@@ -180,7 +180,7 @@
             // lblCopyModel
             // 
             this.lblCopyModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCopyModel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCopyModel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblCopyModel.Location = new System.Drawing.Point(53, 0);
             this.lblCopyModel.Name = "lblCopyModel";
             this.lblCopyModel.Size = new System.Drawing.Size(136, 62);
@@ -228,7 +228,7 @@
             // lblDeleteModel
             // 
             this.lblDeleteModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDeleteModel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDeleteModel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblDeleteModel.Location = new System.Drawing.Point(53, 0);
             this.lblDeleteModel.Name = "lblDeleteModel";
             this.lblDeleteModel.Size = new System.Drawing.Size(136, 62);
@@ -276,7 +276,7 @@
             // lblEditModel
             // 
             this.lblEditModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEditModel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblEditModel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblEditModel.Location = new System.Drawing.Point(53, 0);
             this.lblEditModel.Name = "lblEditModel";
             this.lblEditModel.Size = new System.Drawing.Size(136, 62);
@@ -324,7 +324,7 @@
             // lblCreateModel
             // 
             this.lblCreateModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCreateModel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCreateModel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblCreateModel.Location = new System.Drawing.Point(53, 0);
             this.lblCreateModel.Name = "lblCreateModel";
             this.lblCreateModel.Size = new System.Drawing.Size(136, 62);
@@ -399,7 +399,7 @@
             // lblCancel
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblCancel.Location = new System.Drawing.Point(53, 0);
             this.lblCancel.Name = "lblCancel";
             this.lblCancel.Size = new System.Drawing.Size(136, 56);
@@ -446,7 +446,7 @@
             // lblApply
             // 
             this.lblApply.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblApply.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblApply.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblApply.Location = new System.Drawing.Point(53, 0);
             this.lblApply.Name = "lblApply";
             this.lblApply.Size = new System.Drawing.Size(136, 56);
@@ -478,7 +478,7 @@
             this.gvModelList.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -499,6 +499,7 @@
             this.gvModelList.Name = "gvModelList";
             this.gvModelList.ReadOnly = true;
             this.gvModelList.RowHeadersVisible = false;
+            this.gvModelList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.gvModelList.RowTemplate.Height = 23;
             this.gvModelList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvModelList.Size = new System.Drawing.Size(1097, 693);
@@ -628,7 +629,7 @@
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label15.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label15.Location = new System.Drawing.Point(3, 349);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(136, 41);
@@ -647,7 +648,7 @@
             // 
             // label12
             // 
-            this.label12.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label12.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label12.Location = new System.Drawing.Point(3, 259);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(136, 41);
@@ -666,7 +667,7 @@
             // 
             // label11
             // 
-            this.label11.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label11.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label11.Location = new System.Drawing.Point(3, 167);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(136, 41);
@@ -685,7 +686,7 @@
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label8.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label8.Location = new System.Drawing.Point(3, 76);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(136, 41);
@@ -695,7 +696,7 @@
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label7.Location = new System.Drawing.Point(3, 11);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(136, 41);

@@ -49,200 +49,216 @@
             // 
             // btnCanel
             // 
-            this.btnCanel.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnCanel.BackColor = System.Drawing.Color.White;
+            this.btnCanel.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnCanel.Location = new System.Drawing.Point(184, 432);
             this.btnCanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCanel.Name = "btnCanel";
             this.btnCanel.Size = new System.Drawing.Size(166, 80);
             this.btnCanel.TabIndex = 33;
             this.btnCanel.Text = "Cancel";
-            this.btnCanel.UseVisualStyleBackColor = true;
+            this.btnCanel.UseVisualStyleBackColor = false;
             this.btnCanel.Click += new System.EventHandler(this.btnCanel_Click);
             // 
             // btnEnter
             // 
-            this.btnEnter.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnEnter.BackColor = System.Drawing.Color.White;
+            this.btnEnter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnEnter.Location = new System.Drawing.Point(270, 258);
             this.btnEnter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(80, 166);
             this.btnEnter.TabIndex = 32;
             this.btnEnter.Text = "ENT";
-            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.UseVisualStyleBackColor = false;
             this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
             // btnBackspace
             // 
-            this.btnBackspace.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnBackspace.BackColor = System.Drawing.Color.White;
+            this.btnBackspace.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnBackspace.Location = new System.Drawing.Point(270, 170);
             this.btnBackspace.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBackspace.Name = "btnBackspace";
             this.btnBackspace.Size = new System.Drawing.Size(80, 80);
             this.btnBackspace.TabIndex = 31;
             this.btnBackspace.Text = "<-";
-            this.btnBackspace.UseVisualStyleBackColor = true;
+            this.btnBackspace.UseVisualStyleBackColor = false;
             this.btnBackspace.Click += new System.EventHandler(this.btnBackspace_Click);
             // 
             // btnMinus
             // 
-            this.btnMinus.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnMinus.BackColor = System.Drawing.Color.White;
+            this.btnMinus.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnMinus.Location = new System.Drawing.Point(270, 84);
             this.btnMinus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Size = new System.Drawing.Size(80, 80);
             this.btnMinus.TabIndex = 30;
             this.btnMinus.Text = "-";
-            this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.UseVisualStyleBackColor = false;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnClear.BackColor = System.Drawing.Color.White;
+            this.btnClear.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnClear.Location = new System.Drawing.Point(184, 345);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 80);
             this.btnClear.TabIndex = 29;
             this.btnClear.Text = "CLEAR";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDot
             // 
-            this.btnDot.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnDot.BackColor = System.Drawing.Color.White;
+            this.btnDot.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnDot.Location = new System.Drawing.Point(98, 345);
             this.btnDot.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDot.Name = "btnDot";
             this.btnDot.Size = new System.Drawing.Size(80, 80);
             this.btnDot.TabIndex = 28;
             this.btnDot.Text = ".";
-            this.btnDot.UseVisualStyleBackColor = true;
+            this.btnDot.UseVisualStyleBackColor = false;
             // 
             // btnNum9
             // 
-            this.btnNum9.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum9.BackColor = System.Drawing.Color.White;
+            this.btnNum9.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum9.Location = new System.Drawing.Point(184, 84);
             this.btnNum9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum9.Name = "btnNum9";
             this.btnNum9.Size = new System.Drawing.Size(80, 80);
             this.btnNum9.TabIndex = 27;
             this.btnNum9.Text = "9";
-            this.btnNum9.UseVisualStyleBackColor = true;
+            this.btnNum9.UseVisualStyleBackColor = false;
             this.btnNum9.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum8
             // 
-            this.btnNum8.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum8.BackColor = System.Drawing.Color.White;
+            this.btnNum8.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum8.Location = new System.Drawing.Point(98, 84);
             this.btnNum8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum8.Name = "btnNum8";
             this.btnNum8.Size = new System.Drawing.Size(80, 80);
             this.btnNum8.TabIndex = 26;
             this.btnNum8.Text = "8";
-            this.btnNum8.UseVisualStyleBackColor = true;
+            this.btnNum8.UseVisualStyleBackColor = false;
             this.btnNum8.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum7
             // 
-            this.btnNum7.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum7.BackColor = System.Drawing.Color.White;
+            this.btnNum7.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum7.Location = new System.Drawing.Point(12, 84);
             this.btnNum7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum7.Name = "btnNum7";
             this.btnNum7.Size = new System.Drawing.Size(80, 80);
             this.btnNum7.TabIndex = 25;
             this.btnNum7.Text = "7";
-            this.btnNum7.UseVisualStyleBackColor = true;
+            this.btnNum7.UseVisualStyleBackColor = false;
             this.btnNum7.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum6
             // 
-            this.btnNum6.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum6.BackColor = System.Drawing.Color.White;
+            this.btnNum6.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum6.Location = new System.Drawing.Point(184, 170);
             this.btnNum6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum6.Name = "btnNum6";
             this.btnNum6.Size = new System.Drawing.Size(80, 80);
             this.btnNum6.TabIndex = 24;
             this.btnNum6.Text = "6";
-            this.btnNum6.UseVisualStyleBackColor = true;
+            this.btnNum6.UseVisualStyleBackColor = false;
             this.btnNum6.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum5
             // 
-            this.btnNum5.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum5.BackColor = System.Drawing.Color.White;
+            this.btnNum5.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum5.Location = new System.Drawing.Point(98, 171);
             this.btnNum5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum5.Name = "btnNum5";
             this.btnNum5.Size = new System.Drawing.Size(80, 80);
             this.btnNum5.TabIndex = 23;
             this.btnNum5.Text = "5";
-            this.btnNum5.UseVisualStyleBackColor = true;
+            this.btnNum5.UseVisualStyleBackColor = false;
             this.btnNum5.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum4
             // 
-            this.btnNum4.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum4.BackColor = System.Drawing.Color.White;
+            this.btnNum4.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum4.Location = new System.Drawing.Point(12, 170);
             this.btnNum4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum4.Name = "btnNum4";
             this.btnNum4.Size = new System.Drawing.Size(80, 80);
             this.btnNum4.TabIndex = 22;
             this.btnNum4.Text = "4";
-            this.btnNum4.UseVisualStyleBackColor = true;
+            this.btnNum4.UseVisualStyleBackColor = false;
             this.btnNum4.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum3
             // 
-            this.btnNum3.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum3.BackColor = System.Drawing.Color.White;
+            this.btnNum3.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum3.Location = new System.Drawing.Point(184, 258);
             this.btnNum3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum3.Name = "btnNum3";
             this.btnNum3.Size = new System.Drawing.Size(80, 80);
             this.btnNum3.TabIndex = 21;
             this.btnNum3.Text = "3";
-            this.btnNum3.UseVisualStyleBackColor = true;
+            this.btnNum3.UseVisualStyleBackColor = false;
             this.btnNum3.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum2
             // 
-            this.btnNum2.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum2.BackColor = System.Drawing.Color.White;
+            this.btnNum2.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum2.Location = new System.Drawing.Point(98, 258);
             this.btnNum2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum2.Name = "btnNum2";
             this.btnNum2.Size = new System.Drawing.Size(80, 80);
             this.btnNum2.TabIndex = 20;
             this.btnNum2.Text = "2";
-            this.btnNum2.UseVisualStyleBackColor = true;
+            this.btnNum2.UseVisualStyleBackColor = false;
             this.btnNum2.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum1
             // 
-            this.btnNum1.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum1.BackColor = System.Drawing.Color.White;
+            this.btnNum1.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum1.Location = new System.Drawing.Point(12, 258);
             this.btnNum1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum1.Name = "btnNum1";
             this.btnNum1.Size = new System.Drawing.Size(80, 80);
             this.btnNum1.TabIndex = 19;
             this.btnNum1.Text = "1";
-            this.btnNum1.UseVisualStyleBackColor = true;
+            this.btnNum1.UseVisualStyleBackColor = false;
             this.btnNum1.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // btnNum0
             // 
-            this.btnNum0.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum0.BackColor = System.Drawing.Color.White;
+            this.btnNum0.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.btnNum0.Location = new System.Drawing.Point(12, 345);
             this.btnNum0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum0.Name = "btnNum0";
             this.btnNum0.Size = new System.Drawing.Size(80, 80);
             this.btnNum0.TabIndex = 18;
             this.btnNum0.Text = "0";
-            this.btnNum0.UseVisualStyleBackColor = true;
+            this.btnNum0.UseVisualStyleBackColor = false;
             this.btnNum0.Click += new System.EventHandler(this.btnNumber_Click);
             // 
             // lblTextMessage
             // 
-            this.lblTextMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.lblTextMessage.BackColor = System.Drawing.Color.White;
             this.lblTextMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTextMessage.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTextMessage.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblTextMessage.Location = new System.Drawing.Point(12, 13);
             this.lblTextMessage.Name = "lblTextMessage";
             this.lblTextMessage.Size = new System.Drawing.Size(340, 59);
@@ -252,6 +268,7 @@
             // KeyPadForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(364, 525);
             this.ControlBox = false;
             this.Controls.Add(this.btnCanel);
@@ -271,12 +288,13 @@
             this.Controls.Add(this.btnNum1);
             this.Controls.Add(this.btnNum0);
             this.Controls.Add(this.lblTextMessage);
+            this.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "KeyPadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = "  ";
             this.ResumeLayout(false);
 
         }
