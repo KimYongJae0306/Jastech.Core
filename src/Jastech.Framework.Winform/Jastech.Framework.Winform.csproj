@@ -54,6 +54,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AkkonParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AkkonParamControl.designer.cs">
+      <DependentUpon>AkkonParamControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\JogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\JogControl.designer.cs">
+      <DependentUpon>JogControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -73,6 +86,12 @@
     </Compile>
     <Compile Include="Controls\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UPHControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UPHControl.designer.cs">
+      <DependentUpon>UPHControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Forms\CopyModelForm.cs">
@@ -92,6 +111,12 @@
     </Compile>
     <Compile Include="Forms\EditModelForm.Designer.cs">
       <DependentUpon>EditModelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HistoryForm.designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\KeyPadForm.cs">
       <SubType>Form</SubType>
@@ -131,11 +156,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\AkkonParamControl.resx">
+      <DependentUpon>AkkonParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\JogControl.resx">
+      <DependentUpon>JogControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UPHControl.resx">
+      <DependentUpon>UPHControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CopyModelForm.resx">
       <DependentUpon>CopyModelForm.cs</DependentUpon>
@@ -145,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditModelForm.resx">
       <DependentUpon>EditModelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HistoryForm.resx">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyPadForm.resx">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
@@ -207,6 +244,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\JastechLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_right.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
