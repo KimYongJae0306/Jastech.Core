@@ -26,12 +26,27 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static void Save(ICogImage image, string fileName)
         {
-            if (Path.GetExtension(fileName) == ".bmp")
+            string extension = Path.GetExtension(fileName);
+            if (extension == ".bmp")
             {
                 CogImageFileBMP bmp = new CogImageFileBMP();
                 bmp.Open(fileName, CogImageFileModeConstants.Write);
                 bmp.Append(image);
                 bmp.Close();
+            }
+            else if(extension == ".jpg" || extension == "jpeg")
+            {
+                CogImageFileJPEG jpg = new CogImageFileJPEG();
+                jpg.Open(fileName, CogImageFileModeConstants.Write);
+                jpg.Append(image);
+                jpg.Close();
+            }
+            else if(extension == ".png")
+            {
+                CogImageFilePNG png = new CogImageFilePNG();
+                png.Open(fileName, CogImageFileModeConstants.Write);
+                png.Append(image);
+                png.Close();
             }
         }
 
