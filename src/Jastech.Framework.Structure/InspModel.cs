@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Structure
 {
-    public partial class InspModel
+    public class InspModel
     {
         [JsonProperty]
         public string Name { get; set; } = "New Model";

@@ -12,13 +12,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
     public class CogPatternMatching : CogVision
     {
         #region 필드
-        public CogPMAlignTool MatchingTool { get; set; } = new CogPMAlignTool();
+        public CogPMAlignTool MatchingTool { get; set; }
         #endregion
 
         #region 속성
-        public ICogImage PatternImage { get; set; } = null;
-
-        public ICogImage TrainImage { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -54,10 +51,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             rect.Color = CogColorConstants.Green;
             rect.LineStyle = CogGraphicLineStyleConstants.Dot;
             MatchingTool.SearchRegion = new CogRectangle(rect);
-            //_cogPMAlignTool.SearchRegion = new CogRectangle(roi);
             MatchingTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.InputImage |
                                                   CogPMAlignCurrentRecordConstants.SearchRegion;
-            //_cogPMAlignTool.SearchRegion
             return MatchingTool;
         }
 
@@ -82,22 +77,15 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             return true;
         }
 
+        public bool IsTrained()
+        {
+            return MatchingTool.Pattern.Trained;
+        }
+
         public void Find()
         {
 
         }
-
-        public override void Save(string filePath)
-        {
-            CogFileHelper.SaveTool<CogPMAlignTool>(filePath, MatchingTool);
-        }
-
-        public override void Load(string filePath)
-        {
-            MatchingTool = CogFileHelper.LoadTool(filePath) as CogPMAlignTool;
-        }
-
-
         #endregion
     }
 }

@@ -27,7 +27,7 @@ namespace Jastech.Framework.Util.Helper
                 Directory.CreateDirectory(_logDir);
         }
 
-        public static void Write(eLogType logType, string logMessage)
+        public static void Write(LogType logType, string logMessage)
         {
             string logpath = GetLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
@@ -45,7 +45,7 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static void Write(eLogType logType, string logMessage, DateTime tm)
+        public static void Write(LogType logType, string logMessage, DateTime tm)
         {
             string logpath = GetLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
@@ -66,13 +66,13 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        private static string GetLogPath(eLogType logType)
+        private static string GetLogPath(LogType logType)
         {
             string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + logType.ToString() + ".log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             return logPath;
         }
 
-        public static void WriteException(eLogType logType, Exception exception)
+        public static void WriteException(LogType logType, Exception exception)
         {
             string logpath = GetLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
@@ -92,7 +92,7 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static void WriteException(eLogType logType, Exception exception, DateTime tm)
+        public static void WriteException(LogType logType, Exception exception, DateTime tm)
         {
             string logpath = GetLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
@@ -123,8 +123,9 @@ namespace Jastech.Framework.Util.Helper
         #endregion
     }
 
-    public enum eLogType
+    public enum LogType
     {
+        SYSTEM,
         DEVICE,
         INSPECTION,
         SEQ,

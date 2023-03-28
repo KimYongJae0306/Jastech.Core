@@ -25,6 +25,9 @@ namespace Jastech.Framework.Config
 
         [JsonProperty]
         public string Config { get; private set; }
+
+        [JsonProperty]
+        public string Temp { get; private set; }
         #endregion
 
         #region 생성자
@@ -37,6 +40,7 @@ namespace Jastech.Framework.Config
             Result = Path.GetFullPath("..\\Result");
             Log = Path.GetFullPath("..\\Log");
             Config = Path.GetFullPath("..\\Config");
+            Temp = Path.GetFullPath("..\\Temp");
         }
         #endregion
 
@@ -62,6 +66,10 @@ namespace Jastech.Framework.Config
             if (!Directory.Exists(Config))
             {
                 Directory.CreateDirectory(Config);
+            }
+            if (!Directory.Exists(Temp))
+            {
+                Directory.CreateDirectory(Temp);
             }
         }
         #endregion

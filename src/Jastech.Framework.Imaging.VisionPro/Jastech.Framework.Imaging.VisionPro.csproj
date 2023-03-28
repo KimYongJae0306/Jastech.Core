@@ -411,9 +411,13 @@
     <Compile Include="CogMathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisionAlgorithms\CogPatternMatching.cs" />
-    <Compile Include="VisionAlgorithms\CogVision.cs" />
-    <Compile Include="VisionAlgorithms\Parameters\CogPatternMachingParam.cs" />
+    <Compile Include="VisionAlgorithms\ICogVision.cs" />
+    <Compile Include="VisionAlgorithms\Parameters\CogPatternMatchingParam.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -87,6 +87,22 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             return cogDisplay.Image;
         }
+        
+        public int ImageWidth()
+        {
+            if (cogDisplay.Image != null)
+                return cogDisplay.Image.Width;
+
+            return 0;
+        }
+
+        public int ImageHeight()
+        {
+            if (cogDisplay.Image != null)
+                return cogDisplay.Image.Height;
+
+            return 0;
+        }
 
         private void btnFileOpen_Click(object sender, EventArgs e)
         {
@@ -203,10 +219,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void AddGraphics(string groupName, ICogRegion cogRegion, bool checkForDuplicates = false)
         {
-            if (cogDisplay.Image == null)
+            if (cogDisplay.Image == null || cogRegion == null)
                 return;
             
             cogDisplay.InteractiveGraphics.Add(cogRegion as ICogGraphicInteractive, groupName, false);
+        }
+
+        public void MoveDisplay(Point point)
+        {
+            cogDisplay.PointToScreen(point);
         }
         #endregion
 

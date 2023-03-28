@@ -91,6 +91,7 @@
     <Compile Include="Cameras\CameraInfo.cs" />
     <Compile Include="Cameras\CameraMil.cs" />
     <Compile Include="Cameras\CameraVieworksVT.cs" />
+    <Compile Include="Cameras\CameraVirtual.cs" />
     <Compile Include="Cameras\ICameraTDIavailable.cs" />
     <Compile Include="Cameras\ICameraTriggerable.cs" />
     <Compile Include="Cameras\ICameraPRNUavailable.cs" />
@@ -99,9 +100,12 @@
     <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
+    <Compile Include="Motions\Axis.cs" />
+    <Compile Include="Motions\AxisHandler.cs" />
     <Compile Include="Motions\Motion.cs" />
     <Compile Include="Motions\MotionHandler.cs" />
     <Compile Include="Motions\MovingParam.cs" />
+    <Compile Include="Motions\VirtualMotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

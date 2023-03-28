@@ -22,26 +22,7 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public double Deceleration { get; set; } = 10;
 
-        [JsonProperty]
-        public double MoveTolerance { get; set; } = 0;
 
-        [JsonProperty]
-        public double NegativeSWLimit { get; set; } = 0;
-
-        [JsonProperty]
-        public double PositiveSWLimit { get; set; } = 100;
-
-        [JsonProperty]
-        public double HomingTimeOut { get; set; } = 120;
-
-        [JsonProperty]
-        public double MovingTimeOut { get; set; } = 10;
-
-        [JsonProperty]
-        public double AfterWaitTime { get; set; } = 0;
-
-        [JsonProperty]
-        public double CenterOfGravity { get; set; } = 0;
         #endregion
 
     }

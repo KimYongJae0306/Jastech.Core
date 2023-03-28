@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,18 @@ namespace Jastech.Framework.Config
     {
         #region 속성
         public PathConfig Path { get; private set; } = new PathConfig();
+
+        public OperationConfig Operation { get; private set; } = new OperationConfig();
+
+        public MachineConfig Machine { get; private set; } = new MachineConfig();
         #endregion
 
         #region 이벤트
         public event ConfigCreatedEventHandler<PathConfig> PathConfigCreated;
+
+        public event ConfigCreatedEventHandler<OperationConfig> OperationConfigCreated;
+
+        public event ConfigCreatedEventHandler<MachineConfig> MachineConfigCreated;
         #endregion
 
         #region 메서드
@@ -24,6 +33,8 @@ namespace Jastech.Framework.Config
             string configPath = $"{curDir}\\..\\Config";
 
             Path.Load(configPath, PathConfigCreated);
+            Operation.Load(configPath, OperationConfigCreated);
+            Machine.Load(configPath, MachineConfigCreated);
         }
 
         public virtual void Save()
@@ -32,16 +43,18 @@ namespace Jastech.Framework.Config
             string configPath = $"{curDir}\\..\\Config";
 
             Path.Save(configPath);
+            Operation.Save(configPath);
+            Machine.Save(configPath);
         }
             
-        public virtual bool Load()
+        public virtual void Load()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";
 
-            bool success = Path.Load<PathConfig>(configPath);
-
-            return success;
+            Path.Load<PathConfig>(configPath);
+            Path.Load<OperationConfig>(configPath);
+            Path.Load<MachineConfig>(configPath);
         }
         #endregion
 

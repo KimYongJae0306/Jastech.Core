@@ -10,14 +10,35 @@ using System.Windows.Forms;
 using Cognex.VisionPro;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogPatternMatchingParamControl : UserControl
     {
-        public ICogImage TargetImage { get; set; } = null;
 
-        public CogPatternMatching algorithm { get; set; } = null;
+        #region 필드
+        private CogPatternMatchingParam MatchingParam;
+        #endregion
+
+        #region 속성
+        #endregion
+
+        #region 이벤트
+        public SetTrainDelegate SetTrainEventHandler;
+        #endregion
+
+        #region 델리게이트
+        public delegate void SetTrainDelegate();
+        #endregion
+
+        #region 생성자
+        #endregion
+
+        #region 메서드
+        #endregion
+
+        public ICogImage TargetImage { get; set; } = null;
 
         public CogPatternMatchingParamControl()
         {
@@ -26,16 +47,22 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void lblAddPattern_Click(object sender, EventArgs e)
         {
-            if (TargetImage == null || algorithm == null)
-                return;
+            SetTrainEventHandler?.Invoke();
 
-            //algorithm.SetTrainRegion()
-            //algorithm.Train();
+
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        public void UpdateData(CogPatternMatchingParam matchingParam)
         {
+            nupdnMatchScore.Value = (decimal)matchingParam.Score;
+            nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
 
+            cogPatternDisplay.Image = matchingParam.MatchingTool.Pattern.TrainImage;
+        }
+
+        private void lblInspection_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Controls\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeviceManager.cs" />
     <Compile Include="Forms\CopyModelForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,12 @@
     <Compile Include="Forms\MessageConfirmForm.Designer.cs">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -151,6 +158,9 @@
     <EmbeddedResource Include="Forms\MessageConfirmForm.resx">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -175,6 +185,14 @@
     <None Include="Resources\Cancel.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Jastech.Framework.Config\Jastech.Framework.Config.csproj">
+      <Project>{6244fa20-eda3-45d4-85c7-50d901c5d376}</Project>
+      <Name>Jastech.Framework.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Device\Jastech.Framework.Device.csproj">
+      <Project>{F43DDCCA-E65C-4131-B789-DB4109E91B68}</Project>
+      <Name>Jastech.Framework.Device</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jastech.FrameWork.Structure\Jastech.Framework.Structure.csproj">
       <Project>{dcff7b48-8df8-4ed9-9f0f-f11c2ccb7547}</Project>
       <Name>Jastech.Framework.Structure</Name>
@@ -186,6 +204,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JastechLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

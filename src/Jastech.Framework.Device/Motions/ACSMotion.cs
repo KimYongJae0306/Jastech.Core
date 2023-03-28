@@ -118,9 +118,9 @@ namespace Jastech.Framework.Device.Motions
         public override void TurnOnServo(int axisNo, bool bOnOff)
         {
             if(bOnOff)
-                _motion.Enable((Axis)axisNo);
+                _motion.Enable((ACS.SPiiPlusNET.Axis)axisNo);
             else
-                _motion.Disable((Axis)axisNo);
+                _motion.Disable((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void AllServoOff()
@@ -130,30 +130,30 @@ namespace Jastech.Framework.Device.Motions
 
         public override void StopMove(int axisNo)
         {
-            _motion.Kill((Axis)axisNo);
+            _motion.Kill((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void JogMove(int axisNo, Direction direction)
         {
-            _motion.Jog(MotionFlags.ACSC_NONE, (Axis)axisNo, (double)direction);
+            _motion.Jog(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, (double)direction);
         }
 
         public override double GetActualPosition(int axisNo)
         {
-            return _motion.GetFPosition((Axis)axisNo);
+            return _motion.GetFPosition((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
         {
-            SetBasicParameter((Axis)axisNo, velocity, accdec);
+            SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
 
-            if (ReadyToMove((Axis)axisNo, targetPosition))
-                _motion.ToPointAsync(MotionFlags.ACSC_NONE, (Axis)axisNo, targetPosition);
+            if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo, targetPosition))
+                _motion.ToPointAsync(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, targetPosition);
         }
 
         public override void SetDefaultParameter(int axisNo, double velocity = 10, double accdec = 10)
         {
-            SetBasicParameter((Axis)axisNo, velocity, accdec);
+            SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
         }
 
         public override bool WaitForDone(int axisNo)
@@ -175,7 +175,7 @@ namespace Jastech.Framework.Device.Motions
                 return null;
 
             //모터 상태 읽음
-            var state = _motion.GetMotorState((Axis)axisNo);
+            var state = _motion.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
             string strMotorStates = "";
 
             //사용가능 상태인지, 멈춘 상태인지, 이동중이 아닌지 확인
@@ -196,7 +196,7 @@ namespace Jastech.Framework.Device.Motions
             if (!_motion.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault((Axis)axisNo);
+            var saftyFlag = _motion.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_LL)
                 return true;
 
@@ -208,7 +208,7 @@ namespace Jastech.Framework.Device.Motions
             if (!_motion.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault((Axis)axisNo);
+            var saftyFlag = _motion.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_RL)
                 return true;
 
@@ -218,7 +218,7 @@ namespace Jastech.Framework.Device.Motions
 
     public partial class ACSMotion
     {
-        private void SetBasicParameter(Axis axis, double velocity, double accdec)
+        private void SetBasicParameter(ACS.SPiiPlusNET.Axis axis, double velocity, double accdec)
         {
             // Acceleration & Deceleration : 90%, Jerk : 10%
             // Convert Acc & Dec to rate
@@ -234,7 +234,7 @@ namespace Jastech.Framework.Device.Motions
             _motion.SetJerk(axis, jogJerk);
         }
 
-        private bool ReadyToMove(Axis axis, double targetPosition)
+        private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis, double targetPosition)
         {
             // Release axis event
             _motion.FaultClear(axis);
@@ -272,7 +272,7 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private bool WaitForDone(Axis axis, int timeOut = 10)
+        private bool WaitForDone(ACS.SPiiPlusNET.Axis axis, int timeOut = 10)
         {
             Stopwatch timeoutChecker = new Stopwatch();
 
@@ -319,7 +319,7 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private bool IsAxisDone(Axis axis)
+        private bool IsAxisDone(ACS.SPiiPlusNET.Axis axis)
         {
             var state = _motion.GetMotorState(axis);
             var position = _motion.GetFPosition(axis);
@@ -335,7 +335,7 @@ namespace Jastech.Framework.Device.Motions
             if (!_motion.IsConnected)
                 return;
 
-            Axis axis = (Axis)axisNo;
+            ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
             _motion.RunBuffer((ProgramBuffer)axis, null);
         }
     }
