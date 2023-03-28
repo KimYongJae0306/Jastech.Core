@@ -41,19 +41,19 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(58, 210);
+            this.progressBar.Location = new System.Drawing.Point(58, 207);
             this.progressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(301, 18);
+            this.progressBar.Size = new System.Drawing.Size(301, 22);
             this.progressBar.TabIndex = 15;
             // 
             // lblProgressMessage
             // 
             this.lblProgressMessage.AutoSize = true;
             this.lblProgressMessage.ForeColor = System.Drawing.Color.Black;
-            this.lblProgressMessage.Location = new System.Drawing.Point(56, 198);
+            this.lblProgressMessage.Location = new System.Drawing.Point(56, 190);
             this.lblProgressMessage.Name = "lblProgressMessage";
-            this.lblProgressMessage.Size = new System.Drawing.Size(62, 12);
+            this.lblProgressMessage.Size = new System.Drawing.Size(59, 15);
             this.lblProgressMessage.TabIndex = 12;
             this.lblProgressMessage.Text = "Loading...";
             // 
@@ -61,19 +61,19 @@
             // 
             this.lblCopyrightText.AutoSize = true;
             this.lblCopyrightText.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyrightText.Location = new System.Drawing.Point(56, 239);
+            this.lblCopyrightText.Location = new System.Drawing.Point(56, 244);
             this.lblCopyrightText.Name = "lblCopyrightText";
-            this.lblCopyrightText.Size = new System.Drawing.Size(252, 12);
+            this.lblCopyrightText.Size = new System.Drawing.Size(245, 15);
             this.lblCopyrightText.TabIndex = 13;
             this.lblCopyrightText.Text = "©1987 Famecs Solutions. All right reserved.";
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("맑은 고딕", 36F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblTitle.Location = new System.Drawing.Point(47, 95);
+            this.lblTitle.Location = new System.Drawing.Point(47, 100);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(470, 71);
+            this.lblTitle.Size = new System.Drawing.Size(470, 67);
             this.lblTitle.TabIndex = 11;
             this.lblTitle.Text = "Jastech";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -81,10 +81,10 @@
             // companyLogo
             // 
             this.companyLogo.Image = global::Jastech.Framework.Winform.Properties.Resources.JastechLogo;
-            this.companyLogo.Location = new System.Drawing.Point(12, 23);
+            this.companyLogo.Location = new System.Drawing.Point(12, 29);
             this.companyLogo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.companyLogo.Name = "companyLogo";
-            this.companyLogo.Size = new System.Drawing.Size(198, 70);
+            this.companyLogo.Size = new System.Drawing.Size(198, 69);
             this.companyLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.companyLogo.TabIndex = 14;
             this.companyLogo.TabStop = false;
@@ -92,11 +92,11 @@
             // lblVersionText
             // 
             this.lblVersionText.AutoSize = true;
-            this.lblVersionText.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblVersionText.Font = new System.Drawing.Font("맑은 고딕", 12F);
             this.lblVersionText.ForeColor = System.Drawing.Color.Black;
-            this.lblVersionText.Location = new System.Drawing.Point(395, 212);
+            this.lblVersionText.Location = new System.Drawing.Point(395, 210);
             this.lblVersionText.Name = "lblVersionText";
-            this.lblVersionText.Size = new System.Drawing.Size(89, 16);
+            this.lblVersionText.Size = new System.Drawing.Size(93, 21);
             this.lblVersionText.TabIndex = 16;
             this.lblVersionText.Text = "Version 1.0";
             // 
@@ -106,16 +106,17 @@
             // 
             // SplashForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(606, 284);
+            this.ClientSize = new System.Drawing.Size(511, 279);
             this.Controls.Add(this.lblVersionText);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.companyLogo);
             this.Controls.Add(this.lblProgressMessage);
             this.Controls.Add(this.lblCopyrightText);
             this.Controls.Add(this.lblTitle);
+            this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SplashForm";
