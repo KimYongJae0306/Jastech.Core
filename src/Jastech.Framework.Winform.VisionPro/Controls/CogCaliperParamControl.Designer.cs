@@ -31,9 +31,9 @@
             this.lblFilterSizeValue = new System.Windows.Forms.Label();
             this.lblEdgeThresholdValue = new System.Windows.Forms.Label();
             this.tlpCaliperParam = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpEdgePolarity = new System.Windows.Forms.TableLayoutPanel();
             this.rdoDarkToLight = new System.Windows.Forms.RadioButton();
             this.rdoLightToDark = new System.Windows.Forms.RadioButton();
-            this.tlpEdgePolarity = new System.Windows.Forms.TableLayoutPanel();
             this.lblEdgePolarity = new System.Windows.Forms.Label();
             this.lblFilterSize = new System.Windows.Forms.Label();
             this.lblEdgeThreshold = new System.Windows.Forms.Label();
@@ -87,6 +87,22 @@
             this.tlpCaliperParam.Size = new System.Drawing.Size(422, 273);
             this.tlpCaliperParam.TabIndex = 2;
             // 
+            // tlpEdgePolarity
+            // 
+            this.tlpEdgePolarity.ColumnCount = 1;
+            this.tlpEdgePolarity.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpEdgePolarity.Controls.Add(this.rdoDarkToLight, 0, 0);
+            this.tlpEdgePolarity.Controls.Add(this.rdoLightToDark, 0, 1);
+            this.tlpEdgePolarity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpEdgePolarity.Location = new System.Drawing.Point(211, 0);
+            this.tlpEdgePolarity.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpEdgePolarity.Name = "tlpEdgePolarity";
+            this.tlpEdgePolarity.RowCount = 2;
+            this.tlpEdgePolarity.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpEdgePolarity.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpEdgePolarity.Size = new System.Drawing.Size(211, 136);
+            this.tlpEdgePolarity.TabIndex = 1;
+            // 
             // rdoDarkToLight
             // 
             this.rdoDarkToLight.Appearance = System.Windows.Forms.Appearance.Button;
@@ -120,22 +136,6 @@
             this.rdoLightToDark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdoLightToDark.UseVisualStyleBackColor = false;
             this.rdoLightToDark.CheckedChanged += new System.EventHandler(this.rdoLightToDark_CheckedChanged);
-            // 
-            // tlpEdgePolarity
-            // 
-            this.tlpEdgePolarity.ColumnCount = 1;
-            this.tlpEdgePolarity.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpEdgePolarity.Controls.Add(this.rdoDarkToLight, 0, 0);
-            this.tlpEdgePolarity.Controls.Add(this.rdoLightToDark, 0, 1);
-            this.tlpEdgePolarity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpEdgePolarity.Location = new System.Drawing.Point(211, 0);
-            this.tlpEdgePolarity.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpEdgePolarity.Name = "tlpEdgePolarity";
-            this.tlpEdgePolarity.RowCount = 2;
-            this.tlpEdgePolarity.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpEdgePolarity.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpEdgePolarity.Size = new System.Drawing.Size(211, 136);
-            this.tlpEdgePolarity.TabIndex = 1;
             // 
             // lblEdgePolarity
             // 

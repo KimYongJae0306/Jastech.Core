@@ -14,7 +14,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     public partial class CogCaliperParamControl : UserControl
     {
         #region 필드
-        private CogCaliperTool _caliperTool = null;
+        private CogCaliperTool CaliperTool = null;
         #endregion
 
         #region 속성
@@ -67,10 +67,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         
         private void SetEdgePolarity(CogCaliperPolarityConstants caliperPolarity)
         {
-            if (_caliperTool == null)
+            if (CaliperTool == null)
                 return;
 
-            _caliperTool.RunParams.Edge0Polarity = caliperPolarity;
+            CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
         }
         #endregion
     }
