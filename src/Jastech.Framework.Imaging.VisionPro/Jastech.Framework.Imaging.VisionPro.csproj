@@ -410,10 +410,12 @@
     <Compile Include="CogImageHelper.cs" />
     <Compile Include="CogMathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisionAlgorithms\CogBead.cs" />
     <Compile Include="VisionAlgorithms\CogBlob.cs" />
     <Compile Include="VisionAlgorithms\CogCaliper.cs" />
     <Compile Include="VisionAlgorithms\CogPatternMatching.cs" />
     <Compile Include="VisionAlgorithms\ICogVision.cs" />
+    <Compile Include="VisionAlgorithms\Parameters\CogBeadParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogBlobParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogCaliperParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogPatternMatchingParam.cs" />

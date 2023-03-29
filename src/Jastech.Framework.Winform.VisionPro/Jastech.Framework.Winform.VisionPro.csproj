@@ -89,6 +89,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CogBeadParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CogBeadParamControl.Designer.cs">
+      <DependentUpon>CogBeadParamControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CogBlobParamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\CogBeadParamControl.resx">
+      <DependentUpon>CogBeadParamControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogBlobParamControl.resx">
       <DependentUpon>CogBlobParamControl.cs</DependentUpon>
     </EmbeddedResource>
