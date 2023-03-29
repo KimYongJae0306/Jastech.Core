@@ -14,9 +14,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
 
-        [JsonProperty]
-        public int LeadCount { get; set; } = 0;
-
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool();
 
@@ -24,7 +21,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             CogCaliperParam param = new CogCaliperParam();
             param.Name = Name;
-            param.LeadCount = LeadCount;
             param.CaliperTool = new CogCaliperTool(CaliperTool);
 
             return param;
