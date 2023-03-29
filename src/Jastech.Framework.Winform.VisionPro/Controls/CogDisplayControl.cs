@@ -51,6 +51,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private double Distance { get; set; }
         #endregion
 
+        #region 이벤트
+        public DrawViewRectDelegate DrawViewRectEventHandler;
+        #endregion
+
+        #region 델리게이트
+        public delegate void DrawViewRectDelegate(CogRectangle viewRect);
+        #endregion
         #region 속성
         public double PixelResolution { get; set; } = 1.0;
 
@@ -81,6 +88,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void SetImage(ICogImage cogImage)
         {
             cogDisplay.Image = cogImage;
+            UpdateViewRect();
         }
 
         public ICogImage GetImage()
@@ -102,6 +110,28 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 return cogDisplay.Image.Height;
 
             return 0;
+        }
+
+        public CogRectangle GetViewRectangle()
+        {
+            double width = cogDisplay.Image.Width/ cogDisplay.Zoom;
+            double height = cogDisplay.Image.Height / cogDisplay.Zoom;
+            ClearGraphic();
+
+            CogRectangle rect = new CogRectangle();
+            double calcX, calcY;
+
+            cogDisplay.GetTransform("#", "*").MapPoint(0, 0, out calcX, out calcY);
+            
+            int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
+            int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
+
+            rect.X = calcX;
+            rect.Y = calcY;
+            rect.Width = calcWidth;
+            rect.Height = calcHeight;
+
+            return rect;
         }
 
         private void btnFileOpen_Click(object sender, EventArgs e)
@@ -371,6 +401,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 //    //DrawTrackingText(e.X, e.Y, 0, Distance.ToString("00.00"), CogGraphicLabelAlignmentConstants.BaselineCenter);
                 //}
             }
+
+            //UpdateThumbnail();
         }
 
         private void DrawCrossLine()
@@ -512,6 +544,23 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             btnPointToPoint.BackColor = _noneSelectColor;
             btnPointToLine.BackColor = _noneSelectColor;
+        }
+
+        private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
+        {
+            if(sender is CogRecordDisplay display)
+            {
+                if (display.Image == null)
+                    return;
+
+                UpdateViewRect();
+            }
+        }
+
+        private void UpdateViewRect()
+        {
+            CogRectangle viewRect = GetViewRectangle();
+            DrawViewRectEventHandler?.Invoke(viewRect);
         }
     }
 }

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -63,10 +63,6 @@
             this.lblApply = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.gvModelList = new System.Windows.Forms.DataGridView();
-            this.ColumnCamNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCamAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCamStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblSelectedDescription = new System.Windows.Forms.Label();
             this.lblSelectedModifiedDate = new System.Windows.Forms.Label();
@@ -81,6 +77,10 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.ColumnCamNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCamAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCamStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -185,7 +185,7 @@
             this.lblCopyModel.Name = "lblCopyModel";
             this.lblCopyModel.Size = new System.Drawing.Size(136, 62);
             this.lblCopyModel.TabIndex = 0;
-            this.lblCopyModel.Text = "복사";
+            this.lblCopyModel.Text = "Copy";
             this.lblCopyModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblCopyModel.Click += new System.EventHandler(this.lblCopyModel_Click);
             // 
@@ -233,7 +233,7 @@
             this.lblDeleteModel.Name = "lblDeleteModel";
             this.lblDeleteModel.Size = new System.Drawing.Size(136, 62);
             this.lblDeleteModel.TabIndex = 0;
-            this.lblDeleteModel.Text = "제거";
+            this.lblDeleteModel.Text = "Delete";
             this.lblDeleteModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDeleteModel.Click += new System.EventHandler(this.lblDeleteModel_Click);
             // 
@@ -281,7 +281,7 @@
             this.lblEditModel.Name = "lblEditModel";
             this.lblEditModel.Size = new System.Drawing.Size(136, 62);
             this.lblEditModel.TabIndex = 0;
-            this.lblEditModel.Text = "편집";
+            this.lblEditModel.Text = "Edit";
             this.lblEditModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblEditModel.Click += new System.EventHandler(this.lblEditModel_Click);
             // 
@@ -329,7 +329,7 @@
             this.lblCreateModel.Name = "lblCreateModel";
             this.lblCreateModel.Size = new System.Drawing.Size(136, 62);
             this.lblCreateModel.TabIndex = 0;
-            this.lblCreateModel.Text = "추가";
+            this.lblCreateModel.Text = "Add";
             this.lblCreateModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblCreateModel.Click += new System.EventHandler(this.lblCreateModel_Click);
             // 
@@ -404,7 +404,7 @@
             this.lblCancel.Name = "lblCancel";
             this.lblCancel.Size = new System.Drawing.Size(136, 56);
             this.lblCancel.TabIndex = 0;
-            this.lblCancel.Text = "취소";
+            this.lblCancel.Text = "Cancel";
             this.lblCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel8
@@ -451,7 +451,7 @@
             this.lblApply.Name = "lblApply";
             this.lblApply.Size = new System.Drawing.Size(136, 56);
             this.lblApply.TabIndex = 0;
-            this.lblApply.Text = "적용";
+            this.lblApply.Text = "Apply";
             this.lblApply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblApply.Click += new System.EventHandler(this.lblApply_Click);
             // 
@@ -476,14 +476,14 @@
             this.gvModelList.AllowUserToDeleteRows = false;
             this.gvModelList.AllowUserToResizeRows = false;
             this.gvModelList.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvModelList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvModelList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gvModelList.ColumnHeadersHeight = 40;
             this.gvModelList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gvModelList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -506,55 +506,6 @@
             this.gvModelList.TabIndex = 3;
             this.gvModelList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvModelList_CellClick);
             this.gvModelList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvModelList_CellDoubleClick);
-            // 
-            // ColumnCamNo
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColumnCamNo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColumnCamNo.HeaderText = "이름";
-            this.ColumnCamNo.MinimumWidth = 300;
-            this.ColumnCamNo.Name = "ColumnCamNo";
-            this.ColumnCamNo.ReadOnly = true;
-            this.ColumnCamNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnCamNo.Width = 300;
-            // 
-            // ColumnSerialNo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColumnSerialNo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSerialNo.HeaderText = "등록일";
-            this.ColumnSerialNo.MinimumWidth = 200;
-            this.ColumnSerialNo.Name = "ColumnSerialNo";
-            this.ColumnSerialNo.ReadOnly = true;
-            this.ColumnSerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnSerialNo.Width = 200;
-            // 
-            // ColumnCamAddress
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColumnCamAddress.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnCamAddress.FillWeight = 200F;
-            this.ColumnCamAddress.HeaderText = "수정일";
-            this.ColumnCamAddress.MinimumWidth = 200;
-            this.ColumnCamAddress.Name = "ColumnCamAddress";
-            this.ColumnCamAddress.ReadOnly = true;
-            this.ColumnCamAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnCamAddress.Width = 200;
-            // 
-            // ColumnCamStatus
-            // 
-            this.ColumnCamStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColumnCamStatus.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnCamStatus.HeaderText = "설명";
-            this.ColumnCamStatus.MinimumWidth = 80;
-            this.ColumnCamStatus.Name = "ColumnCamStatus";
-            this.ColumnCamStatus.ReadOnly = true;
-            this.ColumnCamStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel6
             // 
@@ -632,9 +583,9 @@
             this.label15.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label15.Location = new System.Drawing.Point(3, 349);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(136, 41);
+            this.label15.Size = new System.Drawing.Size(278, 41);
             this.label15.TabIndex = 8;
-            this.label15.Text = "설명";
+            this.label15.Text = "Description";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel11
@@ -651,9 +602,9 @@
             this.label12.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label12.Location = new System.Drawing.Point(3, 259);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(136, 41);
+            this.label12.Size = new System.Drawing.Size(247, 41);
             this.label12.TabIndex = 6;
-            this.label12.Text = "수정일";
+            this.label12.Text = "Modified Date";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel9
@@ -670,9 +621,9 @@
             this.label11.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label11.Location = new System.Drawing.Point(3, 167);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(136, 41);
+            this.label11.Size = new System.Drawing.Size(256, 41);
             this.label11.TabIndex = 4;
-            this.label11.Text = "등록일";
+            this.label11.Text = "Create Date";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel7
@@ -689,9 +640,9 @@
             this.label8.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label8.Location = new System.Drawing.Point(3, 76);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(136, 41);
+            this.label8.Size = new System.Drawing.Size(281, 41);
             this.label8.TabIndex = 2;
-            this.label8.Text = "이름";
+            this.label8.Text = "Name";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
@@ -701,8 +652,57 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(136, 41);
             this.label7.TabIndex = 1;
-            this.label7.Text = "모델 정보";
+            this.label7.Text = "Model Info";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ColumnCamNo
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColumnCamNo.DefaultCellStyle = dataGridViewCellStyle7;
+            this.ColumnCamNo.HeaderText = "Name";
+            this.ColumnCamNo.MinimumWidth = 300;
+            this.ColumnCamNo.Name = "ColumnCamNo";
+            this.ColumnCamNo.ReadOnly = true;
+            this.ColumnCamNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnCamNo.Width = 300;
+            // 
+            // ColumnSerialNo
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColumnSerialNo.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ColumnSerialNo.HeaderText = "Create Date";
+            this.ColumnSerialNo.MinimumWidth = 200;
+            this.ColumnSerialNo.Name = "ColumnSerialNo";
+            this.ColumnSerialNo.ReadOnly = true;
+            this.ColumnSerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnSerialNo.Width = 200;
+            // 
+            // ColumnCamAddress
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColumnCamAddress.DefaultCellStyle = dataGridViewCellStyle9;
+            this.ColumnCamAddress.FillWeight = 200F;
+            this.ColumnCamAddress.HeaderText = "Modified Date";
+            this.ColumnCamAddress.MinimumWidth = 200;
+            this.ColumnCamAddress.Name = "ColumnCamAddress";
+            this.ColumnCamAddress.ReadOnly = true;
+            this.ColumnCamAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnCamAddress.Width = 200;
+            // 
+            // ColumnCamStatus
+            // 
+            this.ColumnCamStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColumnCamStatus.DefaultCellStyle = dataGridViewCellStyle10;
+            this.ColumnCamStatus.HeaderText = "Description";
+            this.ColumnCamStatus.MinimumWidth = 80;
+            this.ColumnCamStatus.Name = "ColumnCamStatus";
+            this.ColumnCamStatus.ReadOnly = true;
+            this.ColumnCamStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ModelControl
             // 
@@ -759,10 +759,6 @@
         private System.Windows.Forms.Label lblCreateModel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.DataGridView gvModelList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSerialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamStatus;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblSelectedDescription;
         private System.Windows.Forms.Label lblSelectedModifiedDate;
@@ -787,5 +783,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblApply;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSerialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCamStatus;
     }
 }
