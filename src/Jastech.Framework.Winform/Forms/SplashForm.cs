@@ -55,32 +55,9 @@ namespace Jastech.Framework.Winform.Forms
         private void SplashForm_Load(object sender, EventArgs e)
         {
             lblTitle.Text = Title;
-            lblTitle.Font = AutoFontSize(lblTitle, lblTitle.Text);
-
             lblVersionText.Text = "Verion" + Version;
 
             SplashActionTimer.Start();
-        }
-
-        public Font AutoFontSize(Label label, String text)
-        {
-            Font font;
-            Graphics gp;
-            SizeF size;
-            Single factor, factorX, factorY;
-            gp = label.CreateGraphics();
-            size = gp.MeasureString(text, label.Font);
-            gp.Dispose();
-
-            factorX = (label.Width) / size.Width;
-            factorY = (label.Height) / size.Height;
-            if (factorX > factorY)
-                factor = factorY;
-            else
-                factor = factorX;
-            font = label.Font;
-
-            return new Font(font.Name, font.SizeInPoints * (factor) - 1);
         }
 
         private void SplashActionTimer_Tick(object sender, EventArgs e)

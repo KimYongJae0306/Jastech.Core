@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lblProgressMessage = new System.Windows.Forms.Label();
-            this.lblCopyrightText = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.companyLogo = new System.Windows.Forms.PictureBox();
             this.lblVersionText = new System.Windows.Forms.Label();
@@ -57,23 +56,13 @@
             this.lblProgressMessage.TabIndex = 12;
             this.lblProgressMessage.Text = "Loading...";
             // 
-            // lblCopyrightText
-            // 
-            this.lblCopyrightText.AutoSize = true;
-            this.lblCopyrightText.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyrightText.Location = new System.Drawing.Point(56, 244);
-            this.lblCopyrightText.Name = "lblCopyrightText";
-            this.lblCopyrightText.Size = new System.Drawing.Size(245, 15);
-            this.lblCopyrightText.TabIndex = 13;
-            this.lblCopyrightText.Text = "©1987 Famecs Solutions. All right reserved.";
-            // 
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("맑은 고딕", 36F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.Black;
             this.lblTitle.Location = new System.Drawing.Point(47, 100);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(470, 67);
+            this.lblTitle.Size = new System.Drawing.Size(441, 67);
             this.lblTitle.TabIndex = 11;
             this.lblTitle.Text = "Jastech";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -114,7 +103,6 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.companyLogo);
             this.Controls.Add(this.lblProgressMessage);
-            this.Controls.Add(this.lblCopyrightText);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -134,7 +122,6 @@
         private System.Windows.Forms.ProgressBar progressBar;
         public System.Windows.Forms.PictureBox companyLogo;
         public System.Windows.Forms.Label lblProgressMessage;
-        public System.Windows.Forms.Label lblCopyrightText;
         public System.Windows.Forms.Label lblTitle;
         public System.Windows.Forms.Label lblVersionText;
         private System.Windows.Forms.Timer SplashActionTimer;

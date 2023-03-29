@@ -36,10 +36,10 @@
             // 
             // cogThumbnailDisplay
             // 
-            this.cogThumbnailDisplay.ColorMapLowerClipColor = System.Drawing.Color.Black;
+            this.cogThumbnailDisplay.ColorMapLowerClipColor = System.Drawing.SystemColors.AppWorkspace;
             this.cogThumbnailDisplay.ColorMapLowerRoiLimit = 0D;
             this.cogThumbnailDisplay.ColorMapPredefined = Cognex.VisionPro.Display.CogDisplayColorMapPredefinedConstants.None;
-            this.cogThumbnailDisplay.ColorMapUpperClipColor = System.Drawing.Color.Black;
+            this.cogThumbnailDisplay.ColorMapUpperClipColor = System.Drawing.SystemColors.AppWorkspace;
             this.cogThumbnailDisplay.ColorMapUpperRoiLimit = 1D;
             this.cogThumbnailDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cogThumbnailDisplay.DoubleTapZoomCycleLength = 2;
