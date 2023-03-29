@@ -32,6 +32,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             CogRectangleAffine rect = new CogRectangleAffine(roi);
             rect.Color = CogColorConstants.Green;
             rect.LineStyle = CogGraphicLineStyleConstants.Dot;
+            rect.GraphicDOFEnable = CogRectangleAffineDOFConstants.Position | CogRectangleAffineDOFConstants.Size | CogRectangleAffineDOFConstants.Skew | CogRectangleAffineDOFConstants.Rotation;
+            rect.Interactive = true;
 
             CaliperTool.Region = new CogRectangleAffine(rect);
             CaliperTool.CurrentRecordEnable = CogCaliperCurrentRecordConstants.InputImage | CogCaliperCurrentRecordConstants.Region;
