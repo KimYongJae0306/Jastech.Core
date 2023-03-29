@@ -116,7 +116,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             double width = cogDisplay.Image.Width/ cogDisplay.Zoom;
             double height = cogDisplay.Image.Height / cogDisplay.Zoom;
-            ClearGraphic();
 
             CogRectangle rect = new CogRectangle();
             double calcX, calcY;
