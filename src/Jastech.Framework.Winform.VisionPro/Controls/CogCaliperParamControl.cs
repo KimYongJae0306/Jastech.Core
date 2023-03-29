@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro.Caliper;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -71,6 +72,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 return;
 
             CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
+        }
+
+        public void UpdateData(CogCaliperParam caliperParam)
+        {
+            if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
+                rdoDarkToLight.Checked = true;
+            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
+                rdoLightToDark.Checked = true;
+            else { }
+
+            lblFilterSizeValue.Text = caliperParam.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
+            lblEdgeThresholdValue.Text = caliperParam.CaliperTool.RunParams.ContrastThreshold.ToString();
         }
         #endregion
     }
