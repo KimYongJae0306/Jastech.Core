@@ -24,6 +24,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void CogThumbnailDisplayControl_Load(object sender, EventArgs e)
         {
+            AddControls();
+
+            // 이벤트 등록(중요)
+            CogDisplay.DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
+            CogThumbnail.UpdateRectEventHandler += CogDisplay.UpdateViewRect;
+        }
+
+        private void AddControls()
+        {
             CogDisplay = new CogDisplayControl();
             CogDisplay.Dock = DockStyle.Fill;
             pnlDisplay.Controls.Add(CogDisplay);
@@ -37,6 +46,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CogDisplay.SetImage(image);
             CogThumbnail.SetThumbnailImage(image);
+        }
+
+        public CogDisplayControl GetDisplay()
+        {
+            return CogDisplay;
         }
     }
 }

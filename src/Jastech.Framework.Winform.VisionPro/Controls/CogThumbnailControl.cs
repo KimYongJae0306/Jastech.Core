@@ -13,17 +13,32 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogThumbnailControl : UserControl
     {
+        #region 필드
         private CogRectangle _prevViewRectangle { get; set; }
+        #endregion
 
+        #region 속성
         private ICogImage ThumbnailImage { get; set; } = null;
 
         private double Scale { get; set; }
+        #endregion
 
+        #region 이벤트
+        public event UpdateRectDelegate UpdateRectEventHandler;
+        #endregion
+
+        #region 델리게이트
+        public delegate void UpdateRectDelegate(CogRectangle rect);
+        #endregion
+
+        #region 생성자
         public CogThumbnailControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         public void SetThumbnailImage(ICogImage cogImage)
         {
             int newHeight = this.cogThumbnailDisplay.Height;
@@ -39,36 +54,26 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (Scale == 0)
                 return;
 
-            CogRectangle viewRect = CalcViewRect(rect);
-
-            if (Equals(viewRect, _prevViewRectangle))
+            if (Equals(rect, _prevViewRectangle))
                 return;
+
+            rect.Color = CogColorConstants.Yellow;
+            rect.LineWidthInScreenPixels = 2;
+            rect.Interactive = true;
+            rect.GraphicDOFEnable = CogRectangleDOFConstants.Position;
+            rect.Changed += ViewRect_Changed;
 
             cogThumbnailDisplay.StaticGraphics.Clear();
             cogThumbnailDisplay.InteractiveGraphics.Clear();
-            AddGraphics("ViewRect", viewRect);
+            AddGraphics("ViewRect", rect);
 
-            _prevViewRectangle = viewRect;
+            _prevViewRectangle = rect;
         }
 
-        private CogRectangle CalcViewRect(CogRectangle rect)
+        private void ViewRect_Changed(object sender, CogChangedEventArgs e)
         {
-            int x = (int)((double)rect.X * Scale);
-            int y = (int)((double)rect.Y * Scale);
-            int width = (int)((double)rect.Width * Scale);
-            int height = (int)((double)rect.Width * Scale);
-
-            CogRectangle viewRect = new CogRectangle
-            {
-                X = x,
-                Y = y,
-                Width = width,
-                Height = height,
-            };
-
-            viewRect.Color = CogColorConstants.Yellow;
-            viewRect.LineWidthInScreenPixels = 2;
-            return viewRect;
+            var rect = sender as CogRectangle;
+            UpdateRectEventHandler?.Invoke(rect);
         }
 
         public void AddGraphics(string groupName, ICogRegion cogRegion, bool checkForDuplicates = false)
@@ -88,5 +93,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             return false;
         }
+        #endregion
     }
 }

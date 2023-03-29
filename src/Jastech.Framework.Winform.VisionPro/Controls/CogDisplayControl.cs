@@ -34,6 +34,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         }
 
         #region 필드
+        private bool _updateViewRect { get; set; } = false;
+
         private Color _noneSelectColor { get; set; } = SystemColors.Control;
 
         private Color _selectedColor { get; set; } = Color.DarkSeaGreen;
@@ -52,7 +54,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 이벤트
-        public DrawViewRectDelegate DrawViewRectEventHandler;
+        public event DrawViewRectDelegate DrawViewRectEventHandler;
         #endregion
 
         #region 델리게이트
@@ -114,15 +116,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public CogRectangle GetViewRectangle()
         {
-            double width = cogDisplay.Image.Width/ cogDisplay.Zoom;
-            double height = cogDisplay.Image.Height / cogDisplay.Zoom;
-            ClearGraphic();
-
             CogRectangle rect = new CogRectangle();
             double calcX, calcY;
-
-            cogDisplay.GetTransform("#", "*").MapPoint(0, 0, out calcX, out calcY);
             
+            cogDisplay.GetTransform("#", "*").MapPoint(0, 0, out calcX, out calcY);
+
             int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
             int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
 
@@ -133,6 +131,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             return rect;
         }
+
 
         private void btnFileOpen_Click(object sender, EventArgs e)
         {
@@ -240,6 +239,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             cogDisplay.StaticGraphics.Clear();
             cogDisplay.InteractiveGraphics.Clear();
+        }
+
+        public void ClearGraphic(string groupName)
+        {
+            DeleteStaticGraphics(groupName);
         }
 
         public PointF GetPan()
@@ -553,6 +557,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 if (display.Image == null)
                     return;
 
+                if(_updateViewRect)
+                {
+                    _updateViewRect = false;
+                    return;
+                }
+
                 UpdateViewRect();
             }
         }
@@ -561,6 +571,29 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CogRectangle viewRect = GetViewRectangle();
             DrawViewRectEventHandler?.Invoke(viewRect);
+        }
+
+        public void UpdateViewRect(CogRectangle rect)
+        {
+            //_updateViewRect = true;
+            //double calcX, calcY;
+            //double x = rect.X;
+            //double y = rect.Y;
+            //cogDisplay.GetTransform("*", "#").MapPoint(rect.X, rect.Y, out calcX, out calcY);
+
+            //int calcWidth = (int)(rect.Width * cogDisplay.Zoom);
+            //int calcHeight = (int)(rect.Height * cogDisplay.Zoom);
+
+            //CogRectangle rect123 = GetViewRectangle();
+            //var g = cogDisplay.PointToScreen(new Point((int)rect.X, (int)rect.Y)); ;
+            //cogDisplay.PanX = g.X;
+            //cogDisplay.PanY = g.Y;
+            //cogDisplay.Width = calcWidth;
+            //cogDisplay.Height = calcHeight;
+            //cogDisplay.PanX = -58;
+            //cogDisplay.PanY = -73;
+            //cogDisplay.Location.X = calcX;
+            //cogDisplay.PanY = calcY;
         }
     }
 }
