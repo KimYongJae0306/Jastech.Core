@@ -557,6 +557,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 if (display.Image == null)
                     return;
 
+                if (display.Zoom < 0.2)
+                    display.Zoom = 0.2;
+
+                if (display.Zoom > 10)
+                    display.Zoom = 10;
+
                 if(_updateViewRect)
                 {
                     _updateViewRect = false;
@@ -575,12 +581,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateViewRect(CogRectangle rect)
         {
+            double x = rect.X;
+            double y = rect.Y;
+
+            int tlqkf = 0;
             //_updateViewRect = true;
-            //double calcX, calcY;
+            double calcX, calcY;
             //double x = rect.X;
             //double y = rect.Y;
-            //cogDisplay.GetTransform("*", "#").MapPoint(rect.X, rect.Y, out calcX, out calcY);
+            cogDisplay.GetTransform("*", "#").MapPoint(rect.X, rect.Y, out calcX, out calcY);
 
+            CogRectangle newRect = new CogRectangle();
+            //newRect.SetXYWidthHeight()
             //int calcWidth = (int)(rect.Width * cogDisplay.Zoom);
             //int calcHeight = (int)(rect.Height * cogDisplay.Zoom);
 

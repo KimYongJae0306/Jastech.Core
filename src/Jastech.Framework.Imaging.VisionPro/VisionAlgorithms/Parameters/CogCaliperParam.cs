@@ -14,6 +14,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
 
+        public Type Direction;
+
+        public object TargetType;
+
+
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool();
 
