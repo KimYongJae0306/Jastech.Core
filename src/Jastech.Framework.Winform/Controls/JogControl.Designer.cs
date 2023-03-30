@@ -49,6 +49,7 @@
             this.lblPitchZValue = new System.Windows.Forms.Label();
             this.pnlJogOperation = new System.Windows.Forms.Panel();
             this.tlpJogOperation = new System.Windows.Forms.TableLayoutPanel();
+            this.lblJog = new System.Windows.Forms.Label();
             this.btnJogDownZ = new System.Windows.Forms.Button();
             this.btnJogDownY = new System.Windows.Forms.Button();
             this.btnJogLeftX = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.btnJogStop = new System.Windows.Forms.Button();
             this.btnJogUpY = new System.Windows.Forms.Button();
             this.btnJogUpZ = new System.Windows.Forms.Button();
-            this.lblJog = new System.Windows.Forms.Label();
             this.tlpJogControl.SuspendLayout();
             this.tlpJog.SuspendLayout();
             this.tlpJogOption.SuspendLayout();
@@ -75,8 +75,8 @@
             // tlpJogControl
             // 
             this.tlpJogControl.ColumnCount = 2;
-            this.tlpJogControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpJogControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpJogControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpJogControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tlpJogControl.Controls.Add(this.tlpJog, 1, 0);
             this.tlpJogControl.Controls.Add(this.lblJog, 0, 0);
             this.tlpJogControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -95,14 +95,14 @@
             this.tlpJog.Controls.Add(this.tlpJogOption, 0, 0);
             this.tlpJog.Controls.Add(this.pnlJogOperation, 0, 1);
             this.tlpJog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpJog.Location = new System.Drawing.Point(120, 0);
+            this.tlpJog.Location = new System.Drawing.Point(156, 0);
             this.tlpJog.Margin = new System.Windows.Forms.Padding(0);
             this.tlpJog.Name = "tlpJog";
             this.tlpJog.RowCount = 2;
             this.tlpJog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpJog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tlpJog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpJog.Size = new System.Drawing.Size(506, 386);
+            this.tlpJog.Size = new System.Drawing.Size(470, 386);
             this.tlpJog.TabIndex = 23;
             // 
             // tlpJogOption
@@ -121,7 +121,7 @@
             this.tlpJogOption.RowCount = 2;
             this.tlpJogOption.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpJogOption.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpJogOption.Size = new System.Drawing.Size(506, 154);
+            this.tlpJogOption.Size = new System.Drawing.Size(470, 154);
             this.tlpJogOption.TabIndex = 20;
             // 
             // pnlJogSpeedMode
@@ -131,7 +131,7 @@
             this.pnlJogSpeedMode.Location = new System.Drawing.Point(6, 6);
             this.pnlJogSpeedMode.Margin = new System.Windows.Forms.Padding(6);
             this.pnlJogSpeedMode.Name = "pnlJogSpeedMode";
-            this.pnlJogSpeedMode.Size = new System.Drawing.Size(241, 65);
+            this.pnlJogSpeedMode.Size = new System.Drawing.Size(223, 65);
             this.pnlJogSpeedMode.TabIndex = 1;
             // 
             // tlpJogSpeedMode
@@ -147,7 +147,7 @@
             this.tlpJogSpeedMode.Name = "tlpJogSpeedMode";
             this.tlpJogSpeedMode.RowCount = 1;
             this.tlpJogSpeedMode.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpJogSpeedMode.Size = new System.Drawing.Size(241, 65);
+            this.tlpJogSpeedMode.Size = new System.Drawing.Size(223, 65);
             this.tlpJogSpeedMode.TabIndex = 0;
             // 
             // rdoJogFastMode
@@ -158,10 +158,10 @@
             this.rdoJogFastMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogFastMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoJogFastMode.ForeColor = System.Drawing.Color.Black;
-            this.rdoJogFastMode.Location = new System.Drawing.Point(120, 0);
+            this.rdoJogFastMode.Location = new System.Drawing.Point(111, 0);
             this.rdoJogFastMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogFastMode.Name = "rdoJogFastMode";
-            this.rdoJogFastMode.Size = new System.Drawing.Size(121, 65);
+            this.rdoJogFastMode.Size = new System.Drawing.Size(112, 65);
             this.rdoJogFastMode.TabIndex = 144;
             this.rdoJogFastMode.Tag = "0";
             this.rdoJogFastMode.Text = "FAST";
@@ -180,7 +180,7 @@
             this.rdoJogSlowMode.Location = new System.Drawing.Point(0, 0);
             this.rdoJogSlowMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogSlowMode.Name = "rdoJogSlowMode";
-            this.rdoJogSlowMode.Size = new System.Drawing.Size(120, 65);
+            this.rdoJogSlowMode.Size = new System.Drawing.Size(111, 65);
             this.rdoJogSlowMode.TabIndex = 143;
             this.rdoJogSlowMode.Tag = "0";
             this.rdoJogSlowMode.Text = "SLOW";
@@ -192,10 +192,10 @@
             // 
             this.pnlJogMode.Controls.Add(this.tlpJogMode);
             this.pnlJogMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlJogMode.Location = new System.Drawing.Point(259, 6);
+            this.pnlJogMode.Location = new System.Drawing.Point(241, 6);
             this.pnlJogMode.Margin = new System.Windows.Forms.Padding(6);
             this.pnlJogMode.Name = "pnlJogMode";
-            this.pnlJogMode.Size = new System.Drawing.Size(241, 65);
+            this.pnlJogMode.Size = new System.Drawing.Size(223, 65);
             this.pnlJogMode.TabIndex = 2;
             // 
             // tlpJogMode
@@ -211,7 +211,7 @@
             this.tlpJogMode.Name = "tlpJogMode";
             this.tlpJogMode.RowCount = 1;
             this.tlpJogMode.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpJogMode.Size = new System.Drawing.Size(241, 65);
+            this.tlpJogMode.Size = new System.Drawing.Size(223, 65);
             this.tlpJogMode.TabIndex = 0;
             // 
             // rdoIncreaseMode
@@ -222,10 +222,10 @@
             this.rdoIncreaseMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoIncreaseMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoIncreaseMode.ForeColor = System.Drawing.Color.Black;
-            this.rdoIncreaseMode.Location = new System.Drawing.Point(120, 0);
+            this.rdoIncreaseMode.Location = new System.Drawing.Point(111, 0);
             this.rdoIncreaseMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoIncreaseMode.Name = "rdoIncreaseMode";
-            this.rdoIncreaseMode.Size = new System.Drawing.Size(121, 65);
+            this.rdoIncreaseMode.Size = new System.Drawing.Size(112, 65);
             this.rdoIncreaseMode.TabIndex = 145;
             this.rdoIncreaseMode.Tag = "0";
             this.rdoIncreaseMode.Text = "INC MODE";
@@ -244,7 +244,7 @@
             this.rdoJogMode.Location = new System.Drawing.Point(0, 0);
             this.rdoJogMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogMode.Name = "rdoJogMode";
-            this.rdoJogMode.Size = new System.Drawing.Size(120, 65);
+            this.rdoJogMode.Size = new System.Drawing.Size(111, 65);
             this.rdoJogMode.TabIndex = 144;
             this.rdoJogMode.Tag = "0";
             this.rdoJogMode.Text = "JOG MODE";
@@ -259,7 +259,7 @@
             this.pnlPitchXY.Location = new System.Drawing.Point(6, 83);
             this.pnlPitchXY.Margin = new System.Windows.Forms.Padding(6);
             this.pnlPitchXY.Name = "pnlPitchXY";
-            this.pnlPitchXY.Size = new System.Drawing.Size(241, 65);
+            this.pnlPitchXY.Size = new System.Drawing.Size(223, 65);
             this.pnlPitchXY.TabIndex = 3;
             // 
             // tlpPitchXY
@@ -275,7 +275,7 @@
             this.tlpPitchXY.Name = "tlpPitchXY";
             this.tlpPitchXY.RowCount = 1;
             this.tlpPitchXY.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPitchXY.Size = new System.Drawing.Size(241, 65);
+            this.tlpPitchXY.Size = new System.Drawing.Size(223, 65);
             this.tlpPitchXY.TabIndex = 0;
             // 
             // lblPitchXY
@@ -287,7 +287,7 @@
             this.lblPitchXY.Location = new System.Drawing.Point(0, 0);
             this.lblPitchXY.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchXY.Name = "lblPitchXY";
-            this.lblPitchXY.Size = new System.Drawing.Size(120, 65);
+            this.lblPitchXY.Size = new System.Drawing.Size(111, 65);
             this.lblPitchXY.TabIndex = 4;
             this.lblPitchXY.Text = "PITCH XY";
             this.lblPitchXY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,10 +298,10 @@
             this.lblPitchXYValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchXYValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchXYValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblPitchXYValue.Location = new System.Drawing.Point(120, 0);
+            this.lblPitchXYValue.Location = new System.Drawing.Point(111, 0);
             this.lblPitchXYValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchXYValue.Name = "lblPitchXYValue";
-            this.lblPitchXYValue.Size = new System.Drawing.Size(121, 65);
+            this.lblPitchXYValue.Size = new System.Drawing.Size(112, 65);
             this.lblPitchXYValue.TabIndex = 2;
             this.lblPitchXYValue.Text = "1.0";
             this.lblPitchXYValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -311,10 +311,10 @@
             // 
             this.pnlPitchZ.Controls.Add(this.tlpPitchZ);
             this.pnlPitchZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPitchZ.Location = new System.Drawing.Point(259, 83);
+            this.pnlPitchZ.Location = new System.Drawing.Point(241, 83);
             this.pnlPitchZ.Margin = new System.Windows.Forms.Padding(6);
             this.pnlPitchZ.Name = "pnlPitchZ";
-            this.pnlPitchZ.Size = new System.Drawing.Size(241, 65);
+            this.pnlPitchZ.Size = new System.Drawing.Size(223, 65);
             this.pnlPitchZ.TabIndex = 4;
             // 
             // tlpPitchZ
@@ -330,7 +330,7 @@
             this.tlpPitchZ.Name = "tlpPitchZ";
             this.tlpPitchZ.RowCount = 1;
             this.tlpPitchZ.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPitchZ.Size = new System.Drawing.Size(241, 65);
+            this.tlpPitchZ.Size = new System.Drawing.Size(223, 65);
             this.tlpPitchZ.TabIndex = 0;
             // 
             // lblPitchZ
@@ -342,7 +342,7 @@
             this.lblPitchZ.Location = new System.Drawing.Point(0, 0);
             this.lblPitchZ.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchZ.Name = "lblPitchZ";
-            this.lblPitchZ.Size = new System.Drawing.Size(120, 65);
+            this.lblPitchZ.Size = new System.Drawing.Size(111, 65);
             this.lblPitchZ.TabIndex = 4;
             this.lblPitchZ.Text = "PITCH Z";
             this.lblPitchZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -353,10 +353,10 @@
             this.lblPitchZValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchZValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchZValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblPitchZValue.Location = new System.Drawing.Point(120, 0);
+            this.lblPitchZValue.Location = new System.Drawing.Point(111, 0);
             this.lblPitchZValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchZValue.Name = "lblPitchZValue";
-            this.lblPitchZValue.Size = new System.Drawing.Size(121, 65);
+            this.lblPitchZValue.Size = new System.Drawing.Size(112, 65);
             this.lblPitchZValue.TabIndex = 2;
             this.lblPitchZValue.Text = "0.1";
             this.lblPitchZValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -369,7 +369,7 @@
             this.pnlJogOperation.Location = new System.Drawing.Point(6, 160);
             this.pnlJogOperation.Margin = new System.Windows.Forms.Padding(6);
             this.pnlJogOperation.Name = "pnlJogOperation";
-            this.pnlJogOperation.Size = new System.Drawing.Size(494, 220);
+            this.pnlJogOperation.Size = new System.Drawing.Size(458, 220);
             this.pnlJogOperation.TabIndex = 151;
             // 
             // tlpJogOperation
@@ -389,13 +389,26 @@
             this.tlpJogOperation.Controls.Add(this.btnJogUpZ, 4, 0);
             this.tlpJogOperation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpJogOperation.Location = new System.Drawing.Point(0, 0);
+            this.tlpJogOperation.Margin = new System.Windows.Forms.Padding(0);
             this.tlpJogOperation.Name = "tlpJogOperation";
             this.tlpJogOperation.RowCount = 3;
             this.tlpJogOperation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpJogOperation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpJogOperation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpJogOperation.Size = new System.Drawing.Size(494, 220);
+            this.tlpJogOperation.Size = new System.Drawing.Size(458, 220);
             this.tlpJogOperation.TabIndex = 19;
+            // 
+            // lblJog
+            // 
+            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJog.Location = new System.Drawing.Point(0, 0);
+            this.lblJog.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.lblJog.Name = "lblJog";
+            this.lblJog.Size = new System.Drawing.Size(152, 386);
+            this.lblJog.TabIndex = 0;
+            this.lblJog.Text = "Jog";
+            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnJogDownZ
             // 
@@ -404,10 +417,10 @@
             this.btnJogDownZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogDownZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down;
-            this.btnJogDownZ.Location = new System.Drawing.Point(374, 146);
+            this.btnJogDownZ.Location = new System.Drawing.Point(347, 146);
             this.btnJogDownZ.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownZ.Name = "btnJogDownZ";
-            this.btnJogDownZ.Size = new System.Drawing.Size(120, 74);
+            this.btnJogDownZ.Size = new System.Drawing.Size(111, 74);
             this.btnJogDownZ.TabIndex = 8;
             this.btnJogDownZ.Text = "Z(-)";
             this.btnJogDownZ.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -420,10 +433,10 @@
             this.btnJogDownY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down;
-            this.btnJogDownY.Location = new System.Drawing.Point(118, 146);
+            this.btnJogDownY.Location = new System.Drawing.Point(109, 146);
             this.btnJogDownY.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownY.Name = "btnJogDownY";
-            this.btnJogDownY.Size = new System.Drawing.Size(118, 74);
+            this.btnJogDownY.Size = new System.Drawing.Size(109, 74);
             this.btnJogDownY.TabIndex = 6;
             this.btnJogDownY.Text = "Y(-)";
             this.btnJogDownY.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -441,7 +454,7 @@
             this.btnJogLeftX.Location = new System.Drawing.Point(0, 73);
             this.btnJogLeftX.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogLeftX.Name = "btnJogLeftX";
-            this.btnJogLeftX.Size = new System.Drawing.Size(118, 73);
+            this.btnJogLeftX.Size = new System.Drawing.Size(109, 73);
             this.btnJogLeftX.TabIndex = 1;
             this.btnJogLeftX.Text = "X(-)";
             this.btnJogLeftX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -456,10 +469,10 @@
             this.btnJogRightX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogRightX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogRightX.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_right;
-            this.btnJogRightX.Location = new System.Drawing.Point(236, 73);
+            this.btnJogRightX.Location = new System.Drawing.Point(218, 73);
             this.btnJogRightX.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogRightX.Name = "btnJogRightX";
-            this.btnJogRightX.Size = new System.Drawing.Size(118, 73);
+            this.btnJogRightX.Size = new System.Drawing.Size(109, 73);
             this.btnJogRightX.TabIndex = 2;
             this.btnJogRightX.Text = "X(+)";
             this.btnJogRightX.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -474,10 +487,10 @@
             this.btnJogStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogStop.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogStop.Image = global::Jastech.Framework.Winform.Properties.Resources.Stop_circle;
-            this.btnJogStop.Location = new System.Drawing.Point(118, 73);
+            this.btnJogStop.Location = new System.Drawing.Point(109, 73);
             this.btnJogStop.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogStop.Name = "btnJogStop";
-            this.btnJogStop.Size = new System.Drawing.Size(118, 73);
+            this.btnJogStop.Size = new System.Drawing.Size(109, 73);
             this.btnJogStop.TabIndex = 4;
             this.btnJogStop.Text = "EStop";
             this.btnJogStop.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -490,10 +503,10 @@
             this.btnJogUpY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogUpY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_up;
-            this.btnJogUpY.Location = new System.Drawing.Point(118, 0);
+            this.btnJogUpY.Location = new System.Drawing.Point(109, 0);
             this.btnJogUpY.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogUpY.Name = "btnJogUpY";
-            this.btnJogUpY.Size = new System.Drawing.Size(118, 73);
+            this.btnJogUpY.Size = new System.Drawing.Size(109, 73);
             this.btnJogUpY.TabIndex = 5;
             this.btnJogUpY.Text = "Y(+)";
             this.btnJogUpY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -508,24 +521,14 @@
             this.btnJogUpZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.btnJogUpZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_up;
-            this.btnJogUpZ.Location = new System.Drawing.Point(374, 0);
+            this.btnJogUpZ.Location = new System.Drawing.Point(347, 0);
             this.btnJogUpZ.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogUpZ.Name = "btnJogUpZ";
-            this.btnJogUpZ.Size = new System.Drawing.Size(120, 73);
+            this.btnJogUpZ.Size = new System.Drawing.Size(111, 73);
             this.btnJogUpZ.TabIndex = 7;
             this.btnJogUpZ.Text = "Z(+)";
             this.btnJogUpZ.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpZ.UseVisualStyleBackColor = false;
-            // 
-            // lblJog
-            // 
-            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJog.Location = new System.Drawing.Point(3, 0);
-            this.lblJog.Name = "lblJog";
-            this.lblJog.Size = new System.Drawing.Size(114, 386);
-            this.lblJog.TabIndex = 0;
-            this.lblJog.Text = "Jog";
-            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // JogControl
             // 
@@ -534,6 +537,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.tlpJogControl);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.Name = "JogControl";
             this.Size = new System.Drawing.Size(626, 386);
             this.tlpJogControl.ResumeLayout(false);

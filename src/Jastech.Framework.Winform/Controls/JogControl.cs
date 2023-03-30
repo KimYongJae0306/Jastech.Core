@@ -22,6 +22,29 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 이벤트
+        #endregion
+
+        #region 델리게이트
+        #endregion
+
+        #region 생성자
+        public JogControl()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region 메서드
+        private void SetSelectJogSpeedMode(JogSpeedMode jogSpeedMode)
+        {
+            _jogSpeedMode = jogSpeedMode;
+        }
+
+        private void SetSelectJogMode(JogMode jogMode)
+        {
+            _jogMode = jogMode;
+        }
+
         private void rdoJogSlowMode_CheckedChanged(object sender, EventArgs e)
         {
             if (rdoJogSlowMode.Checked)
@@ -114,28 +137,6 @@ namespace Jastech.Framework.Winform.Controls
         private void btnJogUpY_MouseUp(object sender, MouseEventArgs e)
         {
             //MoveStop(eAxis.Axis_Y);
-        }
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        public JogControl()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region 메서드
-        private void SetSelectJogSpeedMode(JogSpeedMode jogSpeedMode)
-        {
-            _jogSpeedMode = jogSpeedMode;
-        }
-
-        private void SetSelectJogMode(JogMode jogMode)
-        {
-            _jogMode = jogMode;
         }
 
         //private void MoveJog(eAxis axis, Direction direction)
