@@ -1,8 +1,11 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,24 +30,35 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         #endregion
 
         #region 메서드
-        public void Run(ICogImage image, CogPatternMatchingParam matchingParam)
+        public CogPatternMatchingResult Run(ICogImage image, CogPatternMatchingParam matchingParam)
         {
+            CogPatternMatchingResult result = new CogPatternMatchingResult();
             if (image == null)
-                return;
-            matchingParam.SetInputImage(image);
+                return result;
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
 
+            matchingParam.SetInputImage(image);
             var resultList = matchingParam.Run();
 
-            if(resultList.Count >0)
+            sw.Stop();
+            result.TactTime = sw.ElapsedMilliseconds;
+            if (resultList.Count >0)
             {
-                var ggg = resultList[0];
-                double score = ggg.Score;
-                double x = ggg.GetPose().TranslationX;
-                double y = ggg.GetPose().TranslationY;
-                double y1 = ggg.GetPose().Rotation;
-                //resultList[0].Score;
-                //resultList[0].
+                MatchPos match = new MatchPos();
+
+                CogRectangle trainRoi = matchingParam.GetTrainRegion() as CogRectangle;
+                var foundResult = resultList[0];
+
+                match.ReferencePos = new PointF((float)trainRoi.CenterX, (float)trainRoi.CenterY);
+                match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);
+                match.Score = (float)foundResult.Score;
+                match.Angle = (float)foundResult.GetPose().Rotation;
+                match.Scale = (float)foundResult.GetPose().Scaling;
+
+                result.MatchPosList.Add(match);
             }
+            return result;
         }
         #endregion
     }

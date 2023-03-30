@@ -47,13 +47,13 @@ namespace Jastech.Framework.Winform.Forms
 
             if (modelName == "")
             {
-                ShowMessageBox("모델 이름을 입력해 주시기 바랍니다.");
+                ShowMessageBox("Enter your model name.");
                 return;
             }
 
             if (ModelFileHelper.IsExistModel(ModelPath, modelName))
             {
-                ShowMessageBox("동일한 이름의 모델이 존재합니다.");
+                ShowMessageBox("The same model exists.");
                 return;
             }
 

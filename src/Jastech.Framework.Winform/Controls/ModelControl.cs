@@ -125,7 +125,7 @@ namespace Jastech.Framework.Winform.Controls
                 return;
 
             MessageYesNoForm form = new MessageYesNoForm();
-            form.Message = "선택된 모델을 삭제하시겠습니까?";
+            form.Message = "Do you want to delete the selected model?";
 
             if (form.ShowDialog() == DialogResult.Yes)
             {
@@ -152,7 +152,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void gvModelList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
                 return;
 
             UpdateSelectedModel(e.RowIndex);

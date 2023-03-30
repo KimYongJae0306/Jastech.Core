@@ -56,7 +56,7 @@ namespace Jastech.Framework.Winform.Forms
                 if (ModelFileHelper.IsExistModel(ModelPath, txtModelName.Text))
                 {
                     MessageConfirmForm form = new MessageConfirmForm();
-                    form.Message = "동일한 모델이 존재 합니다.";
+                    form.Message = "The same model exists.";
                     form.ShowDialog();
                     return;
                 }
