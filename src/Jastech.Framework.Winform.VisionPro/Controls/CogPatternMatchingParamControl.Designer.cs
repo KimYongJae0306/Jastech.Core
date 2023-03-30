@@ -51,17 +51,16 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 375F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(665, 482);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(532, 386);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // tableLayoutPanel3
@@ -72,16 +71,15 @@
             this.tableLayoutPanel3.Controls.Add(this.cogPatternDisplay, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblTrain, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 312F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(367, 474);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(294, 380);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // lblMasking
@@ -89,13 +87,13 @@
             this.lblMasking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMasking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMasking.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblMasking.Location = new System.Drawing.Point(4, 362);
-            this.lblMasking.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMasking.Location = new System.Drawing.Point(3, 290);
             this.lblMasking.Name = "lblMasking";
-            this.lblMasking.Size = new System.Drawing.Size(359, 50);
+            this.lblMasking.Size = new System.Drawing.Size(288, 40);
             this.lblMasking.TabIndex = 21;
             this.lblMasking.Text = "Masking";
             this.lblMasking.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMasking.Click += new System.EventHandler(this.lblMasking_Click);
             // 
             // cogPatternDisplay
             // 
@@ -107,13 +105,13 @@
             this.cogPatternDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cogPatternDisplay.DoubleTapZoomCycleLength = 2;
             this.cogPatternDisplay.DoubleTapZoomSensitivity = 2.5D;
-            this.cogPatternDisplay.Location = new System.Drawing.Point(4, 2);
-            this.cogPatternDisplay.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.cogPatternDisplay.Location = new System.Drawing.Point(3, 2);
+            this.cogPatternDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cogPatternDisplay.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1;
             this.cogPatternDisplay.MouseWheelSensitivity = 1D;
             this.cogPatternDisplay.Name = "cogPatternDisplay";
             this.cogPatternDisplay.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("cogPatternDisplay.OcxState")));
-            this.cogPatternDisplay.Size = new System.Drawing.Size(359, 308);
+            this.cogPatternDisplay.Size = new System.Drawing.Size(288, 246);
             this.cogPatternDisplay.TabIndex = 1;
             // 
             // lblTrain
@@ -121,10 +119,9 @@
             this.lblTrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTrain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTrain.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblTrain.Location = new System.Drawing.Point(4, 312);
-            this.lblTrain.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTrain.Location = new System.Drawing.Point(3, 250);
             this.lblTrain.Name = "lblTrain";
-            this.lblTrain.Size = new System.Drawing.Size(359, 50);
+            this.lblTrain.Size = new System.Drawing.Size(288, 40);
             this.lblTrain.TabIndex = 20;
             this.lblTrain.Text = "Train";
             this.lblTrain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,17 +134,17 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(379, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.panel2.Location = new System.Drawing.Point(303, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(282, 478);
+            this.panel2.Size = new System.Drawing.Size(226, 382);
             this.panel2.TabIndex = 0;
             // 
             // nupdnMaxAngle
             // 
             this.nupdnMaxAngle.Font = new System.Drawing.Font("돋움", 10.8F);
-            this.nupdnMaxAngle.Location = new System.Drawing.Point(160, 79);
-            this.nupdnMaxAngle.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.nupdnMaxAngle.Location = new System.Drawing.Point(128, 63);
+            this.nupdnMaxAngle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMaxAngle.Maximum = new decimal(new int[] {
             180,
             0,
@@ -159,27 +156,26 @@
             0,
             -2147483648});
             this.nupdnMaxAngle.Name = "nupdnMaxAngle";
-            this.nupdnMaxAngle.Size = new System.Drawing.Size(100, 28);
+            this.nupdnMaxAngle.Size = new System.Drawing.Size(80, 24);
             this.nupdnMaxAngle.TabIndex = 19;
             this.nupdnMaxAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // nupdnMatchScore
             // 
             this.nupdnMatchScore.Font = new System.Drawing.Font("돋움", 10.8F);
-            this.nupdnMatchScore.Location = new System.Drawing.Point(160, 31);
-            this.nupdnMatchScore.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.nupdnMatchScore.Location = new System.Drawing.Point(128, 25);
+            this.nupdnMatchScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMatchScore.Name = "nupdnMatchScore";
-            this.nupdnMatchScore.Size = new System.Drawing.Size(100, 28);
+            this.nupdnMatchScore.Size = new System.Drawing.Size(80, 24);
             this.nupdnMatchScore.TabIndex = 13;
             this.nupdnMatchScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(15, 71);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 39);
+            this.label3.Size = new System.Drawing.Size(104, 31);
             this.label3.TabIndex = 3;
             this.label3.Text = "Angle Max";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,22 +183,21 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(15, 22);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 39);
+            this.label2.Size = new System.Drawing.Size(100, 31);
             this.label2.TabIndex = 2;
             this.label2.Text = "Score [%]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CogPatternMatchingParamControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CogPatternMatchingParamControl";
-            this.Size = new System.Drawing.Size(665, 482);
+            this.Size = new System.Drawing.Size(532, 386);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogPatternDisplay)).EndInit();

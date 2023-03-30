@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.ImageFile;
 using Cognex.VisionPro.ImageProcessing;
+using Cognex.VisionPro.PMAlign;
 using System;
 using System.Collections.Generic;
 using System.IO;

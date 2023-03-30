@@ -22,7 +22,118 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public double MaxAngle { get; set; } = 1;
 
         [JsonIgnore]
-        public CogPMAlignTool MatchingTool { get; set; } = new CogPMAlignTool();
+        private CogPMAlignTool PMTool { get; set; }
+
+        public void SetTrainRegion(CogRectangle roi)
+        {
+            if (PMTool == null)
+                return;
+
+            //if (PMTool.Pattern.Trained == false)
+            {
+                CogRectangle rect = new CogRectangle(roi);
+
+                PMTool.Pattern.Origin.TranslationX = rect.CenterX;
+                PMTool.Pattern.Origin.TranslationY = rect.CenterY;
+                PMTool.Pattern.TrainRegion = rect;
+                //PMTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.TrainImage |
+                //                                        CogPMAlignCurrentRecordConstants.TrainRegion |
+                //                                        CogPMAlignCurrentRecordConstants.SearchRegion |
+                //                                        CogPMAlignCurrentRecordConstants.PatternOrigin;
+            }
+        }
+
+        public ICogRegion GetTrainRegion()
+        {
+            if (PMTool == null)
+                return null;
+
+            return PMTool.Pattern.TrainRegion;
+        }
+
+        public void SetSearchRegion(CogRectangle roi)
+        {
+            CogRectangle rect = new CogRectangle(roi);
+            rect.Color = CogColorConstants.Green;
+            rect.LineStyle = CogGraphicLineStyleConstants.Dot;
+            PMTool.SearchRegion = new CogRectangle(rect);
+            //PMTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.TrainImage |
+            //                                        CogPMAlignCurrentRecordConstants.TrainRegion |
+            //                                        CogPMAlignCurrentRecordConstants.SearchRegion |
+            //                                        CogPMAlignCurrentRecordConstants.PatternOrigin;
+        }
+
+        public ICogRegion GetSearchRegion()
+        {
+            return PMTool.SearchRegion;
+        }
+
+        public bool Train(ICogImage image)
+        {
+            if (image == null || PMTool == null)
+                return false;
+
+            PMTool.Pattern.TrainImage = image;
+            PMTool.Pattern.Train();
+
+            return true;
+        }
+
+        public bool IsTrained()
+        {
+            if (PMTool == null)
+                return false;
+
+            return PMTool.Pattern.Trained;
+        }
+
+        public ICogImage GetTrainedPatternImage()
+        {
+            if (PMTool == null)
+                return null;
+
+            return PMTool.Pattern.GetTrainedPatternImage();
+        }
+
+        public ICogImage GetInputImage()
+        {
+            if (PMTool == null)
+                return null;
+
+            return PMTool.InputImage;
+        }
+
+        public ICogImage GetTrainImage()
+        {
+            if (PMTool == null)
+                return null;
+
+            return PMTool.Pattern.TrainImage;
+        }
+
+        public CogImage8Grey GetTrainImageMask()
+        {
+            if (PMTool == null)
+                return null;
+           
+            return PMTool.Pattern.TrainImageMask;
+        }
+
+        public ICogRecord CreateCurrentRecord(CogPMAlignCurrentRecordConstants constants)
+        {
+            if (PMTool == null)
+                return null;
+
+            PMTool.CurrentRecordEnable = constants;
+
+            return PMTool.CreateCurrentRecord();
+        }
+
+        public void TrainImageMask(CogImage8Grey image)
+        {
+            PMTool.Pattern.TrainImageMask = image;
+            PMTool.Pattern.Train();
+        }
 
         public CogPatternMatchingParam DeepCopy()
         {
@@ -30,7 +141,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             param.Name = Name;
             param.Score = Score;
             param.MaxAngle = MaxAngle;
-            param.MatchingTool = new CogPMAlignTool(MatchingTool);
+            param.PMTool = new CogPMAlignTool(PMTool);
 
             return param;
         }
@@ -43,7 +154,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             string fileName = string.Format(@"{0}.vpp", Name);
             string path = Path.Combine(dirPath, fileName);
 
-            CogFileHelper.SaveTool<CogPMAlignTool>(path, MatchingTool);
+            if (PMTool == null)
+                PMTool = new CogPMAlignTool();
+
+            CogFileHelper.SaveTool<CogPMAlignTool>(path, PMTool);
         }
 
         public void LoadTool(string dirPath)
@@ -53,7 +167,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
             if (File.Exists(path))
             {
-                MatchingTool = CogFileHelper.LoadTool(path) as CogPMAlignTool;
+                PMTool = CogFileHelper.LoadTool(path) as CogPMAlignTool;
             }
             else
             {
@@ -63,7 +177,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            MatchingTool.Dispose();
+            PMTool.Dispose();
         }
     }
 }

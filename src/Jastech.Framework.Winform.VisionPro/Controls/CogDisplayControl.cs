@@ -342,7 +342,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     DeleteStaticGraphics("Tracking");
 
                     DrawToolList.Add(TrackingCogDistanceTool);
-                    SetGraphics(DrawToolList.Count.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
+                    SetStaticGraphics(DrawToolList.Count.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
 
                     Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(DrawToolList.Count.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
@@ -387,7 +387,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     if (IsContainGroupNameInStaticGraphics(groupName))
                         cogDisplay.StaticGraphics.Remove(groupName);
 
-                    SetGraphics(groupName, TrackingCogDistanceTool.CreateLastRunRecord());
+                    SetStaticGraphics(groupName, TrackingCogDistanceTool.CreateLastRunRecord());
 
                     Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(groupName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
@@ -491,7 +491,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return new PointF((float)calcX, (float)calcY);
         }
 
-        private void SetGraphics(string groupName, ICogRecord record)
+        public void SetStaticGraphics(string groupName, ICogRecord record)
         {
             foreach (CogRecord subRecord in record.SubRecords)
             {
@@ -518,7 +518,38 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         cogDisplay.StaticGraphics.AddList(subRecord.Content as CogGraphicCollection, groupName);
                     }
                 }
-                SetGraphics(groupName, subRecord);
+                SetStaticGraphics(groupName, subRecord);
+            }
+        }
+
+        public void SetInteractiveGraphics(string groupName, ICogRecord record)
+        {
+            foreach (CogRecord subRecord in record.SubRecords)
+            {
+                if (typeof(ICogGraphic).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                        cogDisplay.InteractiveGraphics.Add(subRecord.Content as ICogGraphicInteractive, groupName, false);
+                }
+                else if (typeof(CogGraphicCollection).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                    {
+                        CogGraphicCollection graphics = subRecord.Content as CogGraphicCollection;
+                        foreach (ICogGraphic graphic in graphics)
+                        {
+                            cogDisplay.InteractiveGraphics.Add(graphic as ICogGraphicInteractive, groupName, false);
+                        }
+                    }
+                }
+                else if (typeof(CogGraphicInteractiveCollection).IsAssignableFrom(subRecord.ContentType))
+                {
+                    if (subRecord.Content != null)
+                    {
+                        cogDisplay.InteractiveGraphics.AddList(subRecord.Content as CogGraphicInteractiveCollection, groupName, false);
+                    }
+                }
+                SetInteractiveGraphics(groupName, subRecord);
             }
         }
 
