@@ -29,18 +29,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (PMTool == null)
                 return;
 
-            //if (PMTool.Pattern.Trained == false)
-            {
-                CogRectangle rect = new CogRectangle(roi);
+            CogRectangle rect = new CogRectangle(roi);
 
-                PMTool.Pattern.Origin.TranslationX = rect.CenterX;
-                PMTool.Pattern.Origin.TranslationY = rect.CenterY;
-                PMTool.Pattern.TrainRegion = rect;
-                //PMTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.TrainImage |
-                //                                        CogPMAlignCurrentRecordConstants.TrainRegion |
-                //                                        CogPMAlignCurrentRecordConstants.SearchRegion |
-                //                                        CogPMAlignCurrentRecordConstants.PatternOrigin;
-            }
+            PMTool.Pattern.Origin.TranslationX = rect.CenterX;
+            PMTool.Pattern.Origin.TranslationY = rect.CenterY;
+            PMTool.Pattern.TrainRegion = rect;
         }
 
         public ICogRegion GetTrainRegion()
@@ -57,10 +50,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             rect.Color = CogColorConstants.Green;
             rect.LineStyle = CogGraphicLineStyleConstants.Dot;
             PMTool.SearchRegion = new CogRectangle(rect);
-            //PMTool.CurrentRecordEnable = CogPMAlignCurrentRecordConstants.TrainImage |
-            //                                        CogPMAlignCurrentRecordConstants.TrainRegion |
-            //                                        CogPMAlignCurrentRecordConstants.SearchRegion |
-            //                                        CogPMAlignCurrentRecordConstants.PatternOrigin;
         }
 
         public ICogRegion GetSearchRegion()
@@ -101,6 +90,24 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
                 return null;
 
             return PMTool.InputImage;
+        }
+
+        public void SetInputImage(ICogImage image)
+        {
+            if (PMTool == null)
+                return;
+
+            PMTool.InputImage = image;
+        }
+
+        public CogPMAlignResults Run()
+        {
+            if (PMTool == null)
+                return null;
+
+            PMTool.Run();
+
+            return PMTool.Results;
         }
 
         public ICogImage GetTrainImage()

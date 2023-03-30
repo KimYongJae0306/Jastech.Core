@@ -29,7 +29,22 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         #region 메서드
         public void Run(ICogImage image, CogPatternMatchingParam matchingParam)
         {
+            if (image == null)
+                return;
+            matchingParam.SetInputImage(image);
 
+            var resultList = matchingParam.Run();
+
+            if(resultList.Count >0)
+            {
+                var ggg = resultList[0];
+                double score = ggg.Score;
+                double x = ggg.GetPose().TranslationX;
+                double y = ggg.GetPose().TranslationY;
+                double y1 = ggg.GetPose().Rotation;
+                //resultList[0].Score;
+                //resultList[0].
+            }
         }
         #endregion
     }
