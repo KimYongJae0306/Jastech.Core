@@ -50,7 +50,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             }
         }
 
-        public static CogImage8Grey Threadhold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
+        public static CogImage8Grey Threshold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
         {
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
             byte[] mapArray = new byte[256];
@@ -59,6 +59,43 @@ namespace Jastech.Framework.Imaging.VisionPro
             {
                 byte data = mapArray[i];
                 if (i >= threshold)
+                    mapArray[i] = isInvert ? (byte)0 : (byte)maxValue;
+                else
+                    mapArray[i] = isInvert ? (byte)maxValue : (byte)0;
+            }
+
+            CogRectangle rect = new CogRectangle
+            {
+                X = 0,
+                Y = 0,
+                Width = orgImage.Width,
+                Height = orgImage.Height,
+            };
+
+            CogIPOneImagePixelMap pixelMap = new CogIPOneImagePixelMap();
+            pixelMap.SetMap(mapArray);
+
+            imageTool.Operators.Add(pixelMap);
+            pixelMap.Dispose();
+
+            imageTool.InputImage = orgImage;
+            imageTool.Run();
+
+            CogImage8Grey outputImage = new CogImage8Grey((CogImage8Grey)imageTool.OutputImage);
+            imageTool.Dispose();
+
+            return outputImage;
+        }
+
+        public static CogImage8Grey Threshold(CogImage8Grey orgImage, int minThreshold, int maxThreshold, int maxValue, bool isInvert = false)
+        {
+            CogIPOneImageTool imageTool = new CogIPOneImageTool();
+            byte[] mapArray = new byte[256];
+
+            for (int i = 0; i < mapArray.Length; i++)
+            {
+                byte data = mapArray[i];
+                if (i >= minThreshold && i <= maxThreshold)
                     mapArray[i] = isInvert ? (byte)0 : (byte)maxValue;
                 else
                     mapArray[i] = isInvert ? (byte)maxValue : (byte)0;
@@ -99,6 +136,15 @@ namespace Jastech.Framework.Imaging.VisionPro
             regionTool.Run();
 
             regionTool.Dispose();
+        }
+
+        public static ICogImage CropImage(ICogImage sourceImage, CogRectangle rect)
+        {
+            CogCopyRegionTool regionTool = new CogCopyRegionTool();
+            regionTool.InputImage = sourceImage;
+            regionTool.Region = rect;
+            regionTool.Run();
+            return regionTool.OutputImage;
         }
 
         public static CogRectangle CreateRectangle(double centerX, double centerY, double width, double height, bool interactive = true, CogRectangleDOFConstants constants = CogRectangleDOFConstants.All)
