@@ -27,7 +27,6 @@ namespace Jastech.Framework.Winform
         public delegate void InitializedEventHandler(Type deviceType, bool success);
         #endregion
 
-
         #region 이벤트
         public event InitializedEventHandler Initialized;
         #endregion

@@ -314,7 +314,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
          
-
             if (_displayMode == DisplayMode.CustomCrossLine)
             {
                 DrawCustomCrossLine(e.X, e.Y);
@@ -579,33 +578,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             DrawViewRectEventHandler?.Invoke(viewRect);
         }
 
-        public void UpdateViewRect(CogRectangle rect)
+        public void UpdateViewRect(CogRectangle rect, double ratio)
         {
-            double x = rect.X;
-            double y = rect.Y;
+            _updateViewRect = true;
 
-            int tlqkf = 0;
-            //_updateViewRect = true;
-            double calcX, calcY;
-            //double x = rect.X;
-            //double y = rect.Y;
-            cogDisplay.GetTransform("*", "#").MapPoint(rect.X, rect.Y, out calcX, out calcY);
-
-            CogRectangle newRect = new CogRectangle();
-            //newRect.SetXYWidthHeight()
-            //int calcWidth = (int)(rect.Width * cogDisplay.Zoom);
-            //int calcHeight = (int)(rect.Height * cogDisplay.Zoom);
-
-            //CogRectangle rect123 = GetViewRectangle();
-            //var g = cogDisplay.PointToScreen(new Point((int)rect.X, (int)rect.Y)); ;
-            //cogDisplay.PanX = g.X;
-            //cogDisplay.PanY = g.Y;
-            //cogDisplay.Width = calcWidth;
-            //cogDisplay.Height = calcHeight;
-            //cogDisplay.PanX = -58;
-            //cogDisplay.PanY = -73;
-            //cogDisplay.Location.X = calcX;
-            //cogDisplay.PanY = calcY;
+            double panPointX = (double)cogDisplay.Image.Width * ratio;
+            panPointX = (cogDisplay.Image.Width / 2) - panPointX;
+            cogDisplay.PanX = panPointX;
         }
     }
 }

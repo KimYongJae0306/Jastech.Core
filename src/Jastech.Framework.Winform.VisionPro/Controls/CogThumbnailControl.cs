@@ -28,7 +28,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 델리게이트
-        public delegate void UpdateRectDelegate(CogRectangle rect);
+        public delegate void UpdateRectDelegate(CogRectangle rect, double ratio);
         #endregion
 
         #region 생성자
@@ -47,6 +47,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             ThumbnailImage = cogImage.ScaleImage(newWidth, newHeight);
             cogThumbnailDisplay.Image = ThumbnailImage;
+            cogThumbnailDisplay.Fit();
         }
 
         public void DrawViewRect(CogRectangle rect)
@@ -73,7 +74,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void ViewRect_Changed(object sender, CogChangedEventArgs e)
         {
             var rect = sender as CogRectangle;
-            UpdateRectEventHandler?.Invoke(rect);
+
+            Point mousePoint = new Point(MousePosition.X, MousePosition.Y);
+            double ratio = PointToClient(mousePoint).X / (double)cogThumbnailDisplay.Width;
+
+            UpdateRectEventHandler?.Invoke(rect, ratio);
         }
 
         public void AddGraphics(string groupName, ICogRegion cogRegion, bool checkForDuplicates = false)
