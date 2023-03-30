@@ -99,6 +99,18 @@
     <Compile Include="Controls\MotionFunctionControl.Designer.cs">
       <DependentUpon>MotionFunctionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MotionParameterCommonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionParameterCommonControl.Designer.cs">
+      <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MotionParameterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionParameterControl.Designer.cs">
+      <DependentUpon>MotionParameterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UPHControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,6 +178,12 @@
     <Compile Include="Forms\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MotionParameterVariableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionParameterVariableControl.Designer.cs">
+      <DependentUpon>MotionParameterVariableControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionFunctionControl.resx">
       <DependentUpon>MotionFunctionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionParameterCommonControl.resx">
+      <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionParameterControl.resx">
+      <DependentUpon>MotionParameterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UPHControl.resx">
       <DependentUpon>UPHControl.cs</DependentUpon>
@@ -224,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionParameterVariableControl.resx">
+      <DependentUpon>MotionParameterVariableControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
