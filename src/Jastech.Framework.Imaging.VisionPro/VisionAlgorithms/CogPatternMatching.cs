@@ -45,16 +45,21 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             result.TactTime = sw.ElapsedMilliseconds;
             if (resultList.Count >0)
             {
-                MatchPos match = new MatchPos();
+                PatternMatchPos match = new PatternMatchPos();
 
                 CogRectangle trainRoi = matchingParam.GetTrainRegion() as CogRectangle;
                 var foundResult = resultList[0];
 
                 match.ReferencePos = new PointF((float)trainRoi.CenterX, (float)trainRoi.CenterY);
+                match.ReferenceWidth = (float)trainRoi.Width;
+                match.ReferenceHeight = (float)trainRoi.Height;
+
                 match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);
                 match.Score = (float)foundResult.Score;
                 match.Angle = (float)foundResult.GetPose().Rotation;
                 match.Scale = (float)foundResult.GetPose().Scaling;
+                match.ResultGraphics = foundResult.CreateResultGraphics(CogPMAlignResultGraphicConstants.MatchRegion
+                                                                        | CogPMAlignResultGraphicConstants.Origin);
 
                 result.MatchPosList.Add(match);
             }
