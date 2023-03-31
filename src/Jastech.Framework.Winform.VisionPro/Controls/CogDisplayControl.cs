@@ -67,6 +67,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private CogDistancePointPointTool TrackingCogDistanceTool = new CogDistancePointPointTool();
 
         private List<CogToolBase> DrawToolList = new List<CogToolBase>();
+
+        public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
+
+        public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
+
         #endregion
 
         #region 이벤트
@@ -554,6 +559,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
+        public void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
+        {
+            cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
+        }
+
         private void btnPointToLine_Click(object sender, EventArgs e)
         {
             if (cogDisplay.Image == null)
@@ -619,9 +629,47 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.PanX = panPointX;
         }
 
-        public void UpdateResult(CogPatternMatchingResult result)
+        public void UpdateResult(CogPatternMatchingResult matchingResult)
         {
+            CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
+            
+            string groupName = "MatchingResult";
+            var matchingResultData = matchingResult.MaxMatchPos;
 
+            resultGraphic.Add(matchingResultData.ResultGraphics);
+            SetInteractiveGraphics(groupName, resultGraphic);
+
+            var result = matchingResult.Result;
+
+            DrawLabel("Result :" + result.ToString(), 0);
+            if(result != Result.Fail)
+            {
+                DrawLabel("Score :" + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
+                DrawLabel("Y :" + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);
+                DrawLabel("X :" + matchingResult.MaxMatchPos.FoundPos.Y.ToString("0.000"), 3);
+                DrawLabel("Angle :" + matchingResult.MaxMatchPos.Angle.ToString("0.000"), 4);
+            }
+
+        }
+
+        private void DrawLabel(string text, int index = 0)
+        {
+            CogGraphicLabel cogLabel = new CogGraphicLabel();
+            int intervalY = 20;
+            double scaleX = ((double)cogDisplay.Width / cogDisplay.Image.Width);
+            float fontSize = (float)((cogDisplay.Image.Width / TextFontSize) * scaleX);
+            double fontPitch = (fontSize / cogDisplay.Zoom);
+
+            cogLabel.Text = text;
+            cogLabel.Color = CogColorConstants.Cyan;
+            cogLabel.Font = new Font(TextFontFamily, fontSize);
+            cogLabel.Alignment = CogGraphicLabelAlignmentConstants.TopLeft;
+
+            PointF drawPoint = MappingPoint(0, 0);
+            cogLabel.X = drawPoint.X;
+            cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index *intervalY);
+
+            cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result Text");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 
     public enum Result
     {
-        Good,
+        OK,
         NG,
         Fail,
     }

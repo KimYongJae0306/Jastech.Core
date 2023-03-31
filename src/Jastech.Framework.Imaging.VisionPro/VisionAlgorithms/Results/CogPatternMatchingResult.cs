@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cognex.VisionPro;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -45,6 +46,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         #region 속성
         public PointF ReferencePos { get; set; }
 
+        public float ReferenceWidth { get; set; }
+
+        public float ReferenceHeight { get; set; }
+
         public PointF FoundPos { get; set; }
 
         public float Score { get; set; }
@@ -52,6 +57,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public float Scale { get; set; }
 
         public double Angle { get; set; }
+
+        public CogCompositeShape ResultGraphics { get; set; }
         #endregion
     }
 }
