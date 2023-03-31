@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
-    public class CogPatternMatchingResult
+    public class CogPatternMatchingResult : VisionResult
     {
         #region 속성
         public long TactTime { get; set; }
 
-        public bool Good { get; set; }
-
-        public List<MatchPos> MatchPosList { get; set; } = new List<MatchPos>();
+        public List<PatternMatchPos> MatchPosList { get; set; } = new List<PatternMatchPos>();
 
         public bool Found
         {
@@ -26,12 +24,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             get => MatchPosList.Max(x => x.Score);
         }
 
-        public MatchPos MaxMatchPos
+        public PatternMatchPos MaxMatchPos
         {
             get
             {
-                MatchPos maxMatchPos = new MatchPos();
-                foreach (MatchPos matchPos in MatchPosList)
+                PatternMatchPos maxMatchPos = new PatternMatchPos();
+                foreach (PatternMatchPos matchPos in MatchPosList)
                 {
                     if (matchPos.Score > maxMatchPos.Score)
                         maxMatchPos = matchPos;
@@ -42,7 +40,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         #endregion
     }
 
-    public class MatchPos
+    public class PatternMatchPos
     {
         #region 속성
         public PointF ReferencePos { get; set; }

@@ -420,6 +420,7 @@
     <Compile Include="VisionAlgorithms\Parameters\CogCaliperParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogPatternMatchingParam.cs" />
     <Compile Include="VisionAlgorithms\Results\CogPatternMatchingResult.cs" />
+    <Compile Include="VisionAlgorithms\Results\VisionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

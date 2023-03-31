@@ -11,6 +11,7 @@ using Cognex.VisionPro;
 using Jastech.Framework.Imaging.VisionPro;
 using Cognex.VisionPro.Dimensioning;
 using Cognex.VisionPro.Implementation;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -616,6 +617,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             double panPointX = (double)cogDisplay.Image.Width * ratio;
             panPointX = (cogDisplay.Image.Width / 2) - panPointX;
             cogDisplay.PanX = panPointX;
+        }
+
+        public void UpdateResult(CogPatternMatchingResult result)
+        {
+
         }
     }
 }

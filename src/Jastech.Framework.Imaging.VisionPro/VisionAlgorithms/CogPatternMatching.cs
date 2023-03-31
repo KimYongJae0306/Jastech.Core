@@ -45,7 +45,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             result.TactTime = sw.ElapsedMilliseconds;
             if (resultList.Count >0)
             {
-                MatchPos match = new MatchPos();
+                PatternMatchPos match = new PatternMatchPos();
 
                 CogRectangle trainRoi = matchingParam.GetTrainRegion() as CogRectangle;
                 var foundResult = resultList[0];
