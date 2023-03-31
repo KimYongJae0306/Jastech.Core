@@ -16,12 +16,27 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     {
         #region 필드
         private CogCaliperTool CaliperTool = null;
+        private CogCaliperParam CurrentParam;
         #endregion
 
         #region 속성
         #endregion
 
         #region 이벤트
+        
+        #endregion
+
+        #region 델리게이트
+        #endregion
+
+        #region 생성자
+        public CogCaliperParamControl()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region 메서드
         private void CogCaliperParamControl_Load(object sender, EventArgs e)
         {
             IntializeUI();
@@ -48,19 +63,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             else
                 rdoLightToDark.BackColor = Color.PaleTurquoise;
         }
-        #endregion
 
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        public CogCaliperParamControl()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region 메서드
         private void IntializeUI()
         {
             rdoDarkToLight.Checked = true;
@@ -84,6 +87,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             lblFilterSizeValue.Text = caliperParam.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
             lblEdgeThresholdValue.Text = caliperParam.CaliperTool.RunParams.ContrastThreshold.ToString();
+
+            CurrentParam = caliperParam;
+        }
+
+        public CogCaliperParam GetCurrentParam()
+        {
+            return CurrentParam;
         }
         #endregion
     }

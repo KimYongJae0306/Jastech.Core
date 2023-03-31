@@ -419,6 +419,7 @@
     <Compile Include="VisionAlgorithms\Parameters\CogBlobParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogCaliperParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\CogPatternMatchingParam.cs" />
+    <Compile Include="VisionAlgorithms\Results\CogCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogPatternMatchingResult.cs" />
   </ItemGroup>
   <ItemGroup>

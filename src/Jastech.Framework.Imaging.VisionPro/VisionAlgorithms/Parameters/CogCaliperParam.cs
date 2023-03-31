@@ -1,4 +1,5 @@
-﻿using Cognex.VisionPro.Caliper;
+﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Caliper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,59 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
 
-        public Type Direction;
+        [JsonProperty]
+        public double Score { get; set; } = 70;
+        //public Type Direction;
 
-        public object TargetType;
+        //public object TargetType;
 
 
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool();
+
+        public void SetInputImage(ICogImage image)
+        {
+            if (CaliperTool == null)
+                return;
+
+            CaliperTool.InputImage = image;
+        }
+
+        public ICogRegion GetRegion()
+        {
+            if (CaliperTool == null)
+                return null;
+
+            return CaliperTool.Region;
+        }
+
+        public void SetRegion(CogRectangleAffine roi)
+        {
+            CogRectangleAffine rect = new CogRectangleAffine(roi);
+            rect.Color = CogColorConstants.Green;
+            rect.LineStyle = CogGraphicLineStyleConstants.Solid;
+            CaliperTool.Region = new CogRectangleAffine(rect);
+        }
+
+        public CogCaliperResults Run()
+        {
+            if (CaliperTool == null)
+                return null;
+
+            CaliperTool.Run();
+
+            return CaliperTool.Results;
+        }
+
+        public ICogRecord CreateCurrentRecord(CogCaliperCurrentRecordConstants constants)
+        {
+            if (CaliperTool == null)
+                return null;
+
+            CaliperTool.CurrentRecordEnable = constants;
+
+            return CaliperTool.CreateCurrentRecord();
+        }
 
         public CogCaliperParam DeepCopy()
         {

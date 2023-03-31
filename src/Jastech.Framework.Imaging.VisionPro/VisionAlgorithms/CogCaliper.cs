@@ -1,17 +1,14 @@
 ﻿using Cognex.VisionPro;
-using Cognex.VisionPro.Caliper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
+using System.Diagnostics;
+using System.Drawing;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
     public class CogCaliper : CogVision
     {
         #region 필드
-        public CogCaliperTool CaliperTool { get; set; }
         #endregion
 
         #region 속성
@@ -27,23 +24,43 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         #endregion
 
         #region 메서드
-        public CogCaliperTool SetRegion(CogRectangleAffine roi)
+        public CogCaliperResult Run(ICogImage image, CogCaliperParam caliperParam)
         {
-            CogRectangleAffine rect = new CogRectangleAffine(roi);
-            rect.Color = CogColorConstants.Green;
-            rect.LineStyle = CogGraphicLineStyleConstants.Dot;
-            rect.GraphicDOFEnable = CogRectangleAffineDOFConstants.Position | CogRectangleAffineDOFConstants.Size | CogRectangleAffineDOFConstants.Skew | CogRectangleAffineDOFConstants.Rotation;
-            rect.Interactive = true;
+            CogCaliperResult result = new CogCaliperResult();
 
-            CaliperTool.Region = new CogRectangleAffine(rect);
-            CaliperTool.CurrentRecordEnable = CogCaliperCurrentRecordConstants.InputImage | CogCaliperCurrentRecordConstants.Region;
+            if (image == null)
+                return result;
 
-            return CaliperTool;
-        }
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
 
-        public ICogRegion GetRegion()
-        {
-            return CaliperTool.Region;
+            caliperParam.SetInputImage(image);
+            var resultList = caliperParam.Run();
+
+            sw.Stop();
+
+            result.TactTime = sw.ElapsedMilliseconds;
+
+            if (resultList.Count > 0)
+            {
+                CaliperMatch match = new CaliperMatch();
+
+                CogRectangleAffine roi = caliperParam.GetRegion() as CogRectangleAffine;
+                var foundResult = resultList[0];
+
+                match.ReferencePos = new PointF((float)roi.CenterX, (float)roi.CenterY);
+                match.ReferenceWidth = roi.SideXLength;
+                match.ReferenceHeight = roi.SideYLength;
+                match.ReferenceRotation = roi.Rotation;
+                match.RefercneSkew = roi.Skew;
+
+                match.FoundPos = new PointF((float)foundResult.PositionX, (float)foundResult.PositionY);
+                match.Score = (float)foundResult.Score;
+
+                result.CaliperMatchList.Add(match);
+            }
+
+            return result;
         }
         #endregion
     }

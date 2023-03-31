@@ -158,5 +158,16 @@ namespace Jastech.Framework.Imaging.VisionPro
 
             return roi;
         }
+
+        public static CogRectangleAffine CreateRectangleAffine(double centerX, double centerY, double sideXLength, double sideYLength, double rotation = 0, double skew = 0, bool interactive = true, CogRectangleAffineDOFConstants constants = CogRectangleAffineDOFConstants.All)
+        {
+            CogRectangleAffine roi = new CogRectangleAffine();
+
+            roi.SetCenterLengthsRotationSkew(centerX, centerY, sideXLength, sideYLength, rotation, skew);
+            roi.Interactive = interactive;
+            roi.GraphicDOFEnable = constants;
+
+            return roi;
+        }
     }
 }
