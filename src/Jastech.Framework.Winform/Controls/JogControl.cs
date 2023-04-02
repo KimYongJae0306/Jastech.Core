@@ -116,6 +116,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
+            
             //MoveStop(eAxis.Axis_X);
         }
 

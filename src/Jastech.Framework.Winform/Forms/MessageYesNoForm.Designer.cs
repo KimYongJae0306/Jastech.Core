@@ -161,7 +161,7 @@
             // lblCancel
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblCancel.Location = new System.Drawing.Point(47, 0);
             this.lblCancel.Name = "lblCancel";
             this.lblCancel.Size = new System.Drawing.Size(118, 46);
@@ -209,7 +209,7 @@
             // lblOK
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOK.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblOK.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblOK.Location = new System.Drawing.Point(47, 0);
             this.lblOK.Name = "lblOK";
             this.lblOK.Size = new System.Drawing.Size(118, 45);

@@ -80,7 +80,7 @@
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("돋움", 16F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(536, 40);
@@ -147,7 +147,7 @@
             // lblCancel
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancel.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblCancel.Location = new System.Drawing.Point(47, 0);
             this.lblCancel.Name = "lblCancel";
             this.lblCancel.Size = new System.Drawing.Size(117, 50);
@@ -196,7 +196,7 @@
             // lblOK
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOK.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblOK.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.lblOK.Location = new System.Drawing.Point(47, 0);
             this.lblOK.Name = "lblOK";
             this.lblOK.Size = new System.Drawing.Size(117, 50);
@@ -225,7 +225,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtDescription.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.txtDescription.Location = new System.Drawing.Point(7, 183);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescription.Multiline = true;
@@ -235,11 +235,11 @@
             // 
             // txtModelName
             // 
-            this.txtModelName.Font = new System.Drawing.Font("돋움", 13.8F);
+            this.txtModelName.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.txtModelName.Location = new System.Drawing.Point(7, 96);
             this.txtModelName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtModelName.Name = "txtModelName";
-            this.txtModelName.Size = new System.Drawing.Size(525, 29);
+            this.txtModelName.Size = new System.Drawing.Size(525, 32);
             this.txtModelName.TabIndex = 10;
             // 
             // panel12
@@ -253,7 +253,7 @@
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label15.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label15.Location = new System.Drawing.Point(3, 148);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(119, 33);
@@ -272,7 +272,7 @@
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label8.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label8.Location = new System.Drawing.Point(3, 61);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 33);
@@ -282,7 +282,7 @@
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.label7.Location = new System.Drawing.Point(3, 9);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 33);
