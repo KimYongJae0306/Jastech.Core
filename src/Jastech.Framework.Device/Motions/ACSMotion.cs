@@ -41,8 +41,6 @@ namespace Jastech.Framework.Device.Motions
         #endregion
 
         #region 메서드
-        #endregion
-
         private bool OpenSerialPort()
         {
             var portInfo = (Protocol as ACSSerialProtocol).PortInfo;
@@ -117,7 +115,7 @@ namespace Jastech.Framework.Device.Motions
 
         public override void TurnOnServo(int axisNo, bool bOnOff)
         {
-            if(bOnOff)
+            if (bOnOff)
                 _motion.Enable((ACS.SPiiPlusNET.Axis)axisNo);
             else
                 _motion.Disable((ACS.SPiiPlusNET.Axis)axisNo);
@@ -214,10 +212,7 @@ namespace Jastech.Framework.Device.Motions
 
             return false;
         }
-    }
 
-    public partial class ACSMotion
-    {
         private void SetBasicParameter(ACS.SPiiPlusNET.Axis axis, double velocity, double accdec)
         {
             // Acceleration & Deceleration : 90%, Jerk : 10%
@@ -338,5 +333,6 @@ namespace Jastech.Framework.Device.Motions
             ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
             _motion.RunBuffer((ProgramBuffer)axis, null);
         }
+        #endregion
     }
 }

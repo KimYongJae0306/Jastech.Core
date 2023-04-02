@@ -66,7 +66,7 @@ namespace Jastech.Framework.Winform
             {
                 MotionHandler.Add(motion);
             }
-
+            
             bool cameraSuccess = CameraHandler.Initialize();
             Initialized?.Invoke(typeof(Camera), cameraSuccess);
 
@@ -79,7 +79,20 @@ namespace Jastech.Framework.Winform
             CameraHandler.Release();
             MotionHandler.Release();
         }
-        #endregion
 
+        public Motion GetMotion()
+        {
+            var motion = DeviceManager.Instance().MotionHandler.First();
+
+            return motion;
+        }
+
+        public Camera GetCamera()
+        {
+            var camera = DeviceManager.Instance().CameraHandler.First();
+
+            return camera;
+        }
+        #endregion
     }
 }
