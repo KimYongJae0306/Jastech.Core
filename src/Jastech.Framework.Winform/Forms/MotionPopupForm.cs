@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Winform.Controls;
+﻿using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Winform.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace Jastech.Framework.Winform.Forms
         #endregion
 
         #region 속성
+        private AxisHandler selectedAxisHanlder { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -52,32 +54,19 @@ namespace Jastech.Framework.Winform.Forms
             for (int rowIndex = 0; rowIndex < tlp.RowCount; rowIndex++)
                 tlp.RowStyles.Add(new RowStyle(SizeType.Percent, (float)(100 / tlp.RowCount)));
 
-            for (int i = 0; i < 3; i++)
+            foreach (var axis in selectedAxisHanlder.AxisList)
             {
                 MotionPopupParameterControl motionPopupParameterControl = new MotionPopupParameterControl();
-
-                if (i == 0)
-                {
-                    motionPopupParameterControl.AxisName = "X";
-                }
-                if (i == 1)
-                {
-                    motionPopupParameterControl.AxisName = "Y";
-                }
-                else if (i == 2)
-                {
-                    motionPopupParameterControl.AxisName = "Z";
-                }
-                else { }
-
+                motionPopupParameterControl.SetAxis(axis);
                 motionPopupParameterControl.Dock = DockStyle.Fill;
                 tlp.Controls.Add(motionPopupParameterControl);
             }
-
+         
             pnlMotionParameter.Controls.Add(tlp);
             pnlMotionParameter.Dock = DockStyle.Fill;
 
             MotionJogControl.Dock = DockStyle.Fill;
+            MotionJogControl.SetAxisHanlder(selectedAxisHanlder);
             pnlJog.Controls.Add(MotionJogControl);
             pnlJog.Dock = DockStyle.Fill;
         }
@@ -88,6 +77,11 @@ namespace Jastech.Framework.Winform.Forms
             this.Size = new Size(720, 800);
 
             ShowCommandPage();
+        }
+
+        public void SetAxisHandler(AxisHandler axisHandler)
+        {
+            selectedAxisHanlder = axisHandler;
         }
 
         private void MakeTeachingListControl()

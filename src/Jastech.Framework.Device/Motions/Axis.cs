@@ -4,42 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.Motions
 {
-    public class AxisParam
-    {
-        [JsonProperty]
-        public double MoveTolerance { get; set; } = 0;
-
-        [JsonProperty]
-        public double NegativeSWLimit { get; set; } = 0;
-
-        [JsonProperty]
-        public double PositiveSWLimit { get; set; } = 100;
-
-        [JsonProperty]
-        public double HomingTimeOut { get; set; } = 120;
-
-        [JsonProperty]
-        public double MovingTimeOut { get; set; } = 10;
-
-        [JsonProperty]
-        public double AfterWaitTime { get; set; } = 0;
-
-        [JsonProperty]
-        public double CenterOfGravity { get; set; } = 0;
-    }
     public class Axis
     {
         #region 속성
+        [JsonProperty]
         public string Name { get; private set; }
 
+        [JsonProperty]
         public Motion Motion { get; private set; }
 
+        [JsonProperty]
         public int AxisNo { get; private set; }
 
-        public AxisParam AxisParam { get; set; } = new AxisParam();
+        [JsonProperty]
+        public AxisCommandParams AxisCommandParam { get; set; } = new AxisCommandParams();
+
+        [JsonProperty]
+        public int HomeOrder { get; set; } = -1;
         #endregion
 
         #region 생성자 
@@ -49,13 +34,96 @@ namespace Jastech.Framework.Device.Motions
             Motion = motion;
             AxisNo = axisNo;
         }
+        #endregion
 
-        public bool StartMove(float position, MovingParam movingParam = null)
+        #region 메서드
+        public bool StartMove(float position, AxisMovingParam movingParam = null)
         {
             Motion.MoveTo(AxisNo, position, movingParam.Velocity, movingParam.Acceleration);
 
             return true;
         }
+
+        public void StopMove()
+        {
+            Motion.StopMove(AxisNo);
+        }
+
+        public bool IsConnected()
+        {
+            return Motion.IsConnected();
+        }
+
+        public void TurnOnServo()
+        {
+            Motion.TurnOnServo(AxisNo, true);
+        }
+
+        public void TurnOffServo()
+        {
+            Motion.TurnOnServo(AxisNo, false);
+        }
+
+        public void JogMove(Direction direction)
+        {
+            Motion.JogMove(AxisNo, direction);
+        }
+
+        public double GetActualPosition()
+        {
+            return Motion.GetActualPosition(AxisNo);
+        }
+
+        public void MoveTo(double targetPosition, AxisMovingParam movingParam = null)
+        {
+            if(movingParam == null)
+                Motion.MoveTo(AxisNo, targetPosition, 10, 10);
+            else
+                Motion.MoveTo(AxisNo, targetPosition, movingParam.Velocity, movingParam.Acceleration);
+        }
+
+        public void SetDefaultParameter(double velocity = 10, double accdec = 10)
+        {
+            Motion.SetDefaultParameter(AxisNo, velocity, accdec);
+        }
+
+        public bool WaitForDone()
+        {
+            return Motion.WaitForDone(AxisNo);
+        }
+
+        public void StartHome()
+        {
+            Motion.StartHome(AxisNo);
+        }
+
+        public string GetCurrentMotionStatus()
+        {
+            return Motion.GetCurrentMotionStatus(AxisNo);
+        }
+
+        public bool IsEnable()
+        {
+            return Motion.IsEnable(AxisNo);
+        }
+
+        public bool IsNegativeLimit()
+        {
+            return Motion.IsNegativeLimit(AxisNo);
+        }
+
+        public bool IsPositiveLimit()
+        {
+            return Motion.IsPositiveLimit(AxisNo);
+        }
         #endregion
+    }
+
+    public enum AxisName
+    {
+        X,
+        Y,
+        Z,
+        T,
     }
 }

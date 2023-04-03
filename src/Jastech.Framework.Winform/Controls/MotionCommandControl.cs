@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using Jastech.Framework.Device.Motions;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -18,7 +19,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public string AxisName { get; set; } = string.Empty;
+        private Axis SelectedAxis { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -49,7 +50,12 @@ namespace Jastech.Framework.Winform.Controls
 
         private void InitializeUI()
         {
-            lblAxisName.Text = AxisName;
+            lblAxisName.Text = SelectedAxis.Name;
+        }
+
+        public void SetAxis(Axis selectedAxis)
+        {
+            SelectedAxis = selectedAxis;
         }
 
         private void UpdateUI(object obj)
@@ -73,23 +79,20 @@ namespace Jastech.Framework.Winform.Controls
 
         private void UpdateMotionStatus()
         {
-            if (DeviceManager.Instance().GetMotion() == null)
-                return;
-
-            if (!DeviceManager.Instance().GetMotion().IsConnected())
+            if (SelectedAxis.IsConnected() == false)
                 return;
 
             lblTargetPosition.Text = "0";
             lblOffsest.Text = "0";
 
-            lblCurrentPosition.Text = DeviceManager.Instance().GetMotion().GetActualPosition(0).ToString("F3");
+            lblCurrentPosition.Text = SelectedAxis.GetActualPosition().ToString("F3");
 
-            if (DeviceManager.Instance().GetMotion().IsNegativeLimit(0))
+            if (SelectedAxis.IsNegativeLimit())
             {
                 lblSensor.Text = "-";
                 lblSensor.BackColor = Color.Red;
             }
-            else if (DeviceManager.Instance().GetMotion().IsPositiveLimit(0))
+            else if (SelectedAxis.IsPositiveLimit())
             {
                 lblSensor.Text = "+";
                 lblSensor.BackColor = Color.Red;
@@ -100,9 +103,9 @@ namespace Jastech.Framework.Winform.Controls
                 lblSensor.BackColor = Color.White;
             }
 
-            lblAxisStatus.Text = DeviceManager.Instance().GetMotion().GetCurrentMotionStatus(0);
+            lblAxisStatus.Text = SelectedAxis.GetCurrentMotionStatus();
 
-            if (DeviceManager.Instance().GetMotion().IsEnable(0))
+            if (SelectedAxis.IsEnable())
                 chkServoOnOff.Checked = true;
             else
                 chkServoOnOff.Checked = false;
@@ -110,23 +113,20 @@ namespace Jastech.Framework.Winform.Controls
 
         private void chkServoOnOff_CheckedChanged(object sender, EventArgs e)
         {
-            if (DeviceManager.Instance().GetMotion() == null)
-                return;
-
-            if (!DeviceManager.Instance().GetMotion().IsConnected())
+            if (SelectedAxis.IsConnected() == false)
                 return;
 
             if (chkServoOnOff.Checked)
             {
-                if (DeviceManager.Instance().GetMotion().IsEnable(0))
+                if (SelectedAxis.IsEnable())
                     return;
                 else
-                    DeviceManager.Instance().GetMotion().TurnOnServo(0, true);
+                    SelectedAxis.TurnOnServo();
             }
             else
             {
-                if (DeviceManager.Instance().GetMotion().IsEnable(0))
-                    DeviceManager.Instance().GetMotion().TurnOnServo(0, false);
+                if (SelectedAxis.IsEnable())
+                    SelectedAxis.TurnOffServo();
                 else
                     return;
             }

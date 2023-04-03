@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Jastech.Framework.Device.Motions;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -18,7 +19,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public string AxisName { get; set; } = string.Empty;
+        private Axis SelectedAxis { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -43,19 +44,24 @@ namespace Jastech.Framework.Winform.Controls
 
         private void AddControl()
         {
-            motionParameterCommonControl.AxisName = AxisName;
+            motionParameterCommonControl.AxisName = SelectedAxis.Name;
             motionParameterCommonControl.Dock = DockStyle.Fill;
             tlpMotionParameter.Controls.Add(motionParameterCommonControl);
             
-            motionParameterVariableControl.AxisName = AxisName;
+            motionParameterVariableControl.AxisName = SelectedAxis.Name;
             motionParameterVariableControl.Dock = DockStyle.Fill;
             tlpMotionParameter.Controls.Add(motionParameterVariableControl);
         }
 
         private void IntializeUI()
         {
-            grpAxisName.Text = AxisName + " Axis Parameter";
+            grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
             Invalidate();
+        }
+
+        public void SetAxis(Axis axis)
+        {
+            SelectedAxis = axis;
         }
 
         public void UpdateUI()

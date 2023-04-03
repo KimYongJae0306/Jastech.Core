@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Jastech.Framework.Device.Motions.MovingParam;
+using static Jastech.Framework.Device.Motions.AxisMovingParam;
 using Jastech.Framework.Device.Motions;
 using Jastech.Framework.Winform.Forms;
 
@@ -17,10 +17,12 @@ namespace Jastech.Framework.Winform.Controls
     {
         #region 필드
         private JogSpeedMode _jogSpeedMode = JogSpeedMode.Slow;
+
         private JogMode _jogMode = JogMode.Jog;
         #endregion
 
         #region 속성
+        private AxisHandler AxisHanlder { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -46,6 +48,11 @@ namespace Jastech.Framework.Winform.Controls
         {
             rdoJogSlowMode.Checked = true;
             rdoJogMode.Checked = true;
+        }
+
+        public void SetAxisHanlder(AxisHandler axisHandler)
+        {
+            AxisHanlder = axisHandler;
         }
 
         private void SetSelectJogSpeedMode(JogSpeedMode jogSpeedMode)
@@ -125,69 +132,80 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
-            MoveJog(0, Direction.CCW);
+            Axis axis = AxisHanlder.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            MoveStop(0);
+            if (AxisHanlder == null)
+                return;
+
+            AxisHanlder.GetAxis(AxisName.X).StopMove();
         }
 
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
-            MoveJog(0, Direction.CW);
+            Axis axis = AxisHanlder.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
+            if (AxisHanlder == null)
+                return;
 
-            MoveStop(0);
+            AxisHanlder.GetAxis(AxisName.X).StopMove();
         }
 
         private void btnJogDownY_MouseDown(object sender, MouseEventArgs e)
         {
-            MoveJog(1, Direction.CCW);
+            Axis axis = AxisHanlder.GetAxis(AxisName.Y);
+            MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogDownY_MouseUp(object sender, MouseEventArgs e)
         {
-            MoveStop(1);
+            if (AxisHanlder == null)
+                return;
+
+            AxisHanlder.GetAxis(AxisName.Y).StopMove();
         }
 
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
-            MoveJog(1, Direction.CW);
+            Axis axis = AxisHanlder.GetAxis(AxisName.Y);
+            MoveJog(axis, Direction.CW);
         }
 
         private void btnJogUpY_MouseUp(object sender, MouseEventArgs e)
         {
-            MoveStop(1);
+            if (AxisHanlder == null)
+                return;
+
+            AxisHanlder.GetAxis(AxisName.Y).StopMove();
         }
 
-        private void MoveJog(int axisNumber, Direction direction)
+        private void MoveJog(Axis axis, Direction direction)
         {
-            if (rdoJogMode.Checked)
-            {
-                double currentPosition = DeviceManager.Instance().GetMotion().GetActualPosition(axisNumber);
-                double targetPosition = 0.0;
+            if (AxisHanlder == null)
+                return;
 
+            if(rdoJogMode.Checked)
+            {
+                double currentPosition = axis.GetActualPosition();
+                double targetPosition = 0.0;
                 if (direction == Direction.CW)
                     targetPosition = currentPosition - Convert.ToDouble(lblPitchXYValue.Text);
                 else if (direction == Direction.CCW)
                     targetPosition = currentPosition + Convert.ToDouble(lblPitchXYValue.Text);
 
-                DeviceManager.Instance().GetMotion().MoveTo(axisNumber, targetPosition, 10, 10);
+                axis.MoveTo(targetPosition);
             }
-            else if (rdoIncreaseMode.Checked)
+            else if(rdoIncreaseMode.Checked)
             {
-                DeviceManager.Instance().GetMotion().JogMove(axisNumber, direction);
+                axis.JogMove(direction);
             }
-            else { }
-        }
-
-        private void MoveStop(int axisNumber)
-        {
-            DeviceManager.Instance().GetMotion().StopMove(axisNumber);
         }
         #endregion
     }

@@ -52,7 +52,7 @@ namespace Jastech.Framework.Device.Motions
             return false;
         }
 
-        public override void JogMove(int axisNo, MovingParam.Direction direction)
+        public override void JogMove(int axisNo, AxisMovingParam.Direction direction)
         {
 
         }

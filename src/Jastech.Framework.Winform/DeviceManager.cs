@@ -24,11 +24,11 @@ namespace Jastech.Framework.Winform
         #endregion
 
         #region 대리자
-        public delegate void InitializedEventHandler(Type deviceType, bool success);
+        public delegate void InitializedDelegate(Type deviceType, bool success);
         #endregion
 
         #region 이벤트
-        public event InitializedEventHandler Initialized;
+        public event InitializedDelegate Initialized;
         #endregion
 
         #region 생성자
@@ -80,12 +80,12 @@ namespace Jastech.Framework.Winform
             MotionHandler.Release();
         }
 
-        public Motion GetMotion()
-        {
-            var motion = DeviceManager.Instance().MotionHandler.First();
+        //public Motion GetMotion()
+        //{
+        //    var motion = DeviceManager.Instance().MotionHandler.First();
 
-            return motion;
-        }
+        //    return motion;
+        //}
 
         public Camera GetCamera()
         {

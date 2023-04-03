@@ -410,7 +410,6 @@
             this.btnJogDownZ.Name = "btnJogDownZ";
             this.btnJogDownZ.Size = new System.Drawing.Size(111, 74);
             this.btnJogDownZ.TabIndex = 8;
-            this.btnJogDownZ.Text = "Z(-)";
             this.btnJogDownZ.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnJogDownZ.UseVisualStyleBackColor = false;
             // 
@@ -426,7 +425,6 @@
             this.btnJogDownY.Name = "btnJogDownY";
             this.btnJogDownY.Size = new System.Drawing.Size(109, 74);
             this.btnJogDownY.TabIndex = 6;
-            this.btnJogDownY.Text = "Y(-)";
             this.btnJogDownY.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnJogDownY.UseVisualStyleBackColor = false;
             this.btnJogDownY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogDownY_MouseDown);
@@ -444,7 +442,6 @@
             this.btnJogLeftX.Name = "btnJogLeftX";
             this.btnJogLeftX.Size = new System.Drawing.Size(109, 73);
             this.btnJogLeftX.TabIndex = 1;
-            this.btnJogLeftX.Text = "X(-)";
             this.btnJogLeftX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogLeftX.UseVisualStyleBackColor = false;
             this.btnJogLeftX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogLeftX_MouseDown);
@@ -462,7 +459,6 @@
             this.btnJogRightX.Name = "btnJogRightX";
             this.btnJogRightX.Size = new System.Drawing.Size(109, 73);
             this.btnJogRightX.TabIndex = 2;
-            this.btnJogRightX.Text = "X(+)";
             this.btnJogRightX.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnJogRightX.UseVisualStyleBackColor = false;
             this.btnJogRightX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogRightX_MouseDown);
@@ -480,7 +476,6 @@
             this.btnJogStop.Name = "btnJogStop";
             this.btnJogStop.Size = new System.Drawing.Size(109, 73);
             this.btnJogStop.TabIndex = 4;
-            this.btnJogStop.Text = "EStop";
             this.btnJogStop.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnJogStop.UseVisualStyleBackColor = false;
             // 
@@ -496,7 +491,6 @@
             this.btnJogUpY.Name = "btnJogUpY";
             this.btnJogUpY.Size = new System.Drawing.Size(109, 73);
             this.btnJogUpY.TabIndex = 5;
-            this.btnJogUpY.Text = "Y(+)";
             this.btnJogUpY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpY.UseVisualStyleBackColor = false;
             this.btnJogUpY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogUpY_MouseDown);
@@ -514,7 +508,6 @@
             this.btnJogUpZ.Name = "btnJogUpZ";
             this.btnJogUpZ.Size = new System.Drawing.Size(111, 73);
             this.btnJogUpZ.TabIndex = 7;
-            this.btnJogUpZ.Text = "Z(+)";
             this.btnJogUpZ.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpZ.UseVisualStyleBackColor = false;
             // 
