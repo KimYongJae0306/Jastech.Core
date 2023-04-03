@@ -69,11 +69,11 @@
     <Compile Include="Controls\AkkonParamControl.designer.cs">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\JogControl.cs">
+    <Compile Include="Controls\MotionJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\JogControl.designer.cs">
-      <DependentUpon>JogControl.cs</DependentUpon>
+    <Compile Include="Controls\MotionJogControl.designer.cs">
+      <DependentUpon>MotionJogControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
@@ -195,8 +195,8 @@
     <EmbeddedResource Include="Controls\AkkonParamControl.resx">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\JogControl.resx">
-      <DependentUpon>JogControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\MotionJogControl.resx">
+      <DependentUpon>MotionJogControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>

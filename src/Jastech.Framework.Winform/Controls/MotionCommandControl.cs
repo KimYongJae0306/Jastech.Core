@@ -73,6 +73,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private void UpdateMotionStatus()
         {
+            if (DeviceManager.Instance().GetMotion() == null)
+                return;
+
             if (!DeviceManager.Instance().GetMotion().IsConnected())
                 return;
 
@@ -107,6 +110,12 @@ namespace Jastech.Framework.Winform.Controls
 
         private void chkServoOnOff_CheckedChanged(object sender, EventArgs e)
         {
+            if (DeviceManager.Instance().GetMotion() == null)
+                return;
+
+            if (!DeviceManager.Instance().GetMotion().IsConnected())
+                return;
+
             if (chkServoOnOff.Checked)
             {
                 if (DeviceManager.Instance().GetMotion().IsEnable(0))

@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.Controls
 {
-    partial class JogControl
+    partial class MotionJogControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -49,7 +49,6 @@
             this.lblPitchZValue = new System.Windows.Forms.Label();
             this.pnlJogOperation = new System.Windows.Forms.Panel();
             this.tlpJogOperation = new System.Windows.Forms.TableLayoutPanel();
-            this.lblJog = new System.Windows.Forms.Label();
             this.btnJogDownZ = new System.Windows.Forms.Button();
             this.btnJogDownY = new System.Windows.Forms.Button();
             this.btnJogLeftX = new System.Windows.Forms.Button();
@@ -57,6 +56,7 @@
             this.btnJogStop = new System.Windows.Forms.Button();
             this.btnJogUpY = new System.Windows.Forms.Button();
             this.btnJogUpZ = new System.Windows.Forms.Button();
+            this.lblJog = new System.Windows.Forms.Label();
             this.tlpJogControl.SuspendLayout();
             this.tlpJog.SuspendLayout();
             this.tlpJogOption.SuspendLayout();
@@ -398,18 +398,6 @@
             this.tlpJogOperation.Size = new System.Drawing.Size(458, 220);
             this.tlpJogOperation.TabIndex = 19;
             // 
-            // lblJog
-            // 
-            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJog.Location = new System.Drawing.Point(0, 0);
-            this.lblJog.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.lblJog.Name = "lblJog";
-            this.lblJog.Size = new System.Drawing.Size(152, 386);
-            this.lblJog.TabIndex = 0;
-            this.lblJog.Text = "Jog";
-            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnJogDownZ
             // 
             this.btnJogDownZ.BackColor = System.Drawing.Color.PaleTurquoise;
@@ -530,7 +518,19 @@
             this.btnJogUpZ.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpZ.UseVisualStyleBackColor = false;
             // 
-            // JogControl
+            // lblJog
+            // 
+            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJog.Location = new System.Drawing.Point(0, 0);
+            this.lblJog.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.lblJog.Name = "lblJog";
+            this.lblJog.Size = new System.Drawing.Size(152, 386);
+            this.lblJog.TabIndex = 0;
+            this.lblJog.Text = "Jog";
+            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MotionJogControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -538,8 +538,9 @@
             this.Controls.Add(this.tlpJogControl);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.Name = "JogControl";
+            this.Name = "MotionJogControl";
             this.Size = new System.Drawing.Size(626, 386);
+            this.Load += new System.EventHandler(this.MotionJogControl_Load);
             this.tlpJogControl.ResumeLayout(false);
             this.tlpJog.ResumeLayout(false);
             this.tlpJogOption.ResumeLayout(false);
