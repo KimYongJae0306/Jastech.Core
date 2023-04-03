@@ -188,6 +188,12 @@ namespace Jastech.Framework.Device.Motions
 
             return strMotorStates;
         }
+        
+        public override bool IsEnable(int axisNo)
+        {
+            var state = _motion.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
+            return Convert.ToBoolean(state & MotorStates.ACSC_MST_ENABLE);
+        }
 
         public override bool IsNegativeLimit(int axisNo)
         {

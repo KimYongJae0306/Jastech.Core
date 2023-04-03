@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.tlpMotionCommand = new System.Windows.Forms.TableLayoutPanel();
-            this.lblServoOnOff = new System.Windows.Forms.Label();
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblAxisStatus = new System.Windows.Forms.Label();
             this.lblCurrentPosition = new System.Windows.Forms.Label();
             this.lblOffsest = new System.Windows.Forms.Label();
             this.lblTargetPosition = new System.Windows.Forms.Label();
             this.lblAxisName = new System.Windows.Forms.Label();
+            this.chkServoOnOff = new System.Windows.Forms.CheckBox();
             this.tlpMotionCommand.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +43,13 @@
             // 
             this.tlpMotionCommand.ColumnCount = 1;
             this.tlpMotionCommand.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMotionCommand.Controls.Add(this.lblServoOnOff, 0, 6);
             this.tlpMotionCommand.Controls.Add(this.lblSensor, 0, 4);
             this.tlpMotionCommand.Controls.Add(this.lblAxisStatus, 0, 5);
             this.tlpMotionCommand.Controls.Add(this.lblCurrentPosition, 0, 3);
             this.tlpMotionCommand.Controls.Add(this.lblOffsest, 0, 2);
             this.tlpMotionCommand.Controls.Add(this.lblTargetPosition, 0, 1);
             this.tlpMotionCommand.Controls.Add(this.lblAxisName, 0, 0);
+            this.tlpMotionCommand.Controls.Add(this.chkServoOnOff, 0, 6);
             this.tlpMotionCommand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMotionCommand.Location = new System.Drawing.Point(0, 0);
             this.tlpMotionCommand.Margin = new System.Windows.Forms.Padding(0);
@@ -65,20 +65,6 @@
             this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMotionCommand.Size = new System.Drawing.Size(200, 400);
             this.tlpMotionCommand.TabIndex = 0;
-            // 
-            // lblServoOnOff
-            // 
-            this.lblServoOnOff.BackColor = System.Drawing.Color.White;
-            this.lblServoOnOff.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblServoOnOff.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblServoOnOff.Location = new System.Drawing.Point(0, 342);
-            this.lblServoOnOff.Margin = new System.Windows.Forms.Padding(0);
-            this.lblServoOnOff.Name = "lblServoOnOff";
-            this.lblServoOnOff.Size = new System.Drawing.Size(200, 58);
-            this.lblServoOnOff.TabIndex = 9;
-            this.lblServoOnOff.Text = "On";
-            this.lblServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSensor
             // 
@@ -164,6 +150,20 @@
             this.lblAxisName.Text = "X";
             this.lblAxisName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chkServoOnOff
+            // 
+            this.chkServoOnOff.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkServoOnOff.BackColor = System.Drawing.Color.White;
+            this.chkServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkServoOnOff.Location = new System.Drawing.Point(3, 345);
+            this.chkServoOnOff.Name = "chkServoOnOff";
+            this.chkServoOnOff.Size = new System.Drawing.Size(194, 52);
+            this.chkServoOnOff.TabIndex = 9;
+            this.chkServoOnOff.Text = "On";
+            this.chkServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkServoOnOff.UseVisualStyleBackColor = false;
+            this.chkServoOnOff.CheckedChanged += new System.EventHandler(this.chkServoOnOff_CheckedChanged);
+            // 
             // MotionCommandControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -183,12 +183,12 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpMotionCommand;
-        private System.Windows.Forms.Label lblServoOnOff;
         private System.Windows.Forms.Label lblSensor;
         private System.Windows.Forms.Label lblAxisStatus;
         private System.Windows.Forms.Label lblCurrentPosition;
         private System.Windows.Forms.Label lblOffsest;
         private System.Windows.Forms.Label lblTargetPosition;
         private System.Windows.Forms.Label lblAxisName;
+        private System.Windows.Forms.CheckBox chkServoOnOff;
     }
 }

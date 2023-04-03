@@ -47,6 +47,8 @@ namespace Jastech.Framework.Device.Motions
 
         public abstract string GetCurrentMotionStatus(int axisNo);
 
+        public abstract bool IsEnable(int axisNo);
+
         public abstract bool IsNegativeLimit(int axisNo);
 
         public abstract bool IsPositiveLimit(int axisNo);

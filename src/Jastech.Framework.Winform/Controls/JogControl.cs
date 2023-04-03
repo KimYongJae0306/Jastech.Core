@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Jastech.Framework.Device.Motions.MovingParam;
+using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Winform.Forms;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -91,64 +93,91 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblPitchXYValue_Click(object sender, EventArgs e)
         {
-
+            SetLabelDoubleData(sender);
         }
 
         private void lblPitchZValue_Click(object sender, EventArgs e)
         {
+            SetLabelDoubleData(sender);
+        }
 
+        private void SetLabelDoubleData(object sender)
+        {
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.ShowDialog();
+
+            double inputData = keyPadForm.PadValue;
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
         }
 
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
-            //MoveJog(eAxis.Axis_X, Direction.CCW);
+            MoveJog(0, Direction.CCW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            //MoveStop(eAxis.Axis_X);
+            MoveStop(0);
         }
 
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
-            //MoveJog(eAxis.Axis_X, Direction.CW);
+            MoveJog(0, Direction.CW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
-            
-            //MoveStop(eAxis.Axis_X);
+
+            MoveStop(0);
         }
 
         private void btnJogDownY_MouseDown(object sender, MouseEventArgs e)
         {
-            //MoveJog(eAxis.Axis_Y, Direction.CCW);
+            MoveJog(1, Direction.CCW);
         }
 
         private void btnJogDownY_MouseUp(object sender, MouseEventArgs e)
         {
-            //MoveStop(eAxis.Axis_Y);
+            MoveStop(1);
         }
 
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
-            //MoveJog(eAxis.Axis_Y, Direction.CW);
+            MoveJog(1, Direction.CW);
         }
 
         private void btnJogUpY_MouseUp(object sender, MouseEventArgs e)
         {
-            //MoveStop(eAxis.Axis_Y);
+            MoveStop(1);
         }
 
-        //private void MoveJog(eAxis axis, Direction direction)
-        //{
+        private void MoveJog(int axisNumber, Direction direction)
+        {
+            if (rdoJogMode.Checked)
+            {
+                double currentPosition = DeviceManager.Instance().GetMotion().GetActualPosition(axisNumber);
+                double targetPosition = 0.0;
 
-        //}
+                if (direction == Direction.CW)
+                    targetPosition = currentPosition - Convert.ToDouble(lblPitchXYValue.Text);
+                else if (direction == Direction.CCW)
+                    targetPosition = currentPosition + Convert.ToDouble(lblPitchXYValue.Text);
 
-        //private void MoveStop(eAxis axis)
-        //{
+                DeviceManager.Instance().GetMotion().MoveTo(axisNumber, targetPosition, 10, 10);
+            }
+            else if (rdoIncreaseMode.Checked)
+            {
+                DeviceManager.Instance().GetMotion().JogMove(axisNumber, direction);
+            }
+            else { }
+        }
 
-        //}
+        private void MoveStop(int axisNumber)
+        {
+            DeviceManager.Instance().GetMotion().StopMove(axisNumber);
+        }
         #endregion
     }
 }

@@ -32,6 +32,11 @@ namespace Jastech.Framework.Device.Motions
             return "";
         }
 
+        public override bool IsEnable(int axisNo)
+        {
+            return false;
+        }
+
         public override bool IsConnected()
         {
             return false;
