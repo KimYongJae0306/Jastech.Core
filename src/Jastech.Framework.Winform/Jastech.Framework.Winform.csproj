@@ -178,12 +178,6 @@
     <Compile Include="Forms\MessageConfirmForm.Designer.cs">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MotionPopupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MotionPopupForm.Designer.cs">
-      <DependentUpon>MotionPopupForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SplashForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,9 +254,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageConfirmForm.resx">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MotionPopupForm.resx">
-      <DependentUpon>MotionPopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
