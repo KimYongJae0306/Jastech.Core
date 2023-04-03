@@ -111,6 +111,12 @@
     <Compile Include="Controls\MotionParameterControl.Designer.cs">
       <DependentUpon>MotionParameterControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MotionPopupParameterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionPopupParameterControl.Designer.cs">
+      <DependentUpon>MotionPopupParameterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UPHControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionParameterControl.resx">
       <DependentUpon>MotionParameterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionPopupParameterControl.resx">
+      <DependentUpon>MotionPopupParameterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UPHControl.resx">
       <DependentUpon>UPHControl.cs</DependentUpon>
