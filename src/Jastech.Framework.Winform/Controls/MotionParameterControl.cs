@@ -13,8 +13,8 @@ namespace Jastech.Framework.Winform.Controls
     public partial class MotionParameterControl : UserControl
     {
         #region 필드
-        MotionParameterCommonControl motionParameterCommonControl = new MotionParameterCommonControl();
-        MotionParameterVariableControl motionParameterVariableControl = new MotionParameterVariableControl();
+        private MotionParameterCommonControl motionParameterCommonControl = new MotionParameterCommonControl();
+        private MotionParameterVariableControl motionParameterVariableControl = new MotionParameterVariableControl();
         #endregion
 
         #region 속성
