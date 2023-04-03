@@ -42,8 +42,9 @@ namespace Jastech.Framework.Winform.Forms
 
         private void AddControl()
         {
-
-
+            motionParameterVariableControl.AxisName = AxisName;
+            motionParameterVariableControl.Dock = DockStyle.Fill;
+            tlpMotionParameter.Controls.Add(motionParameterVariableControl);
         }
         #endregion
     }
