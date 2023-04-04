@@ -46,10 +46,10 @@ namespace Jastech.Framework.Structure
             Name = name;
             Description = description;
 
-            foreach (var axis in axisHandler.AxisList)
-            {
-                AddAxisParam(axis);
-            }
+            //foreach (var axis in axisHandler.AxisList)
+            //{
+            //    AddAxisParam(axis);
+            //}
         }
 
         public void AddAxisParam(Axis axis)
