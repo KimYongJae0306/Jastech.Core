@@ -21,7 +21,7 @@ namespace Jastech.Framework.Device.Motions
         public int AxisNo { get; private set; }
 
         [JsonProperty]
-        public AxisCommandParams AxisCommandParam { get; set; } = new AxisCommandParams();
+        public AxisCommonParams AxisCommonParams { get; set; } = new AxisCommonParams();
 
         [JsonProperty]
         public int HomeOrder { get; set; } = -1;

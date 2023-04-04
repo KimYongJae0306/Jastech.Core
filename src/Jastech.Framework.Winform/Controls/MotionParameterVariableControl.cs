@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
+using Jastech.Framework.Device.Motions;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -17,7 +18,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public string AxisName { get; set; } = string.Empty;
+        private Axis SelectedAxis { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -34,14 +35,29 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        public void UpdateUI()
+        private void MotionParameterVariableControl_Load(object sender, EventArgs e)
         {
-            lblVelocityValue.Text = "0";
-            lblAccelerationTimeValue.Text = "0";
-            lblDecelerationTimeValue.Text = "0";
+            InitializeUI();
+        }
 
-            lblMovingTimeOutValue.Text = "0";
-            lblAfterWaitTimeValue.Text = "0";
+        private void InitializeUI()
+        {
+            grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
+        }
+
+        public void SetAxis(Axis axis)
+        {
+            SelectedAxis = axis;
+        }
+
+        public void UpdateUI(Device.Motions.AxisMovingParam movingParam)
+        {
+            lblVelocityValue.Text = movingParam.Velocity.ToString();
+            lblAccelerationTimeValue.Text = movingParam.Acceleration.ToString();
+            lblDecelerationTimeValue.Text = movingParam.Deceleration.ToString();
+
+            lblMovingTimeOutValue.Text = movingParam.MovingTimeOut.ToString();
+            lblAfterWaitTimeValue.Text = movingParam.AferWaitTime.ToString();
         }
 
         public void SetParameter()

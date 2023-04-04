@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
+using Jastech.Framework.Device.Motions;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -17,7 +18,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public string AxisName { get; set; } = string.Empty;
+        private Axis SelectedAxis { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -34,7 +35,22 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        public void UpdateUI()
+        private void MotionParameterCommonControl_Load(object sender, EventArgs e)
+        {
+            InitializeUI();
+        }
+
+        private void InitializeUI()
+        {
+            grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
+        }
+
+        public void SetAxis(Axis axis)
+        {
+            SelectedAxis = axis;
+        }
+
+        public void UpdateUI(Structure.TeachingPosition teachingPosition)
         {
             lblJogLowSpeedValue.Text = "0";
             lblJogHighSpeedValue.Text = "0";

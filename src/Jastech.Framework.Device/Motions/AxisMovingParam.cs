@@ -25,7 +25,6 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public double AferWaitTime { get; set; } = 0; // ms
         #endregion
-
     }
 
     public partial class AxisMovingParam

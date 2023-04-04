@@ -41,7 +41,9 @@
             this.lblMoveToleranceValue = new System.Windows.Forms.Label();
             this.lblHomingTimeOut = new System.Windows.Forms.Label();
             this.lblHomingTimeOutValue = new System.Windows.Forms.Label();
+            this.grpAxisName = new System.Windows.Forms.GroupBox();
             this.tlpMotionCommonParameter.SuspendLayout();
+            this.grpAxisName.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMotionCommonParameter
@@ -69,13 +71,13 @@
             this.tlpMotionCommonParameter.Controls.Add(this.lblHomingTimeOutValue, 7, 1);
             this.tlpMotionCommonParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMotionCommonParameter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.tlpMotionCommonParameter.Location = new System.Drawing.Point(0, 0);
+            this.tlpMotionCommonParameter.Location = new System.Drawing.Point(3, 23);
             this.tlpMotionCommonParameter.Margin = new System.Windows.Forms.Padding(0);
             this.tlpMotionCommonParameter.Name = "tlpMotionCommonParameter";
             this.tlpMotionCommonParameter.RowCount = 2;
             this.tlpMotionCommonParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMotionCommonParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMotionCommonParameter.Size = new System.Drawing.Size(700, 160);
+            this.tlpMotionCommonParameter.Size = new System.Drawing.Size(694, 134);
             this.tlpMotionCommonParameter.TabIndex = 1;
             // 
             // lblNegativeLimitValue
@@ -83,10 +85,10 @@
             this.lblNegativeLimitValue.BackColor = System.Drawing.Color.White;
             this.lblNegativeLimitValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblNegativeLimitValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNegativeLimitValue.Location = new System.Drawing.Point(146, 83);
+            this.lblNegativeLimitValue.Location = new System.Drawing.Point(144, 70);
             this.lblNegativeLimitValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblNegativeLimitValue.Name = "lblNegativeLimitValue";
-            this.lblNegativeLimitValue.Size = new System.Drawing.Size(58, 74);
+            this.lblNegativeLimitValue.Size = new System.Drawing.Size(57, 61);
             this.lblNegativeLimitValue.TabIndex = 7;
             this.lblNegativeLimitValue.Text = "0.0";
             this.lblNegativeLimitValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -97,10 +99,10 @@
             this.lblNegativeLimit.BackColor = System.Drawing.Color.White;
             this.lblNegativeLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblNegativeLimit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNegativeLimit.Location = new System.Drawing.Point(6, 83);
+            this.lblNegativeLimit.Location = new System.Drawing.Point(6, 70);
             this.lblNegativeLimit.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblNegativeLimit.Name = "lblNegativeLimit";
-            this.lblNegativeLimit.Size = new System.Drawing.Size(128, 74);
+            this.lblNegativeLimit.Size = new System.Drawing.Size(126, 61);
             this.lblNegativeLimit.TabIndex = 6;
             this.lblNegativeLimit.Text = "NEGATIVE\r\nLIMIT (mm)";
             this.lblNegativeLimit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -110,10 +112,10 @@
             this.lblJogLowSpeedValue.BackColor = System.Drawing.Color.White;
             this.lblJogLowSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogLowSpeedValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJogLowSpeedValue.Location = new System.Drawing.Point(146, 3);
+            this.lblJogLowSpeedValue.Location = new System.Drawing.Point(144, 3);
             this.lblJogLowSpeedValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogLowSpeedValue.Name = "lblJogLowSpeedValue";
-            this.lblJogLowSpeedValue.Size = new System.Drawing.Size(58, 74);
+            this.lblJogLowSpeedValue.Size = new System.Drawing.Size(57, 61);
             this.lblJogLowSpeedValue.TabIndex = 3;
             this.lblJogLowSpeedValue.Text = "0.0";
             this.lblJogLowSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -127,7 +129,7 @@
             this.lblJogLowSpeed.Location = new System.Drawing.Point(6, 3);
             this.lblJogLowSpeed.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogLowSpeed.Name = "lblJogLowSpeed";
-            this.lblJogLowSpeed.Size = new System.Drawing.Size(128, 74);
+            this.lblJogLowSpeed.Size = new System.Drawing.Size(126, 61);
             this.lblJogLowSpeed.TabIndex = 1;
             this.lblJogLowSpeed.Text = "JOG LOW SPEED\r\n(mm/sec)";
             this.lblJogLowSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,10 +139,10 @@
             this.lblJogHighSpeed.BackColor = System.Drawing.Color.White;
             this.lblJogHighSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogHighSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJogHighSpeed.Location = new System.Drawing.Point(251, 3);
+            this.lblJogHighSpeed.Location = new System.Drawing.Point(247, 3);
             this.lblJogHighSpeed.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogHighSpeed.Name = "lblJogHighSpeed";
-            this.lblJogHighSpeed.Size = new System.Drawing.Size(128, 74);
+            this.lblJogHighSpeed.Size = new System.Drawing.Size(126, 61);
             this.lblJogHighSpeed.TabIndex = 8;
             this.lblJogHighSpeed.Text = "JOG HIGH SPEED\r\n(mm/sec)";
             this.lblJogHighSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,10 +152,10 @@
             this.lblPositiveLimit.BackColor = System.Drawing.Color.White;
             this.lblPositiveLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPositiveLimit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPositiveLimit.Location = new System.Drawing.Point(251, 83);
+            this.lblPositiveLimit.Location = new System.Drawing.Point(247, 70);
             this.lblPositiveLimit.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblPositiveLimit.Name = "lblPositiveLimit";
-            this.lblPositiveLimit.Size = new System.Drawing.Size(128, 74);
+            this.lblPositiveLimit.Size = new System.Drawing.Size(126, 61);
             this.lblPositiveLimit.TabIndex = 9;
             this.lblPositiveLimit.Text = "POSITIVE\r\nLIMIT (mm)";
             this.lblPositiveLimit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,10 +165,10 @@
             this.lblJogHighSpeedValue.BackColor = System.Drawing.Color.White;
             this.lblJogHighSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogHighSpeedValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJogHighSpeedValue.Location = new System.Drawing.Point(391, 3);
+            this.lblJogHighSpeedValue.Location = new System.Drawing.Point(385, 3);
             this.lblJogHighSpeedValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogHighSpeedValue.Name = "lblJogHighSpeedValue";
-            this.lblJogHighSpeedValue.Size = new System.Drawing.Size(58, 74);
+            this.lblJogHighSpeedValue.Size = new System.Drawing.Size(57, 61);
             this.lblJogHighSpeedValue.TabIndex = 10;
             this.lblJogHighSpeedValue.Text = "0.0";
             this.lblJogHighSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -177,10 +179,10 @@
             this.lblPositiveLimitValue.BackColor = System.Drawing.Color.White;
             this.lblPositiveLimitValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPositiveLimitValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPositiveLimitValue.Location = new System.Drawing.Point(391, 83);
+            this.lblPositiveLimitValue.Location = new System.Drawing.Point(385, 70);
             this.lblPositiveLimitValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblPositiveLimitValue.Name = "lblPositiveLimitValue";
-            this.lblPositiveLimitValue.Size = new System.Drawing.Size(58, 74);
+            this.lblPositiveLimitValue.Size = new System.Drawing.Size(57, 61);
             this.lblPositiveLimitValue.TabIndex = 11;
             this.lblPositiveLimitValue.Text = "0.0";
             this.lblPositiveLimitValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -191,10 +193,10 @@
             this.lblMoveTolerance.BackColor = System.Drawing.Color.White;
             this.lblMoveTolerance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMoveTolerance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMoveTolerance.Location = new System.Drawing.Point(496, 3);
+            this.lblMoveTolerance.Location = new System.Drawing.Point(488, 3);
             this.lblMoveTolerance.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblMoveTolerance.Name = "lblMoveTolerance";
-            this.lblMoveTolerance.Size = new System.Drawing.Size(128, 74);
+            this.lblMoveTolerance.Size = new System.Drawing.Size(126, 61);
             this.lblMoveTolerance.TabIndex = 12;
             this.lblMoveTolerance.Text = "MOVE\r\nTOLERANCE (mm)";
             this.lblMoveTolerance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -204,10 +206,10 @@
             this.lblMoveToleranceValue.BackColor = System.Drawing.Color.White;
             this.lblMoveToleranceValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMoveToleranceValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMoveToleranceValue.Location = new System.Drawing.Point(636, 3);
+            this.lblMoveToleranceValue.Location = new System.Drawing.Point(626, 3);
             this.lblMoveToleranceValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblMoveToleranceValue.Name = "lblMoveToleranceValue";
-            this.lblMoveToleranceValue.Size = new System.Drawing.Size(58, 74);
+            this.lblMoveToleranceValue.Size = new System.Drawing.Size(62, 61);
             this.lblMoveToleranceValue.TabIndex = 13;
             this.lblMoveToleranceValue.Text = "0.0";
             this.lblMoveToleranceValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -218,10 +220,10 @@
             this.lblHomingTimeOut.BackColor = System.Drawing.Color.White;
             this.lblHomingTimeOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHomingTimeOut.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHomingTimeOut.Location = new System.Drawing.Point(496, 83);
+            this.lblHomingTimeOut.Location = new System.Drawing.Point(488, 70);
             this.lblHomingTimeOut.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblHomingTimeOut.Name = "lblHomingTimeOut";
-            this.lblHomingTimeOut.Size = new System.Drawing.Size(128, 74);
+            this.lblHomingTimeOut.Size = new System.Drawing.Size(126, 61);
             this.lblHomingTimeOut.TabIndex = 14;
             this.lblHomingTimeOut.Text = "HOMING\r\nTIMEOUT (sec)";
             this.lblHomingTimeOut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -231,25 +233,38 @@
             this.lblHomingTimeOutValue.BackColor = System.Drawing.Color.White;
             this.lblHomingTimeOutValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHomingTimeOutValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHomingTimeOutValue.Location = new System.Drawing.Point(636, 83);
+            this.lblHomingTimeOutValue.Location = new System.Drawing.Point(626, 70);
             this.lblHomingTimeOutValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblHomingTimeOutValue.Name = "lblHomingTimeOutValue";
-            this.lblHomingTimeOutValue.Size = new System.Drawing.Size(58, 74);
+            this.lblHomingTimeOutValue.Size = new System.Drawing.Size(62, 61);
             this.lblHomingTimeOutValue.TabIndex = 15;
             this.lblHomingTimeOutValue.Text = "0.0";
             this.lblHomingTimeOutValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblHomingTimeOutValue.Click += new System.EventHandler(this.Value_Changed);
+            // 
+            // grpAxisName
+            // 
+            this.grpAxisName.Controls.Add(this.tlpMotionCommonParameter);
+            this.grpAxisName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpAxisName.Location = new System.Drawing.Point(0, 0);
+            this.grpAxisName.Name = "grpAxisName";
+            this.grpAxisName.Size = new System.Drawing.Size(700, 160);
+            this.grpAxisName.TabIndex = 2;
+            this.grpAxisName.TabStop = false;
+            this.grpAxisName.Text = "Axis Name";
             // 
             // MotionParameterCommonControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.tlpMotionCommonParameter);
+            this.Controls.Add(this.grpAxisName);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "MotionParameterCommonControl";
             this.Size = new System.Drawing.Size(700, 160);
+            this.Load += new System.EventHandler(this.MotionParameterCommonControl_Load);
             this.tlpMotionCommonParameter.ResumeLayout(false);
+            this.grpAxisName.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -269,5 +284,6 @@
         private System.Windows.Forms.Label lblMoveToleranceValue;
         private System.Windows.Forms.Label lblHomingTimeOut;
         private System.Windows.Forms.Label lblHomingTimeOutValue;
+        private System.Windows.Forms.GroupBox grpAxisName;
     }
 }

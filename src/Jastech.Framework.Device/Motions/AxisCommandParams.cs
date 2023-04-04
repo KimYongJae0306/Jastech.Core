@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Motions
 {
-    public class AxisCommandParams
+    public class AxisCommonParams
     {
         [JsonProperty]
         public double JogLowSpeed { get; set; } = 10;

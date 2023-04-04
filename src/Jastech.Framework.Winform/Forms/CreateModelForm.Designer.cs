@@ -91,9 +91,8 @@
             this.txtModelName.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.txtModelName.Location = new System.Drawing.Point(7, 96);
             this.txtModelName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtModelName.Multiline = true;
             this.txtModelName.Name = "txtModelName";
-            this.txtModelName.Size = new System.Drawing.Size(525, 21);
+            this.txtModelName.Size = new System.Drawing.Size(525, 32);
             this.txtModelName.TabIndex = 10;
             // 
             // panel12

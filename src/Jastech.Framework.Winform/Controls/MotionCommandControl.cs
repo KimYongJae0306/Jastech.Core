@@ -58,7 +58,7 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = selectedAxis;
         }
 
-        private void UpdateUI(object obj)
+        public void UpdateUI(object obj)
         {
             try
             {
