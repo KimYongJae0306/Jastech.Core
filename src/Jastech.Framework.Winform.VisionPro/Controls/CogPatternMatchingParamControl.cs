@@ -46,9 +46,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void lblAddPattern_Click(object sender, EventArgs e)
         {
-            if(GetOriginImage() != null)
+            if (GetOriginImage() != null)
             {
+                if (CurrentParam.GetSearchRegion() == null)
+                    return;
+
                 ICogImage originImage = GetOriginImageHandler();
+                
                 CurrentParam.Train(originImage);
                 cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
             }
