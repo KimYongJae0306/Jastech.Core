@@ -319,7 +319,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (cogDisplay.Image == null)
                 return;
-         
+
+            if(e.Button == MouseButtons.Left)
+                DeleteResultGraphics();
+
             if (_displayMode == DisplayMode.CustomCrossLine)
             {
                 DrawCustomCrossLine(e.X, e.Y);
@@ -478,9 +481,30 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogDisplay.StaticGraphics.Remove(groupName);
         }
 
+        public void DeleteResultGraphics()
+        {
+            string groupName = "Result";
+            if (IsContainGroupNameInInteractiveGraphics(groupName))
+                cogDisplay.InteractiveGraphics.Remove(groupName);
+
+            if (IsContainGroupNameInStaticGraphics(groupName))
+                cogDisplay.StaticGraphics.Remove(groupName);
+        }
+
+
         private bool IsContainGroupNameInStaticGraphics(string groupName)
         {
             foreach (var value in cogDisplay.StaticGraphics.ZOrderGroups)
+            {
+                if (groupName == (string)value)
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsContainGroupNameInInteractiveGraphics(string groupName)
+        {
+            foreach (var value in cogDisplay.InteractiveGraphics.ZOrderGroups)
             {
                 if (groupName == (string)value)
                     return true;
@@ -609,7 +633,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     _updateViewRect = false;
                     return;
                 }
-
+                DeleteResultGraphics();
                 UpdateViewRect();
             }
         }
@@ -633,7 +657,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
             
-            string groupName = "MatchingResult";
+            string groupName = "Result";
             var matchingResultData = matchingResult.MaxMatchPos;
 
             resultGraphic.Add(matchingResultData.ResultGraphics);
@@ -641,18 +665,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             var result = matchingResult.Result;
 
-            DrawLabel("Result :" + result.ToString(), 0);
+            DrawResultLabel("Result :" + result.ToString(), 0);
             if(result != Result.Fail)
             {
-                DrawLabel("Score :" + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
-                DrawLabel("Y :" + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);
-                DrawLabel("X :" + matchingResult.MaxMatchPos.FoundPos.Y.ToString("0.000"), 3);
-                DrawLabel("Angle :" + matchingResult.MaxMatchPos.Angle.ToString("0.000"), 4);
+                DrawResultLabel("Score :" + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
+                DrawResultLabel("Y :" + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);
+                DrawResultLabel("X :" + matchingResult.MaxMatchPos.FoundPos.Y.ToString("0.000"), 3);
+                DrawResultLabel("Angle :" + matchingResult.MaxMatchPos.Angle.ToString("0.000"), 4);
             }
 
         }
 
-        private void DrawLabel(string text, int index = 0)
+        private void DrawResultLabel(string text, int index = 0)
         {
             CogGraphicLabel cogLabel = new CogGraphicLabel();
             int intervalY = 20;
@@ -669,7 +693,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLabel.X = drawPoint.X;
             cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index *intervalY);
 
-            cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result Text");
+            cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
         }
     }
 }

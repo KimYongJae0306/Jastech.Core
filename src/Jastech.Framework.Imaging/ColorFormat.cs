@@ -11,4 +11,11 @@ namespace Jastech.Framework.Imaging
         Gray,
         RGB24
     }
+
+    public enum ImageExtension
+    {
+        Jpg,
+        Bmp,
+        Png,
+    }
 }
