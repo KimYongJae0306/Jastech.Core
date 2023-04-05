@@ -153,7 +153,7 @@
             // rdoJogFastMode
             // 
             this.rdoJogFastMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogFastMode.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoJogFastMode.BackColor = System.Drawing.Color.White;
             this.rdoJogFastMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogFastMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogFastMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -172,7 +172,7 @@
             // rdoJogSlowMode
             // 
             this.rdoJogSlowMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogSlowMode.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoJogSlowMode.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.rdoJogSlowMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogSlowMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogSlowMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -217,7 +217,7 @@
             // rdoIncreaseMode
             // 
             this.rdoIncreaseMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoIncreaseMode.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoIncreaseMode.BackColor = System.Drawing.Color.White;
             this.rdoIncreaseMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoIncreaseMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoIncreaseMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -236,7 +236,7 @@
             // rdoJogMode
             // 
             this.rdoJogMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogMode.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoJogMode.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.rdoJogMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -280,7 +280,7 @@
             // 
             // lblPitchXY
             // 
-            this.lblPitchXY.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.lblPitchXY.BackColor = System.Drawing.Color.White;
             this.lblPitchXY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchXY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchXY.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -335,7 +335,7 @@
             // 
             // lblPitchZ
             // 
-            this.lblPitchZ.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.lblPitchZ.BackColor = System.Drawing.Color.White;
             this.lblPitchZ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchZ.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -400,7 +400,7 @@
             // 
             // btnJogDownZ
             // 
-            this.btnJogDownZ.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogDownZ.BackColor = System.Drawing.Color.White;
             this.btnJogDownZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -415,7 +415,7 @@
             // 
             // btnJogDownY
             // 
-            this.btnJogDownY.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogDownY.BackColor = System.Drawing.Color.White;
             this.btnJogDownY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -432,7 +432,7 @@
             // 
             // btnJogLeftX
             // 
-            this.btnJogLeftX.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogLeftX.BackColor = System.Drawing.Color.White;
             this.btnJogLeftX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogLeftX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogLeftX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -449,7 +449,7 @@
             // 
             // btnJogRightX
             // 
-            this.btnJogRightX.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogRightX.BackColor = System.Drawing.Color.White;
             this.btnJogRightX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogRightX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogRightX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -466,7 +466,7 @@
             // 
             // btnJogStop
             // 
-            this.btnJogStop.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogStop.BackColor = System.Drawing.Color.White;
             this.btnJogStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogStop.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -481,7 +481,7 @@
             // 
             // btnJogUpY
             // 
-            this.btnJogUpY.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogUpY.BackColor = System.Drawing.Color.White;
             this.btnJogUpY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogUpY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
@@ -498,7 +498,7 @@
             // 
             // btnJogUpZ
             // 
-            this.btnJogUpZ.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnJogUpZ.BackColor = System.Drawing.Color.White;
             this.btnJogUpZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogUpZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);

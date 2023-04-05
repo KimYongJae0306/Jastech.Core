@@ -40,7 +40,7 @@ namespace Jastech.Framework.Winform.Forms
             _isKorean = chkToggleLanguage.Checked;
 
             if (_isKorean)
-                chkToggleLanguage.BackColor = Color.DarkCyan;
+                chkToggleLanguage.BackColor = Color.DeepSkyBlue;
             else
                 chkToggleLanguage.BackColor = Color.White;
 
@@ -58,9 +58,9 @@ namespace Jastech.Framework.Winform.Forms
                 chkCapsLock.Checked = true;
                 chkShiftLeft.Checked = true;
                 chkShiftRight.Checked = true;
-                chkCapsLock.BackColor = Color.DarkCyan;
-                chkShiftLeft.BackColor = Color.DarkCyan;
-                chkShiftRight.BackColor = Color.DarkCyan;
+                chkCapsLock.BackColor = Color.DeepSkyBlue;
+                chkShiftLeft.BackColor = Color.DeepSkyBlue;
+                chkShiftRight.BackColor = Color.DeepSkyBlue;
             }
             else
             {

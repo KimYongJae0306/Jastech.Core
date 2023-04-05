@@ -107,7 +107,7 @@ namespace Jastech.Framework.Winform.Controls
         private double tempJogHighSpeed = 0.0;
         private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
         {
-            tempJogLowSpeed = SetLabelDoubleData(sender);
+            tempJogHighSpeed = SetLabelDoubleData(sender);
         }
 
         private double tempMoveTolerance = 0.0;
