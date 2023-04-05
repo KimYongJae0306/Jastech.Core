@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Imaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,12 @@ namespace Jastech.Framework.Config
 
         [JsonProperty]
         public bool SaveImageNG { get; set; } = true;
+
+        [JsonProperty]
+        public ImageExtension ExtensionOKImage { get; set; } = ImageExtension.Bmp;
+
+        [JsonProperty]
+        public ImageExtension ExtensionNGImage { get; set; } = ImageExtension.Bmp;
         #endregion
     }
 }
