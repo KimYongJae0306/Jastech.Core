@@ -72,6 +72,34 @@ namespace Jastech.Framework.Util.Helper
             return logPath;
         }
 
+        private static string GetErrorLogPath(ErrorType logType)
+        {
+            string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + "Error" + ".log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            return logPath;
+        }
+
+        public static void Error(ErrorType logType, string logMessage)
+        {
+            string logpath = GetErrorLogPath(logType);
+            string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+
+            if (!Directory.Exists(strDir))
+                Directory.CreateDirectory(strDir);
+
+            string time = GetTimeString(DateTime.Now);
+            string message = "[" + time + "] " +"[" +logType.ToString()+"] "  + logMessage;
+            message = message.Replace("\r\n", "");
+
+            lock (_objLock)
+            {
+                StreamWriter log = new StreamWriter(logpath, true);
+                using (log)
+                {
+                    log.WriteLine(message);
+                }
+            }
+        }
+
         public static void WriteException(LogType logType, Exception exception)
         {
             string logpath = GetLogPath(logType);
@@ -131,5 +159,15 @@ namespace Jastech.Framework.Util.Helper
         SEQ,
         SUB_SEQ,
         ERROR,
+    }
+
+    public enum ErrorType
+    {
+        Grabber,
+        Camera,
+        PLC,
+        Light,
+        SEQ,
+        Inspection,
     }
 }

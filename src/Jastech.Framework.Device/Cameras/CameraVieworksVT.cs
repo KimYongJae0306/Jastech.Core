@@ -1,5 +1,6 @@
 ﻿using Jastech.Framework.Comm;
 using Jastech.Framework.Comm.Protocol;
+using Jastech.Framework.Imaging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -228,7 +229,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public TriggerMode TriggerMode { get; private set; }
 
-        public TriggerSource TriggerSource { get; private set; }
+        public int TriggerSource { get; private set; }
         #endregion
 
         #region 메서드
@@ -240,11 +241,16 @@ namespace Jastech.Framework.Device.Cameras
             SendMessage(message);
         }
 
-        public void SetTriggerSource(TriggerSource triggerSource)
+        /// <summary>
+        ///  CC1_Port(CameraLink) = 1
+        ///  External_Port(Line1) = 5
+        /// </summary>
+        /// <param name="triggerSource"></param>
+        public void SetTriggerSource(int triggerSource)
         {
             TriggerSource = triggerSource;
 
-            string message = MakeSetCommand(SetTriggerSourceCmd, (int)triggerSource);
+            string message = MakeSetCommand(SetTriggerSourceCmd, triggerSource);
             SendMessage(message);
         }
         #endregion

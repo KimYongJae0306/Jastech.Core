@@ -75,6 +75,9 @@
     <Reference Include="Matrox.MatroxImagingLibrary">
       <HintPath>..\..\..\Jastech.Library\Matrox\Matrox.MatroxImagingLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MvCameraControl.Net">
+      <HintPath>..\..\..\Jastech.Library\HIK\MvCameraControl.Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -88,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\CameraHandler.cs" />
+    <Compile Include="Cameras\CameraHIK.cs" />
     <Compile Include="Cameras\CameraInfo.cs" />
     <Compile Include="Cameras\CameraMil.cs" />
     <Compile Include="Cameras\CameraVieworksVT.cs" />
@@ -99,6 +103,8 @@
     <Compile Include="Grabbers\Grabber.cs" />
     <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="IDevice.cs" />
+    <Compile Include="LightCtrls\LightCtrl.cs" />
+    <Compile Include="LightCtrls\SerialLightCtrl.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Axis.cs" />
     <Compile Include="Motions\AxisCommandParams.cs" />
@@ -119,13 +125,20 @@
       <Project>{05b26e55-9c49-4078-983a-c6b13f6ee375}</Project>
       <Name>Jastech.Framework.Comm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
+      <Project>{2380da0f-851a-4430-9a43-e7b2deee29f2}</Project>
+      <Name>Jastech.Framework.Imaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jastech.Framework.Matrox\Jastech.Framework.Matrox.csproj">
       <Project>{8b4b5cef-5b39-423a-a460-a24f7fd8890e}</Project>
       <Name>Jastech.Framework.Matrox</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
+      <Project>{07ef86cc-ac6a-454e-b12b-eb63454a1dca}</Project>
+      <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LightCtrls\" />
     <Folder Include="Plcs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
 ﻿using Jastech.Framework.Device.Grabbers;
+using Jastech.Framework.Imaging;
 using Matrox.MatroxImagingLibrary;
 using Newtonsoft.Json;
 using System;
@@ -15,6 +16,8 @@ namespace Jastech.Framework.Device.Cameras
     {
         #region 필드
         const int BufferPoolCount = 10;
+
+        private object _lock = new object();
 
         private MilSystem MilSystem { get; set; } = null;
 
@@ -161,28 +164,32 @@ namespace Jastech.Framework.Device.Cameras
             MIL_ID currentImageId = MIL.M_NULL;
             MIL.MdigGetHookInfo(EventId, MIL.M_MODIFIED_BUFFER + MIL.M_BUFFER_ID, ref currentImageId);
 
-            LastGrabImage = currentImageId;
+            lock(_lock)
+                LastGrabImage = currentImageId;
 
             return MIL.M_NULL;
         }
 
         public override byte[] GetGrabbedImage()
         {
-            if (LastGrabImage != null)
+            lock (_lock)
             {
-                IntPtr ptr = IntPtr.Zero;
-                var pitch = MIL.MbufInquire(LastGrabImage, MIL.M_PITCH, ptr);
+                if (LastGrabImage != null)
+                {
+                    IntPtr ptr = IntPtr.Zero;
+                    var pitch = MIL.MbufInquire(LastGrabImage, MIL.M_PITCH, ptr);
 
-                //byte[] UserArrayPtr = new byte[CameraInfo.ImageWidth * CameraInfo.ImageHeight];
-                byte[] dataArray = new byte[pitch * ImageHeight];
+                    //byte[] UserArrayPtr = new byte[CameraInfo.ImageWidth * CameraInfo.ImageHeight];
+                    byte[] dataArray = new byte[pitch * ImageHeight];
 
-                MIL.MbufGet(LastGrabImage, dataArray);
+                    MIL.MbufGet(LastGrabImage, dataArray);
 
-                return dataArray;
-            }
-            else
-            {
-                return null;
+                    return dataArray;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -292,7 +299,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public TriggerMode TriggerMode { get; private set; }
 
-        public TriggerSource TriggerSource { get; private set; }
+        public int TriggerSource { get; private set; }
         #endregion
 
         #region 메서드
@@ -301,7 +308,7 @@ namespace Jastech.Framework.Device.Cameras
             TriggerMode = triggerMode;
         }
 
-        public void SetTriggerSource(TriggerSource triggerSource)
+        public void SetTriggerSource(int triggerSource)
         {
             TriggerSource = triggerSource;
         }

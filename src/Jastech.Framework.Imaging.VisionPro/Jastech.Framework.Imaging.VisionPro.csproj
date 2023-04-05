@@ -223,5 +223,11 @@
       <Version>13.0.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
+      <Project>{2380da0f-851a-4430-9a43-e7b2deee29f2}</Project>
+      <Name>Jastech.Framework.Imaging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

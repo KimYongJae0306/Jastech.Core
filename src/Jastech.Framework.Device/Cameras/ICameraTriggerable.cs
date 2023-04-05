@@ -16,10 +16,12 @@ namespace Jastech.Framework.Device.Cameras
         TriggerMode TriggerMode { get; }
 
         [JsonProperty]
-        TriggerSource TriggerSource { get; }
+        int TriggerSource { get; }
+        //TriggerSource TriggerSource { get; }
 
         void SetTriggerMode(TriggerMode triggerMode);
 
-        void SetTriggerSource(TriggerSource triggerSource);
+        void SetTriggerSource(int triggerSource);
+        //void SetTriggerSource(TriggerSource triggerSource);
     }
 }

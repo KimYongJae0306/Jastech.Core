@@ -24,11 +24,11 @@ namespace Jastech.Framework.Winform
         #endregion
 
         #region 대리자
-        public delegate void InitializedDelegate(Type deviceType, bool success);
+        public delegate void InitializedEventHandler(Type deviceType, bool success);
         #endregion
 
         #region 이벤트
-        public event InitializedDelegate Initialized;
+        public event InitializedEventHandler Initialized;
         #endregion
 
         #region 생성자

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -168,6 +169,53 @@ namespace Jastech.Framework.Imaging.VisionPro
             roi.GraphicDOFEnable = constants;
 
             return roi;
+        }
+
+        public static ICogImage CovertImage(byte[] data, int width, int height, ColorFormat colorFormat)
+        {
+            if (colorFormat == ColorFormat.Gray)
+            {
+                var dataSize = width * height;
+                var buffer = new SafeMalloc(dataSize);
+
+                Marshal.Copy(data, 0, buffer, dataSize);
+
+                CogImage8Root root = new CogImage8Root();
+
+                root.Initialize(width, height, buffer, width, buffer);
+                var cogImage = new CogImage8Grey();
+                cogImage.SetRoot(root);
+                return cogImage;
+            }
+            else if(colorFormat == ColorFormat.RGB24)
+            {
+                var dataSize = width * height;
+
+                var bufferB = new SafeMalloc(dataSize);
+                Marshal.Copy(data, 0, bufferB, dataSize);
+
+                var bufferG = new SafeMalloc(dataSize);
+                Marshal.Copy(data, dataSize, bufferG, dataSize);
+
+                var bufferR = new SafeMalloc(dataSize);
+                Marshal.Copy(data, dataSize * 2, bufferR, dataSize);
+
+
+                var cogRootR = new CogImage8Root();
+                cogRootR.Initialize(width, height, bufferR, width, bufferR);
+
+                var cogRootG = new CogImage8Root();
+                cogRootG.Initialize(width, height, bufferG, width, bufferG);
+
+                var cogRootB = new CogImage8Root();
+                cogRootB.Initialize(width, height, bufferB, width, bufferB);
+
+                var cogImage = new CogImage24PlanarColor();
+                cogImage.SetRoots(cogRootR, cogRootG, cogRootB);
+
+                return cogImage;
+            }
+            return null;
         }
     }
 }

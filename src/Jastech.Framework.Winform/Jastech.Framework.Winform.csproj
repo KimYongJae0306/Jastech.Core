@@ -276,6 +276,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\Edit.png" />
   </ItemGroup>
   <ItemGroup>

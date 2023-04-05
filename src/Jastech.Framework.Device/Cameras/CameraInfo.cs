@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Imaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;

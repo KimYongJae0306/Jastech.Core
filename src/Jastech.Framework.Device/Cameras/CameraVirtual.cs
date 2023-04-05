@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Imaging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -102,7 +103,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public TriggerMode TriggerMode { get; private set; }
 
-        public TriggerSource TriggerSource { get; private set; }
+        public int TriggerSource { get; private set; }
         #endregion
 
         #region 메서드
@@ -111,7 +112,7 @@ namespace Jastech.Framework.Device.Cameras
             TriggerMode = triggerMode;
         }
 
-        public void SetTriggerSource(TriggerSource triggerSource)
+        public void SetTriggerSource(int triggerSource)
         {
             TriggerSource = triggerSource;
         }

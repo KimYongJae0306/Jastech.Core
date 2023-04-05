@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Imaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace Jastech.Framework.Device.Cameras
             SensorType = sensorType;
         }
         #endregion
-
 
         #region 속성
         [JsonProperty]
@@ -105,12 +105,6 @@ namespace Jastech.Framework.Device.Cameras
         Line
     }
 
-    public enum ColorFormat
-    {
-        Gray,
-        RGB24
-    }
-
     public enum CameraType
     {
         VT_6k35c_trigger,
@@ -122,9 +116,9 @@ namespace Jastech.Framework.Device.Cameras
         Hardware,
     }
 
-    public enum TriggerSource
-    {
-        CC1_Port = 1, // CameraLink
-        External_Port = 5, // Line1
-    }
+    //public enum TriggerSource
+    //{
+    //    CC1_Port = 1, // CameraLink
+    //    External_Port = 5, // Line1
+    //}
 }
