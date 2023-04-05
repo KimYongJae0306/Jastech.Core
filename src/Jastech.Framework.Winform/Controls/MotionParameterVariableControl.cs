@@ -44,7 +44,7 @@ namespace Jastech.Framework.Winform.Controls
             InitializeUI();
         }
 
-        public void Initialize(AxisMovingParam movingParam)
+        public void UpdateData(AxisMovingParam movingParam)
         {
             MovingParam = movingParam.DeepCopy();
             UpdateUI();

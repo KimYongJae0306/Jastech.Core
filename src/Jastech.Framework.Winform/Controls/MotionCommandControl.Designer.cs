@@ -121,6 +121,7 @@
             this.lblOffsest.TabIndex = 5;
             this.lblOffsest.Text = "0.0";
             this.lblOffsest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblOffsest.Click += new System.EventHandler(this.lblOffsest_Click);
             // 
             // lblTargetPosition
             // 
@@ -135,6 +136,7 @@
             this.lblTargetPosition.TabIndex = 4;
             this.lblTargetPosition.Text = "0.0";
             this.lblTargetPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTargetPosition.Click += new System.EventHandler(this.lblTargetPosition_Click);
             // 
             // lblAxisName
             // 

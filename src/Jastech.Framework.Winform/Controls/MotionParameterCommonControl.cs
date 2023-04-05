@@ -47,7 +47,7 @@ namespace Jastech.Framework.Winform.Controls
             grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
         }
 
-        public void Initialize(AxisCommonParams axisCommonParams)
+        public void UpdateData(AxisCommonParams axisCommonParams)
         {
             CommonParam = axisCommonParams;
             UpdateUI();

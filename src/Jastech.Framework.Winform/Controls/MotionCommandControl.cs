@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using Jastech.Framework.Device.Motions;
 using Jastech.Framework.Structure;
+using Jastech.Framework.Winform.Forms;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -43,7 +44,7 @@ namespace Jastech.Framework.Winform.Controls
             InitializeUI();
         }
 
-        public void Intialize(TeachingAxisInfo axisInfo)
+        public void UpdateData(TeachingAxisInfo axisInfo)
         {
             AxisInfo = axisInfo.DeepCopy();
             UpdateUI();
@@ -62,7 +63,10 @@ namespace Jastech.Framework.Winform.Controls
         public void UpdateUI()
         {
             lblTargetPosition.Text = AxisInfo.TargetPosition.ToString();
+            tempTargetPosition = AxisInfo.TargetPosition;
+
             lblOffsest.Text = AxisInfo.Offset.ToString();
+            tempOffset = AxisInfo.Offset;
         }
 
         public void UpdateAxisStatus()
@@ -136,8 +140,40 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
 
+        private double tempTargetPosition = 0.0;
+        private void lblTargetPosition_Click(object sender, EventArgs e)
+        {
+            tempTargetPosition = SetLabelDoubleData(sender);
+        }
+
+        private double tempOffset = 0.0;
+        private void lblOffsest_Click(object sender, EventArgs e)
+        {
+            tempOffset = SetLabelDoubleData(sender);
+        }
+
+        private double SetLabelDoubleData(object sender)
+        {
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.ShowDialog();
+
+            double inputData = keyPadForm.PadValue;
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
+
+            return inputData;
+        }
+
         public TeachingAxisInfo GetCurrentData()
         {
+            TeachingAxisInfo param = new TeachingAxisInfo();
+
+            param.TargetPosition = tempTargetPosition;
+            param.Offset = tempOffset;
+
+            AxisInfo = param.DeepCopy();
+
             return AxisInfo;
         }
         #endregion

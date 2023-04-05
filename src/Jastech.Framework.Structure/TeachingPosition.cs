@@ -121,8 +121,10 @@ namespace Jastech.Framework.Structure
         public TeachingAxisInfo DeepCopy()
         {
             TeachingAxisInfo info = new TeachingAxisInfo();
+
             info.Name = Name;
             info.TargetPosition = TargetPosition;
+            info.Offset = Offset;
             info.MovingParam = MovingParam.DeepCopy();
 
             return info;

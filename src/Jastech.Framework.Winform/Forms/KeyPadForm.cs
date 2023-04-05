@@ -55,6 +55,9 @@ namespace Jastech.Framework.Winform.Forms
 
             private void btnEnter_Click(object sender, EventArgs e)
             {
+                if (lblTextMessage.Text == "")
+                    lblTextMessage.Text = "0";
+
                 PadValue = Convert.ToDouble(lblTextMessage.Text);
 
                 this.DialogResult = DialogResult.OK;
