@@ -1,5 +1,6 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -62,9 +63,16 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (image == null || PMTool == null)
                 return false;
 
-            PMTool.Pattern.TrainImage = image;
-            PMTool.Pattern.Train();
-
+            try
+            {
+                PMTool.Pattern.TrainImage = image;
+                PMTool.Pattern.Train();
+            }
+            catch (Exception err)
+            {
+                LogHelper.Error(ErrorType.Inspection, err.Message);
+                return false;
+            }
             return true;
         }
 

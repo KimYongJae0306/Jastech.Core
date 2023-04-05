@@ -17,6 +17,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private CogThumbnailControl CogThumbnail { get; set; }
 
+        public event EventHandler DeleteEventHandler;
+
         public CogThumbnailDisplayControl()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             // 이벤트 등록(중요)
             CogDisplay.DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
             CogThumbnail.UpdateRectEventHandler += CogDisplay.UpdateViewRect;
+
+            CogDisplay.DeleteEventHandler += DeleteEventHandler;
         }
 
         private void AddControls()
