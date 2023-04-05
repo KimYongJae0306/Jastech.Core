@@ -22,13 +22,5 @@ namespace Jastech.Framework.Structure
         public string Description { get; set; } = "";
 
         public static string FileName { get; } = "InspModel.json";
-
-        [JsonProperty]
-        public List<TeachingPosition> PositionList { get; set; } = new List<TeachingPosition>();
-
-        public void AddTeachingPosition(TeachingPosition position)
-        {
-            PositionList.Add(position);
-        }
     }
 }

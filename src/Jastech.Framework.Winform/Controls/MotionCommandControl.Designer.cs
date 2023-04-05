@@ -155,9 +155,10 @@
             this.chkServoOnOff.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkServoOnOff.BackColor = System.Drawing.Color.White;
             this.chkServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkServoOnOff.Location = new System.Drawing.Point(3, 345);
+            this.chkServoOnOff.Location = new System.Drawing.Point(0, 342);
+            this.chkServoOnOff.Margin = new System.Windows.Forms.Padding(0);
             this.chkServoOnOff.Name = "chkServoOnOff";
-            this.chkServoOnOff.Size = new System.Drawing.Size(194, 52);
+            this.chkServoOnOff.Size = new System.Drawing.Size(200, 58);
             this.chkServoOnOff.TabIndex = 9;
             this.chkServoOnOff.Text = "On";
             this.chkServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

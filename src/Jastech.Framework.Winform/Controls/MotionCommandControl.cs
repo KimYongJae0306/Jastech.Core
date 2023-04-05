@@ -9,24 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Structure;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionCommandControl : UserControl
     {
         #region 필드
-        private System.Threading.Timer _controlTimer = null;
         #endregion
 
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
+        public TeachingAxisInfo AxisInfo { get; set; } = null;
         #endregion
 
         #region 이벤트
         #endregion
 
         #region 델리게이트
-        private delegate void UpdateUIDelegate(object obj);
+        private delegate void UpdateMotionStatusDelegate();
         #endregion
 
         #region 생성자
@@ -39,13 +40,13 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void MotionCommandControl_Load(object sender, EventArgs e)
         {
-            StartTimer();
             InitializeUI();
         }
 
-        private void StartTimer()
+        public void Intialize(TeachingAxisInfo axisInfo)
         {
-            _controlTimer = new System.Threading.Timer(UpdateUI, null, 1000, 1000);
+            AxisInfo = axisInfo.DeepCopy();
+            UpdateUI();
         }
 
         private void InitializeUI()
@@ -58,18 +59,24 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = selectedAxis;
         }
 
-        public void UpdateUI(object obj)
+        public void UpdateUI()
+        {
+            lblTargetPosition.Text = AxisInfo.TargetPosition.ToString();
+            lblOffsest.Text = AxisInfo.Offset.ToString();
+        }
+
+        public void UpdateAxisStatus()
         {
             try
             {
                 if (this.InvokeRequired)
                 {
-                    UpdateUIDelegate callback = UpdateUI;
-                    BeginInvoke(callback, obj);
+                    UpdateMotionStatusDelegate callback = UpdateAxisStatus;
+                    BeginInvoke(callback);
                     return;
                 }
 
-                UpdateMotionStatus();
+                UpdateStatus();
             }
             catch (Exception ex)
             {
@@ -77,13 +84,10 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
 
-        private void UpdateMotionStatus()
+        private void UpdateStatus()
         {
-            if (SelectedAxis.IsConnected() == false)
+            if (!SelectedAxis.IsConnected())
                 return;
-
-            lblTargetPosition.Text = "0";
-            lblOffsest.Text = "0";
 
             lblCurrentPosition.Text = SelectedAxis.GetActualPosition().ToString("F3");
 
@@ -130,6 +134,11 @@ namespace Jastech.Framework.Winform.Controls
                 else
                     return;
             }
+        }
+
+        public TeachingAxisInfo GetCurrentData()
+        {
+            return AxisInfo;
         }
         #endregion
     }

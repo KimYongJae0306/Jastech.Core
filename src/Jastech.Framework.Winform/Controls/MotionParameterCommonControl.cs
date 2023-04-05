@@ -19,6 +19,8 @@ namespace Jastech.Framework.Winform.Controls
 
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
+
+        private AxisCommonParams CommonParam { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -45,39 +47,94 @@ namespace Jastech.Framework.Winform.Controls
             grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
         }
 
+        public void Initialize(AxisCommonParams axisCommonParams)
+        {
+            CommonParam = axisCommonParams;
+            UpdateUI();
+        }
+
         public void SetAxis(Axis axis)
         {
             SelectedAxis = axis;
         }
 
-        public void UpdateUI(Structure.TeachingPosition teachingPosition)
+        public void UpdateUI()
         {
-            lblJogLowSpeedValue.Text = "0";
-            lblJogHighSpeedValue.Text = "0";
-            lblMoveToleranceValue.Text = "0";
+            if (CommonParam == null)
+                return;
 
-            lblNegativeLimitValue.Text = "0";
-            lblPositiveLimitValue.Text = "0";
-            lblHomingTimeOutValue.Text = "0";
+            lblJogLowSpeedValue.Text = CommonParam.JogLowSpeed.ToString();
+            tempJogLowSpeed = CommonParam.JogLowSpeed;
+
+            lblJogHighSpeedValue.Text = CommonParam.JogHighSpeed.ToString();
+            tempJogHighSpeed = CommonParam.JogHighSpeed;
+
+            lblMoveToleranceValue.Text = CommonParam.MoveTolerance.ToString();
+            tempMoveTolerance = CommonParam.MoveTolerance;
+
+            lblNegativeLimitValue.Text = CommonParam.NegativeLimit.ToString();
+            tempNegativeLimit = CommonParam.NegativeLimit;
+
+            lblPositiveLimitValue.Text = CommonParam.PositiveLimit.ToString();
+            tempPositiveLimit = CommonParam.PositiveLimit;
+
+            lblHomingTimeOutValue.Text = CommonParam.HommingTimeOut.ToString();
+            tempHomingTimeOut = CommonParam.HommingTimeOut;
         }
 
-        public void SetParameter()
+        public AxisCommonParams GetCurrentData()
         {
-            double a = Convert.ToDouble(lblJogLowSpeedValue.Text);
-            double b = Convert.ToDouble(lblJogHighSpeedValue.Text);
-            double c = Convert.ToDouble(lblMoveToleranceValue.Text);
+            AxisCommonParams param = new AxisCommonParams();
 
-            double d = Convert.ToDouble(lblNegativeLimitValue.Text);
-            double e = Convert.ToDouble(lblPositiveLimitValue.Text);
-            double f = Convert.ToDouble(lblHomingTimeOutValue.Text);
+            param.JogLowSpeed = tempJogLowSpeed;
+            param.JogHighSpeed = tempJogHighSpeed;
+            param.MoveTolerance = tempMoveTolerance;
+            param.NegativeLimit = tempNegativeLimit;
+            param.PositiveLimit = tempPositiveLimit;
+            param.HommingTimeOut = tempHomingTimeOut;
+
+            CommonParam = param.DeepCopy();
+
+            return CommonParam;
         }
 
-        private void Value_Changed(object sender, EventArgs e)
+        private double tempJogLowSpeed = 0.0;
+        private void lblJogLowSpeedValue_Click(object sender, EventArgs e)
         {
-            SetLabelDoubleData(sender);
+            tempJogLowSpeed = SetLabelDoubleData(sender);
         }
 
-        private void SetLabelDoubleData(object sender)
+        private double tempJogHighSpeed = 0.0;
+        private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
+        {
+            tempJogLowSpeed = SetLabelDoubleData(sender);
+        }
+
+        private double tempMoveTolerance = 0.0;
+        private void lblMoveToleranceValue_Click(object sender, EventArgs e)
+        {
+            tempMoveTolerance = SetLabelDoubleData(sender);
+        }
+
+        private double tempNegativeLimit = 0.0;
+        private void lblNegativeLimitValue_Click(object sender, EventArgs e)
+        {
+            tempNegativeLimit = SetLabelDoubleData(sender);
+        }
+
+        private double tempPositiveLimit = 0.0;
+        private void lblPositiveLimitValue_Click(object sender, EventArgs e)
+        {
+            tempPositiveLimit = SetLabelDoubleData(sender);
+        }
+
+        private double tempHomingTimeOut = 0.0;
+        private void lblHomingTimeOutValue_Click(object sender, EventArgs e)
+        {
+            tempHomingTimeOut = SetLabelDoubleData(sender);
+        }
+
+        private double SetLabelDoubleData(object sender)
         {
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.ShowDialog();
@@ -86,7 +143,11 @@ namespace Jastech.Framework.Winform.Controls
 
             Label label = (Label)sender;
             label.Text = inputData.ToString();
+
+            return inputData;
         }
         #endregion
+
+        
     }
 }

@@ -101,7 +101,7 @@
     <Compile Include="IDevice.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Axis.cs" />
-    <Compile Include="Motions\AxisCommandParams.cs" />
+    <Compile Include="Motions\AxisCommonParams.cs" />
     <Compile Include="Motions\AxisHandler.cs" />
     <Compile Include="Motions\AxisMovingParam.cs" />
     <Compile Include="Motions\Motion.cs" />

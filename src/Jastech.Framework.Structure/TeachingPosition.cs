@@ -35,21 +35,16 @@ namespace Jastech.Framework.Structure
         [JsonProperty]
         public string Description { get; set; } = string.Empty;
 
-        [JsonIgnore]
-        private AxisHandler AxisHandler { get; set; } = null;
-
         [JsonProperty]
         public List<TeachingAxisInfo> AxisInfoList = new List<TeachingAxisInfo>();
 
-        public TeachingPosition(string name, string description, AxisHandler axisHandler)
+        public void CreateTeachingPosition(string name, string description, AxisHandler axisHandler)
         {
             Name = name;
             Description = description;
 
-            //foreach (var axis in axisHandler.AxisList)
-            //{
-            //    AddAxisParam(axis);
-            //}
+            foreach (var axis in axisHandler.AxisList)
+                AddAxisParam(axis);
         }
 
         public void AddAxisParam(Axis axis)
@@ -67,9 +62,19 @@ namespace Jastech.Framework.Structure
             return AxisInfoList.Where(x => x.Name == axisName).First().TargetPosition;
         }
 
-        public void SetTargetPosition(string axisName, double targetPosition)
+        public void SetTargetPosition(AxisName name, double targetPosition)
         {
-            AxisInfoList.Where(x => x.Name == axisName).First().TargetPosition = targetPosition;
+            AxisInfoList.Where(x => x.Name == name.ToString()).First().TargetPosition = targetPosition;
+        }
+
+        public double GetOffset(string axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName).First().Offset;
+        }
+
+        public void SetOffset(AxisName name, double offset)
+        {
+            AxisInfoList.Where(x => x.Name == name.ToString()).First().Offset = offset;
         }
 
         public AxisMovingParam GetMovingParams(string axisName)
@@ -77,9 +82,25 @@ namespace Jastech.Framework.Structure
             return AxisInfoList.Where(x => x.Name == axisName).First().MovingParam;
         }
 
-        public void SetMovingParams(string axisName, AxisMovingParam param)
+        public AxisMovingParam GetMovingParams(AxisName name)
         {
-            AxisInfoList.Where(x => x.Name == axisName).First().MovingParam = param;
+            return AxisInfoList.Where(x => x.Name == name.ToString()).First().MovingParam;
+        }
+
+        public void SetMovingParams(AxisName name, AxisMovingParam param)
+        {
+            AxisInfoList.Where(x => x.Name == name.ToString()).First().MovingParam = param;
+        }
+
+        public TeachingPosition DeepCopy()
+        {
+            TeachingPosition param = new TeachingPosition();
+
+            param.Name = Name;
+            param.Description = Description;
+            param.AxisInfoList = AxisInfoList.Select(x => x.DeepCopy()).ToList();
+
+            return param;
         }
     }
 
@@ -92,6 +113,19 @@ namespace Jastech.Framework.Structure
         public double TargetPosition { get; set; } = 0.0;
 
         [JsonProperty]
+        public double Offset { get; set; } = 0.0;
+
+        [JsonProperty]
         public AxisMovingParam MovingParam { get; set; } = new AxisMovingParam();
+
+        public TeachingAxisInfo DeepCopy()
+        {
+            TeachingAxisInfo info = new TeachingAxisInfo();
+            info.Name = Name;
+            info.TargetPosition = TargetPosition;
+            info.MovingParam = MovingParam.DeepCopy();
+
+            return info;
+        }
     }
 }

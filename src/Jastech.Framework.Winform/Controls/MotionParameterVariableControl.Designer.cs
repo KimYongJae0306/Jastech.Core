@@ -88,7 +88,7 @@
             this.lblMovingTimeOutValue.TabIndex = 5;
             this.lblMovingTimeOutValue.Text = "0.0";
             this.lblMovingTimeOutValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMovingTimeOutValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblMovingTimeOutValue.Click += new System.EventHandler(this.lblMovingTimeOutValue_Click);
             // 
             // lblMovingTimeOut
             // 
@@ -115,7 +115,7 @@
             this.lblVelocityValue.TabIndex = 3;
             this.lblVelocityValue.Text = "0.0";
             this.lblVelocityValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblVelocityValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblVelocityValue.Click += new System.EventHandler(this.lblVelocityValue_Click);
             // 
             // lblVelocity
             // 
@@ -168,7 +168,7 @@
             this.lblAccelerationTimeValue.TabIndex = 8;
             this.lblAccelerationTimeValue.Text = "0.0";
             this.lblAccelerationTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAccelerationTimeValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblAccelerationTimeValue.Click += new System.EventHandler(this.lblAccelerationTimeValue_Click);
             // 
             // lblAfterWaitTimeValue
             // 
@@ -182,7 +182,7 @@
             this.lblAfterWaitTimeValue.TabIndex = 9;
             this.lblAfterWaitTimeValue.Text = "0.0";
             this.lblAfterWaitTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAfterWaitTimeValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblAfterWaitTimeValue.Click += new System.EventHandler(this.lblAfterWaitTimeValue_Click);
             // 
             // lblDecelerationTime
             // 
@@ -209,7 +209,7 @@
             this.lblDecelerationTimeValue.TabIndex = 11;
             this.lblDecelerationTimeValue.Text = "0.0";
             this.lblDecelerationTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblDecelerationTimeValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblDecelerationTimeValue.Click += new System.EventHandler(this.lblDecelerationTimeValue_Click);
             // 
             // grpAxisName
             // 

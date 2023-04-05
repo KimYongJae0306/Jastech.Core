@@ -92,7 +92,7 @@
             this.lblNegativeLimitValue.TabIndex = 7;
             this.lblNegativeLimitValue.Text = "0.0";
             this.lblNegativeLimitValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNegativeLimitValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblNegativeLimitValue.Click += new System.EventHandler(this.lblNegativeLimitValue_Click);
             // 
             // lblNegativeLimit
             // 
@@ -119,7 +119,7 @@
             this.lblJogLowSpeedValue.TabIndex = 3;
             this.lblJogLowSpeedValue.Text = "0.0";
             this.lblJogLowSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblJogLowSpeedValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblJogLowSpeedValue.Click += new System.EventHandler(this.lblJogLowSpeedValue_Click);
             // 
             // lblJogLowSpeed
             // 
@@ -172,7 +172,7 @@
             this.lblJogHighSpeedValue.TabIndex = 10;
             this.lblJogHighSpeedValue.Text = "0.0";
             this.lblJogHighSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblJogHighSpeedValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblJogHighSpeedValue.Click += new System.EventHandler(this.lblJogHighSpeedValue_Click);
             // 
             // lblPositiveLimitValue
             // 
@@ -186,7 +186,7 @@
             this.lblPositiveLimitValue.TabIndex = 11;
             this.lblPositiveLimitValue.Text = "0.0";
             this.lblPositiveLimitValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblPositiveLimitValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblPositiveLimitValue.Click += new System.EventHandler(this.lblPositiveLimitValue_Click);
             // 
             // lblMoveTolerance
             // 
@@ -213,7 +213,7 @@
             this.lblMoveToleranceValue.TabIndex = 13;
             this.lblMoveToleranceValue.Text = "0.0";
             this.lblMoveToleranceValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMoveToleranceValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblMoveToleranceValue.Click += new System.EventHandler(this.lblMoveToleranceValue_Click);
             // 
             // lblHomingTimeOut
             // 
@@ -240,7 +240,7 @@
             this.lblHomingTimeOutValue.TabIndex = 15;
             this.lblHomingTimeOutValue.Text = "0.0";
             this.lblHomingTimeOutValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHomingTimeOutValue.Click += new System.EventHandler(this.Value_Changed);
+            this.lblHomingTimeOutValue.Click += new System.EventHandler(this.lblHomingTimeOutValue_Click);
             // 
             // grpAxisName
             // 

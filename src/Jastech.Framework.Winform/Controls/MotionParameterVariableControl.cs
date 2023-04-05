@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
 using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Structure;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -19,6 +20,9 @@ namespace Jastech.Framework.Winform.Controls
 
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
+        public string Name { get; set; } = "";
+
+        public AxisMovingParam MovingParam { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -40,9 +44,33 @@ namespace Jastech.Framework.Winform.Controls
             InitializeUI();
         }
 
+        public void Initialize(AxisMovingParam movingParam)
+        {
+            MovingParam = movingParam.DeepCopy();
+            UpdateUI();
+        }
+
         private void InitializeUI()
         {
             grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
+        }
+
+        private void UpdateUI()
+        {
+            lblVelocityValue.Text = MovingParam.Velocity.ToString();
+            tempVelocity = MovingParam.Velocity;
+
+            lblAccelerationTimeValue.Text = MovingParam.Acceleration.ToString();
+            tempAcceleration = MovingParam.Acceleration;
+
+            lblDecelerationTimeValue.Text = MovingParam.Deceleration.ToString();
+            tempDeceleration = MovingParam.Deceleration;
+
+            lblMovingTimeOutValue.Text = MovingParam.MovingTimeOut.ToString();
+            tempMovingTimeOut = MovingParam.MovingTimeOut;
+
+            lblAfterWaitTimeValue.Text = MovingParam.AferWaitTime.ToString();
+            tempAferWaitTime = MovingParam.AferWaitTime;
         }
 
         public void SetAxis(Axis axis)
@@ -50,32 +78,37 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = axis;
         }
 
-        public void UpdateUI(Device.Motions.AxisMovingParam movingParam)
+        private double tempVelocity = 0.0;
+        private void lblVelocityValue_Click(object sender, EventArgs e)
         {
-            lblVelocityValue.Text = movingParam.Velocity.ToString();
-            lblAccelerationTimeValue.Text = movingParam.Acceleration.ToString();
-            lblDecelerationTimeValue.Text = movingParam.Deceleration.ToString();
-
-            lblMovingTimeOutValue.Text = movingParam.MovingTimeOut.ToString();
-            lblAfterWaitTimeValue.Text = movingParam.AferWaitTime.ToString();
+            tempVelocity = SetLabelDoubleData(sender);
         }
 
-        public void SetParameter()
+        private double tempAcceleration = 0.0;
+        private void lblAccelerationTimeValue_Click(object sender, EventArgs e)
         {
-            double a = Convert.ToDouble(lblVelocityValue.Text);
-            double b = Convert.ToDouble(lblAccelerationTimeValue.Text);
-            double c = Convert.ToDouble(lblDecelerationTimeValue.Text);
-
-            double d = Convert.ToDouble(lblMovingTimeOutValue.Text);
-            double e = Convert.ToDouble(lblAfterWaitTimeValue.Text);
+            tempAcceleration = SetLabelDoubleData(sender);
         }
 
-        private void Value_Changed(object sender, EventArgs e)
+        private double tempDeceleration = 0.0;
+        private void lblDecelerationTimeValue_Click(object sender, EventArgs e)
         {
-            SetLabelDoubleData(sender);
+            tempDeceleration = SetLabelDoubleData(sender);
         }
 
-        private void SetLabelDoubleData(object sender)
+        private double tempMovingTimeOut = 0.0;
+        private void lblMovingTimeOutValue_Click(object sender, EventArgs e)
+        {
+            tempMovingTimeOut = SetLabelDoubleData(sender);
+        }
+        
+        private double tempAferWaitTime = 0.0;
+        private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
+        {
+            tempAferWaitTime = SetLabelDoubleData(sender);
+        }
+
+        private double SetLabelDoubleData(object sender)
         {
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.ShowDialog();
@@ -84,6 +117,24 @@ namespace Jastech.Framework.Winform.Controls
 
             Label label = (Label)sender;
             label.Text = inputData.ToString();
+
+            return inputData;
+        }
+
+        public AxisMovingParam GetCurrentData()
+        {
+            AxisMovingParam param = new AxisMovingParam();
+
+            param.Velocity = tempVelocity;
+            param.Acceleration = tempAcceleration;
+            param.Deceleration = tempDeceleration;
+
+            param.MovingTimeOut = tempMovingTimeOut;
+            param.AferWaitTime = tempAferWaitTime;
+
+            MovingParam = param.DeepCopy();
+
+            return MovingParam;
         }
         #endregion
     }

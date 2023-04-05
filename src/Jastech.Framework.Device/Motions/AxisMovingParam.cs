@@ -25,6 +25,20 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public double AferWaitTime { get; set; } = 0; // ms
         #endregion
+
+        #region 메서드
+        public AxisMovingParam DeepCopy()
+        {
+            AxisMovingParam param = new AxisMovingParam();
+            param.Velocity = Velocity;
+            param.Acceleration = Acceleration;
+            param.Deceleration = Deceleration;
+            param.MovingTimeOut = MovingTimeOut;
+            param.AferWaitTime = AferWaitTime;
+
+            return param;
+        }
+        #endregion
     }
 
     public partial class AxisMovingParam
