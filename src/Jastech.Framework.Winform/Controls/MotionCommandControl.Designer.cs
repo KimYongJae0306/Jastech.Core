@@ -68,7 +68,7 @@
             // 
             // lblSensor
             // 
-            this.lblSensor.BackColor = System.Drawing.Color.White;
+            this.lblSensor.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lblSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSensor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSensor.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -82,7 +82,7 @@
             // 
             // lblAxisStatus
             // 
-            this.lblAxisStatus.BackColor = System.Drawing.Color.White;
+            this.lblAxisStatus.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lblAxisStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAxisStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAxisStatus.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -96,7 +96,7 @@
             // 
             // lblCurrentPosition
             // 
-            this.lblCurrentPosition.BackColor = System.Drawing.Color.White;
+            this.lblCurrentPosition.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lblCurrentPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCurrentPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrentPosition.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);

@@ -47,10 +47,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (rdoDarkToLight.Checked)
             {
                 SetEdgePolarity(CogCaliperPolarityConstants.DarkToLight);
-                rdoDarkToLight.BackColor = Color.DarkCyan;
+                rdoDarkToLight.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoDarkToLight.BackColor = Color.PaleTurquoise;
+                rdoDarkToLight.BackColor = Color.White;
         }
 
         private void rdoLightToDark_CheckedChanged(object sender, EventArgs e)
@@ -58,10 +58,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (rdoLightToDark.Checked)
             {
                 SetEdgePolarity(CogCaliperPolarityConstants.LightToDark);
-                rdoLightToDark.BackColor = Color.DarkCyan;
+                rdoLightToDark.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoLightToDark.BackColor = Color.PaleTurquoise;
+                rdoLightToDark.BackColor = Color.White;
         }
 
         private void IntializeUI()

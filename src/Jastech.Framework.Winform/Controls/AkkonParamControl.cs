@@ -128,10 +128,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoGroup.Checked)
             {
                 ShowGroupParamter();
-                rdoGroup.BackColor = Color.DarkCyan;
+                rdoGroup.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoGroup.BackColor = Color.PaleTurquoise;
+                rdoGroup.BackColor = Color.White;
         }
 
         private void ShowGroupParamter()
@@ -150,10 +150,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoBump.Checked)
             {
                 ShowBumpParamter();
-                rdoBump.BackColor = Color.DarkCyan;
+                rdoBump.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoBump.BackColor = Color.PaleTurquoise;
+                rdoBump.BackColor = Color.White;
         }
 
         private void ShowBumpParamter()
@@ -172,10 +172,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoEngineerParmeter.Checked)
             {
                 ShowEngineerParamter();
-                rdoEngineerParmeter.BackColor = Color.DarkCyan;
+                rdoEngineerParmeter.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoEngineerParmeter.BackColor = Color.PaleTurquoise;
+                rdoEngineerParmeter.BackColor = Color.White;
         }
 
         private void ShowEngineerParamter()
@@ -191,10 +191,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoMakerParmeter.Checked)
             {
                 ShowMakerParamter();
-                rdoMakerParmeter.BackColor = Color.DarkCyan;
+                rdoMakerParmeter.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoMakerParmeter.BackColor = Color.PaleTurquoise;
+                rdoMakerParmeter.BackColor = Color.White;
         }
 
         private void ShowMakerParamter()
@@ -210,10 +210,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoOption.Checked)
             {
                 ShowOptionParameter();
-                rdoOption.BackColor = Color.DarkCyan;
+                rdoOption.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoOption.BackColor = Color.PaleTurquoise;
+                rdoOption.BackColor = Color.White;
         }
 
         private void ShowOptionParameter()

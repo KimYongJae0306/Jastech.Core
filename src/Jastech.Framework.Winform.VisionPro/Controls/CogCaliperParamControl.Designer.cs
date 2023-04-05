@@ -107,7 +107,7 @@
             // 
             this.rdoDarkToLight.Appearance = System.Windows.Forms.Appearance.Button;
             this.rdoDarkToLight.AutoSize = true;
-            this.rdoDarkToLight.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoDarkToLight.BackColor = System.Drawing.Color.White;
             this.rdoDarkToLight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoDarkToLight.Location = new System.Drawing.Point(0, 0);
             this.rdoDarkToLight.Margin = new System.Windows.Forms.Padding(0);
@@ -124,7 +124,7 @@
             // 
             this.rdoLightToDark.Appearance = System.Windows.Forms.Appearance.Button;
             this.rdoLightToDark.AutoSize = true;
-            this.rdoLightToDark.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.rdoLightToDark.BackColor = System.Drawing.Color.White;
             this.rdoLightToDark.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoLightToDark.Location = new System.Drawing.Point(0, 68);
             this.rdoLightToDark.Margin = new System.Windows.Forms.Padding(0);

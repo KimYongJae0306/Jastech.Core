@@ -70,10 +70,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogSlowMode.Checked)
             {
                 SetSelectJogSpeedMode(JogSpeedMode.Slow);
-                rdoJogSlowMode.BackColor = Color.DarkCyan;
+                rdoJogSlowMode.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoJogSlowMode.BackColor = Color.PaleTurquoise;
+                rdoJogSlowMode.BackColor = Color.White;
         }
 
         private void rdoJogFastMode_CheckedChanged(object sender, EventArgs e)
@@ -81,10 +81,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogFastMode.Checked)
             {
                 SetSelectJogSpeedMode(JogSpeedMode.Fast);
-                rdoJogFastMode.BackColor = Color.DarkCyan;
+                rdoJogFastMode.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoJogFastMode.BackColor = Color.PaleTurquoise;
+                rdoJogFastMode.BackColor = Color.White;
         }
 
         private void rdoJogMode_CheckedChanged(object sender, EventArgs e)
@@ -92,10 +92,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogMode.Checked)
             {
                 SetSelectJogMode(JogMode.Jog);
-                rdoJogMode.BackColor = Color.DarkCyan;
+                rdoJogMode.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoJogMode.BackColor = Color.PaleTurquoise;
+                rdoJogMode.BackColor = Color.White;
         }
 
         private void rdoIncreaseMode_CheckedChanged(object sender, EventArgs e)
@@ -103,10 +103,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoIncreaseMode.Checked)
             {
                 SetSelectJogMode(JogMode.Increase);
-                rdoIncreaseMode.BackColor = Color.DarkCyan;
+                rdoIncreaseMode.BackColor = Color.DeepSkyBlue;
             }
             else
-                rdoIncreaseMode.BackColor = Color.PaleTurquoise;
+                rdoIncreaseMode.BackColor = Color.White;
         }
 
         private void lblPitchXYValue_Click(object sender, EventArgs e)
