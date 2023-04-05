@@ -35,7 +35,9 @@
             this.lblOffsest = new System.Windows.Forms.Label();
             this.lblTargetPosition = new System.Windows.Forms.Label();
             this.lblAxisName = new System.Windows.Forms.Label();
-            this.chkServoOnOff = new System.Windows.Forms.CheckBox();
+            this.lblMoveToTarget = new System.Windows.Forms.Label();
+            this.lblCurrentToTarget = new System.Windows.Forms.Label();
+            this.lblServoOnOff = new System.Windows.Forms.Label();
             this.tlpMotionCommand.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,25 +45,29 @@
             // 
             this.tlpMotionCommand.ColumnCount = 1;
             this.tlpMotionCommand.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMotionCommand.Controls.Add(this.lblSensor, 0, 4);
-            this.tlpMotionCommand.Controls.Add(this.lblAxisStatus, 0, 5);
-            this.tlpMotionCommand.Controls.Add(this.lblCurrentPosition, 0, 3);
+            this.tlpMotionCommand.Controls.Add(this.lblServoOnOff, 0, 8);
+            this.tlpMotionCommand.Controls.Add(this.lblCurrentToTarget, 0, 5);
+            this.tlpMotionCommand.Controls.Add(this.lblMoveToTarget, 0, 3);
+            this.tlpMotionCommand.Controls.Add(this.lblSensor, 0, 6);
+            this.tlpMotionCommand.Controls.Add(this.lblAxisStatus, 0, 7);
+            this.tlpMotionCommand.Controls.Add(this.lblCurrentPosition, 0, 4);
             this.tlpMotionCommand.Controls.Add(this.lblOffsest, 0, 2);
             this.tlpMotionCommand.Controls.Add(this.lblTargetPosition, 0, 1);
             this.tlpMotionCommand.Controls.Add(this.lblAxisName, 0, 0);
-            this.tlpMotionCommand.Controls.Add(this.chkServoOnOff, 0, 6);
             this.tlpMotionCommand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMotionCommand.Location = new System.Drawing.Point(0, 0);
             this.tlpMotionCommand.Margin = new System.Windows.Forms.Padding(0);
             this.tlpMotionCommand.Name = "tlpMotionCommand";
-            this.tlpMotionCommand.RowCount = 7;
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tlpMotionCommand.RowCount = 9;
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tlpMotionCommand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMotionCommand.Size = new System.Drawing.Size(200, 400);
             this.tlpMotionCommand.TabIndex = 0;
@@ -72,10 +78,10 @@
             this.lblSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSensor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSensor.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblSensor.Location = new System.Drawing.Point(0, 228);
-            this.lblSensor.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSensor.Location = new System.Drawing.Point(1, 265);
+            this.lblSensor.Margin = new System.Windows.Forms.Padding(1);
             this.lblSensor.Name = "lblSensor";
-            this.lblSensor.Size = new System.Drawing.Size(200, 57);
+            this.lblSensor.Size = new System.Drawing.Size(198, 42);
             this.lblSensor.TabIndex = 8;
             this.lblSensor.Text = "Done";
             this.lblSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,10 +92,10 @@
             this.lblAxisStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAxisStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAxisStatus.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblAxisStatus.Location = new System.Drawing.Point(0, 285);
-            this.lblAxisStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.lblAxisStatus.Location = new System.Drawing.Point(1, 309);
+            this.lblAxisStatus.Margin = new System.Windows.Forms.Padding(1);
             this.lblAxisStatus.Name = "lblAxisStatus";
-            this.lblAxisStatus.Size = new System.Drawing.Size(200, 57);
+            this.lblAxisStatus.Size = new System.Drawing.Size(198, 42);
             this.lblAxisStatus.TabIndex = 7;
             this.lblAxisStatus.Text = "Done";
             this.lblAxisStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,10 +106,10 @@
             this.lblCurrentPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCurrentPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrentPosition.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblCurrentPosition.Location = new System.Drawing.Point(0, 171);
-            this.lblCurrentPosition.Margin = new System.Windows.Forms.Padding(0);
+            this.lblCurrentPosition.Location = new System.Drawing.Point(1, 177);
+            this.lblCurrentPosition.Margin = new System.Windows.Forms.Padding(1);
             this.lblCurrentPosition.Name = "lblCurrentPosition";
-            this.lblCurrentPosition.Size = new System.Drawing.Size(200, 57);
+            this.lblCurrentPosition.Size = new System.Drawing.Size(198, 42);
             this.lblCurrentPosition.TabIndex = 6;
             this.lblCurrentPosition.Text = "0.0";
             this.lblCurrentPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -114,10 +120,10 @@
             this.lblOffsest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblOffsest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOffsest.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblOffsest.Location = new System.Drawing.Point(0, 114);
-            this.lblOffsest.Margin = new System.Windows.Forms.Padding(0);
+            this.lblOffsest.Location = new System.Drawing.Point(1, 89);
+            this.lblOffsest.Margin = new System.Windows.Forms.Padding(1);
             this.lblOffsest.Name = "lblOffsest";
-            this.lblOffsest.Size = new System.Drawing.Size(200, 57);
+            this.lblOffsest.Size = new System.Drawing.Size(198, 42);
             this.lblOffsest.TabIndex = 5;
             this.lblOffsest.Text = "0.0";
             this.lblOffsest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -129,10 +135,10 @@
             this.lblTargetPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTargetPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTargetPosition.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTargetPosition.Location = new System.Drawing.Point(0, 57);
-            this.lblTargetPosition.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTargetPosition.Location = new System.Drawing.Point(1, 45);
+            this.lblTargetPosition.Margin = new System.Windows.Forms.Padding(1);
             this.lblTargetPosition.Name = "lblTargetPosition";
-            this.lblTargetPosition.Size = new System.Drawing.Size(200, 57);
+            this.lblTargetPosition.Size = new System.Drawing.Size(198, 42);
             this.lblTargetPosition.TabIndex = 4;
             this.lblTargetPosition.Text = "0.0";
             this.lblTargetPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -144,28 +150,56 @@
             this.lblAxisName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAxisName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAxisName.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblAxisName.Location = new System.Drawing.Point(0, 0);
-            this.lblAxisName.Margin = new System.Windows.Forms.Padding(0);
+            this.lblAxisName.Location = new System.Drawing.Point(1, 1);
+            this.lblAxisName.Margin = new System.Windows.Forms.Padding(1);
             this.lblAxisName.Name = "lblAxisName";
-            this.lblAxisName.Size = new System.Drawing.Size(200, 57);
+            this.lblAxisName.Size = new System.Drawing.Size(198, 42);
             this.lblAxisName.TabIndex = 3;
             this.lblAxisName.Text = "X";
             this.lblAxisName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // chkServoOnOff
+            // lblMoveToTarget
             // 
-            this.chkServoOnOff.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkServoOnOff.BackColor = System.Drawing.Color.White;
-            this.chkServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkServoOnOff.Location = new System.Drawing.Point(0, 342);
-            this.chkServoOnOff.Margin = new System.Windows.Forms.Padding(0);
-            this.chkServoOnOff.Name = "chkServoOnOff";
-            this.chkServoOnOff.Size = new System.Drawing.Size(200, 58);
-            this.chkServoOnOff.TabIndex = 9;
-            this.chkServoOnOff.Text = "On";
-            this.chkServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkServoOnOff.UseVisualStyleBackColor = false;
-            this.chkServoOnOff.CheckedChanged += new System.EventHandler(this.chkServoOnOff_CheckedChanged);
+            this.lblMoveToTarget.BackColor = System.Drawing.Color.White;
+            this.lblMoveToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMoveToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMoveToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMoveToTarget.Location = new System.Drawing.Point(1, 133);
+            this.lblMoveToTarget.Margin = new System.Windows.Forms.Padding(1);
+            this.lblMoveToTarget.Name = "lblMoveToTarget";
+            this.lblMoveToTarget.Size = new System.Drawing.Size(198, 42);
+            this.lblMoveToTarget.TabIndex = 22;
+            this.lblMoveToTarget.Text = "Move To";
+            this.lblMoveToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCurrentToTarget
+            // 
+            this.lblCurrentToTarget.BackColor = System.Drawing.Color.White;
+            this.lblCurrentToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCurrentToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCurrentToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCurrentToTarget.Location = new System.Drawing.Point(1, 221);
+            this.lblCurrentToTarget.Margin = new System.Windows.Forms.Padding(1);
+            this.lblCurrentToTarget.Name = "lblCurrentToTarget";
+            this.lblCurrentToTarget.Size = new System.Drawing.Size(198, 42);
+            this.lblCurrentToTarget.TabIndex = 23;
+            this.lblCurrentToTarget.Text = "Set";
+            this.lblCurrentToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblServoOnOff
+            // 
+            this.lblServoOnOff.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblServoOnOff.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblServoOnOff.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblServoOnOff.Location = new System.Drawing.Point(1, 353);
+            this.lblServoOnOff.Margin = new System.Windows.Forms.Padding(1);
+            this.lblServoOnOff.Name = "lblServoOnOff";
+            this.lblServoOnOff.Size = new System.Drawing.Size(198, 46);
+            this.lblServoOnOff.TabIndex = 24;
+            this.lblServoOnOff.Text = "On";
+            this.lblServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblServoOnOff.Click += new System.EventHandler(this.lblServoOnOff_Click);
             // 
             // MotionCommandControl
             // 
@@ -192,6 +226,8 @@
         private System.Windows.Forms.Label lblOffsest;
         private System.Windows.Forms.Label lblTargetPosition;
         private System.Windows.Forms.Label lblAxisName;
-        private System.Windows.Forms.CheckBox chkServoOnOff;
+        private System.Windows.Forms.Label lblCurrentToTarget;
+        private System.Windows.Forms.Label lblMoveToTarget;
+        private System.Windows.Forms.Label lblServoOnOff;
     }
 }

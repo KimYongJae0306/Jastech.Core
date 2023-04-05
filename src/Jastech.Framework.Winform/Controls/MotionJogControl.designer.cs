@@ -515,10 +515,10 @@
             // 
             this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJog.Location = new System.Drawing.Point(0, 0);
-            this.lblJog.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.lblJog.Location = new System.Drawing.Point(4, 1);
+            this.lblJog.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             this.lblJog.Name = "lblJog";
-            this.lblJog.Size = new System.Drawing.Size(152, 386);
+            this.lblJog.Size = new System.Drawing.Size(148, 384);
             this.lblJog.TabIndex = 0;
             this.lblJog.Text = "Jog";
             this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

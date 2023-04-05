@@ -114,30 +114,26 @@ namespace Jastech.Framework.Winform.Controls
             lblAxisStatus.Text = SelectedAxis.GetCurrentMotionStatus();
 
             if (SelectedAxis.IsEnable())
-                chkServoOnOff.Checked = true;
+            {
+                lblServoOnOff.BackColor = Color.DeepSkyBlue;
+                lblServoOnOff.Text = "On";
+            }
             else
-                chkServoOnOff.Checked = false;
+            {
+                lblServoOnOff.BackColor = Color.White;
+                lblServoOnOff.Text = "Off";
+            }
         }
 
-        private void chkServoOnOff_CheckedChanged(object sender, EventArgs e)
+        private void lblServoOnOff_Click(object sender, EventArgs e)
         {
             if (SelectedAxis.IsConnected() == false)
                 return;
 
-            if (chkServoOnOff.Checked)
-            {
-                if (SelectedAxis.IsEnable())
-                    return;
-                else
-                    SelectedAxis.TurnOnServo();
-            }
+            if (SelectedAxis.IsEnable())
+                SelectedAxis.TurnOffServo();
             else
-            {
-                if (SelectedAxis.IsEnable())
-                    SelectedAxis.TurnOffServo();
-                else
-                    return;
-            }
+                SelectedAxis.TurnOnServo();
         }
 
         private double tempTargetPosition = 0.0;
@@ -175,6 +171,11 @@ namespace Jastech.Framework.Winform.Controls
             AxisInfo = param.DeepCopy();
 
             return AxisInfo;
+        }
+
+        private void btnCurrentToTarget_Click(object sender, EventArgs e)
+        {
+            lblTargetPosition.Text = lblCurrentPosition.Text;
         }
         #endregion
     }
