@@ -228,6 +228,10 @@
       <Project>{2380da0f-851a-4430-9a43-e7b2deee29f2}</Project>
       <Name>Jastech.Framework.Imaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
+      <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
+      <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -56,11 +56,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         #region 이벤트
         public event DrawViewRectDelegate DrawViewRectEventHandler;
+
+        public event EventHandler DeleteEventHandler;
         #endregion
 
         #region 델리게이트
         public delegate void DrawViewRectDelegate(CogRectangle viewRect);
         #endregion
+
         #region 속성
         public double PixelResolution { get; set; } = 1.0;
 
@@ -71,13 +74,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
 
         public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
-
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자
@@ -138,7 +134,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return rect;
         }
 
-
         private void btnFileOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -188,15 +183,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void btnFitZoom_Click(object sender, EventArgs e)
         {
             cogDisplay.Fit(true);
-
-            //CogDistanceTool.InputImage = cogDisplay.Image;
-            //CogDistanceTool.StartX = 0;
-            //CogDistanceTool.StartY = 0;
-
-            //CogDistanceTool.EndX = 10000;
-            //CogDistanceTool.EndY = 1000 ;
-            //CogDistanceTool.Run();
-            //SetGraphics("Cog", CogDistanceTool.CreateLastRunRecord());
         }
 
         private void btnPanning_Click(object sender, EventArgs e)
@@ -269,7 +255,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             cogDisplay.PointToScreen(point);
         }
-        #endregion
 
         private void btnCustomCrossLine_Click(object sender, EventArgs e)
         {
@@ -283,7 +268,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 btnCustomCrossLine.BackColor = _noneSelectColor;
                 _displayMode = DisplayMode.None;
 
-                if(IsContainGroupNameInStaticGraphics(groupName))
+                if (IsContainGroupNameInStaticGraphics(groupName))
                     cogDisplay.StaticGraphics.Remove(groupName);
             }
             else
@@ -320,14 +305,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
 
-            if(e.Button == MouseButtons.Left)
-                DeleteResultGraphics();
-
             if (_displayMode == DisplayMode.CustomCrossLine)
             {
                 DrawCustomCrossLine(e.X, e.Y);
             }
-            else if(_displayMode == DisplayMode.PointToPoint)
+            else if (_displayMode == DisplayMode.PointToPoint)
             {
                 PointF mappingPoint = MappingPoint(e.X, e.Y);
 
@@ -339,14 +321,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                     _stepPointToPoint = StepPointToPoint.End;
                 }
-                else if(_stepPointToPoint == StepPointToPoint.End)
+                else if (_stepPointToPoint == StepPointToPoint.End)
                 {
                     EndPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
 
                     Distance = CogMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length;
                     _stepPointToPoint = StepPointToPoint.Measure;
                 }
-                else if(_stepPointToPoint == StepPointToPoint.Measure)
+                else if (_stepPointToPoint == StepPointToPoint.Measure)
                 {
                     DeleteStaticGraphics("Tracking");
 
@@ -358,10 +340,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                     _stepPointToPoint = StepPointToPoint.Start;
                 }
-                else if(_stepPointToPoint == StepPointToPoint.Complete)
+                else if (_stepPointToPoint == StepPointToPoint.Complete)
                 {
-                    
-                    
+
+
                 }
             }
         }
@@ -373,19 +355,19 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (_displayMode == DisplayMode.PointToPoint)
             {
-                if(_stepPointToPoint == StepPointToPoint.End || _stepPointToPoint == StepPointToPoint.Measure)
+                if (_stepPointToPoint == StepPointToPoint.End || _stepPointToPoint == StepPointToPoint.Measure)
                 {
                     PointF mappingPoint = MappingPoint(e.X, e.Y);
 
                     TrackingCogDistanceTool.StartX = StartPoint.X;
                     TrackingCogDistanceTool.StartY = StartPoint.Y;
 
-                    if(_stepPointToPoint == StepPointToPoint.End)
+                    if (_stepPointToPoint == StepPointToPoint.End)
                     {
                         TrackingCogDistanceTool.EndX = mappingPoint.X;
                         TrackingCogDistanceTool.EndY = mappingPoint.Y;
                     }
-                    else if(_stepPointToPoint == StepPointToPoint.Measure)
+                    else if (_stepPointToPoint == StepPointToPoint.Measure)
                     {
                         TrackingCogDistanceTool.EndX = EndPoint.X;
                         TrackingCogDistanceTool.EndY = EndPoint.Y;
@@ -401,20 +383,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(groupName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
                 }
-                else if(_stepPointToPoint == StepPointToPoint.Measure)
+                else if (_stepPointToPoint == StepPointToPoint.Measure)
                 {
 
                 }
-                //double cursorSizeY = 20;
-                //string groupName = _stepPointToPoint.ToString();
-
-                //if(_stepPointToPoint == StepPointToPoint.Mesasure)
-                //{
-                //    //DrawTrackingText(e.X, e.Y, 0, Distance.ToString("00.00"), CogGraphicLabelAlignmentConstants.BaselineCenter);
-                //}
             }
-
-            //UpdateThumbnail();
         }
 
         private void DrawCrossLine()
@@ -617,7 +590,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
-            if(sender is CogRecordDisplay display)
+
+            if (sender is CogRecordDisplay display)
             {
                 if (display.Image == null)
                     return;
@@ -628,12 +602,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 if (display.Zoom > 10)
                     display.Zoom = 10;
 
-                if(_updateViewRect)
+                if (_updateViewRect)
                 {
                     _updateViewRect = false;
                     return;
                 }
-                DeleteResultGraphics();
+                string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
+                {
+                    DeleteResultGraphics();
+                    DeleteEventHandler?.Invoke(sender, e);
+                }
+
                 UpdateViewRect();
             }
         }
@@ -656,9 +636,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void UpdateResult(CogPatternMatchingResult matchingResult)
         {
             CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
-            
+
             string groupName = "Result";
             var matchingResultData = matchingResult.MaxMatchPos;
+            if (matchingResultData.ResultGraphics == null)
+                return;
 
             resultGraphic.Add(matchingResultData.ResultGraphics);
             SetInteractiveGraphics(groupName, resultGraphic);
@@ -666,7 +648,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             var result = matchingResult.Result;
 
             DrawResultLabel("Result :" + result.ToString(), 0);
-            if(result != Result.Fail)
+            if (result != Result.Fail)
             {
                 DrawResultLabel("Score :" + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
                 DrawResultLabel("Y :" + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);
@@ -691,9 +673,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             PointF drawPoint = MappingPoint(0, 0);
             cogLabel.X = drawPoint.X;
-            cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index *intervalY);
+            cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index * intervalY);
 
             cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
         }
+        #endregion
     }
 }

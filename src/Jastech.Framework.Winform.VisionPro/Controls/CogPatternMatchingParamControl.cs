@@ -53,8 +53,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 ICogImage originImage = GetOriginImageHandler();
                 
-                CurrentParam.Train(originImage);
-                cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
+                if(CurrentParam.Train(originImage))
+                    cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
+                else
+                {
+                    MessageConfirmForm form = new MessageConfirmForm();
+                    form.Message = "Could not train pattern due to lack of features";
+                    form.ShowDialog();
+                }
             }
         }
 
