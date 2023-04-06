@@ -124,6 +124,8 @@
             // 
             this.cogDisplayStatusBar.CoordinateSpaceName = "*\\#";
             this.cogDisplayStatusBar.CoordinateSpaceName3D = "*\\#";
+            this.cogDisplayStatusBar.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cogDisplayStatusBar.ForeColor = System.Drawing.Color.White;
             this.cogDisplayStatusBar.Location = new System.Drawing.Point(68, 0);
             this.cogDisplayStatusBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cogDisplayStatusBar.Name = "cogDisplayStatusBar";
@@ -303,7 +305,7 @@
             // CogDisplayControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tableLayoutPanel3);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CogDisplayControl";

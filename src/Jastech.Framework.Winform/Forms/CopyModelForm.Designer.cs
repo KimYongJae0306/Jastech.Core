@@ -234,6 +234,7 @@
             // 
             this.txtModelName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.txtModelName.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.txtModelName.ForeColor = System.Drawing.Color.White;
             this.txtModelName.Location = new System.Drawing.Point(7, 96);
             this.txtModelName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtModelName.Name = "txtModelName";
