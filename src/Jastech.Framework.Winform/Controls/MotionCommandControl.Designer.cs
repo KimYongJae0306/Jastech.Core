@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.tlpMotionCommand = new System.Windows.Forms.TableLayoutPanel();
+            this.lblServoOnOff = new System.Windows.Forms.Label();
+            this.lblCurrentToTarget = new System.Windows.Forms.Label();
+            this.lblMoveToTarget = new System.Windows.Forms.Label();
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblAxisStatus = new System.Windows.Forms.Label();
             this.lblCurrentPosition = new System.Windows.Forms.Label();
             this.lblOffsest = new System.Windows.Forms.Label();
             this.lblTargetPosition = new System.Windows.Forms.Label();
             this.lblAxisName = new System.Windows.Forms.Label();
-            this.lblMoveToTarget = new System.Windows.Forms.Label();
-            this.lblCurrentToTarget = new System.Windows.Forms.Label();
-            this.lblServoOnOff = new System.Windows.Forms.Label();
             this.tlpMotionCommand.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,12 +72,59 @@
             this.tlpMotionCommand.Size = new System.Drawing.Size(200, 400);
             this.tlpMotionCommand.TabIndex = 0;
             // 
+            // lblServoOnOff
+            // 
+            this.lblServoOnOff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblServoOnOff.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblServoOnOff.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblServoOnOff.ForeColor = System.Drawing.Color.White;
+            this.lblServoOnOff.Location = new System.Drawing.Point(1, 353);
+            this.lblServoOnOff.Margin = new System.Windows.Forms.Padding(1);
+            this.lblServoOnOff.Name = "lblServoOnOff";
+            this.lblServoOnOff.Size = new System.Drawing.Size(198, 46);
+            this.lblServoOnOff.TabIndex = 24;
+            this.lblServoOnOff.Text = "On";
+            this.lblServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblServoOnOff.Click += new System.EventHandler(this.lblServoOnOff_Click);
+            // 
+            // lblCurrentToTarget
+            // 
+            this.lblCurrentToTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblCurrentToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCurrentToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCurrentToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCurrentToTarget.ForeColor = System.Drawing.Color.White;
+            this.lblCurrentToTarget.Location = new System.Drawing.Point(1, 221);
+            this.lblCurrentToTarget.Margin = new System.Windows.Forms.Padding(1);
+            this.lblCurrentToTarget.Name = "lblCurrentToTarget";
+            this.lblCurrentToTarget.Size = new System.Drawing.Size(198, 42);
+            this.lblCurrentToTarget.TabIndex = 23;
+            this.lblCurrentToTarget.Text = "Set";
+            this.lblCurrentToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMoveToTarget
+            // 
+            this.lblMoveToTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblMoveToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMoveToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMoveToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMoveToTarget.ForeColor = System.Drawing.Color.White;
+            this.lblMoveToTarget.Location = new System.Drawing.Point(1, 133);
+            this.lblMoveToTarget.Margin = new System.Windows.Forms.Padding(1);
+            this.lblMoveToTarget.Name = "lblMoveToTarget";
+            this.lblMoveToTarget.Size = new System.Drawing.Size(198, 42);
+            this.lblMoveToTarget.TabIndex = 22;
+            this.lblMoveToTarget.Text = "Move To";
+            this.lblMoveToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblSensor
             // 
-            this.lblSensor.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblSensor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSensor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSensor.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblSensor.ForeColor = System.Drawing.Color.White;
             this.lblSensor.Location = new System.Drawing.Point(1, 265);
             this.lblSensor.Margin = new System.Windows.Forms.Padding(1);
             this.lblSensor.Name = "lblSensor";
@@ -88,10 +135,11 @@
             // 
             // lblAxisStatus
             // 
-            this.lblAxisStatus.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblAxisStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAxisStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAxisStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAxisStatus.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblAxisStatus.ForeColor = System.Drawing.Color.White;
             this.lblAxisStatus.Location = new System.Drawing.Point(1, 309);
             this.lblAxisStatus.Margin = new System.Windows.Forms.Padding(1);
             this.lblAxisStatus.Name = "lblAxisStatus";
@@ -102,10 +150,11 @@
             // 
             // lblCurrentPosition
             // 
-            this.lblCurrentPosition.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblCurrentPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblCurrentPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCurrentPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrentPosition.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCurrentPosition.ForeColor = System.Drawing.Color.White;
             this.lblCurrentPosition.Location = new System.Drawing.Point(1, 177);
             this.lblCurrentPosition.Margin = new System.Windows.Forms.Padding(1);
             this.lblCurrentPosition.Name = "lblCurrentPosition";
@@ -116,10 +165,11 @@
             // 
             // lblOffsest
             // 
-            this.lblOffsest.BackColor = System.Drawing.Color.White;
+            this.lblOffsest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblOffsest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblOffsest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOffsest.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblOffsest.ForeColor = System.Drawing.Color.White;
             this.lblOffsest.Location = new System.Drawing.Point(1, 89);
             this.lblOffsest.Margin = new System.Windows.Forms.Padding(1);
             this.lblOffsest.Name = "lblOffsest";
@@ -131,10 +181,11 @@
             // 
             // lblTargetPosition
             // 
-            this.lblTargetPosition.BackColor = System.Drawing.Color.White;
+            this.lblTargetPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblTargetPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTargetPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTargetPosition.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblTargetPosition.ForeColor = System.Drawing.Color.White;
             this.lblTargetPosition.Location = new System.Drawing.Point(1, 45);
             this.lblTargetPosition.Margin = new System.Windows.Forms.Padding(1);
             this.lblTargetPosition.Name = "lblTargetPosition";
@@ -146,10 +197,11 @@
             // 
             // lblAxisName
             // 
-            this.lblAxisName.BackColor = System.Drawing.Color.White;
+            this.lblAxisName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAxisName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAxisName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAxisName.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblAxisName.ForeColor = System.Drawing.Color.White;
             this.lblAxisName.Location = new System.Drawing.Point(1, 1);
             this.lblAxisName.Margin = new System.Windows.Forms.Padding(1);
             this.lblAxisName.Name = "lblAxisName";
@@ -158,54 +210,11 @@
             this.lblAxisName.Text = "X";
             this.lblAxisName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMoveToTarget
-            // 
-            this.lblMoveToTarget.BackColor = System.Drawing.Color.White;
-            this.lblMoveToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMoveToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMoveToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblMoveToTarget.Location = new System.Drawing.Point(1, 133);
-            this.lblMoveToTarget.Margin = new System.Windows.Forms.Padding(1);
-            this.lblMoveToTarget.Name = "lblMoveToTarget";
-            this.lblMoveToTarget.Size = new System.Drawing.Size(198, 42);
-            this.lblMoveToTarget.TabIndex = 22;
-            this.lblMoveToTarget.Text = "Move To";
-            this.lblMoveToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCurrentToTarget
-            // 
-            this.lblCurrentToTarget.BackColor = System.Drawing.Color.White;
-            this.lblCurrentToTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCurrentToTarget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCurrentToTarget.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblCurrentToTarget.Location = new System.Drawing.Point(1, 221);
-            this.lblCurrentToTarget.Margin = new System.Windows.Forms.Padding(1);
-            this.lblCurrentToTarget.Name = "lblCurrentToTarget";
-            this.lblCurrentToTarget.Size = new System.Drawing.Size(198, 42);
-            this.lblCurrentToTarget.TabIndex = 23;
-            this.lblCurrentToTarget.Text = "Set";
-            this.lblCurrentToTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblServoOnOff
-            // 
-            this.lblServoOnOff.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblServoOnOff.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblServoOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblServoOnOff.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblServoOnOff.Location = new System.Drawing.Point(1, 353);
-            this.lblServoOnOff.Margin = new System.Windows.Forms.Padding(1);
-            this.lblServoOnOff.Name = "lblServoOnOff";
-            this.lblServoOnOff.Size = new System.Drawing.Size(198, 46);
-            this.lblServoOnOff.TabIndex = 24;
-            this.lblServoOnOff.Text = "On";
-            this.lblServoOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblServoOnOff.Click += new System.EventHandler(this.lblServoOnOff_Click);
-            // 
             // MotionCommandControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tlpMotionCommand);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);

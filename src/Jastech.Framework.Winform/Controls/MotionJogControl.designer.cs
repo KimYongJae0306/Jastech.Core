@@ -49,6 +49,7 @@
             this.lblPitchZValue = new System.Windows.Forms.Label();
             this.pnlJogOperation = new System.Windows.Forms.Panel();
             this.tlpJogOperation = new System.Windows.Forms.TableLayoutPanel();
+            this.lblJog = new System.Windows.Forms.Label();
             this.btnJogDownZ = new System.Windows.Forms.Button();
             this.btnJogDownY = new System.Windows.Forms.Button();
             this.btnJogLeftX = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.btnJogStop = new System.Windows.Forms.Button();
             this.btnJogUpY = new System.Windows.Forms.Button();
             this.btnJogUpZ = new System.Windows.Forms.Button();
-            this.lblJog = new System.Windows.Forms.Label();
             this.tlpJogControl.SuspendLayout();
             this.tlpJog.SuspendLayout();
             this.tlpJogOption.SuspendLayout();
@@ -153,11 +153,11 @@
             // rdoJogFastMode
             // 
             this.rdoJogFastMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogFastMode.BackColor = System.Drawing.Color.White;
+            this.rdoJogFastMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoJogFastMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogFastMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogFastMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoJogFastMode.ForeColor = System.Drawing.Color.Black;
+            this.rdoJogFastMode.ForeColor = System.Drawing.Color.White;
             this.rdoJogFastMode.Location = new System.Drawing.Point(111, 0);
             this.rdoJogFastMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogFastMode.Name = "rdoJogFastMode";
@@ -172,11 +172,11 @@
             // rdoJogSlowMode
             // 
             this.rdoJogSlowMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogSlowMode.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rdoJogSlowMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoJogSlowMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogSlowMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogSlowMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoJogSlowMode.ForeColor = System.Drawing.Color.Black;
+            this.rdoJogSlowMode.ForeColor = System.Drawing.Color.White;
             this.rdoJogSlowMode.Location = new System.Drawing.Point(0, 0);
             this.rdoJogSlowMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogSlowMode.Name = "rdoJogSlowMode";
@@ -217,11 +217,11 @@
             // rdoIncreaseMode
             // 
             this.rdoIncreaseMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoIncreaseMode.BackColor = System.Drawing.Color.White;
+            this.rdoIncreaseMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoIncreaseMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoIncreaseMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoIncreaseMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoIncreaseMode.ForeColor = System.Drawing.Color.Black;
+            this.rdoIncreaseMode.ForeColor = System.Drawing.Color.White;
             this.rdoIncreaseMode.Location = new System.Drawing.Point(111, 0);
             this.rdoIncreaseMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoIncreaseMode.Name = "rdoIncreaseMode";
@@ -236,11 +236,11 @@
             // rdoJogMode
             // 
             this.rdoJogMode.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoJogMode.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rdoJogMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoJogMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoJogMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rdoJogMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoJogMode.ForeColor = System.Drawing.Color.Black;
+            this.rdoJogMode.ForeColor = System.Drawing.Color.White;
             this.rdoJogMode.Location = new System.Drawing.Point(0, 0);
             this.rdoJogMode.Margin = new System.Windows.Forms.Padding(0);
             this.rdoJogMode.Name = "rdoJogMode";
@@ -280,10 +280,11 @@
             // 
             // lblPitchXY
             // 
-            this.lblPitchXY.BackColor = System.Drawing.Color.White;
+            this.lblPitchXY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPitchXY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchXY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchXY.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPitchXY.ForeColor = System.Drawing.Color.White;
             this.lblPitchXY.Location = new System.Drawing.Point(0, 0);
             this.lblPitchXY.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchXY.Name = "lblPitchXY";
@@ -294,10 +295,11 @@
             // 
             // lblPitchXYValue
             // 
-            this.lblPitchXYValue.BackColor = System.Drawing.Color.White;
+            this.lblPitchXYValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPitchXYValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchXYValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchXYValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPitchXYValue.ForeColor = System.Drawing.Color.White;
             this.lblPitchXYValue.Location = new System.Drawing.Point(111, 0);
             this.lblPitchXYValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchXYValue.Name = "lblPitchXYValue";
@@ -335,10 +337,11 @@
             // 
             // lblPitchZ
             // 
-            this.lblPitchZ.BackColor = System.Drawing.Color.White;
+            this.lblPitchZ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPitchZ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchZ.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPitchZ.ForeColor = System.Drawing.Color.White;
             this.lblPitchZ.Location = new System.Drawing.Point(0, 0);
             this.lblPitchZ.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchZ.Name = "lblPitchZ";
@@ -349,10 +352,11 @@
             // 
             // lblPitchZValue
             // 
-            this.lblPitchZValue.BackColor = System.Drawing.Color.White;
+            this.lblPitchZValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPitchZValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPitchZValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPitchZValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPitchZValue.ForeColor = System.Drawing.Color.White;
             this.lblPitchZValue.Location = new System.Drawing.Point(111, 0);
             this.lblPitchZValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPitchZValue.Name = "lblPitchZValue";
@@ -398,13 +402,25 @@
             this.tlpJogOperation.Size = new System.Drawing.Size(458, 220);
             this.tlpJogOperation.TabIndex = 19;
             // 
+            // lblJog
+            // 
+            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJog.ForeColor = System.Drawing.Color.White;
+            this.lblJog.Location = new System.Drawing.Point(4, 1);
+            this.lblJog.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
+            this.lblJog.Name = "lblJog";
+            this.lblJog.Size = new System.Drawing.Size(148, 384);
+            this.lblJog.TabIndex = 0;
+            this.lblJog.Text = "Jog";
+            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // btnJogDownZ
             // 
-            this.btnJogDownZ.BackColor = System.Drawing.Color.White;
             this.btnJogDownZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogDownZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down;
+            this.btnJogDownZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down_White;
             this.btnJogDownZ.Location = new System.Drawing.Point(347, 146);
             this.btnJogDownZ.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownZ.Name = "btnJogDownZ";
@@ -415,11 +431,10 @@
             // 
             // btnJogDownY
             // 
-            this.btnJogDownY.BackColor = System.Drawing.Color.White;
             this.btnJogDownY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down;
+            this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down_White;
             this.btnJogDownY.Location = new System.Drawing.Point(109, 146);
             this.btnJogDownY.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownY.Name = "btnJogDownY";
@@ -432,11 +447,10 @@
             // 
             // btnJogLeftX
             // 
-            this.btnJogLeftX.BackColor = System.Drawing.Color.White;
             this.btnJogLeftX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogLeftX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogLeftX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogLeftX.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_left;
+            this.btnJogLeftX.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Left_White;
             this.btnJogLeftX.Location = new System.Drawing.Point(0, 73);
             this.btnJogLeftX.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogLeftX.Name = "btnJogLeftX";
@@ -449,11 +463,10 @@
             // 
             // btnJogRightX
             // 
-            this.btnJogRightX.BackColor = System.Drawing.Color.White;
             this.btnJogRightX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogRightX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogRightX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogRightX.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_right;
+            this.btnJogRightX.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Right_White;
             this.btnJogRightX.Location = new System.Drawing.Point(218, 73);
             this.btnJogRightX.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogRightX.Name = "btnJogRightX";
@@ -466,11 +479,10 @@
             // 
             // btnJogStop
             // 
-            this.btnJogStop.BackColor = System.Drawing.Color.White;
             this.btnJogStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogStop.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogStop.Image = global::Jastech.Framework.Winform.Properties.Resources.Stop_circle;
+            this.btnJogStop.Image = global::Jastech.Framework.Winform.Properties.Resources.Stop_Circle_White;
             this.btnJogStop.Location = new System.Drawing.Point(109, 73);
             this.btnJogStop.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogStop.Name = "btnJogStop";
@@ -481,11 +493,10 @@
             // 
             // btnJogUpY
             // 
-            this.btnJogUpY.BackColor = System.Drawing.Color.White;
             this.btnJogUpY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogUpY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogUpY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_up;
+            this.btnJogUpY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Up_White;
             this.btnJogUpY.Location = new System.Drawing.Point(109, 0);
             this.btnJogUpY.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogUpY.Name = "btnJogUpY";
@@ -498,11 +509,10 @@
             // 
             // btnJogUpZ
             // 
-            this.btnJogUpZ.BackColor = System.Drawing.Color.White;
             this.btnJogUpZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogUpZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogUpZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogUpZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_up;
+            this.btnJogUpZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Up_White;
             this.btnJogUpZ.Location = new System.Drawing.Point(347, 0);
             this.btnJogUpZ.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogUpZ.Name = "btnJogUpZ";
@@ -511,23 +521,11 @@
             this.btnJogUpZ.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpZ.UseVisualStyleBackColor = false;
             // 
-            // lblJog
-            // 
-            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblJog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJog.Location = new System.Drawing.Point(4, 1);
-            this.lblJog.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
-            this.lblJog.Name = "lblJog";
-            this.lblJog.Size = new System.Drawing.Size(148, 384);
-            this.lblJog.TabIndex = 0;
-            this.lblJog.Text = "Jog";
-            this.lblJog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // MotionJogControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tlpJogControl);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);

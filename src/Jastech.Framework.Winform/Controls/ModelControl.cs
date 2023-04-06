@@ -31,6 +31,8 @@ namespace Jastech.Framework.Winform.Controls
         public event CopyModelDelegate CopyModelEventHandler;
 
         public event ApplyModelDelegate ApplyModelEventHandler;
+
+        public event EventHandler CloseEventHandler;
         #endregion
 
         #region 델리게이트
@@ -207,6 +209,11 @@ namespace Jastech.Framework.Winform.Controls
             UpdateSelectedModel(e.RowIndex);
 
             ApplyModel();
+        }
+
+        private void lblCancel_Click(object sender, EventArgs e)
+        {
+            CloseEventHandler?.Invoke(sender, e);
         }
     }
 }

@@ -60,7 +60,6 @@
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.txtModelDescription);
             this.panel6.Controls.Add(this.txtModelName);
@@ -78,6 +77,7 @@
             // 
             // txtModelDescription
             // 
+            this.txtModelDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.txtModelDescription.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.txtModelDescription.Location = new System.Drawing.Point(7, 183);
             this.txtModelDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -88,6 +88,7 @@
             // 
             // txtModelName
             // 
+            this.txtModelName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.txtModelName.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
             this.txtModelName.Location = new System.Drawing.Point(7, 96);
             this.txtModelName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -97,7 +98,7 @@
             // 
             // panel12
             // 
-            this.panel12.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel12.BackColor = System.Drawing.SystemColors.Highlight;
             this.panel12.Location = new System.Drawing.Point(6, 178);
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
@@ -107,6 +108,7 @@
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(3, 148);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(230, 33);
@@ -116,7 +118,7 @@
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel7.BackColor = System.Drawing.SystemColors.Highlight;
             this.panel7.Location = new System.Drawing.Point(6, 91);
             this.panel7.Margin = new System.Windows.Forms.Padding(0);
             this.panel7.Name = "panel7";
@@ -126,6 +128,7 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(3, 61);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 33);
@@ -136,6 +139,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(3, 9);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 33);
@@ -162,9 +166,10 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(536, 40);
@@ -221,7 +226,7 @@
             // label13
             // 
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel;
+            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel_White;
             this.label13.Location = new System.Drawing.Point(3, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 50);
@@ -232,6 +237,7 @@
             // 
             this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.lblCancel.ForeColor = System.Drawing.Color.White;
             this.lblCancel.Location = new System.Drawing.Point(47, 0);
             this.lblCancel.Name = "lblCancel";
             this.lblCancel.Size = new System.Drawing.Size(117, 50);
@@ -270,7 +276,7 @@
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
+            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select_White;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 50);
@@ -281,6 +287,7 @@
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOK.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.lblOK.ForeColor = System.Drawing.Color.White;
             this.lblOK.Location = new System.Drawing.Point(47, 0);
             this.lblOK.Name = "lblOK";
             this.lblOK.Size = new System.Drawing.Size(117, 50);
@@ -304,7 +311,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(544, 543);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);

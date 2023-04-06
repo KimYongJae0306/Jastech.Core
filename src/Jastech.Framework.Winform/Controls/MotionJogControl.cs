@@ -19,6 +19,10 @@ namespace Jastech.Framework.Winform.Controls
         private JogSpeedMode _jogSpeedMode = JogSpeedMode.Slow;
 
         private JogMode _jogMode = JogMode.Jog;
+
+        private Color _selectedColor;
+
+        private Color _noneSelectedColor;
         #endregion
 
         #region 속성
@@ -46,6 +50,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private void Initialize()
         {
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _noneSelectedColor = Color.FromArgb(52, 52, 52);
+
             rdoJogSlowMode.Checked = true;
             rdoJogMode.Checked = true;
         }
@@ -70,10 +77,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogSlowMode.Checked)
             {
                 SetSelectJogSpeedMode(JogSpeedMode.Slow);
-                rdoJogSlowMode.BackColor = Color.DeepSkyBlue;
+                rdoJogSlowMode.BackColor = _selectedColor;
             }
             else
-                rdoJogSlowMode.BackColor = Color.White;
+                rdoJogSlowMode.BackColor = _noneSelectedColor;
         }
 
         private void rdoJogFastMode_CheckedChanged(object sender, EventArgs e)
@@ -81,10 +88,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogFastMode.Checked)
             {
                 SetSelectJogSpeedMode(JogSpeedMode.Fast);
-                rdoJogFastMode.BackColor = Color.DeepSkyBlue;
+                rdoJogFastMode.BackColor = _selectedColor;
             }
             else
-                rdoJogFastMode.BackColor = Color.White;
+                rdoJogFastMode.BackColor = _noneSelectedColor;
         }
 
         private void rdoJogMode_CheckedChanged(object sender, EventArgs e)
@@ -92,10 +99,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoJogMode.Checked)
             {
                 SetSelectJogMode(JogMode.Jog);
-                rdoJogMode.BackColor = Color.DeepSkyBlue;
+                rdoJogMode.BackColor = _selectedColor;
             }
             else
-                rdoJogMode.BackColor = Color.White;
+                rdoJogMode.BackColor = _noneSelectedColor;
         }
 
         private void rdoIncreaseMode_CheckedChanged(object sender, EventArgs e)
@@ -103,10 +110,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoIncreaseMode.Checked)
             {
                 SetSelectJogMode(JogMode.Increase);
-                rdoIncreaseMode.BackColor = Color.DeepSkyBlue;
+                rdoIncreaseMode.BackColor = _selectedColor;
             }
             else
-                rdoIncreaseMode.BackColor = Color.White;
+                rdoIncreaseMode.BackColor = _noneSelectedColor;
         }
 
         private void lblPitchXYValue_Click(object sender, EventArgs e)

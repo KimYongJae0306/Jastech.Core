@@ -306,5 +306,38 @@
   <ItemGroup>
     <None Include="Resources\Arrow_right.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Select_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_Up_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_Right_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_down_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_Left_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop_Circle_White.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

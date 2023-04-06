@@ -78,7 +78,7 @@
             // 
             // lblMovingTimeOutValue
             // 
-            this.lblMovingTimeOutValue.BackColor = System.Drawing.Color.White;
+            this.lblMovingTimeOutValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblMovingTimeOutValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMovingTimeOutValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMovingTimeOutValue.Location = new System.Drawing.Point(144, 70);
@@ -92,7 +92,7 @@
             // 
             // lblMovingTimeOut
             // 
-            this.lblMovingTimeOut.BackColor = System.Drawing.Color.White;
+            this.lblMovingTimeOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblMovingTimeOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMovingTimeOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMovingTimeOut.Location = new System.Drawing.Point(6, 70);
@@ -105,7 +105,7 @@
             // 
             // lblVelocityValue
             // 
-            this.lblVelocityValue.BackColor = System.Drawing.Color.White;
+            this.lblVelocityValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblVelocityValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblVelocityValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblVelocityValue.Location = new System.Drawing.Point(144, 3);
@@ -119,7 +119,7 @@
             // 
             // lblVelocity
             // 
-            this.lblVelocity.BackColor = System.Drawing.Color.White;
+            this.lblVelocity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblVelocity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblVelocity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblVelocity.Location = new System.Drawing.Point(6, 3);
@@ -132,7 +132,7 @@
             // 
             // lblAccelerationTime
             // 
-            this.lblAccelerationTime.BackColor = System.Drawing.Color.White;
+            this.lblAccelerationTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblAccelerationTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAccelerationTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAccelerationTime.Location = new System.Drawing.Point(247, 3);
@@ -145,7 +145,7 @@
             // 
             // lblAfterWaitTime
             // 
-            this.lblAfterWaitTime.BackColor = System.Drawing.Color.White;
+            this.lblAfterWaitTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblAfterWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAfterWaitTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAfterWaitTime.Location = new System.Drawing.Point(247, 70);
@@ -158,7 +158,7 @@
             // 
             // lblAccelerationTimeValue
             // 
-            this.lblAccelerationTimeValue.BackColor = System.Drawing.Color.White;
+            this.lblAccelerationTimeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAccelerationTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAccelerationTimeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAccelerationTimeValue.Location = new System.Drawing.Point(385, 3);
@@ -172,7 +172,7 @@
             // 
             // lblAfterWaitTimeValue
             // 
-            this.lblAfterWaitTimeValue.BackColor = System.Drawing.Color.White;
+            this.lblAfterWaitTimeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAfterWaitTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAfterWaitTimeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAfterWaitTimeValue.Location = new System.Drawing.Point(385, 70);
@@ -186,7 +186,7 @@
             // 
             // lblDecelerationTime
             // 
-            this.lblDecelerationTime.BackColor = System.Drawing.Color.White;
+            this.lblDecelerationTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblDecelerationTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDecelerationTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDecelerationTime.Location = new System.Drawing.Point(488, 3);
@@ -199,7 +199,7 @@
             // 
             // lblDecelerationTimeValue
             // 
-            this.lblDecelerationTimeValue.BackColor = System.Drawing.Color.White;
+            this.lblDecelerationTimeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDecelerationTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDecelerationTimeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDecelerationTimeValue.Location = new System.Drawing.Point(626, 3);
@@ -215,6 +215,7 @@
             // 
             this.grpAxisName.Controls.Add(this.tlpMotionVariableParameter);
             this.grpAxisName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpAxisName.ForeColor = System.Drawing.Color.White;
             this.grpAxisName.Location = new System.Drawing.Point(0, 0);
             this.grpAxisName.Name = "grpAxisName";
             this.grpAxisName.Size = new System.Drawing.Size(700, 160);
@@ -226,9 +227,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.grpAxisName);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "MotionParameterVariableControl";
             this.Size = new System.Drawing.Size(700, 160);
             this.Load += new System.EventHandler(this.MotionParameterVariableControl_Load);

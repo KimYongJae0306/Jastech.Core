@@ -82,9 +82,9 @@
             // 
             // lblNegativeLimitValue
             // 
-            this.lblNegativeLimitValue.BackColor = System.Drawing.Color.White;
             this.lblNegativeLimitValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblNegativeLimitValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNegativeLimitValue.ForeColor = System.Drawing.Color.White;
             this.lblNegativeLimitValue.Location = new System.Drawing.Point(144, 70);
             this.lblNegativeLimitValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblNegativeLimitValue.Name = "lblNegativeLimitValue";
@@ -96,9 +96,10 @@
             // 
             // lblNegativeLimit
             // 
-            this.lblNegativeLimit.BackColor = System.Drawing.Color.White;
+            this.lblNegativeLimit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblNegativeLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblNegativeLimit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNegativeLimit.ForeColor = System.Drawing.Color.White;
             this.lblNegativeLimit.Location = new System.Drawing.Point(6, 70);
             this.lblNegativeLimit.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblNegativeLimit.Name = "lblNegativeLimit";
@@ -109,9 +110,9 @@
             // 
             // lblJogLowSpeedValue
             // 
-            this.lblJogLowSpeedValue.BackColor = System.Drawing.Color.White;
             this.lblJogLowSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogLowSpeedValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJogLowSpeedValue.ForeColor = System.Drawing.Color.White;
             this.lblJogLowSpeedValue.Location = new System.Drawing.Point(144, 3);
             this.lblJogLowSpeedValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogLowSpeedValue.Name = "lblJogLowSpeedValue";
@@ -123,9 +124,10 @@
             // 
             // lblJogLowSpeed
             // 
-            this.lblJogLowSpeed.BackColor = System.Drawing.Color.White;
+            this.lblJogLowSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblJogLowSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogLowSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJogLowSpeed.ForeColor = System.Drawing.Color.White;
             this.lblJogLowSpeed.Location = new System.Drawing.Point(6, 3);
             this.lblJogLowSpeed.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogLowSpeed.Name = "lblJogLowSpeed";
@@ -136,9 +138,10 @@
             // 
             // lblJogHighSpeed
             // 
-            this.lblJogHighSpeed.BackColor = System.Drawing.Color.White;
+            this.lblJogHighSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblJogHighSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogHighSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJogHighSpeed.ForeColor = System.Drawing.Color.White;
             this.lblJogHighSpeed.Location = new System.Drawing.Point(247, 3);
             this.lblJogHighSpeed.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogHighSpeed.Name = "lblJogHighSpeed";
@@ -149,9 +152,10 @@
             // 
             // lblPositiveLimit
             // 
-            this.lblPositiveLimit.BackColor = System.Drawing.Color.White;
+            this.lblPositiveLimit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblPositiveLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPositiveLimit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPositiveLimit.ForeColor = System.Drawing.Color.White;
             this.lblPositiveLimit.Location = new System.Drawing.Point(247, 70);
             this.lblPositiveLimit.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblPositiveLimit.Name = "lblPositiveLimit";
@@ -162,9 +166,9 @@
             // 
             // lblJogHighSpeedValue
             // 
-            this.lblJogHighSpeedValue.BackColor = System.Drawing.Color.White;
             this.lblJogHighSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblJogHighSpeedValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJogHighSpeedValue.ForeColor = System.Drawing.Color.White;
             this.lblJogHighSpeedValue.Location = new System.Drawing.Point(385, 3);
             this.lblJogHighSpeedValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblJogHighSpeedValue.Name = "lblJogHighSpeedValue";
@@ -176,9 +180,9 @@
             // 
             // lblPositiveLimitValue
             // 
-            this.lblPositiveLimitValue.BackColor = System.Drawing.Color.White;
             this.lblPositiveLimitValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPositiveLimitValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPositiveLimitValue.ForeColor = System.Drawing.Color.White;
             this.lblPositiveLimitValue.Location = new System.Drawing.Point(385, 70);
             this.lblPositiveLimitValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblPositiveLimitValue.Name = "lblPositiveLimitValue";
@@ -190,9 +194,10 @@
             // 
             // lblMoveTolerance
             // 
-            this.lblMoveTolerance.BackColor = System.Drawing.Color.White;
+            this.lblMoveTolerance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblMoveTolerance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMoveTolerance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMoveTolerance.ForeColor = System.Drawing.Color.White;
             this.lblMoveTolerance.Location = new System.Drawing.Point(488, 3);
             this.lblMoveTolerance.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblMoveTolerance.Name = "lblMoveTolerance";
@@ -203,9 +208,9 @@
             // 
             // lblMoveToleranceValue
             // 
-            this.lblMoveToleranceValue.BackColor = System.Drawing.Color.White;
             this.lblMoveToleranceValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMoveToleranceValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMoveToleranceValue.ForeColor = System.Drawing.Color.White;
             this.lblMoveToleranceValue.Location = new System.Drawing.Point(626, 3);
             this.lblMoveToleranceValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblMoveToleranceValue.Name = "lblMoveToleranceValue";
@@ -217,9 +222,10 @@
             // 
             // lblHomingTimeOut
             // 
-            this.lblHomingTimeOut.BackColor = System.Drawing.Color.White;
+            this.lblHomingTimeOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblHomingTimeOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHomingTimeOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblHomingTimeOut.ForeColor = System.Drawing.Color.White;
             this.lblHomingTimeOut.Location = new System.Drawing.Point(488, 70);
             this.lblHomingTimeOut.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblHomingTimeOut.Name = "lblHomingTimeOut";
@@ -230,9 +236,9 @@
             // 
             // lblHomingTimeOutValue
             // 
-            this.lblHomingTimeOutValue.BackColor = System.Drawing.Color.White;
             this.lblHomingTimeOutValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHomingTimeOutValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblHomingTimeOutValue.ForeColor = System.Drawing.Color.White;
             this.lblHomingTimeOutValue.Location = new System.Drawing.Point(626, 70);
             this.lblHomingTimeOutValue.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.lblHomingTimeOutValue.Name = "lblHomingTimeOutValue";
@@ -246,6 +252,7 @@
             // 
             this.grpAxisName.Controls.Add(this.tlpMotionCommonParameter);
             this.grpAxisName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpAxisName.ForeColor = System.Drawing.Color.White;
             this.grpAxisName.Location = new System.Drawing.Point(0, 0);
             this.grpAxisName.Name = "grpAxisName";
             this.grpAxisName.Size = new System.Drawing.Size(700, 160);
@@ -257,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.grpAxisName);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "MotionParameterCommonControl";
