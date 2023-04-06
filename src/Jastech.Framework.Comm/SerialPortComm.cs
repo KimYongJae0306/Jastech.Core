@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Comm
 {
-    public class SerialComm
+    public class SerialPortComm
     {
         #region 필드
         private SerialPort _serialPort = new SerialPort();

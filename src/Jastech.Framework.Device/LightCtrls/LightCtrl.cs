@@ -35,16 +35,6 @@ namespace Jastech.Framework.Device.LightCtrls
         #endregion
 
         #region 메서드
-        /// <summary>
-        /// 컨트롤에 연결된 조명 전체를 켠다.
-        /// </summary>
-        /// <returns></returns>
-        public abstract bool TurnOn();
-
-        /// <summary>
-        /// 컨트롤에 연결된 조명 전체를 끈다.
-        /// </summary>
-        /// <returns></returns>
         public abstract bool TurnOff();
 
         public abstract bool TurnOn(int channel, int level);

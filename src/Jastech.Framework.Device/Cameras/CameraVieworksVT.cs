@@ -38,7 +38,7 @@ namespace Jastech.Framework.Device.Cameras
 
         const double nullCommand = -1.0;
 
-        private SerialComm _serialComm { get; set; } = new SerialComm();
+        private SerialPortComm _serialComm { get; set; } = new SerialPortComm();
 
         private ReceivedPacket _lastReceivedPacket = new ReceivedPacket();
         #endregion

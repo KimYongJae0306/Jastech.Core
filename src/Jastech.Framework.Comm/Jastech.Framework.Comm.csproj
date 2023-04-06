@@ -83,8 +83,9 @@
     <Compile Include="Protocol\PacketBuffer.cs" />
     <Compile Include="Protocol\Protocol.cs" />
     <Compile Include="Protocol\Packet.cs" />
+    <Compile Include="Protocol\StxEtxProtocol.cs" />
     <Compile Include="Protocol\VieworksVTCameraProtocol.cs" />
-    <Compile Include="SerialComm.cs" />
+    <Compile Include="SerialPortComm.cs" />
     <Compile Include="SerialPortInfo.cs" />
     <Compile Include="TcpIpInfo.cs" />
   </ItemGroup>
@@ -92,6 +93,12 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
+      <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
+      <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

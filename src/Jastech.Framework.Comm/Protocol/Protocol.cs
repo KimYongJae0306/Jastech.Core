@@ -10,7 +10,7 @@ namespace Jastech.Framework.Comm.Protocol
 
     public interface IProtocol
     {
-        byte[] SendPacket(SendPacket send);
+        byte[] SendPacket(SendPacket sendPacket);
 
         ParsingResult ReceivedPacketParsing(PacketBuffer packetBuffer, out ReceivedPacket receivedPacket);
     }

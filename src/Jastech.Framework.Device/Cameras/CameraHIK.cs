@@ -56,7 +56,7 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public override bool Initialize()
         {
-            LogHelper.Write(LogType.DEVICE, "Initialize HIK Camera");
+            LogHelper.Write(LogType.Device, "Initialize HIK Camera");
             base.Initialize();
 
             if (FindDevice() == false)

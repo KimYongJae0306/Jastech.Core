@@ -153,12 +153,12 @@ namespace Jastech.Framework.Util.Helper
 
     public enum LogType
     {
-        SYSTEM,
-        DEVICE,
-        INSPECTION,
-        SEQ,
-        SUB_SEQ,
-        ERROR,
+        System,
+        Device,
+        comm,
+        Inspection,
+        Seq,
+        Error,
     }
 
     public enum ErrorType
@@ -166,8 +166,9 @@ namespace Jastech.Framework.Util.Helper
         Grabber,
         Camera,
         PLC,
-        Light,
+        LightCtrl,
         SEQ,
         Inspection,
+        Etc,
     }
 }

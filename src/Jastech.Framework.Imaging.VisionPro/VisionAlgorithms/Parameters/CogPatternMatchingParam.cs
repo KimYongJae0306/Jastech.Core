@@ -156,7 +156,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             param.Name = Name;
             param.Score = Score;
             param.MaxAngle = MaxAngle;
-            param.PMTool = new CogPMAlignTool(PMTool);
+            if(PMTool != null)
+                param.PMTool = new CogPMAlignTool(PMTool);
 
             return param;
         }

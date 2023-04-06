@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,16 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static object LoadTool(string path)
         {
-            return CogSerializer.LoadObjectFromFile(path);
+            try
+            {
+                return CogSerializer.LoadObjectFromFile(path);
+            }
+            catch (Exception)
+            {
+                LogHelper.Error(ErrorType.Etc, "Cognex Liscense not found.");
+                return null;
+            }
+            
         }
     }
 }
