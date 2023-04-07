@@ -84,7 +84,7 @@ namespace Jastech.Framework.Winform.Forms
 
         private void SpalashProc()
         {
-            LogHelper.Write(LogType.System, "Start SpalashProc.");
+            Logger.Write(LogType.System, "Start SpalashProc.");
 
             if (SetupActionEventHandler != null && SetupActionEventHandler(this) == false)
             {

@@ -34,7 +34,7 @@ namespace Jastech.Framework.Winform.Controls
                 if (lstLogMessage.Items.Count >= 2000)
                     lstLogMessage.Items.Clear();
 
-                string content = "[ " + LogHelper.GetTimeString(DateTime.Now) + " ] ";
+                string content = "[ " + Logger.GetTimeString(DateTime.Now) + " ] ";
                 content += message;
 
                 lstLogMessage.Items.Add(content);

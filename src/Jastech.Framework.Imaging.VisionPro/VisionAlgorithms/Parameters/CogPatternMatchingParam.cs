@@ -70,7 +70,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             }
             catch (Exception err)
             {
-                LogHelper.Error(ErrorType.Inspection, err.Message);
+                Logger.Error(ErrorType.Inspection, err.Message);
                 return false;
             }
             return true;

@@ -26,7 +26,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             }
             catch (Exception)
             {
-                LogHelper.Error(ErrorType.Etc, "Cognex Liscense not found.");
+                Logger.Error(ErrorType.Etc, "Cognex Liscense not found.");
                 return null;
             }
             

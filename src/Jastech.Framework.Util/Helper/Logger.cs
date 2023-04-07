@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Util.Helper
 {
-    public static class LogHelper
+    public static class Logger
     {
         #region 필드
         private static string _logDir = "";
@@ -64,6 +64,34 @@ namespace Jastech.Framework.Util.Helper
                     log.WriteLine(message);
                 }
             }
+        }
+
+        public static void Dedug(LogType logType, string logMessage)
+        {
+            string logpath = GetDebugPath();
+            string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+
+            if (!Directory.Exists(strDir))
+                Directory.CreateDirectory(strDir);
+
+            string time = GetTimeString(DateTime.Now);
+            string message = "[" + time + "] " + "[" + logType.ToString() + "] " + logMessage;
+            message = message.Replace("\r\n", "");
+
+            lock (_objLock)
+            {
+                StreamWriter log = new StreamWriter(logpath, true);
+                using (log)
+                {
+                    log.WriteLine(message);
+                }
+            }
+        }
+
+        private static string GetDebugPath()
+        {
+            string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + "Debug.log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            return logPath;
         }
 
         private static string GetLogPath(LogType logType)
@@ -143,9 +171,12 @@ namespace Jastech.Framework.Util.Helper
 
         public static string GetTimeString(DateTime tm)
         {
-            DateTime now = DateTime.Now;
-            string strTime = string.Format(@"{0:00}{1:00} {2:00}:{3:00}:{4:00} / {5:00}:{6:00}:{7:00}.{8:000}ms",
-                tm.Month, tm.Day, tm.Hour, tm.Minute, tm.Second, now.Hour, now.Minute, now.Second, now.Millisecond);
+            string strTime = string.Format(@"{0:00}{1:00} {2:00}:{3:00}:{4:00}.{5:000}ms",
+               tm.Month, tm.Day, tm.Hour, tm.Minute, tm.Second, tm.Millisecond);
+
+            //DateTime now = DateTime.Now;
+            //string strTime = string.Format(@"{0:00}{1:00} {2:00}:{3:00}:{4:00} / {5:00}:{6:00}:{7:00}.{8:000}ms",
+            //    tm.Month, tm.Day, tm.Hour, tm.Minute, tm.Second, now.Hour, now.Minute, now.Second, now.Millisecond);
             return strTime;
         }
         #endregion
@@ -155,7 +186,6 @@ namespace Jastech.Framework.Util.Helper
     {
         System,
         Device,
-        comm,
         Inspection,
         Seq,
         Error,

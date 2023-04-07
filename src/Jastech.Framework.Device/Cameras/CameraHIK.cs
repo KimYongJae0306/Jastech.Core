@@ -56,24 +56,24 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public override bool Initialize()
         {
-            LogHelper.Write(LogType.Device, "Initialize HIK Camera");
+            Logger.Write(LogType.Device, "Initialize HIK Camera");
             base.Initialize();
 
             if (FindDevice() == false)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Not Found. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Not Found. Name : {0}", Name));
                 return false;
             }
 
             if (OpenDevice() == false)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Open Device Fail. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Open Device Fail. Name : {0}", Name));
                 return false;
             }
 
             if (SetGigEGevSCPSPacketSize() == false)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera SetGigEGevSCPSPacketSize. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetGigEGevSCPSPacketSize. Name : {0}", Name));
                 return false;
             }
 
@@ -88,7 +88,7 @@ namespace Jastech.Framework.Device.Cameras
             int result = _camera.MV_CC_RegisterImageCallBackEx_NET(ImageCallback, IntPtr.Zero);
             if (MyCamera.MV_OK != result)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Register image callback failed. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register image callback failed. Name : {0}", Name));
                 return false;
             }
 
@@ -158,7 +158,7 @@ namespace Jastech.Framework.Device.Cameras
             int nRet = _camera.MV_CC_StopGrabbing_NET();
             if (MyCamera.MV_OK != nRet)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Stop Grab failed. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Stop Grab failed. Name : {0}", Name));
                 return;
             }
         }
@@ -169,7 +169,7 @@ namespace Jastech.Framework.Device.Cameras
             int nRet = _camera.MV_CC_SetFloatValue_NET("ExposureTime", expose);
             if (nRet != MyCamera.MV_OK)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera SetExposureTime failed({0}). Name : {1}", expose, Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetExposureTime failed({0}). Name : {1}", expose, Name));
                 return;
             }
         }
@@ -232,7 +232,7 @@ namespace Jastech.Framework.Device.Cameras
                 result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
 
             if (result != MyCamera.MV_OK)
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera SetTriggerMode failed({0}). Name : {1}", triggerMode.ToString(), Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetTriggerMode failed({0}). Name : {1}", triggerMode.ToString(), Name));
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Jastech.Framework.Device.Cameras
             if (result != MyCamera.MV_OK)
             {
                 MyCamera.MV_CAM_TRIGGER_SOURCE source =(MyCamera.MV_CAM_TRIGGER_SOURCE)triggerSource;
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera TriggerSource set failed({0}). Name : {1}", source.ToString(), Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera TriggerSource set failed({0}). Name : {1}", source.ToString(), Name));
             }
         }
         #endregion
@@ -331,13 +331,13 @@ namespace Jastech.Framework.Device.Cameras
                     result = _camera.MV_CC_SetIntValue_NET("GevSCPSPacketSize", (uint)packetSize);
                     if (result != MyCamera.MV_OK)
                     {
-                        LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Set Packet Size failed. Name : {0}", Name));
+                        Logger.Error(ErrorType.Camera, string.Format("HIK Camera Set Packet Size failed. Name : {0}", Name));
                         return false;
                     }
                 }
                 else
                 {
-                    LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Get Packet Size failed. Name : {0}", Name));
+                    Logger.Error(ErrorType.Camera, string.Format("HIK Camera Get Packet Size failed. Name : {0}", Name));
                     return false;
                 }
             }
@@ -369,7 +369,7 @@ namespace Jastech.Framework.Device.Cameras
             int result = _camera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)type);
             if (result != 0)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Acquisition Mode set failed. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Acquisition Mode set failed. Name : {0}", Name));
                 return false;
             }
             return true;
@@ -380,7 +380,7 @@ namespace Jastech.Framework.Device.Cameras
             int result = _camera.MV_CC_GetIntValue_NET("PayloadSize", ref IntValueParam);
             if (MyCamera.MV_OK != result)
             {
-                LogHelper.Error(ErrorType.Camera, string.Format("HIK Camera Get PayloadSize failed. Name : {0}", Name));
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Get PayloadSize failed. Name : {0}", Name));
             }
 
             return IntValueParam.nCurValue;
@@ -408,7 +408,7 @@ namespace Jastech.Framework.Device.Cameras
                     if (tryCount < reTry++)
                         throw new Exception(ErrorMessage("Device Create Fail!", nRet));
                     else
-                        LogHelper.Error(ErrorType.Camera, $"HIK Camera Open Error. ReConnectTry...{reTry}");
+                        Logger.Error(ErrorType.Camera, $"HIK Camera Open Error. ReConnectTry...{reTry}");
                 }
                 else
                     break;

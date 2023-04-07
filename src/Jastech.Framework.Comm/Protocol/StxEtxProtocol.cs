@@ -67,7 +67,7 @@ namespace Jastech.Framework.Comm.Protocol
                 string fullString = System.Text.Encoding.Default.GetString(bufferByte.ToArray());
                 int strLen = Math.Min(fullString.Length, 100);
 
-                LogHelper.Write(LogType.comm, String.Format("Invalid Packet : {0}...", packetSample));
+                Logger.Dedug(LogType.Device, String.Format("Invalid Packet : {0}...", packetSample));
                 packetBuffer.Clear();
 
                 return ParsingResult.PacketError;
@@ -85,7 +85,7 @@ namespace Jastech.Framework.Comm.Protocol
 
             int length = endPos - startPos;
 
-            LogHelper.Write(LogType.comm, String.Format("Packet Received {0} - {1} : {2} ...", startPos, endPos, packetSample));
+            Logger.Write(LogType.Device, String.Format("Packet Received {0} - {1} : {2} ...", startPos, endPos, packetSample));
 
             byte[] packetBody = bufferByte.Skip(startPos).Take(length).ToArray();
 

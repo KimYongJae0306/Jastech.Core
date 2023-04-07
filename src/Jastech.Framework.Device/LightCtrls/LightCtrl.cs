@@ -18,6 +18,12 @@ namespace Jastech.Framework.Device.LightCtrls
 
         [JsonProperty]
         public int NumChannel { get; protected set; }
+
+        [JsonProperty]
+        public int LightStableTimeMs { get; set; } = 10;
+
+        [JsonProperty]
+        public int PacketResponseTimeMs { get; set; } = 10;
         #endregion
 
         #region 이벤트

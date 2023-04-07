@@ -105,6 +105,7 @@
     <Compile Include="IDevice.cs" />
     <Compile Include="LightCtrls\LightCtrl.cs" />
     <Compile Include="LightCtrls\SerialLightCtrl.cs" />
+    <Compile Include="LightCtrls\VirtualLightCtrl.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Axis.cs" />
     <Compile Include="Motions\AxisCommonParams.cs" />
