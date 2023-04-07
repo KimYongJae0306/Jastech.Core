@@ -15,8 +15,8 @@ namespace Jastech.Framework.Device.LightCtrls
     public class SerialLightCtrl : LightCtrl
     {
         #region 생성자
-        public SerialLightCtrl(string name, int numChannel)
-            : base(name, numChannel)
+        public SerialLightCtrl(string name, int totalChannelCount)
+            : base(name, totalChannelCount)
         {
         }
         #endregion
@@ -76,7 +76,7 @@ namespace Jastech.Framework.Device.LightCtrls
         {
             bool success = true;
 
-            for (int i = 0; i < NumChannel; i++)
+            for (int i = 0; i < TotalChannelCount; i++)
             {
                 success |= TurnOn(i, 0);
             }
@@ -123,8 +123,8 @@ namespace Jastech.Framework.Device.LightCtrls
     {
         public StxEtxProtocol LvsProtocol { get; private set; } = null;
 
-        public LvsLightCtrl(string name, int numChannel)
-            : base(name, numChannel)
+        public LvsLightCtrl(string name, int totalChannelCount)
+            : base(name, totalChannelCount)
         {
            
         }

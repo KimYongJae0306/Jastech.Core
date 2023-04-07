@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ namespace Jastech.Framework.Config
         public List<IDevice> Devices { get; private set; } = new List<IDevice>();
         #endregion
 
-
         #region 메서드
         public void Add(IDevice device)
         {
@@ -23,6 +23,11 @@ namespace Jastech.Framework.Config
                 return;
 
             Devices.Add(device);
+        }
+
+        public ReadOnlyCollection<T> GetDevices<T>() where T : IDevice
+        {
+            return Devices.Where((d) => d is T).Cast<T>().ToList().AsReadOnly();
         }
         #endregion
     }

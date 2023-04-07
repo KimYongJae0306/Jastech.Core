@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Device.LightCtrls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Jastech.Framework.Structure
 {
     public class InspModel
     {
+        public static string FileName { get; } = "InspModel.json";
+
         [JsonProperty]
         public string Name { get; set; } = "New Model";
 
@@ -20,7 +23,5 @@ namespace Jastech.Framework.Structure
 
         [JsonProperty]
         public string Description { get; set; } = "";
-
-        public static string FileName { get; } = "InspModel.json";
     }
 }

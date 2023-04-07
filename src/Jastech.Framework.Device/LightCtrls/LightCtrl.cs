@@ -9,15 +9,12 @@ namespace Jastech.Framework.Device.LightCtrls
 {
     public abstract partial class LightCtrl : IDevice
     {
-        #region 필드
-        #endregion
-
         #region 속성
         [JsonProperty]
-        public int MaxLightLevel { get; protected set; } = 255;
+        public Dictionary<string, int> ChannelNameMap { get; private set; } = new Dictionary<string, int>();
 
         [JsonProperty]
-        public int NumChannel { get; protected set; }
+        public int TotalChannelCount { get; protected set; }
 
         [JsonProperty]
         public int LightStableTimeMs { get; set; } = 10;
@@ -26,17 +23,11 @@ namespace Jastech.Framework.Device.LightCtrls
         public int PacketResponseTimeMs { get; set; } = 10;
         #endregion
 
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
         #region 생성자
-        public LightCtrl(string name, int numChannel)
+        public LightCtrl(string name, int totalChannelCount)
         {
             Name = name;
-            NumChannel = numChannel;
+            TotalChannelCount = totalChannelCount;
         }
         #endregion
 

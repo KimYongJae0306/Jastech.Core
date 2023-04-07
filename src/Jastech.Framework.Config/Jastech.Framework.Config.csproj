@@ -80,7 +80,6 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="ConfigSet.cs" />
-    <Compile Include="LightConfig.cs" />
     <Compile Include="MachineConfig.cs" />
     <Compile Include="OperationConfig.cs" />
     <Compile Include="PathConfig.cs" />

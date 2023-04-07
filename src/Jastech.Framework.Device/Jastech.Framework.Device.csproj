@@ -104,6 +104,8 @@
     <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="LightCtrls\LightCtrl.cs" />
+    <Compile Include="LightCtrls\LightParameter.cs" />
+    <Compile Include="LightCtrls\LightValue.cs" />
     <Compile Include="LightCtrls\SerialLightCtrl.cs" />
     <Compile Include="LightCtrls\VirtualLightCtrl.cs" />
     <Compile Include="Motions\ACSMotion.cs" />

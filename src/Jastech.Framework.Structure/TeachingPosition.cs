@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Device.Motions;
+﻿using Jastech.Framework.Device.LightCtrls;
+using Jastech.Framework.Device.Motions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -193,7 +193,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            PMTool.Dispose();
+            PMTool?.Dispose();
         }
     }
 }

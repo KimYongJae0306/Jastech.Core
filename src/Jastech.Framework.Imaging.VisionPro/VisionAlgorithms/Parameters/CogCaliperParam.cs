@@ -102,7 +102,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            CaliperTool.Dispose();
+            CaliperTool?.Dispose();
         }
     }
 }
