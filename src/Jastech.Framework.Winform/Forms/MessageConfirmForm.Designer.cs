@@ -53,7 +53,6 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.pnlTop, 0, 0);
@@ -71,9 +70,10 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(174)))), ((int)(((byte)(224)))));
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.pnlTop.Controls.Add(this.lblAlarm);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTop.ForeColor = System.Drawing.Color.White;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTop.Name = "pnlTop";
@@ -95,7 +95,6 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.panel8);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 257);
@@ -133,7 +132,7 @@
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select;
+            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select_White;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 45);
@@ -144,6 +143,7 @@
             // 
             this.lblOK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOK.Font = new System.Drawing.Font("돋움", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblOK.ForeColor = System.Drawing.Color.White;
             this.lblOK.Location = new System.Drawing.Point(47, 0);
             this.lblOK.Name = "lblOK";
             this.lblOK.Size = new System.Drawing.Size(118, 45);
@@ -175,6 +175,7 @@
             this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMessage.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMessage.ForeColor = System.Drawing.Color.White;
             this.lblMessage.Location = new System.Drawing.Point(222, 0);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(398, 197);
@@ -197,10 +198,11 @@
             // 
             // lblMessageText
             // 
-            this.lblMessageText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.lblMessageText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.lblMessageText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMessageText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMessageText.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMessageText.ForeColor = System.Drawing.Color.White;
             this.lblMessageText.Location = new System.Drawing.Point(91, 0);
             this.lblMessageText.Name = "lblMessageText";
             this.lblMessageText.Size = new System.Drawing.Size(125, 197);
@@ -223,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(631, 315);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

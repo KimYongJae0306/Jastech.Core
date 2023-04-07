@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelControl));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,6 +65,10 @@
             this.lblApply = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.gvModelList = new System.Windows.Forms.DataGridView();
+            this.ColumnCamNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCamAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCamStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblSelectedDescription = new System.Windows.Forms.Label();
             this.lblSelectedModifiedDate = new System.Windows.Forms.Label();
@@ -78,10 +83,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.ColumnCamNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCamAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCamStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -499,6 +500,14 @@
             this.ColumnSerialNo,
             this.ColumnCamAddress,
             this.ColumnCamStatus});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("맑은 고딕", 21.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvModelList.DefaultCellStyle = dataGridViewCellStyle6;
             this.gvModelList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvModelList.EnableHeadersVisualStyles = false;
             this.gvModelList.Location = new System.Drawing.Point(3, 4);
@@ -508,12 +517,69 @@
             this.gvModelList.ReadOnly = true;
             this.gvModelList.RowHeadersVisible = false;
             this.gvModelList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
-            this.gvModelList.RowTemplate.Height = 23;
+            this.gvModelList.RowTemplate.Height = 40;
             this.gvModelList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvModelList.Size = new System.Drawing.Size(1097, 693);
             this.gvModelList.TabIndex = 3;
             this.gvModelList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvModelList_CellClick);
             this.gvModelList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvModelList_CellDoubleClick);
+            // 
+            // ColumnCamNo
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.ColumnCamNo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColumnCamNo.HeaderText = "Name";
+            this.ColumnCamNo.MinimumWidth = 300;
+            this.ColumnCamNo.Name = "ColumnCamNo";
+            this.ColumnCamNo.ReadOnly = true;
+            this.ColumnCamNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnCamNo.Width = 300;
+            // 
+            // ColumnSerialNo
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            this.ColumnSerialNo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnSerialNo.HeaderText = "Create Date";
+            this.ColumnSerialNo.MinimumWidth = 200;
+            this.ColumnSerialNo.Name = "ColumnSerialNo";
+            this.ColumnSerialNo.ReadOnly = true;
+            this.ColumnSerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnSerialNo.Width = 200;
+            // 
+            // ColumnCamAddress
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.ColumnCamAddress.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnCamAddress.FillWeight = 200F;
+            this.ColumnCamAddress.HeaderText = "Modified Date";
+            this.ColumnCamAddress.MinimumWidth = 200;
+            this.ColumnCamAddress.Name = "ColumnCamAddress";
+            this.ColumnCamAddress.ReadOnly = true;
+            this.ColumnCamAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnCamAddress.Width = 200;
+            // 
+            // ColumnCamStatus
+            // 
+            this.ColumnCamStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            this.ColumnCamStatus.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColumnCamStatus.HeaderText = "Description";
+            this.ColumnCamStatus.MinimumWidth = 80;
+            this.ColumnCamStatus.Name = "ColumnCamStatus";
+            this.ColumnCamStatus.ReadOnly = true;
+            this.ColumnCamStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel6
             // 
@@ -670,63 +736,6 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "Model Info";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ColumnCamNo
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.ColumnCamNo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColumnCamNo.HeaderText = "Name";
-            this.ColumnCamNo.MinimumWidth = 300;
-            this.ColumnCamNo.Name = "ColumnCamNo";
-            this.ColumnCamNo.ReadOnly = true;
-            this.ColumnCamNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnCamNo.Width = 300;
-            // 
-            // ColumnSerialNo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            this.ColumnSerialNo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSerialNo.HeaderText = "Create Date";
-            this.ColumnSerialNo.MinimumWidth = 200;
-            this.ColumnSerialNo.Name = "ColumnSerialNo";
-            this.ColumnSerialNo.ReadOnly = true;
-            this.ColumnSerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnSerialNo.Width = 200;
-            // 
-            // ColumnCamAddress
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            this.ColumnCamAddress.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnCamAddress.FillWeight = 200F;
-            this.ColumnCamAddress.HeaderText = "Modified Date";
-            this.ColumnCamAddress.MinimumWidth = 200;
-            this.ColumnCamAddress.Name = "ColumnCamAddress";
-            this.ColumnCamAddress.ReadOnly = true;
-            this.ColumnCamAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnCamAddress.Width = 200;
-            // 
-            // ColumnCamStatus
-            // 
-            this.ColumnCamStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            this.ColumnCamStatus.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnCamStatus.HeaderText = "Description";
-            this.ColumnCamStatus.MinimumWidth = 80;
-            this.ColumnCamStatus.Name = "ColumnCamStatus";
-            this.ColumnCamStatus.ReadOnly = true;
-            this.ColumnCamStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ModelControl
             // 
