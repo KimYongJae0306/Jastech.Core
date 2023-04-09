@@ -96,6 +96,7 @@ namespace Jastech.Framework.Winform.Controls
             CreateModelForm form = new CreateModelForm();
             form.ModelPath = ModelPath;
             form.CreateModelEvent += CreateModelEventHandler;
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 UpdateModelList();

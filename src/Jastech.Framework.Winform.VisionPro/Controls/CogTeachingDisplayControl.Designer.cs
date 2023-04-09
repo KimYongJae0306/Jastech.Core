@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.VisionPro.Controls
 {
-    partial class CogThumbnailDisplayControl
+    partial class CogTeachingDisplayControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.

@@ -234,6 +234,12 @@
     <Compile Include="Controls\CogDisplayControl.Designer.cs">
       <DependentUpon>CogDisplayControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CogInspDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CogInspDisplayControl.Designer.cs">
+      <DependentUpon>CogInspDisplayControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CogPatternMatchingParamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,11 +252,11 @@
     <Compile Include="Controls\CogThumbnailControl.Designer.cs">
       <DependentUpon>CogThumbnailControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CogThumbnailDisplayControl.cs">
+    <Compile Include="Controls\CogTeachingDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CogThumbnailDisplayControl.Designer.cs">
-      <DependentUpon>CogThumbnailDisplayControl.cs</DependentUpon>
+    <Compile Include="Controls\CogTeachingDisplayControl.Designer.cs">
+      <DependentUpon>CogTeachingDisplayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CogAlignMaskingForm.cs">
       <SubType>Form</SubType>
@@ -278,14 +284,17 @@
     <EmbeddedResource Include="Controls\CogDisplayControl.resx">
       <DependentUpon>CogDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CogInspDisplayControl.resx">
+      <DependentUpon>CogInspDisplayControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogPatternMatchingParamControl.resx">
       <DependentUpon>CogPatternMatchingParamControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogThumbnailControl.resx">
       <DependentUpon>CogThumbnailControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CogThumbnailDisplayControl.resx">
-      <DependentUpon>CogThumbnailDisplayControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\CogTeachingDisplayControl.resx">
+      <DependentUpon>CogTeachingDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CogAlignMaskingForm.resx">
       <DependentUpon>CogAlignMaskingForm.cs</DependentUpon>
