@@ -186,6 +186,9 @@ namespace Jastech.Framework.Winform.Controls
 
         public List<InspModel> GetModelList(string modelPath)
         {
+            if (!Directory.Exists(modelPath))
+                Directory.CreateDirectory(modelPath);
+
             List<InspModel> modelList = new List<InspModel>();
 
             string[] dirs = Directory.GetDirectories(modelPath);
