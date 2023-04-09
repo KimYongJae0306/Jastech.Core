@@ -11,7 +11,7 @@ using Cognex.VisionPro;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
-    public partial class CogThumbnailDisplayControl : UserControl
+    public partial class CogTeachingDisplayControl : UserControl
     {
         private CogDisplayControl CogDisplay { get; set; }
 
@@ -19,7 +19,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public event EventHandler DeleteEventHandler;
 
-        public CogThumbnailDisplayControl()
+        public CogTeachingDisplayControl()
         {
             InitializeComponent();
         }
