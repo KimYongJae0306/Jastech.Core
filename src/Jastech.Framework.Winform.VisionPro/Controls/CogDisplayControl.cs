@@ -454,14 +454,22 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogDisplay.StaticGraphics.Remove(groupName);
         }
 
-        public void DeleteResultGraphics()
+        public bool DeleteResultGraphics()
         {
+            bool isDelete = false;
             string groupName = "Result";
             if (IsContainGroupNameInInteractiveGraphics(groupName))
+            {
                 cogDisplay.InteractiveGraphics.Remove(groupName);
+                isDelete = true;
+            }
 
             if (IsContainGroupNameInStaticGraphics(groupName))
+            {
                 cogDisplay.StaticGraphics.Remove(groupName);
+                isDelete = true;
+            }
+            return isDelete;
         }
 
 
@@ -590,7 +598,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
-
             if (sender is CogRecordDisplay display)
             {
                 if (display.Image == null)
@@ -610,8 +617,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 string flagNames = e.GetStateFlagNames(sender);
                 if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
                 {
-                    DeleteResultGraphics();
-                    DeleteEventHandler?.Invoke(sender, e);
+                    if(DeleteResultGraphics())
+                        DeleteEventHandler?.Invoke(sender, e);
                 }
 
                 UpdateViewRect();
