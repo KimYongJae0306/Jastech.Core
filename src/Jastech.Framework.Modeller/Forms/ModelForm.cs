@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jastech.Framework.Winform.Forms
+namespace Jastech.Framework.Modeller.Forms
 {
     public partial class ModelForm : Form
     {
@@ -29,9 +29,9 @@ namespace Jastech.Framework.Winform.Forms
 
         private void AddControl()
         {
-            ModelControl ModelControl = new ModelControl();
-            ModelControl.Dock = DockStyle.Fill;
-            pnlModelForm.Controls.Add(ModelControl);
+            //ModelControl ModelControl = new ModelControl();
+            //ModelControl.Dock = DockStyle.Fill;
+            //pnlModelForm.Controls.Add(ModelControl);
         }
     }
 }

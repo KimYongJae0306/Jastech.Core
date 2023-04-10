@@ -1,4 +1,4 @@
-﻿namespace Jastech.Framework.Winform.Forms
+﻿namespace Jastech.Framework.Modeller.Forms
 {
     partial class EditModelForm
     {
@@ -138,7 +138,7 @@
             // label13
             // 
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel_White;
+            this.label13.Image = global::Jastech.Framework.Modeller.Properties.Resources.Cancel_White;
             this.label13.Location = new System.Drawing.Point(3, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 50);
@@ -188,7 +188,7 @@
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Image = global::Jastech.Framework.Winform.Properties.Resources.Select_White;
+            this.label9.Image = global::Jastech.Framework.Modeller.Properties.Resources.Select_White;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 50);

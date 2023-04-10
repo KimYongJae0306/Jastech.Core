@@ -1,6 +1,7 @@
 ﻿using Jastech.Framework.Structure;
 using Jastech.Framework.Structure.Helper;
 using Jastech.Framework.Structure.Service;
+using Jastech.Framework.Winform.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Jastech.Framework.Winform.Controls.ModelControl;
+using static Jastech.Framework.Modeller.Controls.ModelControl;
 
-namespace Jastech.Framework.Winform.Forms
+namespace Jastech.Framework.Modeller.Forms
 {
     public partial class EditModelForm : Form
     {

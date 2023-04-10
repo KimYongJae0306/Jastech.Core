@@ -1,4 +1,4 @@
-﻿namespace Jastech.Framework.Winform.Controls
+﻿namespace Jastech.Framework.Modeller.Controls
 {
     partial class ModelControl
     {
@@ -219,7 +219,7 @@
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Image = global::Jastech.Framework.Winform.Properties.Resources.Delete_White;
+            this.label3.Image = global::Jastech.Framework.Modeller.Properties.Resources.Delete_White;
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 62);
@@ -268,7 +268,7 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Image = global::Jastech.Framework.Winform.Properties.Resources.Edit_White;
+            this.label1.Image = global::Jastech.Framework.Modeller.Properties.Resources.Edit_White;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 62);
@@ -317,7 +317,7 @@
             // lblCreateModelImage
             // 
             this.lblCreateModelImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCreateModelImage.Image = global::Jastech.Framework.Winform.Properties.Resources.New_White;
+            this.lblCreateModelImage.Image = global::Jastech.Framework.Modeller.Properties.Resources.New_White;
             this.lblCreateModelImage.Location = new System.Drawing.Point(3, 0);
             this.lblCreateModelImage.Name = "lblCreateModelImage";
             this.lblCreateModelImage.Size = new System.Drawing.Size(44, 62);
@@ -394,7 +394,7 @@
             // lblCancelImage
             // 
             this.lblCancelImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancelImage.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel_White;
+            this.lblCancelImage.Image = global::Jastech.Framework.Modeller.Properties.Resources.Cancel_White;
             this.lblCancelImage.Location = new System.Drawing.Point(3, 0);
             this.lblCancelImage.Name = "lblCancelImage";
             this.lblCancelImage.Size = new System.Drawing.Size(44, 56);
@@ -443,7 +443,7 @@
             // lblApplyImage
             // 
             this.lblApplyImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblApplyImage.Image = global::Jastech.Framework.Winform.Properties.Resources.Select_White;
+            this.lblApplyImage.Image = global::Jastech.Framework.Modeller.Properties.Resources.Select_White;
             this.lblApplyImage.Location = new System.Drawing.Point(3, 0);
             this.lblApplyImage.Name = "lblApplyImage";
             this.lblApplyImage.Size = new System.Drawing.Size(44, 56);

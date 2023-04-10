@@ -1,4 +1,4 @@
-﻿namespace Jastech.Framework.Winform.Forms
+﻿namespace Jastech.Framework.Modeller.Forms
 {
     partial class ModelForm
     {

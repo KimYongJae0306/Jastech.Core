@@ -1,6 +1,7 @@
 ﻿using Jastech.Framework.Structure;
 using Jastech.Framework.Structure.Helper;
 using Jastech.Framework.Structure.Service;
+using Jastech.Framework.Winform.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Jastech.Framework.Winform.Controls.ModelControl;
+using static Jastech.Framework.Modeller.Controls.ModelControl;
 
-namespace Jastech.Framework.Winform.Forms
+namespace Jastech.Framework.Modeller.Forms
 {
     public partial class CreateModelForm : Form
     {
@@ -43,6 +44,7 @@ namespace Jastech.Framework.Winform.Forms
         {
             string modelName = txtModelName.Text;
             string description = txtModelDescription.Text;
+
             DateTime time = DateTime.Now;
 
             if (modelName == "")
@@ -50,6 +52,7 @@ namespace Jastech.Framework.Winform.Forms
                 ShowMessageBox("Enter your model name.");
                 return;
             }
+
 
             if (ModelFileHelper.IsExistModel(ModelPath, modelName))
             {
@@ -84,5 +87,14 @@ namespace Jastech.Framework.Winform.Forms
             form.ShowDialog();
         }
         #endregion
+
+        private void txtTabCount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자만 입력되도록 필터링             
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리             
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

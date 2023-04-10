@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Structure;
 using Jastech.Framework.Winform.Forms;
-using static Jastech.Framework.Winform.Forms.CreateModelForm;
 using Jastech.Framework.Structure.Service;
 using System.IO;
 using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Structure.Helper;
+using Jastech.Framework.Modeller.Forms;
 
-namespace Jastech.Framework.Winform.Controls
+namespace Jastech.Framework.Modeller.Controls
 {
     public partial class ModelControl : UserControl
     {

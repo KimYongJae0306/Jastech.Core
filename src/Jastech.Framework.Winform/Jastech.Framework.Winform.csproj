@@ -84,12 +84,6 @@
     <Compile Include="Controls\LogControl.Designer.cs">
       <DependentUpon>LogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ModelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ModelControl.Designer.cs">
-      <DependentUpon>ModelControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MotionCommandControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -121,24 +115,6 @@
       <DependentUpon>UPHControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DeviceManager.cs" />
-    <Compile Include="Forms\CopyModelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CopyModelForm.Designer.cs">
-      <DependentUpon>CopyModelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CreateModelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CreateModelForm.Designer.cs">
-      <DependentUpon>CreateModelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EditModelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditModelForm.Designer.cs">
-      <DependentUpon>EditModelForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\HistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,12 +138,6 @@
     </Compile>
     <Compile Include="Forms\MessageYesNoForm.Designer.cs">
       <DependentUpon>MessageYesNoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ModelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ModelForm.Designer.cs">
-      <DependentUpon>ModelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MessageConfirmForm.cs">
       <SubType>Form</SubType>
@@ -201,9 +171,6 @@
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ModelControl.resx">
-      <DependentUpon>ModelControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionCommandControl.resx">
       <DependentUpon>MotionCommandControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,15 +186,6 @@
     <EmbeddedResource Include="Controls\UPHControl.resx">
       <DependentUpon>UPHControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CopyModelForm.resx">
-      <DependentUpon>CopyModelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CreateModelForm.resx">
-      <DependentUpon>CreateModelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditModelForm.resx">
-      <DependentUpon>EditModelForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,9 +197,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageYesNoForm.resx">
       <DependentUpon>MessageYesNoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModelForm.resx">
-      <DependentUpon>ModelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageConfirmForm.resx">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
