@@ -46,16 +46,16 @@
             this.tfpnlContainer.RowCount = 2;
             this.tfpnlContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tfpnlContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tfpnlContainer.Size = new System.Drawing.Size(628, 443);
+            this.tfpnlContainer.Size = new System.Drawing.Size(927, 390);
             this.tfpnlContainer.TabIndex = 5;
             // 
             // pnlThumbnail
             // 
             this.pnlThumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlThumbnail.Location = new System.Drawing.Point(3, 345);
+            this.pnlThumbnail.Location = new System.Drawing.Point(3, 292);
             this.pnlThumbnail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlThumbnail.Name = "pnlThumbnail";
-            this.pnlThumbnail.Size = new System.Drawing.Size(622, 96);
+            this.pnlThumbnail.Size = new System.Drawing.Size(921, 96);
             this.pnlThumbnail.TabIndex = 3;
             // 
             // pnlDisplay
@@ -64,18 +64,18 @@
             this.pnlDisplay.Location = new System.Drawing.Point(3, 2);
             this.pnlDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDisplay.Name = "pnlDisplay";
-            this.pnlDisplay.Size = new System.Drawing.Size(622, 339);
+            this.pnlDisplay.Size = new System.Drawing.Size(921, 286);
             this.pnlDisplay.TabIndex = 0;
             // 
-            // CogThumbnailDisplayControl
+            // CogTeachingDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tfpnlContainer);
-            this.Name = "CogThumbnailDisplayControl";
-            this.Size = new System.Drawing.Size(628, 443);
-            this.Load += new System.EventHandler(this.CogThumbnailDisplayControl_Load);
+            this.Name = "CogTeachingDisplayControl";
+            this.Size = new System.Drawing.Size(927, 390);
+            this.Load += new System.EventHandler(this.CogTeachingDisplayControl_Load);
             this.tfpnlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 

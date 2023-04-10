@@ -24,7 +24,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             InitializeComponent();
         }
 
-        private void CogThumbnailDisplayControl_Load(object sender, EventArgs e)
+        private void CogTeachingDisplayControl_Load(object sender, EventArgs e)
         {
             AddControls();
 
