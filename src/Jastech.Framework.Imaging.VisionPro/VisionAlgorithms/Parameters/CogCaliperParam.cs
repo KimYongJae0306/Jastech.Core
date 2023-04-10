@@ -65,7 +65,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
                 return null;
 
             CaliperTool.CurrentRecordEnable = constants;
-
+            CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.All;
+            
             return CaliperTool.CreateCurrentRecord();
         }
 
