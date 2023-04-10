@@ -17,6 +17,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 필드
         private CogCaliperTool CaliperTool = null;
         private CogCaliperParam CurrentParam;
+        private Color _selectedColor = new Color();
+        private Color _nonSelectedColor = new Color();
         #endregion
 
         #region 속성
@@ -47,10 +49,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (rdoDarkToLight.Checked)
             {
                 SetEdgePolarity(CogCaliperPolarityConstants.DarkToLight);
-                rdoDarkToLight.BackColor = Color.DeepSkyBlue;
+                rdoDarkToLight.BackColor = _selectedColor;
             }
             else
-                rdoDarkToLight.BackColor = Color.White;
+                rdoDarkToLight.BackColor = _nonSelectedColor;
         }
 
         private void rdoLightToDark_CheckedChanged(object sender, EventArgs e)
@@ -58,14 +60,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (rdoLightToDark.Checked)
             {
                 SetEdgePolarity(CogCaliperPolarityConstants.LightToDark);
-                rdoLightToDark.BackColor = Color.DeepSkyBlue;
+                rdoLightToDark.BackColor = _selectedColor;
             }
             else
-                rdoLightToDark.BackColor = Color.White;
+                rdoLightToDark.BackColor = _nonSelectedColor;
         }
 
         private void IntializeUI()
         {
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _nonSelectedColor = Color.FromArgb(52, 52, 52);
             rdoDarkToLight.Checked = true;
         }
         
