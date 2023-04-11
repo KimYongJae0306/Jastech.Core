@@ -51,6 +51,7 @@
             // 
             this.btnCanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnCanel.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnCanel.ForeColor = System.Drawing.Color.White;
             this.btnCanel.Location = new System.Drawing.Point(184, 432);
             this.btnCanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCanel.Name = "btnCanel";
@@ -64,6 +65,7 @@
             // 
             this.btnEnter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnEnter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnEnter.ForeColor = System.Drawing.Color.White;
             this.btnEnter.Location = new System.Drawing.Point(270, 258);
             this.btnEnter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEnter.Name = "btnEnter";
@@ -77,6 +79,7 @@
             // 
             this.btnBackspace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnBackspace.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnBackspace.ForeColor = System.Drawing.Color.White;
             this.btnBackspace.Location = new System.Drawing.Point(270, 170);
             this.btnBackspace.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBackspace.Name = "btnBackspace";
@@ -90,6 +93,7 @@
             // 
             this.btnMinus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnMinus.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnMinus.ForeColor = System.Drawing.Color.White;
             this.btnMinus.Location = new System.Drawing.Point(270, 84);
             this.btnMinus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMinus.Name = "btnMinus";
@@ -103,6 +107,7 @@
             // 
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnClear.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnClear.ForeColor = System.Drawing.Color.White;
             this.btnClear.Location = new System.Drawing.Point(184, 345);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClear.Name = "btnClear";
@@ -116,6 +121,7 @@
             // 
             this.btnDot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnDot.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnDot.ForeColor = System.Drawing.Color.White;
             this.btnDot.Location = new System.Drawing.Point(98, 345);
             this.btnDot.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDot.Name = "btnDot";
@@ -128,6 +134,7 @@
             // 
             this.btnNum9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum9.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum9.ForeColor = System.Drawing.Color.White;
             this.btnNum9.Location = new System.Drawing.Point(184, 84);
             this.btnNum9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum9.Name = "btnNum9";
@@ -141,6 +148,7 @@
             // 
             this.btnNum8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum8.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum8.ForeColor = System.Drawing.Color.White;
             this.btnNum8.Location = new System.Drawing.Point(98, 84);
             this.btnNum8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum8.Name = "btnNum8";
@@ -154,6 +162,7 @@
             // 
             this.btnNum7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum7.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum7.ForeColor = System.Drawing.Color.White;
             this.btnNum7.Location = new System.Drawing.Point(12, 84);
             this.btnNum7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum7.Name = "btnNum7";
@@ -167,6 +176,7 @@
             // 
             this.btnNum6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum6.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum6.ForeColor = System.Drawing.Color.White;
             this.btnNum6.Location = new System.Drawing.Point(184, 170);
             this.btnNum6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum6.Name = "btnNum6";
@@ -180,6 +190,7 @@
             // 
             this.btnNum5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum5.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum5.ForeColor = System.Drawing.Color.White;
             this.btnNum5.Location = new System.Drawing.Point(98, 171);
             this.btnNum5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum5.Name = "btnNum5";
@@ -193,6 +204,7 @@
             // 
             this.btnNum4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum4.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum4.ForeColor = System.Drawing.Color.White;
             this.btnNum4.Location = new System.Drawing.Point(12, 170);
             this.btnNum4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum4.Name = "btnNum4";
@@ -206,6 +218,7 @@
             // 
             this.btnNum3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum3.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum3.ForeColor = System.Drawing.Color.White;
             this.btnNum3.Location = new System.Drawing.Point(184, 258);
             this.btnNum3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum3.Name = "btnNum3";
@@ -219,6 +232,7 @@
             // 
             this.btnNum2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum2.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum2.ForeColor = System.Drawing.Color.White;
             this.btnNum2.Location = new System.Drawing.Point(98, 258);
             this.btnNum2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum2.Name = "btnNum2";
@@ -232,6 +246,7 @@
             // 
             this.btnNum1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum1.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum1.ForeColor = System.Drawing.Color.White;
             this.btnNum1.Location = new System.Drawing.Point(12, 258);
             this.btnNum1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum1.Name = "btnNum1";
@@ -245,6 +260,7 @@
             // 
             this.btnNum0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
             this.btnNum0.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.btnNum0.ForeColor = System.Drawing.Color.White;
             this.btnNum0.Location = new System.Drawing.Point(12, 345);
             this.btnNum0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNum0.Name = "btnNum0";

@@ -56,6 +56,7 @@
             // 
             // pnlThumbnail
             // 
+            this.pnlThumbnail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.pnlThumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlThumbnail.Location = new System.Drawing.Point(3, 333);
             this.pnlThumbnail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
