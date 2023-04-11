@@ -219,10 +219,11 @@
             // 
             // lblStrengthFilterValue
             // 
-            this.lblStrengthFilterValue.BackColor = System.Drawing.Color.White;
+            this.lblStrengthFilterValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStrengthFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblStrengthFilterValue.ForeColor = System.Drawing.Color.White;
             this.lblStrengthFilterValue.Location = new System.Drawing.Point(60, 88);
             this.lblStrengthFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthFilterValue.Name = "lblStrengthFilterValue";
@@ -233,10 +234,11 @@
             // 
             // lblStrengthFilter
             // 
-            this.lblStrengthFilter.BackColor = System.Drawing.Color.White;
+            this.lblStrengthFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStrengthFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthFilter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblStrengthFilter.ForeColor = System.Drawing.Color.White;
             this.lblStrengthFilter.Location = new System.Drawing.Point(0, 88);
             this.lblStrengthFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthFilter.Name = "lblStrengthFilter";
@@ -247,10 +249,11 @@
             // 
             // lblCount
             // 
-            this.lblCount.BackColor = System.Drawing.Color.White;
+            this.lblCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCount.ForeColor = System.Drawing.Color.White;
             this.lblCount.Location = new System.Drawing.Point(0, 0);
             this.lblCount.Margin = new System.Windows.Forms.Padding(0);
             this.lblCount.Name = "lblCount";
@@ -261,10 +264,11 @@
             // 
             // lblCountValue
             // 
-            this.lblCountValue.BackColor = System.Drawing.Color.White;
+            this.lblCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCountValue.ForeColor = System.Drawing.Color.White;
             this.lblCountValue.Location = new System.Drawing.Point(60, 0);
             this.lblCountValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblCountValue.Name = "lblCountValue";
@@ -275,10 +279,11 @@
             // 
             // lblMinSizeFilter
             // 
-            this.lblMinSizeFilter.BackColor = System.Drawing.Color.White;
+            this.lblMinSizeFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblMinSizeFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMinSizeFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMinSizeFilter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMinSizeFilter.ForeColor = System.Drawing.Color.White;
             this.lblMinSizeFilter.Location = new System.Drawing.Point(0, 22);
             this.lblMinSizeFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinSizeFilter.Name = "lblMinSizeFilter";
@@ -289,10 +294,11 @@
             // 
             // lblMaxSizeFilter
             // 
-            this.lblMaxSizeFilter.BackColor = System.Drawing.Color.White;
+            this.lblMaxSizeFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblMaxSizeFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxSizeFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMaxSizeFilter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMaxSizeFilter.ForeColor = System.Drawing.Color.White;
             this.lblMaxSizeFilter.Location = new System.Drawing.Point(0, 44);
             this.lblMaxSizeFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxSizeFilter.Name = "lblMaxSizeFilter";
@@ -303,10 +309,11 @@
             // 
             // lblGroupDistance
             // 
-            this.lblGroupDistance.BackColor = System.Drawing.Color.White;
+            this.lblGroupDistance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblGroupDistance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGroupDistance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupDistance.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGroupDistance.ForeColor = System.Drawing.Color.White;
             this.lblGroupDistance.Location = new System.Drawing.Point(0, 66);
             this.lblGroupDistance.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupDistance.Name = "lblGroupDistance";
@@ -317,10 +324,11 @@
             // 
             // lblLength
             // 
-            this.lblLength.BackColor = System.Drawing.Color.White;
+            this.lblLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLength.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLength.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLength.ForeColor = System.Drawing.Color.White;
             this.lblLength.Location = new System.Drawing.Point(123, 0);
             this.lblLength.Margin = new System.Windows.Forms.Padding(0);
             this.lblLength.Name = "lblLength";
@@ -331,10 +339,11 @@
             // 
             // lblWidthCut
             // 
-            this.lblWidthCut.BackColor = System.Drawing.Color.White;
+            this.lblWidthCut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblWidthCut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWidthCut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWidthCut.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblWidthCut.ForeColor = System.Drawing.Color.White;
             this.lblWidthCut.Location = new System.Drawing.Point(123, 22);
             this.lblWidthCut.Margin = new System.Windows.Forms.Padding(0);
             this.lblWidthCut.Name = "lblWidthCut";
@@ -345,10 +354,11 @@
             // 
             // lblHeightCut
             // 
-            this.lblHeightCut.BackColor = System.Drawing.Color.White;
+            this.lblHeightCut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblHeightCut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHeightCut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHeightCut.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblHeightCut.ForeColor = System.Drawing.Color.White;
             this.lblHeightCut.Location = new System.Drawing.Point(123, 44);
             this.lblHeightCut.Margin = new System.Windows.Forms.Padding(0);
             this.lblHeightCut.Name = "lblHeightCut";
@@ -359,10 +369,11 @@
             // 
             // lblBWRatio
             // 
-            this.lblBWRatio.BackColor = System.Drawing.Color.White;
+            this.lblBWRatio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblBWRatio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBWRatio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBWRatio.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblBWRatio.ForeColor = System.Drawing.Color.White;
             this.lblBWRatio.Location = new System.Drawing.Point(123, 66);
             this.lblBWRatio.Margin = new System.Windows.Forms.Padding(0);
             this.lblBWRatio.Name = "lblBWRatio";
@@ -373,10 +384,11 @@
             // 
             // lblExtraLeadDisplay
             // 
-            this.lblExtraLeadDisplay.BackColor = System.Drawing.Color.White;
+            this.lblExtraLeadDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblExtraLeadDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblExtraLeadDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblExtraLeadDisplay.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblExtraLeadDisplay.ForeColor = System.Drawing.Color.White;
             this.lblExtraLeadDisplay.Location = new System.Drawing.Point(123, 88);
             this.lblExtraLeadDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.lblExtraLeadDisplay.Name = "lblExtraLeadDisplay";
@@ -387,10 +399,11 @@
             // 
             // lblMinSizeFilterValue
             // 
-            this.lblMinSizeFilterValue.BackColor = System.Drawing.Color.White;
+            this.lblMinSizeFilterValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblMinSizeFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMinSizeFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMinSizeFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMinSizeFilterValue.ForeColor = System.Drawing.Color.White;
             this.lblMinSizeFilterValue.Location = new System.Drawing.Point(60, 22);
             this.lblMinSizeFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinSizeFilterValue.Name = "lblMinSizeFilterValue";
@@ -401,10 +414,11 @@
             // 
             // lblMaxSizeFilterValue
             // 
-            this.lblMaxSizeFilterValue.BackColor = System.Drawing.Color.White;
+            this.lblMaxSizeFilterValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblMaxSizeFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxSizeFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMaxSizeFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblMaxSizeFilterValue.ForeColor = System.Drawing.Color.White;
             this.lblMaxSizeFilterValue.Location = new System.Drawing.Point(60, 44);
             this.lblMaxSizeFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxSizeFilterValue.Name = "lblMaxSizeFilterValue";
@@ -415,10 +429,11 @@
             // 
             // lblGroupDistanceValue
             // 
-            this.lblGroupDistanceValue.BackColor = System.Drawing.Color.White;
+            this.lblGroupDistanceValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblGroupDistanceValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGroupDistanceValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupDistanceValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGroupDistanceValue.ForeColor = System.Drawing.Color.White;
             this.lblGroupDistanceValue.Location = new System.Drawing.Point(60, 66);
             this.lblGroupDistanceValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupDistanceValue.Name = "lblGroupDistanceValue";
@@ -429,10 +444,11 @@
             // 
             // lblLengthValue
             // 
-            this.lblLengthValue.BackColor = System.Drawing.Color.White;
+            this.lblLengthValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLengthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLengthValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLengthValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLengthValue.ForeColor = System.Drawing.Color.White;
             this.lblLengthValue.Location = new System.Drawing.Point(183, 0);
             this.lblLengthValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblLengthValue.Name = "lblLengthValue";
@@ -443,10 +459,11 @@
             // 
             // lblWidthCutValue
             // 
-            this.lblWidthCutValue.BackColor = System.Drawing.Color.White;
+            this.lblWidthCutValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblWidthCutValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWidthCutValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWidthCutValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblWidthCutValue.ForeColor = System.Drawing.Color.White;
             this.lblWidthCutValue.Location = new System.Drawing.Point(183, 22);
             this.lblWidthCutValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblWidthCutValue.Name = "lblWidthCutValue";
@@ -457,10 +474,11 @@
             // 
             // lblHeightCutValue
             // 
-            this.lblHeightCutValue.BackColor = System.Drawing.Color.White;
+            this.lblHeightCutValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblHeightCutValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHeightCutValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHeightCutValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblHeightCutValue.ForeColor = System.Drawing.Color.White;
             this.lblHeightCutValue.Location = new System.Drawing.Point(183, 44);
             this.lblHeightCutValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblHeightCutValue.Name = "lblHeightCutValue";
@@ -471,10 +489,11 @@
             // 
             // lblBWRatioValue
             // 
-            this.lblBWRatioValue.BackColor = System.Drawing.Color.White;
+            this.lblBWRatioValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblBWRatioValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBWRatioValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBWRatioValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblBWRatioValue.ForeColor = System.Drawing.Color.White;
             this.lblBWRatioValue.Location = new System.Drawing.Point(183, 66);
             this.lblBWRatioValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblBWRatioValue.Name = "lblBWRatioValue";
@@ -485,10 +504,11 @@
             // 
             // lblExtraLeadDisplayValue
             // 
-            this.lblExtraLeadDisplayValue.BackColor = System.Drawing.Color.White;
+            this.lblExtraLeadDisplayValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblExtraLeadDisplayValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblExtraLeadDisplayValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblExtraLeadDisplayValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblExtraLeadDisplayValue.ForeColor = System.Drawing.Color.White;
             this.lblExtraLeadDisplayValue.Location = new System.Drawing.Point(183, 88);
             this.lblExtraLeadDisplayValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblExtraLeadDisplayValue.Name = "lblExtraLeadDisplayValue";
@@ -547,10 +567,11 @@
             // lblGroupCount
             // 
             this.lblGroupCount.AutoSize = true;
-            this.lblGroupCount.BackColor = System.Drawing.Color.White;
+            this.lblGroupCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblGroupCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGroupCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGroupCount.ForeColor = System.Drawing.Color.White;
             this.lblGroupCount.Location = new System.Drawing.Point(0, 0);
             this.lblGroupCount.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupCount.Name = "lblGroupCount";
@@ -562,10 +583,11 @@
             // lblGroupCountValue
             // 
             this.lblGroupCountValue.AutoSize = true;
-            this.lblGroupCountValue.BackColor = System.Drawing.Color.White;
+            this.lblGroupCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblGroupCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGroupCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGroupCountValue.ForeColor = System.Drawing.Color.White;
             this.lblGroupCountValue.Location = new System.Drawing.Point(63, 0);
             this.lblGroupCountValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupCountValue.Name = "lblGroupCountValue";
@@ -576,11 +598,13 @@
             // 
             // cmbGroupNumber
             // 
+            this.cmbGroupNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbGroupNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbGroupNumber.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbGroupNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGroupNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbGroupNumber.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbGroupNumber.ForeColor = System.Drawing.Color.White;
             this.cmbGroupNumber.FormattingEnabled = true;
             this.cmbGroupNumber.IntegralHeight = false;
             this.cmbGroupNumber.ItemHeight = 22;
@@ -594,10 +618,11 @@
             // lblGroupNumber
             // 
             this.lblGroupNumber.AutoSize = true;
-            this.lblGroupNumber.BackColor = System.Drawing.Color.White;
+            this.lblGroupNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblGroupNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGroupNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupNumber.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGroupNumber.ForeColor = System.Drawing.Color.White;
             this.lblGroupNumber.Location = new System.Drawing.Point(129, 0);
             this.lblGroupNumber.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupNumber.Name = "lblGroupNumber";
@@ -609,10 +634,11 @@
             // lblROIWidth
             // 
             this.lblROIWidth.AutoSize = true;
-            this.lblROIWidth.BackColor = System.Drawing.Color.White;
+            this.lblROIWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblROIWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblROIWidth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblROIWidth.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblROIWidth.ForeColor = System.Drawing.Color.White;
             this.lblROIWidth.Location = new System.Drawing.Point(0, 22);
             this.lblROIWidth.Margin = new System.Windows.Forms.Padding(0);
             this.lblROIWidth.Name = "lblROIWidth";
@@ -624,10 +650,11 @@
             // lblROIWidthValue
             // 
             this.lblROIWidthValue.AutoSize = true;
-            this.lblROIWidthValue.BackColor = System.Drawing.Color.White;
+            this.lblROIWidthValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblROIWidthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblROIWidthValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblROIWidthValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblROIWidthValue.ForeColor = System.Drawing.Color.White;
             this.lblROIWidthValue.Location = new System.Drawing.Point(63, 22);
             this.lblROIWidthValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblROIWidthValue.Name = "lblROIWidthValue";
@@ -639,10 +666,11 @@
             // lblROIHeight
             // 
             this.lblROIHeight.AutoSize = true;
-            this.lblROIHeight.BackColor = System.Drawing.Color.White;
+            this.lblROIHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblROIHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblROIHeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblROIHeight.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblROIHeight.ForeColor = System.Drawing.Color.White;
             this.lblROIHeight.Location = new System.Drawing.Point(129, 22);
             this.lblROIHeight.Margin = new System.Windows.Forms.Padding(0);
             this.lblROIHeight.Name = "lblROIHeight";
@@ -654,10 +682,11 @@
             // lblROIHeightValue
             // 
             this.lblROIHeightValue.AutoSize = true;
-            this.lblROIHeightValue.BackColor = System.Drawing.Color.White;
+            this.lblROIHeightValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblROIHeightValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblROIHeightValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblROIHeightValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblROIHeightValue.ForeColor = System.Drawing.Color.White;
             this.lblROIHeightValue.Location = new System.Drawing.Point(192, 22);
             this.lblROIHeightValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblROIHeightValue.Name = "lblROIHeightValue";
@@ -669,10 +698,11 @@
             // lblLeadCount
             // 
             this.lblLeadCount.AutoSize = true;
-            this.lblLeadCount.BackColor = System.Drawing.Color.White;
+            this.lblLeadCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLeadCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLeadCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLeadCount.ForeColor = System.Drawing.Color.White;
             this.lblLeadCount.Location = new System.Drawing.Point(0, 44);
             this.lblLeadCount.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadCount.Name = "lblLeadCount";
@@ -684,10 +714,11 @@
             // lblLeadCountValue
             // 
             this.lblLeadCountValue.AutoSize = true;
-            this.lblLeadCountValue.BackColor = System.Drawing.Color.White;
+            this.lblLeadCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLeadCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLeadCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLeadCountValue.ForeColor = System.Drawing.Color.White;
             this.lblLeadCountValue.Location = new System.Drawing.Point(63, 44);
             this.lblLeadCountValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadCountValue.Name = "lblLeadCountValue";
@@ -699,10 +730,11 @@
             // lblLeadPitch
             // 
             this.lblLeadPitch.AutoSize = true;
-            this.lblLeadPitch.BackColor = System.Drawing.Color.White;
+            this.lblLeadPitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLeadPitch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadPitch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLeadPitch.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLeadPitch.ForeColor = System.Drawing.Color.White;
             this.lblLeadPitch.Location = new System.Drawing.Point(129, 44);
             this.lblLeadPitch.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadPitch.Name = "lblLeadPitch";
@@ -714,10 +746,11 @@
             // lblLeadPitchValue
             // 
             this.lblLeadPitchValue.AutoSize = true;
-            this.lblLeadPitchValue.BackColor = System.Drawing.Color.White;
+            this.lblLeadPitchValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLeadPitchValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadPitchValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLeadPitchValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLeadPitchValue.ForeColor = System.Drawing.Color.White;
             this.lblLeadPitchValue.Location = new System.Drawing.Point(192, 44);
             this.lblLeadPitchValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadPitchValue.Name = "lblLeadPitchValue";
@@ -772,7 +805,7 @@
             // 
             // lblDimple
             // 
-            this.lblDimple.BackColor = System.Drawing.Color.White;
+            this.lblDimple.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDimple.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDimple.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDimple.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -786,7 +819,7 @@
             // 
             // lblDimpleNGCount
             // 
-            this.lblDimpleNGCount.BackColor = System.Drawing.Color.White;
+            this.lblDimpleNGCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDimpleNGCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDimpleNGCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDimpleNGCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -800,7 +833,7 @@
             // 
             // lblDimpleNGCountValue
             // 
-            this.lblDimpleNGCountValue.BackColor = System.Drawing.Color.White;
+            this.lblDimpleNGCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDimpleNGCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDimpleNGCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDimpleNGCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -814,7 +847,7 @@
             // 
             // lblDimpleThreshold
             // 
-            this.lblDimpleThreshold.BackColor = System.Drawing.Color.White;
+            this.lblDimpleThreshold.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDimpleThreshold.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDimpleThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDimpleThreshold.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -828,7 +861,7 @@
             // 
             // lblDimpleThresholdValue
             // 
-            this.lblDimpleThresholdValue.BackColor = System.Drawing.Color.White;
+            this.lblDimpleThresholdValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblDimpleThresholdValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDimpleThresholdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDimpleThresholdValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -844,7 +877,7 @@
             // 
             this.chkUseDimple.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkUseDimple.AutoSize = true;
-            this.chkUseDimple.BackColor = System.Drawing.Color.White;
+            this.chkUseDimple.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.chkUseDimple.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkUseDimple.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.chkUseDimple.Location = new System.Drawing.Point(183, 40);
@@ -858,7 +891,7 @@
             // 
             // lblAlarmNGCount
             // 
-            this.lblAlarmNGCount.BackColor = System.Drawing.Color.White;
+            this.lblAlarmNGCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAlarmNGCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAlarmNGCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarmNGCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -872,7 +905,7 @@
             // 
             // lblAlarmCapacity
             // 
-            this.lblAlarmCapacity.BackColor = System.Drawing.Color.White;
+            this.lblAlarmCapacity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAlarmCapacity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAlarmCapacity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarmCapacity.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -886,7 +919,7 @@
             // 
             // lblAlarm
             // 
-            this.lblAlarm.BackColor = System.Drawing.Color.White;
+            this.lblAlarm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAlarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarm.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -900,7 +933,7 @@
             // 
             // lblAlarmNGCountValue
             // 
-            this.lblAlarmNGCountValue.BackColor = System.Drawing.Color.White;
+            this.lblAlarmNGCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAlarmNGCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAlarmNGCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarmNGCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -914,7 +947,7 @@
             // 
             // lblAlarmCapacityValue
             // 
-            this.lblAlarmCapacityValue.BackColor = System.Drawing.Color.White;
+            this.lblAlarmCapacityValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblAlarmCapacityValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAlarmCapacityValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAlarmCapacityValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -930,7 +963,7 @@
             // 
             this.chkUseAlarm.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkUseAlarm.AutoSize = true;
-            this.chkUseAlarm.BackColor = System.Drawing.Color.White;
+            this.chkUseAlarm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.chkUseAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkUseAlarm.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.chkUseAlarm.Location = new System.Drawing.Point(183, 120);
@@ -1010,11 +1043,13 @@
             // 
             // cmbFilterDirection
             // 
+            this.cmbFilterDirection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbFilterDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFilterDirection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbFilterDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFilterDirection.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbFilterDirection.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbFilterDirection.ForeColor = System.Drawing.Color.White;
             this.cmbFilterDirection.FormattingEnabled = true;
             this.cmbFilterDirection.IntegralHeight = false;
             this.cmbFilterDirection.Location = new System.Drawing.Point(61, 88);
@@ -1026,11 +1061,13 @@
             // 
             // cmbFilterType
             // 
+            this.cmbFilterType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbFilterType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFilterType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFilterType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbFilterType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbFilterType.ForeColor = System.Drawing.Color.White;
             this.cmbFilterType.FormattingEnabled = true;
             this.cmbFilterType.IntegralHeight = false;
             this.cmbFilterType.Location = new System.Drawing.Point(61, 66);
@@ -1042,11 +1079,13 @@
             // 
             // cmbStrengthBase
             // 
+            this.cmbStrengthBase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbStrengthBase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbStrengthBase.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbStrengthBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStrengthBase.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbStrengthBase.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbStrengthBase.ForeColor = System.Drawing.Color.White;
             this.cmbStrengthBase.FormattingEnabled = true;
             this.cmbStrengthBase.IntegralHeight = false;
             this.cmbStrengthBase.Location = new System.Drawing.Point(186, 44);
@@ -1057,11 +1096,13 @@
             // 
             // cmbTargetType
             // 
+            this.cmbTargetType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbTargetType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTargetType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTargetType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbTargetType.ForeColor = System.Drawing.Color.White;
             this.cmbTargetType.FormattingEnabled = true;
             this.cmbTargetType.IntegralHeight = false;
             this.cmbTargetType.Location = new System.Drawing.Point(61, 44);
@@ -1073,11 +1114,13 @@
             // 
             // cmbPeakProperty
             // 
+            this.cmbPeakProperty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbPeakProperty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPeakProperty.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbPeakProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPeakProperty.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbPeakProperty.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbPeakProperty.ForeColor = System.Drawing.Color.White;
             this.cmbPeakProperty.FormattingEnabled = true;
             this.cmbPeakProperty.IntegralHeight = false;
             this.cmbPeakProperty.Location = new System.Drawing.Point(186, 22);
@@ -1088,11 +1131,13 @@
             // 
             // cmbPanelType
             // 
+            this.cmbPanelType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbPanelType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPanelType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbPanelType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPanelType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbPanelType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbPanelType.ForeColor = System.Drawing.Color.White;
             this.cmbPanelType.FormattingEnabled = true;
             this.cmbPanelType.IntegralHeight = false;
             this.cmbPanelType.Location = new System.Drawing.Point(61, 22);
@@ -1104,11 +1149,13 @@
             // 
             // cmbShadowDirection
             // 
+            this.cmbShadowDirection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbShadowDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbShadowDirection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbShadowDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbShadowDirection.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbShadowDirection.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbShadowDirection.ForeColor = System.Drawing.Color.White;
             this.cmbShadowDirection.FormattingEnabled = true;
             this.cmbShadowDirection.IntegralHeight = false;
             this.cmbShadowDirection.Location = new System.Drawing.Point(186, 0);
@@ -1119,10 +1166,11 @@
             // 
             // lblInspectionType
             // 
-            this.lblInspectionType.BackColor = System.Drawing.Color.White;
+            this.lblInspectionType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblInspectionType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInspectionType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInspectionType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblInspectionType.ForeColor = System.Drawing.Color.White;
             this.lblInspectionType.Location = new System.Drawing.Point(0, 0);
             this.lblInspectionType.Margin = new System.Windows.Forms.Padding(0);
             this.lblInspectionType.Name = "lblInspectionType";
@@ -1133,10 +1181,11 @@
             // 
             // lblThresholdWeightValue
             // 
-            this.lblThresholdWeightValue.BackColor = System.Drawing.Color.White;
+            this.lblThresholdWeightValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblThresholdWeightValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblThresholdWeightValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblThresholdWeightValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblThresholdWeightValue.ForeColor = System.Drawing.Color.White;
             this.lblThresholdWeightValue.Location = new System.Drawing.Point(61, 110);
             this.lblThresholdWeightValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdWeightValue.Name = "lblThresholdWeightValue";
@@ -1147,10 +1196,11 @@
             // 
             // lblPeakThreshold
             // 
-            this.lblPeakThreshold.BackColor = System.Drawing.Color.White;
+            this.lblPeakThreshold.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPeakThreshold.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPeakThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPeakThreshold.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPeakThreshold.ForeColor = System.Drawing.Color.White;
             this.lblPeakThreshold.Location = new System.Drawing.Point(0, 132);
             this.lblPeakThreshold.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakThreshold.Name = "lblPeakThreshold";
@@ -1161,10 +1211,11 @@
             // 
             // lblThresholdWeight
             // 
-            this.lblThresholdWeight.BackColor = System.Drawing.Color.White;
+            this.lblThresholdWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblThresholdWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblThresholdWeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblThresholdWeight.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblThresholdWeight.ForeColor = System.Drawing.Color.White;
             this.lblThresholdWeight.Location = new System.Drawing.Point(0, 110);
             this.lblThresholdWeight.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdWeight.Name = "lblThresholdWeight";
@@ -1175,10 +1226,11 @@
             // 
             // lblFilterDirection
             // 
-            this.lblFilterDirection.BackColor = System.Drawing.Color.White;
+            this.lblFilterDirection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblFilterDirection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFilterDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblFilterDirection.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblFilterDirection.ForeColor = System.Drawing.Color.White;
             this.lblFilterDirection.Location = new System.Drawing.Point(0, 88);
             this.lblFilterDirection.Margin = new System.Windows.Forms.Padding(0);
             this.lblFilterDirection.Name = "lblFilterDirection";
@@ -1189,10 +1241,11 @@
             // 
             // lblFilterType
             // 
-            this.lblFilterType.BackColor = System.Drawing.Color.White;
+            this.lblFilterType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblFilterType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFilterType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblFilterType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblFilterType.ForeColor = System.Drawing.Color.White;
             this.lblFilterType.Location = new System.Drawing.Point(0, 66);
             this.lblFilterType.Margin = new System.Windows.Forms.Padding(0);
             this.lblFilterType.Name = "lblFilterType";
@@ -1203,10 +1256,11 @@
             // 
             // lblTargetType
             // 
-            this.lblTargetType.BackColor = System.Drawing.Color.White;
+            this.lblTargetType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblTargetType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTargetType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTargetType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblTargetType.ForeColor = System.Drawing.Color.White;
             this.lblTargetType.Location = new System.Drawing.Point(0, 44);
             this.lblTargetType.Margin = new System.Windows.Forms.Padding(0);
             this.lblTargetType.Name = "lblTargetType";
@@ -1217,10 +1271,11 @@
             // 
             // lblPanelType
             // 
-            this.lblPanelType.BackColor = System.Drawing.Color.White;
+            this.lblPanelType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPanelType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPanelType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPanelType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPanelType.ForeColor = System.Drawing.Color.White;
             this.lblPanelType.Location = new System.Drawing.Point(0, 22);
             this.lblPanelType.Margin = new System.Windows.Forms.Padding(0);
             this.lblPanelType.Name = "lblPanelType";
@@ -1231,10 +1286,11 @@
             // 
             // lblShadowDirection
             // 
-            this.lblShadowDirection.BackColor = System.Drawing.Color.White;
+            this.lblShadowDirection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblShadowDirection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblShadowDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblShadowDirection.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblShadowDirection.ForeColor = System.Drawing.Color.White;
             this.lblShadowDirection.Location = new System.Drawing.Point(125, 0);
             this.lblShadowDirection.Margin = new System.Windows.Forms.Padding(0);
             this.lblShadowDirection.Name = "lblShadowDirection";
@@ -1245,10 +1301,11 @@
             // 
             // lblPeakProperty
             // 
-            this.lblPeakProperty.BackColor = System.Drawing.Color.White;
+            this.lblPeakProperty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPeakProperty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPeakProperty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPeakProperty.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPeakProperty.ForeColor = System.Drawing.Color.White;
             this.lblPeakProperty.Location = new System.Drawing.Point(125, 22);
             this.lblPeakProperty.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakProperty.Name = "lblPeakProperty";
@@ -1259,10 +1316,11 @@
             // 
             // lblStrengthBase
             // 
-            this.lblStrengthBase.BackColor = System.Drawing.Color.White;
+            this.lblStrengthBase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStrengthBase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthBase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthBase.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblStrengthBase.ForeColor = System.Drawing.Color.White;
             this.lblStrengthBase.Location = new System.Drawing.Point(125, 44);
             this.lblStrengthBase.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthBase.Name = "lblStrengthBase";
@@ -1273,10 +1331,11 @@
             // 
             // lblLogTrace
             // 
-            this.lblLogTrace.BackColor = System.Drawing.Color.White;
+            this.lblLogTrace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblLogTrace.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLogTrace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLogTrace.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblLogTrace.ForeColor = System.Drawing.Color.White;
             this.lblLogTrace.Location = new System.Drawing.Point(125, 66);
             this.lblLogTrace.Margin = new System.Windows.Forms.Padding(0);
             this.lblLogTrace.Name = "lblLogTrace";
@@ -1287,10 +1346,11 @@
             // 
             // lblThresholdMode
             // 
-            this.lblThresholdMode.BackColor = System.Drawing.Color.White;
+            this.lblThresholdMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblThresholdMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblThresholdMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblThresholdMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblThresholdMode.ForeColor = System.Drawing.Color.White;
             this.lblThresholdMode.Location = new System.Drawing.Point(125, 88);
             this.lblThresholdMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdMode.Name = "lblThresholdMode";
@@ -1301,10 +1361,11 @@
             // 
             // lblStrengthScaleFactor
             // 
-            this.lblStrengthScaleFactor.BackColor = System.Drawing.Color.White;
+            this.lblStrengthScaleFactor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStrengthScaleFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthScaleFactor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthScaleFactor.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblStrengthScaleFactor.ForeColor = System.Drawing.Color.White;
             this.lblStrengthScaleFactor.Location = new System.Drawing.Point(125, 110);
             this.lblStrengthScaleFactor.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthScaleFactor.Name = "lblStrengthScaleFactor";
@@ -1315,10 +1376,11 @@
             // 
             // lblSliceOverlap
             // 
-            this.lblSliceOverlap.BackColor = System.Drawing.Color.White;
+            this.lblSliceOverlap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblSliceOverlap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSliceOverlap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSliceOverlap.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblSliceOverlap.ForeColor = System.Drawing.Color.White;
             this.lblSliceOverlap.Location = new System.Drawing.Point(125, 132);
             this.lblSliceOverlap.Margin = new System.Windows.Forms.Padding(0);
             this.lblSliceOverlap.Name = "lblSliceOverlap";
@@ -1329,10 +1391,11 @@
             // 
             // lblPeakThresholdValue
             // 
-            this.lblPeakThresholdValue.BackColor = System.Drawing.Color.White;
+            this.lblPeakThresholdValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblPeakThresholdValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPeakThresholdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPeakThresholdValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPeakThresholdValue.ForeColor = System.Drawing.Color.White;
             this.lblPeakThresholdValue.Location = new System.Drawing.Point(61, 132);
             this.lblPeakThresholdValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakThresholdValue.Name = "lblPeakThresholdValue";
@@ -1343,10 +1406,11 @@
             // 
             // lblStrengthScaleFactorValue
             // 
-            this.lblStrengthScaleFactorValue.BackColor = System.Drawing.Color.White;
+            this.lblStrengthScaleFactorValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStrengthScaleFactorValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthScaleFactorValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthScaleFactorValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblStrengthScaleFactorValue.ForeColor = System.Drawing.Color.White;
             this.lblStrengthScaleFactorValue.Location = new System.Drawing.Point(186, 110);
             this.lblStrengthScaleFactorValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthScaleFactorValue.Name = "lblStrengthScaleFactorValue";
@@ -1357,10 +1421,11 @@
             // 
             // lblSliceOverlapValue
             // 
-            this.lblSliceOverlapValue.BackColor = System.Drawing.Color.White;
+            this.lblSliceOverlapValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblSliceOverlapValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSliceOverlapValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSliceOverlapValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblSliceOverlapValue.ForeColor = System.Drawing.Color.White;
             this.lblSliceOverlapValue.Location = new System.Drawing.Point(186, 132);
             this.lblSliceOverlapValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblSliceOverlapValue.Name = "lblSliceOverlapValue";
@@ -1399,11 +1464,13 @@
             // 
             // cmbInspectionType
             // 
+            this.cmbInspectionType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbInspectionType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbInspectionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbInspectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInspectionType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbInspectionType.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbInspectionType.ForeColor = System.Drawing.Color.White;
             this.cmbInspectionType.FormattingEnabled = true;
             this.cmbInspectionType.IntegralHeight = false;
             this.cmbInspectionType.Location = new System.Drawing.Point(61, 0);
@@ -1415,11 +1482,13 @@
             // 
             // cmbThresholdMode
             // 
+            this.cmbThresholdMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.cmbThresholdMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbThresholdMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbThresholdMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbThresholdMode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbThresholdMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.cmbThresholdMode.ForeColor = System.Drawing.Color.White;
             this.cmbThresholdMode.FormattingEnabled = true;
             this.cmbThresholdMode.IntegralHeight = false;
             this.cmbThresholdMode.Location = new System.Drawing.Point(186, 88);
@@ -1430,9 +1499,10 @@
             // 
             // chkLogTraceUseCheck
             // 
-            this.chkLogTraceUseCheck.BackColor = System.Drawing.Color.White;
+            this.chkLogTraceUseCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.chkLogTraceUseCheck.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkLogTraceUseCheck.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.chkLogTraceUseCheck.ForeColor = System.Drawing.Color.White;
             this.chkLogTraceUseCheck.Location = new System.Drawing.Point(192, 66);
             this.chkLogTraceUseCheck.Margin = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.chkLogTraceUseCheck.Name = "chkLogTraceUseCheck";
@@ -1476,7 +1546,7 @@
             // rdoBump
             // 
             this.rdoBump.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoBump.BackColor = System.Drawing.Color.White;
+            this.rdoBump.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoBump.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoBump.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoBump.Location = new System.Drawing.Point(133, 0);
@@ -1493,7 +1563,7 @@
             // rdoGroup
             // 
             this.rdoGroup.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoGroup.BackColor = System.Drawing.Color.White;
+            this.rdoGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoGroup.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoGroup.Location = new System.Drawing.Point(0, 0);
@@ -1510,7 +1580,7 @@
             // rdoMakerParmeter
             // 
             this.rdoMakerParmeter.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoMakerParmeter.BackColor = System.Drawing.Color.White;
+            this.rdoMakerParmeter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoMakerParmeter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoMakerParmeter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoMakerParmeter.Location = new System.Drawing.Point(399, 0);
@@ -1527,7 +1597,7 @@
             // rdoEngineerParmeter
             // 
             this.rdoEngineerParmeter.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoEngineerParmeter.BackColor = System.Drawing.Color.White;
+            this.rdoEngineerParmeter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoEngineerParmeter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoEngineerParmeter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoEngineerParmeter.Location = new System.Drawing.Point(266, 0);
@@ -1544,7 +1614,7 @@
             // rdoOption
             // 
             this.rdoOption.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoOption.BackColor = System.Drawing.Color.White;
+            this.rdoOption.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoOption.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoOption.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.rdoOption.Location = new System.Drawing.Point(532, 0);
@@ -1562,9 +1632,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tlpSetParameter);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "AkkonParamControl";
             this.Size = new System.Drawing.Size(669, 418);
             this.Load += new System.EventHandler(this.AkkonParamControl_Load);

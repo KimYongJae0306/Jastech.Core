@@ -662,7 +662,30 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 DrawResultLabel("X :" + matchingResult.MaxMatchPos.FoundPos.Y.ToString("0.000"), 3);
                 DrawResultLabel("Angle :" + matchingResult.MaxMatchPos.Angle.ToString("0.000"), 4);
             }
+        }
 
+        public void UpdateResult(CogCaliperResult caliperResult)
+        {
+            CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
+
+            string groupName = "Result";
+            var caliperResultData = caliperResult.MaxCaliperMatch;
+            if (caliperResultData.ResultGraphics == null)
+                return;
+
+            resultGraphic.Add(caliperResultData.ResultGraphics);
+            SetInteractiveGraphics(groupName, resultGraphic);
+
+            var result = caliperResult.Result;
+
+            DrawResultLabel("Result :" + result.ToString(), 0);
+            if (result != Result.Fail)
+            {
+                DrawResultLabel("Score :" + (caliperResult.MaxScore * 100).ToString("0.000"), 1);
+                DrawResultLabel("Y :" + caliperResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);
+                DrawResultLabel("X :" + caliperResult.MaxCaliperMatch.FoundPos.Y.ToString("0.000"), 3);
+                //DrawResultLabel("Angle :" + caliperResult.MaxCaliperMatch.Angle.ToString("0.000"), 4);
+            }
         }
 
         private void DrawResultLabel(string text, int index = 0)

@@ -52,10 +52,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.ReferenceWidth = roi.SideXLength;
                 match.ReferenceHeight = roi.SideYLength;
                 match.ReferenceRotation = roi.Rotation;
-                match.RefercneSkew = roi.Skew;
+                match.ReferenceSkew = roi.Skew;
 
                 match.FoundPos = new PointF((float)foundResult.PositionX, (float)foundResult.PositionY);
                 match.Score = (float)foundResult.Score;
+
+                match.ResultGraphics = foundResult.CreateResultGraphics(Cognex.VisionPro.Caliper.CogCaliperResultGraphicConstants.Edges);
 
                 result.CaliperMatchList.Add(match);
             }

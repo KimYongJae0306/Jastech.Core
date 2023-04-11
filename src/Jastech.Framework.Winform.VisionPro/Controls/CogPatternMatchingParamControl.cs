@@ -117,6 +117,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public CogPatternMatchingParam GetCurrentParam()
         {
+            CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
+            CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
             return CurrentParam;
         }
 

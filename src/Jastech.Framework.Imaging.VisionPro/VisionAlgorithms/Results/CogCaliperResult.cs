@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cognex.VisionPro;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
-    public class CogCaliperResult
+    public class CogCaliperResult : VisionResult
     {
         #region 필드
         #endregion
@@ -66,10 +67,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 
         public double ReferenceRotation { get; set; }
 
-        public double RefercneSkew { get; set; }
+        public double ReferenceSkew { get; set; }
 
         public PointF FoundPos { get; set; }
+
         public float Score { get; set; }
+
+        public CogCompositeShape ResultGraphics { get; set; }
     }
 }
 

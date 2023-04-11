@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Cognex.VisionPro;
+using Jastech.Framework.Winform.Forms;
+using Jastech.Apps.Structure;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogCaliperParamControl : UserControl
     {
         #region 필드
-        private CogCaliperTool CaliperTool = null;
-        private CogCaliperParam CurrentParam;
+        private AlignParam CurrentParam;
         private Color _selectedColor = new Color();
         private Color _nonSelectedColor = new Color();
         #endregion
@@ -25,10 +27,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 이벤트
-        
+        public GetOriginImageDelegate GetOriginImageHandler;
         #endregion
 
         #region 델리게이트
+        public delegate ICogImage GetOriginImageDelegate();
         #endregion
 
         #region 생성자
@@ -75,27 +78,52 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         
         private void SetEdgePolarity(CogCaliperPolarityConstants caliperPolarity)
         {
-            if (CaliperTool == null)
+            if (CurrentParam == null)
                 return;
 
-            CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
+            CurrentParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
         }
 
-        public void UpdateData(CogCaliperParam caliperParam)
+        private void lblFilterSizeValue_Click(object sender, EventArgs e)
         {
-            if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
+            int filterSize = SetLabelIntegerData(sender);
+            CurrentParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
+        }
+
+        private void lblEdgeThresholdValue_Click(object sender, EventArgs e)
+        {
+            int edgeThreshold = SetLabelIntegerData(sender);
+            CurrentParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold = edgeThreshold;
+        }
+
+        private int SetLabelIntegerData(object sender)
+        {
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.ShowDialog();
+
+            int inputData = Convert.ToInt16(keyPadForm.PadValue);
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
+
+            return inputData;
+        }
+
+        public void UpdateData(AlignParam alignParam)
+        {
+            if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
                 rdoDarkToLight.Checked = true;
-            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
+            else if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
                 rdoLightToDark.Checked = true;
             else { }
 
-            lblFilterSizeValue.Text = caliperParam.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
-            lblEdgeThresholdValue.Text = caliperParam.CaliperTool.RunParams.ContrastThreshold.ToString();
+            lblFilterSizeValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
+            lblEdgeThresholdValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold.ToString();
 
-            CurrentParam = caliperParam;
+            CurrentParam = alignParam;
         }
 
-        public CogCaliperParam GetCurrentParam()
+        public AlignParam GetCurrentParam()
         {
             return CurrentParam;
         }

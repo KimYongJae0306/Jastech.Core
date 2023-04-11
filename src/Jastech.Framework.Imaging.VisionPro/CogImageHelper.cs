@@ -166,6 +166,8 @@ namespace Jastech.Framework.Imaging.VisionPro
 
             roi.SetCenterLengthsRotationSkew(centerX, centerY, sideXLength, sideYLength, rotation, skew);
             roi.Interactive = interactive;
+            roi.XDirectionAdornment = CogRectangleAffineDirectionAdornmentConstants.SolidArrow;
+            roi.YDirectionAdornment = CogRectangleAffineDirectionAdornmentConstants.Arrow;
             roi.GraphicDOFEnable = constants;
 
             return roi;
