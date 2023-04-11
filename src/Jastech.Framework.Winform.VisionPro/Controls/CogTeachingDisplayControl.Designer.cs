@@ -51,6 +51,7 @@
             // 
             // pnlThumbnail
             // 
+            this.pnlThumbnail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlThumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlThumbnail.Location = new System.Drawing.Point(3, 292);
             this.pnlThumbnail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
