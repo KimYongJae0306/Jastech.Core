@@ -35,6 +35,8 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public SensorType SensorType { get; protected set; }
+
+        public bool IsGrabbing { get; protected set; }
         #endregion
 
         #region 이벤트

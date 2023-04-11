@@ -12,16 +12,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
     public class CogCaliperParam
     {
-        [JsonProperty]
-        public string Name { get; set; } = string.Empty;
-
-        [JsonProperty]
-        public double Score { get; set; } = 70;
-        //public Type Direction;
-
-        //public object TargetType;
-
-
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool();
 
@@ -73,32 +63,31 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public CogCaliperParam DeepCopy()
         {
             CogCaliperParam param = new CogCaliperParam();
-            param.Name = Name;
             param.CaliperTool = new CogCaliperTool(CaliperTool);
 
             return param;
         }
 
-        public void SaveTool(string dirPath)
+        public void SaveTool(string dirPath, string name)
         {
             if (Directory.Exists(dirPath) == false)
                 Directory.CreateDirectory(dirPath);
 
-            string fileName = string.Format(@"{0}.vpp", Name);
+            string fileName = string.Format(@"{0}.vpp", name);
             string path = Path.Combine(dirPath, fileName);
 
             CogFileHelper.SaveTool<CogCaliperTool>(path, CaliperTool);
         }
 
-        public void LoadTool(string dirPath)
+        public void LoadTool(string dirPath, string name)
         {
-            string fileName = string.Format("{0}.vpp", Name);
+            string fileName = string.Format("{0}.vpp", name);
             string path = Path.Combine(dirPath, fileName);
 
             if (File.Exists(path))
                 CaliperTool = CogFileHelper.LoadTool(path) as CogCaliperTool;
             else
-                SaveTool(dirPath);
+                SaveTool(dirPath, name);
         }
 
         public void Dispose()
