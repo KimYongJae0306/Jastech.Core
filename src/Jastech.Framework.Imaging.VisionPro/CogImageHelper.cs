@@ -219,5 +219,64 @@ namespace Jastech.Framework.Imaging.VisionPro
             }
             return null;
         }
+
+        public static List<CogRectangleAffine> DivideRegion(CogRectangleAffine orgRect, int leadCount)
+        {
+            if (leadCount <= 0)
+                return null;
+
+            int totalCount = leadCount * 2;
+            List<CogRectangleAffine> divideRegionList = new List<CogRectangleAffine>();
+
+            double interval = orgRect.SideXLength / totalCount;
+            double centerX = orgRect.CenterX - (((orgRect.SideXLength / 2) - (interval / 2)) * Math.Cos(orgRect.Rotation));
+            double centerY = orgRect.CenterY - (((orgRect.SideXLength / 2) - (interval / 2)) * Math.Sin(orgRect.Rotation));
+
+
+            for (int index = 0; index < totalCount; index++)
+            {
+                CogRectangleAffine divideRegion = new CogRectangleAffine(orgRect);
+
+                double dX = (interval * index) * System.Math.Cos(orgRect.Rotation);
+                double dY = (interval* index) * System.Math.Sin(orgRect.Rotation);//orgRect.Rotation;
+
+                //double dX = orgRect.SideXLength / leadCount * leadIndex * System.Math.Cos(orgRect.Rotation);
+                //double dY = orgRect.SideXLength / leadCount * leadIndex * orgRect.Rotation;
+
+                divideRegion.SideXLength = interval;
+                divideRegion.CenterX = centerX + dX;
+                divideRegion.CenterY = centerY + dY;
+
+                //if (index % 2 == 0) //좌측부분 ROI
+                //    divideRegion.Rotation = divideRegion.Rotation - 3.14;
+                //divideRegion.CenterX = centerX + (interval * index);
+                //divideRegion.CenterY = centerY;
+
+                divideRegionList.Add(divideRegion);
+            }
+
+            //tool.Region.CornerXY
+            //double dNewX = (orgRect.CenterX - orgRect.SideXLength / 2)/* + (orgRect.SideXLength / totalCount)*/;
+            //double dNewY = orgRect.CenterY;
+
+            //for (int leadIndex = 0; leadIndex < totalCount; leadIndex++)
+            //{
+            //    CogRectangleAffine divideRegion = new CogRectangleAffine(orgRect);
+
+            //    double dX = (orgRect.SideXLength / totalCount) * leadIndex * System.Math.Cos(orgRect.Rotation);
+            //    double dY = orgRect.SideXLength / totalCount * leadIndex * System.Math.Sin(orgRect.Rotation);//orgRect.Rotation;
+
+            //    //double dX = orgRect.SideXLength / leadCount * leadIndex * System.Math.Cos(orgRect.Rotation);
+            //    //double dY = orgRect.SideXLength / leadCount * leadIndex * orgRect.Rotation;
+
+            //    divideRegion.SideXLength = divideRegion.SideXLength / totalCount;
+            //    divideRegion.CenterX = dNewX + dX;
+            //    divideRegion.CenterY = dNewY + dY;
+
+            //    divideRegionList.Add(divideRegion);
+            //}
+
+            return divideRegionList;
+        }
     }
 }

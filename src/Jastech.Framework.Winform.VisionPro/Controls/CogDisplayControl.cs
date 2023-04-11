@@ -533,6 +533,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
+        public void SetStaticGraphics(string groupName, ICogGraphic cogGraphic)
+        {
+            cogDisplay.StaticGraphics.Add(cogGraphic, groupName);
+        }
+
         public void SetInteractiveGraphics(string groupName, ICogRecord record)
         {
             foreach (CogRecord subRecord in record.SubRecords)
@@ -564,7 +569,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
+        private void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
         {
             cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
         }
@@ -664,28 +669,28 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void UpdateResult(CogCaliperResult caliperResult)
+        public void UpdateResult(CogAlignCaliperResult alignResult)
         {
+            if (alignResult == null)
+                return;
+
             CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
 
             string groupName = "Result";
-            var caliperResultData = caliperResult.MaxCaliperMatch;
-            if (caliperResultData.ResultGraphics == null)
-                return;
 
-            resultGraphic.Add(caliperResultData.ResultGraphics);
+            foreach (var item in alignResult.CogAlignResult)
+            {
+                resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
+            }
+            
             SetInteractiveGraphics(groupName, resultGraphic);
 
-            var result = caliperResult.Result;
-
-            DrawResultLabel("Result :" + result.ToString(), 0);
-            if (result != Result.Fail)
-            {
-                DrawResultLabel("Score :" + (caliperResult.MaxScore * 100).ToString("0.000"), 1);
-                DrawResultLabel("Y :" + caliperResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);
-                DrawResultLabel("X :" + caliperResult.MaxCaliperMatch.FoundPos.Y.ToString("0.000"), 3);
-                //DrawResultLabel("Angle :" + caliperResult.MaxCaliperMatch.Angle.ToString("0.000"), 4);
-            }
+            DrawResultLabel("Result :" + alignResult.Judgement.ToString(), 0);
+            //if (alignResult.Judgement != Result.Fail)
+            //{
+            //    DrawResultLabel("Y :" + alignResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);
+            //    DrawResultLabel("X :" + alignResult.MaxCaliperMatch.FoundPos.Y.ToString("0.000"), 3);
+            //}
         }
 
         private void DrawResultLabel(string text, int index = 0)

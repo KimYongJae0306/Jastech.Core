@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
-    public class CogCaliperResult : VisionResult
+    public class VisionProCaliperResult : VisionResult
     {
         #region 필드
         #endregion

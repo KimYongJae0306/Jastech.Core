@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
-    public class CogPatternMatchingParam
+    public class VisionProPatternMatchingParam
     {
         [JsonProperty]
         public string Name { get; set; }
@@ -150,9 +150,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             PMTool.Pattern.Train();
         }
 
-        public CogPatternMatchingParam DeepCopy()
+        public VisionProPatternMatchingParam DeepCopy()
         {
-            CogPatternMatchingParam param = new CogPatternMatchingParam();
+            VisionProPatternMatchingParam param = new VisionProPatternMatchingParam();
             param.Name = Name;
             param.Score = Score;
             param.MaxAngle = MaxAngle;

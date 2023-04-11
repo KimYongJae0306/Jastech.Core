@@ -30,7 +30,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         #endregion
 
         #region 메서드
-        public CogPatternMatchingResult Run(ICogImage image, CogPatternMatchingParam matchingParam)
+        public CogPatternMatchingResult Run(ICogImage image, VisionProPatternMatchingParam matchingParam)
         {
             CogPatternMatchingResult result = new CogPatternMatchingResult();
             if (image == null)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
-    public class CogBlobParam
+    public class VisionProBlobParam
     {
         #region 필드
         #endregion

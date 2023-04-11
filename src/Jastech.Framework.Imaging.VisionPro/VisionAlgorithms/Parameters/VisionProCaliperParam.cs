@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
-    public class CogCaliperParam
+    public class VisionProCaliperParam
     {
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool();
@@ -60,9 +60,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             return CaliperTool.CreateCurrentRecord();
         }
 
-        public CogCaliperParam DeepCopy()
+        public VisionProCaliperParam DeepCopy()
         {
-            CogCaliperParam param = new CogCaliperParam();
+            VisionProCaliperParam param = new VisionProCaliperParam();
             param.CaliperTool = new CogCaliperTool(CaliperTool);
 
             return param;

@@ -73,7 +73,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             _selectedColor = Color.FromArgb(104, 104, 104);
             _nonSelectedColor = Color.FromArgb(52, 52, 52);
-            rdoDarkToLight.Checked = true;
+            //rdoDarkToLight.Checked = true;
         }
         
         private void SetEdgePolarity(CogCaliperPolarityConstants caliperPolarity)

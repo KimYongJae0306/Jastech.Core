@@ -21,7 +21,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     {
 
         #region 필드
-        private CogPatternMatchingParam CurrentParam;
+        private VisionProPatternMatchingParam CurrentParam;
         #endregion
 
         #region 속성
@@ -64,7 +64,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void UpdateData(CogPatternMatchingParam matchingParam)
+        public void UpdateData(VisionProPatternMatchingParam matchingParam)
         {
             nupdnMatchScore.Value = (decimal)matchingParam.Score;
             nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
@@ -115,7 +115,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public CogPatternMatchingParam GetCurrentParam()
+        public VisionProPatternMatchingParam GetCurrentParam()
         {
             CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
             CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);

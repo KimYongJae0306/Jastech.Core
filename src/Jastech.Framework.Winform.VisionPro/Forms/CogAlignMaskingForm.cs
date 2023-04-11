@@ -21,9 +21,9 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
         #region 속성
         private ICogImage OriginImage { get; set; }
 
-        private CogPatternMatchingParam OriginParam { get; set; }
+        private VisionProPatternMatchingParam OriginParam { get; set; }
 
-        private CogPatternMatchingParam CurrentParam { get; set; }
+        private VisionProPatternMatchingParam CurrentParam { get; set; }
         #endregion
 
         #region 이벤트
@@ -46,7 +46,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
             Reset();
         }
 
-        public void Initialize(CogPatternMatchingParam param)
+        public void Initialize(VisionProPatternMatchingParam param)
         {
             OriginParam = param;
             CurrentParam = param.DeepCopy();
@@ -81,7 +81,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
             cogImageMaskEdit.MaskImage = CurrentParam.GetTrainImageMask();
         }
 
-        public CogPatternMatchingParam GetCurrentParam()
+        public VisionProPatternMatchingParam GetCurrentParam()
         {
             return CurrentParam;
         }
