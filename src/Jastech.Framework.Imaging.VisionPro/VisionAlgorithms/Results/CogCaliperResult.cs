@@ -16,6 +16,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         #region 속성
         public long TactTime { get; set; } = 0;
         public List<CaliperMatch> CaliperMatchList { get; set; } = new List<CaliperMatch>();
+
         public bool Found
         {
             get => CaliperMatchList.Count() > 0;
