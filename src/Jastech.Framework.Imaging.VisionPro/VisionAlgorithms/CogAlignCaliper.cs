@@ -28,7 +28,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 if (leadIndex % 2 == 0)
                 {
                     caliperParam.CaliperTool.RunParams.Edge0Polarity = polarityConstants;
-
                 }
                 else
                 {
@@ -53,6 +52,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                     resultList.Add(currentResult);
             }
 
+            caliperParam.CaliperTool.RunParams.Edge0Polarity = polarityConstants;
             caliperParam.CaliperTool.Region = rect;
             return resultList;
         }

@@ -117,7 +117,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 rdoDarkToLight.Checked = true;
             else if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
                 rdoLightToDark.Checked = true;
-            else { }
+            else
+            {
+                rdoDarkToLight.Checked = false;
+                rdoLightToDark.Checked = false;
+            }
 
             lblFilterSizeValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
             lblEdgeThresholdValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold.ToString();
