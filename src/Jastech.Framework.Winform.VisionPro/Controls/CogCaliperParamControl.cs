@@ -111,6 +111,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateData(AlignParam alignParam)
         {
+            CurrentParam = alignParam;
+
             if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
                 rdoDarkToLight.Checked = true;
             else if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
@@ -119,8 +121,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             lblFilterSizeValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
             lblEdgeThresholdValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold.ToString();
-
-            CurrentParam = alignParam;
         }
 
         public AlignParam GetCurrentParam()
