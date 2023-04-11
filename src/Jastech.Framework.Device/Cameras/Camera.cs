@@ -35,8 +35,6 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public SensorType SensorType { get; protected set; }
-
-        public bool IsGrabbing { get; protected set; }
         #endregion
 
         #region 이벤트
@@ -67,6 +65,8 @@ namespace Jastech.Framework.Device.Cameras
         public abstract void GrabOnce();
 
         public abstract void GrabMuti(int grabCount);
+
+        public abstract void GrabContinous();
 
         public abstract void Stop();
 

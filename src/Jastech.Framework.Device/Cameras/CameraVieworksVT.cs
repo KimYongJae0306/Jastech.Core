@@ -170,6 +170,10 @@ namespace Jastech.Framework.Device.Cameras
         {
         }
 
+        public override void GrabContinous()
+        {
+        }
+
         public override void Stop()
         {
         }

@@ -38,6 +38,11 @@ namespace Jastech.Framework.Device.Cameras
 
         }
 
+        public override void GrabContinous()
+        {
+            
+        }
+
         public override void ReverseX(bool reverse)
         {
 

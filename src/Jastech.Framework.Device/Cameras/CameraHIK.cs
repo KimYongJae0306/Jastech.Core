@@ -145,12 +145,13 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabMuti(int grabCount)
         {
-            if(grabCount <= 0)
-                SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
-            else
-                SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
-
+            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
             _camera.MV_CC_StartGrabbing_NET();
+        }
+
+        public override void GrabContinous()
+        {
+            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
         }
 
         public override void Stop()

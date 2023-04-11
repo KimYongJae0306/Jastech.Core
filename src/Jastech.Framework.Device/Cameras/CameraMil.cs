@@ -48,11 +48,6 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public CameraType CameraType { get; set; }
-
-        [JsonProperty]
-        public int GrabCount { get; set; } = -1;
-
-        public int CurGrabCount { get; set; } = 0;
         #endregion
 
         #region 이벤트
@@ -123,8 +118,6 @@ namespace Jastech.Framework.Device.Cameras
 
         public override bool Release()
         {
-            IsGrabbing = false;
-
             base.Release();
             MIL.MdigFree(DigitizerId);
 
@@ -202,27 +195,14 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabOnce()
         {
-            IsGrabbing = true;
-            CurGrabCount = 0;
             MIL.MdigGrab(DigitizerId, LastGrabImage);
         }
 
         public override void GrabMuti(int grabCount)
         {
-            IsGrabbing = true;
-            CurGrabCount = 0;
-
             if (TriggerMode == TriggerMode.Software)
             {
                 MIL.MdigGrabContinuous(DigitizerId, LastGrabImage);
-            }
-            else if (grabCount < 0)
-            {
-                if (processingFunctionPtr != null)
-                    processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
-
-                // Stop 명령어 올때 까지 계속해서 Grab
-                MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
             }
             else
             {
@@ -235,9 +215,17 @@ namespace Jastech.Framework.Device.Cameras
             }
         }
 
+        public override void GrabContinous()
+        {
+            if (processingFunctionPtr != null)
+                processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
+
+            // Stop 명령어 올때 까지 계속해서 Grab
+            MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
+        }
+
         public override void Stop()
         {
-            IsGrabbing = false;
             if (TriggerMode == TriggerMode.Software)
             {
                 MIL.MdigHalt(DigitizerId);
@@ -263,12 +251,6 @@ namespace Jastech.Framework.Device.Cameras
             CameraMil cameraMil = hUserData.Target as CameraMil;
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
-            cameraMil.CurGrabCount++;
-
-            if(cameraMil.CurGrabCount == cameraMil.GrabCount)
-            {
-                cameraMil.IsGrabbing = false;
-            }
 
             return MIL.M_NULL;
         }
