@@ -24,9 +24,11 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 이벤트
+        public GetOriginImageDelegate GetOriginImageHandler;
         #endregion
 
         #region 델리게이트
+        public delegate ICogImage GetOriginImageDelegate();
         #endregion
 
         #region 생성자
