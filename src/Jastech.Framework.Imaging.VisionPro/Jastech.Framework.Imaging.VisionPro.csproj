@@ -50,6 +50,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ATTWrapperd">
+      <HintPath>..\..\..\Jastech.Library\Macron\Debug\ATTWrapperd.dll</HintPath>
+    </Reference>
     <Reference Include="Cognex.VisionPro, Version=65.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.dll</HintPath>
@@ -211,12 +214,10 @@
     <Compile Include="VisionAlgorithms\CogCaliper.cs" />
     <Compile Include="VisionAlgorithms\CogPatternMatching.cs" />
     <Compile Include="VisionAlgorithms\ICogVision.cs" />
-    <Compile Include="VisionAlgorithms\Parameters\AkkonParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProBeadParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProBlobParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProCaliperParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProPatternMatchingParam.cs" />
-    <Compile Include="VisionAlgorithms\Results\AkkonResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogAlignCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogPatternMatchingResult.cs" />

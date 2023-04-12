@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Jastech.Framework.Macron.Akkon.Parameters;
 using Cognex.VisionPro;
 
-namespace Jastech.Framework.Winform.VisionPro.Controls
-{
+namespace Jastech.Framework.Macron.Akkon.Controls
+{ 
     public partial class AkkonParamControl : UserControl
     {
         #region 필드
         private AkkonParamter.ParameterType _parameterType = AkkonParamter.ParameterType.GROUP;
+
+        private AkkonParam CurrentParam;
 
         private Color _selectedColor = new Color();
 
@@ -132,6 +135,50 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cmbThresholdMode.Items.Add(item.ToString().ToUpper());
         }
         #endregion
+
+        public void UpdateData(AkkonParam akkonParam)
+        {
+            CurrentParam = akkonParam;
+
+            ///Enginner Param
+            lblCountValue.Text = akkonParam.JudgeCount.ToString();
+            lblLengthValue.Text = akkonParam.JudgeLength.ToString("F2");
+            lblMinSizeFilterValue.Text = akkonParam.AkkonInspectionFilter.s_fMinSize.ToString("F2");
+            lblMaxSizeFilterValue.Text = akkonParam.AkkonInspectionFilter.s_fMaxSize.ToString("F2");
+            lblGroupDistanceValue.Text = akkonParam.AkkonInspectionFilter.s_fGroupingDistance.ToString("F2");
+            lblStrengthFilterValue.Text = akkonParam.AkkonInspectionParameter.s_fStrengthThreshold.ToString("F2");
+            lblWidthCutValue.Text = akkonParam.AkkonInspectionFilter.s_nWidthCut.ToString();
+            lblHeightCutValue.Text = akkonParam.AkkonInspectionFilter.s_nHeightCut.ToString();
+            lblBWRatioValue.Text = akkonParam.AkkonInspectionFilter.s_fBWRatio.ToString("F2");
+            lblExtraLeadDisplayValue.Text = akkonParam.AkkonInspectionParameter.s_nExtraLead.ToString();
+
+            // Maker Param
+            cmbInspectionType.SelectedIndex = akkonParam.AkkonInspectionOption.s_nInspType;
+            cmbPanelType.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nIsFlexible;
+            cmbTargetType.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nPanelInfo;
+            cmbFilterType.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eFilterType;
+            cmbFilterDirection.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nFilterDir;
+            cmbShadowDirection.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eShadowDir;
+            cmbPeakProperty.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_ePeakProp;
+            cmbStrengthBase.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eStrengthBase;
+            cmbThresholdMode.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eThMode;
+
+            chkLogTraceUseCheck.Checked = akkonParam.AkkonInspectionOption.s_bLogTrace;
+            lblThresholdWeightValue.Text = akkonParam.AkkonInspectionParameter.s_fThWeight.ToString("F2");
+            lblPeakThresholdValue.Text = akkonParam.AkkonInspectionParameter.s_nThPeak.ToString();
+            lblStandardDeviationValue.Text = akkonParam.AkkonInspectionParameter.s_fStdDevLeadJudge.ToString();
+            lblStrengthScaleFactorValue.Text = akkonParam.AkkonInspectionParameter.s_fStrengthScaleFactor.ToString("F2");
+            lblSliceOverlapValue.Text = akkonParam.AkkonInspectionOption.s_nOverlap.ToString("F2");
+
+            // Option
+            chkUseDimple.Checked = true;
+            lblDimpleNGCountValue.Text = "0";
+            lblDimpleThresholdValue.Text = "0";
+
+            chkUseAlarm.Checked = true;
+            lblAlarmCapacityValue.Text = "0";
+            lblAlarmNGCountValue.Text = "0";
+        }
 
         private void rdoGroup_CheckedChanged(object sender, EventArgs e)
         {

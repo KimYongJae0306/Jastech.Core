@@ -210,12 +210,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AkkonParamControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AkkonParamControl.Designer.cs">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CogInspAlignDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -284,9 +278,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\AkkonParamControl.resx">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogInspAlignDisplayControl.resx">
       <DependentUpon>CogInspAlignDisplayControl.cs</DependentUpon>
     </EmbeddedResource>

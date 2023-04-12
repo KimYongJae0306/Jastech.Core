@@ -1,4 +1,4 @@
-﻿namespace Jastech.Framework.Winform.VisionPro.Controls
+﻿namespace Jastech.Framework.Macron.Akkon.Controls
 {
     partial class AkkonParamControl
     {
