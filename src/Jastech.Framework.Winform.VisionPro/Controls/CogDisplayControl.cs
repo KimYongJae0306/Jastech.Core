@@ -253,7 +253,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void MoveDisplay(Point point)
         {
-            cogDisplay.PointToScreen(point);
+            var gg = MappingPoint(point.X, point.Y);
+
+            cogDisplay.PanX = gg.X;// - (cogDisplay.Width /2);
+            cogDisplay.PanY = gg.Y;// - (cogDisplay.Height / 2);
+
+            //cogDisplay.PanX = gg.X;// - (cogDisplay.Width /2);
+            //cogDisplay.PanY = gg.Y;// - (cogDisplay.Height / 2);
         }
 
         private void btnCustomCrossLine_Click(object sender, EventArgs e)

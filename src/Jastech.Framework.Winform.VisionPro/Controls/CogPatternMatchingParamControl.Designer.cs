@@ -163,6 +163,7 @@
             this.nupdnMaxAngle.Size = new System.Drawing.Size(80, 27);
             this.nupdnMaxAngle.TabIndex = 19;
             this.nupdnMaxAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nupdnMaxAngle.Leave += new System.EventHandler(this.nupdnMaxAngle_Leave);
             // 
             // nupdnMatchScore
             // 
@@ -175,6 +176,7 @@
             this.nupdnMatchScore.Size = new System.Drawing.Size(80, 27);
             this.nupdnMatchScore.TabIndex = 13;
             this.nupdnMatchScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nupdnMatchScore.Leave += new System.EventHandler(this.nupdnMatchScore_Leave);
             // 
             // label3
             // 

@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.ImageProcessing;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
@@ -65,7 +66,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
             try
             {
-                PMTool.Pattern.TrainImage = image;
+                var trainRegion = PMTool.Pattern.TrainRegion as CogRectangle;
+
+                //ICogImage trainImage =  CogImageHelper.CogCopyRegionTool(null, image, trainRegion, false);
+                ICogImage trainImage = CogImageHelper.CropImage(image, trainRegion);
+
+                PMTool.Pattern.TrainImage = trainImage;
                 PMTool.Pattern.Train();
             }
             catch (Exception err)
@@ -87,6 +93,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public ICogImage GetTrainedPatternImage()
         {
             if (PMTool == null)
+                return null;
+
+            if (PMTool.Pattern.Trained == false)
                 return null;
 
             return PMTool.Pattern.GetTrainedPatternImage();
@@ -130,7 +139,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             if (PMTool == null)
                 return null;
-           
+
             return PMTool.Pattern.TrainImageMask;
         }
 
@@ -156,7 +165,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             param.Name = Name;
             param.Score = Score;
             param.MaxAngle = MaxAngle;
-            if(PMTool != null)
+            if (PMTool != null)
                 param.PMTool = new CogPMAlignTool(PMTool);
 
             return param;

@@ -66,6 +66,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateData(VisionProPatternMatchingParam matchingParam)
         {
+            if(CurrentParam != null)
+            {
+                CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
+                CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
+            }
+
             nupdnMatchScore.Value = (decimal)matchingParam.Score;
             nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
             CurrentParam = matchingParam;
@@ -119,6 +125,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
             CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
+
             return CurrentParam;
         }
 
@@ -165,6 +172,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 form.ShowDialog();
 
             }
+        }
+
+        private void nupdnMatchScore_Leave(object sender, EventArgs e)
+        {
+            if (CurrentParam != null)
+                CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
+        }
+
+        private void nupdnMaxAngle_Leave(object sender, EventArgs e)
+        {
+            if (CurrentParam != null)
+                CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
         }
     }
 }
