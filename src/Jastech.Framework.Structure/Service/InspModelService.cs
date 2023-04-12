@@ -33,6 +33,8 @@ namespace Jastech.Framework.Structure.Service
         #region 메서드
         public abstract InspModel New();
 
+        public abstract void CreateModelInfo(InspModel inspModel);
+
         public abstract InspModel Load(string filePath);
 
         public abstract void Save(string filePath, InspModel model);
