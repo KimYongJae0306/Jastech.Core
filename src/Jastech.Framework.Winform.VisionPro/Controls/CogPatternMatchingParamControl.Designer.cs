@@ -87,6 +87,7 @@
             this.lblMasking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMasking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMasking.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMasking.ForeColor = System.Drawing.Color.White;
             this.lblMasking.Location = new System.Drawing.Point(3, 290);
             this.lblMasking.Name = "lblMasking";
             this.lblMasking.Size = new System.Drawing.Size(288, 40);
@@ -119,6 +120,7 @@
             this.lblTrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTrain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTrain.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTrain.ForeColor = System.Drawing.Color.White;
             this.lblTrain.Location = new System.Drawing.Point(3, 250);
             this.lblTrain.Name = "lblTrain";
             this.lblTrain.Size = new System.Drawing.Size(288, 40);
@@ -142,7 +144,9 @@
             // 
             // nupdnMaxAngle
             // 
-            this.nupdnMaxAngle.Font = new System.Drawing.Font("돋움", 10.8F);
+            this.nupdnMaxAngle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.nupdnMaxAngle.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.nupdnMaxAngle.ForeColor = System.Drawing.Color.White;
             this.nupdnMaxAngle.Location = new System.Drawing.Point(128, 63);
             this.nupdnMaxAngle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMaxAngle.Maximum = new decimal(new int[] {
@@ -156,23 +160,26 @@
             0,
             -2147483648});
             this.nupdnMaxAngle.Name = "nupdnMaxAngle";
-            this.nupdnMaxAngle.Size = new System.Drawing.Size(80, 24);
+            this.nupdnMaxAngle.Size = new System.Drawing.Size(80, 27);
             this.nupdnMaxAngle.TabIndex = 19;
             this.nupdnMaxAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // nupdnMatchScore
             // 
-            this.nupdnMatchScore.Font = new System.Drawing.Font("돋움", 10.8F);
+            this.nupdnMatchScore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.nupdnMatchScore.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.nupdnMatchScore.ForeColor = System.Drawing.Color.White;
             this.nupdnMatchScore.Location = new System.Drawing.Point(128, 25);
             this.nupdnMatchScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMatchScore.Name = "nupdnMatchScore";
-            this.nupdnMatchScore.Size = new System.Drawing.Size(80, 24);
+            this.nupdnMatchScore.Size = new System.Drawing.Size(80, 27);
             this.nupdnMatchScore.TabIndex = 13;
             this.nupdnMatchScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(12, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 31);
@@ -183,6 +190,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 31);
@@ -194,6 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tableLayoutPanel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CogPatternMatchingParamControl";

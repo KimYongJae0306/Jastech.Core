@@ -12,6 +12,7 @@ using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Cognex.VisionPro;
 using Jastech.Framework.Winform.Forms;
 using Jastech.Apps.Structure;
+using Jastech.Apps.Structure.Parameters;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
