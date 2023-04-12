@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jastech.Framework.Winform.Controls
+namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class AkkonParamControl : UserControl
     {
