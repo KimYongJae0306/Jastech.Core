@@ -251,15 +251,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.InteractiveGraphics.Add(cogRegion as ICogGraphicInteractive, groupName, false);
         }
 
-        public void MoveDisplay(Point point)
+        public void SetDisplayToCenter(Point point)
         {
-            var gg = MappingPoint(point.X, point.Y);
+            if (cogDisplay.Image == null)
+                return;
 
-            cogDisplay.PanX = gg.X;// - (cogDisplay.Width /2);
-            cogDisplay.PanY = gg.Y;// - (cogDisplay.Height / 2);
-
-            //cogDisplay.PanX = gg.X;// - (cogDisplay.Width /2);
-            //cogDisplay.PanY = gg.Y;// - (cogDisplay.Height / 2);
+            cogDisplay.PanX = cogDisplay.Image.Width / 2 - point.X;
+            cogDisplay.PanY = cogDisplay.Image.Height / 2 - point.Y;
         }
 
         private void btnCustomCrossLine_Click(object sender, EventArgs e)
