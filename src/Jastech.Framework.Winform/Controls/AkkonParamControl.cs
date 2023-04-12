@@ -14,6 +14,10 @@ namespace Jastech.Framework.Winform.Controls
     {
         #region 필드
         private AkkonParamter.ParameterType _parameterType = AkkonParamter.ParameterType.GROUP;
+
+        private Color _selectedColor = new Color();
+
+        private Color _nonSelectedColor = new Color();
         #endregion
 
         #region 속성
@@ -70,6 +74,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private void InitializeUI()
         {
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _nonSelectedColor = Color.FromArgb(52, 52, 52);
+
             // Checked Radio Button
             rdoGroup.Checked = true;
 
@@ -128,10 +135,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoGroup.Checked)
             {
                 ShowGroupParamter();
-                rdoGroup.BackColor = Color.DeepSkyBlue;
+                rdoGroup.BackColor = _selectedColor;
             }
             else
-                rdoGroup.BackColor = Color.White;
+                rdoGroup.BackColor = _nonSelectedColor;
         }
 
         private void ShowGroupParamter()
@@ -150,10 +157,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoBump.Checked)
             {
                 ShowBumpParamter();
-                rdoBump.BackColor = Color.DeepSkyBlue;
+                rdoBump.BackColor = _selectedColor;
             }
             else
-                rdoBump.BackColor = Color.White;
+                rdoBump.BackColor = _nonSelectedColor;
         }
 
         private void ShowBumpParamter()
@@ -172,10 +179,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoEngineerParmeter.Checked)
             {
                 ShowEngineerParamter();
-                rdoEngineerParmeter.BackColor = Color.DeepSkyBlue;
+                rdoEngineerParmeter.BackColor = _selectedColor;
             }
             else
-                rdoEngineerParmeter.BackColor = Color.White;
+                rdoEngineerParmeter.BackColor = _nonSelectedColor;
         }
 
         private void ShowEngineerParamter()
@@ -191,10 +198,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoMakerParmeter.Checked)
             {
                 ShowMakerParamter();
-                rdoMakerParmeter.BackColor = Color.DeepSkyBlue;
+                rdoMakerParmeter.BackColor = _selectedColor;
             }
             else
-                rdoMakerParmeter.BackColor = Color.White;
+                rdoMakerParmeter.BackColor = _nonSelectedColor;
         }
 
         private void ShowMakerParamter()
@@ -210,10 +217,10 @@ namespace Jastech.Framework.Winform.Controls
             if (rdoOption.Checked)
             {
                 ShowOptionParameter();
-                rdoOption.BackColor = Color.DeepSkyBlue;
+                rdoOption.BackColor = _selectedColor;
             }
             else
-                rdoOption.BackColor = Color.White;
+                rdoOption.BackColor = _nonSelectedColor;
         }
 
         private void ShowOptionParameter()

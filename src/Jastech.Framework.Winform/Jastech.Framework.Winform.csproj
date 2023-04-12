@@ -78,6 +78,12 @@
     <Compile Include="Controls\AkkonParamControl.designer.cs">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AutoFocusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AutoFocusControl.Designer.cs">
+      <DependentUpon>AutoFocusControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +113,12 @@
     </Compile>
     <Compile Include="Controls\MotionParameterCommonControl.Designer.cs">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MotionRepeatControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionRepeatControl.Designer.cs">
+      <DependentUpon>MotionRepeatControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\UPHControl.cs">
       <SubType>UserControl</SubType>
@@ -168,6 +180,9 @@
     <EmbeddedResource Include="Controls\AkkonParamControl.resx">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AutoFocusControl.resx">
+      <DependentUpon>AutoFocusControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionParameterCommonControl.resx">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionRepeatControl.resx">
+      <DependentUpon>MotionRepeatControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UPHControl.resx">
       <DependentUpon>UPHControl.cs</DependentUpon>

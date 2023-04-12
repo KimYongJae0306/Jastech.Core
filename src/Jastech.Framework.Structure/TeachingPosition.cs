@@ -117,6 +117,9 @@ namespace Jastech.Framework.Structure
         public double Offset { get; set; } = 0.0;
 
         [JsonProperty]
+        public int CenterOfGravity { get; set; } = 0;
+
+        [JsonProperty]
         public AxisMovingParam MovingParam { get; set; } = new AxisMovingParam();
 
         public TeachingAxisInfo DeepCopy()
@@ -126,6 +129,7 @@ namespace Jastech.Framework.Structure
             info.Name = Name;
             info.TargetPosition = TargetPosition;
             info.Offset = Offset;
+            info.CenterOfGravity = CenterOfGravity;
             info.MovingParam = MovingParam.DeepCopy();
 
             return info;

@@ -45,10 +45,10 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void MotionJogControl_Load(object sender, EventArgs e)
         {
-            Initialize();
+            InitializeUI();
         }
 
-        private void Initialize()
+        private void InitializeUI()
         {
             _selectedColor = Color.FromArgb(104, 104, 104);
             _noneSelectedColor = Color.FromArgb(52, 52, 52);

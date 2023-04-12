@@ -23,7 +23,7 @@ namespace Jastech.Framework.Device.Motions
         public double MovingTimeOut { get; set; } = 3 * 1000; // ms
 
         [JsonProperty]
-        public double AferWaitTime { get; set; } = 0; // ms
+        public int AfterWaitTime { get; set; } = 0; // ms
         #endregion
 
         #region 메서드
@@ -34,7 +34,7 @@ namespace Jastech.Framework.Device.Motions
             param.Acceleration = Acceleration;
             param.Deceleration = Deceleration;
             param.MovingTimeOut = MovingTimeOut;
-            param.AferWaitTime = AferWaitTime;
+            param.AfterWaitTime = AfterWaitTime;
 
             return param;
         }

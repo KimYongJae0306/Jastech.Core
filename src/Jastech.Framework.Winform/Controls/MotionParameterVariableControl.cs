@@ -69,8 +69,8 @@ namespace Jastech.Framework.Winform.Controls
             lblMovingTimeOutValue.Text = MovingParam.MovingTimeOut.ToString();
             tempMovingTimeOut = MovingParam.MovingTimeOut;
 
-            lblAfterWaitTimeValue.Text = MovingParam.AferWaitTime.ToString();
-            tempAferWaitTime = MovingParam.AferWaitTime;
+            lblAfterWaitTimeValue.Text = MovingParam.AfterWaitTime.ToString();
+            tempAferWaitTime = MovingParam.AfterWaitTime;
         }
 
         public void SetAxis(Axis axis)
@@ -101,12 +101,6 @@ namespace Jastech.Framework.Winform.Controls
         {
             tempMovingTimeOut = SetLabelDoubleData(sender);
         }
-        
-        private double tempAferWaitTime = 0.0;
-        private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
-        {
-            tempAferWaitTime = SetLabelDoubleData(sender);
-        }
 
         private double SetLabelDoubleData(object sender)
         {
@@ -114,6 +108,25 @@ namespace Jastech.Framework.Winform.Controls
             keyPadForm.ShowDialog();
 
             double inputData = keyPadForm.PadValue;
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
+
+            return inputData;
+        }
+
+        private int tempAferWaitTime = 0;
+        private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
+        {
+            tempAferWaitTime = SetLabelIntegerData(sender);
+        }
+
+        private int SetLabelIntegerData(object sender)
+        {
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.ShowDialog();
+
+            int inputData = Convert.ToInt32(keyPadForm.PadValue);
 
             Label label = (Label)sender;
             label.Text = inputData.ToString();
@@ -130,7 +143,7 @@ namespace Jastech.Framework.Winform.Controls
             param.Deceleration = tempDeceleration;
 
             param.MovingTimeOut = tempMovingTimeOut;
-            param.AferWaitTime = tempAferWaitTime;
+            param.AfterWaitTime = tempAferWaitTime;
 
             MovingParam = param.DeepCopy();
 

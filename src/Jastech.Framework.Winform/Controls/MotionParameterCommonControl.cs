@@ -147,7 +147,5 @@ namespace Jastech.Framework.Winform.Controls
             return inputData;
         }
         #endregion
-
-        
     }
 }

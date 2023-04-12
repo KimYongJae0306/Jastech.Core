@@ -60,7 +60,7 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = selectedAxis;
         }
 
-        public void UpdateUI()
+        private void UpdateUI()
         {
             lblTargetPosition.Text = AxisInfo.TargetPosition.ToString();
             tempTargetPosition = AxisInfo.TargetPosition;

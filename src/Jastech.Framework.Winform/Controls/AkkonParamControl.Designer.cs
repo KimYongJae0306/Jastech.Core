@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AkkonParamControl));
             this.tlpSetParameter = new System.Windows.Forms.TableLayoutPanel();
             this.pnlShowSelectParameter = new System.Windows.Forms.Panel();
             this.pnlEngineerParameter = new System.Windows.Forms.Panel();
@@ -119,6 +120,10 @@
             this.rdoMakerParmeter = new System.Windows.Forms.RadioButton();
             this.rdoEngineerParmeter = new System.Windows.Forms.RadioButton();
             this.rdoOption = new System.Windows.Forms.RadioButton();
+            this.lblClone = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.rdoCopyHorizontal = new System.Windows.Forms.RadioButton();
+            this.rdoCopyVertical = new System.Windows.Forms.RadioButton();
             this.tlpSetParameter.SuspendLayout();
             this.pnlShowSelectParameter.SuspendLayout();
             this.pnlEngineerParameter.SuspendLayout();
@@ -131,6 +136,7 @@
             this.tlpMakerParameter.SuspendLayout();
             this.pnlSelectParameter.SuspendLayout();
             this.tlpSelectParameter.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpSetParameter
@@ -547,6 +553,8 @@
             this.tlpGroupParameter.Controls.Add(this.lblLeadCountValue, 1, 2);
             this.tlpGroupParameter.Controls.Add(this.lblLeadPitch, 3, 2);
             this.tlpGroupParameter.Controls.Add(this.lblLeadPitchValue, 4, 2);
+            this.tlpGroupParameter.Controls.Add(this.lblClone, 0, 3);
+            this.tlpGroupParameter.Controls.Add(this.tableLayoutPanel1, 1, 3);
             this.tlpGroupParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpGroupParameter.Location = new System.Drawing.Point(0, 0);
             this.tlpGroupParameter.Margin = new System.Windows.Forms.Padding(0);
@@ -978,7 +986,7 @@
             // pnlMakerParameter
             // 
             this.pnlMakerParameter.Controls.Add(this.tlpMakerParameter);
-            this.pnlMakerParameter.Location = new System.Drawing.Point(15, 197);
+            this.pnlMakerParameter.Location = new System.Drawing.Point(8, 197);
             this.pnlMakerParameter.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMakerParameter.Name = "pnlMakerParameter";
             this.pnlMakerParameter.Size = new System.Drawing.Size(248, 179);
@@ -1436,7 +1444,7 @@
             // 
             // lblStandardDeviationValue
             // 
-            this.lblStandardDeviationValue.BackColor = System.Drawing.Color.White;
+            this.lblStandardDeviationValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStandardDeviationValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStandardDeviationValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStandardDeviationValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -1450,7 +1458,7 @@
             // 
             // lblStandardDeviation
             // 
-            this.lblStandardDeviation.BackColor = System.Drawing.Color.White;
+            this.lblStandardDeviation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.lblStandardDeviation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStandardDeviation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStandardDeviation.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
@@ -1628,6 +1636,72 @@
             this.rdoOption.UseVisualStyleBackColor = false;
             this.rdoOption.CheckedChanged += new System.EventHandler(this.rdoOption_CheckedChanged);
             // 
+            // lblClone
+            // 
+            this.lblClone.AutoSize = true;
+            this.lblClone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblClone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblClone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblClone.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblClone.ForeColor = System.Drawing.Color.White;
+            this.lblClone.Location = new System.Drawing.Point(0, 66);
+            this.lblClone.Margin = new System.Windows.Forms.Padding(0);
+            this.lblClone.Name = "lblClone";
+            this.lblClone.Size = new System.Drawing.Size(63, 22);
+            this.lblClone.TabIndex = 27;
+            this.lblClone.Text = "Clone";
+            this.lblClone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.rdoCopyVertical, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rdoCopyHorizontal, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(63, 66);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(63, 22);
+            this.tableLayoutPanel1.TabIndex = 28;
+            // 
+            // rdoCopyHorizontal
+            // 
+            this.rdoCopyHorizontal.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rdoCopyHorizontal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.rdoCopyHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdoCopyHorizontal.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.rdoCopyHorizontal.ForeColor = System.Drawing.Color.Black;
+            this.rdoCopyHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("rdoCopyHorizontal.Image")));
+            this.rdoCopyHorizontal.Location = new System.Drawing.Point(0, 0);
+            this.rdoCopyHorizontal.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCopyHorizontal.Name = "rdoCopyHorizontal";
+            this.rdoCopyHorizontal.Size = new System.Drawing.Size(31, 22);
+            this.rdoCopyHorizontal.TabIndex = 143;
+            this.rdoCopyHorizontal.Tag = "0";
+            this.rdoCopyHorizontal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rdoCopyHorizontal.UseVisualStyleBackColor = false;
+            // 
+            // rdoCopyVertical
+            // 
+            this.rdoCopyVertical.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rdoCopyVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.rdoCopyVertical.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdoCopyVertical.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.rdoCopyVertical.ForeColor = System.Drawing.Color.Black;
+            this.rdoCopyVertical.Image = ((System.Drawing.Image)(resources.GetObject("rdoCopyVertical.Image")));
+            this.rdoCopyVertical.Location = new System.Drawing.Point(31, 0);
+            this.rdoCopyVertical.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCopyVertical.Name = "rdoCopyVertical";
+            this.rdoCopyVertical.Size = new System.Drawing.Size(32, 22);
+            this.rdoCopyVertical.TabIndex = 144;
+            this.rdoCopyVertical.Tag = "0";
+            this.rdoCopyVertical.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rdoCopyVertical.UseVisualStyleBackColor = false;
+            // 
             // AkkonParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1653,6 +1727,7 @@
             this.tlpMakerParameter.ResumeLayout(false);
             this.pnlSelectParameter.ResumeLayout(false);
             this.tlpSelectParameter.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1750,5 +1825,9 @@
         private System.Windows.Forms.RadioButton rdoMakerParmeter;
         private System.Windows.Forms.RadioButton rdoEngineerParmeter;
         private System.Windows.Forms.RadioButton rdoOption;
+        private System.Windows.Forms.Label lblClone;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.RadioButton rdoCopyVertical;
+        private System.Windows.Forms.RadioButton rdoCopyHorizontal;
     }
 }
