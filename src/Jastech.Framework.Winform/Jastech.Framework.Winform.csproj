@@ -72,12 +72,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AkkonParamControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AkkonParamControl.designer.cs">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\AutoFocusControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -177,9 +171,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\AkkonParamControl.resx">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\AutoFocusControl.resx">
       <DependentUpon>AutoFocusControl.cs</DependentUpon>
     </EmbeddedResource>

@@ -211,10 +211,12 @@
     <Compile Include="VisionAlgorithms\CogCaliper.cs" />
     <Compile Include="VisionAlgorithms\CogPatternMatching.cs" />
     <Compile Include="VisionAlgorithms\ICogVision.cs" />
+    <Compile Include="VisionAlgorithms\Parameters\AkkonParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProBeadParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProBlobParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProCaliperParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProPatternMatchingParam.cs" />
+    <Compile Include="VisionAlgorithms\Results\AkkonResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogAlignCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogPatternMatchingResult.cs" />
