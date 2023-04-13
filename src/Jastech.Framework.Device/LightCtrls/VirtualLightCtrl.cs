@@ -17,6 +17,16 @@ namespace Jastech.Framework.Device.LightCtrls
         #endregion
 
         #region 메서드
+        public override bool Initialize()
+        {
+            return true;
+        }
+
+        public override bool Release()
+        {
+            return true;
+        }
+
         public override bool TurnOff()
         {
             return true;

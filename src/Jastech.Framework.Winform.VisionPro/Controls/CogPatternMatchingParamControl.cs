@@ -143,21 +143,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             cogPatternDisplay.Image = image;
         }
-        #endregion
-        private void lblInspection_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void lblMasking_Click(object sender, EventArgs e)
         {
-            if(CurrentParam.IsTrained())
+            if (CurrentParam.IsTrained())
             {
                 if (GetOriginImage() is ICogImage orginImage)
                 {
                     CogAlignMaskingForm form = new CogAlignMaskingForm();
                     form.Initialize(CurrentParam);
-                    if(form.ShowDialog() == DialogResult.OK)
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
                         CurrentParam.TrainImageMask(form.GetCurrentParam().GetTrainImageMask());
 
@@ -185,5 +180,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (CurrentParam != null)
                 CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
         }
+        #endregion
     }
 }

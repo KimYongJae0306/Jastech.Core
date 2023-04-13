@@ -11,15 +11,13 @@ using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Cognex.VisionPro;
 using Jastech.Framework.Winform.Forms;
-using Jastech.Apps.Structure;
-using Jastech.Apps.Structure.Parameters;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogCaliperParamControl : UserControl
     {
         #region 필드
-        private AlignParam CurrentParam;
+        private VisionProCaliperParam CurrentParam;
         private Color _selectedColor = new Color();
         private Color _nonSelectedColor = new Color();
         #endregion
@@ -82,19 +80,19 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (CurrentParam == null)
                 return;
 
-            CurrentParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
+            CurrentParam.CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
         }
 
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
         {
             int filterSize = SetLabelIntegerData(sender);
-            CurrentParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
+            CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
         }
 
         private void lblEdgeThresholdValue_Click(object sender, EventArgs e)
         {
             int edgeThreshold = SetLabelIntegerData(sender);
-            CurrentParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold = edgeThreshold;
+            CurrentParam.CaliperTool.RunParams.ContrastThreshold = edgeThreshold;
         }
 
         private int SetLabelIntegerData(object sender)
@@ -110,13 +108,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return inputData;
         }
 
-        public void UpdateData(AlignParam alignParam)
+        public void UpdateData(VisionProCaliperParam caliperParam)
         {
-            CurrentParam = alignParam;
+            CurrentParam = caliperParam;
 
-            if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
+            if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
                 rdoDarkToLight.Checked = true;
-            else if (alignParam.CaliperParams.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
+            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
                 rdoLightToDark.Checked = true;
             else
             {
@@ -124,11 +122,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 rdoLightToDark.Checked = false;
             }
 
-            lblFilterSizeValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
-            lblEdgeThresholdValue.Text = alignParam.CaliperParams.CaliperTool.RunParams.ContrastThreshold.ToString();
+            lblFilterSizeValue.Text = caliperParam.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
+            lblEdgeThresholdValue.Text = caliperParam.CaliperTool.RunParams.ContrastThreshold.ToString();
         }
 
-        public AlignParam GetCurrentParam()
+        public VisionProCaliperParam GetCurrentParam()
         {
             return CurrentParam;
         }

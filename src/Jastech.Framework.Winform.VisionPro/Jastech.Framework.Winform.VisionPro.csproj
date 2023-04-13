@@ -314,10 +314,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Jastech.Apps\Source\Jastech.Apps.Structure\Jastech.Apps.Structure.csproj">
-      <Project>{1D6EA4E5-02D4-4C2A-8873-D336D420E726}</Project>
-      <Name>Jastech.Apps.Structure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Jastech.Framework.Imaging.VisionPro\Jastech.Framework.Imaging.VisionPro.csproj">
       <Project>{22EE7B1A-E7B2-4547-94DD-4E85BDB56956}</Project>
       <Name>Jastech.Framework.Imaging.VisionPro</Name>
