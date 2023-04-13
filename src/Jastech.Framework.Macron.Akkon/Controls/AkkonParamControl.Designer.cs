@@ -28,19 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AkkonParamControl));
             this.tlpSetParameter = new System.Windows.Forms.TableLayoutPanel();
             this.pnlShowSelectParameter = new System.Windows.Forms.Panel();
             this.pnlEngineerParameter = new System.Windows.Forms.Panel();
             this.tlpEngineerParameter = new System.Windows.Forms.TableLayoutPanel();
             this.lblStrengthFilterValue = new System.Windows.Forms.Label();
             this.lblStrengthFilter = new System.Windows.Forms.Label();
-            this.lblCount = new System.Windows.Forms.Label();
-            this.lblCountValue = new System.Windows.Forms.Label();
+            this.lblJudgeCount = new System.Windows.Forms.Label();
+            this.lblJudgeCountValue = new System.Windows.Forms.Label();
             this.lblMinSizeFilter = new System.Windows.Forms.Label();
             this.lblMaxSizeFilter = new System.Windows.Forms.Label();
             this.lblGroupDistance = new System.Windows.Forms.Label();
-            this.lblLength = new System.Windows.Forms.Label();
+            this.lblJudgeLength = new System.Windows.Forms.Label();
             this.lblWidthCut = new System.Windows.Forms.Label();
             this.lblHeightCut = new System.Windows.Forms.Label();
             this.lblBWRatio = new System.Windows.Forms.Label();
@@ -48,29 +47,11 @@
             this.lblMinSizeFilterValue = new System.Windows.Forms.Label();
             this.lblMaxSizeFilterValue = new System.Windows.Forms.Label();
             this.lblGroupDistanceValue = new System.Windows.Forms.Label();
-            this.lblLengthValue = new System.Windows.Forms.Label();
+            this.lblJudgeLengthValue = new System.Windows.Forms.Label();
             this.lblWidthCutValue = new System.Windows.Forms.Label();
             this.lblHeightCutValue = new System.Windows.Forms.Label();
             this.lblBWRatioValue = new System.Windows.Forms.Label();
             this.lblExtraLeadDisplayValue = new System.Windows.Forms.Label();
-            this.pnlGroupParameter = new System.Windows.Forms.Panel();
-            this.tlpGroupParameter = new System.Windows.Forms.TableLayoutPanel();
-            this.lblGroupCount = new System.Windows.Forms.Label();
-            this.lblGroupCountValue = new System.Windows.Forms.Label();
-            this.cmbGroupNumber = new System.Windows.Forms.ComboBox();
-            this.lblGroupNumber = new System.Windows.Forms.Label();
-            this.lblROIWidth = new System.Windows.Forms.Label();
-            this.lblROIWidthValue = new System.Windows.Forms.Label();
-            this.lblROIHeight = new System.Windows.Forms.Label();
-            this.lblROIHeightValue = new System.Windows.Forms.Label();
-            this.lblLeadCount = new System.Windows.Forms.Label();
-            this.lblLeadCountValue = new System.Windows.Forms.Label();
-            this.lblLeadPitch = new System.Windows.Forms.Label();
-            this.lblLeadPitchValue = new System.Windows.Forms.Label();
-            this.lblClone = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.rdoCopyVertical = new System.Windows.Forms.RadioButton();
-            this.rdoCopyHorizontal = new System.Windows.Forms.RadioButton();
             this.pnlOptionParameter = new System.Windows.Forms.Panel();
             this.tlpOptionParameter = new System.Windows.Forms.TableLayoutPanel();
             this.lblDimple = new System.Windows.Forms.Label();
@@ -119,8 +100,6 @@
             this.chkLogTraceUseCheck = new System.Windows.Forms.CheckBox();
             this.pnlSelectParameter = new System.Windows.Forms.Panel();
             this.tlpSelectParameter = new System.Windows.Forms.TableLayoutPanel();
-            this.rdoBump = new System.Windows.Forms.RadioButton();
-            this.rdoGroup = new System.Windows.Forms.RadioButton();
             this.rdoMakerParmeter = new System.Windows.Forms.RadioButton();
             this.rdoEngineerParmeter = new System.Windows.Forms.RadioButton();
             this.rdoOption = new System.Windows.Forms.RadioButton();
@@ -128,9 +107,6 @@
             this.pnlShowSelectParameter.SuspendLayout();
             this.pnlEngineerParameter.SuspendLayout();
             this.tlpEngineerParameter.SuspendLayout();
-            this.pnlGroupParameter.SuspendLayout();
-            this.tlpGroupParameter.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.pnlOptionParameter.SuspendLayout();
             this.tlpOptionParameter.SuspendLayout();
             this.pnlMakerParameter.SuspendLayout();
@@ -152,25 +128,24 @@
             this.tlpSetParameter.RowCount = 2;
             this.tlpSetParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tlpSetParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpSetParameter.Size = new System.Drawing.Size(669, 418);
+            this.tlpSetParameter.Size = new System.Drawing.Size(813, 548);
             this.tlpSetParameter.TabIndex = 1;
             // 
             // pnlShowSelectParameter
             // 
             this.pnlShowSelectParameter.Controls.Add(this.pnlEngineerParameter);
-            this.pnlShowSelectParameter.Controls.Add(this.pnlGroupParameter);
             this.pnlShowSelectParameter.Controls.Add(this.pnlOptionParameter);
             this.pnlShowSelectParameter.Controls.Add(this.pnlMakerParameter);
             this.pnlShowSelectParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlShowSelectParameter.Location = new System.Drawing.Point(3, 63);
             this.pnlShowSelectParameter.Name = "pnlShowSelectParameter";
-            this.pnlShowSelectParameter.Size = new System.Drawing.Size(663, 352);
+            this.pnlShowSelectParameter.Size = new System.Drawing.Size(807, 482);
             this.pnlShowSelectParameter.TabIndex = 5;
             // 
             // pnlEngineerParameter
             // 
             this.pnlEngineerParameter.Controls.Add(this.tlpEngineerParameter);
-            this.pnlEngineerParameter.Location = new System.Drawing.Point(274, 3);
+            this.pnlEngineerParameter.Location = new System.Drawing.Point(10, 294);
             this.pnlEngineerParameter.Margin = new System.Windows.Forms.Padding(0);
             this.pnlEngineerParameter.Name = "pnlEngineerParameter";
             this.pnlEngineerParameter.Size = new System.Drawing.Size(246, 180);
@@ -179,32 +154,32 @@
             // 
             // tlpEngineerParameter
             // 
-            this.tlpEngineerParameter.ColumnCount = 5;
+            this.tlpEngineerParameter.ColumnCount = 4;
             this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpEngineerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpEngineerParameter.Controls.Add(this.lblStrengthFilterValue, 1, 4);
             this.tlpEngineerParameter.Controls.Add(this.lblStrengthFilter, 0, 4);
-            this.tlpEngineerParameter.Controls.Add(this.lblCount, 0, 0);
-            this.tlpEngineerParameter.Controls.Add(this.lblCountValue, 1, 0);
+            this.tlpEngineerParameter.Controls.Add(this.lblJudgeCount, 0, 0);
+            this.tlpEngineerParameter.Controls.Add(this.lblJudgeCountValue, 1, 0);
             this.tlpEngineerParameter.Controls.Add(this.lblMinSizeFilter, 0, 1);
             this.tlpEngineerParameter.Controls.Add(this.lblMaxSizeFilter, 0, 2);
             this.tlpEngineerParameter.Controls.Add(this.lblGroupDistance, 0, 3);
-            this.tlpEngineerParameter.Controls.Add(this.lblLength, 3, 0);
-            this.tlpEngineerParameter.Controls.Add(this.lblWidthCut, 3, 1);
-            this.tlpEngineerParameter.Controls.Add(this.lblHeightCut, 3, 2);
-            this.tlpEngineerParameter.Controls.Add(this.lblBWRatio, 3, 3);
-            this.tlpEngineerParameter.Controls.Add(this.lblExtraLeadDisplay, 3, 4);
+            this.tlpEngineerParameter.Controls.Add(this.lblJudgeLength, 2, 0);
+            this.tlpEngineerParameter.Controls.Add(this.lblWidthCut, 2, 1);
+            this.tlpEngineerParameter.Controls.Add(this.lblHeightCut, 2, 2);
+            this.tlpEngineerParameter.Controls.Add(this.lblBWRatio, 2, 3);
+            this.tlpEngineerParameter.Controls.Add(this.lblExtraLeadDisplay, 2, 4);
             this.tlpEngineerParameter.Controls.Add(this.lblMinSizeFilterValue, 1, 1);
             this.tlpEngineerParameter.Controls.Add(this.lblMaxSizeFilterValue, 1, 2);
             this.tlpEngineerParameter.Controls.Add(this.lblGroupDistanceValue, 1, 3);
-            this.tlpEngineerParameter.Controls.Add(this.lblLengthValue, 4, 0);
-            this.tlpEngineerParameter.Controls.Add(this.lblWidthCutValue, 4, 1);
-            this.tlpEngineerParameter.Controls.Add(this.lblHeightCutValue, 4, 2);
-            this.tlpEngineerParameter.Controls.Add(this.lblBWRatioValue, 4, 3);
-            this.tlpEngineerParameter.Controls.Add(this.lblExtraLeadDisplayValue, 4, 4);
+            this.tlpEngineerParameter.Controls.Add(this.lblJudgeLengthValue, 3, 0);
+            this.tlpEngineerParameter.Controls.Add(this.lblWidthCutValue, 3, 1);
+            this.tlpEngineerParameter.Controls.Add(this.lblHeightCutValue, 3, 2);
+            this.tlpEngineerParameter.Controls.Add(this.lblBWRatioValue, 3, 3);
+            this.tlpEngineerParameter.Controls.Add(this.lblExtraLeadDisplayValue, 3, 4);
             this.tlpEngineerParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpEngineerParameter.Location = new System.Drawing.Point(0, 0);
             this.tlpEngineerParameter.Margin = new System.Windows.Forms.Padding(0);
@@ -218,8 +193,6 @@
             this.tlpEngineerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlpEngineerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlpEngineerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpEngineerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpEngineerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpEngineerParameter.Size = new System.Drawing.Size(246, 180);
             this.tlpEngineerParameter.TabIndex = 0;
             // 
@@ -230,13 +203,14 @@
             this.lblStrengthFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblStrengthFilterValue.ForeColor = System.Drawing.Color.White;
-            this.lblStrengthFilterValue.Location = new System.Drawing.Point(60, 88);
+            this.lblStrengthFilterValue.Location = new System.Drawing.Point(61, 88);
             this.lblStrengthFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthFilterValue.Name = "lblStrengthFilterValue";
-            this.lblStrengthFilterValue.Size = new System.Drawing.Size(60, 22);
+            this.lblStrengthFilterValue.Size = new System.Drawing.Size(61, 22);
             this.lblStrengthFilterValue.TabIndex = 27;
             this.lblStrengthFilterValue.Text = "0";
             this.lblStrengthFilterValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStrengthFilterValue.Click += new System.EventHandler(this.lblStrengthFilterValue_Click);
             // 
             // lblStrengthFilter
             // 
@@ -248,40 +222,41 @@
             this.lblStrengthFilter.Location = new System.Drawing.Point(0, 88);
             this.lblStrengthFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthFilter.Name = "lblStrengthFilter";
-            this.lblStrengthFilter.Size = new System.Drawing.Size(60, 22);
+            this.lblStrengthFilter.Size = new System.Drawing.Size(61, 22);
             this.lblStrengthFilter.TabIndex = 18;
             this.lblStrengthFilter.Text = "STRENGTH FILTER(%)";
             this.lblStrengthFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblCount
+            // lblJudgeCount
             // 
-            this.lblCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblCount.ForeColor = System.Drawing.Color.White;
-            this.lblCount.Location = new System.Drawing.Point(0, 0);
-            this.lblCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(60, 22);
-            this.lblCount.TabIndex = 2;
-            this.lblCount.Text = "COUNT";
-            this.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblJudgeCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJudgeCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJudgeCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblJudgeCount.ForeColor = System.Drawing.Color.White;
+            this.lblJudgeCount.Location = new System.Drawing.Point(0, 0);
+            this.lblJudgeCount.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJudgeCount.Name = "lblJudgeCount";
+            this.lblJudgeCount.Size = new System.Drawing.Size(61, 22);
+            this.lblJudgeCount.TabIndex = 2;
+            this.lblJudgeCount.Text = "COUNT";
+            this.lblJudgeCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblCountValue
+            // lblJudgeCountValue
             // 
-            this.lblCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblCountValue.ForeColor = System.Drawing.Color.White;
-            this.lblCountValue.Location = new System.Drawing.Point(60, 0);
-            this.lblCountValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblCountValue.Name = "lblCountValue";
-            this.lblCountValue.Size = new System.Drawing.Size(60, 22);
-            this.lblCountValue.TabIndex = 9;
-            this.lblCountValue.Text = "0";
-            this.lblCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblJudgeCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJudgeCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJudgeCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblJudgeCountValue.ForeColor = System.Drawing.Color.White;
+            this.lblJudgeCountValue.Location = new System.Drawing.Point(61, 0);
+            this.lblJudgeCountValue.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJudgeCountValue.Name = "lblJudgeCountValue";
+            this.lblJudgeCountValue.Size = new System.Drawing.Size(61, 22);
+            this.lblJudgeCountValue.TabIndex = 9;
+            this.lblJudgeCountValue.Text = "0";
+            this.lblJudgeCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeCountValue.Click += new System.EventHandler(this.lblJudgeCountValue_Click);
             // 
             // lblMinSizeFilter
             // 
@@ -293,7 +268,7 @@
             this.lblMinSizeFilter.Location = new System.Drawing.Point(0, 22);
             this.lblMinSizeFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinSizeFilter.Name = "lblMinSizeFilter";
-            this.lblMinSizeFilter.Size = new System.Drawing.Size(60, 22);
+            this.lblMinSizeFilter.Size = new System.Drawing.Size(61, 22);
             this.lblMinSizeFilter.TabIndex = 10;
             this.lblMinSizeFilter.Text = "MIN SIZE FILTER(um)";
             this.lblMinSizeFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,7 +283,7 @@
             this.lblMaxSizeFilter.Location = new System.Drawing.Point(0, 44);
             this.lblMaxSizeFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxSizeFilter.Name = "lblMaxSizeFilter";
-            this.lblMaxSizeFilter.Size = new System.Drawing.Size(60, 22);
+            this.lblMaxSizeFilter.Size = new System.Drawing.Size(61, 22);
             this.lblMaxSizeFilter.TabIndex = 11;
             this.lblMaxSizeFilter.Text = "MAX SIZE FILTER(um)";
             this.lblMaxSizeFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -323,25 +298,25 @@
             this.lblGroupDistance.Location = new System.Drawing.Point(0, 66);
             this.lblGroupDistance.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupDistance.Name = "lblGroupDistance";
-            this.lblGroupDistance.Size = new System.Drawing.Size(60, 22);
+            this.lblGroupDistance.Size = new System.Drawing.Size(61, 22);
             this.lblGroupDistance.TabIndex = 12;
             this.lblGroupDistance.Text = "GROUP DISTANCE(px)";
             this.lblGroupDistance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblLength
+            // lblJudgeLength
             // 
-            this.lblLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLength.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLength.ForeColor = System.Drawing.Color.White;
-            this.lblLength.Location = new System.Drawing.Point(123, 0);
-            this.lblLength.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(60, 22);
-            this.lblLength.TabIndex = 14;
-            this.lblLength.Text = "LENGTH";
-            this.lblLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblJudgeLength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJudgeLength.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJudgeLength.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblJudgeLength.ForeColor = System.Drawing.Color.White;
+            this.lblJudgeLength.Location = new System.Drawing.Point(122, 0);
+            this.lblJudgeLength.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJudgeLength.Name = "lblJudgeLength";
+            this.lblJudgeLength.Size = new System.Drawing.Size(61, 22);
+            this.lblJudgeLength.TabIndex = 14;
+            this.lblJudgeLength.Text = "LENGTH";
+            this.lblJudgeLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWidthCut
             // 
@@ -350,10 +325,10 @@
             this.lblWidthCut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWidthCut.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblWidthCut.ForeColor = System.Drawing.Color.White;
-            this.lblWidthCut.Location = new System.Drawing.Point(123, 22);
+            this.lblWidthCut.Location = new System.Drawing.Point(122, 22);
             this.lblWidthCut.Margin = new System.Windows.Forms.Padding(0);
             this.lblWidthCut.Name = "lblWidthCut";
-            this.lblWidthCut.Size = new System.Drawing.Size(60, 22);
+            this.lblWidthCut.Size = new System.Drawing.Size(61, 22);
             this.lblWidthCut.TabIndex = 13;
             this.lblWidthCut.Text = "WIDTH CUT(px)";
             this.lblWidthCut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -365,10 +340,10 @@
             this.lblHeightCut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHeightCut.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblHeightCut.ForeColor = System.Drawing.Color.White;
-            this.lblHeightCut.Location = new System.Drawing.Point(123, 44);
+            this.lblHeightCut.Location = new System.Drawing.Point(122, 44);
             this.lblHeightCut.Margin = new System.Windows.Forms.Padding(0);
             this.lblHeightCut.Name = "lblHeightCut";
-            this.lblHeightCut.Size = new System.Drawing.Size(60, 22);
+            this.lblHeightCut.Size = new System.Drawing.Size(61, 22);
             this.lblHeightCut.TabIndex = 15;
             this.lblHeightCut.Text = "HEIGHT CUT(px)";
             this.lblHeightCut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -380,10 +355,10 @@
             this.lblBWRatio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBWRatio.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblBWRatio.ForeColor = System.Drawing.Color.White;
-            this.lblBWRatio.Location = new System.Drawing.Point(123, 66);
+            this.lblBWRatio.Location = new System.Drawing.Point(122, 66);
             this.lblBWRatio.Margin = new System.Windows.Forms.Padding(0);
             this.lblBWRatio.Name = "lblBWRatio";
-            this.lblBWRatio.Size = new System.Drawing.Size(60, 22);
+            this.lblBWRatio.Size = new System.Drawing.Size(61, 22);
             this.lblBWRatio.TabIndex = 16;
             this.lblBWRatio.Text = "BW RATIO";
             this.lblBWRatio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -395,10 +370,10 @@
             this.lblExtraLeadDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblExtraLeadDisplay.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblExtraLeadDisplay.ForeColor = System.Drawing.Color.White;
-            this.lblExtraLeadDisplay.Location = new System.Drawing.Point(123, 88);
+            this.lblExtraLeadDisplay.Location = new System.Drawing.Point(122, 88);
             this.lblExtraLeadDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.lblExtraLeadDisplay.Name = "lblExtraLeadDisplay";
-            this.lblExtraLeadDisplay.Size = new System.Drawing.Size(60, 22);
+            this.lblExtraLeadDisplay.Size = new System.Drawing.Size(61, 22);
             this.lblExtraLeadDisplay.TabIndex = 17;
             this.lblExtraLeadDisplay.Text = "EXTRA LEAD DISPLAY";
             this.lblExtraLeadDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -410,13 +385,14 @@
             this.lblMinSizeFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMinSizeFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblMinSizeFilterValue.ForeColor = System.Drawing.Color.White;
-            this.lblMinSizeFilterValue.Location = new System.Drawing.Point(60, 22);
+            this.lblMinSizeFilterValue.Location = new System.Drawing.Point(61, 22);
             this.lblMinSizeFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinSizeFilterValue.Name = "lblMinSizeFilterValue";
-            this.lblMinSizeFilterValue.Size = new System.Drawing.Size(60, 22);
+            this.lblMinSizeFilterValue.Size = new System.Drawing.Size(61, 22);
             this.lblMinSizeFilterValue.TabIndex = 19;
             this.lblMinSizeFilterValue.Text = "0";
             this.lblMinSizeFilterValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMinSizeFilterValue.Click += new System.EventHandler(this.lblMinSizeFilterValue_Click);
             // 
             // lblMaxSizeFilterValue
             // 
@@ -425,13 +401,14 @@
             this.lblMaxSizeFilterValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMaxSizeFilterValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblMaxSizeFilterValue.ForeColor = System.Drawing.Color.White;
-            this.lblMaxSizeFilterValue.Location = new System.Drawing.Point(60, 44);
+            this.lblMaxSizeFilterValue.Location = new System.Drawing.Point(61, 44);
             this.lblMaxSizeFilterValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxSizeFilterValue.Name = "lblMaxSizeFilterValue";
-            this.lblMaxSizeFilterValue.Size = new System.Drawing.Size(60, 22);
+            this.lblMaxSizeFilterValue.Size = new System.Drawing.Size(61, 22);
             this.lblMaxSizeFilterValue.TabIndex = 20;
             this.lblMaxSizeFilterValue.Text = "0";
             this.lblMaxSizeFilterValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMaxSizeFilterValue.Click += new System.EventHandler(this.lblMaxSizeFilterValue_Click);
             // 
             // lblGroupDistanceValue
             // 
@@ -440,28 +417,30 @@
             this.lblGroupDistanceValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGroupDistanceValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblGroupDistanceValue.ForeColor = System.Drawing.Color.White;
-            this.lblGroupDistanceValue.Location = new System.Drawing.Point(60, 66);
+            this.lblGroupDistanceValue.Location = new System.Drawing.Point(61, 66);
             this.lblGroupDistanceValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblGroupDistanceValue.Name = "lblGroupDistanceValue";
-            this.lblGroupDistanceValue.Size = new System.Drawing.Size(60, 22);
+            this.lblGroupDistanceValue.Size = new System.Drawing.Size(61, 22);
             this.lblGroupDistanceValue.TabIndex = 21;
             this.lblGroupDistanceValue.Text = "0";
             this.lblGroupDistanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblGroupDistanceValue.Click += new System.EventHandler(this.lblGroupDistanceValue_Click);
             // 
-            // lblLengthValue
+            // lblJudgeLengthValue
             // 
-            this.lblLengthValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLengthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLengthValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLengthValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLengthValue.ForeColor = System.Drawing.Color.White;
-            this.lblLengthValue.Location = new System.Drawing.Point(183, 0);
-            this.lblLengthValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLengthValue.Name = "lblLengthValue";
-            this.lblLengthValue.Size = new System.Drawing.Size(63, 22);
-            this.lblLengthValue.TabIndex = 22;
-            this.lblLengthValue.Text = "0";
-            this.lblLengthValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeLengthValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblJudgeLengthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJudgeLengthValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJudgeLengthValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
+            this.lblJudgeLengthValue.ForeColor = System.Drawing.Color.White;
+            this.lblJudgeLengthValue.Location = new System.Drawing.Point(183, 0);
+            this.lblJudgeLengthValue.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJudgeLengthValue.Name = "lblJudgeLengthValue";
+            this.lblJudgeLengthValue.Size = new System.Drawing.Size(63, 22);
+            this.lblJudgeLengthValue.TabIndex = 22;
+            this.lblJudgeLengthValue.Text = "0";
+            this.lblJudgeLengthValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblJudgeLengthValue.Click += new System.EventHandler(this.lblJudgeLengthValue_Click);
             // 
             // lblWidthCutValue
             // 
@@ -477,6 +456,7 @@
             this.lblWidthCutValue.TabIndex = 23;
             this.lblWidthCutValue.Text = "0";
             this.lblWidthCutValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWidthCutValue.Click += new System.EventHandler(this.lblWidthCutValue_Click);
             // 
             // lblHeightCutValue
             // 
@@ -492,6 +472,7 @@
             this.lblHeightCutValue.TabIndex = 24;
             this.lblHeightCutValue.Text = "0";
             this.lblHeightCutValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeightCutValue.Click += new System.EventHandler(this.lblHeightCutValue_Click);
             // 
             // lblBWRatioValue
             // 
@@ -507,6 +488,7 @@
             this.lblBWRatioValue.TabIndex = 25;
             this.lblBWRatioValue.Text = "0";
             this.lblBWRatioValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblBWRatioValue.Click += new System.EventHandler(this.lblBWRatioValue_Click);
             // 
             // lblExtraLeadDisplayValue
             // 
@@ -522,321 +504,12 @@
             this.lblExtraLeadDisplayValue.TabIndex = 26;
             this.lblExtraLeadDisplayValue.Text = "0";
             this.lblExtraLeadDisplayValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlGroupParameter
-            // 
-            this.pnlGroupParameter.Controls.Add(this.tlpGroupParameter);
-            this.pnlGroupParameter.Location = new System.Drawing.Point(0, 0);
-            this.pnlGroupParameter.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlGroupParameter.Name = "pnlGroupParameter";
-            this.pnlGroupParameter.Size = new System.Drawing.Size(256, 183);
-            this.pnlGroupParameter.TabIndex = 0;
-            this.pnlGroupParameter.Visible = false;
-            // 
-            // tlpGroupParameter
-            // 
-            this.tlpGroupParameter.ColumnCount = 5;
-            this.tlpGroupParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpGroupParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpGroupParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F));
-            this.tlpGroupParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpGroupParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpGroupParameter.Controls.Add(this.lblGroupCount, 0, 0);
-            this.tlpGroupParameter.Controls.Add(this.lblGroupCountValue, 1, 0);
-            this.tlpGroupParameter.Controls.Add(this.cmbGroupNumber, 4, 0);
-            this.tlpGroupParameter.Controls.Add(this.lblGroupNumber, 3, 0);
-            this.tlpGroupParameter.Controls.Add(this.lblROIWidth, 0, 1);
-            this.tlpGroupParameter.Controls.Add(this.lblROIWidthValue, 1, 1);
-            this.tlpGroupParameter.Controls.Add(this.lblROIHeight, 3, 1);
-            this.tlpGroupParameter.Controls.Add(this.lblROIHeightValue, 4, 1);
-            this.tlpGroupParameter.Controls.Add(this.lblLeadCount, 0, 2);
-            this.tlpGroupParameter.Controls.Add(this.lblLeadCountValue, 1, 2);
-            this.tlpGroupParameter.Controls.Add(this.lblLeadPitch, 3, 2);
-            this.tlpGroupParameter.Controls.Add(this.lblLeadPitchValue, 4, 2);
-            this.tlpGroupParameter.Controls.Add(this.lblClone, 0, 3);
-            this.tlpGroupParameter.Controls.Add(this.tableLayoutPanel1, 1, 3);
-            this.tlpGroupParameter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpGroupParameter.Location = new System.Drawing.Point(0, 0);
-            this.tlpGroupParameter.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpGroupParameter.Name = "tlpGroupParameter";
-            this.tlpGroupParameter.RowCount = 7;
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpGroupParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpGroupParameter.Size = new System.Drawing.Size(256, 183);
-            this.tlpGroupParameter.TabIndex = 1;
-            // 
-            // lblGroupCount
-            // 
-            this.lblGroupCount.AutoSize = true;
-            this.lblGroupCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblGroupCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGroupCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGroupCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblGroupCount.ForeColor = System.Drawing.Color.White;
-            this.lblGroupCount.Location = new System.Drawing.Point(0, 0);
-            this.lblGroupCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblGroupCount.Name = "lblGroupCount";
-            this.lblGroupCount.Size = new System.Drawing.Size(63, 22);
-            this.lblGroupCount.TabIndex = 1;
-            this.lblGroupCount.Text = "GROUP COUNT";
-            this.lblGroupCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblGroupCountValue
-            // 
-            this.lblGroupCountValue.AutoSize = true;
-            this.lblGroupCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblGroupCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGroupCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGroupCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblGroupCountValue.ForeColor = System.Drawing.Color.White;
-            this.lblGroupCountValue.Location = new System.Drawing.Point(63, 0);
-            this.lblGroupCountValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblGroupCountValue.Name = "lblGroupCountValue";
-            this.lblGroupCountValue.Size = new System.Drawing.Size(63, 22);
-            this.lblGroupCountValue.TabIndex = 8;
-            this.lblGroupCountValue.Text = "0";
-            this.lblGroupCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbGroupNumber
-            // 
-            this.cmbGroupNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.cmbGroupNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbGroupNumber.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbGroupNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGroupNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbGroupNumber.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.cmbGroupNumber.ForeColor = System.Drawing.Color.White;
-            this.cmbGroupNumber.FormattingEnabled = true;
-            this.cmbGroupNumber.IntegralHeight = false;
-            this.cmbGroupNumber.ItemHeight = 22;
-            this.cmbGroupNumber.Location = new System.Drawing.Point(192, 0);
-            this.cmbGroupNumber.Margin = new System.Windows.Forms.Padding(0);
-            this.cmbGroupNumber.Name = "cmbGroupNumber";
-            this.cmbGroupNumber.Size = new System.Drawing.Size(64, 28);
-            this.cmbGroupNumber.TabIndex = 26;
-            this.cmbGroupNumber.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
-            // 
-            // lblGroupNumber
-            // 
-            this.lblGroupNumber.AutoSize = true;
-            this.lblGroupNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblGroupNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGroupNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGroupNumber.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblGroupNumber.ForeColor = System.Drawing.Color.White;
-            this.lblGroupNumber.Location = new System.Drawing.Point(129, 0);
-            this.lblGroupNumber.Margin = new System.Windows.Forms.Padding(0);
-            this.lblGroupNumber.Name = "lblGroupNumber";
-            this.lblGroupNumber.Size = new System.Drawing.Size(63, 22);
-            this.lblGroupNumber.TabIndex = 9;
-            this.lblGroupNumber.Text = "GROUP No.";
-            this.lblGroupNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblROIWidth
-            // 
-            this.lblROIWidth.AutoSize = true;
-            this.lblROIWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblROIWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblROIWidth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblROIWidth.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblROIWidth.ForeColor = System.Drawing.Color.White;
-            this.lblROIWidth.Location = new System.Drawing.Point(0, 22);
-            this.lblROIWidth.Margin = new System.Windows.Forms.Padding(0);
-            this.lblROIWidth.Name = "lblROIWidth";
-            this.lblROIWidth.Size = new System.Drawing.Size(63, 22);
-            this.lblROIWidth.TabIndex = 10;
-            this.lblROIWidth.Text = "ROI WIDTH(㎛)";
-            this.lblROIWidth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblROIWidthValue
-            // 
-            this.lblROIWidthValue.AutoSize = true;
-            this.lblROIWidthValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblROIWidthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblROIWidthValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblROIWidthValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblROIWidthValue.ForeColor = System.Drawing.Color.White;
-            this.lblROIWidthValue.Location = new System.Drawing.Point(63, 22);
-            this.lblROIWidthValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblROIWidthValue.Name = "lblROIWidthValue";
-            this.lblROIWidthValue.Size = new System.Drawing.Size(63, 22);
-            this.lblROIWidthValue.TabIndex = 16;
-            this.lblROIWidthValue.Text = "0";
-            this.lblROIWidthValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblROIHeight
-            // 
-            this.lblROIHeight.AutoSize = true;
-            this.lblROIHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblROIHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblROIHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblROIHeight.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblROIHeight.ForeColor = System.Drawing.Color.White;
-            this.lblROIHeight.Location = new System.Drawing.Point(129, 22);
-            this.lblROIHeight.Margin = new System.Windows.Forms.Padding(0);
-            this.lblROIHeight.Name = "lblROIHeight";
-            this.lblROIHeight.Size = new System.Drawing.Size(63, 22);
-            this.lblROIHeight.TabIndex = 11;
-            this.lblROIHeight.Text = "ROI HEIGHT(㎛)";
-            this.lblROIHeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblROIHeightValue
-            // 
-            this.lblROIHeightValue.AutoSize = true;
-            this.lblROIHeightValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblROIHeightValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblROIHeightValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblROIHeightValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblROIHeightValue.ForeColor = System.Drawing.Color.White;
-            this.lblROIHeightValue.Location = new System.Drawing.Point(192, 22);
-            this.lblROIHeightValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblROIHeightValue.Name = "lblROIHeightValue";
-            this.lblROIHeightValue.Size = new System.Drawing.Size(64, 22);
-            this.lblROIHeightValue.TabIndex = 17;
-            this.lblROIHeightValue.Text = "0";
-            this.lblROIHeightValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLeadCount
-            // 
-            this.lblLeadCount.AutoSize = true;
-            this.lblLeadCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLeadCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLeadCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLeadCount.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLeadCount.ForeColor = System.Drawing.Color.White;
-            this.lblLeadCount.Location = new System.Drawing.Point(0, 44);
-            this.lblLeadCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLeadCount.Name = "lblLeadCount";
-            this.lblLeadCount.Size = new System.Drawing.Size(63, 22);
-            this.lblLeadCount.TabIndex = 14;
-            this.lblLeadCount.Text = "LEAD COUNT";
-            this.lblLeadCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLeadCountValue
-            // 
-            this.lblLeadCountValue.AutoSize = true;
-            this.lblLeadCountValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLeadCountValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLeadCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLeadCountValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLeadCountValue.ForeColor = System.Drawing.Color.White;
-            this.lblLeadCountValue.Location = new System.Drawing.Point(63, 44);
-            this.lblLeadCountValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLeadCountValue.Name = "lblLeadCountValue";
-            this.lblLeadCountValue.Size = new System.Drawing.Size(63, 22);
-            this.lblLeadCountValue.TabIndex = 19;
-            this.lblLeadCountValue.Text = "0";
-            this.lblLeadCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLeadPitch
-            // 
-            this.lblLeadPitch.AutoSize = true;
-            this.lblLeadPitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLeadPitch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLeadPitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLeadPitch.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLeadPitch.ForeColor = System.Drawing.Color.White;
-            this.lblLeadPitch.Location = new System.Drawing.Point(129, 44);
-            this.lblLeadPitch.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLeadPitch.Name = "lblLeadPitch";
-            this.lblLeadPitch.Size = new System.Drawing.Size(63, 22);
-            this.lblLeadPitch.TabIndex = 13;
-            this.lblLeadPitch.Text = "LEAD PITCH(㎛)";
-            this.lblLeadPitch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLeadPitchValue
-            // 
-            this.lblLeadPitchValue.AutoSize = true;
-            this.lblLeadPitchValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblLeadPitchValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLeadPitchValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLeadPitchValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblLeadPitchValue.ForeColor = System.Drawing.Color.White;
-            this.lblLeadPitchValue.Location = new System.Drawing.Point(192, 44);
-            this.lblLeadPitchValue.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLeadPitchValue.Name = "lblLeadPitchValue";
-            this.lblLeadPitchValue.Size = new System.Drawing.Size(64, 22);
-            this.lblLeadPitchValue.TabIndex = 18;
-            this.lblLeadPitchValue.Text = "0";
-            this.lblLeadPitchValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblClone
-            // 
-            this.lblClone.AutoSize = true;
-            this.lblClone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblClone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblClone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblClone.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblClone.ForeColor = System.Drawing.Color.White;
-            this.lblClone.Location = new System.Drawing.Point(0, 66);
-            this.lblClone.Margin = new System.Windows.Forms.Padding(0);
-            this.lblClone.Name = "lblClone";
-            this.lblClone.Size = new System.Drawing.Size(63, 22);
-            this.lblClone.TabIndex = 27;
-            this.lblClone.Text = "Clone";
-            this.lblClone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.rdoCopyVertical, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.rdoCopyHorizontal, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(63, 66);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(63, 22);
-            this.tableLayoutPanel1.TabIndex = 28;
-            // 
-            // rdoCopyVertical
-            // 
-            this.rdoCopyVertical.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoCopyVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoCopyVertical.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoCopyVertical.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoCopyVertical.ForeColor = System.Drawing.Color.Black;
-            this.rdoCopyVertical.Image = ((System.Drawing.Image)(resources.GetObject("rdoCopyVertical.Image")));
-            this.rdoCopyVertical.Location = new System.Drawing.Point(31, 0);
-            this.rdoCopyVertical.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoCopyVertical.Name = "rdoCopyVertical";
-            this.rdoCopyVertical.Size = new System.Drawing.Size(32, 22);
-            this.rdoCopyVertical.TabIndex = 144;
-            this.rdoCopyVertical.Tag = "0";
-            this.rdoCopyVertical.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoCopyVertical.UseVisualStyleBackColor = false;
-            // 
-            // rdoCopyHorizontal
-            // 
-            this.rdoCopyHorizontal.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoCopyHorizontal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoCopyHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoCopyHorizontal.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoCopyHorizontal.ForeColor = System.Drawing.Color.Black;
-            this.rdoCopyHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("rdoCopyHorizontal.Image")));
-            this.rdoCopyHorizontal.Location = new System.Drawing.Point(0, 0);
-            this.rdoCopyHorizontal.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoCopyHorizontal.Name = "rdoCopyHorizontal";
-            this.rdoCopyHorizontal.Size = new System.Drawing.Size(31, 22);
-            this.rdoCopyHorizontal.TabIndex = 143;
-            this.rdoCopyHorizontal.Tag = "0";
-            this.rdoCopyHorizontal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoCopyHorizontal.UseVisualStyleBackColor = false;
+            this.lblExtraLeadDisplayValue.Click += new System.EventHandler(this.lblExtraLeadDisplayValue_Click);
             // 
             // pnlOptionParameter
             // 
             this.pnlOptionParameter.Controls.Add(this.tlpOptionParameter);
-            this.pnlOptionParameter.Location = new System.Drawing.Point(274, 197);
+            this.pnlOptionParameter.Location = new System.Drawing.Point(551, 294);
             this.pnlOptionParameter.Margin = new System.Windows.Forms.Padding(0);
             this.pnlOptionParameter.Name = "pnlOptionParameter";
             this.pnlOptionParameter.Size = new System.Drawing.Size(246, 166);
@@ -1052,7 +725,7 @@
             // pnlMakerParameter
             // 
             this.pnlMakerParameter.Controls.Add(this.tlpMakerParameter);
-            this.pnlMakerParameter.Location = new System.Drawing.Point(8, 197);
+            this.pnlMakerParameter.Location = new System.Drawing.Point(283, 294);
             this.pnlMakerParameter.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMakerParameter.Name = "pnlMakerParameter";
             this.pnlMakerParameter.Size = new System.Drawing.Size(248, 179);
@@ -1061,19 +734,19 @@
             // 
             // tlpMakerParameter
             // 
-            this.tlpMakerParameter.ColumnCount = 5;
+            this.tlpMakerParameter.ColumnCount = 4;
             this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMakerParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMakerParameter.Controls.Add(this.cmbFilterDirection, 1, 4);
             this.tlpMakerParameter.Controls.Add(this.cmbFilterType, 1, 3);
-            this.tlpMakerParameter.Controls.Add(this.cmbStrengthBase, 4, 2);
+            this.tlpMakerParameter.Controls.Add(this.cmbStrengthBase, 3, 2);
             this.tlpMakerParameter.Controls.Add(this.cmbTargetType, 1, 2);
-            this.tlpMakerParameter.Controls.Add(this.cmbPeakProperty, 4, 1);
+            this.tlpMakerParameter.Controls.Add(this.cmbPeakProperty, 3, 1);
             this.tlpMakerParameter.Controls.Add(this.cmbPanelType, 1, 1);
-            this.tlpMakerParameter.Controls.Add(this.cmbShadowDirection, 4, 0);
+            this.tlpMakerParameter.Controls.Add(this.cmbShadowDirection, 3, 0);
             this.tlpMakerParameter.Controls.Add(this.lblInspectionType, 0, 0);
             this.tlpMakerParameter.Controls.Add(this.lblThresholdWeightValue, 1, 5);
             this.tlpMakerParameter.Controls.Add(this.lblPeakThreshold, 0, 6);
@@ -1082,21 +755,21 @@
             this.tlpMakerParameter.Controls.Add(this.lblFilterType, 0, 3);
             this.tlpMakerParameter.Controls.Add(this.lblTargetType, 0, 2);
             this.tlpMakerParameter.Controls.Add(this.lblPanelType, 0, 1);
-            this.tlpMakerParameter.Controls.Add(this.lblShadowDirection, 3, 0);
-            this.tlpMakerParameter.Controls.Add(this.lblPeakProperty, 3, 1);
-            this.tlpMakerParameter.Controls.Add(this.lblStrengthBase, 3, 2);
-            this.tlpMakerParameter.Controls.Add(this.lblLogTrace, 3, 3);
-            this.tlpMakerParameter.Controls.Add(this.lblThresholdMode, 3, 4);
-            this.tlpMakerParameter.Controls.Add(this.lblStrengthScaleFactor, 3, 5);
-            this.tlpMakerParameter.Controls.Add(this.lblSliceOverlap, 3, 6);
+            this.tlpMakerParameter.Controls.Add(this.lblShadowDirection, 2, 0);
+            this.tlpMakerParameter.Controls.Add(this.lblPeakProperty, 2, 1);
+            this.tlpMakerParameter.Controls.Add(this.lblStrengthBase, 2, 2);
+            this.tlpMakerParameter.Controls.Add(this.lblLogTrace, 2, 3);
+            this.tlpMakerParameter.Controls.Add(this.lblThresholdMode, 2, 4);
+            this.tlpMakerParameter.Controls.Add(this.lblStrengthScaleFactor, 2, 5);
+            this.tlpMakerParameter.Controls.Add(this.lblSliceOverlap, 2, 6);
             this.tlpMakerParameter.Controls.Add(this.lblPeakThresholdValue, 1, 6);
-            this.tlpMakerParameter.Controls.Add(this.lblStrengthScaleFactorValue, 4, 5);
-            this.tlpMakerParameter.Controls.Add(this.lblSliceOverlapValue, 4, 6);
+            this.tlpMakerParameter.Controls.Add(this.lblStrengthScaleFactorValue, 3, 5);
+            this.tlpMakerParameter.Controls.Add(this.lblSliceOverlapValue, 3, 6);
             this.tlpMakerParameter.Controls.Add(this.lblStandardDeviationValue, 1, 7);
             this.tlpMakerParameter.Controls.Add(this.lblStandardDeviation, 0, 7);
             this.tlpMakerParameter.Controls.Add(this.cmbInspectionType, 1, 0);
-            this.tlpMakerParameter.Controls.Add(this.cmbThresholdMode, 4, 4);
-            this.tlpMakerParameter.Controls.Add(this.chkLogTraceUseCheck, 4, 3);
+            this.tlpMakerParameter.Controls.Add(this.cmbThresholdMode, 3, 4);
+            this.tlpMakerParameter.Controls.Add(this.chkLogTraceUseCheck, 3, 3);
             this.tlpMakerParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMakerParameter.Location = new System.Drawing.Point(0, 0);
             this.tlpMakerParameter.Margin = new System.Windows.Forms.Padding(0);
@@ -1110,8 +783,6 @@
             this.tlpMakerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlpMakerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlpMakerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tlpMakerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMakerParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMakerParameter.Size = new System.Drawing.Size(248, 179);
             this.tlpMakerParameter.TabIndex = 0;
             // 
@@ -1126,10 +797,10 @@
             this.cmbFilterDirection.ForeColor = System.Drawing.Color.White;
             this.cmbFilterDirection.FormattingEnabled = true;
             this.cmbFilterDirection.IntegralHeight = false;
-            this.cmbFilterDirection.Location = new System.Drawing.Point(61, 88);
+            this.cmbFilterDirection.Location = new System.Drawing.Point(62, 88);
             this.cmbFilterDirection.Margin = new System.Windows.Forms.Padding(0);
             this.cmbFilterDirection.Name = "cmbFilterDirection";
-            this.cmbFilterDirection.Size = new System.Drawing.Size(61, 28);
+            this.cmbFilterDirection.Size = new System.Drawing.Size(62, 28);
             this.cmbFilterDirection.TabIndex = 149;
             this.cmbFilterDirection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -1144,10 +815,10 @@
             this.cmbFilterType.ForeColor = System.Drawing.Color.White;
             this.cmbFilterType.FormattingEnabled = true;
             this.cmbFilterType.IntegralHeight = false;
-            this.cmbFilterType.Location = new System.Drawing.Point(61, 66);
+            this.cmbFilterType.Location = new System.Drawing.Point(62, 66);
             this.cmbFilterType.Margin = new System.Windows.Forms.Padding(0);
             this.cmbFilterType.Name = "cmbFilterType";
-            this.cmbFilterType.Size = new System.Drawing.Size(61, 28);
+            this.cmbFilterType.Size = new System.Drawing.Size(62, 28);
             this.cmbFilterType.TabIndex = 147;
             this.cmbFilterType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -1167,6 +838,7 @@
             this.cmbStrengthBase.Name = "cmbStrengthBase";
             this.cmbStrengthBase.Size = new System.Drawing.Size(62, 28);
             this.cmbStrengthBase.TabIndex = 146;
+            this.cmbStrengthBase.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbTargetType
             // 
@@ -1179,10 +851,10 @@
             this.cmbTargetType.ForeColor = System.Drawing.Color.White;
             this.cmbTargetType.FormattingEnabled = true;
             this.cmbTargetType.IntegralHeight = false;
-            this.cmbTargetType.Location = new System.Drawing.Point(61, 44);
+            this.cmbTargetType.Location = new System.Drawing.Point(62, 44);
             this.cmbTargetType.Margin = new System.Windows.Forms.Padding(0);
             this.cmbTargetType.Name = "cmbTargetType";
-            this.cmbTargetType.Size = new System.Drawing.Size(61, 28);
+            this.cmbTargetType.Size = new System.Drawing.Size(62, 28);
             this.cmbTargetType.TabIndex = 145;
             this.cmbTargetType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -1202,6 +874,7 @@
             this.cmbPeakProperty.Name = "cmbPeakProperty";
             this.cmbPeakProperty.Size = new System.Drawing.Size(62, 28);
             this.cmbPeakProperty.TabIndex = 144;
+            this.cmbPeakProperty.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbPanelType
             // 
@@ -1214,10 +887,10 @@
             this.cmbPanelType.ForeColor = System.Drawing.Color.White;
             this.cmbPanelType.FormattingEnabled = true;
             this.cmbPanelType.IntegralHeight = false;
-            this.cmbPanelType.Location = new System.Drawing.Point(61, 22);
+            this.cmbPanelType.Location = new System.Drawing.Point(62, 22);
             this.cmbPanelType.Margin = new System.Windows.Forms.Padding(0);
             this.cmbPanelType.Name = "cmbPanelType";
-            this.cmbPanelType.Size = new System.Drawing.Size(61, 28);
+            this.cmbPanelType.Size = new System.Drawing.Size(62, 28);
             this.cmbPanelType.TabIndex = 143;
             this.cmbPanelType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -1237,6 +910,7 @@
             this.cmbShadowDirection.Name = "cmbShadowDirection";
             this.cmbShadowDirection.Size = new System.Drawing.Size(62, 28);
             this.cmbShadowDirection.TabIndex = 142;
+            this.cmbShadowDirection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // lblInspectionType
             // 
@@ -1248,7 +922,7 @@
             this.lblInspectionType.Location = new System.Drawing.Point(0, 0);
             this.lblInspectionType.Margin = new System.Windows.Forms.Padding(0);
             this.lblInspectionType.Name = "lblInspectionType";
-            this.lblInspectionType.Size = new System.Drawing.Size(61, 22);
+            this.lblInspectionType.Size = new System.Drawing.Size(62, 22);
             this.lblInspectionType.TabIndex = 3;
             this.lblInspectionType.Text = "INSPECTION TYPE";
             this.lblInspectionType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1260,10 +934,10 @@
             this.lblThresholdWeightValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblThresholdWeightValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblThresholdWeightValue.ForeColor = System.Drawing.Color.White;
-            this.lblThresholdWeightValue.Location = new System.Drawing.Point(61, 110);
+            this.lblThresholdWeightValue.Location = new System.Drawing.Point(62, 110);
             this.lblThresholdWeightValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdWeightValue.Name = "lblThresholdWeightValue";
-            this.lblThresholdWeightValue.Size = new System.Drawing.Size(61, 22);
+            this.lblThresholdWeightValue.Size = new System.Drawing.Size(62, 22);
             this.lblThresholdWeightValue.TabIndex = 28;
             this.lblThresholdWeightValue.Text = "0";
             this.lblThresholdWeightValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1278,7 +952,7 @@
             this.lblPeakThreshold.Location = new System.Drawing.Point(0, 132);
             this.lblPeakThreshold.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakThreshold.Name = "lblPeakThreshold";
-            this.lblPeakThreshold.Size = new System.Drawing.Size(61, 22);
+            this.lblPeakThreshold.Size = new System.Drawing.Size(62, 22);
             this.lblPeakThreshold.TabIndex = 29;
             this.lblPeakThreshold.Text = "PEAK THRESHOLD";
             this.lblPeakThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1293,7 +967,7 @@
             this.lblThresholdWeight.Location = new System.Drawing.Point(0, 110);
             this.lblThresholdWeight.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdWeight.Name = "lblThresholdWeight";
-            this.lblThresholdWeight.Size = new System.Drawing.Size(61, 22);
+            this.lblThresholdWeight.Size = new System.Drawing.Size(62, 22);
             this.lblThresholdWeight.TabIndex = 30;
             this.lblThresholdWeight.Text = "THRESHOLD WEIGHT";
             this.lblThresholdWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1308,7 +982,7 @@
             this.lblFilterDirection.Location = new System.Drawing.Point(0, 88);
             this.lblFilterDirection.Margin = new System.Windows.Forms.Padding(0);
             this.lblFilterDirection.Name = "lblFilterDirection";
-            this.lblFilterDirection.Size = new System.Drawing.Size(61, 22);
+            this.lblFilterDirection.Size = new System.Drawing.Size(62, 22);
             this.lblFilterDirection.TabIndex = 31;
             this.lblFilterDirection.Text = "FILTER DIRECTION";
             this.lblFilterDirection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1323,7 +997,7 @@
             this.lblFilterType.Location = new System.Drawing.Point(0, 66);
             this.lblFilterType.Margin = new System.Windows.Forms.Padding(0);
             this.lblFilterType.Name = "lblFilterType";
-            this.lblFilterType.Size = new System.Drawing.Size(61, 22);
+            this.lblFilterType.Size = new System.Drawing.Size(62, 22);
             this.lblFilterType.TabIndex = 32;
             this.lblFilterType.Text = "FILTER TYPE";
             this.lblFilterType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1338,7 +1012,7 @@
             this.lblTargetType.Location = new System.Drawing.Point(0, 44);
             this.lblTargetType.Margin = new System.Windows.Forms.Padding(0);
             this.lblTargetType.Name = "lblTargetType";
-            this.lblTargetType.Size = new System.Drawing.Size(61, 22);
+            this.lblTargetType.Size = new System.Drawing.Size(62, 22);
             this.lblTargetType.TabIndex = 33;
             this.lblTargetType.Text = "TARGET TYPE";
             this.lblTargetType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1353,7 +1027,7 @@
             this.lblPanelType.Location = new System.Drawing.Point(0, 22);
             this.lblPanelType.Margin = new System.Windows.Forms.Padding(0);
             this.lblPanelType.Name = "lblPanelType";
-            this.lblPanelType.Size = new System.Drawing.Size(61, 22);
+            this.lblPanelType.Size = new System.Drawing.Size(62, 22);
             this.lblPanelType.TabIndex = 34;
             this.lblPanelType.Text = "PANEL TYPE";
             this.lblPanelType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1365,10 +1039,10 @@
             this.lblShadowDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblShadowDirection.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblShadowDirection.ForeColor = System.Drawing.Color.White;
-            this.lblShadowDirection.Location = new System.Drawing.Point(125, 0);
+            this.lblShadowDirection.Location = new System.Drawing.Point(124, 0);
             this.lblShadowDirection.Margin = new System.Windows.Forms.Padding(0);
             this.lblShadowDirection.Name = "lblShadowDirection";
-            this.lblShadowDirection.Size = new System.Drawing.Size(61, 22);
+            this.lblShadowDirection.Size = new System.Drawing.Size(62, 22);
             this.lblShadowDirection.TabIndex = 35;
             this.lblShadowDirection.Text = "SHADOW DIRECTION";
             this.lblShadowDirection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1380,10 +1054,10 @@
             this.lblPeakProperty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPeakProperty.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblPeakProperty.ForeColor = System.Drawing.Color.White;
-            this.lblPeakProperty.Location = new System.Drawing.Point(125, 22);
+            this.lblPeakProperty.Location = new System.Drawing.Point(124, 22);
             this.lblPeakProperty.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakProperty.Name = "lblPeakProperty";
-            this.lblPeakProperty.Size = new System.Drawing.Size(61, 22);
+            this.lblPeakProperty.Size = new System.Drawing.Size(62, 22);
             this.lblPeakProperty.TabIndex = 36;
             this.lblPeakProperty.Text = "PEAK PROPERTY";
             this.lblPeakProperty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1395,10 +1069,10 @@
             this.lblStrengthBase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthBase.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblStrengthBase.ForeColor = System.Drawing.Color.White;
-            this.lblStrengthBase.Location = new System.Drawing.Point(125, 44);
+            this.lblStrengthBase.Location = new System.Drawing.Point(124, 44);
             this.lblStrengthBase.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthBase.Name = "lblStrengthBase";
-            this.lblStrengthBase.Size = new System.Drawing.Size(61, 22);
+            this.lblStrengthBase.Size = new System.Drawing.Size(62, 22);
             this.lblStrengthBase.TabIndex = 38;
             this.lblStrengthBase.Text = "STRENGTH BASE";
             this.lblStrengthBase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1410,10 +1084,10 @@
             this.lblLogTrace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLogTrace.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblLogTrace.ForeColor = System.Drawing.Color.White;
-            this.lblLogTrace.Location = new System.Drawing.Point(125, 66);
+            this.lblLogTrace.Location = new System.Drawing.Point(124, 66);
             this.lblLogTrace.Margin = new System.Windows.Forms.Padding(0);
             this.lblLogTrace.Name = "lblLogTrace";
-            this.lblLogTrace.Size = new System.Drawing.Size(61, 22);
+            this.lblLogTrace.Size = new System.Drawing.Size(62, 22);
             this.lblLogTrace.TabIndex = 37;
             this.lblLogTrace.Text = "LOG TRACE";
             this.lblLogTrace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1425,10 +1099,10 @@
             this.lblThresholdMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblThresholdMode.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblThresholdMode.ForeColor = System.Drawing.Color.White;
-            this.lblThresholdMode.Location = new System.Drawing.Point(125, 88);
+            this.lblThresholdMode.Location = new System.Drawing.Point(124, 88);
             this.lblThresholdMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblThresholdMode.Name = "lblThresholdMode";
-            this.lblThresholdMode.Size = new System.Drawing.Size(61, 22);
+            this.lblThresholdMode.Size = new System.Drawing.Size(62, 22);
             this.lblThresholdMode.TabIndex = 39;
             this.lblThresholdMode.Text = "THRESHOLD MODE";
             this.lblThresholdMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1440,10 +1114,10 @@
             this.lblStrengthScaleFactor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStrengthScaleFactor.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblStrengthScaleFactor.ForeColor = System.Drawing.Color.White;
-            this.lblStrengthScaleFactor.Location = new System.Drawing.Point(125, 110);
+            this.lblStrengthScaleFactor.Location = new System.Drawing.Point(124, 110);
             this.lblStrengthScaleFactor.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthScaleFactor.Name = "lblStrengthScaleFactor";
-            this.lblStrengthScaleFactor.Size = new System.Drawing.Size(61, 22);
+            this.lblStrengthScaleFactor.Size = new System.Drawing.Size(62, 22);
             this.lblStrengthScaleFactor.TabIndex = 40;
             this.lblStrengthScaleFactor.Text = "STRENGTH SCALE FACTOR";
             this.lblStrengthScaleFactor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1455,10 +1129,10 @@
             this.lblSliceOverlap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSliceOverlap.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblSliceOverlap.ForeColor = System.Drawing.Color.White;
-            this.lblSliceOverlap.Location = new System.Drawing.Point(125, 132);
+            this.lblSliceOverlap.Location = new System.Drawing.Point(124, 132);
             this.lblSliceOverlap.Margin = new System.Windows.Forms.Padding(0);
             this.lblSliceOverlap.Name = "lblSliceOverlap";
-            this.lblSliceOverlap.Size = new System.Drawing.Size(61, 22);
+            this.lblSliceOverlap.Size = new System.Drawing.Size(62, 22);
             this.lblSliceOverlap.TabIndex = 41;
             this.lblSliceOverlap.Text = "SLICE OVERLAP";
             this.lblSliceOverlap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1470,10 +1144,10 @@
             this.lblPeakThresholdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPeakThresholdValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.lblPeakThresholdValue.ForeColor = System.Drawing.Color.White;
-            this.lblPeakThresholdValue.Location = new System.Drawing.Point(61, 132);
+            this.lblPeakThresholdValue.Location = new System.Drawing.Point(62, 132);
             this.lblPeakThresholdValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblPeakThresholdValue.Name = "lblPeakThresholdValue";
-            this.lblPeakThresholdValue.Size = new System.Drawing.Size(61, 22);
+            this.lblPeakThresholdValue.Size = new System.Drawing.Size(62, 22);
             this.lblPeakThresholdValue.TabIndex = 43;
             this.lblPeakThresholdValue.Text = "0";
             this.lblPeakThresholdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1514,10 +1188,10 @@
             this.lblStandardDeviationValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStandardDeviationValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStandardDeviationValue.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblStandardDeviationValue.Location = new System.Drawing.Point(61, 154);
+            this.lblStandardDeviationValue.Location = new System.Drawing.Point(62, 154);
             this.lblStandardDeviationValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblStandardDeviationValue.Name = "lblStandardDeviationValue";
-            this.lblStandardDeviationValue.Size = new System.Drawing.Size(61, 25);
+            this.lblStandardDeviationValue.Size = new System.Drawing.Size(62, 25);
             this.lblStandardDeviationValue.TabIndex = 46;
             this.lblStandardDeviationValue.Text = "0";
             this.lblStandardDeviationValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1531,7 +1205,7 @@
             this.lblStandardDeviation.Location = new System.Drawing.Point(0, 154);
             this.lblStandardDeviation.Margin = new System.Windows.Forms.Padding(0);
             this.lblStandardDeviation.Name = "lblStandardDeviation";
-            this.lblStandardDeviation.Size = new System.Drawing.Size(61, 25);
+            this.lblStandardDeviation.Size = new System.Drawing.Size(62, 25);
             this.lblStandardDeviation.TabIndex = 42;
             this.lblStandardDeviation.Text = "STANDARD DEVIATION";
             this.lblStandardDeviation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1547,10 +1221,10 @@
             this.cmbInspectionType.ForeColor = System.Drawing.Color.White;
             this.cmbInspectionType.FormattingEnabled = true;
             this.cmbInspectionType.IntegralHeight = false;
-            this.cmbInspectionType.Location = new System.Drawing.Point(61, 0);
+            this.cmbInspectionType.Location = new System.Drawing.Point(62, 0);
             this.cmbInspectionType.Margin = new System.Windows.Forms.Padding(0);
             this.cmbInspectionType.Name = "cmbInspectionType";
-            this.cmbInspectionType.Size = new System.Drawing.Size(61, 28);
+            this.cmbInspectionType.Size = new System.Drawing.Size(62, 28);
             this.cmbInspectionType.TabIndex = 141;
             this.cmbInspectionType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -1570,6 +1244,7 @@
             this.cmbThresholdMode.Name = "cmbThresholdMode";
             this.cmbThresholdMode.Size = new System.Drawing.Size(62, 28);
             this.cmbThresholdMode.TabIndex = 148;
+            this.cmbThresholdMode.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // chkLogTraceUseCheck
             // 
@@ -1592,64 +1267,27 @@
             this.pnlSelectParameter.Location = new System.Drawing.Point(0, 0);
             this.pnlSelectParameter.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSelectParameter.Name = "pnlSelectParameter";
-            this.pnlSelectParameter.Size = new System.Drawing.Size(669, 60);
+            this.pnlSelectParameter.Size = new System.Drawing.Size(813, 60);
             this.pnlSelectParameter.TabIndex = 2;
             // 
             // tlpSelectParameter
             // 
-            this.tlpSelectParameter.ColumnCount = 5;
-            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpSelectParameter.Controls.Add(this.rdoBump, 0, 0);
-            this.tlpSelectParameter.Controls.Add(this.rdoGroup, 0, 0);
-            this.tlpSelectParameter.Controls.Add(this.rdoMakerParmeter, 3, 0);
-            this.tlpSelectParameter.Controls.Add(this.rdoEngineerParmeter, 2, 0);
-            this.tlpSelectParameter.Controls.Add(this.rdoOption, 4, 0);
+            this.tlpSelectParameter.ColumnCount = 3;
+            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpSelectParameter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpSelectParameter.Controls.Add(this.rdoMakerParmeter, 1, 0);
+            this.tlpSelectParameter.Controls.Add(this.rdoEngineerParmeter, 0, 0);
+            this.tlpSelectParameter.Controls.Add(this.rdoOption, 2, 0);
             this.tlpSelectParameter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSelectParameter.Location = new System.Drawing.Point(0, 0);
             this.tlpSelectParameter.Margin = new System.Windows.Forms.Padding(0);
             this.tlpSelectParameter.Name = "tlpSelectParameter";
             this.tlpSelectParameter.RowCount = 1;
             this.tlpSelectParameter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpSelectParameter.Size = new System.Drawing.Size(669, 60);
+            this.tlpSelectParameter.Size = new System.Drawing.Size(813, 60);
             this.tlpSelectParameter.TabIndex = 0;
-            // 
-            // rdoBump
-            // 
-            this.rdoBump.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoBump.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoBump.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoBump.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoBump.Location = new System.Drawing.Point(133, 0);
-            this.rdoBump.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoBump.Name = "rdoBump";
-            this.rdoBump.Size = new System.Drawing.Size(133, 60);
-            this.rdoBump.TabIndex = 3;
-            this.rdoBump.TabStop = true;
-            this.rdoBump.Text = "BUMP";
-            this.rdoBump.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoBump.UseVisualStyleBackColor = false;
-            this.rdoBump.CheckedChanged += new System.EventHandler(this.rdoBump_CheckedChanged);
-            // 
-            // rdoGroup
-            // 
-            this.rdoGroup.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoGroup.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoGroup.Location = new System.Drawing.Point(0, 0);
-            this.rdoGroup.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoGroup.Name = "rdoGroup";
-            this.rdoGroup.Size = new System.Drawing.Size(133, 60);
-            this.rdoGroup.TabIndex = 0;
-            this.rdoGroup.TabStop = true;
-            this.rdoGroup.Text = "GROUP";
-            this.rdoGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoGroup.UseVisualStyleBackColor = false;
-            this.rdoGroup.CheckedChanged += new System.EventHandler(this.rdoGroup_CheckedChanged);
             // 
             // rdoMakerParmeter
             // 
@@ -1657,10 +1295,10 @@
             this.rdoMakerParmeter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoMakerParmeter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoMakerParmeter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoMakerParmeter.Location = new System.Drawing.Point(399, 0);
+            this.rdoMakerParmeter.Location = new System.Drawing.Point(271, 0);
             this.rdoMakerParmeter.Margin = new System.Windows.Forms.Padding(0);
             this.rdoMakerParmeter.Name = "rdoMakerParmeter";
-            this.rdoMakerParmeter.Size = new System.Drawing.Size(133, 60);
+            this.rdoMakerParmeter.Size = new System.Drawing.Size(271, 60);
             this.rdoMakerParmeter.TabIndex = 1;
             this.rdoMakerParmeter.TabStop = true;
             this.rdoMakerParmeter.Text = "MAKER\r\nPARAMETER";
@@ -1674,10 +1312,10 @@
             this.rdoEngineerParmeter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoEngineerParmeter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoEngineerParmeter.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoEngineerParmeter.Location = new System.Drawing.Point(266, 0);
+            this.rdoEngineerParmeter.Location = new System.Drawing.Point(0, 0);
             this.rdoEngineerParmeter.Margin = new System.Windows.Forms.Padding(0);
             this.rdoEngineerParmeter.Name = "rdoEngineerParmeter";
-            this.rdoEngineerParmeter.Size = new System.Drawing.Size(133, 60);
+            this.rdoEngineerParmeter.Size = new System.Drawing.Size(271, 60);
             this.rdoEngineerParmeter.TabIndex = 2;
             this.rdoEngineerParmeter.TabStop = true;
             this.rdoEngineerParmeter.Text = "ENGINEER\r\nPARAMETER";
@@ -1691,10 +1329,10 @@
             this.rdoOption.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.rdoOption.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoOption.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.rdoOption.Location = new System.Drawing.Point(532, 0);
+            this.rdoOption.Location = new System.Drawing.Point(542, 0);
             this.rdoOption.Margin = new System.Windows.Forms.Padding(0);
             this.rdoOption.Name = "rdoOption";
-            this.rdoOption.Size = new System.Drawing.Size(137, 60);
+            this.rdoOption.Size = new System.Drawing.Size(271, 60);
             this.rdoOption.TabIndex = 1;
             this.rdoOption.TabStop = true;
             this.rdoOption.Text = "OPTION";
@@ -1711,16 +1349,12 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "AkkonParamControl";
-            this.Size = new System.Drawing.Size(669, 418);
+            this.Size = new System.Drawing.Size(813, 548);
             this.Load += new System.EventHandler(this.AkkonParamControl_Load);
             this.tlpSetParameter.ResumeLayout(false);
             this.pnlShowSelectParameter.ResumeLayout(false);
             this.pnlEngineerParameter.ResumeLayout(false);
             this.tlpEngineerParameter.ResumeLayout(false);
-            this.pnlGroupParameter.ResumeLayout(false);
-            this.tlpGroupParameter.ResumeLayout(false);
-            this.tlpGroupParameter.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlOptionParameter.ResumeLayout(false);
             this.tlpOptionParameter.ResumeLayout(false);
             this.tlpOptionParameter.PerformLayout();
@@ -1740,12 +1374,12 @@
         private System.Windows.Forms.TableLayoutPanel tlpEngineerParameter;
         private System.Windows.Forms.Label lblStrengthFilterValue;
         private System.Windows.Forms.Label lblStrengthFilter;
-        private System.Windows.Forms.Label lblCount;
-        private System.Windows.Forms.Label lblCountValue;
+        private System.Windows.Forms.Label lblJudgeCount;
+        private System.Windows.Forms.Label lblJudgeCountValue;
         private System.Windows.Forms.Label lblMinSizeFilter;
         private System.Windows.Forms.Label lblMaxSizeFilter;
         private System.Windows.Forms.Label lblGroupDistance;
-        private System.Windows.Forms.Label lblLength;
+        private System.Windows.Forms.Label lblJudgeLength;
         private System.Windows.Forms.Label lblWidthCut;
         private System.Windows.Forms.Label lblHeightCut;
         private System.Windows.Forms.Label lblBWRatio;
@@ -1753,25 +1387,11 @@
         private System.Windows.Forms.Label lblMinSizeFilterValue;
         private System.Windows.Forms.Label lblMaxSizeFilterValue;
         private System.Windows.Forms.Label lblGroupDistanceValue;
-        private System.Windows.Forms.Label lblLengthValue;
+        private System.Windows.Forms.Label lblJudgeLengthValue;
         private System.Windows.Forms.Label lblWidthCutValue;
         private System.Windows.Forms.Label lblHeightCutValue;
         private System.Windows.Forms.Label lblBWRatioValue;
         private System.Windows.Forms.Label lblExtraLeadDisplayValue;
-        private System.Windows.Forms.Panel pnlGroupParameter;
-        private System.Windows.Forms.TableLayoutPanel tlpGroupParameter;
-        private System.Windows.Forms.Label lblGroupCount;
-        private System.Windows.Forms.Label lblGroupCountValue;
-        private System.Windows.Forms.ComboBox cmbGroupNumber;
-        private System.Windows.Forms.Label lblGroupNumber;
-        private System.Windows.Forms.Label lblROIWidth;
-        private System.Windows.Forms.Label lblROIWidthValue;
-        private System.Windows.Forms.Label lblROIHeight;
-        private System.Windows.Forms.Label lblROIHeightValue;
-        private System.Windows.Forms.Label lblLeadCount;
-        private System.Windows.Forms.Label lblLeadCountValue;
-        private System.Windows.Forms.Label lblLeadPitch;
-        private System.Windows.Forms.Label lblLeadPitchValue;
         private System.Windows.Forms.Panel pnlOptionParameter;
         private System.Windows.Forms.TableLayoutPanel tlpOptionParameter;
         private System.Windows.Forms.Label lblDimple;
@@ -1820,14 +1440,8 @@
         private System.Windows.Forms.CheckBox chkLogTraceUseCheck;
         private System.Windows.Forms.Panel pnlSelectParameter;
         private System.Windows.Forms.TableLayoutPanel tlpSelectParameter;
-        private System.Windows.Forms.RadioButton rdoBump;
-        private System.Windows.Forms.RadioButton rdoGroup;
         private System.Windows.Forms.RadioButton rdoMakerParmeter;
         private System.Windows.Forms.RadioButton rdoEngineerParmeter;
         private System.Windows.Forms.RadioButton rdoOption;
-        private System.Windows.Forms.Label lblClone;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.RadioButton rdoCopyVertical;
-        private System.Windows.Forms.RadioButton rdoCopyHorizontal;
     }
 }

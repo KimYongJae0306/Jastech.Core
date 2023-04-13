@@ -15,8 +15,6 @@ namespace Jastech.Framework.Macron.Akkon.Controls
     public partial class AkkonParamControl : UserControl
     {
         #region 필드
-        private AkkonParamter.ParameterType _parameterType = AkkonParamter.ParameterType.GROUP;
-
         private AkkonParam CurrentParam;
 
         private Color _selectedColor = new Color();
@@ -60,7 +58,7 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             if (cmb != null)
             {
                 e.DrawBackground();
-                cmb.ItemHeight = lblGroupNumber.Height - 7;
+                cmb.ItemHeight = lblInspectionType.Height - 7;
 
                 if (e.Index >= 0)
                 {
@@ -84,7 +82,7 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             _nonSelectedColor = Color.FromArgb(52, 52, 52);
 
             // Checked Radio Button
-            rdoGroup.Checked = true;
+            rdoEngineerParmeter.Checked = true;
 
             // Authority
             //if (Main.Instance().Authority != eAuthority.Maker)
@@ -93,137 +91,102 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             //    rdoMakerParmeter.Enabled = true;
 
             // Parameter Panel Dock
-            this.pnlGroupParameter.Dock = DockStyle.Fill;
             this.pnlEngineerParameter.Dock = DockStyle.Fill;
             this.pnlMakerParameter.Dock = DockStyle.Fill;
             this.pnlOptionParameter.Dock = DockStyle.Fill;
-
-            // Inspection Type
-            foreach (AkkonParamter.MakerParameter.eInspectionType item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eInspectionType)))
-                cmbInspectionType.Items.Add(item.ToString().ToUpper());
-
-            // Panel Type
-            foreach (AkkonParamter.MakerParameter.ePanelType item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.ePanelType)))
-                cmbPanelType.Items.Add(item.ToString().ToUpper());
-
-            // Target Type
-            foreach (AkkonParamter.MakerParameter.eTargetType item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eTargetType)))
-                cmbTargetType.Items.Add(item.ToString().ToUpper());
-
-            // Filter Type
-            foreach (AkkonParamter.MakerParameter.eFilterType item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eFilterType)))
-                cmbFilterType.Items.Add(item.ToString().ToUpper());
-
-            // Filter Direction
-            foreach (AkkonParamter.MakerParameter.eFilterDirection item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eFilterDirection)))
-                cmbFilterDirection.Items.Add(item.ToString().ToUpper());
-
-            // Shadow Direction
-            foreach (AkkonParamter.MakerParameter.eShadowDirection item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eShadowDirection)))
-                cmbShadowDirection.Items.Add(item.ToString().ToUpper());
-
-            // Peak Property
-            foreach (AkkonParamter.MakerParameter.ePeakProperty item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.ePeakProperty)))
-                cmbPeakProperty.Items.Add(item.ToString().ToUpper());
-
-            // Strength Base
-            foreach (AkkonParamter.MakerParameter.eStrengthBase item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eStrengthBase)))
-                cmbStrengthBase.Items.Add(item.ToString().ToUpper());
-
-            // Threshold Mode
-            foreach (AkkonParamter.MakerParameter.eThresholdMode item in Enum.GetValues(typeof(AkkonParamter.MakerParameter.eThresholdMode)))
-                cmbThresholdMode.Items.Add(item.ToString().ToUpper());
         }
         #endregion
 
-        public void UpdateData(AkkonParam akkonParam)
+        private void InitializeComboBox()
+        {
+            foreach (InspectionType inspectionType in Enum.GetValues(typeof(InspectionType)))
+                cmbInspectionType.Items.Add(inspectionType.ToString().ToUpper());
+
+            foreach (PanelType panelType in Enum.GetValues(typeof(PanelType)))
+                cmbPanelType.Items.Add(panelType.ToString().ToUpper());
+
+            foreach (TargetType targetType in Enum.GetValues(typeof(TargetType)))
+                cmbTargetType.Items.Add(targetType.ToString().ToUpper());
+
+            foreach (FilterType filterType in Enum.GetValues(typeof(FilterType)))
+                cmbFilterType.Items.Add(filterType.ToString().ToUpper());
+
+            foreach (FilterDirection filterDirection in Enum.GetValues(typeof(FilterDirection)))
+                cmbFilterDirection.Items.Add(filterDirection.ToString().ToUpper());
+
+            foreach (ShadowDirection shadowDirection in Enum.GetValues(typeof(ShadowDirection)))
+                cmbShadowDirection.Items.Add(shadowDirection.ToString().ToUpper());
+
+            foreach (PeakProperty peakProperty in Enum.GetValues(typeof(PeakProperty)))
+                cmbPeakProperty.Items.Add(peakProperty.ToString().ToUpper());
+
+            foreach (StrengthBase strengthBase in Enum.GetValues(typeof(StrengthBase)))
+                cmbStrengthBase.Items.Add(strengthBase.ToString().ToUpper());
+
+            foreach (ThresholdMode thresholdMode in Enum.GetValues(typeof(ThresholdMode)))
+                cmbThresholdMode.Items.Add(thresholdMode.ToString().ToUpper());
+        }
+
+        private void UpdateData(AkkonParam akkonParam)
+        {
+            // Group Param
+            //lblGroupCountValue.Text = akkonParam.GroupCount.ToString();
+            //if (akkonParam.GroupCount > 0)
+            //    cmbGroupNumber.SelectedIndex = 0;
+            //lblROIWidthValue.Text = akkonParam.LeadWidth.ToString();
+            //lblROIHeightValue.Text = akkonParam.LeadHeight.ToString();
+            //lblLeadCountValue.Text = akkonParam.LeadCount.ToString();
+            //lblLeadPitchValue.Text = akkonParam.LeadPitch.ToString();
+
+            ///Enginner Param
+            lblJudgeCountValue.Text = akkonParam.JudgeCount.ToString();
+            lblJudgeLengthValue.Text = akkonParam.JudgeLength.ToString("F2");
+            lblMinSizeFilterValue.Text = akkonParam.FilterMinSize.ToString("F2");
+            lblMaxSizeFilterValue.Text = akkonParam.FilterMaxSize.ToString("F2");
+            lblGroupDistanceValue.Text = akkonParam.GroupingDistance.ToString("F2");
+            lblStrengthFilterValue.Text = akkonParam.StrengthThreshold.ToString("F2");
+            lblWidthCutValue.Text = akkonParam.WidthCut.ToString();
+            lblHeightCutValue.Text = akkonParam.HeightCut.ToString();
+            lblBWRatioValue.Text = akkonParam.BWRatio.ToString("F2");
+            lblExtraLeadDisplayValue.Text = akkonParam.ExtraLead.ToString();
+
+            // Maker Param
+            cmbInspectionType.SelectedIndex = (int)akkonParam.InspectionType;
+            cmbPanelType.SelectedIndex = (int)akkonParam.PanelType;
+            cmbTargetType.SelectedIndex = (int)akkonParam.TargetType;
+            cmbFilterType.SelectedIndex = (int)akkonParam.FilterType;
+            cmbFilterDirection.SelectedIndex = (int)akkonParam.FilterDirection;
+            cmbShadowDirection.SelectedIndex = (int)akkonParam.ShadowDirection;
+            cmbPeakProperty.SelectedIndex = (int)akkonParam.PeakProperty;
+            cmbStrengthBase.SelectedIndex = (int)akkonParam.StrengthBase;
+            cmbThresholdMode.SelectedIndex = (int)akkonParam.ThresholdMode;
+
+            chkLogTraceUseCheck.Checked = akkonParam.UseLogTrace;
+            lblThresholdWeightValue.Text = akkonParam.ThresholdWeight.ToString("F2");
+            lblPeakThresholdValue.Text = akkonParam.ThresholdPeak.ToString();
+            lblStandardDeviationValue.Text = akkonParam.StdDevLeadJudge.ToString();
+            lblStrengthScaleFactorValue.Text = akkonParam.StrengthScaleFactor.ToString("F2");
+            lblSliceOverlapValue.Text = akkonParam.Overlap.ToString("F2");
+
+            // Option
+            chkUseDimple.Checked = akkonParam.UseDimple;
+            lblDimpleNGCountValue.Text = akkonParam.DimpleNGCount.ToString();
+            lblDimpleThresholdValue.Text = akkonParam.DimpleThreshold.ToString();
+
+            chkUseAlarm.Checked = akkonParam.UseAlarm;
+            lblAlarmCapacityValue.Text = akkonParam.AlarmCapacity.ToString();
+            lblAlarmNGCountValue.Text = akkonParam.AlarmNGCount.ToString();
+        }
+
+        public void Initialize(AkkonParam akkonParam)
         {
             CurrentParam = akkonParam;
 
-            ///Enginner Param
-            lblCountValue.Text = akkonParam.JudgeCount.ToString();
-            lblLengthValue.Text = akkonParam.JudgeLength.ToString("F2");
-            lblMinSizeFilterValue.Text = akkonParam.AkkonInspectionFilter.s_fMinSize.ToString("F2");
-            lblMaxSizeFilterValue.Text = akkonParam.AkkonInspectionFilter.s_fMaxSize.ToString("F2");
-            lblGroupDistanceValue.Text = akkonParam.AkkonInspectionFilter.s_fGroupingDistance.ToString("F2");
-            lblStrengthFilterValue.Text = akkonParam.AkkonInspectionParameter.s_fStrengthThreshold.ToString("F2");
-            lblWidthCutValue.Text = akkonParam.AkkonInspectionFilter.s_nWidthCut.ToString();
-            lblHeightCutValue.Text = akkonParam.AkkonInspectionFilter.s_nHeightCut.ToString();
-            lblBWRatioValue.Text = akkonParam.AkkonInspectionFilter.s_fBWRatio.ToString("F2");
-            lblExtraLeadDisplayValue.Text = akkonParam.AkkonInspectionParameter.s_nExtraLead.ToString();
-
-            // Maker Param
-            cmbInspectionType.SelectedIndex = akkonParam.AkkonInspectionOption.s_nInspType;
-            cmbPanelType.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nIsFlexible;
-            cmbTargetType.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nPanelInfo;
-            cmbFilterType.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eFilterType;
-            cmbFilterDirection.SelectedIndex = akkonParam.AkkonInspectionParameter.s_nFilterDir;
-            cmbShadowDirection.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eShadowDir;
-            cmbPeakProperty.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_ePeakProp;
-            cmbStrengthBase.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eStrengthBase;
-            cmbThresholdMode.SelectedIndex = (int)akkonParam.AkkonInspectionParameter.s_eThMode;
-
-            chkLogTraceUseCheck.Checked = akkonParam.AkkonInspectionOption.s_bLogTrace;
-            lblThresholdWeightValue.Text = akkonParam.AkkonInspectionParameter.s_fThWeight.ToString("F2");
-            lblPeakThresholdValue.Text = akkonParam.AkkonInspectionParameter.s_nThPeak.ToString();
-            lblStandardDeviationValue.Text = akkonParam.AkkonInspectionParameter.s_fStdDevLeadJudge.ToString();
-            lblStrengthScaleFactorValue.Text = akkonParam.AkkonInspectionParameter.s_fStrengthScaleFactor.ToString("F2");
-            lblSliceOverlapValue.Text = akkonParam.AkkonInspectionOption.s_nOverlap.ToString("F2");
-
-            // Option
-            chkUseDimple.Checked = true;
-            lblDimpleNGCountValue.Text = "0";
-            lblDimpleThresholdValue.Text = "0";
-
-            chkUseAlarm.Checked = true;
-            lblAlarmCapacityValue.Text = "0";
-            lblAlarmNGCountValue.Text = "0";
+            InitializeComboBox();
+            UpdateData(akkonParam);
         }
 
-        private void rdoGroup_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdoGroup.Checked)
-            {
-                ShowGroupParamter();
-                rdoGroup.BackColor = _selectedColor;
-            }
-            else
-                rdoGroup.BackColor = _nonSelectedColor;
-        }
-
-        private void ShowGroupParamter()
-        {
-            pnlGroupParameter.Visible = true;
-            pnlEngineerParameter.Visible = false;
-            pnlMakerParameter.Visible = false;
-            pnlOptionParameter.Visible = false;
-
-            lblGroupCountValue.Enabled = true;
-            cmbGroupNumber.Enabled = true;
-        }
-
-        private void rdoBump_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdoBump.Checked)
-            {
-                ShowBumpParamter();
-                rdoBump.BackColor = _selectedColor;
-            }
-            else
-                rdoBump.BackColor = _nonSelectedColor;
-        }
-
-        private void ShowBumpParamter()
-        {
-            pnlGroupParameter.Visible = true;
-            pnlEngineerParameter.Visible = false;
-            pnlMakerParameter.Visible = false;
-            pnlOptionParameter.Visible = false;
-
-            lblGroupCountValue.Enabled = false;
-            cmbGroupNumber.Enabled = false;
-        }
-
+        #region Panel Open
         private void rdoEngineerParmeter_CheckedChanged(object sender, EventArgs e)
         {
             if (rdoEngineerParmeter.Checked)
@@ -237,7 +200,6 @@ namespace Jastech.Framework.Macron.Akkon.Controls
 
         private void ShowEngineerParamter()
         {
-            pnlGroupParameter.Visible = false;
             pnlEngineerParameter.Visible = true;
             pnlMakerParameter.Visible = false;
             pnlOptionParameter.Visible = false;
@@ -256,7 +218,6 @@ namespace Jastech.Framework.Macron.Akkon.Controls
 
         private void ShowMakerParamter()
         {
-            pnlGroupParameter.Visible = false;
             pnlEngineerParameter.Visible = false;
             pnlMakerParameter.Visible = true;
             pnlOptionParameter.Visible = false;
@@ -275,131 +236,66 @@ namespace Jastech.Framework.Macron.Akkon.Controls
 
         private void ShowOptionParameter()
         {
-            pnlGroupParameter.Visible = false;
             pnlEngineerParameter.Visible = false;
             pnlMakerParameter.Visible = false;
             pnlOptionParameter.Visible = true;
         }
-    }
 
-    public class AkkonParamter
-    {
-        public enum ParameterType
+
+        public AkkonParam GetCurrentParam()
         {
-            GROUP,
-            BUMP,
-            ENGINEER_PARAMETER,
-            MAKER_PARAMETER,
-            OPTION,
+            return CurrentParam;
+        }
+        #endregion
+
+        private void lblJudgeCountValue_Click(object sender, EventArgs e)
+        {
+
         }
 
-        public class GroupParameter
+        private void lblJudgeLengthValue_Click(object sender, EventArgs e)
         {
-            public int GroupCount { get; set; } = 0;
-            public int ROIWidth { get; set; } = 0;
-            public int ROIHeight { get; set; } = 0;
-            public int LeadCount { get; set; } = 0;
-            public int LeadPitch { get; set; } = 0;
+
         }
 
-        public class EngineerParameter
+        private void lblMinSizeFilterValue_Click(object sender, EventArgs e)
         {
-            public int Count { get; set; } = 0;
-            public int MinimumFilterSize { get; set; } = 0;
-            public int MaximumFilterSize { get; set; } = 0;
-            public int GroupDistance { get; set; } = 0;
-            public int StrengthFilter { get; set; } = 0;
-            public int Length { get; set; } = 0;
-            public int WidthCut { get; set; } = 0;
-            public int HeightCut { get; set; } = 0;
-            public int BandWidthRatio { get; set; } = 0;
-            public int ExtraLeadDisplay { get; set; } = 0;
+
         }
 
-        public class MakerParameter
+        private void lblWidthCutValue_Click(object sender, EventArgs e)
         {
-            public enum eInspectionType
-            {
-                THRESHOLD,
-                DL_MODE_0,
-                DL_MODE_1,
-                DL_MODE_2,
-            }
 
-            public enum ePanelType
-            {
-                RIGID,
-                FLEXIBLE,
-            }
-
-            public enum eTargetType
-            {
-                COF,
-                COG,
-                FOG,
-            }
-
-            public enum eFilterType
-            {
-                NORMAL,
-                SMALL,
-                FILTER_2,
-                FILTER_3,
-                FILTER_4,
-                BIG,
-            }
-
-            public enum eFilterDirection
-            {
-                HORIZONTAL,
-                VERTICAL,
-            }
-
-            public int ThresholdWeight { get; set; } = 0;
-            public int PeakThreshold { get; set; } = 0;
-            public int StandardDeviation { get; set; } = 0;
-
-
-            public enum eShadowDirection
-            {
-                UP,
-                DOWN,
-                LEFT,
-                RIGHT,
-            }
-
-            public enum ePeakProperty
-            {
-                NORMAL,
-                NEAR,
-            }
-
-            public enum eStrengthBase
-            {
-                ENH,
-                RAW,
-            }
-
-            public bool UseLogTrace { get; set; } = false;
-
-            public enum eThresholdMode
-            {
-                AUTO,
-                WHITE,
-                BLACK,
-            }
-
-            public int StrengthScaleFactor { get; set; } = 0;
-            public int SliceOverlap { get; set; } = 0;
         }
 
-        public class OptionParameter
+        private void lblMaxSizeFilterValue_Click(object sender, EventArgs e)
         {
-            public int DimpleNGCount { get; set; } = 0;
-            public int DimpleThreshold { get; set; } = 0;
-            public int AlarmCapacity { get; set; } = 0;
-            public int AlarmNGCount { get; set; } = 0;
+
+        }
+
+        private void lblHeightCutValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblGroupDistanceValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBWRatioValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStrengthFilterValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblExtraLeadDisplayValue_Click(object sender, EventArgs e)
+        {
+
         }
     }
-    
 }

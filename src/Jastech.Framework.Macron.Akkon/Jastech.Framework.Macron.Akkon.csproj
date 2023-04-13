@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AkkonEnum.cs" />
     <Compile Include="Controls\AkkonParamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,6 +85,12 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
+      <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
+      <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
