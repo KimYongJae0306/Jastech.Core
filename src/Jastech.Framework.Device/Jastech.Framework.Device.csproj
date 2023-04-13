@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LAF\LAF.cs" />
+    <Compile Include="LAFCtrl\LAFCtrl.cs" />
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\CameraHandler.cs" />
     <Compile Include="Cameras\CameraHIK.cs" />
@@ -104,8 +104,10 @@
     <Compile Include="Grabbers\Grabber.cs" />
     <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="IDevice.cs" />
-    <Compile Include="LAF\NuriOneLAF.cs" />
-    <Compile Include="LAF\NuriOne\NuriOneParser.cs" />
+    <Compile Include="LAFCtrl\LAFCtrlHandler.cs" />
+    <Compile Include="LAFCtrl\NuriOneLAFCtrl.cs" />
+    <Compile Include="LAFCtrl\NuriOne\NuriOneParser.cs" />
+    <Compile Include="LAFCtrl\VirtualLAFCtrl.cs" />
     <Compile Include="LightCtrls\LightCtrl.cs" />
     <Compile Include="LightCtrls\LightCtrlHandler.cs" />
     <Compile Include="LightCtrls\LightParameter.cs" />

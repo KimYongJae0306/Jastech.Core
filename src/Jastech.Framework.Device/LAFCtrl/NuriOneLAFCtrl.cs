@@ -9,9 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
-namespace Jastech.Framework.Device.LAF
+namespace Jastech.Framework.Device.LAFCtrl
 {
-    public partial class NuriOneLAF : LAF
+    public partial class NuriOneLAFCtrl : LAFCtrl
     {
         [JsonProperty]
         public SerialPortComm SerialPortComm { get; set; } = null;
@@ -34,7 +34,7 @@ namespace Jastech.Framework.Device.LAF
 
         private string LastReceivedData { get; set; }
 
-        public NuriOneLAF(string name)
+        public NuriOneLAFCtrl(string name)
          : base(name)
         {
         }
@@ -75,6 +75,9 @@ namespace Jastech.Framework.Device.LAF
         private void SerialPortComm_Received(byte[] data)
         {
             LastReceivedData = Encoding.Default.GetString(data);
+
+            OnLAFReceived(data);
+
             ResponseReceivedEvent.Set();
         }
 
@@ -205,7 +208,7 @@ namespace Jastech.Framework.Device.LAF
         }
     }
 
-    public partial class NuriOneLAF
+    public partial class NuriOneLAFCtrl
     {
         #region Const
         const string CMD_WRITE_STORE_PERMANENT_PARAMETERS = "write_all_parameters";     // 이 커맨드는 파라미터를 영구적으로 저장시킬 수 있습니다. (Non-permanent 항목은 제외) 응답시간은 500~1000ms입니다. 이 커맨드는 센서 또는 모터 동작에 영향을 줄 수 있기 때문에, Normal Sensor 구동 중인 경우에는 사용하지 마십시오.

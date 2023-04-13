@@ -1,5 +1,6 @@
 ﻿using Jastech.Framework.Config;
 using Jastech.Framework.Device.Cameras;
+using Jastech.Framework.Device.LAFCtrl;
 using Jastech.Framework.Device.LightCtrls;
 using Jastech.Framework.Device.Motions;
 using System;
@@ -23,6 +24,8 @@ namespace Jastech.Framework.Winform
 
         public LightCtrlHandler LightCtrlHandler { get; private set; }
 
+        public LAFCtrlHandler LAFCtrlHandler { get; private set; }
+
         private ConfigSet ConfigSet { get; set; }
         #endregion
 
@@ -40,6 +43,7 @@ namespace Jastech.Framework.Winform
             CameraHandler = new CameraHandler();
             MotionHandler = new MotionHandler();
             LightCtrlHandler = new LightCtrlHandler();
+            LAFCtrlHandler = new LAFCtrlHandler();
         }
         #endregion
 
@@ -61,6 +65,7 @@ namespace Jastech.Framework.Winform
             var devices = ConfigSet.Machine.Devices;
             var cameras = devices.Where((d) => d is Camera).Cast<Camera>();
             var motions = devices.Where((d) => d is Motion).Cast<Motion>();
+            var lafs = devices.Where((d) => d is LAFCtrl).Cast<LAFCtrl>();
             var lightCtrls = devices.Where((d) => d is LightCtrl).Cast<LightCtrl>();
 
             foreach (var camera in cameras)
@@ -71,6 +76,10 @@ namespace Jastech.Framework.Winform
             {
                 MotionHandler.Add(motion);
             }
+            foreach (var laf in lafs)
+            {
+                LAFCtrlHandler.Add(laf);
+            }
             foreach (var lightCtrl in lightCtrls)
             {
                 LightCtrlHandler.Add(lightCtrl);
@@ -80,7 +89,10 @@ namespace Jastech.Framework.Winform
             Initialized?.Invoke(typeof(Camera), cameraSuccess);
 
             bool motionSuccess = MotionHandler.Initialize();
-            Initialized?.Invoke(typeof(Motion), cameraSuccess);
+            Initialized?.Invoke(typeof(Motion), motionSuccess);
+
+            bool lafSuccess = LAFCtrlHandler.Initialize();
+            Initialized?.Invoke(typeof(LAFCtrl), lafSuccess);
 
             bool lightCtrlSuccess = LightCtrlHandler.Initialize();
             Initialized?.Invoke(typeof(LightCtrl), lightCtrlSuccess);
@@ -90,6 +102,7 @@ namespace Jastech.Framework.Winform
         {
             CameraHandler.Release();
             MotionHandler.Release();
+            LAFCtrlHandler.Release();
             LightCtrlHandler.Release();
         }
         #endregion

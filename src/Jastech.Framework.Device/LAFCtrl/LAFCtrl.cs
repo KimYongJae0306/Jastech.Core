@@ -6,26 +6,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jastech.Framework.Device.LAF
+namespace Jastech.Framework.Device.LAFCtrl
 {
-    public abstract partial class LAF : IDevice
+    public abstract partial class LAFCtrl : IDevice
     {
-        public LAF(string name)
+        public LAFCtrl(string name)
         {
             Name = name;
         }
 
-        //public delegate void LAFEventHandler(string data);
+        public delegate void LAFEventHandler(byte[] data);
 
-        //public event LAFEventHandler LAFReceived;
+        public event LAFEventHandler LAFReceived;
 
-        //protected void OnLAFReceived(string data)
-        //{
-        //    LAFReceived?.Invoke(data);
-        //}
+        protected void OnLAFReceived(byte[] data)
+        {
+            LAFReceived?.Invoke(data);
+        }
     }
 
-    public abstract partial class LAF : IDevice
+    public abstract partial class LAFCtrl : IDevice
     {
         #region 속성
         public string Name { get; protected set; }
