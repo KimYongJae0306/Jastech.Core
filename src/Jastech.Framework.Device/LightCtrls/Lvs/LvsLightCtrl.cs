@@ -101,7 +101,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             byte[] dataArray = new byte[4];
             Parser.OpMode = 0x00;                    // [OPMode] Write : 0x00, Read : 0x01
             Parser.DataLength = 0x01;                    // [DataLength]
-            Parser.Address = 0x20;                    // [Address] Channel Select Register : 0x20 
+            Parser.Address = 0x28;                    // [Address] Step Value Register : 0x28
             Parser.Value = Convert.ToByte(level);   // Light level
 
             Parser.Serialize(out byte[] serializedData);
