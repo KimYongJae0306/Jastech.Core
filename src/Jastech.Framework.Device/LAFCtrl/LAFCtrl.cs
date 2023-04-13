@@ -17,11 +17,11 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public delegate void LAFEventHandler(byte[] data);
 
-        public event LAFEventHandler LAFReceived;
+        public event LAFEventHandler DataReceived;
 
         protected void OnLAFReceived(byte[] data)
         {
-            LAFReceived?.Invoke(data);
+            DataReceived?.Invoke(data);
         }
     }
 

@@ -197,6 +197,13 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
+        public void RequestData(string command)
+        {
+            string makeData = MakeGetCommand(command);
+
+            SerialPortComm.Send(makeData);
+        }
+
         private string MakeSetCommand(string command, string value = "")
         {
             return string.Format(";" + command + " " + value + "\r");
