@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LAF\LAF.cs" />
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\CameraHandler.cs" />
     <Compile Include="Cameras\CameraHIK.cs" />
@@ -103,11 +104,15 @@
     <Compile Include="Grabbers\Grabber.cs" />
     <Compile Include="Grabbers\GrabberMil.cs" />
     <Compile Include="IDevice.cs" />
+    <Compile Include="LAF\NuriOneLAF.cs" />
+    <Compile Include="LAF\NuriOne\NuriOneParser.cs" />
     <Compile Include="LightCtrls\LightCtrl.cs" />
     <Compile Include="LightCtrls\LightCtrlHandler.cs" />
     <Compile Include="LightCtrls\LightParameter.cs" />
     <Compile Include="LightCtrls\LightValue.cs" />
-    <Compile Include="LightCtrls\SerialLightCtrl.cs" />
+    <Compile Include="LightCtrls\Lvs\LvsLightCtrl.cs" />
+    <Compile Include="LightCtrls\Lvs\Parser\ILvsParser.cs" />
+    <Compile Include="LightCtrls\Lvs\Parser\LvsSerialParser.cs" />
     <Compile Include="LightCtrls\VirtualLightCtrl.cs" />
     <Compile Include="Motions\ACSMotion.cs" />
     <Compile Include="Motions\Axis.cs" />
@@ -143,6 +148,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Cameras\Viewworks\" />
+    <Folder Include="Motions\ACS\" />
     <Folder Include="Plcs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

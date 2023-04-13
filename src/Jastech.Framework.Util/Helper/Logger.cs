@@ -200,5 +200,6 @@ namespace Jastech.Framework.Util.Helper
         SEQ,
         Inspection,
         Etc,
+        Comm,
     }
 }

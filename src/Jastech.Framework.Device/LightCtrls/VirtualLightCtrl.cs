@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Comm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace Jastech.Framework.Device.LightCtrls
     public class VirtualLightCtrl : LightCtrl
     {
         #region 생성자
-        public VirtualLightCtrl(string name, int numChannel)
-            : base(name, numChannel)
+        public VirtualLightCtrl(string name, int totalChannelCount)
+            : base(name, totalChannelCount, null)
         {
         }
         #endregion
@@ -21,7 +22,7 @@ namespace Jastech.Framework.Device.LightCtrls
             return true;
         }
 
-        public override bool TurnOff(int channel, int level)
+        public override bool TurnOff(int channel)
         {
             return true;
         }

@@ -1,5 +1,6 @@
 ﻿using ACS.SPiiPlusNET;
 using Jastech.Framework.Comm.Protocol;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,13 +18,25 @@ namespace Jastech.Framework.Device.Motions
         #region 필드
         private const int _bufferCount = 8;
 
-        private Api _motion { get; set; } = null;
+      
 
         private Thread _repeatThread { get; set; } = null;
         #endregion
 
         #region 속성
-        public IProtocol Protocol { get; set; } = null;
+        [JsonProperty]
+        public ACSConnectType ConnectType { get; set; }
+
+        [JsonProperty]
+        public int PortNo { get; set; }
+
+        [JsonProperty]
+        public int BaudRate { get; set; }
+
+        [JsonProperty]
+        public string IpAddress { get; set; }
+
+        public Api Api { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -33,63 +46,46 @@ namespace Jastech.Framework.Device.Motions
         #endregion
 
         #region 생성자
-        public ACSMotion(string name, int axisNumber)
+        public ACSMotion(string name, int axisNumber, ACSConnectType connectType)
             : base(name, axisNumber)
         {
-
+            ConnectType = connectType;
         }
         #endregion
 
         #region 메서드
         private bool OpenSerialPort()
         {
-            var portInfo = (Protocol as ACSSerialProtocol).PortInfo;
-
-            _motion.OpenCommSerial(portInfo.PortNo, portInfo.BaudRate);
-
+            Api.OpenCommSerial(PortNo, BaudRate);
             return true;
         }
 
         private bool ConectEthernet()
         {
-            var info = (Protocol as ACSTcpIpProtocol).TcpInfo;
-
-            _motion.OpenCommEthernet(info.IpAddress, (int)EthernetCommOption.ACSC_SOCKET_STREAM_PORT);
-
+            Api.OpenCommEthernet(IpAddress, (int)EthernetCommOption.ACSC_SOCKET_STREAM_PORT);
             return true;
-        }
-
-        private void CreateObject()
-        {
-            _motion = new Api();
-
-            foreach (var info in _motion.GetConnectionsList())
-            {
-                // Except ACS Framework 
-                if (!info.Application.Contains("ACS"))
-                    _motion.TerminateConnection(info);
-            }
         }
 
         public override bool Initialize()
         {
             base.Initialize();
 
-            if (_motion != null && _motion.IsConnected)
+            if (Api != null && Api.IsConnected)
                 return false;
 
-            CreateObject();
+            Api = new Api();
 
-            if (Protocol is ACSSerialProtocol)
+            if (ConnectType == ACSConnectType.Serial)
             {
                 if (OpenSerialPort())
                     return true;
             }
-            else if (Protocol is ACSTcpIpProtocol)
+            else if(ConnectType == ACSConnectType.Ethernet)
             {
                 if (ConectEthernet())
                     return true;
             }
+
             return false;
         }
 
@@ -97,48 +93,48 @@ namespace Jastech.Framework.Device.Motions
         {
             base.Release();
 
-            if (_motion.IsConnected)
-                _motion.KillAll();
+            if (Api.IsConnected)
+                Api.KillAll();
 
-            _motion?.CloseComm();
+            Api?.CloseComm();
 
             return true;
         }
 
         public override bool IsConnected()
         {
-            if (_motion == null)
+            if (Api == null)
                 return false;
 
-            return _motion.IsConnected;
+            return Api.IsConnected;
         }
 
         public override void TurnOnServo(int axisNo, bool bOnOff)
         {
             if (bOnOff)
-                _motion.Enable((ACS.SPiiPlusNET.Axis)axisNo);
+                Api.Enable((ACS.SPiiPlusNET.Axis)axisNo);
             else
-                _motion.Disable((ACS.SPiiPlusNET.Axis)axisNo);
+                Api.Disable((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void AllServoOff()
         {
-            _motion.DisableAll();
+            Api.DisableAll();
         }
 
         public override void StopMove(int axisNo)
         {
-            _motion.Kill((ACS.SPiiPlusNET.Axis)axisNo);
+            Api.Kill((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void JogMove(int axisNo, Direction direction)
         {
-            _motion.Jog(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, (double)direction);
+            Api.Jog(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, (double)direction);
         }
 
         public override double GetActualPosition(int axisNo)
         {
-            return _motion.GetFPosition((ACS.SPiiPlusNET.Axis)axisNo);
+            return Api.GetFPosition((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
@@ -146,7 +142,7 @@ namespace Jastech.Framework.Device.Motions
             SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
 
             if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo, targetPosition))
-                _motion.ToPointAsync(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, targetPosition);
+                Api.ToPointAsync(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, targetPosition);
         }
 
         public override void SetDefaultParameter(int axisNo, double velocity = 10, double accdec = 10)
@@ -169,11 +165,11 @@ namespace Jastech.Framework.Device.Motions
 
         public override string GetCurrentMotionStatus(int axisNo)
         {
-            if (!_motion.IsConnected)
+            if (!Api.IsConnected)
                 return null;
 
             //모터 상태 읽음
-            var state = _motion.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
+            var state = Api.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
             string strMotorStates = "";
 
             //사용가능 상태인지, 멈춘 상태인지, 이동중이 아닌지 확인
@@ -191,16 +187,16 @@ namespace Jastech.Framework.Device.Motions
         
         public override bool IsEnable(int axisNo)
         {
-            var state = _motion.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
+            var state = Api.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
             return Convert.ToBoolean(state & MotorStates.ACSC_MST_ENABLE);
         }
 
         public override bool IsNegativeLimit(int axisNo)
         {
-            if (!_motion.IsConnected)
+            if (!Api.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
+            var saftyFlag = Api.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_LL)
                 return true;
 
@@ -209,10 +205,10 @@ namespace Jastech.Framework.Device.Motions
 
         public override bool IsPositiveLimit(int axisNo)
         {
-            if (!_motion.IsConnected)
+            if (!Api.IsConnected)
                 return false;
 
-            var saftyFlag = _motion.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
+            var saftyFlag = Api.GetFault((ACS.SPiiPlusNET.Axis)axisNo);
             if (saftyFlag == SafetyControlMasks.ACSC_SAFETY_RL)
                 return true;
 
@@ -228,29 +224,29 @@ namespace Jastech.Framework.Device.Motions
             // Convert Jerk time to rate
             double jogJerk = Math.Abs(jogAcceleration / ((accdec * 0.1) / 1000.0));
 
-            _motion.SetVelocity(axis, velocity);
-            _motion.SetAcceleration(axis, jogAcceleration);
-            _motion.SetDeceleration(axis, jogAcceleration);
-            _motion.SetKillDeceleration(axis, jogAcceleration * 2);
-            _motion.SetJerk(axis, jogJerk);
+            Api.SetVelocity(axis, velocity);
+            Api.SetAcceleration(axis, jogAcceleration);
+            Api.SetDeceleration(axis, jogAcceleration);
+            Api.SetKillDeceleration(axis, jogAcceleration * 2);
+            Api.SetJerk(axis, jogJerk);
         }
 
         private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis, double targetPosition)
         {
             // Release axis event
-            _motion.FaultClear(axis);
+            Api.FaultClear(axis);
 
             Thread.Sleep(100);
 
             // Read motor status
-            var state = _motion.GetMotorState(axis);
+            var state = Api.GetMotorState(axis);
 
             // Check enable to move
             if (Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE) || !Convert.ToBoolean(state & MotorStates.ACSC_MST_INPOS) || !Convert.ToBoolean(state & MotorStates.ACSC_MST_ENABLE))
                 return false;
 
             // Check motor's error status
-            var error = _motion.GetMotorError(axis);
+            var error = Api.GetMotorError(axis);
             if (error != (int)MotorStates.ACSC_NONE)
             {
                 Console.WriteLine("Motor error has occurred.");
@@ -277,7 +273,7 @@ namespace Jastech.Framework.Device.Motions
         {
             Stopwatch timeoutChecker = new Stopwatch();
 
-            if (!_motion.IsConnected)
+            if (!Api.IsConnected)
                 return false;
 
             timeoutChecker.Start();
@@ -291,13 +287,13 @@ namespace Jastech.Framework.Device.Motions
                 //}
 
                 //Amp Fault 확인
-                var safetyFlag = _motion.GetFault(axis);
+                var safetyFlag = Api.GetFault(axis);
                 if (safetyFlag != SafetyControlMasks.ACSC_NONE)
                 {
                     //Amp Fault 발생
                     //####ESTOP!!####
-                    _motion.KillAll();
-                    _motion.Disable(axis);
+                    Api.KillAll();
+                    Api.Disable(axis);
 
                     Console.WriteLine("Fault occurs in axis Amp.");
 
@@ -322,8 +318,8 @@ namespace Jastech.Framework.Device.Motions
 
         private bool IsAxisDone(ACS.SPiiPlusNET.Axis axis)
         {
-            var state = _motion.GetMotorState(axis);
-            var position = _motion.GetFPosition(axis);
+            var state = Api.GetMotorState(axis);
+            var position = Api.GetFPosition(axis);
 
             if (!Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE) && Convert.ToBoolean(state & MotorStates.ACSC_MST_INPOS))
                 return true;
@@ -333,12 +329,18 @@ namespace Jastech.Framework.Device.Motions
 
         private void Home(int axisNo)
         {
-            if (!_motion.IsConnected)
+            if (!Api.IsConnected)
                 return;
 
             ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
-            _motion.RunBuffer((ProgramBuffer)axis, null);
+            Api.RunBuffer((ProgramBuffer)axis, null);
         }
         #endregion
+    }
+
+    public enum ACSConnectType
+    {
+        Serial,
+        Ethernet,
     }
 }

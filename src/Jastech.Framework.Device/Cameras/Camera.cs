@@ -117,10 +117,4 @@ namespace Jastech.Framework.Device.Cameras
         Software,
         Hardware,
     }
-
-    //public enum TriggerSource
-    //{
-    //    CC1_Port = 1, // CameraLink
-    //    External_Port = 5, // Line1
-    //}
 }

@@ -78,13 +78,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IComm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\ACSProtocol.cs" />
+    <Compile Include="Protocol\EmptyProtocol.cs" />
+    <Compile Include="Protocol\IProtocol.cs" />
+    <Compile Include="Protocol\NuriLAFProtocol.cs" />
     <Compile Include="Protocol\PacketBuffer.cs" />
-    <Compile Include="Protocol\Protocol.cs" />
     <Compile Include="Protocol\Packet.cs" />
     <Compile Include="Protocol\StxEtxProtocol.cs" />
-    <Compile Include="Protocol\VieworksVTCameraProtocol.cs" />
+    <Compile Include="Protocol\ViewworksVTSerialProtocol.cs" />
+    <Compile Include="ReceivedPacket.cs" />
     <Compile Include="SerialPortComm.cs" />
     <Compile Include="SerialPortInfo.cs" />
     <Compile Include="TcpIpInfo.cs" />

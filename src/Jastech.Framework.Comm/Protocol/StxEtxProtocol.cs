@@ -10,122 +10,96 @@ namespace Jastech.Framework.Comm.Protocol
 {
     public class StxEtxProtocol : IProtocol
     {
-        #region 필드
+        #region 생성자
+        public StxEtxProtocol(byte[] sendingStx, byte[] sendingEtx, byte[] receivingStx, byte[] receivingEtx)
+        {
+            SendingStx = sendingStx;
+            SendingEtx = sendingEtx;
+            ReceivingStx = receivingStx;
+            ReceivingEtx = receivingEtx;
+        }
         #endregion
+
 
         #region 속성
-        public byte[] StartChar { get; set; } = null;
+        private byte[] SendingStx { get; }
 
-        public byte[] EndChar { get; set; } = null;
+        private byte[] SendingEtx { get; }
 
-        public bool UseChecksum { get; set; } = false;
+        private byte[] ReceivingStx { get; }
 
-        public int ChecksumSize { get; set; } = 0;
+        private byte[] ReceivingEtx { get; }
         #endregion
 
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        #endregion
 
         #region 메서드
-        public byte[] SendPacket(SendPacket sendPacket)
+        public bool MakePacket(byte[] unformattedPacket, out byte[] packet)
         {
-            if (StartChar != null && EndChar != null)
-                return StartChar.Concat(sendPacket.Data).Concat(EndChar).ToArray();
-            else if (StartChar != null)
-                return StartChar.Concat(sendPacket.Data).ToArray();
+            packet = new byte[SendingStx.Length + unformattedPacket.Length + SendingEtx.Length];
+
+            if (unformattedPacket == null)
+                return false;
+            if (unformattedPacket.Length == 0)
+                return false;
+
+            if (SendingStx.Length > 0)
+            {
+                Array.Copy(SendingStx, 0, packet, 0, SendingStx.Length);
+            }
+            Array.Copy(unformattedPacket, 0, packet, SendingStx.Length, unformattedPacket.Length);
+            if (SendingEtx.Length > 0)
+            {
+                Array.Copy(SendingEtx, 0, packet, SendingStx.Length + unformattedPacket.Length, SendingEtx.Length);
+            }
             else
-                return sendPacket.Data.Concat(EndChar).ToArray();
+            {
+                Logger.Error(ErrorType.Comm, "Etx는 비어있을 수 없음");
+                return false;
+            }
+
+            return true;
         }
 
-        public ParsingResult ReceivedPacketParsing(PacketBuffer packetBuffer, out ReceivedPacket receivedPacket)
+        public bool ParsingReceivedPacket(byte[] packetBuffer, out byte[] packet, out int searchingLength)
         {
-            receivedPacket = new ReceivedPacket();
-
-            // 종료 문자는 반드시 설정되어야 함
-            Debug.Assert(EndChar != null);
-
-            byte[] bufferByte = packetBuffer.FullData;
-
-            int endPos = IndexOf(bufferByte, EndChar);
-            if (endPos == -1)
-                return ParsingResult.Incomplete;
-
-            int startPos = 0;
-            if (StartChar != null && StartChar.Count() > 0)
-                startPos = IndexOf(bufferByte, StartChar);
-
-            string packetSample = packetBuffer.GetString(100);
-
-            if (startPos == -1)
+            packet = null;
+            searchingLength = -1;
+            if (ReceivingStx.Length == 0 && ReceivingEtx.Length == 0)
             {
-                string fullString = System.Text.Encoding.Default.GetString(bufferByte.ToArray());
-                int strLen = Math.Min(fullString.Length, 100);
-
-                Logger.Dedug(LogType.Device, String.Format("Invalid Packet : {0}...", packetSample));
-                packetBuffer.Clear();
-
-                return ParsingResult.PacketError;
+                Logger.Error(ErrorType.Comm, "Etx는 비어있을 수 없음");
+                return false;
             }
 
-            if (endPos < startPos)
+            if (packetBuffer == null)
+                return false;
+
+            string dataStr = Encoding.Default.GetString(packetBuffer);
+            string stxStr = Encoding.Default.GetString(ReceivingStx);
+            string etxStr = Encoding.Default.GetString(ReceivingEtx);
+            int stxIndex = -1;
+            int etxIndex = -1;
+            if (ReceivingStx.Length > 0 && ReceivingEtx.Length == 0)
             {
-                packetBuffer.RemoveData(startPos + 1);
-
-                return ParsingResult.Incomplete;
+                Logger.Error(ErrorType.Comm, "Etx는 비어있을 수 없음");
+                return false;
             }
-
-            if (StartChar != null)
-                startPos += StartChar.Count();
-
-            int length = endPos - startPos;
-
-            Logger.Write(LogType.Device, String.Format("Packet Received {0} - {1} : {2} ...", startPos, endPos, packetSample));
-
-            byte[] packetBody = bufferByte.Skip(startPos).Take(length).ToArray();
-
-            if (UseChecksum)
+            else if (ReceivingStx.Length == 0 && ReceivingEtx.Length > 0)
             {
+                stxIndex = 0;
+                etxIndex = dataStr.IndexOf(etxStr);
             }
-
-            receivedPacket.ReceivedDataByte = packetBody;
-            receivedPacket.ReceivedData = UTF8Encoding.Default.GetString(packetBody);
-            packetBuffer.RemoveData(endPos + EndChar.Length);
-
-            return ParsingResult.Complete;
-        }
-
-        int IndexOf(byte[] dataByte, byte[] searchByte)
-        {
-            for (int dataIndex = 0; dataIndex < dataByte.Count(); dataIndex++)
+            else
             {
-                if (dataByte[dataIndex] != searchByte[0])
-                    continue;
-
-                if (dataByte.Count() - dataIndex < searchByte.Count())
-                    return -1;
-
-                bool found = true;
-                for (int searchIndex = 0; searchIndex < searchByte.Count(); searchIndex++)
-                {
-                    if (searchByte[searchIndex] != dataByte[dataIndex + searchIndex])
-                    {
-                        dataIndex += searchIndex;
-                        found = false;
-                        break;
-                    }
-                }
-
-                if (found)
-                    return dataIndex;
+                stxIndex = dataStr.IndexOf(stxStr);
+                etxIndex = dataStr.IndexOf(etxStr);
             }
+            if (stxIndex == -1 || etxIndex == -1)
+                return false;
 
-            return -1;
+            searchingLength = etxIndex + ReceivingEtx.Length;
+            packet = new byte[searchingLength - stxIndex - stxStr.Length - etxStr.Length];
+            Array.Copy(packetBuffer, stxIndex + stxStr.Length, packet, 0, packet.Length);
+            return true;
         }
         #endregion
     }

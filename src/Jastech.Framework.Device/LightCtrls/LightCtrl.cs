@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Comm;
+using Jastech.Framework.Comm.Protocol;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +22,20 @@ namespace Jastech.Framework.Device.LightCtrls
         public int LightStableTimeMs { get; set; } = 10;
 
         [JsonProperty]
-        public int PacketResponseTimeMs { get; set; } = 10;
+        public int PacketResponseTimeMs { get; set; } = 200;
+
+        public IComm Communition { get; set; } = null;
+
+        public IProtocol Protocol { get; set; } = null;
         #endregion
 
+
         #region 생성자
-        public LightCtrl(string name, int totalChannelCount)
+        public LightCtrl(string name, int totalChannelCount, IComm comm)
         {
             Name = name;
             TotalChannelCount = totalChannelCount;
+            Communition = comm;
         }
         #endregion
 
@@ -36,7 +44,7 @@ namespace Jastech.Framework.Device.LightCtrls
 
         public abstract bool TurnOn(int channel, int level);
 
-        public abstract bool TurnOff(int channel, int level);
+        public abstract bool TurnOff(int channel);
         #endregion
     }
 
@@ -49,12 +57,22 @@ namespace Jastech.Framework.Device.LightCtrls
         #region 메서드
         public virtual bool Initialize()
         {
+            if (Protocol == null || Communition == null)
+                return false;
+
+            if (Communition.Initialize(Protocol) == false)
+                return false;
+
             return true;
         }
 
         public virtual bool Release()
         {
-            return true;
+            bool isSuccess = true;
+
+            isSuccess |= Communition.Release();
+
+            return isSuccess;
         }
         #endregion
     }

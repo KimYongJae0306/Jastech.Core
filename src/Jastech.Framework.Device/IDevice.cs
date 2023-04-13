@@ -20,4 +20,9 @@ namespace Jastech.Framework.Device
         bool Release();
         #endregion
     }
+
+    public enum DeviceComm
+    {
+        Serial,
+    }
 }

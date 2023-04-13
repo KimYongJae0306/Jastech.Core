@@ -1,4 +1,6 @@
 ﻿using Jastech.Framework.Comm.Protocol;
+using Jastech.Framework.Util.Helper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -8,149 +10,159 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Comm
 {
-    public class SerialPortComm
+    public class SerialPortComm : IComm
     {
-        #region 필드
-        private SerialPort _serialPort = new SerialPort();
+        #region 생성자
+        public SerialPortComm()
+        {
 
-        private IProtocol protocol;
+        }
+
+        public SerialPortComm(string portName, int baudRate, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.One)
+        {
+            PortName = portName;
+            BaudRate = baudRate;
+            Parity = parity;
+            DataBits = dataBits;
+            StopBits = stopBits;
+        }
         #endregion
 
         #region 속성
+        [JsonProperty]
         public string PortName { get; set; }
 
-        public SerialPortInfo Info { get; private set; } = new SerialPortInfo();
+        [JsonProperty]
+        public int BaudRate { get; set; }
 
-        public PacketBuffer PacketBuffer { get; } = new PacketBuffer();
+        [JsonProperty]
+        public Parity Parity { get; set; }
 
-        public bool IsOpen
-        {
-            get
-            {
-                return _serialPort.IsOpen;
-            }
-        }
+        [JsonProperty]
+        public int DataBits { get; set; }
+
+        [JsonProperty]
+        public StopBits StopBits { get; set; }
+
+        private SerialPort SerialPort { get; set; }
+
+        private IProtocol Protocol { get; set; }
+
+        private ReceivedPacket ReceivedPacketBuffer { get; } = new ReceivedPacket();
         #endregion
 
         #region 이벤트
-        public event DataReceivedDelegate DataReceived;
+        public event ReceivedEventHandler Received;
         #endregion
 
         #region 메서드
-        public void Initialize(SerialPortInfo serialPortInfo, IProtocol protocol)
+        public bool Initialize(IProtocol protocol)
         {
-            this.protocol = protocol;
-
-            PortName = serialPortInfo.PortName.ToString();
-            _serialPort.PortName = PortName;
-            _serialPort.BaudRate = serialPortInfo.BaudRate;
-            _serialPort.DataBits = serialPortInfo.DataBits;
-            _serialPort.StopBits = serialPortInfo.StopBits;
-            _serialPort.Parity = serialPortInfo.Parity;
-            _serialPort.RtsEnable = serialPortInfo.RtsEnable;
-            _serialPort.DtrEnable = serialPortInfo.DtrEnable;
-        }
-
-        public bool Open()
-        {
-            try
-            {
-                _serialPort.Open();
-            }
-            catch (Exception)
-            {
+            if (SerialPort != null)
                 return false;
-            }
 
-            ResetBuffer();
-            _serialPort.DataReceived += PortDataReceived;
+            if (protocol == null)
+                return false;
+
+            Protocol = protocol;
+            SerialPort = new SerialPort(PortName, BaudRate, Parity, DataBits, StopBits);
+            SerialPort.DataReceived += SerialPort_Protocol_DataReceived;
 
             return true;
         }
 
-        private void ResetBuffer()
+        public bool Release()
         {
-            _serialPort.DiscardInBuffer();
-            _serialPort.DiscardOutBuffer();
+            if (SerialPort == null)
+                return false;
+
+            Disconnect();
+            return true;
         }
 
-        public void Close()
+        public bool Connect()
         {
-            if (_serialPort.IsOpen)
-            {
-                _serialPort.DataReceived -= PortDataReceived;
-                _serialPort.Close();
-            }
-        }
+            if (SerialPort == null)
+                return false;
 
-        public void SendPacket(string packetStr)
-        {
-            SendPacket(new SendPacket(packetStr));
-        }
-
-        public void SendPacket(byte[] buffer, int offset, int count)
-        {
-            if (_serialPort.IsOpen)
-            {
-                _serialPort.Write(buffer, offset, count);
-            }
-        }
-
-        public void SendPacket(SendPacket sendPacket)
-        {
-            if (sendPacket != null)
-            {
-                if (_serialPort.IsOpen)
-                {
-                    byte[] dataByte;
-                    if (protocol != null)
-                        dataByte = protocol.SendPacket(sendPacket);
-                    else
-                        dataByte = sendPacket.Data;
-
-                    SendPacket(dataByte, 0, dataByte.Length);
-                }
-            }
-        }
-
-        private void PortDataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-            int byteToRead = _serialPort.BytesToRead;
-            byte[] dataByte = new byte[byteToRead];
             try
             {
-                int byteRead = _serialPort.Read(dataByte, 0, byteToRead);
-                ParsingPacket(dataByte, byteRead);
+                SerialPort.Open();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(String.Format("Serial Port Read Error : Name - {0} / Msg - {1} ", PortName, ex.Message));
+                Logger.Error(ErrorType.Comm, $"SerialCommnuication: Connect: {ex.Message}");
+                return false;
             }
+            return true;
         }
 
-        private void ParsingPacket(byte[] dataByte, int byteRead)
+        public bool IsConnected()
         {
-            ReceivedPacket receivedPacket;
-            ParsingResult result;
+            if (SerialPort == null)
+                return false;
 
-            PacketBuffer.AppendData(dataByte, byteRead);
+            return !SerialPort.IsOpen;
+        }
 
-            do
+        public bool Disconnect()
+        {
+            if (SerialPort == null)
+                return false;
+
+            if (SerialPort.IsOpen)
             {
-                result = protocol.ReceivedPacketParsing(PacketBuffer, out receivedPacket);
-                if (result == ParsingResult.Complete)
-                {
-                    DataReceived?.Invoke(receivedPacket);
-                }
-                else if (result == ParsingResult.PacketError)
-                {
-                    PacketBuffer.Clear();
-                }
-
-                if (PacketBuffer.Empty == true)
-                    break;
+                SerialPort.Close();
             }
-            while (result == ParsingResult.Complete);
+            return true;
+        }
+
+        public bool Send(byte[] data)
+        {
+            if (SerialPort == null)
+                return false;
+            if (!SerialPort.IsOpen)
+                return false;
+
+            if (Protocol == null)
+                return false;
+
+            if (!Protocol.MakePacket(data, out byte[] packet))
+                return false;
+
+
+            SerialPort.Write(packet, 0, packet.Length);
+            return true;
+        }
+
+        public bool Send(string data)
+        {
+            byte[] dataByte = Encoding.UTF8.GetBytes(data);
+
+            return Send(dataByte);
+        }
+
+        private void SerialPort_Protocol_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (e.EventType != SerialData.Chars)
+                return;
+
+            var reservedPacketBuffer = new byte[SerialPort.BytesToRead];
+            int readCount = SerialPort.Read(reservedPacketBuffer, 0, reservedPacketBuffer.Length);
+
+            if (readCount <= 0)
+                return;
+
+            var readPacketBuffer = new byte[readCount];
+            Array.Copy(reservedPacketBuffer, readPacketBuffer, readPacketBuffer.Length);
+            ReceivedPacketBuffer.Enqueue(readPacketBuffer);
+            if (!ReceivedPacketBuffer.Dequeue(Protocol, out List<byte[]> datas))
+                return;
+
+            foreach (var data in datas)
+            {
+                Received?.Invoke(data);
+            }
         }
         #endregion
     }

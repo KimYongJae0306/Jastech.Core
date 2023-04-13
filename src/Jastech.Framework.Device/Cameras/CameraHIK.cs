@@ -14,12 +14,12 @@ namespace Jastech.Framework.Device.Cameras
 {
     public partial class CameraHIK : Camera, ICameraTriggerable
     {
-
         #region 필드
         private object _lock { get; set; } = new object();
-        #endregion
 
         private MyCamera _camera { get; set; } = new MyCamera();
+        #endregion
+
         #region 속성
         [JsonProperty]
         public string SerialNo { get; set; }

@@ -37,28 +37,24 @@ namespace Jastech.Framework.Device.Cameras
         const string TriggerPresetCmd = "w sync";
 
         const double nullCommand = -1.0;
-
-        private SerialPortComm _serialComm { get; set; } = new SerialPortComm();
-
-        private ReceivedPacket _lastReceivedPacket = new ReceivedPacket();
         #endregion
 
         #region 속성
         [JsonProperty]
-        public SerialPortInfo SerialPortInfo { get; set; } = new SerialPortInfo();
+        public SerialPortComm SerialPortComm { get; set; } = null;
 
         [JsonProperty]
         public int PacketResponseTimeMs { get; set; } = 100;
+
+        public string ReceivedMessage { get; set; } = "";
 
         protected ManualResetEvent ResponseReceivedEvent { get; set; } = new ManualResetEvent(false);
         #endregion
 
         #region 이벤트
-        public event ReceivedEventHandler BufferReceived;
         #endregion
 
         #region 델리게이트
-        public delegate void ReceivedEventHandler(ReceivedPacket receivedPacket);
         #endregion
 
         #region 생성자
@@ -71,30 +67,32 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public override bool Initialize()
         {
+            if (SerialPortComm == null)
+                return false;
+
             base.Initialize();
 
-            _serialComm.Initialize(SerialPortInfo, new VieworksVTCameraPortocol());
+            SerialPortComm.Initialize(new ViewworksVTSerialProtocol());
+            SerialPortComm.Received += SerialPortComm_Received;
 
-            if (_serialComm.Open())
-            {
-                _serialComm.DataReceived += SerialComm_DataReceived;
-                return true;
-            }
-            else
-                return false;
+            return SerialPortComm.Connect();
         }
-
+     
         public override bool Release()
         {
-            _serialComm.DataReceived -= SerialComm_DataReceived;
-            _serialComm.Close();
-
+            if(SerialPortComm != null)
+            {
+                SerialPortComm.Received -= SerialPortComm_Received;
+                SerialPortComm.Disconnect();
+            }
+            base.Release();
             return true;
         }
 
-        private void SerialComm_DataReceived(ReceivedPacket receivedPacket)
+        private void SerialPortComm_Received(byte[] data)
         {
-            _lastReceivedPacket = receivedPacket;
+            string dataString = Encoding.Default.GetString(data);
+            ResponseReceivedEvent.Set();
         }
 
         public override void SetExposureTime(double value)
@@ -111,7 +109,7 @@ namespace Jastech.Framework.Device.Cameras
             ResponseReceivedEvent.WaitOne(PacketResponseTimeMs);
 
             double exposure;
-            if (double.TryParse(_lastReceivedPacket.ReceivedData, out exposure))
+            if (double.TryParse(ReceivedMessage, out exposure))
                 return exposure;
             else
                 return -1;
@@ -181,7 +179,8 @@ namespace Jastech.Framework.Device.Cameras
         public void SendMessage(string message)
         {
             ResponseReceivedEvent.Reset();
-            _serialComm.SendPacket(message);
+            ReceivedMessage = "";
+            SerialPortComm.Send(message);
         }
 
         private string MakeSetCommand(string command, double value1, double value2 = nullCommand)
