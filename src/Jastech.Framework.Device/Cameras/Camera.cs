@@ -35,6 +35,12 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public SensorType SensorType { get; protected set; }
+
+        [JsonProperty]
+        public double PixelResolution_mm { get; set; } = 1;
+
+        [JsonProperty]
+        public double LensScale { get; set; } = 1;
         #endregion
 
         #region 이벤트
