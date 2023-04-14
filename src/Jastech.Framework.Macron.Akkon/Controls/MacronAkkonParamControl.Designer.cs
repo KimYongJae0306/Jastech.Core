@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Macron.Akkon.Controls
 {
-    partial class AkkonParamControl
+    partial class MacronAkkonParamControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -1340,7 +1340,7 @@
             this.rdoOption.UseVisualStyleBackColor = false;
             this.rdoOption.CheckedChanged += new System.EventHandler(this.rdoOption_CheckedChanged);
             // 
-            // AkkonParamControl
+            // MacronAkkonParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1348,7 +1348,7 @@
             this.Controls.Add(this.tlpSetParameter);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.White;
-            this.Name = "AkkonParamControl";
+            this.Name = "MacronAkkonParamControl";
             this.Size = new System.Drawing.Size(813, 548);
             this.Load += new System.EventHandler(this.AkkonParamControl_Load);
             this.tlpSetParameter.ResumeLayout(false);

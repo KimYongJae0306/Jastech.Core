@@ -66,20 +66,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AkkonEnum.cs" />
-    <Compile Include="Controls\AkkonParamControl.cs">
+    <Compile Include="Controls\MacronAkkonParamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AkkonParamControl.Designer.cs">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
+    <Compile Include="Controls\MacronAkkonParamControl.designer.cs">
+      <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Parameters\AkkonParam.cs" />
+    <Compile Include="Parameters\MacronAkkonGroup.cs" />
+    <Compile Include="Parameters\MacronAkkonParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\AkkonResult.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\AkkonParamControl.resx">
-      <DependentUpon>AkkonParamControl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
@@ -91,6 +87,11 @@
       <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
       <Name>Jastech.Framework.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\MacronAkkonParamControl.resx">
+      <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

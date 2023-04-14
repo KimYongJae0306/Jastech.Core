@@ -12,10 +12,10 @@ using Cognex.VisionPro;
 
 namespace Jastech.Framework.Macron.Akkon.Controls
 { 
-    public partial class AkkonParamControl : UserControl
+    public partial class MacronAkkonParamControl : UserControl
     {
         #region 필드
-        private AkkonParam CurrentParam;
+        private MacronAkkonParam CurrentParam;
 
         private Color _selectedColor = new Color();
 
@@ -34,7 +34,7 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         #endregion
 
         #region 생성자
-        public AkkonParamControl()
+        public MacronAkkonParamControl()
         {
             InitializeComponent();
         }
@@ -127,8 +127,11 @@ namespace Jastech.Framework.Macron.Akkon.Controls
                 cmbThresholdMode.Items.Add(thresholdMode.ToString().ToUpper());
         }
 
-        private void UpdateData(AkkonParam akkonParam)
+        public void UpdateData(MacronAkkonParam macronAkkonParam)
         {
+            CurrentParam = macronAkkonParam;
+
+            InitializeComboBox();
             // Group Param
             //lblGroupCountValue.Text = akkonParam.GroupCount.ToString();
             //if (akkonParam.GroupCount > 0)
@@ -139,52 +142,52 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             //lblLeadPitchValue.Text = akkonParam.LeadPitch.ToString();
 
             ///Enginner Param
-            lblJudgeCountValue.Text = akkonParam.JudgeCount.ToString();
-            lblJudgeLengthValue.Text = akkonParam.JudgeLength.ToString("F2");
-            lblMinSizeFilterValue.Text = akkonParam.FilterMinSize.ToString("F2");
-            lblMaxSizeFilterValue.Text = akkonParam.FilterMaxSize.ToString("F2");
-            lblGroupDistanceValue.Text = akkonParam.GroupingDistance.ToString("F2");
-            lblStrengthFilterValue.Text = akkonParam.StrengthThreshold.ToString("F2");
-            lblWidthCutValue.Text = akkonParam.WidthCut.ToString();
-            lblHeightCutValue.Text = akkonParam.HeightCut.ToString();
-            lblBWRatioValue.Text = akkonParam.BWRatio.ToString("F2");
-            lblExtraLeadDisplayValue.Text = akkonParam.ExtraLead.ToString();
+            lblJudgeCountValue.Text = macronAkkonParam.JudgeCount.ToString();
+            lblJudgeLengthValue.Text = macronAkkonParam.JudgeLength.ToString("F2");
+            lblMinSizeFilterValue.Text = macronAkkonParam.FilterMinSize.ToString("F2");
+            lblMaxSizeFilterValue.Text = macronAkkonParam.FilterMaxSize.ToString("F2");
+            lblGroupDistanceValue.Text = macronAkkonParam.GroupingDistance.ToString("F2");
+            lblStrengthFilterValue.Text = macronAkkonParam.StrengthThreshold.ToString("F2");
+            lblWidthCutValue.Text = macronAkkonParam.WidthCut.ToString();
+            lblHeightCutValue.Text = macronAkkonParam.HeightCut.ToString();
+            lblBWRatioValue.Text = macronAkkonParam.BWRatio.ToString("F2");
+            lblExtraLeadDisplayValue.Text = macronAkkonParam.ExtraLead.ToString();
 
             // Maker Param
-            cmbInspectionType.SelectedIndex = (int)akkonParam.InspectionType;
-            cmbPanelType.SelectedIndex = (int)akkonParam.PanelType;
-            cmbTargetType.SelectedIndex = (int)akkonParam.TargetType;
-            cmbFilterType.SelectedIndex = (int)akkonParam.FilterType;
-            cmbFilterDirection.SelectedIndex = (int)akkonParam.FilterDirection;
-            cmbShadowDirection.SelectedIndex = (int)akkonParam.ShadowDirection;
-            cmbPeakProperty.SelectedIndex = (int)akkonParam.PeakProperty;
-            cmbStrengthBase.SelectedIndex = (int)akkonParam.StrengthBase;
-            cmbThresholdMode.SelectedIndex = (int)akkonParam.ThresholdMode;
+            cmbInspectionType.SelectedIndex = (int)macronAkkonParam.InspectionType;
+            cmbPanelType.SelectedIndex = (int)macronAkkonParam.PanelType;
+            cmbTargetType.SelectedIndex = (int)macronAkkonParam.TargetType;
+            cmbFilterType.SelectedIndex = (int)macronAkkonParam.FilterType;
+            cmbFilterDirection.SelectedIndex = (int)macronAkkonParam.FilterDirection;
+            cmbShadowDirection.SelectedIndex = (int)macronAkkonParam.ShadowDirection;
+            cmbPeakProperty.SelectedIndex = (int)macronAkkonParam.PeakProperty;
+            cmbStrengthBase.SelectedIndex = (int)macronAkkonParam.StrengthBase;
+            cmbThresholdMode.SelectedIndex = (int)macronAkkonParam.ThresholdMode;
 
-            chkLogTraceUseCheck.Checked = akkonParam.UseLogTrace;
-            lblThresholdWeightValue.Text = akkonParam.ThresholdWeight.ToString("F2");
-            lblPeakThresholdValue.Text = akkonParam.ThresholdPeak.ToString();
-            lblStandardDeviationValue.Text = akkonParam.StdDevLeadJudge.ToString();
-            lblStrengthScaleFactorValue.Text = akkonParam.StrengthScaleFactor.ToString("F2");
-            lblSliceOverlapValue.Text = akkonParam.Overlap.ToString("F2");
+            chkLogTraceUseCheck.Checked = macronAkkonParam.UseLogTrace;
+            lblThresholdWeightValue.Text = macronAkkonParam.ThresholdWeight.ToString("F2");
+            lblPeakThresholdValue.Text = macronAkkonParam.ThresholdPeak.ToString();
+            lblStandardDeviationValue.Text = macronAkkonParam.StdDevLeadJudge.ToString();
+            lblStrengthScaleFactorValue.Text = macronAkkonParam.StrengthScaleFactor.ToString("F2");
+            lblSliceOverlapValue.Text = macronAkkonParam.Overlap.ToString("F2");
 
             // Option
-            chkUseDimple.Checked = akkonParam.UseDimple;
-            lblDimpleNGCountValue.Text = akkonParam.DimpleNGCount.ToString();
-            lblDimpleThresholdValue.Text = akkonParam.DimpleThreshold.ToString();
+            chkUseDimple.Checked = macronAkkonParam.UseDimple;
+            lblDimpleNGCountValue.Text = macronAkkonParam.DimpleNGCount.ToString();
+            lblDimpleThresholdValue.Text = macronAkkonParam.DimpleThreshold.ToString();
 
-            chkUseAlarm.Checked = akkonParam.UseAlarm;
-            lblAlarmCapacityValue.Text = akkonParam.AlarmCapacity.ToString();
-            lblAlarmNGCountValue.Text = akkonParam.AlarmNGCount.ToString();
+            chkUseAlarm.Checked = macronAkkonParam.UseAlarm;
+            lblAlarmCapacityValue.Text = macronAkkonParam.AlarmCapacity.ToString();
+            lblAlarmNGCountValue.Text = macronAkkonParam.AlarmNGCount.ToString();
         }
 
-        public void Initialize(AkkonParam akkonParam)
-        {
-            CurrentParam = akkonParam;
+        //public void UpdateData(MacronAkkonParam macronAkkonParam)
+        //{
+            
 
-            InitializeComboBox();
-            UpdateData(akkonParam);
-        }
+        //    InitializeComboBox();
+        //    UpdateData(macronAkkonParam);
+        //}
 
         #region Panel Open
         private void rdoEngineerParmeter_CheckedChanged(object sender, EventArgs e)
@@ -242,7 +245,7 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         }
 
 
-        public AkkonParam GetCurrentParam()
+        public MacronAkkonParam GetCurrentParam()
         {
             return CurrentParam;
         }
