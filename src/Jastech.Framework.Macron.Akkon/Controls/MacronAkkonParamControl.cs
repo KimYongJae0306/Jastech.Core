@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Macron.Akkon.Parameters;
 using Cognex.VisionPro;
+using Jastech.Framework.Winform.Forms;
 
 namespace Jastech.Framework.Macron.Akkon.Controls
 { 
@@ -181,14 +182,6 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             lblAlarmNGCountValue.Text = macronAkkonParam.AlarmNGCount.ToString();
         }
 
-        //public void UpdateData(MacronAkkonParam macronAkkonParam)
-        //{
-            
-
-        //    InitializeComboBox();
-        //    UpdateData(macronAkkonParam);
-        //}
-
         #region Panel Open
         private void rdoEngineerParmeter_CheckedChanged(object sender, EventArgs e)
         {
@@ -251,54 +244,227 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         }
         #endregion
 
+        #region Engineer Param
         private void lblJudgeCountValue_Click(object sender, EventArgs e)
         {
-
+            int judgeCount = SetLabelIntegerData(sender);
+            CurrentParam.JudgeCount = judgeCount;
         }
 
         private void lblJudgeLengthValue_Click(object sender, EventArgs e)
         {
-
+            double judgeLength = SetLabelDoubleData(sender);
+            CurrentParam.JudgeLength = judgeLength;
         }
 
         private void lblMinSizeFilterValue_Click(object sender, EventArgs e)
         {
-
+            double filterMinSize = SetLabelDoubleData(sender);
+            CurrentParam.FilterMinSize = filterMinSize;
         }
 
         private void lblWidthCutValue_Click(object sender, EventArgs e)
         {
-
+            int widthCut = SetLabelIntegerData(sender);
+            CurrentParam.WidthCut = widthCut;
         }
 
         private void lblMaxSizeFilterValue_Click(object sender, EventArgs e)
         {
-
+            double finterMaxSize = SetLabelDoubleData(sender);
+            CurrentParam.FilterMaxSize = finterMaxSize;
         }
 
         private void lblHeightCutValue_Click(object sender, EventArgs e)
         {
-
+            int heightCut = SetLabelIntegerData(sender);
+            CurrentParam.HeightCut = heightCut;
         }
 
         private void lblGroupDistanceValue_Click(object sender, EventArgs e)
         {
-
+            double groupDistance = SetLabelDoubleData(sender);
+            CurrentParam.GroupingDistance = groupDistance;
         }
 
         private void lblBWRatioValue_Click(object sender, EventArgs e)
         {
-
+            double bwRatio = SetLabelDoubleData(sender);
+            CurrentParam.BWRatio = (float)bwRatio;
         }
 
         private void lblStrengthFilterValue_Click(object sender, EventArgs e)
         {
-
+            double strengthFilter = SetLabelDoubleData(sender);
+            CurrentParam.StrengthThreshold = (float)strengthFilter;
         }
 
         private void lblExtraLeadDisplayValue_Click(object sender, EventArgs e)
         {
+            int extraLead = SetLabelIntegerData(sender);
+            CurrentParam.ExtraLead = extraLead;
+        }
+        #endregion
 
+        #region Maker Param
+        private void cmbInspectionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbInspectionType.SelectedIndex;
+            CurrentParam.InspectionType = (InspectionType)selectedIndex;
+        }
+
+        private void cmbShadowDirection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbShadowDirection.SelectedIndex;
+            CurrentParam.ShadowDirection = (ShadowDirection)selectedIndex;
+        }
+
+        private void cmbPanelType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbPanelType.SelectedIndex;
+            CurrentParam.PanelType = (PanelType)selectedIndex;
+        }
+
+        private void cmbPeakProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbPeakProperty.SelectedIndex;
+            CurrentParam.PeakProperty = (PeakProperty)selectedIndex;
+        }
+
+        private void cmbTargetType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbTargetType.SelectedIndex;
+            CurrentParam.TargetType = (TargetType)selectedIndex;
+        }
+
+        private void cmbStrengthBase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbStrengthBase.SelectedIndex;
+            CurrentParam.StrengthBase = (StrengthBase)selectedIndex;
+        }
+
+        private void cmbFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbFilterType.SelectedIndex;
+            CurrentParam.FilterType = (FilterType)selectedIndex;
+        }
+
+        private void chkLogTraceUseCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentParam.UseLogTrace = chkLogTraceUseCheck.Checked;
+        }
+
+        private void cmbFilterDirection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbFilterDirection.SelectedIndex;
+            CurrentParam.FilterDirection = (FilterDirection)selectedIndex;
+        }
+
+        private void cmbThresholdMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = cmbThresholdMode.SelectedIndex;
+            CurrentParam.ThresholdMode = (ThresholdMode)selectedIndex;
+        }
+
+        private void lblThresholdWeightValue_Click(object sender, EventArgs e)
+        {
+            double thresholdWeight = SetLabelDoubleData(sender);
+            CurrentParam.ThresholdWeight = thresholdWeight;
+        }
+
+        private void lblStrengthScaleFactorValue_Click(object sender, EventArgs e)
+        {
+            double strengthScaleFactor = SetLabelDoubleData(sender);
+            CurrentParam.StrengthScaleFactor = (float)strengthScaleFactor;
+        }
+
+        private void lblPeakThresholdValue_Click(object sender, EventArgs e)
+        {
+            int thresholdPeak = SetLabelIntegerData(sender);
+            CurrentParam.ThresholdPeak = thresholdPeak;
+        }
+
+        private void lblSliceOverlapValue_Click(object sender, EventArgs e)
+        {
+            int overlap = SetLabelIntegerData(sender);
+            CurrentParam.Overlap = overlap;
+        }
+
+        private void lblStandardDeviationValue_Click(object sender, EventArgs e)
+        {
+            double stdDevLeadJudge = SetLabelDoubleData(sender);
+            CurrentParam.StdDevLeadJudge = (float)stdDevLeadJudge;
+        }
+        #endregion
+
+        #region Option Param
+        private void lblDimpleNGCountValue_Click(object sender, EventArgs e)
+        {
+            int dimpleNGCount = SetLabelIntegerData(sender);
+            CurrentParam.DimpleNGCount = dimpleNGCount;
+        }
+
+        private void lblDimpleThresholdValue_Click(object sender, EventArgs e)
+        {
+            int dimpleThreshold = SetLabelIntegerData(sender);
+            CurrentParam.DimpleThreshold = dimpleThreshold;
+        }
+
+        private void chkUseDimple_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentParam.UseDimple = chkUseAlarm.Checked;
+        }
+
+        private void lblAlarmCapacityValue_Click(object sender, EventArgs e)
+        {
+            int alarmCapacity = SetLabelIntegerData(sender);
+            CurrentParam.AlarmCapacity = alarmCapacity;
+        }
+
+        private void lblAlarmNGCountValue_Click(object sender, EventArgs e)
+        {
+            int alarmNGCount = SetLabelIntegerData(sender);
+            CurrentParam.AlarmNGCount = alarmNGCount;
+        }
+
+        private void chkUseAlarm_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentParam.UseAlarm = chkUseAlarm.Checked;
+        }
+        #endregion
+
+        private int SetLabelIntegerData(object sender)
+        {
+            Label lbl = sender as Label;
+            int prevData = Convert.ToInt32(lbl.Text);
+
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = (double)prevData;
+            keyPadForm.ShowDialog();
+
+            int inputData = Convert.ToInt16(keyPadForm.PadValue);
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
+
+            return inputData;
+        }
+
+        private double SetLabelDoubleData(object sender)
+        {
+            Label lbl = sender as Label;
+            double prevData = Convert.ToDouble(lbl.Text);
+
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = prevData;
+            keyPadForm.ShowDialog();
+
+            double inputData = keyPadForm.PadValue;
+
+            Label label = (Label)sender;
+            label.Text = inputData.ToString();
+
+            return inputData;
         }
     }
 }

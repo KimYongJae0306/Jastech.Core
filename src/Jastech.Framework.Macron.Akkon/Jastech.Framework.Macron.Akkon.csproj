@@ -87,6 +87,10 @@
       <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
       <Name>Jastech.Framework.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Winform\Jastech.Framework.Winform.csproj">
+      <Project>{D46C7263-535A-4BF9-AD14-5183EDE0A984}</Project>
+      <Name>Jastech.Framework.Winform</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\MacronAkkonParamControl.resx">

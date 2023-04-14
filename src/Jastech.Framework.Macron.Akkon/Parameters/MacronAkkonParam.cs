@@ -23,31 +23,31 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 
         // Engineer
         [JsonProperty]
-        public int JudgeCount { get; set; } = 0;
+        public int JudgeCount { get; set; } = 2;
 
         [JsonProperty]
-        public double JudgeLength { get; set; } = 0.0;
+        public double JudgeLength { get; set; } = 10.0;
 
         [JsonProperty]
-        public double FilterMinSize { get; set; } = 0.0;
+        public double FilterMinSize { get; set; } = 2.0;
 
         [JsonProperty]
-        public double FilterMaxSize { get; set; } = 0.0;
+        public double FilterMaxSize { get; set; } = 15.0;
 
         [JsonProperty]
-        public int WidthCut { get; set; } = 0;
+        public int WidthCut { get; set; } = 15;
 
         [JsonProperty]
-        public int HeightCut { get; set; } = 0;
+        public int HeightCut { get; set; } = 15;
 
         [JsonProperty]
-        public double GroupingDistance { get; set; } = 0.0;
+        public double GroupingDistance { get; set; } = 5.0;
 
         [JsonProperty]
         public float BWRatio { get; set; } = 0.0f;
 
         [JsonProperty]
-        public float StrengthThreshold { get; set; } = 0.0f;
+        public float StrengthThreshold { get; set; } = 15.0f;
 
         [JsonProperty]
         public int ExtraLead { get; set; } = 0;
@@ -84,16 +84,16 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         public ThresholdMode ThresholdMode { get; set; } = ThresholdMode.AUTO;
 
         [JsonProperty]
-        public double ThresholdWeight { get; set; } = 0.0;
+        public double ThresholdWeight { get; set; } = 2.5;
 
         [JsonProperty]
-        public float StrengthScaleFactor { get; set; } = 0.0f;
+        public float StrengthScaleFactor { get; set; } = 1.0f;
 
         [JsonProperty]
-        public int ThresholdPeak { get; set; } = 0;
+        public int ThresholdPeak { get; set; } = 70;
 
         [JsonProperty]
-        public int Overlap { get; set; } = 0;
+        public int Overlap { get; set; } = 288;
 
         [JsonProperty]
         public float StdDevLeadJudge { get; set; } = 0.0f;

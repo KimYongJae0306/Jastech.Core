@@ -591,6 +591,7 @@
             this.lblDimpleNGCountValue.TabIndex = 27;
             this.lblDimpleNGCountValue.Text = "0";
             this.lblDimpleNGCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDimpleNGCountValue.Click += new System.EventHandler(this.lblDimpleNGCountValue_Click);
             // 
             // lblDimpleThreshold
             // 
@@ -619,6 +620,7 @@
             this.lblDimpleThresholdValue.TabIndex = 27;
             this.lblDimpleThresholdValue.Text = "0";
             this.lblDimpleThresholdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDimpleThresholdValue.Click += new System.EventHandler(this.lblDimpleThresholdValue_Click);
             // 
             // chkUseDimple
             // 
@@ -635,6 +637,7 @@
             this.chkUseDimple.Text = "On";
             this.chkUseDimple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkUseDimple.UseVisualStyleBackColor = false;
+            this.chkUseDimple.CheckedChanged += new System.EventHandler(this.chkUseDimple_CheckedChanged);
             // 
             // lblAlarmNGCount
             // 
@@ -691,6 +694,7 @@
             this.lblAlarmNGCountValue.TabIndex = 27;
             this.lblAlarmNGCountValue.Text = "0";
             this.lblAlarmNGCountValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAlarmNGCountValue.Click += new System.EventHandler(this.lblAlarmNGCountValue_Click);
             // 
             // lblAlarmCapacityValue
             // 
@@ -705,6 +709,7 @@
             this.lblAlarmCapacityValue.TabIndex = 27;
             this.lblAlarmCapacityValue.Text = "0";
             this.lblAlarmCapacityValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAlarmCapacityValue.Click += new System.EventHandler(this.lblAlarmCapacityValue_Click);
             // 
             // chkUseAlarm
             // 
@@ -721,6 +726,7 @@
             this.chkUseAlarm.Text = "On";
             this.chkUseAlarm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkUseAlarm.UseVisualStyleBackColor = false;
+            this.chkUseAlarm.CheckedChanged += new System.EventHandler(this.chkUseAlarm_CheckedChanged);
             // 
             // pnlMakerParameter
             // 
@@ -803,6 +809,7 @@
             this.cmbFilterDirection.Size = new System.Drawing.Size(62, 28);
             this.cmbFilterDirection.TabIndex = 149;
             this.cmbFilterDirection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbFilterDirection.SelectedIndexChanged += new System.EventHandler(this.cmbFilterDirection_SelectedIndexChanged);
             // 
             // cmbFilterType
             // 
@@ -821,6 +828,7 @@
             this.cmbFilterType.Size = new System.Drawing.Size(62, 28);
             this.cmbFilterType.TabIndex = 147;
             this.cmbFilterType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbFilterType.SelectedIndexChanged += new System.EventHandler(this.cmbFilterType_SelectedIndexChanged);
             // 
             // cmbStrengthBase
             // 
@@ -839,6 +847,7 @@
             this.cmbStrengthBase.Size = new System.Drawing.Size(62, 28);
             this.cmbStrengthBase.TabIndex = 146;
             this.cmbStrengthBase.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbStrengthBase.SelectedIndexChanged += new System.EventHandler(this.cmbStrengthBase_SelectedIndexChanged);
             // 
             // cmbTargetType
             // 
@@ -857,6 +866,7 @@
             this.cmbTargetType.Size = new System.Drawing.Size(62, 28);
             this.cmbTargetType.TabIndex = 145;
             this.cmbTargetType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbTargetType.SelectedIndexChanged += new System.EventHandler(this.cmbTargetType_SelectedIndexChanged);
             // 
             // cmbPeakProperty
             // 
@@ -875,6 +885,7 @@
             this.cmbPeakProperty.Size = new System.Drawing.Size(62, 28);
             this.cmbPeakProperty.TabIndex = 144;
             this.cmbPeakProperty.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbPeakProperty.SelectedIndexChanged += new System.EventHandler(this.cmbPeakProperty_SelectedIndexChanged);
             // 
             // cmbPanelType
             // 
@@ -893,6 +904,7 @@
             this.cmbPanelType.Size = new System.Drawing.Size(62, 28);
             this.cmbPanelType.TabIndex = 143;
             this.cmbPanelType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbPanelType.SelectedIndexChanged += new System.EventHandler(this.cmbPanelType_SelectedIndexChanged);
             // 
             // cmbShadowDirection
             // 
@@ -911,6 +923,7 @@
             this.cmbShadowDirection.Size = new System.Drawing.Size(62, 28);
             this.cmbShadowDirection.TabIndex = 142;
             this.cmbShadowDirection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbShadowDirection.SelectedIndexChanged += new System.EventHandler(this.cmbShadowDirection_SelectedIndexChanged);
             // 
             // lblInspectionType
             // 
@@ -941,6 +954,7 @@
             this.lblThresholdWeightValue.TabIndex = 28;
             this.lblThresholdWeightValue.Text = "0";
             this.lblThresholdWeightValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblThresholdWeightValue.Click += new System.EventHandler(this.lblThresholdWeightValue_Click);
             // 
             // lblPeakThreshold
             // 
@@ -1151,6 +1165,7 @@
             this.lblPeakThresholdValue.TabIndex = 43;
             this.lblPeakThresholdValue.Text = "0";
             this.lblPeakThresholdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPeakThresholdValue.Click += new System.EventHandler(this.lblPeakThresholdValue_Click);
             // 
             // lblStrengthScaleFactorValue
             // 
@@ -1166,6 +1181,7 @@
             this.lblStrengthScaleFactorValue.TabIndex = 44;
             this.lblStrengthScaleFactorValue.Text = "0";
             this.lblStrengthScaleFactorValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStrengthScaleFactorValue.Click += new System.EventHandler(this.lblStrengthScaleFactorValue_Click);
             // 
             // lblSliceOverlapValue
             // 
@@ -1181,6 +1197,7 @@
             this.lblSliceOverlapValue.TabIndex = 45;
             this.lblSliceOverlapValue.Text = "0";
             this.lblSliceOverlapValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSliceOverlapValue.Click += new System.EventHandler(this.lblSliceOverlapValue_Click);
             // 
             // lblStandardDeviationValue
             // 
@@ -1195,6 +1212,7 @@
             this.lblStandardDeviationValue.TabIndex = 46;
             this.lblStandardDeviationValue.Text = "0";
             this.lblStandardDeviationValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStandardDeviationValue.Click += new System.EventHandler(this.lblStandardDeviationValue_Click);
             // 
             // lblStandardDeviation
             // 
@@ -1227,6 +1245,7 @@
             this.cmbInspectionType.Size = new System.Drawing.Size(62, 28);
             this.cmbInspectionType.TabIndex = 141;
             this.cmbInspectionType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbInspectionType.SelectedIndexChanged += new System.EventHandler(this.cmbInspectionType_SelectedIndexChanged);
             // 
             // cmbThresholdMode
             // 
@@ -1245,6 +1264,7 @@
             this.cmbThresholdMode.Size = new System.Drawing.Size(62, 28);
             this.cmbThresholdMode.TabIndex = 148;
             this.cmbThresholdMode.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbThresholdMode.SelectedIndexChanged += new System.EventHandler(this.cmbThresholdMode_SelectedIndexChanged);
             // 
             // chkLogTraceUseCheck
             // 
@@ -1259,6 +1279,7 @@
             this.chkLogTraceUseCheck.TabIndex = 150;
             this.chkLogTraceUseCheck.Text = "USE CHECK";
             this.chkLogTraceUseCheck.UseVisualStyleBackColor = false;
+            this.chkLogTraceUseCheck.CheckedChanged += new System.EventHandler(this.chkLogTraceUseCheck_CheckedChanged);
             // 
             // pnlSelectParameter
             // 

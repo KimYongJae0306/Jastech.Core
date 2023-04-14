@@ -11,66 +11,69 @@ using System.Windows.Forms;
 namespace Jastech.Framework.Winform.Forms
 {
     public partial class KeyPadForm : Form
+    {
+        public double PadValue { get; set; }
+
+        public double PreviousValue { get; set; }
+
+        public KeyPadForm()
         {
-            public double PadValue { get; set; }
+            InitializeComponent();
+        }
 
-            public KeyPadForm()
+        private void btnNumber_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (lblTextMessage.Text == "")
             {
-                InitializeComponent();
-            }
-
-            private void btnNumber_Click(object sender, EventArgs e)
-            {
-                Button button = (Button)sender;
-
-                if (lblTextMessage.Text == "")
-                {
-                    if (button.Text == "0" || button.Text == ".")
-                        return;
-                }
-                lblTextMessage.Text += button.Text;
-            }
-
-            private void btnMinus_Click(object sender, EventArgs e)
-            {
-                string message = lblTextMessage.Text;
-                if (message == "")
+                if (button.Text == "0" || button.Text == ".")
                     return;
-
-                lblTextMessage.Text = "-" + message;
             }
+            lblTextMessage.Text += button.Text;
+        }
 
-            private void btnBackspace_Click(object sender, EventArgs e)
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+            string message = lblTextMessage.Text;
+            if (message == "")
+                return;
+
+            lblTextMessage.Text = "-" + message;
+        }
+
+        private void btnBackspace_Click(object sender, EventArgs e)
+        {
+            string message = lblTextMessage.Text;
+            if (message == "")
+                return;
+            lblTextMessage.Text = message.Substring(0, message.Length - 1);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lblTextMessage.Text = "";
+        }
+
+        private void btnEnter_Click(object sender, EventArgs e)
+        {
+            if (lblTextMessage.Text == "")
+                lblTextMessage.Text = "0";
+
+            PadValue = Convert.ToDouble(lblTextMessage.Text);
+
+            this.DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void btnCanel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you want cancel?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string message = lblTextMessage.Text;
-                if (message == "")
-                    return;
-                lblTextMessage.Text = message.Substring(0, message.Length - 1);
-            }
-
-            private void btnClear_Click(object sender, EventArgs e)
-            {
-                lblTextMessage.Text = "";
-            }
-
-            private void btnEnter_Click(object sender, EventArgs e)
-            {
-                if (lblTextMessage.Text == "")
-                    lblTextMessage.Text = "0";
-
-                PadValue = Convert.ToDouble(lblTextMessage.Text);
-
-                this.DialogResult = DialogResult.OK;
+                PadValue = PreviousValue;
+                this.DialogResult = DialogResult.No;
                 Close();
             }
-
-            private void btnCanel_Click(object sender, EventArgs e)
-            {
-                if (MessageBox.Show("Do you want cancel?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    this.DialogResult = DialogResult.No;
-                    Close();
-                }
-            }
         }
+    }
 }

@@ -84,7 +84,7 @@ namespace Jastech.Framework.Winform.Controls
             SetLabelDoubleData(sender);
         }
 
-        private void SetLabelDoubleData(object sender)
+        private double SetLabelDoubleData(object sender)
         {
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.ShowDialog();
@@ -93,6 +93,8 @@ namespace Jastech.Framework.Winform.Controls
 
             Label label = (Label)sender;
             label.Text = inputData.ToString();
+
+            return inputData;
         }
 
         private void btnSetCurrentToTarget_Click(object sender, EventArgs e)
