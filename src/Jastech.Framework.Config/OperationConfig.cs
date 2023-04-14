@@ -12,8 +12,11 @@ namespace Jastech.Framework.Config
     {
         #region 속성
         [JsonProperty]
-        public bool VirtualMode { get; set; } = false;
+        public static bool UseKeyboard { get; set; } = false;
 
+        [JsonProperty]
+        public bool VirtualMode { get; set; } = true;
+   
         [JsonProperty]
         public string LastModelName { get; set; } = "";
 

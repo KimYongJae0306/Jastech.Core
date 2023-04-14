@@ -54,7 +54,6 @@ namespace Jastech.Framework.Structure.Helper
                 prevModel.ModifiedDate = DateTime.Now;
                 prevModel.Description = editModel.Description;
 
-
                 // 정보 변경 후 다시 저장
                 Save(modelPath, prevModel);
 
