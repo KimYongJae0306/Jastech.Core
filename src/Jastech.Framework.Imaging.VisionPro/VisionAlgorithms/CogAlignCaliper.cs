@@ -19,6 +19,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
             var rectList = CogImageHelper.DivideRegion(rect, leadCount);
 
+            if (rectList == null)
+                return resultList;
+
             int totalLeadCount = leadCount * 2;
 
             CogCaliperPolarityConstants polarityConstants = caliperParam.CaliperTool.RunParams.Edge0Polarity;
