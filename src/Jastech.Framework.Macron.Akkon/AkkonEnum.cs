@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Macron.Akkon
 {
-    public enum ROICopyDirection
+    public enum ROICloneDirection
     {
         Horizontal,
         Vertical,

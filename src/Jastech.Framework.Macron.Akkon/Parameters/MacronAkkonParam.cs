@@ -117,45 +117,9 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public int AlarmNGCount { get; set; } = 0;
 
-        public void SaveData(string dirPath, string name)
-        {
-            if (Directory.Exists(dirPath) == false)
-                Directory.CreateDirectory(dirPath);
-
-            string fileName = string.Format(@"{0}.txt", name);
-            string path = Path.Combine(dirPath, fileName);
-
-            using (StreamWriter outputFile = new StreamWriter(path))
-            {
-                outputFile.Write("0");
-                outputFile.Write("");
-                outputFile.Write("1");
-                outputFile.Write(" ");
-                outputFile.Write("2");
-                outputFile.Write(" ");
-                outputFile.Write("\n");
-            }
-        }
-
-        public void LoadData(string dirPath, string name)
-        {
-            string fileName = string.Format("{0}.txt", name);
-            string path = Path.Combine(dirPath, fileName);
-
-            if (File.Exists(path))
-            { }//CaliperTool = CogFileHelper.LoadTool(path) as CogCaliperTool;
-            else
-                SaveData(dirPath, name);
-        }
-
         public MacronAkkonParam DeepCopy()
         {
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonParam;
-        }
-
-        public void Dispose()
-        {
-            this.Dispose();
         }
     }
 

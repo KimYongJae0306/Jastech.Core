@@ -542,6 +542,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.StaticGraphics.Add(cogGraphic, groupName);
         }
 
+        public void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
+        {
+            cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
+        }
+
         public void SetInteractiveGraphics(string groupName, ICogRecord record)
         {
             foreach (CogRecord subRecord in record.SubRecords)
@@ -573,10 +578,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        private void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
-        {
-            cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
-        }
+        //private void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
+        //{
+        //    cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
+        //}
 
         private void btnPointToLine_Click(object sender, EventArgs e)
         {
@@ -626,7 +631,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 string flagNames = e.GetStateFlagNames(sender);
                 if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
                 {
-                    if(DeleteResultGraphics())
+                    if (DeleteResultGraphics())
                         DeleteEventHandler?.Invoke(sender, e);
                 }
 

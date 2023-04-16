@@ -72,6 +72,7 @@
     <Compile Include="Controls\MacronAkkonParamControl.designer.cs">
       <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parameters\AkkonROI.cs" />
     <Compile Include="Parameters\MacronAkkonGroup.cs" />
     <Compile Include="Parameters\MacronAkkonParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

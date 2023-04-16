@@ -30,17 +30,14 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 
         public MacronAkkonGroup DeepCopy()
         {
-            //MacronAkkonGroup param = new MacronAkkonGroup();
-
-            //param.Index = Index;
-            //param.Count = Count;
-            //param.Pitch = Pitch;
-            //param.Width = Width;
-            //param.Height = Height;
-            //param.MacronAkkonParam = new MacronAkkonParam();
-
-            //return param;
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonGroup;
+        }
+
+        public List<AkkonROI> AkkonROIList { get; set; } = new List<AkkonROI>();
+
+        public void AddROI(AkkonROI roi)
+        {
+            AkkonROIList.Add(roi);
         }
     }
 }
