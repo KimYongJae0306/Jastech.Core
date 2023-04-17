@@ -420,7 +420,7 @@
             this.btnJogDownZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownZ.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogDownZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down_White;
+            this.btnJogDownZ.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Down_White;
             this.btnJogDownZ.Location = new System.Drawing.Point(347, 146);
             this.btnJogDownZ.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownZ.Name = "btnJogDownZ";
@@ -434,7 +434,7 @@
             this.btnJogDownY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnJogDownY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJogDownY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_down_White;
+            this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Down_White;
             this.btnJogDownY.Location = new System.Drawing.Point(109, 146);
             this.btnJogDownY.Margin = new System.Windows.Forms.Padding(0);
             this.btnJogDownY.Name = "btnJogDownY";

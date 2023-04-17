@@ -39,5 +39,10 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         {
             AkkonROIList.Add(roi);
         }
+
+        public void DeleteROI(int index)
+        {
+            AkkonROIList.RemoveAt(index);
+        }
     }
 }

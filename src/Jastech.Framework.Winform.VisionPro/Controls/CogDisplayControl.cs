@@ -116,6 +116,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return 0;
         }
 
+        public double GetZoomValue()
+        {
+            return cogDisplay.Zoom;
+        }
+
         public CogRectangle GetViewRectangle()
         {
             CogRectangle rect = new CogRectangle();
@@ -444,7 +449,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLabel.BackgroundColor = CogColorConstants.Black;
             cogLabel.Color = CogColorConstants.Green;
             cogLabel.Alignment = CogGraphicLabelAlignmentConstants.BaselineCenter;
-            cogLabel.Font = new Font("굴림", 10);
+            cogLabel.Font = new Font("맑은 고딕", 10);
             cogLabel.SetXYText(calcX, calcY, message);
 
             cogDisplay.StaticGraphics.Add(cogLabel, groupName);

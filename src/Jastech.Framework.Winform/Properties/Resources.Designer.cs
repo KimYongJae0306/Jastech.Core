@@ -63,9 +63,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_down {
+        internal static System.Drawing.Bitmap Arrow_Down {
             get {
-                object obj = ResourceManager.GetObject("Arrow_down", resourceCulture);
+                object obj = ResourceManager.GetObject("Arrow_Down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_down_White {
+        internal static System.Drawing.Bitmap Arrow_Down_White {
             get {
-                object obj = ResourceManager.GetObject("Arrow_down_White", resourceCulture);
+                object obj = ResourceManager.GetObject("Arrow_Down_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_left {
+        internal static System.Drawing.Bitmap Arrow_Left {
             get {
-                object obj = ResourceManager.GetObject("Arrow_left", resourceCulture);
+                object obj = ResourceManager.GetObject("Arrow_Left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_right {
+        internal static System.Drawing.Bitmap Arrow_Right {
             get {
-                object obj = ResourceManager.GetObject("Arrow_right", resourceCulture);
+                object obj = ResourceManager.GetObject("Arrow_Right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_up {
+        internal static System.Drawing.Bitmap Arrow_Up {
             get {
-                object obj = ResourceManager.GetObject("Arrow_up", resourceCulture);
+                object obj = ResourceManager.GetObject("Arrow_Up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +156,46 @@ namespace Jastech.Framework.Winform.Properties {
         internal static System.Drawing.Bitmap Cancel_White {
             get {
                 object obj = ResourceManager.GetObject("Cancel_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caret_Horizontal_Expand_White {
+            get {
+                object obj = ResourceManager.GetObject("Caret_Horizontal_Expand_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caret_Horizontal_Focus_White {
+            get {
+                object obj = ResourceManager.GetObject("Caret_Horizontal_Focus_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caret_Vertical_Expand_White {
+            get {
+                object obj = ResourceManager.GetObject("Caret_Vertical_Expand_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caret_Vertical_Focus_White {
+            get {
+                object obj = ResourceManager.GetObject("Caret_Vertical_Focus_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,6 +293,26 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ROIMoveMode_White {
+            get {
+                object obj = ResourceManager.GetObject("ROIMoveMode_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ROISizeMode_White {
+            get {
+                object obj = ResourceManager.GetObject("ROISizeMode_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Select {
             get {
                 object obj = ResourceManager.GetObject("Select", resourceCulture);
@@ -266,6 +326,36 @@ namespace Jastech.Framework.Winform.Properties {
         internal static System.Drawing.Bitmap Select_White {
             get {
                 object obj = ResourceManager.GetObject("Select_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skew_CCW {
+            get {
+                object obj = ResourceManager.GetObject("Skew_CCW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skew_CW {
+            get {
+                object obj = ResourceManager.GetObject("Skew_CW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skew_Zero {
+            get {
+                object obj = ResourceManager.GetObject("Skew_Zero", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

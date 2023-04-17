@@ -118,6 +118,12 @@
     <Compile Include="Controls\MotionRepeatControl.Designer.cs">
       <DependentUpon>MotionRepeatControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ROIJogControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ROIJogControl.Designer.cs">
+      <DependentUpon>ROIJogControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UPHControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionRepeatControl.resx">
       <DependentUpon>MotionRepeatControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ROIJogControl.resx">
+      <DependentUpon>ROIJogControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UPHControl.resx">
       <DependentUpon>UPHControl.cs</DependentUpon>
@@ -319,6 +328,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Stop_Circle_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ROIMoveMode_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ROISizeMode_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skew_CW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skew_CCW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skew_Zero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Vertical_Focus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Horizontal_Focus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Vertical_Focus_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Horizontal_Focus_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Horizontal_Expand_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Vertical_Expand_White.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
