@@ -36,7 +36,7 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonGroup;
         }
 
-        public List<AkkonROI> AkkonROIList { get; set; } = new List<AkkonROI>();
+        public List<AkkonROI> AkkonROIList { get; private set; } = new List<AkkonROI>();
 
         public void AddROI(AkkonROI roi)
         {
