@@ -4,6 +4,7 @@ using Cognex.VisionPro.ImageProcessing;
 using Cognex.VisionPro.PMAlign;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -50,6 +51,27 @@ namespace Jastech.Framework.Imaging.VisionPro
                 png.Append(image);
                 png.Close();
             }
+        }
+
+        public static byte[] GetWidthDataArray(CogImage8Grey image, int index)
+        {
+            byte[] dataArray = new byte[image.Width];
+            unsafe
+            {
+                var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
+
+                IntPtr ptrData = cogPixelData.Scan0;
+                int startIndex = cogPixelData.Stride * index;
+
+                byte* data = (byte*)(void*)ptrData;
+                int count = 0;
+                for (int i = startIndex; i < startIndex + image.Width; i++)
+                {
+                    dataArray[count] = data[i];
+                    count++;
+                }
+            }
+            return dataArray;
         }
 
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
@@ -175,6 +197,40 @@ namespace Jastech.Framework.Imaging.VisionPro
             roi.GraphicDOFEnable = constants;
 
             return roi;
+        }
+    
+        public static List<CogRectangleAffine> CreateRectangleAffine(List<PointF> topEdgePointList, List<PointF> bottomEdgePointList)
+        {
+            if (topEdgePointList.Count != bottomEdgePointList.Count)
+            {
+                // Top, Bottom List 수가 같아야함
+                return null;
+            }
+
+            //if(topEdgePointList.Count % 2 != 0 || bottomEdgePointList.Count % 2 != 0)
+            //{
+            //    // Top, Bottom List 모두 짝수여야함
+            //    return null;
+            //}
+            List<CogRectangleAffine> roiList = new List<CogRectangleAffine>();
+
+            for (int i = 0; i < topEdgePointList.Count; i+= 2)
+            {
+                if (i + 1 >= topEdgePointList.Count)
+                    break;
+                CogRectangleAffine roi = new CogRectangleAffine();
+                double originX = topEdgePointList[i].X;
+                double originY = topEdgePointList[i].Y;
+                double cornerXX = topEdgePointList[i + 1].X;
+                double cornerXY = topEdgePointList[i + 1].Y;
+                double cornerYX = bottomEdgePointList[i].X;
+                double cornerYY = bottomEdgePointList[i].Y;
+
+                roi.SetOriginCornerXCornerY(originX, originY, cornerXX, cornerXY, cornerYX, cornerYY);
+                roiList.Add(roi);
+            }
+
+            return roiList;
         }
 
         public static ICogImage CovertImage(byte[] data, int width, int height, ColorFormat colorFormat)

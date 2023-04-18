@@ -17,6 +17,9 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         public int Count { get; set; } = 273;
 
         [JsonProperty]
+        public double Threshold { get; set; } = 100;
+
+        [JsonProperty]
         public double Pitch { get; set; } = 70.0;  //um
 
         [JsonProperty]

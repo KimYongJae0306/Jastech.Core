@@ -95,6 +95,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             UpdateViewRect();
         }
 
+        public void SetBinaryImage(CogImage8Grey image)
+        {
+            cogDisplay.Image = image;
+        }
+
+
         public ICogImage GetImage()
         {
             return cogDisplay.Image;
@@ -463,6 +469,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogDisplay.StaticGraphics.Remove(groupName);
         }
 
+        public void DeleteInInteractiveGraphics(string groupName)
+        {
+            if (IsContainGroupNameInInteractiveGraphics(groupName))
+                cogDisplay.InteractiveGraphics.Remove(groupName);
+        }
+
         public bool DeleteResultGraphics()
         {
             bool isDelete = false;
@@ -621,9 +633,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 if (display.Image == null)
                     return;
-
-                if (display.Zoom < 0.2)
-                    display.Zoom = 0.2;
 
                 if (display.Zoom > 10)
                     display.Zoom = 10;
