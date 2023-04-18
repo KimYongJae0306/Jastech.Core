@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Jastech.Framework.Imaging.Result;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

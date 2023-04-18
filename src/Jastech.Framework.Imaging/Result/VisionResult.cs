@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
+namespace Jastech.Framework.Imaging.Result
 {
     public class VisionResult
     {

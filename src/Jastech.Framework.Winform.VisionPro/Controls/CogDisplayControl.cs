@@ -12,6 +12,7 @@ using Jastech.Framework.Imaging.VisionPro;
 using Cognex.VisionPro.Dimensioning;
 using Cognex.VisionPro.Implementation;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
+using Jastech.Framework.Imaging.Result;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -708,7 +709,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             
             SetInteractiveGraphics(groupName, resultGraphic);
 
-            DrawResultLabel("Result :" + alignResult.Judgement.ToString(), 0);
+            DrawResultLabel("Result :" + alignResult.Result.ToString(), 0);
             //if (alignResult.Judgement != Result.Fail)
             //{
             //    DrawResultLabel("Y :" + alignResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);

@@ -70,6 +70,7 @@
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\MatHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result\VisionResult.cs" />
     <Compile Include="SafeMalloc.cs" />
   </ItemGroup>
   <ItemGroup>

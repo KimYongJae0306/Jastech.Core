@@ -222,7 +222,6 @@
     <Compile Include="VisionAlgorithms\Results\CogAlignCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\CogPatternMatchingResult.cs" />
-    <Compile Include="VisionAlgorithms\Results\VisionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

@@ -318,6 +318,10 @@
       <Project>{22EE7B1A-E7B2-4547-94DD-4E85BDB56956}</Project>
       <Name>Jastech.Framework.Imaging.VisionPro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
+      <Project>{2380DA0F-851A-4430-9A43-E7B2DEEE29F2}</Project>
+      <Name>Jastech.Framework.Imaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jastech.Framework.Winform\Jastech.Framework.Winform.csproj">
       <Project>{D46C7263-535A-4BF9-AD14-5183EDE0A984}</Project>
       <Name>Jastech.Framework.Winform</Name>

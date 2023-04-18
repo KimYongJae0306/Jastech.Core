@@ -52,7 +52,6 @@
     <Reference Include="ATTWrapperd">
       <HintPath>..\..\..\Jastech.Library\Macron\Debug\ATTWrapperd.dll</HintPath>
     </Reference>
-    <Reference Include="Cognex.VisionPro.Core, Version=71.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -72,6 +71,7 @@
     <Compile Include="Controls\MacronAkkonParamControl.designer.cs">
       <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MacronAkkon.cs" />
     <Compile Include="Parameters\AkkonROI.cs" />
     <Compile Include="Parameters\MacronAkkonGroup.cs" />
     <Compile Include="Parameters\MacronAkkonParam.cs" />
