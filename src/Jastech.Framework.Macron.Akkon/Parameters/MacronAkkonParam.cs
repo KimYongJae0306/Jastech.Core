@@ -10,17 +10,6 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
 
-        //// Group
-        //public int GroupCount { get; set; } = 0;
-
-        //public int LeadWidth { get; set; } = 0;
-
-        //public int LeadHeight { get; set; } = 0;
-
-        //public int LeadCount { get; set; } = 0;
-
-        //public int LeadPitch { get; set; } = 0;
-
         // Engineer
         [JsonProperty]
         public int JudgeCount { get; set; } = 2;
