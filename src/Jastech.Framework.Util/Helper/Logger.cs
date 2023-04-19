@@ -193,6 +193,7 @@ namespace Jastech.Framework.Util.Helper
 
     public enum ErrorType
     {
+        Motion,
         Grabber,
         Camera,
         PLC,

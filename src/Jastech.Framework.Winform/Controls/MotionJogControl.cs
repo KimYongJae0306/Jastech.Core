@@ -26,7 +26,7 @@ namespace Jastech.Framework.Winform.Controls
 
         public JogMode JogMode { get; set; } = JogMode.Jog;
 
-        public double JogPitch { get; set; } = 0.1;
+        public double JogPitch { get; set; } = 1.0;
         #endregion
 
         #region 이벤트
@@ -43,17 +43,6 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        private void MotionJogControl_Load(object sender, EventArgs e)
-        {
-            //InitializeUI();
-        }
-
-        private void InitializeUI()
-        {
-            //_selectedColor = Color.FromArgb(104, 104, 104);
-            //_noneSelectedColor = Color.FromArgb(52, 52, 52);
-        }
-
         public void SetAxisHanlder(AxisHandler axisHandler)
         {
             AxisHanlder = axisHandler;

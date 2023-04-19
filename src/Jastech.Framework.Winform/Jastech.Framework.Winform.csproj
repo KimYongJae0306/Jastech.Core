@@ -67,18 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AutoFocusControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AutoFocusControl.Designer.cs">
-      <DependentUpon>AutoFocusControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AutoFocusFunctionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AutoFocusFunctionControl.designer.cs">
-      <DependentUpon>AutoFocusFunctionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,12 +90,6 @@
     </Compile>
     <Compile Include="Controls\MotionParameterCommonControl.Designer.cs">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MotionRepeatControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MotionRepeatControl.Designer.cs">
-      <DependentUpon>MotionRepeatControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ROIJogControl.cs">
       <SubType>Form</SubType>
@@ -172,12 +154,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\AutoFocusControl.resx">
-      <DependentUpon>AutoFocusControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\AutoFocusFunctionControl.resx">
-      <DependentUpon>AutoFocusFunctionControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,9 +165,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionParameterCommonControl.resx">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MotionRepeatControl.resx">
-      <DependentUpon>MotionRepeatControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ROIJogControl.resx">
       <DependentUpon>ROIJogControl.cs</DependentUpon>

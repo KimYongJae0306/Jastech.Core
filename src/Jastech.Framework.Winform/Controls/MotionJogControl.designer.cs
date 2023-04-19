@@ -147,7 +147,6 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "MotionJogControl";
             this.Size = new System.Drawing.Size(300, 300);
-            this.Load += new System.EventHandler(this.MotionJogControl_Load);
             this.tlpJogOperation.ResumeLayout(false);
             this.ResumeLayout(false);
 

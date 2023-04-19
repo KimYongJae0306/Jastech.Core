@@ -16,6 +16,9 @@ namespace Jastech.Framework.Winform.Controls
     {
         public LAFCtrl SelectedLafCtrl { get; private set; } = null;
 
+        public JogMode JogMode { get; set; } = JogMode.Jog;
+        public JogSpeedMode JogSpeedMode { get; set; } = JogSpeedMode.Slow;
+
         public double MoveAmount { get; set; } = 0.1;
 
         public LAFJogControl()

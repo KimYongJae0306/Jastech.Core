@@ -1,5 +1,6 @@
 ﻿using ACS.SPiiPlusNET;
 using Jastech.Framework.Comm.Protocol;
+using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -156,6 +157,41 @@ namespace Jastech.Framework.Device.Motions
                 return true;
             else
                 return false;
+        }
+
+        private bool WaitForDone(int axis, int timeOut = 10)
+        {
+            Stopwatch timeoutChecker = new Stopwatch();
+
+            if (!Api.IsConnected)
+                return false;
+
+            timeoutChecker.Start();
+            while (!IsAxisDone((ACS.SPiiPlusNET.Axis)axis))
+            {
+                var safetyFlag = Api.GetFault((ACS.SPiiPlusNET.Axis)axis);
+                if (safetyFlag != SafetyControlMasks.ACSC_NONE)
+                {
+                    Api.KillAll();
+                    Api.Disable((ACS.SPiiPlusNET.Axis)axis);
+
+                    Logger.Error(ErrorType.Motion, "Fault occurs in axis Amp.");
+                    return false;
+                }
+
+                if (timeoutChecker.ElapsedMilliseconds / 1000 >= timeOut)
+                {
+                    Logger.Error(ErrorType.Motion, "Axis movement has exceeded the set time.");
+                    return false;
+                }
+
+                Thread.Sleep(1);
+            }
+            timeoutChecker.Reset();
+
+            Logger.Error(ErrorType.Motion, "Axis movement has arrived at its destination.");
+
+            return true;
         }
 
         public override void StartHome(int axisNo)
