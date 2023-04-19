@@ -83,6 +83,11 @@ namespace Jastech.Framework.Device.Cameras
                 ImageGrabbed.Invoke(this);
             }
         }
+
+        public void GrabMuti(object grabCount)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

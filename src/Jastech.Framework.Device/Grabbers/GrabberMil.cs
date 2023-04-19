@@ -1,4 +1,5 @@
 ﻿using Jastech.Framework.Matrox;
+using Jastech.Framework.Util.Helper;
 using Matrox.MatroxImagingLibrary;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,7 @@ namespace Jastech.Framework.Device.Grabbers
                 case MilSystemType.Solios:
                     return MIL.M_SYSTEM_SOLIOS;
                 case MilSystemType.Rapixo:
-                    return MIL.M_SYSTEM_RADIENTCXP;
+                    return "M_SYSTEM_RAPIXOCXP"; // MIL 버전 때문에 MIL.M_SYSTEM_RAPIXOCXP가 존재하지 않음
             }
 
             return MIL.M_SYSTEM_SOLIOS;
@@ -77,7 +78,10 @@ namespace Jastech.Framework.Device.Grabbers
         {
             MilSystem milSystem = MilSystemList.Find(x => x.SystemDescriptor == systemDescriptor && x.SystemNum == systemNum);
             if (milSystem == null)
+            {
                 milSystem = CreateMilSystem(systemDescriptor, systemNum);
+                MilSystemList.Add(milSystem);
+            }
 
             return milSystem;
         }
@@ -88,20 +92,16 @@ namespace Jastech.Framework.Device.Grabbers
 
             MIL_ID systemId = MIL.M_NULL;
 
-            //StringBuilder foundBoardName = new StringBuilder();
-            //MIL.MappInquire(MIL.M_INSTALLED_SYSTEM_DESCRIPTOR + 0, foundBoardName);
-            //if (MIL.MsysAlloc("M_SYSTEM_RAPIXOCXP", MIL.M_DEV0, MIL.M_COMPLETE, ref systemId) != MIL.M_NULL)
-            //{
-
-            //}
-                if (MIL.MsysAlloc("M_SYSTEM_RAPIXOCXP", systemNum, MIL.M_DEFAULT, ref systemId) == MIL.M_NULL)
+        
+            if (MIL.MsysAlloc("M_SYSTEM_RAPIXOCXP", systemNum, MIL.M_DEFAULT, ref systemId) == MIL.M_NULL)
             {
-                //LogHelper.Error(String.Format("Can't Allocate MIL System. {0}, {1}", systemDescriptor, systemNum));
+                string message = String.Format("Can't Allocate MIL System. {0}, {1}", systemDescriptor, systemNum);
+                Logger.Error(ErrorType.Camera, message);
             }
             else
             {
                 milSystem = new MilSystem();
-                milSystem.SystemDescriptor = "M_SYSTEM_RAPIXOCXP";// systemDescriptor;
+                milSystem.SystemDescriptor = systemDescriptor;// "M_SYSTEM_RAPIXOCXP";// systemDescriptor;
                 milSystem.SystemNum = systemNum;
                 milSystem.SystemId = systemId;
             }
