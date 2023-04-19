@@ -14,7 +14,6 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string Name { get; private set; }
 
-        [JsonProperty]
         public Motion Motion { get; private set; }
 
         [JsonProperty]
@@ -37,6 +36,11 @@ namespace Jastech.Framework.Device.Motions
         #endregion
 
         #region 메서드
+        public void SetMotion(Motion motion)
+        {
+            Motion = motion;    
+        }
+
         public bool StartMove(float position, AxisMovingParam movingParam = null)
         {
             Motion.MoveTo(AxisNo, position, movingParam.Velocity, movingParam.Acceleration);

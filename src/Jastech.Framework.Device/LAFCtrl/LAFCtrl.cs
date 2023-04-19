@@ -5,11 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.LAFCtrl
 {
     public abstract partial class LAFCtrl : IDevice
     {
+        public bool IsLaserOn { get; protected set; }
+
+        public LAFStatus Status { get; set; } = new LAFStatus();
+
         public LAFCtrl(string name)
         {
             Name = name;
@@ -18,6 +23,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         public delegate void LAFEventHandler(string name, byte[] data);
 
         public event LAFEventHandler DataReceived;
+
+        public abstract void SetMotionRelativeMove(Direction direction, double value);
 
         protected void OnLAFReceived(byte[] data)
         {
@@ -47,5 +54,38 @@ namespace Jastech.Framework.Device.LAFCtrl
             return true;
         }
         #endregion
+    }
+
+
+    public class LAFStatus
+    {
+        private object _lock { get; set; } = new object();
+
+        public string Name { get; set; }
+
+        public int CenterofGravity { get; set; }
+
+        public double MPos { get; set; }
+
+        public bool IsNegativeLimit { get; set; }
+
+        public bool IsPositiveLimit { get; set; }
+
+        public void SetStatus(int centerOfCravity, double mPos, bool isNegativeLimit, bool isPositiveLimit)
+        {
+            lock (_lock)
+            {
+                CenterofGravity = centerOfCravity;
+                MPos = mPos;
+                IsNegativeLimit = isNegativeLimit;
+                IsPositiveLimit = isPositiveLimit;
+            }
+        }
+
+        public LAFStatus GetStatus()
+        {
+            lock (_lock)
+                return this;
+        }
     }
 }

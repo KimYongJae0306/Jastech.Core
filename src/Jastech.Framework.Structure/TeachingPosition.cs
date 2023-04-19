@@ -63,6 +63,11 @@ namespace Jastech.Framework.Structure
             return AxisInfoList.Where(x => x.Name == axisName).First().TargetPosition;
         }
 
+        public double GetTargetPosition(AxisName axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName.ToString()).First().TargetPosition;
+        }
+
         public void SetTargetPosition(AxisName name, double targetPosition)
         {
             AxisInfoList.Where(x => x.Name == name.ToString()).First().TargetPosition = targetPosition;
@@ -73,9 +78,29 @@ namespace Jastech.Framework.Structure
             return AxisInfoList.Where(x => x.Name == axisName).First().Offset;
         }
 
+        public double GetOffset(AxisName axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName.ToString()).First().Offset;
+        }
+
         public void SetOffset(AxisName name, double offset)
         {
             AxisInfoList.Where(x => x.Name == name.ToString()).First().Offset = offset;
+        }
+
+        public double GetCenterOfGravity(string axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName).First().CenterOfGravity;
+        }
+
+        public double GetCenterOfGravity(AxisName axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName.ToString()).First().CenterOfGravity;
+        }
+
+        public void SetCenterOfGravity(AxisName name, int centerOfGravity)
+        {
+            AxisInfoList.Where(x => x.Name == name.ToString()).First().CenterOfGravity = centerOfGravity;
         }
 
         public AxisMovingParam GetMovingParams(string axisName)

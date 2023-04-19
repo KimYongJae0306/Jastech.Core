@@ -73,23 +73,23 @@
     <Compile Include="Controls\AutoFocusControl.Designer.cs">
       <DependentUpon>AutoFocusControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AutoFocusFunctionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AutoFocusFunctionControl.designer.cs">
+      <DependentUpon>AutoFocusFunctionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LAFJogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LAFJogControl.Designer.cs">
+      <DependentUpon>LAFJogControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LogControl.Designer.cs">
       <DependentUpon>LogControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MotionCommandControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MotionCommandControl.Designer.cs">
-      <DependentUpon>MotionCommandControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MotionFunctionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MotionFunctionControl.Designer.cs">
-      <DependentUpon>MotionFunctionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MotionJogControl.cs">
       <SubType>UserControl</SubType>
@@ -175,14 +175,14 @@
     <EmbeddedResource Include="Controls\AutoFocusControl.resx">
       <DependentUpon>AutoFocusControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AutoFocusFunctionControl.resx">
+      <DependentUpon>AutoFocusFunctionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LAFJogControl.resx">
+      <DependentUpon>LAFJogControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MotionCommandControl.resx">
-      <DependentUpon>MotionCommandControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MotionFunctionControl.resx">
-      <DependentUpon>MotionFunctionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionJogControl.resx">
       <DependentUpon>MotionJogControl.cs</DependentUpon>

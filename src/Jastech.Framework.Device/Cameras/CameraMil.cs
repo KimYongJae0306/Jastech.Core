@@ -36,9 +36,9 @@ namespace Jastech.Framework.Device.Cameras
 
         #region 속성
         [JsonProperty]
-        public MilSystemType MilSystemType { get; set; } = MilSystemType.Solios;
+        public MilSystemType MilSystemType { get; set; } = MilSystemType.Rapixo;
 
-        public uint SystemNum { get; set; } = 1; // 설치된 Frame Grabber Index
+        public uint SystemNum { get; set; } = 0; // 설치된 Frame Grabber Index
 
         [JsonProperty]
         public int NumOfBand { get; set; }
@@ -88,8 +88,8 @@ namespace Jastech.Framework.Device.Cameras
                         MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
             // MIL M_GRAB_END 콜백 등록
-            //ThisHandle = GCHandle.Alloc(this);
-            //MIL.MdigHookFunction(MilDigitizerId, MIL.M_GRAB_END, new MIL_DIG_HOOK_FUNCTION_PTR(HookHandlerPtr), GCHandle.ToIntPtr(ThisHandle));
+            _thisHandle = GCHandle.Alloc(this);
+            MIL.MdigHookFunction(DigitizerId, MIL.M_GRAB_END, new MIL_DIG_HOOK_FUNCTION_PTR(HookHandlerPtr), GCHandle.ToIntPtr(_thisHandle));
 
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
@@ -135,7 +135,8 @@ namespace Jastech.Framework.Device.Cameras
             if (dcfFile == "")
                 return false;
 
-            MIL_ID milDigitizer = MIL.MdigAlloc(MilSystem.SystemId, DigitizerNum, dcfFile, MIL.M_DEFAULT, MIL.M_NULL);
+            //MIL_ID milDigitizer = MIL.MdigAlloc(MilSystem.SystemId, DigitizerNum, dcfFile, MIL.M_DEFAULT, MIL.M_NULL);
+            MIL_ID milDigitizer = MIL.MdigAlloc(MilSystem.SystemId, DigitizerNum, "", MIL.M_DEFAULT, MIL.M_NULL);
 
             if (milDigitizer == null)
                 return false;

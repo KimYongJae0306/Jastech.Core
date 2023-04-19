@@ -36,13 +36,13 @@ namespace Jastech.Framework.Comm
         public int BaudRate { get; set; }
 
         [JsonProperty]
-        public Parity Parity { get; set; }
+        public Parity Parity { get; set; } = Parity.None;
 
         [JsonProperty]
-        public int DataBits { get; set; }
+        public int DataBits { get; set; } = 8;
 
         [JsonProperty]
-        public StopBits StopBits { get; set; }
+        public StopBits StopBits { get; set; } = StopBits.One;
 
         private SerialPort SerialPort { get; set; }
 
@@ -130,7 +130,7 @@ namespace Jastech.Framework.Comm
             if (!Protocol.MakePacket(data, out byte[] packet))
                 return false;
 
-
+            string gg = Encoding.Default.GetString(packet);
             SerialPort.Write(packet, 0, packet.Length);
             return true;
         }
@@ -161,7 +161,8 @@ namespace Jastech.Framework.Comm
 
             foreach (var data in datas)
             {
-                Received?.Invoke(data);
+                if(data != null)
+                    Received?.Invoke(data);
             }
         }
         #endregion

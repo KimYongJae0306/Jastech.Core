@@ -1,5 +1,6 @@
 ﻿using Jastech.Framework.Comm;
 using Jastech.Framework.Comm.Protocol;
+using Jastech.Framework.Device.Motions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -120,6 +121,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public void SetLaserOnOff(bool isOn)
         {
+            IsLaserOn = isOn;
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF, value);
@@ -154,7 +156,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionRelativeMove(Direction direction, double value)
+        public override void SetMotionRelativeMove(Direction direction, double value)
         {
             if (value * ResolutionAxisZ < 1)
                 return;
@@ -235,16 +237,5 @@ namespace Jastech.Framework.Device.LAFCtrl
         const string CMD_WRITE_ACCELDECEL = "uc motionacctcms";                         // SET Motion Acceleration/Deceleration
         const int AF_SENSOR_PORT_RES_WAIT = 200;
         #endregion
-    }
-
-    public class NuriLAFStatus
-    {
-        public int CenterOfGravity { get; set; }
-
-        public double MPos { get; set; }
-
-        public bool IsNegativeLimit { get; set; }
-
-        public bool IsPositiveLimit { get; set; }
     }
 }

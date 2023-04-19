@@ -36,7 +36,11 @@ namespace Jastech.Framework.Device.Motions
 
         public Axis GetAxis(AxisName name)
         {
-            return AxisList.Where(x => x.Name == name.ToString()).First();
+            if(AxisList.Where(x => x.Name == name.ToString()).Count() > 0)
+                return AxisList.Where(x => x.Name == name.ToString()).First();
+        
+            return null;
+
         }
     }
 }

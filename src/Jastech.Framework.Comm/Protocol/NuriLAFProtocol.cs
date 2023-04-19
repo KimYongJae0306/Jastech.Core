@@ -38,43 +38,55 @@ namespace Jastech.Framework.Comm.Protocol
 
             if(RequestDataArray == null)
             {
-                packet = new byte[packetBuffer.Length];
-                if (packet.Length > 0)
-                {
-                    Array.Copy(packetBuffer, packet, packet.Length);
-                }
-                searchingLength = packet.Length;
-                return true;
+                //packet = new byte[packetBuffer.Length];
+                //if (packet.Length > 0)
+                //{
+                //    Array.Copy(packetBuffer, packet, packet.Length);
+                //}
+                //string receiveData1 = Encoding.Default.GetString(packetBuffer);
+                //searchingLength = packet.Length;
+                return false;
             }
 
             string receiveData = Encoding.Default.GetString(packetBuffer);
-
-            bool isAllContain = true;
-            Dictionary<int, int> searchIndexList = new Dictionary<int, int>();
-            foreach (var data in RequestDataArray)
+            string crlf = "\r\n";
+            int splitIndex = receiveData.IndexOf(crlf);
+            if (splitIndex > 0) 
             {
-                bool isContain = receiveData.Contains(data);
-                isAllContain |= isContain;
+                string splitMessage = receiveData.Substring(splitIndex + crlf.Length);
 
-                if (isContain)
-                    searchIndexList.Add(receiveData.IndexOf(data), data.Length);
-            }
-
-            if (isAllContain)
-            {
-                if(searchIndexList.Count > 0)
+                int count = 0;
+                Dictionary<int, int> searchIndexList = new Dictionary<int, int>();
+                foreach (var data in RequestDataArray)
                 {
-                    int maxKey = searchIndexList.Keys.Max();
-                    searchIndexList.TryGetValue(maxKey, out int value);
-                    searchingLength = maxKey + value;
+                    if (data == ";uc")
+                        continue;
 
-                    return true;
+                    bool isContain =splitMessage.Contains(data);
+
+                    if (isContain)
+                        searchIndexList.Add(splitMessage.IndexOf(data), data.Length);
+                    else
+                        count++;
                 }
-                return false;
+
+                if (count == 0)
+                {
+                    if (searchIndexList.Count > 0)
+                    {
+                        int maxKey = searchIndexList.Keys.Max();
+                        searchIndexList.TryGetValue(maxKey, out int value);
+                        searchingLength = splitIndex + maxKey + value;
+                        
+                        packet = new byte[splitMessage.Length];
+
+                        Array.Copy(packetBuffer, splitIndex + crlf.Length, packet, 0, packet.Length);
+                        
+                        return true;
+                    }
+                }
             }
-            else
-                return false;
-        
+            return false;
         }
     }
 }

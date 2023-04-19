@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Device.Motions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,11 @@ namespace Jastech.Framework.Device.LAFCtrl
         public override bool IsConnected()
         {
             return true;
+        }
+
+        public override void SetMotionRelativeMove(AxisMovingParam.Direction direction, double value)
+        {
+            
         }
     }
 }

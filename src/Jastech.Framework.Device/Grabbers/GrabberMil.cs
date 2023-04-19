@@ -11,6 +11,7 @@ namespace Jastech.Framework.Device.Grabbers
     public enum MilSystemType
     {
         Solios,
+        Rapixo,
     }
     public partial class GrabberMil : Grabber
     {
@@ -41,7 +42,7 @@ namespace Jastech.Framework.Device.Grabbers
         #region 메서드
         public override void Initialize()
         {
-            //MilHelper.InitApplication();
+            MilHelper.InitApplication();
         }
 
         public override void Release()
@@ -65,6 +66,8 @@ namespace Jastech.Framework.Device.Grabbers
             {
                 case MilSystemType.Solios:
                     return MIL.M_SYSTEM_SOLIOS;
+                case MilSystemType.Rapixo:
+                    return MIL.M_SYSTEM_RADIENTCXP;
             }
 
             return MIL.M_SYSTEM_SOLIOS;
@@ -84,14 +87,21 @@ namespace Jastech.Framework.Device.Grabbers
             MilSystem milSystem = null;
 
             MIL_ID systemId = MIL.M_NULL;
-            if (MIL.MsysAlloc(systemDescriptor, systemNum, MIL.M_DEFAULT, ref systemId) == MIL.M_NULL)
+
+            //StringBuilder foundBoardName = new StringBuilder();
+            //MIL.MappInquire(MIL.M_INSTALLED_SYSTEM_DESCRIPTOR + 0, foundBoardName);
+            //if (MIL.MsysAlloc("M_SYSTEM_RAPIXOCXP", MIL.M_DEV0, MIL.M_COMPLETE, ref systemId) != MIL.M_NULL)
+            //{
+
+            //}
+                if (MIL.MsysAlloc("M_SYSTEM_RAPIXOCXP", systemNum, MIL.M_DEFAULT, ref systemId) == MIL.M_NULL)
             {
                 //LogHelper.Error(String.Format("Can't Allocate MIL System. {0}, {1}", systemDescriptor, systemNum));
             }
             else
             {
                 milSystem = new MilSystem();
-                milSystem.SystemDescriptor = systemDescriptor;
+                milSystem.SystemDescriptor = "M_SYSTEM_RAPIXOCXP";// systemDescriptor;
                 milSystem.SystemNum = systemNum;
                 milSystem.SystemId = systemId;
             }
