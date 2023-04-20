@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Macron.Akkon.Parameters;
 using Jastech.Framework.Winform.Forms;
+using AW;
 
 namespace Jastech.Framework.Macron.Akkon.Controls
 { 
@@ -142,37 +143,37 @@ namespace Jastech.Framework.Macron.Akkon.Controls
             ///Enginner Param
             lblJudgeCountValue.Text = macronAkkonParam.JudgeCount.ToString();
             lblJudgeLengthValue.Text = macronAkkonParam.JudgeLength.ToString("F2");
-            lblMinSizeFilterValue.Text = macronAkkonParam.FilterMinSize.ToString("F2");
-            lblMaxSizeFilterValue.Text = macronAkkonParam.FilterMaxSize.ToString("F2");
-            lblGroupDistanceValue.Text = macronAkkonParam.GroupingDistance.ToString("F2");
-            lblStrengthFilterValue.Text = macronAkkonParam.StrengthThreshold.ToString("F2");
-            lblWidthCutValue.Text = macronAkkonParam.WidthCut.ToString();
-            lblHeightCutValue.Text = macronAkkonParam.HeightCut.ToString();
-            lblBWRatioValue.Text = macronAkkonParam.BWRatio.ToString("F2");
-            lblExtraLeadDisplayValue.Text = macronAkkonParam.ExtraLead.ToString();
+            lblMinSizeFilterValue.Text = macronAkkonParam.FilterParam.MinSize.ToString("F2");
+            lblMaxSizeFilterValue.Text = macronAkkonParam.FilterParam.MaxSize.ToString("F2");
+            lblGroupDistanceValue.Text = macronAkkonParam.FilterParam.GroupingDistance.ToString("F2");
+            lblStrengthFilterValue.Text = macronAkkonParam.InspParam.StrengthThreshold.ToString("F2");
+            lblWidthCutValue.Text = macronAkkonParam.FilterParam.WidthCut.ToString();
+            lblHeightCutValue.Text = macronAkkonParam.FilterParam.HeightCut.ToString();
+            lblBWRatioValue.Text = macronAkkonParam.FilterParam.BWRatio.ToString("F2");
+            lblExtraLeadDisplayValue.Text = macronAkkonParam.DrawOption.ExtraLead.ToString();
 
             // Maker Param
-            cmbInspectionType.SelectedIndex = (int)macronAkkonParam.InspectionType;
-            cmbPanelType.SelectedIndex = (int)macronAkkonParam.PanelType;
-            cmbTargetType.SelectedIndex = (int)macronAkkonParam.TargetType;
-            cmbFilterType.SelectedIndex = (int)macronAkkonParam.FilterType;
-            cmbFilterDirection.SelectedIndex = (int)macronAkkonParam.FilterDirection;
-            cmbShadowDirection.SelectedIndex = (int)macronAkkonParam.ShadowDirection;
-            cmbPeakProperty.SelectedIndex = (int)macronAkkonParam.PeakProperty;
-            cmbStrengthBase.SelectedIndex = (int)macronAkkonParam.StrengthBase;
-            cmbThresholdMode.SelectedIndex = (int)macronAkkonParam.ThresholdMode;
+            cmbInspectionType.SelectedIndex = (int)macronAkkonParam.InspOption.InspType;
+            cmbPanelType.SelectedIndex = (int)macronAkkonParam.InspParam.IsFlexible;
+            cmbTargetType.SelectedIndex = (int)macronAkkonParam.InspParam.PanelInfo;
+            cmbFilterType.SelectedIndex = (int)macronAkkonParam.InspParam.FilterType;
+            cmbFilterDirection.SelectedIndex = (int)macronAkkonParam.InspParam.FilterDir;
+            cmbShadowDirection.SelectedIndex = (int)macronAkkonParam.InspParam.ShadowDir;
+            cmbPeakProperty.SelectedIndex = (int)macronAkkonParam.InspParam.PeakProp;
+            cmbStrengthBase.SelectedIndex = (int)macronAkkonParam.InspParam.StrengthBase;
+            cmbThresholdMode.SelectedIndex = (int)macronAkkonParam.InspParam.ThMode;
 
-            chkLogTraceUseCheck.Checked = macronAkkonParam.UseLogTrace;
-            lblThresholdWeightValue.Text = macronAkkonParam.ThresholdWeight.ToString("F2");
-            lblPeakThresholdValue.Text = macronAkkonParam.ThresholdPeak.ToString();
-            lblStandardDeviationValue.Text = macronAkkonParam.StdDevLeadJudge.ToString();
-            lblStrengthScaleFactorValue.Text = macronAkkonParam.StrengthScaleFactor.ToString("F2");
-            lblSliceOverlapValue.Text = macronAkkonParam.Overlap.ToString("F2");
+            chkLogTraceUseCheck.Checked = macronAkkonParam.InspOption.LogTrace;
+            lblThresholdWeightValue.Text = macronAkkonParam.InspParam.ThWeight.ToString("F2");
+            lblPeakThresholdValue.Text = macronAkkonParam.InspParam.ThPeak.ToString();
+            lblStandardDeviationValue.Text = macronAkkonParam.InspParam.StdDevLeadJudge.ToString();
+            lblStrengthScaleFactorValue.Text = macronAkkonParam.InspParam.StrengthScaleFactor.ToString("F2");
+            lblSliceOverlapValue.Text = macronAkkonParam.InspOption.Overlap.ToString("F2");
 
             // Option
-            chkUseDimple.Checked = macronAkkonParam.UseDimple;
-            lblDimpleNGCountValue.Text = macronAkkonParam.DimpleNGCount.ToString();
-            lblDimpleThresholdValue.Text = macronAkkonParam.DimpleThreshold.ToString();
+            chkUseDimple.Checked = macronAkkonParam.DimpleInspParam.IsEnable;
+            lblDimpleNGCountValue.Text = macronAkkonParam.DimpleInspParam.NGCount.ToString();
+            lblDimpleThresholdValue.Text = macronAkkonParam.DimpleInspParam.Threshold.ToString();
 
             chkUseAlarm.Checked = macronAkkonParam.UseAlarm;
             lblAlarmCapacityValue.Text = macronAkkonParam.AlarmCapacity.ToString();
@@ -257,49 +258,49 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         private void lblMinSizeFilterValue_Click(object sender, EventArgs e)
         {
             double filterMinSize = SetLabelDoubleData(sender);
-            CurrentParam.FilterMinSize = filterMinSize;
+            CurrentParam.FilterParam.MinSize = (float)filterMinSize;
         }
 
         private void lblWidthCutValue_Click(object sender, EventArgs e)
         {
             int widthCut = SetLabelIntegerData(sender);
-            CurrentParam.WidthCut = widthCut;
+            CurrentParam.FilterParam.WidthCut = widthCut;
         }
 
         private void lblMaxSizeFilterValue_Click(object sender, EventArgs e)
         {
             double finterMaxSize = SetLabelDoubleData(sender);
-            CurrentParam.FilterMaxSize = finterMaxSize;
+            CurrentParam.FilterParam.MaxSize = (float)finterMaxSize;
         }
 
         private void lblHeightCutValue_Click(object sender, EventArgs e)
         {
             int heightCut = SetLabelIntegerData(sender);
-            CurrentParam.HeightCut = heightCut;
+            CurrentParam.FilterParam.HeightCut = heightCut;
         }
 
         private void lblGroupDistanceValue_Click(object sender, EventArgs e)
         {
             double groupDistance = SetLabelDoubleData(sender);
-            CurrentParam.GroupingDistance = groupDistance;
+            CurrentParam.FilterParam.GroupingDistance = groupDistance;
         }
 
         private void lblBWRatioValue_Click(object sender, EventArgs e)
         {
             double bwRatio = SetLabelDoubleData(sender);
-            CurrentParam.BWRatio = (float)bwRatio;
+            CurrentParam.FilterParam.BWRatio = (float)bwRatio;
         }
 
         private void lblStrengthFilterValue_Click(object sender, EventArgs e)
         {
             double strengthFilter = SetLabelDoubleData(sender);
-            CurrentParam.StrengthThreshold = (float)strengthFilter;
+            CurrentParam.InspParam.StrengthThreshold = (float)strengthFilter;
         }
 
         private void lblExtraLeadDisplayValue_Click(object sender, EventArgs e)
         {
             int extraLead = SetLabelIntegerData(sender);
-            CurrentParam.ExtraLead = extraLead;
+            CurrentParam.InspParam.ExtraLead = extraLead;
         }
         #endregion
 
@@ -307,90 +308,90 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         private void cmbInspectionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbInspectionType.SelectedIndex;
-            CurrentParam.InspectionType = (InspectionType)selectedIndex;
+            CurrentParam.InspOption.InspType = (int)selectedIndex;
         }
 
         private void cmbShadowDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbShadowDirection.SelectedIndex;
-            CurrentParam.ShadowDirection = (ShadowDirection)selectedIndex;
+            CurrentParam.InspParam.ShadowDir = (EN_SHADOWDIR_WRAP)selectedIndex;
         }
 
         private void cmbPanelType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbPanelType.SelectedIndex;
-            CurrentParam.PanelType = (PanelType)selectedIndex;
+            CurrentParam.InspParam.IsFlexible = selectedIndex;
         }
 
         private void cmbPeakProperty_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbPeakProperty.SelectedIndex;
-            CurrentParam.PeakProperty = (PeakProperty)selectedIndex;
+            CurrentParam.InspParam.PeakProp = (EN_PEAK_PROP_WRAP)selectedIndex;
         }
 
         private void cmbTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbTargetType.SelectedIndex;
-            CurrentParam.TargetType = (TargetType)selectedIndex;
+            CurrentParam.InspParam.PanelInfo = selectedIndex;
         }
 
         private void cmbStrengthBase_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbStrengthBase.SelectedIndex;
-            CurrentParam.StrengthBase = (StrengthBase)selectedIndex;
+            CurrentParam.InspParam.StrengthBase = (EN_STRENGTH_BASE_WRAP)selectedIndex;
         }
 
         private void cmbFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbFilterType.SelectedIndex;
-            CurrentParam.FilterType = (FilterType)selectedIndex;
+            CurrentParam.InspParam.FilterType = (EN_MVFILTERTYPE_WRAP)selectedIndex;
         }
 
         private void chkLogTraceUseCheck_CheckedChanged(object sender, EventArgs e)
         {
-            CurrentParam.UseLogTrace = chkLogTraceUseCheck.Checked;
+            CurrentParam.InspOption.LogTrace = chkLogTraceUseCheck.Checked;
         }
 
         private void cmbFilterDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbFilterDirection.SelectedIndex;
-            CurrentParam.FilterDirection = (FilterDirection)selectedIndex;
+            CurrentParam.InspParam.FilterType = (EN_MVFILTERTYPE_WRAP)selectedIndex;
         }
 
         private void cmbThresholdMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = cmbThresholdMode.SelectedIndex;
-            CurrentParam.ThresholdMode = (ThresholdMode)selectedIndex;
+            CurrentParam.InspParam.ThMode = (EN_THMODE_WRAP)selectedIndex;
         }
 
         private void lblThresholdWeightValue_Click(object sender, EventArgs e)
         {
             double thresholdWeight = SetLabelDoubleData(sender);
-            CurrentParam.ThresholdWeight = thresholdWeight;
+            CurrentParam.InspParam.ThWeight = thresholdWeight;
         }
 
         private void lblStrengthScaleFactorValue_Click(object sender, EventArgs e)
         {
             double strengthScaleFactor = SetLabelDoubleData(sender);
-            CurrentParam.StrengthScaleFactor = (float)strengthScaleFactor;
+            CurrentParam.InspParam.StrengthScaleFactor = (float)strengthScaleFactor;
         }
 
         private void lblPeakThresholdValue_Click(object sender, EventArgs e)
         {
             int thresholdPeak = SetLabelIntegerData(sender);
-            CurrentParam.ThresholdPeak = thresholdPeak;
+            CurrentParam.InspParam.ThPeak = thresholdPeak;
         }
 
         private void lblSliceOverlapValue_Click(object sender, EventArgs e)
         {
             int overlap = SetLabelIntegerData(sender);
-            CurrentParam.Overlap = overlap;
+            CurrentParam.InspOption.Overlap = overlap;
         }
 
         private void lblStandardDeviationValue_Click(object sender, EventArgs e)
         {
             double stdDevLeadJudge = SetLabelDoubleData(sender);
-            CurrentParam.StdDevLeadJudge = (float)stdDevLeadJudge;
+            CurrentParam.InspParam.StdDevLeadJudge = (float)stdDevLeadJudge;
         }
         #endregion
 
@@ -398,18 +399,18 @@ namespace Jastech.Framework.Macron.Akkon.Controls
         private void lblDimpleNGCountValue_Click(object sender, EventArgs e)
         {
             int dimpleNGCount = SetLabelIntegerData(sender);
-            CurrentParam.DimpleNGCount = dimpleNGCount;
+            CurrentParam.DimpleInspParam.NGCount = dimpleNGCount;
         }
 
         private void lblDimpleThresholdValue_Click(object sender, EventArgs e)
         {
             int dimpleThreshold = SetLabelIntegerData(sender);
-            CurrentParam.DimpleThreshold = dimpleThreshold;
+            CurrentParam.DimpleInspParam.Threshold = dimpleThreshold;
         }
 
         private void chkUseDimple_CheckedChanged(object sender, EventArgs e)
         {
-            CurrentParam.UseDimple = chkUseAlarm.Checked;
+            CurrentParam.DimpleInspParam.IsEnable = chkUseAlarm.Checked;
         }
 
         private void lblAlarmCapacityValue_Click(object sender, EventArgs e)

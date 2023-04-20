@@ -10,101 +10,36 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
 
-        // Engineer
         [JsonProperty]
-        public int JudgeCount { get; set; } = 2;
+        public int JudgeCount { get; set; } = 10;
 
         [JsonProperty]
-        public double JudgeLength { get; set; } = 10.0;
-
-        [JsonProperty]
-        public double FilterMinSize { get; set; } = 2.0;
-
-        [JsonProperty]
-        public double FilterMaxSize { get; set; } = 15.0;
-
-        [JsonProperty]
-        public int WidthCut { get; set; } = 15;
-
-        [JsonProperty]
-        public int HeightCut { get; set; } = 15;
-
-        [JsonProperty]
-        public double GroupingDistance { get; set; } = 5.0;
-
-        [JsonProperty]
-        public float BWRatio { get; set; } = 0.0f;
-
-        [JsonProperty]
-        public float StrengthThreshold { get; set; } = 15.0f;
-
-        [JsonProperty]
-        public int ExtraLead { get; set; } = 0;
-
-        // Maker
-        [JsonProperty]
-        public InspectionType InspectionType { get; set; } = InspectionType.THRESHOLD;
-
-        [JsonProperty]
-        public PanelType PanelType { get; set; } = PanelType.RIGID;
-
-        [JsonProperty]
-        public TargetType TargetType { get; set; } = TargetType.COF;
-
-        [JsonProperty]
-        public ShadowDirection ShadowDirection { get; set; } = ShadowDirection.UP;
-
-        [JsonProperty]
-        public PeakProperty PeakProperty { get; set; } = PeakProperty.NORMAL;
-
-        [JsonProperty]
-        public StrengthBase StrengthBase { get; set; } = StrengthBase.ENH;
-
-        [JsonProperty]
-        public FilterType FilterType { get; set; } = FilterType.NORMAL;
-
-        [JsonProperty]
-        public bool UseLogTrace { get; set; } = false;
-
-        [JsonProperty]
-        public FilterDirection FilterDirection { get; set; } = FilterDirection.HORIZONTAL;
-
-        [JsonProperty]
-        public ThresholdMode ThresholdMode { get; set; } = ThresholdMode.AUTO;
-
-        [JsonProperty]
-        public double ThresholdWeight { get; set; } = 2.5;
-
-        [JsonProperty]
-        public float StrengthScaleFactor { get; set; } = 1.0f;
-
-        [JsonProperty]
-        public int ThresholdPeak { get; set; } = 70;
-
-        [JsonProperty]
-        public int Overlap { get; set; } = 288;
-
-        [JsonProperty]
-        public float StdDevLeadJudge { get; set; } = 0.0f;
-
-        // Option
-        [JsonProperty]
-        public bool UseDimple { get; set; } = false;
-
-        [JsonProperty]
-        public int DimpleNGCount { get; set; } = 0;
-
-        [JsonProperty]
-        public int DimpleThreshold { get; set; } = 0;
-
+        public double JudgeLength { get; set; } = 10;
+       
         [JsonProperty]
         public bool UseAlarm { get; set; } = false;
 
         [JsonProperty]
-        public int AlarmCapacity { get; set; } = 0;
+        public int AlarmCapacity { get; set; } = 10;
 
         [JsonProperty]
-        public int AlarmNGCount { get; set; } = 0;
+        public int AlarmNGCount { get; set; } = 60;
+
+        [JsonProperty]
+        public MacronAkkonInspParam InspParam = new MacronAkkonInspParam();
+
+        [JsonProperty]
+        public MacronAkkonFilterParam FilterParam = new MacronAkkonFilterParam();
+
+        [JsonProperty]
+        public MacronAkkonDrawOption DrawOption = new MacronAkkonDrawOption();
+
+        [JsonProperty]
+        public MacronAkkonInspOption InspOption = new MacronAkkonInspOption();
+
+        [JsonProperty]
+        public DimpleInspParam DimpleInspParam { get; set; } = new DimpleInspParam();
+
 
         public MacronAkkonParam DeepCopy()
         {
@@ -112,85 +47,288 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         }
     }
 
-    //public class MacronParam
-    //{
-    //    // Filter Param
-    //    public MVAKKONFILTER AkkonInspectionFilter { get; set; } = null;
-    //    public float MinStrength { get; set; } = 0.0f;
-    //    public int RawSadowMin { get; set; } = 0;
-    //    public float RawStdMax { get; set; } = 0.0f;
-    //    public float RawStdMin { get; set; } = 0.0f;
-    //    public float RawAvgMax { get; set; } = 0.0f;
-    //    public float RawAvgMin { get; set; } = 0.0f;
-    //    public int RawUpShootCut { get; set; } = 0;
-    //    public int ShadowPeakCut { get; set; } = 0;
-    //    public float EnhStdCut { get; set; } = 0.0f;
-    //    public float BWRatioMax { get; set; } = 0.0f;
-    //    public int WHRawPeakCut { get; set; } = 0;
-    //    public int RawPeakCut { get; set; } = 0;
-    //    public int HeightCut { get; set; } = 0;
-    //    public int WidthCut { get; set; } = 0;
-    //    public float ImulSize { get; set; } = 0.0f;
-    //    public float AkkonInArea { get; set; } = 0.0f;
-    //    public int AkkonInLine { get; set; } = 0;
-    //    public int RoiDiv { get; set; } = 0;
-    //    public int MinWidth { get; set; } = 0;
-    //    public int MinHeight { get; set; } = 0;
-    //    public float FilterMinSize { get; set; } = 0.0f;
-    //    public float FilterMaxSize { get; set; } = 0.0f;
-    //    public double GroupingDistance { get; set; } = 0.0;
-    //    public int MinBoundaryOverlap { get; set; } = 0;
-    //    public int RawShadowMax { get; set; } = 0;
-    //    public bool UseEdgeFARemove { get; set; } = false;
-    //    public int EdgeRange { get; set; } = 0;
-    //    public int Width { get; set; } = 0;
-    //    public int Height { get; set; } = 0;
-    //    public float EdgeStrendgthCut { get; set; } = 0.0f;
-    //    public int EdgeSizeCut { get; set; } = 0;
-    //    public float BWRatio { get; set; } = 0.0f;
-    //    public float WHRatio { get; set; } = 0.0f;
+    public class DimpleInspParam
+    {
+        [JsonProperty]
+        public bool IsEnable { get; set; } = false;
 
-    //    // Insp Param
-    //    public MVINSPPARA AkkonInspectionParameter { get; set; } = null;
-    //    public int FilterDirection { get; set; } = 0;
-    //    public int DLPatchSizeX { get; set; } = 0;
-    //    public bool EdgeFilp { get; set; } = false;
-    //    public int DLSperateCut { get; set; } = 0;
-    //    public int DLNetWorkType { get; set; } = 0;
-    //    public float DLSizeProb { get; set; } = 0.0f;
-    //    public float DLPeakProb { get; set; } = 0.0f;
-    //    public bool UseAbsoluteTreshold { get; set; } = false;
-    //    public int ImulInspectionThreshold { get; set; } = 0;
-    //    public int AbsoluteThresholdLow { get; set; } = 0;
-    //    public int AbsoluteThresholdHigh { get; set; } = 0;
-    //    public bool ImulInspection { get; set; } = false;
-    //    public int IsFlexible { get; set; } = 0;
-    //    public float StdDevLeadJudge { get; set; } = 0.0f;
-    //    public int RoiDivDistance { get; set; } = 0;
-    //    public int ExtraLead { get; set; } = 0;
-    //    public int PanelInfo { get; set; } = 0;
-    //    public float Postolerance { get; set; } = 0.0f;
-    //    public int InflateLeadSize { get; set; } = 0;
-    //    public float StrengthScaleFactor { get; set; } = 0.0f;
-    //    public int MinShadowWidth { get; set; } = 0;
-    //    public int ThresholdPeak { get; set; } = 0;
-    //    public PeakProperty PeakProperty { get; set; } = PeakProperty.NORMAL;
-    //    public StrengthBase StrengthBase { get; set; } = StrengthBase.ENH;
-    //    public ShadowDirection ShadowDirection { get; set; } = ShadowDirection.UP;
-    //    public ThresholdMode ThresholdMode { get; set; } = ThresholdMode.AUTO;
-    //    public FilterType FilterType { get; set; } = FilterType.NORMAL;
-    //    public float StrengthThreshold { get; set; } = 0.0f;
-    //    public int ShadowOffset { get; set; } = 0;
-    //    public double ThresholdWeight { get; set; } = 0.0;
-    //    public int DLPatchSizeY { get; set; } = 0;
+        [JsonProperty]
+        public int NGCount { get; set; } = 10;
 
-    //    // Option Param
-    //    public MVINSP_OPTION AkkonInspectionOption { get; set; } = null;
-    //    public bool UseLogTrace { get; set; } = false;
-    //    public int InspType { get; set; } = 0;
-    //    public float InspResizeRatio { get; set; } = 0.0f;
-    //    public float PixelResolution { get; set; } = 0.0f;
-    //    public int Overlap { get; set; } = 0;
-    //    public int RotOffset { get; set; } = 0;
-    //}
+        [JsonProperty]
+        public int Threshold { get; set; } = 60;
+    }
+
+    public class MacronAkkonInspParam
+    {
+        #region 속성
+        [JsonProperty]
+        public int FilterDir { get; set; }
+
+        [JsonProperty]
+        public int DLPatchSizeX { get; set; }
+
+        [JsonProperty]
+        public bool EdgeFlip { get; set; }
+
+        [JsonProperty]
+        public int DLSperateCut { get; set; }
+
+        [JsonProperty]
+        public int DLNetWorkType { get; set; }
+
+        [JsonProperty]
+        public float DLSizeProb { get; set; }
+
+        [JsonProperty]
+        public float DLPeakProb { get; set; }
+
+        [JsonProperty]
+        public bool UseAbsTh { get; set; }
+
+        [JsonProperty]
+        public int ImulInspectionThresh { get; set; }
+
+        [JsonProperty]
+        public int AbsoluteThLow { get; set; }
+
+        [JsonProperty]
+        public int AbsoluteThHi { get; set; }
+
+        [JsonProperty]
+        public bool ImulInspection { get; set; }
+
+        [JsonProperty]
+        public int IsFlexible { get; set; }
+
+        [JsonProperty]
+        public float StdDevLeadJudge { get; set; }
+
+        [JsonProperty]
+        public int RoiDivDistance { get; set; }
+
+        [JsonProperty]
+        public int ExtraLead { get; set; }
+
+        [JsonProperty]
+        public int PanelInfo { get; set; }
+
+        [JsonProperty]
+        public float PosTolerance { get; set; }
+
+        [JsonProperty]
+        public int InflateLeadSize { get; set; }
+
+        [JsonProperty]
+        public float StrengthScaleFactor { get; set; }
+
+        [JsonProperty]
+        public int MinShadowWidth { get; set; }
+
+        [JsonProperty]
+        public int ThPeak { get; set; }
+
+        [JsonProperty]
+        public EN_PEAK_PROP_WRAP PeakProp { get; set; }
+
+        [JsonProperty]
+        public EN_STRENGTH_BASE_WRAP StrengthBase { get; set; }
+
+        [JsonProperty]
+        public EN_SHADOWDIR_WRAP ShadowDir { get; set; }
+
+        [JsonProperty]
+        public EN_THMODE_WRAP ThMode { get; set; }
+
+        [JsonProperty]
+        public EN_MVFILTERTYPE_WRAP FilterType { get; set; }
+
+        [JsonProperty]
+        public float StrengthThreshold { get; set; }
+
+        [JsonProperty]
+        public int ShadowOffset { get; set; }
+
+        [JsonProperty]
+        public double ThWeight { get; set; }
+
+        [JsonProperty]
+        public int DLPatchSizeY { get; set; }
+        #endregion
+    }
+
+    public class MacronAkkonFilterParam
+    {
+        #region 속성
+        [JsonProperty]
+        public float MinStrength;
+
+        [JsonProperty]
+        public int RawShadowMin;
+
+        [JsonProperty]
+        public float RawStdMax;
+
+        [JsonProperty]
+        public float RawStdMin;
+
+        [JsonProperty]
+        public float RawAvgMax;
+
+        [JsonProperty]
+        public float RawAvgMin;
+
+        [JsonProperty]
+        public int RawUpShootcut;
+
+        [JsonProperty]
+        public int ShadowPeakcut;
+
+        [JsonProperty]
+        public float Enhstdcut;
+
+        [JsonProperty]
+        public float BWRatioMax;
+
+        [JsonProperty]
+        public int WHRawPeakCut;
+
+        [JsonProperty]
+        public int RawPeakCut;
+
+        [JsonProperty]
+        public int HeightCut;
+
+        [JsonProperty]
+        public int WidthCut;
+
+        [JsonProperty]
+        public float ImulSize;
+
+        [JsonProperty]
+        public float AkkonInArea;
+
+        [JsonProperty]
+        public int AkkonInLine;
+
+        [JsonProperty]
+        public int ROIDiv;
+
+        [JsonProperty]
+        public int MinWidth;
+
+        [JsonProperty]
+        public int MinHeight;
+
+        [JsonProperty]
+        public float MinSize;
+
+        [JsonProperty]
+        public float MaxSize;
+
+        [JsonProperty]
+        public double GroupingDistance;
+
+        [JsonProperty]
+        public int MinBoundaryOverlap;
+
+        [JsonProperty]
+        public int RawShadowMax;
+
+        [JsonProperty]
+        public bool UseEdgeFARemove;
+
+        [JsonProperty]
+        public int EdgeRange;
+
+        [JsonProperty]
+        public int Width;
+
+        [JsonProperty]
+        public int Height;
+
+        [JsonProperty]
+        public float EdgeStrengthCut;
+
+        [JsonProperty]
+        public int EdgeSizeCut;
+
+        [JsonProperty]
+        public float BWRatio;
+
+        [JsonProperty]
+        public float WHRatio;
+        #endregion
+    }
+
+    public class MacronAkkonDrawOption
+    {
+        #region 속성
+        [JsonProperty]
+        public bool Center;
+
+        [JsonProperty]
+        public bool Contour;
+
+        [JsonProperty]
+        public bool ShadowBox;
+
+        [JsonProperty]
+        public bool FirstLastPoint;
+
+        [JsonProperty]
+        public bool ColorStrength;
+
+        [JsonProperty]
+        public float PixelSize_um;
+
+        [JsonProperty]
+        public bool ShowSize;
+
+        [JsonProperty]
+        public bool ShowStrength;
+
+        [JsonProperty]
+        public bool DrawBlobNumbering;
+
+        [JsonProperty]
+        public bool SelectLeadDisplay;
+
+        [JsonProperty]
+        public bool DisplayLength;
+
+        [JsonProperty]
+        public int Panelnfo;
+
+        [JsonProperty]
+        public int ExtraLead;
+
+        [JsonProperty]
+        public float DrawResizeRatio;
+        #endregion
+    }
+
+    public class MacronAkkonInspOption
+    {
+        #region 속성
+        [JsonProperty]
+        public bool LogTrace;
+
+        [JsonProperty]
+        public int InspType;
+
+        [JsonProperty]
+        public float InspResizeRatio;
+
+        [JsonProperty]
+        public float PixelResolution;
+
+        [JsonProperty]
+        public int Overlap;
+
+        [JsonProperty]
+        public int RotOffset;
+        #endregion
+    }
+
 }

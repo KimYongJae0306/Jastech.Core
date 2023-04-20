@@ -10,6 +10,7 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 {
     public class MacronAkkonGroup
     {
+        #region 속성
         [JsonProperty]
         public int Index { get; set; }
 
@@ -31,12 +32,15 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public MacronAkkonParam MacronAkkonParam { get; set; } = new MacronAkkonParam();
 
+        [JsonProperty]
+        public List<AkkonROI> AkkonROIList { get; private set; } = new List<AkkonROI>();
+        #endregion
+
+        #region 메서드
         public MacronAkkonGroup DeepCopy()
         {
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonGroup;
         }
-
-        public List<AkkonROI> AkkonROIList { get; private set; } = new List<AkkonROI>();
 
         public void AddROI(AkkonROI roi)
         {
@@ -47,5 +51,6 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         {
             AkkonROIList.RemoveAt(index);
         }
+        #endregion
     }
 }
