@@ -86,7 +86,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
         {
             int filterSize = SetLabelIntegerData(sender);
-            CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
+            if(filterSize > 0)
+                CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
         }
 
         private void lblEdgeThresholdValue_Click(object sender, EventArgs e)
@@ -97,7 +98,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private int SetLabelIntegerData(object sender)
         {
+            Label lbl = sender as Label;
+            int prevData = Convert.ToInt32(lbl.Text);
+
             KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = (double)prevData;
             keyPadForm.ShowDialog();
 
             int inputData = Convert.ToInt16(keyPadForm.PadValue);

@@ -40,7 +40,6 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public DimpleInspParam DimpleInspParam { get; set; } = new DimpleInspParam();
 
-
         public MacronAkkonParam DeepCopy()
         {
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonParam;
