@@ -202,5 +202,6 @@ namespace Jastech.Framework.Util.Helper
         Inspection,
         Etc,
         Comm,
+        Macron,
     }
 }

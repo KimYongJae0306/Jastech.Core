@@ -1,6 +1,7 @@
 ﻿using AW;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Macron.Akkon.Parameters;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +14,10 @@ namespace Jastech.Framework.Macron.Akkon
     public partial class MacronAkkon
     {
         public static CATTWrapper ATTWrapper { get; private set; } = new CATTWrapper();
+
         public static CALLBACKFUNC cb { get; private set; } = new CALLBACKFUNC(cbProgress);
+
+        public static MacronAkkonPrepareInspParam PrevinitalizeParam { get; private set; } = new MacronAkkonPrepareInspParam();
 
         private static void cbProgress(int nStageNo, int nTabNo, bool bSliceInsp, int nError)
         {
@@ -37,12 +41,29 @@ namespace Jastech.Framework.Macron.Akkon
 
         }
 
-        public void CreateDllBuffer(int stageCount, int tabCount, int threadCount, int sliceWidth, int sliceHeight, float resizeRatio)
+        public void CreateDllBuffer(MacronAkkonPrepareInspParam param)
         {
+            if (IsNewInitalizeParam(param))
+                return;
+          
+            // Release();
+
             ATTWrapper.AWFreeInspectionFlag();
             ATTWrapper.AWDeleteInspManager();
-            ATTWrapper.AWCreateInspManager(stageCount, tabCount);
-            ATTWrapper.AWCreateAttSliceImageBuffer(tabCount, threadCount, sliceWidth, sliceHeight, resizeRatio);
+            ATTWrapper.AWCreateInspManager(param.StageCount, param.TabCount);
+            ATTWrapper.AWCreateAttSliceImageBuffer(param.TabCount, param.ThreadCount, param.SliceWidth, param.SliceHeight, param.ResizeRatio);
+
+            PrevinitalizeParam = param;
+        }
+
+        private bool IsNewInitalizeParam(MacronAkkonPrepareInspParam param)
+        {
+            if (PrevinitalizeParam.StageCount == param.StageCount && PrevinitalizeParam.TabCount == param.TabCount 
+                            && PrevinitalizeParam.ThreadCount == param.ThreadCount && PrevinitalizeParam.SliceWidth == param.SliceWidth
+              && PrevinitalizeParam.SliceHeight == param.SliceHeight && PrevinitalizeParam.ResizeRatio == param.ResizeRatio)
+                return false;
+
+            return true;
         }
 
         public void CreateImageBuffer(int stageNo, int tabNo, int imageWidth, int imageHeight, float resizeRatio)
@@ -50,18 +71,58 @@ namespace Jastech.Framework.Macron.Akkon
             ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, imageWidth, imageHeight, resizeRatio);
         }
 
-        public void SetROIData(MacronAkkonGroup group, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle)
+        public int[][] CalcATTROI(MacronAkkonGroup group, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle)
         {
             int leadCount = group.AkkonROIList.Count();
 
             int[][] leadPoints = ConvertROI(leadCount, group, centerPoint, offset, angle);
 
-            ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, 1); // AWReadROI ResizeRatio : 1 로 고정(Macron 측과 약속)
+            return leadPoints;
+
+//            ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, 1); 
         }
 
-        public int PrepareInspect(ref int[][] sliceCounts, int stageNo, int tabNo, int imageWidth, int imageHeight, float resizeRatio)
+        //public int PrepareInspect(ref int[][] sliceCounts, int stageNo, int tabNo, int imageWidth, int imageHeight, float resizeRatio)
+        //{
+        //    int overlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
+
+        //    int totalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, imageWidth, imageHeight, false);
+        //    sliceCounts[stageNo][tabNo] = totalSliceCount;
+
+
+        //    //ATTWrapper.AWAllocInspectionFlag(totalSliceCount);
+        //    return totalSliceCount;
+        //}
+
+        static List<List<int>> m_vvSliceOverlap;
+        static List<List<int>> m_vvTotalSliceCnt;
+        public bool PrepareInspect(MacronAkkonPrepareInspParam param, int stageNo, int[][] leadPoints)
         {
-            int overlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
+            CreateDllBuffer(param);
+
+            List<int> tabSliceOverLapList = new List<int>();
+            List<int> tabTotalSliceCountList = new List<int>();
+
+            for (int tabNo = 0; tabNo < param.TabCount; tabNo++)
+            {
+                ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, param.SliceWidth, param.SliceHeight, param.ResizeRatio);
+
+                bool readRoi = ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, 1);// AWReadROI ResizeRatio : 1 로 고정(Macron 측과 약속)
+
+                if (readRoi == false)
+                {
+                    Logger.Error(ErrorType.Macron, "AW ReadROI Fail.");
+                    return false;
+                }
+
+                int overlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
+                int calcTotalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, param.SliceWidth, param.SliceHeight, false);
+
+                tabSliceOverLapList.Add(overlap);
+                tabTotalSliceCountList.Add(calcTotalSliceCount);
+            }
+
+           
 
             int totalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, imageWidth, imageHeight, false);
             sliceCounts[stageNo][tabNo] = totalSliceCount;
@@ -70,6 +131,7 @@ namespace Jastech.Framework.Macron.Akkon
             //ATTWrapper.AWAllocInspectionFlag(totalSliceCount);
             return totalSliceCount;
         }
+
 
         public void Inspection(byte[] imageBytes, int imageWidth, int imageHeight,int stageNo, int tabNo, float resizeRatio)
         {

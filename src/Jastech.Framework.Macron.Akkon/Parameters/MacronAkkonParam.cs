@@ -330,4 +330,19 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         #endregion
     }
 
+    public class MacronAkkonPrepareInspParam
+    {
+        public int StageCount { get; set; } = -1;
+
+        public int TabCount { get; set; } = -1;
+
+        public int ThreadCount { get; set; } = -1;
+
+        public int SliceWidth { get; set; } = -1;
+
+        public int SliceHeight { get; set; } = -1;
+
+        public int ResizeRatio { get; set; } = -1;
+    }
+
 }
