@@ -203,5 +203,6 @@ namespace Jastech.Framework.Util.Helper
         Etc,
         Comm,
         Macron,
+        Apps,
     }
 }
