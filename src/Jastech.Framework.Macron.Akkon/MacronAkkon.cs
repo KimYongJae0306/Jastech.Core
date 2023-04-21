@@ -1,6 +1,7 @@
 ﻿using AW;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Macron.Akkon.Parameters;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -93,43 +94,43 @@ namespace Jastech.Framework.Macron.Akkon
         //    return totalSliceCount;
         //}
 
-        static List<List<int>> m_vvSliceOverlap;
-        static List<List<int>> m_vvTotalSliceCnt;
-        public bool PrepareInspect(MacronAkkonPrepareInspParam param, int stageNo, int[][] leadPoints)
-        {
-            CreateDllBuffer(param);
+        //static List<List<int>> m_vvSliceOverlap;
+        //static List<List<int>> m_vvTotalSliceCnt;
+        //public bool PrepareInspect(MacronAkkonPrepareInspParam param, int stageNo, int[][] leadPoints)
+        //{
+        //    CreateDllBuffer(param);
 
-            List<int> tabSliceOverLapList = new List<int>();
-            List<int> tabTotalSliceCountList = new List<int>();
+        //    List<int> tabSliceOverLapList = new List<int>();
+        //    List<int> tabTotalSliceCountList = new List<int>();
 
-            for (int tabNo = 0; tabNo < param.TabCount; tabNo++)
-            {
-                ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, param.SliceWidth, param.SliceHeight, param.ResizeRatio);
+        //    for (int tabNo = 0; tabNo < param.TabCount; tabNo++)
+        //    {
+        //        ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, param.SliceWidth, param.SliceHeight, param.ResizeRatio);
 
-                bool readRoi = ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, 1);// AWReadROI ResizeRatio : 1 로 고정(Macron 측과 약속)
+        //        bool readRoi = ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, 1);// AWReadROI ResizeRatio : 1 로 고정(Macron 측과 약속)
 
-                if (readRoi == false)
-                {
-                    Logger.Error(ErrorType.Macron, "AW ReadROI Fail.");
-                    return false;
-                }
+        //        //if (readRoi == false)
+        //        //{
+        //        //    Logger.Error(ErrorType.Macron, "AW ReadROI Fail.");
+        //        //    return false;
+        //        //}
 
-                int overlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
-                int calcTotalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, param.SliceWidth, param.SliceHeight, false);
+        //        int overlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
+        //        int calcTotalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, param.SliceWidth, param.SliceHeight, false);
 
-                tabSliceOverLapList.Add(overlap);
-                tabTotalSliceCountList.Add(calcTotalSliceCount);
-            }
+        //        tabSliceOverLapList.Add(overlap);
+        //        tabTotalSliceCountList.Add(calcTotalSliceCount);
+        //    }
 
            
 
-            int totalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, imageWidth, imageHeight, false);
-            sliceCounts[stageNo][tabNo] = totalSliceCount;
+        //    //int totalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, overlap, imageWidth, imageHeight, false);
+        //    //sliceCounts[stageNo][tabNo] = totalSliceCount;
 
 
-            //ATTWrapper.AWAllocInspectionFlag(totalSliceCount);
-            return totalSliceCount;
-        }
+        //    //ATTWrapper.AWAllocInspectionFlag(totalSliceCount);
+        //    return totalSliceCount;
+        //}
 
 
         public void Inspection(byte[] imageBytes, int imageWidth, int imageHeight,int stageNo, int tabNo, float resizeRatio)
