@@ -20,7 +20,6 @@ namespace Jastech.Framework.Winform.Controls
 
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
-        public string Name { get; set; } = "";
 
         public AxisMovingParam MovingParam { get; set; } = null;
         #endregion
@@ -46,7 +45,10 @@ namespace Jastech.Framework.Winform.Controls
 
         public void UpdateData(AxisMovingParam movingParam)
         {
-            MovingParam = movingParam.DeepCopy();
+            if (movingParam == null)
+                return;
+
+            MovingParam = movingParam;
             UpdateUI();
         }
 
@@ -58,19 +60,10 @@ namespace Jastech.Framework.Winform.Controls
         private void UpdateUI()
         {
             lblVelocityValue.Text = MovingParam.Velocity.ToString();
-            tempVelocity = MovingParam.Velocity;
-
             lblAccelerationTimeValue.Text = MovingParam.Acceleration.ToString();
-            tempAcceleration = MovingParam.Acceleration;
-
             lblDecelerationTimeValue.Text = MovingParam.Deceleration.ToString();
-            tempDeceleration = MovingParam.Deceleration;
-
             lblMovingTimeOutValue.Text = MovingParam.MovingTimeOut.ToString();
-            tempMovingTimeOut = MovingParam.MovingTimeOut;
-
             lblAfterWaitTimeValue.Text = MovingParam.AfterWaitTime.ToString();
-            tempAferWaitTime = MovingParam.AfterWaitTime;
         }
 
         public void SetAxis(Axis axis)
@@ -78,33 +71,52 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = axis;
         }
 
-        private double tempVelocity = 0.0;
+        public AxisMovingParam GetCurrentData()
+        {
+            AxisMovingParam param = new AxisMovingParam();
+
+            param.Velocity = MovingParam.Velocity;
+            param.Acceleration = MovingParam.Acceleration;
+            param.Deceleration = MovingParam.Deceleration;
+
+            param.MovingTimeOut = MovingParam.MovingTimeOut;
+            param.AfterWaitTime = MovingParam.AfterWaitTime;
+
+            return param.DeepCopy();
+        }
+
         private void lblVelocityValue_Click(object sender, EventArgs e)
         {
-            tempVelocity = SetLabelDoubleData(sender);
+            MovingParam.Velocity = SetLabelDoubleData(sender);
         }
 
-        private double tempAcceleration = 0.0;
         private void lblAccelerationTimeValue_Click(object sender, EventArgs e)
         {
-            tempAcceleration = SetLabelDoubleData(sender);
+            MovingParam.Acceleration = SetLabelDoubleData(sender);
         }
 
-        private double tempDeceleration = 0.0;
         private void lblDecelerationTimeValue_Click(object sender, EventArgs e)
         {
-            tempDeceleration = SetLabelDoubleData(sender);
+            MovingParam.Deceleration = SetLabelDoubleData(sender);
         }
 
-        private double tempMovingTimeOut = 0.0;
         private void lblMovingTimeOutValue_Click(object sender, EventArgs e)
         {
-            tempMovingTimeOut = SetLabelDoubleData(sender);
+            MovingParam.MovingTimeOut = SetLabelDoubleData(sender);
+        }
+
+        private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
+        {
+            MovingParam.AfterWaitTime = SetLabelIntegerData(sender);
         }
 
         private double SetLabelDoubleData(object sender)
         {
+            Label lbl = sender as Label;
+            double prevData = Convert.ToDouble(lbl.Text);
+
             KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
             double inputData = keyPadForm.PadValue;
@@ -115,39 +127,21 @@ namespace Jastech.Framework.Winform.Controls
             return inputData;
         }
 
-        private int tempAferWaitTime = 0;
-        private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
-        {
-            tempAferWaitTime = SetLabelIntegerData(sender);
-        }
-
         private int SetLabelIntegerData(object sender)
         {
+            Label lbl = sender as Label;
+            int prevData = Convert.ToInt32(lbl.Text);
+
             KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = (double)prevData;
             keyPadForm.ShowDialog();
 
-            int inputData = Convert.ToInt32(keyPadForm.PadValue);
+            int inputData = Convert.ToInt16(keyPadForm.PadValue);
 
             Label label = (Label)sender;
             label.Text = inputData.ToString();
 
             return inputData;
-        }
-
-        public AxisMovingParam GetCurrentData()
-        {
-            AxisMovingParam param = new AxisMovingParam();
-
-            param.Velocity = tempVelocity;
-            param.Acceleration = tempAcceleration;
-            param.Deceleration = tempDeceleration;
-
-            param.MovingTimeOut = tempMovingTimeOut;
-            param.AfterWaitTime = tempAferWaitTime;
-
-            MovingParam = param.DeepCopy();
-
-            return MovingParam;
         }
         #endregion
     }

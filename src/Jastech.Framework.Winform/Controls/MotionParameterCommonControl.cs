@@ -42,15 +42,28 @@ namespace Jastech.Framework.Winform.Controls
             InitializeUI();
         }
 
+        public void UpdateData(AxisCommonParams axisCommonParams)
+        {
+            if (axisCommonParams == null)
+                return;
+
+            CommonParam = axisCommonParams/*.DeepCopy()*/;
+            UpdateUI();
+        }
+
         private void InitializeUI()
         {
             grpAxisName.Text = SelectedAxis.Name.ToString() + " Axis Parameter";
         }
 
-        public void UpdateData(AxisCommonParams axisCommonParams)
+        public void UpdateUI()
         {
-            CommonParam = axisCommonParams;
-            UpdateUI();
+            lblJogLowSpeedValue.Text = CommonParam.JogLowSpeed.ToString();
+            lblJogHighSpeedValue.Text = CommonParam.JogHighSpeed.ToString();
+            lblMoveToleranceValue.Text = CommonParam.MoveTolerance.ToString();
+            lblNegativeLimitValue.Text = CommonParam.NegativeLimit.ToString();
+            lblPositiveLimitValue.Text = CommonParam.PositiveLimit.ToString();
+            lblHomingTimeOutValue.Text = CommonParam.HommingTimeOut.ToString();
         }
 
         public void SetAxis(Axis axis)
@@ -58,85 +71,57 @@ namespace Jastech.Framework.Winform.Controls
             SelectedAxis = axis;
         }
 
-        public void UpdateUI()
-        {
-            if (CommonParam == null)
-                return;
-
-            lblJogLowSpeedValue.Text = CommonParam.JogLowSpeed.ToString();
-            tempJogLowSpeed = CommonParam.JogLowSpeed;
-
-            lblJogHighSpeedValue.Text = CommonParam.JogHighSpeed.ToString();
-            tempJogHighSpeed = CommonParam.JogHighSpeed;
-
-            lblMoveToleranceValue.Text = CommonParam.MoveTolerance.ToString();
-            tempMoveTolerance = CommonParam.MoveTolerance;
-
-            lblNegativeLimitValue.Text = CommonParam.NegativeLimit.ToString();
-            tempNegativeLimit = CommonParam.NegativeLimit;
-
-            lblPositiveLimitValue.Text = CommonParam.PositiveLimit.ToString();
-            tempPositiveLimit = CommonParam.PositiveLimit;
-
-            lblHomingTimeOutValue.Text = CommonParam.HommingTimeOut.ToString();
-            tempHomingTimeOut = CommonParam.HommingTimeOut;
-        }
-
         public AxisCommonParams GetCurrentData()
         {
             AxisCommonParams param = new AxisCommonParams();
 
-            param.JogLowSpeed = tempJogLowSpeed;
-            param.JogHighSpeed = tempJogHighSpeed;
-            param.MoveTolerance = tempMoveTolerance;
-            param.NegativeLimit = tempNegativeLimit;
-            param.PositiveLimit = tempPositiveLimit;
-            param.HommingTimeOut = tempHomingTimeOut;
+            param.JogLowSpeed = CommonParam.JogLowSpeed;
+            param.JogHighSpeed = CommonParam.JogHighSpeed;
+            param.MoveTolerance = CommonParam.MoveTolerance;
+            param.NegativeLimit = CommonParam.NegativeLimit;
+            param.PositiveLimit = CommonParam.PositiveLimit;
+            param.HommingTimeOut = CommonParam.HommingTimeOut;
 
-            CommonParam = param.DeepCopy();
-
-            return CommonParam;
+            return param.DeepCopy();
         }
 
-        private double tempJogLowSpeed = 0.0;
         private void lblJogLowSpeedValue_Click(object sender, EventArgs e)
         {
-            tempJogLowSpeed = SetLabelDoubleData(sender);
+            CommonParam.JogLowSpeed = SetLabelDoubleData(sender);
         }
 
-        private double tempJogHighSpeed = 0.0;
         private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
         {
-            tempJogHighSpeed = SetLabelDoubleData(sender);
+            CommonParam.JogHighSpeed = SetLabelDoubleData(sender);
         }
 
-        private double tempMoveTolerance = 0.0;
         private void lblMoveToleranceValue_Click(object sender, EventArgs e)
         {
-            tempMoveTolerance = SetLabelDoubleData(sender);
+            CommonParam.MoveTolerance = SetLabelDoubleData(sender);
         }
 
-        private double tempNegativeLimit = 0.0;
         private void lblNegativeLimitValue_Click(object sender, EventArgs e)
         {
-            tempNegativeLimit = SetLabelDoubleData(sender);
+            CommonParam.NegativeLimit = SetLabelDoubleData(sender);
         }
 
-        private double tempPositiveLimit = 0.0;
         private void lblPositiveLimitValue_Click(object sender, EventArgs e)
         {
-            tempPositiveLimit = SetLabelDoubleData(sender);
+            CommonParam.PositiveLimit = SetLabelDoubleData(sender);
         }
 
-        private double tempHomingTimeOut = 0.0;
         private void lblHomingTimeOutValue_Click(object sender, EventArgs e)
         {
-            tempHomingTimeOut = SetLabelDoubleData(sender);
+            CommonParam.HommingTimeOut = SetLabelDoubleData(sender);
         }
 
         private double SetLabelDoubleData(object sender)
         {
+            Label lbl = sender as Label;
+            double prevData = Convert.ToDouble(lbl.Text);
+
             KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
             double inputData = keyPadForm.PadValue;
