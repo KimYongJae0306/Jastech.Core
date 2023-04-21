@@ -10,18 +10,14 @@ namespace Jastech.Framework.Device.Cameras
     public interface ICameraTriggerable
     {
         [JsonProperty]
-        int TriggerChannel { get; }
+        int TriggerChannel { get; set; }
 
         [JsonProperty]
-        TriggerMode TriggerMode { get; }
+        TriggerMode TriggerMode { get; set; }
 
         [JsonProperty]
-        int TriggerSource { get; }
-        //TriggerSource TriggerSource { get; }
+        int TriggerSource { get; set; }
 
-        void SetTriggerMode(TriggerMode triggerMode);
-
-        void SetTriggerSource(int triggerSource);
-        //void SetTriggerSource(TriggerSource triggerSource);
+        void ActiveTriggerCommand();
     }
 }

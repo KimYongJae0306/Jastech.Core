@@ -128,4 +128,10 @@ namespace Jastech.Framework.Device.Cameras
         Software,
         Hardware,
     }
+
+    public enum MilCxpTriggerSource
+    {
+        Lin0 = 0,
+        Cxp = 1,
+    }
 }

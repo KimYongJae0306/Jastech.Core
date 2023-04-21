@@ -228,15 +228,20 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraVieworksVT : ICameraTriggerable
     {
         #region 속성
-        public int TriggerChannel { get; private set; }
+        public int TriggerChannel { get; set; }
 
-        public TriggerMode TriggerMode { get; private set; }
+        public TriggerMode TriggerMode { get; set; }
 
-        public int TriggerSource { get; private set; }
+        public int TriggerSource { get; set; }
         #endregion
 
         #region 메서드
-        public void SetTriggerMode(TriggerMode triggerMode)
+        public void ActiveTriggerCommand()
+        {
+            SetTriggerMode(TriggerMode);
+            SetTriggerSource(TriggerSource);
+        }
+        private void SetTriggerMode(TriggerMode triggerMode)
         {
             TriggerMode = triggerMode;
 
@@ -249,7 +254,7 @@ namespace Jastech.Framework.Device.Cameras
         ///  External_Port(Line1) = 5
         /// </summary>
         /// <param name="triggerSource"></param>
-        public void SetTriggerSource(int triggerSource)
+        private void SetTriggerSource(int triggerSource)
         {
             TriggerSource = triggerSource;
 

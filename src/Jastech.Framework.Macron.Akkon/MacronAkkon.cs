@@ -1,7 +1,6 @@
 ﻿using AW;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Macron.Akkon.Parameters;
-using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

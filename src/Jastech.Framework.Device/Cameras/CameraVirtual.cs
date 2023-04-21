@@ -104,22 +104,17 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraVirtual : ICameraTriggerable
     {
         #region 속성
-        public int TriggerChannel { get; private set; }
+        public int TriggerChannel { get; set; }
 
-        public TriggerMode TriggerMode { get; private set; }
+        public TriggerMode TriggerMode { get; set; }
 
-        public int TriggerSource { get; private set; }
+        public int TriggerSource { get; set; }
         #endregion
 
         #region 메서드
-        public void SetTriggerMode(TriggerMode triggerMode)
+        public void ActiveTriggerCommand()
         {
-            TriggerMode = triggerMode;
-        }
 
-        public void SetTriggerSource(int triggerSource)
-        {
-            TriggerSource = triggerSource;
         }
         #endregion
     }

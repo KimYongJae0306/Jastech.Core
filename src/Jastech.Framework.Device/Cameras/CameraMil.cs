@@ -1,9 +1,12 @@
 ﻿using Jastech.Framework.Device.Grabbers;
 using Jastech.Framework.Imaging;
+using Jastech.Framework.Matrox;
+using Jastech.Framework.Util.Helper;
 using Matrox.MatroxImagingLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -53,6 +56,8 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public CameraType CameraType { get; set; }
+
+        //public GrabberMil Grabber { get; set; } = new GrabberMil();
         #endregion
 
         #region 이벤트
@@ -72,6 +77,9 @@ namespace Jastech.Framework.Device.Cameras
         public override bool Initialize()
         {
             base.Initialize();
+
+       
+            //Grabber.Initialize();
 
             MilSystem = GrabberMil.GetMilSystem(MilSystemType, SystemNum);
 
@@ -127,20 +135,18 @@ namespace Jastech.Framework.Device.Cameras
                     _grabImageBuffer[i] = MIL.MbufAllocColor(MilSystem.SystemId, 3, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
             }
 
+            //ActiveTriggerCommand();
             return true;
         }
 
         public override bool Release()
         {
             base.Release();
+
+
+            Array.ForEach(_grabImageBuffer, f => MIL.MbufFree(f));
             MIL.MdigFree(DigitizerId);
 
-            MIL.MdigFree(LastGrabImage);
-
-            for (int i = 0; i < BufferPoolCount; i++)
-            {
-                MIL.MdigFree(_grabImageBuffer[i]);
-            }
             return true;
         }
 
@@ -300,23 +306,81 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraMil : ICameraTriggerable
     {
         #region 속성
-        public int TriggerChannel { get; private set; }
+        public int TriggerChannel { get; set; }
 
-        public TriggerMode TriggerMode { get; private set; }
+        public TriggerMode TriggerMode { get; set; }
 
-        public int TriggerSource { get; private set; }
+        public int TriggerSource { get; set; }
+
+        [JsonProperty]
+        public MilTriggerSignalType TriggerSignalType { get; set; }
+
+        [JsonProperty]
+        public MILIoSourceType TriggerIoSourceType { get; set; }
         #endregion
 
         #region 메서드
-        public void SetTriggerMode(TriggerMode triggerMode)
+        public void ActiveTriggerCommand()
         {
-            TriggerMode = triggerMode;
+            // Trigger Mode
+            if (TriggerMode == TriggerMode.Software)
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerMode", MIL.M_TYPE_STRING, "Off");
+            else
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerMode", MIL.M_TYPE_STRING, "On");
+
+            // Trigger Source
+            MilCxpTriggerSource source = (MilCxpTriggerSource)TriggerSource;
+            if (source == MilCxpTriggerSource.Lin0)
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "LineStart");
+            else if (source == MilCxpTriggerSource.Cxp)
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "CXPin");
+
+            // Trigger Signal 
+            //ex : MIL.MdigControl(DigitizerId, MIL.M_TL_TRIGGER + MIL.M_IO_SOURCE, MIL.M_AUX_IO0);
+            long controlType = GetTriggerSignalType(TriggerSignalType);
+            MIL_INT controlValue = GetTriggerIoSource(TriggerIoSourceType);
+            MIL.MdigControl(DigitizerId, controlType, controlValue);
         }
 
-        public void SetTriggerSource(int triggerSource)
+
+        private int GetTriggerSignalType(MilTriggerSignalType signalType)
         {
-            TriggerSource = triggerSource;
+            int value = 0;
+            switch (signalType)
+            {
+                case MilTriggerSignalType.TL_Trigger:
+                    value = MIL.M_TL_TRIGGER + MIL.M_IO_SOURCE;
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }
+
+        private int GetTriggerIoSource(MILIoSourceType sourceType)
+        {
+            int value = 0;
+            switch (sourceType)
+            {
+                case MILIoSourceType.AUX_IO0:
+                    value = MIL.M_AUX_IO0;
+                    break;
+                default:
+                    break;
+            }
+            return value;
         }
         #endregion
     }
+
+    public enum MilTriggerSignalType
+    {
+        TL_Trigger,
+    }
+
+    public enum MILIoSourceType
+    {
+        AUX_IO0,
+    }
+
 }

@@ -79,7 +79,7 @@ namespace Jastech.Framework.Device.Cameras
 
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
 
-            SetTriggerMode(TriggerMode);
+            ActiveTriggerCommand();
 
             PayLoadSize = GetPayLoadSize();
 
@@ -214,52 +214,51 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraHIK : ICameraTriggerable
     {
         #region 속성
-        public int TriggerChannel { get; private set; }
+        public int TriggerChannel { get; set; }
 
-        public TriggerMode TriggerMode { get; private set; }
+        public TriggerMode TriggerMode { get; set; }
 
-        public int TriggerSource { get; private set; }
+        public int TriggerSource { get; set; }
         #endregion
 
         #region 메서드
-        public void SetTriggerMode(TriggerMode triggerMode)
+        public void ActiveTriggerCommand()
         {
-            TriggerMode = triggerMode;
-
             int result = MyCamera.MV_OK;
-            if (triggerMode == TriggerMode.Software)
+
+            // Trigger Mode
+            if (TriggerMode == TriggerMode.Software)
                 result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
-            else if (triggerMode == TriggerMode.Hardware)
+            else if (TriggerMode == TriggerMode.Hardware)
                 result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
 
             if (result != MyCamera.MV_OK)
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetTriggerMode failed({0}). Name : {1}", triggerMode.ToString(), Name));
-        }
+            {
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetTriggerMode failed({0}). Name : {1}", TriggerMode.ToString(), Name));
+                return;
+            }
 
-        /// <summary>
-        /// MV_TRIGGER_SOURCE_LINE0 = 0,
-        /// MV_TRIGGER_SOURCE_LINE1 = 1,
-        /// MV_TRIGGER_SOURCE_LINE2 = 2,
-        /// MV_TRIGGER_SOURCE_LINE3 = 3,
-        /// MV_TRIGGER_SOURCE_COUNTER0 = 4,
-        /// MV_TRIGGER_SOURCE_SOFTWARE = 7,
-        /// MV_TRIGGER_SOURCE_FrequencyConverter = 8
-        /// </summary>
-        /// <param name="triggerSource"></param>
-        public void SetTriggerSource(int triggerSource)
-        {
-            TriggerSource = triggerSource;
-
-            int result = MyCamera.MV_OK;
-            result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)triggerSource);
+            // Trigger Source
+            result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)TriggerSource);
 
             if (result != MyCamera.MV_OK)
             {
-                MyCamera.MV_CAM_TRIGGER_SOURCE source =(MyCamera.MV_CAM_TRIGGER_SOURCE)triggerSource;
+                MyCamera.MV_CAM_TRIGGER_SOURCE source = (MyCamera.MV_CAM_TRIGGER_SOURCE)TriggerSource;
                 Logger.Error(ErrorType.Camera, string.Format("HIK Camera TriggerSource set failed({0}). Name : {1}", source.ToString(), Name));
+                return;
             }
         }
         #endregion
+    }
+    public enum HIKTriggerSourceType
+    {
+        MV_TRIGGER_SOURCE_LINE0 = 0,
+        MV_TRIGGER_SOURCE_LINE1 = 1,
+        MV_TRIGGER_SOURCE_LINE2 = 2,
+        MV_TRIGGER_SOURCE_LINE3 = 3,
+        MV_TRIGGER_SOURCE_COUNTER0 = 4,
+        MV_TRIGGER_SOURCE_SOFTWARE = 7,
+        MV_TRIGGER_SOURCE_FrequencyConverter = 8
     }
 
     public partial class CameraHIK

@@ -15,7 +15,7 @@ namespace Jastech.Framework.Imaging.Helper
 
             Mat matrix = Cv2.GetRotationMatrix2D(center, angle, 1);
 
-            Mat imageRotated = new Mat();
+            Mat imageRotated = new Mat(new Size(image.Width, image.Height), image.Type());
             Cv2.WarpAffine(image, imageRotated, matrix, new Size(image.Width, image.Height));
 
             matrix.Dispose();
