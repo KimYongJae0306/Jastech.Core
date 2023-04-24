@@ -88,7 +88,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             SetAccDec(100);
         }
 
-        public void SetMotionMaxSpeed(int value)
+        public override void SetMotionMaxSpeed(double value)
         {
             //****Example****
             //[설정값]
@@ -144,13 +144,13 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionStop()
+        public override void SetMotionStop()
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_STOP);
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionZeroSet()
+        public override void SetMotionZeroSet()
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_ZERO);
             SerialPortComm.Send(command);
@@ -171,20 +171,20 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionAbsoluteMove(double value)
+        public override void SetMotionAbsoluteMove(double value)
         {
             int targetPosition = Convert.ToInt32(value * ResolutionAxisZ);
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionPositiveLimit(int value)
+        public override void SetMotionPositiveLimit(double value)
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, value.ToString());
             SerialPortComm.Send(command);
         }
 
-        public void SetMotionNegativeLimit(int value)
+        public override void SetMotionNegativeLimit(double value)
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, value.ToString());
             SerialPortComm.Send(command);
@@ -215,6 +215,26 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             return string.Format(";" + command + "\r");
         }
+
+        //public override void SetMotionNegativeLimit(double value)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public override void SetMotionPositiveLimit(double value)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public override void SetMotionMaxSpeed(double value)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public override void SetMotionZeroSet()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
     public partial class NuriOneLAFCtrl

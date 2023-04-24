@@ -32,5 +32,35 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             
         }
+
+        public override void SetMotionAbsoluteMove(double value)
+        {
+
+        }
+
+        public override void SetMotionNegativeLimit(double value)
+        {
+            
+        }
+
+        public override void SetMotionPositiveLimit(double value)
+        {
+            
+        }
+
+        public override void SetMotionMaxSpeed(double value)
+        {
+            
+        }
+
+        public override void SetMotionZeroSet()
+        {
+            
+        }
+
+        public override void SetMotionStop()
+        {
+
+        }
     }
 }
