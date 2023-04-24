@@ -70,11 +70,13 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract void GrabOnce();
 
-        public abstract void GrabMuti(int grabCount);
+        public abstract void GrabMulti(int grabCount);
 
         public abstract void GrabContinous();
 
         public abstract void Stop();
+
+        public abstract void SetOperationMode(TDIOperationMode operationMode);
 
         protected void ImageGrabbedCallback()
         {
@@ -133,5 +135,11 @@ namespace Jastech.Framework.Device.Cameras
     {
         Lin0 = 0,
         Cxp = 1,
+    }
+
+    public enum OperationMode
+    {
+        Area,
+        TDI,
     }
 }
