@@ -10,13 +10,11 @@ namespace Jastech.Framework.Macron.Akkon
     public delegate void CALLBACKFUNC(int nStageNo, int nTapNo, bool bSliceInsp, int nError);
     internal static class NativeMethods
     {
-#if DEBUG
-        [DllImport("mv_akkonInspd.dll")]
-#endif
-
-#if RELEASE
-            [DllImport("mv_akkonInsp.dll")]
-#endif
+//#if DEBUG
+//        [DllImport("mv_akkonInspd.dll")]
+//#else
+        [DllImport("mv_akkonInsp.dll")]
+//#endif
         internal static extern void CallBackRegistry(CALLBACKFUNC cb);
     }
 }
