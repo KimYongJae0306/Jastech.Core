@@ -136,6 +136,7 @@ namespace Jastech.Framework.Device.Cameras
             }
 
             //ActiveTriggerCommand();
+            //SetOperationMode(TDIOperationMode.Area);
             return true;
         }
 
@@ -204,7 +205,7 @@ namespace Jastech.Framework.Device.Cameras
             MIL.MdigGrab(DigitizerId, LastGrabImage);
         }
 
-        public override void GrabMuti(int grabCount)
+        public override void GrabMulti(int grabCount)
         {
             if (TriggerMode == TriggerMode.Software)
             {
@@ -246,12 +247,12 @@ namespace Jastech.Framework.Device.Cameras
             Thread.Sleep(50);
         }
 
+        static int gr = 0;
         static MIL_INT ProcessingFunction(MIL_INT HookType, MIL_ID HookId, IntPtr HookDataPtr)
         {
             if (IntPtr.Zero.Equals(HookDataPtr) == true)
                 return MIL.M_NULL;
               
-
             MIL_ID currentImageId = MIL.M_NULL;
             MIL.MdigGetHookInfo(HookId, MIL.M_MODIFIED_BUFFER + MIL.M_BUFFER_ID, ref currentImageId);
 
@@ -262,12 +263,15 @@ namespace Jastech.Framework.Device.Cameras
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
 
+            gr++;
+            Console.WriteLine("Grabbing~ {0}", gr);
             return MIL.M_NULL;
         }
 
         public override void SetExposureTime(double value)
         {
-            // dcf 파일에서 설정함
+            long exposureTimeInus = (long)value;
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ExposureTime", MIL.M_TYPE_DOUBLE, ref exposureTimeInus);
         }
 
         public override double GetExposureTime()
@@ -283,12 +287,14 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetAnalogGain(int value)
         {
-            // dcf 파일에서 설정함
+            string analogGain = "X" + value.ToString();
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "AnalogGain", MIL.M_TYPE_STRING, "X1");
         }
 
         public override void SetDigitalGain(double value)
         {
-            // dcf 파일에서 설정함
+            double digitalGain = value;
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "DigitalGain", MIL.M_TYPE_DOUBLE, ref digitalGain);
         }
 
         public override void SetOffsetX(int value)
@@ -298,7 +304,16 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetImageWidth(int value)
         {
-            // dcf 파일에서 설정함
+            long width = (long)value;
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
+        }
+
+        public override void SetOperationMode(TDIOperationMode operationMode)
+        {
+            if (operationMode == TDIOperationMode.Area)
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
+            else
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
         }
         #endregion
     }
@@ -311,6 +326,8 @@ namespace Jastech.Framework.Device.Cameras
         public TriggerMode TriggerMode { get; set; }
 
         public int TriggerSource { get; set; }
+
+        //public OperationMode OperationMode { get; set; } = OperationMode.TDI;
 
         [JsonProperty]
         public MilTriggerSignalType TriggerSignalType { get; set; }

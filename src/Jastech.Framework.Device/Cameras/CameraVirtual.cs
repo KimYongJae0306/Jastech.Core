@@ -28,7 +28,7 @@ namespace Jastech.Framework.Device.Cameras
             return null;
         }
 
-        public override void GrabMuti(int grabCount)
+        public override void GrabMulti(int grabCount)
         {
 
         }
@@ -76,6 +76,11 @@ namespace Jastech.Framework.Device.Cameras
         public override void Stop()
         {
 
+        }
+
+        public override void SetOperationMode(TDIOperationMode operationMode)
+        {
+            
         }
         #endregion
     }
