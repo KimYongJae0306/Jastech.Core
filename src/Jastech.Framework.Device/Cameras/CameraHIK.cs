@@ -320,7 +320,7 @@ namespace Jastech.Framework.Device.Cameras
             }
 #if DEBUG
 #else
-            MyCamera.MV_CC_SetHeartBeatTimeout_NET(1000);
+            _camera.MV_CC_SetHeartBeatTimeout_NET(1000);
 #endif
             return true;
         }

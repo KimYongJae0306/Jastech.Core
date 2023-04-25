@@ -27,8 +27,8 @@ namespace Jastech.Framework.Winform.Forms
 
             if (lblTextMessage.Text == "")
             {
-                if (button.Text == "0" || button.Text == ".")
-                    return;
+                //if (button.Text == "0" || button.Text == ".")
+                //    return;
             }
             lblTextMessage.Text += button.Text;
         }
@@ -74,6 +74,11 @@ namespace Jastech.Framework.Winform.Forms
                 this.DialogResult = DialogResult.No;
                 Close();
             }
+        }
+
+        private void btnDot_Click(object sender, EventArgs e)
+        {
+            lblTextMessage.Text += btnDot.Text;
         }
     }
 }
