@@ -143,7 +143,7 @@ namespace Jastech.Framework.Device.Cameras
             _camera.MV_CC_StartGrabbing_NET();
         }
 
-        public override void GrabMuti(int grabCount)
+        public override void GrabMulti(int grabCount)
         {
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
             _camera.MV_CC_StartGrabbing_NET();
@@ -206,6 +206,11 @@ namespace Jastech.Framework.Device.Cameras
         public override void SetImageWidth(int value)
         {
             //MVS 연결 후 작성 예정
+        }
+
+        public override void SetOperationMode(TDIOperationMode operationMode)
+        {
+            
         }
         #endregion
 

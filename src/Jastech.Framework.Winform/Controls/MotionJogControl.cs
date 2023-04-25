@@ -93,6 +93,7 @@ namespace Jastech.Framework.Winform.Controls
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
             Axis axis = AxisHanlder.GetAxis(AxisName.Y);
+
             MoveJog(axis, Direction.CCW);
         }
 
@@ -108,6 +109,28 @@ namespace Jastech.Framework.Winform.Controls
         {
             if (AxisHanlder == null)
                 return;
+
+            if (!axis.IsEnable())
+            {
+                MessageConfirmForm form = new MessageConfirmForm();
+                form.Message = axis.Name + " Axis is ServoOff.";
+                form.ShowDialog();
+                return;
+            }
+
+            if (JogSpeedMode == JogSpeedMode.Slow)
+            {
+                double jogSlowVelocity = axis.AxisCommonParams.JogLowSpeed;
+                double jogSlowAcceleration = jogSlowVelocity * 10;
+                axis.SetDefaultParameter(jogSlowVelocity, jogSlowAcceleration);
+            }
+            else if (JogSpeedMode == JogSpeedMode.Fast)
+            {
+                double jogFastVelocity = axis.AxisCommonParams.JogHighSpeed;
+                double jogFastAcceleration = jogFastVelocity * 10;
+                axis.SetDefaultParameter(jogFastVelocity, jogFastAcceleration);
+            }
+            else { }
 
             if (JogMode == JogMode.Jog)
             {

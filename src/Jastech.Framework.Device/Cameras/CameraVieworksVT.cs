@@ -164,7 +164,7 @@ namespace Jastech.Framework.Device.Cameras
         {
         }
 
-        public override void GrabMuti(int grabCount)
+        public override void GrabMulti(int grabCount)
         {
         }
 
@@ -221,6 +221,11 @@ namespace Jastech.Framework.Device.Cameras
 
             string message = MakeSetCommand(SetScanDirectionCmd, (int)direction);
             SendMessage(message);
+        }
+
+        public override void SetOperationMode(TDIOperationMode operationMode)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
