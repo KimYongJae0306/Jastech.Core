@@ -129,6 +129,7 @@
             this.btnDot.TabIndex = 28;
             this.btnDot.Text = ".";
             this.btnDot.UseVisualStyleBackColor = false;
+            this.btnDot.Click += new System.EventHandler(this.btnDot_Click);
             // 
             // btnNum9
             // 

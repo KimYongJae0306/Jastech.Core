@@ -96,11 +96,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             UpdateViewRect();
         }
 
-        public void SetBinaryImage(CogImage8Grey image)
+        public void SetTempImage(ICogImage image)
         {
             cogDisplay.Image = image;
         }
-
 
         public ICogImage GetImage()
         {

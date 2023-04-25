@@ -48,10 +48,11 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ATTWrapperd">
-      <HintPath>..\..\..\Jastech.Library\Macron\Debug\ATTWrapperd.dll</HintPath>
+    <Reference Include="ATTWrapper">
+      <HintPath>..\..\..\Jastech.Library\Macron\Release\ATTWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,6 +73,24 @@
     <Compile Include="Controls\MacronAkkonParamControl.designer.cs">
       <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MacronEngineerParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MacronEngineerParamControl.Designer.cs">
+      <DependentUpon>MacronEngineerParamControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MacronMakerParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MacronMakerParamControl.Designer.cs">
+      <DependentUpon>MacronMakerParamControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MacronOptionParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MacronOptionParamControl.Designer.cs">
+      <DependentUpon>MacronOptionParamControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MacronAkkon.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Parameters\AkkonROI.cs" />
@@ -81,14 +100,17 @@
     <Compile Include="Results\AkkonResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Emgu.CV">
+      <Version>4.7.0.5276</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.Bitmap">
+      <Version>4.7.0.5276</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.runtime.windows">
+      <Version>4.7.0.5276</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="OpenCvSharp4">
-      <Version>4.7.0.20230115</Version>
-    </PackageReference>
-    <PackageReference Include="OpenCvSharp4.runtime.win">
-      <Version>4.7.0.20230115</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +130,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\MacronAkkonParamControl.resx">
       <DependentUpon>MacronAkkonParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MacronEngineerParamControl.resx">
+      <DependentUpon>MacronEngineerParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MacronMakerParamControl.resx">
+      <DependentUpon>MacronMakerParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MacronOptionParamControl.resx">
+      <DependentUpon>MacronOptionParamControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

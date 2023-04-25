@@ -74,6 +74,34 @@ namespace Jastech.Framework.Imaging.VisionPro
             return dataArray;
         }
 
+        public static byte[] GetByteArray(CogImage8Grey image)
+        {
+            unsafe
+            {
+                var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
+                int length = cogPixelData.Stride * cogPixelData.Height;
+
+                IntPtr ptrData = cogPixelData.Scan0;
+
+                byte[] dataByteArary = new byte[length];
+                Marshal.Copy(ptrData,  dataByteArary, 0, length);
+
+                return dataByteArary;
+            }
+        }
+
+        public static IntPtr GetIntptr(CogImage8Grey image, out int stride)
+        {
+            unsafe
+            {
+                var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
+                IntPtr ptrData = cogPixelData.Scan0;
+                stride = cogPixelData.Stride;
+
+                return ptrData;
+            }
+        }
+
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
         {
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
@@ -278,6 +306,35 @@ namespace Jastech.Framework.Imaging.VisionPro
                 return cogImage;
             }
             return null;
+        }
+
+        public static ICogImage CovertImage(byte[] dataR, byte[] dataG, byte[] dataB, int width, int height)
+        {
+            var dataSize = width * height;
+
+            var bufferB = new SafeMalloc(dataSize);
+            Marshal.Copy(dataB, 0, bufferB, dataSize);
+
+            var bufferG = new SafeMalloc(dataSize);
+            Marshal.Copy(dataG, 0, bufferG, dataSize);
+
+            var bufferR = new SafeMalloc(dataSize);
+            Marshal.Copy(dataR, 0, bufferR, dataSize);
+
+
+            var cogRootR = new CogImage8Root();
+            cogRootR.Initialize(width, height, bufferR, width, bufferR);
+
+            var cogRootG = new CogImage8Root();
+            cogRootG.Initialize(width, height, bufferG, width, bufferG);
+
+            var cogRootB = new CogImage8Root();
+            cogRootB.Initialize(width, height, bufferB, width, bufferB);
+
+            var cogImage = new CogImage24PlanarColor();
+            cogImage.SetRoots(cogRootR, cogRootG, cogRootB);
+
+            return cogImage;
         }
 
         public static List<CogRectangleAffine> DivideRegion(CogRectangleAffine orgRect, int leadCount)

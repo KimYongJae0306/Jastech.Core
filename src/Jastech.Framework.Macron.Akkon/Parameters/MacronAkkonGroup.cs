@@ -15,6 +15,12 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         public int Index { get; set; }
 
         [JsonProperty]
+        public int UnitIndex { get; set; }
+
+        [JsonProperty]
+        public int TabIndex { get; set; }
+
+        [JsonProperty]
         public int Count { get; set; } = 273;
 
         [JsonProperty]
@@ -28,9 +34,6 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 
         [JsonProperty]
         public double Height { get; set; } = 100.0;// um
-
-        [JsonProperty]
-        public MacronAkkonParam MacronAkkonParam { get; set; } = new MacronAkkonParam();
 
         [JsonProperty]
         public List<AkkonROI> AkkonROIList { get; private set; } = new List<AkkonROI>();
@@ -49,7 +52,8 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 
         public void DeleteROI(int index)
         {
-            AkkonROIList.RemoveAt(index);
+            if(AkkonROIList.Count > 0)
+                AkkonROIList.RemoveAt(index);
         }
         #endregion
     }
