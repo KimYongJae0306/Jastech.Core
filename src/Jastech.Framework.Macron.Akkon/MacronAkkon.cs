@@ -170,6 +170,38 @@ namespace Jastech.Framework.Macron.Akkon
             var inspOption = GetConvertMacronInspOption(akkonParam.InspOption);
 
             //Test
+            inspParam.s_nFilterDir = 1;
+            inspParam.s_fThWeight = 2;
+            inspParam.s_nShadowOffset = 7;
+            inspParam.s_fStrengthThreshold = 0;
+            inspParam.s_eFilterType = EN_MVFILTERTYPE_WRAP._MV_FILTER_4;
+            inspParam.s_eThMode = EN_THMODE_WRAP._MV_TH_WHITE;
+            inspParam.s_eShadowDir = EN_SHADOWDIR_WRAP._MV_SHADOW_DN;
+            inspParam.s_eStrengthBase = EN_STRENGTH_BASE_WRAP._MV_STRENGTH_ENH;
+            inspParam.s_ePeakProp = EN_PEAK_PROP_WRAP._MV_PEAK_NORMAL;
+            inspParam.s_nThPeak = 70;
+            inspParam.s_nMinShadowWidth = 5;
+            inspParam.s_fStrengthScaleFactor = 1.0f;
+            inspParam.s_nInflateLeadSize = 0;
+            inspParam.s_fPosTolerance = 1.0f;
+            inspParam.s_nExtraLead = 0;
+            inspParam.s_nRoiDivDistance = 200;
+            inspParam.s_fStdDevLeadJudge = 0;
+            inspParam.s_bImulInspection = false;
+            inspParam.s_nAbsoluteThHi = 180;
+            inspParam.s_nAbsoluteThLow = 0;
+            inspParam.s_nImulInspectionThresh = 1;
+            inspParam.s_bUseAbsTh = false;
+            inspParam.s_fDLPeakProb = 0.9f;
+            inspParam.s_fDLSizeProb = 0.9f;
+            inspParam.s_nDLNetWorkType = 1;
+            inspParam.s_nDLSperateCut = 0;
+            inspParam.s_bEdgeFlip = false;
+            inspParam.s_nDLPatchSizeX = 246;
+            inspParam.s_nDLPatchSizeY = 0;
+
+            inspOption.s_nOverlap = 34;
+            inspParam.s_nPanelInfo = 0;
             //inspParam.s_nFilterDir = 2;
             //inspParam.s_eFilterType = (EN_MVFILTERTYPE_WRAP)4;
             //inspParam.s_nRoiDivDistance = 200;
@@ -177,7 +209,7 @@ namespace Jastech.Framework.Macron.Akkon
             //inspOption.s_fPixelResolution = 0.07f;
             //inspOption.s_fInspResizeRatio = 1;
             //inspOption.s_bLogTrace = false;
-            
+
             GetConvertInspAkkonParam(inspParam, ref akkonParam.InspParam);
             GetConvertFilterAkkonParam(filterParam, ref akkonParam.FilterParam);
             GetConvertDrawOptionParam(drawOption, ref akkonParam.DrawOption);
@@ -201,7 +233,8 @@ namespace Jastech.Framework.Macron.Akkon
 
             int sliceOverlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
             int calcTotalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, sliceOverlap, PrevAkkonParam.SliceWidth, PrevAkkonParam.SliceHeight, false);
-
+            sliceOverlap = 180;
+            calcTotalSliceCount = 34;
             tabSliceOverLapList.Add(sliceOverlap);
             tabTotalSliceCountList.Add(calcTotalSliceCount);
 
@@ -230,7 +263,7 @@ namespace Jastech.Framework.Macron.Akkon
 #if DEBUG
                 isInspected = InspectDoneEvent.WaitOne(60 * 1000);
 #else
-                isInspected = InspectDoneEvent.WaitOne(1000);
+                isInspected = InspectDoneEvent.WaitOne(20 * 1000);
 #endif
 
                 if(isInspected)

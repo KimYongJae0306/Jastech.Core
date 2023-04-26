@@ -229,11 +229,11 @@ namespace Jastech.Framework.Imaging.VisionPro
     
         public static List<CogRectangleAffine> CreateRectangleAffine(List<PointF> topEdgePointList, List<PointF> bottomEdgePointList)
         {
-            if (topEdgePointList.Count != bottomEdgePointList.Count)
-            {
-                // Top, Bottom List 수가 같아야함
-                return null;
-            }
+            //if (topEdgePointList.Count != bottomEdgePointList.Count)
+            //{
+            //    // Top, Bottom List 수가 같아야함
+            //    return null;
+            //}
 
             //if(topEdgePointList.Count % 2 != 0 || bottomEdgePointList.Count % 2 != 0)
             //{
