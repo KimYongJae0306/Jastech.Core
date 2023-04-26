@@ -76,8 +76,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             var rect = sender as CogRectangle;
 
             Point mousePoint = new Point(MousePosition.X, MousePosition.Y);
-            Point tt = cogThumbnailDisplay.PointToClient(mousePoint);
-            double ratio = tt.X / (double)cogThumbnailDisplay.Width;
+            Point clientPoint = cogThumbnailDisplay.PointToClient(mousePoint);
+            double ratio = clientPoint.X / (double)cogThumbnailDisplay.Width;
 
             UpdateRectEventHandler?.Invoke(rect, ratio);
         }
