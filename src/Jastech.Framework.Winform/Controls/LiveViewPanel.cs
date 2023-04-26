@@ -131,7 +131,7 @@ namespace Jastech.Framework.Winform.Controls
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            DrawImage(g);
+            //DrawImage(g);
         }
 
         Bitmap _originBitmap = null;
