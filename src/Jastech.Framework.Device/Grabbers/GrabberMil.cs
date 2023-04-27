@@ -41,24 +41,21 @@ namespace Jastech.Framework.Device.Grabbers
         #endregion
 
         #region 메서드
-        public override void Initialize()
-        {
-            MilHelper.InitApplication();
-        }
-
-        public override void Release()
-        {
-            foreach (MilSystem milSystem in MilSystemList)
-            {
-                MIL.MsysFree(milSystem.SystemId);
-            }
-        }
-
         public static MilSystem GetMilSystem(MilSystemType systemType, uint systemNum)
         {
             string systemDescriptor = GetSystemDescriptor(systemType);
 
             return GetMilSystem(systemDescriptor, systemNum);
+        }
+
+        public static void Release()
+        {
+            foreach (MilSystem milSystem in MilSystemList)
+            {
+                MIL.MsysFree(milSystem.SystemId);
+                milSystem.SystemId = MIL.M_NULL;
+            }
+            MilSystemList.Clear();
         }
 
         static string GetSystemDescriptor(MilSystemType systemType)

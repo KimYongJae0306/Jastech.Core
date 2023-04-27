@@ -121,6 +121,12 @@ namespace Jastech.Framework.Device.Cameras
         {
 
         }
+
+        public void SetTriggerMode(TriggerMode triggerMode)
+        {
+            TriggerMode = triggerMode;
+            ActiveTriggerCommand();
+        }
         #endregion
     }
 

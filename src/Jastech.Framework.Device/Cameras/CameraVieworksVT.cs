@@ -246,7 +246,8 @@ namespace Jastech.Framework.Device.Cameras
             SetTriggerMode(TriggerMode);
             SetTriggerSource(TriggerSource);
         }
-        private void SetTriggerMode(TriggerMode triggerMode)
+        
+        public void SetTriggerMode(TriggerMode triggerMode)
         {
             TriggerMode = triggerMode;
 

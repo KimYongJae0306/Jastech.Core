@@ -253,6 +253,12 @@ namespace Jastech.Framework.Device.Cameras
                 return;
             }
         }
+       
+        public void SetTriggerMode(TriggerMode triggerMode)
+        {
+            TriggerMode = triggerMode;
+            ActiveTriggerCommand();
+        }
         #endregion
     }
     public enum HIKTriggerSourceType

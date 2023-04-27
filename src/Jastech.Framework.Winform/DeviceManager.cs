@@ -145,6 +145,7 @@ namespace Jastech.Framework.Winform
             }
 
             CameraHandler.Release();
+
         }
         #endregion
     }

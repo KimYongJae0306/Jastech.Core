@@ -19,5 +19,7 @@ namespace Jastech.Framework.Device.Cameras
         int TriggerSource { get; set; }
 
         void ActiveTriggerCommand();
+
+        void SetTriggerMode(TriggerMode triggerMode);
     }
 }

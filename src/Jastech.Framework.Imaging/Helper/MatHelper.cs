@@ -18,8 +18,7 @@ namespace Jastech.Framework.Imaging.Helper
         public static Mat ByteArrayToMat(byte[] data, int width, int height, int channel)
         {
             Mat mat = new Mat(new Size(width, height), DepthType.Cv8U, channel);
-            Marshal.Copy(data, 0, mat.DataPointer, data.Length);
-
+            Marshal.Copy(data, 0, mat.DataPointer, mat.Step * mat.Height);
             return mat;
         }
 

@@ -20,12 +20,5 @@ namespace Jastech.Framework.Device.Grabbers
         [JsonProperty]
         public GrabberType GrabberType { get; set; }
         #endregion
-
-        #region 메서드
-
-        public abstract void Initialize();
-
-        public abstract void Release();
-        #endregion
     }
 }
