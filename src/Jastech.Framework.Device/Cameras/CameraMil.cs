@@ -78,9 +78,6 @@ namespace Jastech.Framework.Device.Cameras
         {
             base.Initialize();
 
-       
-            //Grabber.Initialize();
-
             MilSystem = GrabberMil.GetMilSystem(MilSystemType, SystemNum);
 
             if (MilSystem == null)
@@ -143,7 +140,6 @@ namespace Jastech.Framework.Device.Cameras
         public override bool Release()
         {
             base.Release();
-
 
             Array.ForEach(_grabImageBuffer, f => MIL.MbufFree(f));
             MIL.MdigFree(DigitizerId);

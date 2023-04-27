@@ -28,9 +28,9 @@ namespace Jastech.Framework.Macron.Akkon
 
     public enum TargetType
     {
-        COF,
-        COG,
-        FOG,
+        COG = 0,
+        COF = 1,
+        FOG = 2,
     }
 
     public enum FilterDirection

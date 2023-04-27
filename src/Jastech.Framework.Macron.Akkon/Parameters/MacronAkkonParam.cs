@@ -59,21 +59,23 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         {
             InspParam.ShadowDir = EN_SHADOWDIR_WRAP._MV_SHADOW_DN;
             InspParam.FilterDir = 1; // 0 Horizontal, 1 Vertical
-            InspParam.ThWeight = 1.5;
+            InspParam.ThWeight = 2.0;
             InspParam.ShadowOffset = 0;
             InspParam.StrengthThreshold = 0;
-            InspParam.PeakProp = EN_PEAK_PROP_WRAP._MV_PEAK_NEAR;
+            InspParam.PeakProp = EN_PEAK_PROP_WRAP._MV_PEAK_NORMAL;
             InspParam.StrengthBase = EN_STRENGTH_BASE_WRAP._MV_STRENGTH_RAW;
             InspParam.ThPeak = 70;
             InspParam.MinShadowWidth = 5;
-            InspParam.StrengthScaleFactor = 0.2f;
+            InspParam.StrengthScaleFactor = 0.7f;
             InspParam.ExtraLead = 20;
             InspParam.EdgeFlip = false;
             InspParam.StdDevLeadJudge = 0;
             InspParam.PanelInfo = 1;// 0 COF, 1 COG, 2 FOG
             InspParam.IsFlexible = 0; // 0 Rigid, 1 Flexible
-            InspParam.AbsoluteThHi = 255;
             InspParam.AbsoluteThLow = 0;
+            InspParam.AbsoluteThHi = 255;
+
+            InspParam.RoiDivDistance = 200;
             InspParam.UseAbsTh = false;
 
             InspParam.DLPeakProb = 0.9f;
@@ -82,8 +84,14 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
             InspParam.DLSperateCut = 0;
             InspParam.DLPatchSizeX = -1;
             InspParam.DLPatchSizeY = -1;
-            InspParam.FilterType = EN_MVFILTERTYPE_WRAP._MV_FILTER_4;
+            InspParam.FilterType = EN_MVFILTERTYPE_WRAP._MV_FILTER_2;
             InspParam.ThMode = EN_THMODE_WRAP._MV_TH_WHITE;
+
+            InspParam.ImulInspection = false;
+            InspParam.ImulInspectionThresh = 200;
+
+            InspParam.PosTolerance = 0;
+            InspParam.InflateLeadSize = 0;
 
             InspOption.LogTrace = false;
             InspOption.InspType = 0;
@@ -93,29 +101,53 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
             InspOption.RotOffset = 0;
 
             DrawOption.SelectLeadDisplay = false;
-            DrawOption.ColorStrength = false;
-            DrawOption.FirstLastPoint = false;
+            DrawOption.Center = false;
+            DrawOption.Contour = true;
             DrawOption.ShadowBox = false;
+            DrawOption.FirstLastPoint = false;
+            DrawOption.ColorStrength = false;
+            DrawOption.PixelSize_um = 0.07f;/*Main.DEFINE.LINE_SCAN_PIXEL_SIZE(3.5) / Main.DEFINE.CAM_LENS_SCALE(5);*/
             DrawOption.ShowSize = false;
             DrawOption.ShowStrength = false;
-            DrawOption.Contour = false;
-            DrawOption.Center = !DrawOption.Contour;
             DrawOption.DrawBlobNumbering = false;
-            DrawOption.PixelSize_um = 0.07f; /*Main.DEFINE.LINE_SCAN_PIXEL_SIZE(0.0035) / Main.DEFINE.CAM_LENS_SCALE(5);*/
             DrawOption.DisplayLength = false;
             DrawOption.Panelnfo = 0;
             DrawOption.ExtraLead = 0;
             DrawOption.DrawResizeRatio = 1.0f;
 
-            FilterParam.MinStrength = InspParam.StrengthThreshold;
-            FilterParam.MinSize = 2.0f;
-            FilterParam.MaxSize = 20.0f;
-            FilterParam.GroupingDistance = 2;
-            FilterParam.BWRatio = -100;
-            FilterParam.ROIDiv = 0;
-            FilterParam.WidthCut = 50;
-            FilterParam.HeightCut = 50;
-            FilterParam.RawPeakCut = 0;
+            FilterParam.MinStrength = 0.0f;
+            FilterParam.RawShadowMin = 0;
+            FilterParam.RawStdMax = 0.0f;
+            FilterParam.RawStdMin = 0.0f;
+            FilterParam.RawAvgMax =  0.0f;
+            FilterParam.RawAvgMin =  0.0f;
+            FilterParam.RawUpShootcut =  0;
+            FilterParam.ShadowPeakcut =  0;
+            FilterParam.Enhstdcut =  0.0f;
+            FilterParam.BWRatioMax =  0.0f;
+            FilterParam.RawPeakCut =  0;
+            FilterParam.ImulSize =  0.0f;
+            FilterParam.AkkonInArea =  0.0f;
+            FilterParam.AkkonInLine =  0;
+            FilterParam.MinWidth =  0;
+            FilterParam.MinHeight =  0;
+            FilterParam.MinSize =  2.0f;
+            FilterParam.MaxSize =  30.0f;
+            FilterParam.MinBoundaryOverlap =  0;
+            FilterParam.RawShadowMax =  0;
+            FilterParam.UseEdgeFARemove =  false;
+            FilterParam.EdgeRange =  0;
+            FilterParam.Width =  0;
+            FilterParam.Height =  0;
+            FilterParam.EdgeStrengthCut =  0.0f;
+            FilterParam.EdgeSizeCut =  0;
+            FilterParam.WHRatio =  0.0f;
+            FilterParam.WHRawPeakCut =  0;
+            FilterParam.HeightCut =  50;
+            FilterParam.WidthCut =  50;
+            FilterParam.ROIDiv =  0;
+            FilterParam.GroupingDistance =  5.0;
+            FilterParam.BWRatio = 0.45f;
         }
 
         public void SetParam(int overlap, float pixelResolution, int panelInfo, int extrLead)

@@ -96,11 +96,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             UpdateViewRect();
         }
 
-        public void SetTempImage(ICogImage image)
-        {
-            cogDisplay.Image = image;
-        }
-
         public ICogImage GetImage()
         {
             return cogDisplay.Image;
@@ -566,6 +561,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetInteractiveGraphics(string groupName, ICogRecord record)
         {
+            if (record == null)
+                return;
             foreach (CogRecord subRecord in record.SubRecords)
             {
                 if (typeof(ICogGraphic).IsAssignableFrom(subRecord.ContentType))
