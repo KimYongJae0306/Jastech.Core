@@ -66,7 +66,7 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static void Dedug(LogType logType, string logMessage)
+        public static void Debug(LogType logType, string logMessage)
         {
             string logpath = GetDebugPath();
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
@@ -187,6 +187,7 @@ namespace Jastech.Framework.Util.Helper
         System,
         Device,
         Inspection,
+        Imaging,
         Seq,
         Error,
     }

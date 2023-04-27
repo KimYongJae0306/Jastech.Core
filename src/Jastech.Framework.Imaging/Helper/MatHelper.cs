@@ -37,6 +37,12 @@ namespace Jastech.Framework.Imaging.Helper
             return new Mat();
         }
 
+        public static Mat DeepCopy(Mat mat)
+        {
+            byte[] data = MatHelper.MatToByteArray(mat);
+            return MatHelper.ByteArrayToMat(data, mat.Width, mat.Height, mat.NumberOfChannels);
+        }
+
         public static Mat CropRoi(Mat mat, Rectangle roi)
         {
             int padLeft = 0 - roi.X;

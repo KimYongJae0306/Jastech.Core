@@ -1,4 +1,5 @@
-﻿using Matrox.MatroxImagingLibrary;
+﻿using Jastech.Framework.Util.Helper;
+using Matrox.MatroxImagingLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Jastech.Framework.Matrox
             {
                 if (ApplicationId == MIL.M_NULL)
                 {
-                    //Logger.Debug(LoggerType.Imaging, "Initialize MIL Applications");
+                    Logger.Debug(LogType.Imaging, "Initialize MIL Applications");
                     MIL_ID applicationId = MIL.M_NULL;
                     MIL.MappAlloc(MIL.M_NULL, MIL.M_DEFAULT, ref applicationId);
                     ApplicationId = applicationId;
@@ -33,7 +34,7 @@ namespace Jastech.Framework.Matrox
             {
                 if (ApplicationId == MIL.M_NULL)
                 {
-                    //Logger.Info(LoggerType.Imaging, "[MatroxHelper.InitApplication] Can't allocation MIL application. Maybe, MILL is not installed.");
+                    Logger.Debug(LogType.Imaging, "[MatroxHelper.InitApplication] Can't allocation MIL application. Maybe, MILL is not installed.");
                 }
                 return false;
             }
