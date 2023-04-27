@@ -100,10 +100,51 @@ namespace Jastech.Framework.Winform
 
         public void Release()
         {
-            CameraHandler.Release();
+            ReleaseCamera();
             MotionHandler.Release();
             LAFCtrlHandler.Release();
             LightCtrlHandler.Release();
+        }
+
+        private void ReleaseCamera()
+        {
+            if (CameraHandler == null)
+                return;
+
+            List<CameraMil> milCameraList = new List<CameraMil>();
+            foreach (var camera in CameraHandler)
+            {
+                if (camera is CameraMil)
+                {
+                    milCameraList.Add(camera as CameraMil);
+                }
+            }
+
+            if (milCameraList.Count > 0)
+            {
+                var maxSystemNum = milCameraList.Select(x => x.SystemNum).Max();
+                List<CameraMil>[] sortCameraList = new List<CameraMil>[maxSystemNum + 1];
+
+                foreach (var milCamera in milCameraList)
+                {
+                    if (sortCameraList[milCamera.SystemNum] == null)
+                        sortCameraList[milCamera.SystemNum] = new List<CameraMil>();
+
+                    sortCameraList[milCamera.SystemNum].Add(milCamera);
+                }
+
+                foreach (var milCamera in sortCameraList)
+                {
+                    milCamera.Sort((f1, f2) => f1.SystemNum.CompareTo(f2.DigitizerNum));
+                }
+
+                foreach (var milCamera in milCameraList)
+                {
+                    milCamera.Release();
+                }
+            }
+
+            CameraHandler.Release();
         }
         #endregion
     }
