@@ -97,7 +97,7 @@ namespace Jastech.Framework.Winform.Controls
             {
                 ratio *= 0.9;
             }
-
+            
             int width = Convert.ToInt32(pnlLiveView.Width * ratio);
             int height = Convert.ToInt32(pnlLiveView.Height * ratio);
 

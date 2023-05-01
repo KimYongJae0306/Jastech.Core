@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,10 @@ namespace Jastech.Framework.Winform.Controls
     {
         public DoubleBufferPanel()
         {
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-
-            this.SetStyle(ControlStyles.UserPaint, true);
-
-            this.UpdateStyles();
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            UpdateStyles();
         }
     }
 }

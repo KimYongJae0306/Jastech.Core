@@ -82,6 +82,12 @@
     <Compile Include="Controls\LiveViewPanel.Designer.cs">
       <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DrawBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DrawBoxControl.Designer.cs">
+      <DependentUpon>DrawBoxControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     <Compile Include="Controls\UPHControl.designer.cs">
       <DependentUpon>UPHControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Figure.cs" />
+    <Compile Include="Data\FigureManager.cs" />
+    <Compile Include="Data\RectangleFigure.cs" />
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Forms\HistoryForm.cs">
       <SubType>Form</SubType>
@@ -169,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LiveViewPanel.resx">
       <DependentUpon>LiveViewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DrawBoxControl.resx">
+      <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
@@ -338,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Caret_Vertical_Expand_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\None.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Roi.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

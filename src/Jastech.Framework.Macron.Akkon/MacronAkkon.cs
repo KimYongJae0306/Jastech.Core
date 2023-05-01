@@ -273,10 +273,6 @@ namespace Jastech.Framework.Macron.Akkon
                     int id = result.s_nId;
                     bool judgement = result.s_bJudgement;
                     float avgStrength = result.s_fAvgStrength;
-                    if(avgStrength != 0)
-                    {
-                        int gg = 10;
-                    }
                     float leadAvg = result.s_fLeadAvg;
                     float leadStdDEV = result.s_fLeadStdDEV;
                     float length = result.s_fLength;

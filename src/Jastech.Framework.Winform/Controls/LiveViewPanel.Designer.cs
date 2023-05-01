@@ -37,7 +37,7 @@
             this.pnlLiveView.Location = new System.Drawing.Point(0, 0);
             this.pnlLiveView.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLiveView.Name = "pnlLiveView";
-            this.pnlLiveView.Size = new System.Drawing.Size(150, 150);
+            this.pnlLiveView.Size = new System.Drawing.Size(679, 427);
             this.pnlLiveView.TabIndex = 0;
             // 
             // LiveViewPanel
@@ -49,6 +49,7 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LiveViewPanel";
+            this.Size = new System.Drawing.Size(679, 427);
             this.Load += new System.EventHandler(this.LiveViewPanel_Load);
             this.ResumeLayout(false);
 
