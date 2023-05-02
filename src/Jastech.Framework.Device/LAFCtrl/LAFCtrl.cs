@@ -26,7 +26,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionRelativeMove(Direction direction, double value);
 
-        // PJH
         public abstract void SetMotionAbsoluteMove(double value);
 
         public abstract void SetMotionNegativeLimit(double value);
@@ -38,7 +37,6 @@ namespace Jastech.Framework.Device.LAFCtrl
         public abstract void SetMotionZeroSet();
 
         public abstract void SetMotionStop();
-        // PJH
 
         protected void OnLAFReceived(byte[] data)
         {

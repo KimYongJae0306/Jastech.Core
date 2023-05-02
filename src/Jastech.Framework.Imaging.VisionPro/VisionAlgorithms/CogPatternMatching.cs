@@ -33,17 +33,22 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         public CogPatternMatchingResult Run(ICogImage image, VisionProPatternMatchingParam matchingParam)
         {
             CogPatternMatchingResult result = new CogPatternMatchingResult();
+
             if (image == null)
                 return result;
+
             Stopwatch sw = new Stopwatch();
             sw.Restart();
 
             matchingParam.SetInputImage(image);
             var resultList = matchingParam.Run();
 
+            if (resultList == null)
+                return null;
+
             sw.Stop();
             result.TactTime = sw.ElapsedMilliseconds;
-            if (resultList.Count >0)
+            if (resultList.Count > 0)
             {
                 PatternMatchPos match = new PatternMatchPos();
 
