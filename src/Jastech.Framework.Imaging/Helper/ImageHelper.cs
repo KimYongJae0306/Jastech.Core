@@ -38,6 +38,42 @@ namespace Jastech.Framework.Imaging.Helper
             return dataArray;
         }
 
+        public static byte[] GetDataArray(Bitmap bmp, List<PointF> points)
+        {
+            if (bmp.PixelFormat != PixelFormat.Format8bppIndexed)
+                return null;
+
+            byte[] dataArray = new byte[points.Count()];
+
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+                IntPtr ptrData = bmpData.Scan0;
+                int stride = bmpData.Stride;
+                int imageBufferSize = stride * bmp.Width * bmp.Height;
+                byte* data = (byte*)(void*)ptrData;
+
+                for (int i = 0; i < points.Count(); i++)
+                {
+                    int index = (int)((int)points[i].Y * stride + (int)points[i].X);
+
+                    if (points[i].X < 0 || points[i].X > bmp.Width)
+                        dataArray[i] = 0;
+                    else if(points[i].Y < 0 || points[i].Y > bmp.Height)
+                        dataArray[i] = 0;
+                    else if(index < 0 || index > imageBufferSize)
+                        dataArray[i] = 0;
+                    else
+                        dataArray[i] = data[index];
+                }
+
+                bmp.UnlockBits(bmpData);
+            }
+
+            return dataArray;
+        }
+
         public static List<int> GetEdgePoint(byte[] dataArray, int edgeValue)
         {
             List<int> edgePointList = new List<int>();

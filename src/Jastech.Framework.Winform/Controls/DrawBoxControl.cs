@@ -9,13 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Jastech.Framework.Winform.Data;
+using System.Drawing.Imaging;
+using Jastech.Framework.Imaging.Helper;
+using System.Diagnostics;
+using Jastech.Framework.Winform.Forms;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class DrawBoxControl : UserControl
     {
+        #region 필드
         private Matrix _transform = new Matrix();
 
+        private Color _selectedColor = new Color();
+
+        private Color _noneSelectedColor = new Color();
+        #endregion
+
+        #region 속성
         private double ZoomScale { get; set; } = 1.0;
 
         private double OffsetX { get; set; } = 0.0;
@@ -27,21 +38,37 @@ namespace Jastech.Framework.Winform.Controls
         public Bitmap OrgImage { get; set; } = null;
 
         private FigureManager FigureManager { get; set; } = new FigureManager();
-      
+
         private Figure TempFigure { get; set; }
 
         private Figure SelectedFigure { get; set; } = null;
 
         private PointF PanningStartPoint { get; set; }
+        #endregion
 
+        #region 이벤트
+        public event FigureDataDelegate FigureDataDelegateEventHanlder;
+        #endregion
+
+        #region 델리게이트
+        public delegate void FigureDataDelegate(byte[] data);
+        #endregion
+
+        #region 생성자
         public DrawBoxControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void DrawBoxControl_Load(object sender, EventArgs e)
         {
-            DisplayMode = DisplayMode.Drawing;
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _noneSelectedColor = Color.FromArgb(52, 52, 52);
+
+            DisplayMode = DisplayMode.None;
+            UpdateDisplayModeUI(DisplayMode);
             pbxDisplay.MouseWheel += PbxDisplay_MouseWheel;
         }
 
@@ -52,7 +79,35 @@ namespace Jastech.Framework.Winform.Controls
                 pbxDisplay.Image.Dispose();
                 pbxDisplay.Image = null;
             }
+            if (OrgImage != null)
+            {
+                OrgImage.Dispose();
+                OrgImage = null;
+            }
             pbxDisplay.Image = bmp;
+            OrgImage = bmp;
+        }
+
+        private void FitZoom()
+        {
+            if (OrgImage != null)
+            {
+                if (pbxDisplay.Width < pbxDisplay.Height)
+                    ZoomScale = (double)pbxDisplay.Width / OrgImage.Width;
+                else
+                    ZoomScale = (double)pbxDisplay.Height / OrgImage.Height;
+
+                double calcWidth = OrgImage.Width * ZoomScale;
+                double valueX = (pbxDisplay.Width / 2.0) - (calcWidth / 2.0);
+
+                double calcHeight = OrgImage.Height * ZoomScale;
+                double valueY = (pbxDisplay.Height / 2.0) - (calcHeight / 2.0);
+
+                OffsetX = (valueX / ZoomScale);
+                OffsetY = (valueY / ZoomScale);
+
+                pbxDisplay.Invalidate();
+            }
         }
 
         private void PbxDisplay_MouseWheel(object sender, MouseEventArgs e)
@@ -61,7 +116,6 @@ namespace Jastech.Framework.Winform.Controls
             double imageY = e.Y / ZoomScale - OffsetY;
 
             ZoomScale += (e.Delta / 1000.0);
-
             if (ZoomScale > 10)
                 ZoomScale = 10;
             if (ZoomScale < 0.1)
@@ -90,7 +144,7 @@ namespace Jastech.Framework.Winform.Controls
             {
                 FigureManager.CheckPointInFigure(calcPoint);
 
-                if(FigureManager.IsSelected())
+                if (FigureManager.IsSelected())
                 {
                     SelectedFigure = FigureManager.GetSelectedFigure();
                     SelectedFigure.MouseDown(calcPoint);
@@ -100,10 +154,12 @@ namespace Jastech.Framework.Winform.Controls
 
                 pbxDisplay.Invalidate();
             }
-            else if(DisplayMode == DisplayMode.Drawing)
+            else if (DisplayMode == DisplayMode.Drawing)
             {
                 if (TempFigure == null)
-                    TempFigure = new RectangleFigure();
+                    TempFigure = new LineDirectionFigure();
+
+                FigureManager.ClearFigureSelected();
 
                 TempFigure.MouseDown(calcPoint);
             }
@@ -122,14 +178,14 @@ namespace Jastech.Framework.Winform.Controls
                     if (TempFigure != null)
                         TempFigure.MouseMove(calcPoint);
                 }
-                else if(DisplayMode == DisplayMode.None)
+                else if (DisplayMode == DisplayMode.None)
                 {
-                    if(FigureManager.GetSelectedFigure() is Figure figure)
+                    if (FigureManager.GetSelectedFigure() is Figure figure)
                     {
                         figure.MouseMove(calcPoint);
                     }
                 }
-                else if(DisplayMode == DisplayMode.Panning)
+                else if (DisplayMode == DisplayMode.Panning)
                 {
                     OffsetX = (e.X / ZoomScale) - PanningStartPoint.X;
                     OffsetY = (e.Y / ZoomScale) - PanningStartPoint.Y;
@@ -139,6 +195,7 @@ namespace Jastech.Framework.Winform.Controls
             else
             {
                 this.Cursor = FigureManager.GetCursors(calcPoint);
+                Console.WriteLine(this.Cursor.ToString());
             }
         }
 
@@ -154,15 +211,15 @@ namespace Jastech.Framework.Winform.Controls
             {
                 if (TempFigure != null)
                 {
-                    double absX = Math.Abs(TempFigure.MouseDownPoint.X - calcX);
-                    double absY = Math.Abs(TempFigure.MouseDownPoint.Y - calcY);
-                    if (absX < 10 || absY < 10)
-                        return;
-
                     TempFigure.IsSelected = true;
                     TempFigure.MouseUp(new PointF((float)calcX, (float)calcY));
                     FigureManager.AddFigure(TempFigure);
+
+                    DisplayMode = DisplayMode.None;
+                    UpdateDisplayModeUI(DisplayMode);
                     TempFigure = null;
+
+                    pbxDisplay.Invalidate();
                 }
             }
         }
@@ -173,43 +230,154 @@ namespace Jastech.Framework.Winform.Controls
                 return;
 
             Graphics g = e.Graphics;
-            g.Clear(Color.White);
+            g.Clear(pbxDisplay.BackColor);
 
             Matrix matrix = new Matrix();
             matrix.Translate((float)OffsetX, (float)OffsetY);
-            Console.WriteLine(OffsetX.ToString() + "    " +OffsetY.ToString() + "   " + DisplayMode.ToString());
             matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
             g.Transform = matrix;
 
-            g.DrawImage(pbxDisplay.Image, new Rectangle(0,0, OrgImage.Width, OrgImage.Height));
+            g.DrawImage(pbxDisplay.Image, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
 
             FigureManager.Draw(g);
 
             if (TempFigure != null)
                 TempFigure.Draw(g);
+
+            if(FigureManager.IsSelected())
+            {
+                if (FigureDataDelegateEventHanlder != null)
+                {
+                    byte[] dataArray = GetDataArray(pbxDisplay.Image as Bitmap, FigureManager.GetSelectedFigure());
+
+                    if (dataArray != null)
+                        FigureDataDelegateEventHanlder(dataArray);
+                }
+            }
         }
 
         private void btnDrawNone_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.None;
+            UpdateDisplayModeUI(DisplayMode);
         }
 
-        private void btnDrawROI_Click(object sender, EventArgs e)
+        private void btnDrawLine_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Drawing;
+            UpdateDisplayModeUI(DisplayMode);
         }
 
         private void pbxDisplay_DoubleClick(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.None;
+            UpdateDisplayModeUI(DisplayMode);
             TempFigure = null;
             FigureManager.ClearFigureSelected();
+
+            Refresh();
         }
 
         private void btnPanning_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Panning;
+            UpdateDisplayModeUI(DisplayMode);
         }
+
+        private void btnFitZoom_Click(object sender, EventArgs e)
+        {
+            FitZoom();
+        }
+
+        private void ctxDisplayMode_Opening(object sender, CancelEventArgs e)
+        {
+            MenuStripSelectedNone();
+            if (DisplayMode == DisplayMode.None)
+            {
+                menuPointerMode.Checked = true;
+            }
+            else if (DisplayMode == DisplayMode.Panning)
+            {
+                menuPanningMode.Checked = true;
+            }
+            else if (DisplayMode == DisplayMode.Drawing)
+            {
+                menuROIMode.Checked = true;
+            }
+        }
+
+        private void MenuStripSelectedNone()
+        {
+            menuPointerMode.Checked = false;
+            menuPanningMode.Checked = false;
+            menuROIMode.Checked = false;
+        }
+
+        private void menuPointerMode_Click(object sender, EventArgs e)
+        {
+            MenuStripSelectedNone();
+            DisplayMode = DisplayMode.None;
+            UpdateDisplayModeUI(DisplayMode);
+        }
+
+        private void menuPanningMode_Click(object sender, EventArgs e)
+        {
+            MenuStripSelectedNone();
+            DisplayMode = DisplayMode.Panning;
+            UpdateDisplayModeUI(DisplayMode);
+        }
+
+        private void menuROIMode_Click(object sender, EventArgs e)
+        {
+            MenuStripSelectedNone();
+            DisplayMode = DisplayMode.Drawing;
+            UpdateDisplayModeUI(DisplayMode);
+        }
+
+        private void menuFitZoom_Click(object sender, EventArgs e)
+        {
+            FitZoom();
+        }
+
+        private byte[] GetDataArray(Bitmap image, Figure figure)
+        {
+            if(figure is LineDirectionFigure lineFigure)
+            {
+                byte[] data = ImageHelper.GetDataArray(image, lineFigure.DrawPoints.ToList());
+                return data;
+            }
+            return null;
+        }
+
+        private void btnDeleteFigure_Click(object sender, EventArgs e)
+        {
+            if (FigureManager.GetSelectedFigure() is Figure figure)
+            {
+                MessageYesNoForm form = new MessageYesNoForm();
+                form.Message = "Do you want to Delete Selected Figure?";
+
+                if (form.ShowDialog() == DialogResult.Yes)
+                {
+                    FigureManager.DeleteSelectedFigure();
+                    pbxDisplay.Invalidate();
+                }
+            }
+        }
+
+        private void UpdateDisplayModeUI(DisplayMode mode)
+        {
+            btnDrawNone.BackColor = _noneSelectedColor;
+            btnPanning.BackColor = _noneSelectedColor;
+            btnDrawLine.BackColor = _noneSelectedColor;
+
+            if (mode == DisplayMode.None)
+                btnDrawNone.BackColor = _selectedColor;
+            else if (mode == DisplayMode.Panning)
+                btnPanning.BackColor = _selectedColor;
+            else if (mode == DisplayMode.Drawing)
+                btnDrawLine.BackColor = _selectedColor;
+        }
+        #endregion
     }
 
     public enum DisplayMode

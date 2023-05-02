@@ -223,4 +223,19 @@
   <data name="Roi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Pointer_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pointer_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Fit_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fit_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Line_arrow_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Line_arrow_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panning_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Panning_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROI_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ROI_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

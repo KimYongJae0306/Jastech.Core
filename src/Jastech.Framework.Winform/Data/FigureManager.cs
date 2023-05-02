@@ -68,5 +68,18 @@ namespace Jastech.Framework.Winform.Data
             }
             return Cursors.Default;
         }
+
+        public void DeleteSelectedFigure()
+        {
+            List<Figure> removeFigures = new List<Figure>();
+            foreach (Figure figure in FigureList)
+            {
+                if (figure.IsSelected)
+                {
+                    removeFigures.Add(figure);
+                }
+            }
+            FigureList.RemoveAll(removeFigures.Contains);
+        }
     }
 }
