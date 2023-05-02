@@ -106,6 +106,12 @@
     <Compile Include="Controls\MotionParameterCommonControl.Designer.cs">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PixelValueGraphControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PixelValueGraphControl.Designer.cs">
+      <DependentUpon>PixelValueGraphControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ROIJogControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,7 @@
     </Compile>
     <Compile Include="Data\Figure.cs" />
     <Compile Include="Data\FigureManager.cs" />
+    <Compile Include="Data\LineDirectionFigure.cs" />
     <Compile Include="Data\RectangleFigure.cs" />
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Forms\HistoryForm.cs">
@@ -191,6 +198,9 @@
     <EmbeddedResource Include="Controls\MotionParameterCommonControl.resx">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PixelValueGraphControl.resx">
+      <DependentUpon>PixelValueGraphControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ROIJogControl.resx">
       <DependentUpon>ROIJogControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -254,6 +264,10 @@
     <ProjectReference Include="..\Jastech.Framework.Imaging.VisionPro\Jastech.Framework.Imaging.VisionPro.csproj">
       <Project>{22EE7B1A-E7B2-4547-94DD-4E85BDB56956}</Project>
       <Name>Jastech.Framework.Imaging.VisionPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
+      <Project>{2380DA0F-851A-4430-9A43-E7B2DEEE29F2}</Project>
+      <Name>Jastech.Framework.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jastech.FrameWork.Structure\Jastech.Framework.Structure.csproj">
       <Project>{dcff7b48-8df8-4ed9-9f0f-f11c2ccb7547}</Project>
@@ -334,12 +348,6 @@
     <None Include="Resources\Skew_Zero.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Caret_Vertical_Focus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Caret_Horizontal_Focus.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Caret_Vertical_Focus_White.png" />
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +364,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Roi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pointer_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ROI_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Panning_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fit_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line_arrow_White.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

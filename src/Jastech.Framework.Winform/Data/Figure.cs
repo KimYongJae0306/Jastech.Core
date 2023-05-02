@@ -54,8 +54,6 @@ namespace Jastech.Framework.Winform.Data
         }
         public abstract void Draw(Graphics g);
 
-        public abstract List<RectangleF> GetTrackRectangles(RectangleF drawRect);
-
         public abstract void CheckPointInFigure(PointF point);
 
         public abstract TrackPosType CheckTrackPos(PointF pt);
@@ -65,6 +63,7 @@ namespace Jastech.Framework.Winform.Data
 
     public enum FigureType
     {
+        ArrowLine,
         Rectangle,
 
     }
@@ -95,6 +94,10 @@ namespace Jastech.Framework.Winform.Data
         LeftBottom,
         RightTop,
         RightBottom,
+
+        Start,
+        End,
+
     }
         
 }

@@ -124,7 +124,7 @@ namespace Jastech.Framework.Winform.Data
             if (ViewRect.Contains(new Point((int)point.X, (int)point.Y)))
             {
                 IsSelected = true;
-                CurrentTrackPos = CheckTrackPos(point);
+                CurrentTrackPos = TrackPosType.InSide;
                 return;
             }
 
@@ -165,17 +165,15 @@ namespace Jastech.Framework.Winform.Data
             return TrackPosType.None;
         }
 
-        public override List<RectangleF> GetTrackRectangles(RectangleF drawRect)
+        public List<RectangleF> GetTrackRectangles(RectangleF drawRect)
         {
             List<RectangleF> trackRects = new List<RectangleF>();
 
-            int rectSize = 6;
+            LeftTopTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Top), TrackRectWidth);
+            LeftBottomTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Bottom), TrackRectWidth);
 
-            LeftTopTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Top), rectSize);
-            LeftBottomTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Bottom), rectSize);
-
-            RightTopTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Top), rectSize);
-            RightBottomTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Bottom), rectSize);
+            RightTopTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Top), TrackRectWidth);
+            RightBottomTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Bottom), TrackRectWidth);
 
             trackRects.Add(LeftTopTrackRect);
             trackRects.Add(LeftBottomTrackRect);
