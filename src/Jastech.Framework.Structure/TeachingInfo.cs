@@ -9,26 +9,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Structure
 {
-
-    #region 필드
-    #endregion
-
-    #region 속성
-    #endregion
-
-    #region 이벤트
-    #endregion
-
-    #region 델리게이트
-    #endregion
-
-    #region 생성자
-    #endregion
-
-    #region 메서드
-    #endregion
-
-    public class TeachingPosition
+    public class TeachingInfo
     {
         [JsonProperty]
         public string Name { get; set; } = string.Empty;
@@ -39,7 +20,7 @@ namespace Jastech.Framework.Structure
         [JsonProperty]
         public List<TeachingAxisInfo> AxisInfoList = new List<TeachingAxisInfo>();
 
-        public void CreateTeachingPosition(string name, string description, AxisHandler axisHandler)
+        public void CreateTeachingInfo(string name, string description, AxisHandler axisHandler)
         {
             Name = name;
             Description = description;
@@ -93,6 +74,11 @@ namespace Jastech.Framework.Structure
             return AxisInfoList.Where(x => x.Name == axisName).First().CenterOfGravity;
         }
 
+        public AxisMovingParam GetMovingParam(string axisName)
+        {
+            return AxisInfoList.Where(x => x.Name == axisName).First().MovingParam;
+        }
+
         public double GetCenterOfGravity(AxisName axisName)
         {
             return AxisInfoList.Where(x => x.Name == axisName.ToString()).First().CenterOfGravity;
@@ -118,9 +104,9 @@ namespace Jastech.Framework.Structure
             AxisInfoList.Where(x => x.Name == name.ToString()).First().MovingParam = param;
         }
 
-        public TeachingPosition DeepCopy()
+        public TeachingInfo DeepCopy()
         {
-            TeachingPosition param = new TeachingPosition();
+            TeachingInfo param = new TeachingInfo();
 
             param.Name = Name;
             param.Description = Description;

@@ -47,6 +47,7 @@
             this.Name = "PixelValueGraphControl";
             this.Size = new System.Drawing.Size(678, 369);
             this.Load += new System.EventHandler(this.PixelValueGraphControl_Load);
+            this.SizeChanged += new System.EventHandler(this.PixelValueGraphControl_SizeChanged);
             this.ResumeLayout(false);
 
         }

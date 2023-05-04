@@ -18,6 +18,8 @@ namespace Jastech.Framework.Device.Cameras
         private object _lock { get; set; } = new object();
 
         private MyCamera _camera { get; set; } = new MyCamera();
+
+        private bool _isGrabbing { get; set; } = false;
         #endregion
 
         #region 속성
@@ -139,29 +141,38 @@ namespace Jastech.Framework.Device.Cameras
         {
             Stop();
 
+            _isGrabbing = true;
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_SINGLE);
             _camera.MV_CC_StartGrabbing_NET();
         }
 
         public override void GrabMulti(int grabCount)
         {
+            _isGrabbing = true;
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
             _camera.MV_CC_StartGrabbing_NET();
         }
 
         public override void GrabContinous()
         {
+            _isGrabbing = true;
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
         }
 
         public override void Stop()
         {
+            _isGrabbing = false;
             int nRet = _camera.MV_CC_StopGrabbing_NET();
             if (MyCamera.MV_OK != nRet)
             {
                 Logger.Error(ErrorType.Camera, string.Format("HIK Camera Stop Grab failed. Name : {0}", Name));
                 return;
             }
+        }
+
+        public override bool IsGrabbing()
+        {
+            return _isGrabbing;
         }
 
         public override void SetExposureTime(double value)

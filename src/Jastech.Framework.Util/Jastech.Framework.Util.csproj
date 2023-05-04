@@ -83,6 +83,7 @@
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\JsonConvertHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
+    <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

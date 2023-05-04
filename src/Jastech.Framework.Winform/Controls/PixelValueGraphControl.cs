@@ -167,5 +167,10 @@ namespace Jastech.Framework.Winform.Controls
             Data = data;
             pnlDrawChart.Refresh();
         }
+
+        private void PixelValueGraphControl_SizeChanged(object sender, EventArgs e)
+        {
+            pnlDrawChart?.Invalidate();
+        }
     }
 }

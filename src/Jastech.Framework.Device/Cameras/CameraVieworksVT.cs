@@ -37,6 +37,8 @@ namespace Jastech.Framework.Device.Cameras
         const string TriggerPresetCmd = "w sync";
 
         const double nullCommand = -1.0;
+
+        private bool _isGrabbing { get; set; } = false;
         #endregion
 
         #region 속성
@@ -162,18 +164,28 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabOnce()
         {
+            _isGrabbing = true;
+            _isGrabbing = false;
         }
 
         public override void GrabMulti(int grabCount)
         {
+            _isGrabbing = true;
         }
 
         public override void GrabContinous()
         {
+            _isGrabbing = true;
         }
 
         public override void Stop()
         {
+            _isGrabbing = false;
+        }
+
+        public override bool IsGrabbing()
+        {
+            return _isGrabbing;
         }
 
         public void SendMessage(string message)

@@ -78,6 +78,11 @@ namespace Jastech.Framework.Device.Cameras
 
         }
 
+        public override bool IsGrabbing()
+        {
+            return false;
+        }
+
         public override void SetOperationMode(TDIOperationMode operationMode)
         {
             

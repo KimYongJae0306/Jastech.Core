@@ -42,6 +42,9 @@ namespace Jastech.Framework.Config
         public bool EnablePreAlign { get; set; } = true;
 
         [JsonProperty]
+        public bool EnableAlign { get; set; } = true;
+
+        [JsonProperty]
         public bool EnableAkkon { get; set; } = true;
 
         [JsonProperty]

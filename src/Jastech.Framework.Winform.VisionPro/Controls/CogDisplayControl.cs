@@ -677,10 +677,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             resultGraphic.Add(matchingResultData.ResultGraphics);
             SetInteractiveGraphics(groupName, resultGraphic);
 
-            var result = matchingResult.Result;
+            var result = matchingResult.Judgement;
 
             DrawResultLabel("Result :" + result.ToString(), 0);
-            if (result != Result.Fail)
+            if (result != Judgement.Fail)
             {
                 DrawResultLabel("Score :" + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
                 DrawResultLabel("Y :" + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);
@@ -705,7 +705,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             
             SetInteractiveGraphics(groupName, resultGraphic);
 
-            DrawResultLabel("Result :" + alignResult.Result.ToString(), 0);
+            DrawResultLabel("Result :" + alignResult.Judgement.ToString(), 0);
             //if (alignResult.Judgement != Result.Fail)
             //{
             //    DrawResultLabel("Y :" + alignResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);

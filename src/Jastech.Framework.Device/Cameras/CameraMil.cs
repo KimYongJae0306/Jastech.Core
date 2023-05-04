@@ -34,6 +34,8 @@ namespace Jastech.Framework.Device.Cameras
         private MIL_ID[] _grabImageBuffer = new MIL_ID[BufferPoolCount];
 
         private MIL_DIG_HOOK_FUNCTION_PTR _processingFunctionPtr = null;
+
+        private bool _isGrabbing { get; set; } = false;
         #endregion
 
         #region 속성
@@ -94,7 +96,7 @@ namespace Jastech.Framework.Device.Cameras
                 if (dcfFile == "")
                     return false;
             }
-            dcfFile = @"D:\test.dcf";
+            
             if (CreateDigitizerId(dcfFile) == false)
                 return false;
 
@@ -205,11 +207,14 @@ namespace Jastech.Framework.Device.Cameras
             {
                 LastGrabImage = _grabImageBuffer[0];
             }
+            _isGrabbing = true;
             MIL.MdigGrab(DigitizerId, LastGrabImage);
+            _isGrabbing = false;
         }
 
         public override void GrabMulti(int grabCount)
         {
+            _isGrabbing = true;
             if (TriggerMode == TriggerMode.Software)
             {
                 if (_processingFunctionPtr == null)
@@ -230,6 +235,8 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabContinous()
         {
+            _isGrabbing = true;
+
             if (_processingFunctionPtr != null)
                 _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
@@ -238,6 +245,7 @@ namespace Jastech.Framework.Device.Cameras
         }
         public override void Stop()
         {
+            _isGrabbing = false;
             if (TriggerMode == TriggerMode.Software)
             {
                 MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_SYNCHRONOUS, _processingFunctionPtr,  GCHandle.ToIntPtr(_thisHandle));
@@ -249,7 +257,11 @@ namespace Jastech.Framework.Device.Cameras
             //Thread.Sleep(50);
         }
 
-        
+        public override bool IsGrabbing()
+        {
+            return _isGrabbing;
+        }
+
         static MIL_INT ProcessingFunction(MIL_INT HookType, MIL_ID HookId, IntPtr HookDataPtr)
         {
             if (IntPtr.Zero.Equals(HookDataPtr) == true)

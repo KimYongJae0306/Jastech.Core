@@ -36,6 +36,7 @@
             this.pnlDisplay = new System.Windows.Forms.Panel();
             this.pbxDisplay = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDeleteFigure = new System.Windows.Forms.Button();
             this.btnFitZoom = new System.Windows.Forms.Button();
             this.btnDrawLine = new System.Windows.Forms.Button();
             this.btnDrawNone = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.menuPanningMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuROIMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFitZoom = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteFigure = new System.Windows.Forms.Button();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -161,6 +161,20 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(40, 484);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
+            // btnDeleteFigure
+            // 
+            this.btnDeleteFigure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnDeleteFigure.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Delete_White;
+            this.btnDeleteFigure.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteFigure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteFigure.Location = new System.Drawing.Point(0, 160);
+            this.btnDeleteFigure.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDeleteFigure.Name = "btnDeleteFigure";
+            this.btnDeleteFigure.Size = new System.Drawing.Size(40, 40);
+            this.btnDeleteFigure.TabIndex = 4;
+            this.btnDeleteFigure.UseVisualStyleBackColor = false;
+            this.btnDeleteFigure.Click += new System.EventHandler(this.btnDeleteFigure_Click);
+            // 
             // btnFitZoom
             // 
             this.btnFitZoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
@@ -255,20 +269,6 @@
             this.menuFitZoom.Size = new System.Drawing.Size(119, 22);
             this.menuFitZoom.Text = "FitZoom";
             this.menuFitZoom.Click += new System.EventHandler(this.menuFitZoom_Click);
-            // 
-            // btnDeleteFigure
-            // 
-            this.btnDeleteFigure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnDeleteFigure.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Delete_White;
-            this.btnDeleteFigure.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteFigure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteFigure.Location = new System.Drawing.Point(0, 160);
-            this.btnDeleteFigure.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDeleteFigure.Name = "btnDeleteFigure";
-            this.btnDeleteFigure.Size = new System.Drawing.Size(40, 40);
-            this.btnDeleteFigure.TabIndex = 4;
-            this.btnDeleteFigure.UseVisualStyleBackColor = false;
-            this.btnDeleteFigure.Click += new System.EventHandler(this.btnDeleteFigure_Click);
             // 
             // DrawBoxControl
             // 

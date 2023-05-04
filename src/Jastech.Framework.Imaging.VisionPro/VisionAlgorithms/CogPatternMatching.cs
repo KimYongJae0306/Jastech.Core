@@ -59,6 +59,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.ReferenceWidth = (float)trainRoi.Width;
                 match.ReferenceHeight = (float)trainRoi.Height;
 
+           
                 match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);
                 match.Score = (float)foundResult.Score;
                 match.Angle = (float)foundResult.GetPose().Rotation;

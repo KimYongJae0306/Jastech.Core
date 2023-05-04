@@ -8,10 +8,10 @@ namespace Jastech.Framework.Imaging.Result
 {
     public class VisionResult
     {
-        public Result Result { get; set; }
+        public Judgement Judgement { get; set; }
     }
 
-    public enum Result
+    public enum Judgement
     {
         OK,
         NG,
