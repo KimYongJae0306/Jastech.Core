@@ -49,8 +49,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 }
 
                 caliperParam.CaliperTool.Region = rectList[leadIndex];
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Restart();
+
                 var currentResult = Run(image, caliperParam);
 
+                sw.Stop();
                 if (currentResult != null)
                     resultList.Add(currentResult);
             }
