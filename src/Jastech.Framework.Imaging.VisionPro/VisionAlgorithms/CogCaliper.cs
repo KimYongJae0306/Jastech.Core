@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -39,6 +40,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             var resultList = caliperParam.Run();
 
             sw.Stop();
+            Console.WriteLine(sw.ElapsedMilliseconds.ToString());
 
             result.TactTime = sw.ElapsedMilliseconds;
 

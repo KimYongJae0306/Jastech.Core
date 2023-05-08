@@ -59,6 +59,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             return PMTool.SearchRegion;
         }
 
+        public CogTransform2DLinear GetOrigin()
+        {
+            return PMTool.Pattern.Origin;
+        }
+
         public bool Train(ICogImage image)
         {
             if (image == null || PMTool == null)
