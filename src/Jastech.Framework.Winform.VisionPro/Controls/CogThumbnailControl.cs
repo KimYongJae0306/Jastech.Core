@@ -41,6 +41,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 메서드
         public void SetThumbnailImage(ICogImage cogImage)
         {
+            if (cogImage == null)
+                return;
+
             int newHeight = this.cogThumbnailDisplay.Height;
             Scale = (double)newHeight / cogImage.Height;
             int newWidth = (int)((double)cogImage.Width * Scale);

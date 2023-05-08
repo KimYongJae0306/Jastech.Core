@@ -218,11 +218,6 @@ namespace Jastech.Framework.Device.Cameras
         {
             //MVS 연결 후 작성 예정
         }
-
-        public override void SetOperationMode(TDIOperationMode operationMode)
-        {
-            
-        }
         #endregion
 
     }

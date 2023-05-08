@@ -49,6 +49,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 }
 
                 caliperParam.CaliperTool.Region = rectList[leadIndex];
+                caliperParam.CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None;
+
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                 sw.Restart();
 

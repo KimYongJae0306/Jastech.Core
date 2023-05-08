@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Cameras
 {
-    public partial class CameraMil : Camera, ICameraTriggerable
+    public partial class CameraMil : Camera, ICameraTriggerable, ICameraTDIavailable
     {
         #region 필드
         const int BufferPoolCount = 10;
@@ -323,29 +323,6 @@ namespace Jastech.Framework.Device.Cameras
             long width = (long)value;
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
         }
-
-        public override void SetOperationMode(TDIOperationMode operationMode)
-        {
-            if (operationMode == TDIOperationMode.Area)
-            {
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
-                StringBuilder value = new StringBuilder();
-                MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, value);
-                string stageString = value.ToString().Replace("TDI", "").Trim();
-
-                TDIStages = Convert.ToInt32(stageString);
-
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
-
-                TriggerMode = TriggerMode.Software;
-            }
-            else
-            {
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
-                TriggerMode = TriggerMode.Hardware;
-            }
-            ActiveTriggerCommand();
-        }
         #endregion
     }
 
@@ -422,6 +399,41 @@ namespace Jastech.Framework.Device.Cameras
             return value;
         }
         #endregion
+    }
+
+    public partial class CameraMil : ICameraTDIavailable
+    {
+        public TDIOperationMode TDIOperationMode { get; set; }
+
+        public TDIDirectionType TDIDirection { get; set; }
+
+        public void SetTDIScanDriection(TDIDirectionType direction)
+        {
+            TDIDirection = direction;
+        }
+
+        public void SetTDIOperationMode(TDIOperationMode mode)
+        {
+            TDIOperationMode = mode;
+            if (TDIOperationMode == TDIOperationMode.Area)
+            {
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
+                StringBuilder value = new StringBuilder();
+                MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, value);
+                string stageString = value.ToString().Replace("TDI", "").Trim();
+
+                TDIStages = Convert.ToInt32(stageString);
+
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
+
+                TriggerMode = TriggerMode.Software;
+            }
+            else
+            {
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
+                TriggerMode = TriggerMode.Hardware;
+            }
+        }
     }
 
     public enum MilTriggerSignalType

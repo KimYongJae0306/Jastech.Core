@@ -27,11 +27,10 @@ namespace Jastech.Framework.Util.Helper
                 Directory.CreateDirectory(_csvDir);
         }
 
-        public static void WriteHeader(string historyName, List<String> headerList)
+        public static void WriteHeader(string csvPath, List<String> headerList)
         {
             try
             {
-                string csvPath = GetCsvPath(historyName);
                 string csvDirectory = csvPath.Substring(0, csvPath.LastIndexOf('\\'));
                 string outputData = string.Empty;
 
@@ -63,17 +62,16 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static string GetCsvPath(string fileName)
-        {
-            string csvPath = string.Format(@"{0}\{1}_{2:0000}{3:00}{4:00}.csv", _csvDir, fileName, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            return csvPath;
-        }
+        //public static string GetCsvPath(string fileName)
+        //{
+        //    string csvPath = string.Format(@"{0}\{1}_{2:0000}{3:00}{4:00}.csv", _csvDir, fileName, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        //    return csvPath;
+        //}
 
-        public static void WriteData(string historyName, List<string> inputData)
+        public static void WriteData(string csvPath, List<string> inputData)
         {
             try
             {
-                string csvPath = GetCsvPath(historyName);
                 string outputData = string.Empty;
 
                 KillProcess(csvPath);
@@ -101,11 +99,10 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static int GetRowCount(string historyName)
+        public static int GetRowCount(string csvPath)
         {
             try
             {
-                string csvPath = GetCsvPath(historyName);
                 //string strDir = csvpath.Substring(0, csvpath.LastIndexOf('\\'));
 
                 if (!File.Exists(csvPath))

@@ -219,7 +219,7 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 메서드
-        public void SetTDISensorMode(TDIOperationMode mode)
+        public void SetTDIOperationMode(TDIOperationMode mode)
         {
             TDIOperationMode = mode;
 
@@ -233,11 +233,6 @@ namespace Jastech.Framework.Device.Cameras
 
             string message = MakeSetCommand(SetScanDirectionCmd, (int)direction);
             SendMessage(message);
-        }
-
-        public override void SetOperationMode(TDIOperationMode operationMode)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

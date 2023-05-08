@@ -85,6 +85,7 @@
     <Compile Include="Helper\Logger.cs" />
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Helper\SystemHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

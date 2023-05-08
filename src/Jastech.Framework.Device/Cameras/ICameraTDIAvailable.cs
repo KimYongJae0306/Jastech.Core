@@ -15,7 +15,7 @@ namespace Jastech.Framework.Device.Cameras
         [JsonProperty]
         TDIDirectionType TDIDirection { get; }
 
-        void SetTDISensorMode(TDIOperationMode mode);
+        void SetTDIOperationMode(TDIOperationMode mode);
 
         void SetTDIScanDriection(TDIDirectionType direction);
     }

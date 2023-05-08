@@ -82,11 +82,6 @@ namespace Jastech.Framework.Device.Cameras
         {
             return false;
         }
-
-        public override void SetOperationMode(TDIOperationMode operationMode)
-        {
-            
-        }
         #endregion
     }
 
@@ -99,7 +94,7 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 메서드
-        public void SetTDISensorMode(TDIOperationMode mode)
+        public void SetTDIOperationMode(TDIOperationMode mode)
         {
             TDIOperationMode = mode;
         }

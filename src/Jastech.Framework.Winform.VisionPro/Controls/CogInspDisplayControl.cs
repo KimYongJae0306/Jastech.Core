@@ -79,7 +79,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             panPointX = (cogDisplay.Image.Width / 2) - panPointX;
             cogDisplay.PanX = panPointX;
         }
-        #endregion
+
+        public void Clear()
+        {
+            cogDisplay.StaticGraphics.Clear();
+            cogDisplay.InteractiveGraphics.Clear();
+            cogDisplay.Image = null;
+        }
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
@@ -99,7 +105,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     _updateViewRect = false;
                     return;
                 }
-            
+
                 UpdateViewRect();
             }
         }
@@ -127,5 +133,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             return rect;
         }
+        #endregion
     }
 }

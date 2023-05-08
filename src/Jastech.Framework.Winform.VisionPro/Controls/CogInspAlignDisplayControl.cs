@@ -44,7 +44,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogRightDisplay.Image != null)
                 cogRightDisplay.Image = null;
 
-            cogLeftDisplay.Image = cogImage;
+            cogRightDisplay.Image = cogImage;
 
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
@@ -59,8 +59,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
             }
 
-            cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-            SetDisplayToCenter(cogLeftDisplay, viewPoint);
+            cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+            SetDisplayToCenter(cogRightDisplay, viewPoint);
         }
 
         public void SetDisplayToCenter(CogRecordDisplay display, Point point)
@@ -68,8 +68,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (display.Image == null)
                 return;
 
-            display.PanX = (display.Image.Width / 2 - point.X) / display.Zoom;
-            display.PanY = (display.Image.Height / 2 - point.Y) / display.Zoom;
+            display.PanX = display.Image.Width / 2 - point.X;
+            display.PanY = display.Image.Height / 2 - point.Y;
+        }
+
+        public void ClearImage()
+        {
+            cogLeftDisplay.InteractiveGraphics.Clear();
+            cogLeftDisplay.Image = null;
+
+            cogRightDisplay.InteractiveGraphics.Clear();
+            cogRightDisplay.Image = null;
         }
     }
 }
