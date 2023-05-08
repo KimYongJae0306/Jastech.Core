@@ -4,6 +4,7 @@ using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             List<VisionProCaliperResult> resultList = new List<VisionProCaliperResult>();
 
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
-            var rectList = CogImageHelper.DivideRegion(rect, leadCount);
 
+            var rectList = CogImageHelper.DivideRegion(rect, leadCount);
             if (rectList == null)
                 return resultList;
 
