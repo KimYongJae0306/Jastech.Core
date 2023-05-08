@@ -71,6 +71,5 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             display.PanX = (display.Image.Width / 2 - point.X) / display.Zoom;
             display.PanY = (display.Image.Height / 2 - point.Y) / display.Zoom;
         }
-
     }
 }
