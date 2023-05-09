@@ -33,7 +33,9 @@ namespace Jastech.Framework.Winform.Data
             foreach (Figure figure in FigureList)
             {
                 if (figure.IsSelected)
+                {
                     isSelected = true;
+                }
             }
             return isSelected;
         }

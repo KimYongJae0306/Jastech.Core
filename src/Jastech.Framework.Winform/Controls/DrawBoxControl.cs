@@ -24,6 +24,8 @@ namespace Jastech.Framework.Winform.Controls
         private Color _selectedColor = new Color();
 
         private Color _noneSelectedColor = new Color();
+
+        public object _lock = new object();
         #endregion
 
         #region 속성
@@ -64,6 +66,10 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void DrawBoxControl_Load(object sender, EventArgs e)
         {
+            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw, true);
+            this.DoubleBuffered = true;
+            this.UpdateStyles();
+            
             _selectedColor = Color.FromArgb(104, 104, 104);
             _noneSelectedColor = Color.FromArgb(52, 52, 52);
 
@@ -74,18 +80,24 @@ namespace Jastech.Framework.Winform.Controls
 
         public void SetImage(Bitmap bmp)
         {
-            if (pbxDisplay.Image != null)
+            //if (pbxDisplay.Image != null)
+            //{
+            //    pbxDisplay.Image.Dispose();
+            //    pbxDisplay.Image = null;
+            //}
+            lock(_lock)
             {
-                pbxDisplay.Image.Dispose();
-                pbxDisplay.Image = null;
+                if (OrgImage != null)
+                {
+                    OrgImage.Dispose();
+                    OrgImage = null;
+                }
+                //pbxDisplay.Image = bmp;
+                OrgImage = bmp;
+                
             }
-            if (OrgImage != null)
-            {
-                OrgImage.Dispose();
-                OrgImage = null;
-            }
-            pbxDisplay.Image = bmp;
-            OrgImage = bmp;
+            
+            pbxDisplay.Invalidate();
         }
 
         private void FitZoom()
@@ -129,9 +141,6 @@ namespace Jastech.Framework.Winform.Controls
 
         private void pbxDisplay_MouseDown(object sender, MouseEventArgs e)
         {
-            if (pbxDisplay.Image == null)
-                return;
-
             if (e.Button != MouseButtons.Left)
                 return;
 
@@ -195,7 +204,7 @@ namespace Jastech.Framework.Winform.Controls
             else
             {
                 this.Cursor = FigureManager.GetCursors(calcPoint);
-                Console.WriteLine(this.Cursor.ToString());
+                //Console.WriteLine(this.Cursor.ToString());
             }
         }
 
@@ -226,34 +235,40 @@ namespace Jastech.Framework.Winform.Controls
 
         private void pbxDisplay_Paint(object sender, PaintEventArgs e)
         {
-            if (OrgImage == null)
-                return;
-
-            Graphics g = e.Graphics;
-            g.Clear(pbxDisplay.BackColor);
-
-            Matrix matrix = new Matrix();
-            matrix.Translate((float)OffsetX, (float)OffsetY);
-            matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
-            g.Transform = matrix;
-
-            g.DrawImage(pbxDisplay.Image, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
-
-            FigureManager.Draw(g);
-
-            if (TempFigure != null)
-                TempFigure.Draw(g);
-
-            if(FigureManager.IsSelected())
+            lock (_lock)
             {
-                if (FigureDataDelegateEventHanlder != null)
-                {
-                    byte[] dataArray = GetDataArray(pbxDisplay.Image as Bitmap, FigureManager.GetSelectedFigure());
+                if (OrgImage == null)
+                    return;
 
-                    if (dataArray != null)
-                        FigureDataDelegateEventHanlder(dataArray);
+                Graphics g = e.Graphics;
+                g.Clear(Color.White);
+
+                Matrix matrix = new Matrix();
+                matrix.Translate((float)OffsetX, (float)OffsetY);
+                matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
+                g.Transform = matrix;
+
+                //g.DrawImage(pbxDisplay.Image, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
+                //OrgImage.
+                g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
+
+                FigureManager.Draw(g);
+
+                if (TempFigure != null)
+                    TempFigure.Draw(g);
+
+                if (FigureManager.IsSelected())
+                {
+                    if (FigureDataDelegateEventHanlder != null)
+                    {
+                        byte[] dataArray = GetDataArray(OrgImage as Bitmap, FigureManager.GetSelectedFigure());
+
+                        if (dataArray != null)
+                            FigureDataDelegateEventHanlder(dataArray);
+                    }
                 }
             }
+               
         }
 
         private void btnDrawNone_Click(object sender, EventArgs e)

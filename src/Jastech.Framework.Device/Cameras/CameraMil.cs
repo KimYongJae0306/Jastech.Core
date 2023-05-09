@@ -110,7 +110,7 @@ namespace Jastech.Framework.Device.Cameras
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-            ActiveTriggerCommand();
+            //ActiveTriggerCommand();
 
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
@@ -266,7 +266,6 @@ namespace Jastech.Framework.Device.Cameras
         {
             if (IntPtr.Zero.Equals(HookDataPtr) == true)
                 return MIL.M_NULL;
-              
             MIL_ID currentImageId = MIL.M_NULL;
             MIL.MdigGetHookInfo(HookId, MIL.M_MODIFIED_BUFFER + MIL.M_BUFFER_ID, ref currentImageId);
 
@@ -349,20 +348,21 @@ namespace Jastech.Framework.Device.Cameras
             if (TriggerMode == TriggerMode.Software)
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerMode", MIL.M_TYPE_STRING, "Off");
             else
+            {
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerMode", MIL.M_TYPE_STRING, "On");
+                // Trigger Source
+                MilCxpTriggerSource source = (MilCxpTriggerSource)TriggerSource;
+                if (source == MilCxpTriggerSource.Lin0)
+                    MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "LineStart");
+                else if (source == MilCxpTriggerSource.Cxp)
+                    MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "CXPin");
 
-            // Trigger Source
-            MilCxpTriggerSource source = (MilCxpTriggerSource)TriggerSource;
-            if (source == MilCxpTriggerSource.Lin0)
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "LineStart");
-            else if (source == MilCxpTriggerSource.Cxp)
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TriggerSource", MIL.M_TYPE_STRING, "CXPin");
-
-            // Trigger Signal 
-            //ex : MIL.MdigControl(DigitizerId, MIL.M_TL_TRIGGER + MIL.M_IO_SOURCE, MIL.M_AUX_IO0);
-            long controlType = GetTriggerSignalType(TriggerSignalType);
-            MIL_INT controlValue = GetTriggerIoSource(TriggerIoSourceType);
-            MIL.MdigControl(DigitizerId, controlType, controlValue);
+                // Trigger Signal 
+                //ex : MIL.MdigControl(DigitizerId, MIL.M_TL_TRIGGER + MIL.M_IO_SOURCE, MIL.M_AUX_IO0);
+                long controlType = GetTriggerSignalType(TriggerSignalType);
+                MIL_INT controlValue = GetTriggerIoSource(TriggerIoSourceType);
+                MIL.MdigControl(DigitizerId, controlType, controlValue);
+            }
         }
 
         public void SetTriggerMode(TriggerMode triggerMode)
@@ -414,9 +414,14 @@ namespace Jastech.Framework.Device.Cameras
 
         public void SetTDIOperationMode(TDIOperationMode mode)
         {
+            
             TDIOperationMode = mode;
             if (TDIOperationMode == TDIOperationMode.Area)
             {
+              
+                TriggerMode = TriggerMode.Software;
+                ActiveTriggerCommand();
+                return;
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
                 StringBuilder value = new StringBuilder();
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, value);
@@ -426,12 +431,14 @@ namespace Jastech.Framework.Device.Cameras
 
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
 
-                TriggerMode = TriggerMode.Software;
+                
             }
             else
             {
-                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
                 TriggerMode = TriggerMode.Hardware;
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
+                ActiveTriggerCommand();
+
             }
         }
     }

@@ -70,6 +70,9 @@
     <Compile Include="Controls\DoubleBufferPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DoubleBufferPicturebox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

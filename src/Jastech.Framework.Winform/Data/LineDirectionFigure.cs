@@ -119,11 +119,12 @@ namespace Jastech.Framework.Winform.Data
 
         public override void CheckPointInFigure(PointF point)
         {
+            float interval = 20;
             foreach (var drawPt in DrawPoints)
             {
-                if (drawPt.X - 2 <= point.X && point.X <= drawPt.X + 2)
+                if (drawPt.X - interval <= point.X && point.X <= drawPt.X + interval)
                 {
-                    if (drawPt.Y - 2 <= point.Y && point.Y <= drawPt.Y + 2)
+                    if (drawPt.Y - interval <= point.Y && point.Y <= drawPt.Y + interval)
                     {
                         IsSelected = true;
                         CurrentTrackPos = TrackPosType.InSide;
