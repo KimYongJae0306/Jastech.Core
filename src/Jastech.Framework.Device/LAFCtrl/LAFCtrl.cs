@@ -38,6 +38,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionStop();
 
+        public abstract void SetCenterOfGravity(int value);
+
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);

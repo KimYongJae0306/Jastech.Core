@@ -121,6 +121,7 @@
             this.btnJogStop.TabIndex = 4;
             this.btnJogStop.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnJogStop.UseVisualStyleBackColor = false;
+            this.btnJogStop.Click += new System.EventHandler(this.btnJogStop_Click);
             // 
             // btnJogUpY
             // 

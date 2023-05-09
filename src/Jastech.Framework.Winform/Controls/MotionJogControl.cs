@@ -93,7 +93,6 @@ namespace Jastech.Framework.Winform.Controls
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
             Axis axis = AxisHanlder.GetAxis(AxisName.Y);
-
             MoveJog(axis, Direction.CCW);
         }
 
@@ -150,5 +149,14 @@ namespace Jastech.Framework.Winform.Controls
             else { }
         }
         #endregion
+
+        private void btnJogStop_Click(object sender, EventArgs e)
+        {
+            Axis axisX = AxisHanlder.GetAxis(AxisName.X);
+            axisX.StopMove();
+
+            Axis axisY = AxisHanlder.GetAxis(AxisName.Z);
+            axisY.StopMove();
+        }
     }
 }

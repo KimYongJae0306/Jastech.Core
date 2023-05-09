@@ -190,15 +190,6 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
-        public void SetFocusPosition(int value)
-        {
-            int offset = (value > 10000) ? 9999 : value;
-            offset = (value < -10000) ? -9999 : value;
-
-            string command = MakeSetCommand(CMD_WRITE_FOCUS_POSITION, offset.ToString());
-            SerialPortComm.Send(command);
-        }
-
         public void RequestData(string command)
         {
             string makeData = MakeGetCommand(command);
@@ -214,6 +205,15 @@ namespace Jastech.Framework.Device.LAFCtrl
         private string MakeGetCommand(string command)
         {
             return string.Format(";" + command + "\r");
+        }
+
+        public override void SetCenterOfGravity(int value)
+        {
+            int offset = (value > 10000) ? 9999 : value;
+            offset = (value < -10000) ? -9999 : value;
+
+            string command = MakeSetCommand(CMD_WRITE_FOCUS_POSITION, offset.ToString());
+            SerialPortComm.Send(command);
         }
 
         //public override void SetMotionNegativeLimit(double value)

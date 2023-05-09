@@ -62,5 +62,10 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
 
         }
+
+        public override void SetCenterOfGravity(int value)
+        {
+            
+        }
     }
 }

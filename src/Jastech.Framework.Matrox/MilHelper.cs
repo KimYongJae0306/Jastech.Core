@@ -10,7 +10,7 @@ namespace Jastech.Framework.Matrox
 {
     public static class MilHelper
     {
-        private static MIL_ID ApplicationId { get; set; } = MIL.M_NULL;
+        public static MIL_ID ApplicationId { get; set; } = MIL.M_NULL;
 
         private static Dictionary<long, Action<MIL_ID>> DisposingActionMap { get; } = new Dictionary<long, Action<MIL_ID>>();
 
