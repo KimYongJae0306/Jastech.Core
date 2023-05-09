@@ -91,6 +91,8 @@ namespace Jastech.Framework.Device.Cameras
         public TDIOperationMode TDIOperationMode { get; private set; }
 
         public TDIDirectionType TDIDirection { get; private set; }
+
+        public int TDIStages { get; set; }
         #endregion
 
         #region 메서드
