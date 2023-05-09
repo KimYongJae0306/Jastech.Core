@@ -80,11 +80,6 @@ namespace Jastech.Framework.Winform.Controls
 
         public void SetImage(Bitmap bmp)
         {
-            //if (pbxDisplay.Image != null)
-            //{
-            //    pbxDisplay.Image.Dispose();
-            //    pbxDisplay.Image = null;
-            //}
             lock(_lock)
             {
                 if (OrgImage != null)
@@ -92,9 +87,7 @@ namespace Jastech.Framework.Winform.Controls
                     OrgImage.Dispose();
                     OrgImage = null;
                 }
-                //pbxDisplay.Image = bmp;
                 OrgImage = bmp;
-                
             }
             
             pbxDisplay.Invalidate();
@@ -130,8 +123,8 @@ namespace Jastech.Framework.Winform.Controls
             ZoomScale += (e.Delta / 1000.0);
             if (ZoomScale > 10)
                 ZoomScale = 10;
-            if (ZoomScale < 0.1)
-                ZoomScale = 0.1;
+            if (ZoomScale < 0.05)
+                ZoomScale = 0.05;
 
             OffsetX = (e.X / ZoomScale) - imageX;
             OffsetY = (e.Y / ZoomScale) - imageY;
@@ -201,11 +194,6 @@ namespace Jastech.Framework.Winform.Controls
                 }
                 pbxDisplay.Invalidate();
             }
-            else
-            {
-                this.Cursor = FigureManager.GetCursors(calcPoint);
-                //Console.WriteLine(this.Cursor.ToString());
-            }
         }
 
         private void pbxDisplay_MouseUp(object sender, MouseEventArgs e)
@@ -252,10 +240,21 @@ namespace Jastech.Framework.Winform.Controls
                 //OrgImage.
                 g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
 
+                int trackResize = (int)(6.0 / ZoomScale);
+                if (trackResize > 50)
+                    trackResize = 50;
+                if (trackResize < 3)
+                    trackResize = 3;
+
+                FigureManager.SetTrackRectSize(trackResize);
                 FigureManager.Draw(g);
 
                 if (TempFigure != null)
+                {
+                    // TempFigure.TrackRectWidth = 
+                    TempFigure.TrackRectSize =trackResize;
                     TempFigure.Draw(g);
+                }
 
                 if (FigureManager.IsSelected())
                 {

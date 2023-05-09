@@ -52,6 +52,16 @@ namespace Jastech.Framework.Winform.Data
         {
             FigureList.ForEach(x => x.IsSelected = false);
         }
+        
+        public void SetFigureWidth(int width)
+        {
+            FigureList.ForEach(x => x.FigureWidth = width);
+        }
+
+        public void SetTrackRectSize(int size)
+        {
+            FigureList.ForEach(x => x.TrackRectSize = size);
+        }
 
         public void Draw(Graphics g)
         {

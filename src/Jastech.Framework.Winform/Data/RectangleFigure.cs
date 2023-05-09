@@ -169,11 +169,11 @@ namespace Jastech.Framework.Winform.Data
         {
             List<RectangleF> trackRects = new List<RectangleF>();
 
-            LeftTopTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Top), TrackRectWidth);
-            LeftBottomTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Bottom), TrackRectWidth);
+            LeftTopTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Top), TrackRectSize);
+            LeftBottomTrackRect = GetRectangle(new PointF(drawRect.Left, drawRect.Bottom), TrackRectSize);
 
-            RightTopTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Top), TrackRectWidth);
-            RightBottomTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Bottom), TrackRectWidth);
+            RightTopTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Top), TrackRectSize);
+            RightBottomTrackRect = GetRectangle(new PointF(drawRect.Right, drawRect.Bottom), TrackRectSize);
 
             trackRects.Add(LeftTopTrackRect);
             trackRects.Add(LeftBottomTrackRect);

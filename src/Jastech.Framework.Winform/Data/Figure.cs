@@ -24,7 +24,9 @@ namespace Jastech.Framework.Winform.Data
 
         public TrackPosType CurrentTrackPos { get; set; } = TrackPosType.None;
 
-        public int TrackRectWidth { get; set; } = 6;
+        public int TrackRectSize { get; set; } = 6;
+
+        public int FigureWidth { get; set; } = 2;
 
         public double Scale { get; set; } = 1.0;
 

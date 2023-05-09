@@ -61,8 +61,6 @@ namespace Jastech.Framework.Device.Cameras
         public CameraType CameraType { get; set; }
 
         public int GrabCount { get; set; } = 0;
-
-        public int TDIStages { get; set; } = 0;
         #endregion
 
         #region 이벤트
@@ -407,6 +405,8 @@ namespace Jastech.Framework.Device.Cameras
 
         public TDIDirectionType TDIDirection { get; set; }
 
+        public int TDIStages { get; set; }
+
         public void SetTDIScanDriection(TDIDirectionType direction)
         {
             TDIDirection = direction;
@@ -418,10 +418,6 @@ namespace Jastech.Framework.Device.Cameras
             TDIOperationMode = mode;
             if (TDIOperationMode == TDIOperationMode.Area)
             {
-              
-                TriggerMode = TriggerMode.Software;
-                ActiveTriggerCommand();
-                return;
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
                 StringBuilder value = new StringBuilder();
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, value);
@@ -430,15 +426,12 @@ namespace Jastech.Framework.Device.Cameras
                 TDIStages = Convert.ToInt32(stageString);
 
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
-
-                
+                SetTriggerMode(TriggerMode.Software);
             }
             else
             {
-                TriggerMode = TriggerMode.Hardware;
                 MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
-                ActiveTriggerCommand();
-
+                SetTriggerMode(TriggerMode.Hardware);
             }
         }
     }

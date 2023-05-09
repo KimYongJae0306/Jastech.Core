@@ -119,7 +119,7 @@ namespace Jastech.Framework.Winform.Data
 
         public override void CheckPointInFigure(PointF point)
         {
-            float interval = 20;
+            float interval = 10;
             foreach (var drawPt in DrawPoints)
             {
                 if (drawPt.X - interval <= point.X && point.X <= drawPt.X + interval)
@@ -158,11 +158,12 @@ namespace Jastech.Framework.Winform.Data
             if (EndTrackRect.Contains(pt))
                 return TrackPosType.End;
 
+            float interval = 10;
             foreach (var drawPt in DrawPoints)
             {
-                if (drawPt.X - 2 <= pt.X && pt.X <= drawPt.X + 2)
+                if (drawPt.X - interval <= pt.X && pt.X <= drawPt.X + interval)
                 {
-                    if (drawPt.Y - 2 <= pt.Y && pt.Y <= drawPt.Y + 2)
+                    if (drawPt.Y - interval <= pt.Y && pt.Y <= drawPt.Y + interval)
                     {
                         IsSelected = true;
                         return TrackPosType.InSide;
@@ -175,8 +176,10 @@ namespace Jastech.Framework.Winform.Data
 
         public override void Draw(Graphics g)
         {
-            Pen pen = new Pen(Color.Yellow, 2);
-            AdjustableArrowCap bigArrow = new AdjustableArrowCap(4, 4);
+            Pen pen = new Pen(Color.Yellow, FigureWidth);
+
+            int arrayCapSize = (int)(FigureWidth * 1.5);
+            AdjustableArrowCap bigArrow = new AdjustableArrowCap(arrayCapSize, arrayCapSize);
             pen.CustomEndCap = bigArrow;
 
             if(DrawPoints.Count > 1)
@@ -187,10 +190,27 @@ namespace Jastech.Framework.Winform.Data
             if (IsSelected)
             {
                 if (TrackRectangleList.Count > 0)
-                    g.FillRectangles(Brushes.White, TrackRectangleList.ToArray());
+                    g.FillRectangles(Brushes.White, CalcTrackRectangleList().ToArray());
             }
         }
 
+        private List<RectangleF> CalcTrackRectangleList()
+        {
+            List<RectangleF> calcRectList = new List<RectangleF>();
+            if (TrackRectangleList.Count > 0)
+            {
+                foreach (var rect in TrackRectangleList)
+                {
+                    float centerX = rect.X + rect.Width / 2;
+                    float centerY = rect.Y + rect.Height / 2;
+
+                    float newLeft = centerX - TrackRectSize / 2;
+                    float newTop = centerY - TrackRectSize / 2;
+                    calcRectList.Add(new RectangleF(newLeft, newTop, TrackRectSize, TrackRectSize));
+                }
+            }
+            return calcRectList;
+        }
         public override Cursor GetCursors(PointF point)
         {
             if (IsSelected)
@@ -210,9 +230,9 @@ namespace Jastech.Framework.Winform.Data
         {
             List<RectangleF> trackRects = new List<RectangleF>();
 
-            float half = TrackRectWidth / 2.0f;
-            StartTrackRect = new RectangleF(startPoint.X - half, startPoint.Y - half, TrackRectWidth, TrackRectWidth);
-            EndTrackRect = new RectangleF(endPoint.X - half, endPoint.Y - half, TrackRectWidth, TrackRectWidth);
+            float half = TrackRectSize / 2.0f;
+            StartTrackRect = new RectangleF(startPoint.X - half, startPoint.Y - half, TrackRectSize, TrackRectSize);
+            EndTrackRect = new RectangleF(endPoint.X - half, endPoint.Y - half, TrackRectSize, TrackRectSize);
 
             trackRects.Add(StartTrackRect);
             trackRects.Add(EndTrackRect);
