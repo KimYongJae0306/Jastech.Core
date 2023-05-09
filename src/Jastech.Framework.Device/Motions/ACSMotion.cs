@@ -106,7 +106,7 @@ namespace Jastech.Framework.Device.Motions
         {
             if (Api == null)
                 return false;
-            Console.WriteLine(Api.IsConnected);
+
             return Api.IsConnected;
         }
 

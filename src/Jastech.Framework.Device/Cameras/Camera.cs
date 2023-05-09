@@ -41,6 +41,9 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public double LensScale { get; set; } = 1;
+
+        [JsonIgnore]
+        public int GrabCount { get; set; } = 0;
         #endregion
 
         #region 이벤트
