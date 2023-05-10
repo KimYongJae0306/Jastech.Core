@@ -111,7 +111,6 @@ namespace Jastech.Framework.Device.Cameras
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
             MIL_INT height = 0;
-            MIL_INT gg = 0;
 
             MIL.MdigInquire(DigitizerId, MIL.M_SIZE_X, ref width);
             MIL.MdigInquire(DigitizerId, MIL.M_SIZE_Y, ref height);
@@ -212,6 +211,11 @@ namespace Jastech.Framework.Device.Cameras
         object testLock = new object();
         public override void GrabMulti(int grabCount)
         {
+            //for (int i = 0; i < BufferPoolCount; i++)
+            //{
+            //    MIL.MbufClear(_grabImageBuffer[i], 255);
+
+            //}
             _isGrabbing = true;
             GrabCount = 0;
             if (TriggerMode == TriggerMode.Software)
@@ -226,18 +230,18 @@ namespace Jastech.Framework.Device.Cameras
                 if (_processingFunctionPtr == null)
                     _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-                if(TDIOperationMode == TDIOperationMode.Area)
-                {
-                    MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-                    //MIL.MdigGrabContinuous(DigitizerId, _grabImageBuffer[0]);
-                }
-                else
-                {
+                //if(TDIOperationMode == TDIOperationMode.Area)
+                //{
+                //    MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
+                //}
+                //else
+                //{
+                    //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
                     // 정해진 GrabCount 만큼 영상 취득
-                    int count = grabCount < BufferPoolCount ? grabCount : BufferPoolCount;
-                    count = grabCount;
+                    //int count = grabCount < BufferPoolCount ? grabCount : BufferPoolCount;
+                    int count = grabCount;
                     MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_SEQUENCE + MIL.M_COUNT(count), MIL.M_ASYNCHRONOUS, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-                }
+                //}
             }
         }
 
@@ -249,15 +253,14 @@ namespace Jastech.Framework.Device.Cameras
                 _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
             // Stop 명령어 올때 까지 계속해서 Grab
-            
-            //MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
+            MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
         }
         public override void Stop()
         {
             _isGrabbing = false;
             if (TriggerMode == TriggerMode.Software)
             {
-                MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_SYNCHRONOUS, _processingFunctionPtr,  GCHandle.ToIntPtr(_thisHandle));
+                MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_DEFAULT, _processingFunctionPtr,  GCHandle.ToIntPtr(_thisHandle));
             }
             else
             {
@@ -429,39 +432,29 @@ namespace Jastech.Framework.Device.Cameras
         {
             if (TDIOperationMode == mode)
                 return;
-
             TDIOperationMode = mode;
+            return;
             if (TDIOperationMode == TDIOperationMode.Area)
             {
-                // SetTriggerMode 먼저 해줘야함
-                //SetTriggerMode(TriggerMode.Software);
 
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
+                SetTriggerMode(TriggerMode.Software);
+                long value = -1;
+                MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_INT64, ref value);
 
-                //long value = -1;
-                //MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_INT64, ref value);
+                StringBuilder valueString = new StringBuilder();
+                MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
 
-                //StringBuilder valueString = new StringBuilder();
-                //MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
-
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
-                //SetTriggerMode(TriggerMode.Software);
-                //return;
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, "TDI256");
-                //StringBuilder value = new StringBuilder();
-                //MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "TDIStages", MIL.M_TYPE_STRING, value);
-                //string stageString = value.ToString().Replace("TDI", "").Trim();
-
-                //TDIStages = Convert.ToInt32(stageString);
-                //TDIStages = 256;
-
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
+                if(valueString.ToString() != "Area")
+                    MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
             }
             else
             {
+                StringBuilder valueString = new StringBuilder();
+                MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
+
                 //SetTriggerMode(TriggerMode.Hardware);
-                //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
+                if(valueString.ToString() != "TDI")
+                    MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
                 //
             }
         }
