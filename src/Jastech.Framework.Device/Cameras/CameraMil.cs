@@ -212,11 +212,6 @@ namespace Jastech.Framework.Device.Cameras
         object testLock = new object();
         public override void GrabMulti(int grabCount)
         {
-            //for (int i = 0; i < BufferPoolCount; i++)
-            //{
-            //    MIL.MbufClear(_grabImageBuffer[i], 255);
-
-            //}
             _isGrabbing = true;
             GrabCount = 0;
             if (TriggerMode == TriggerMode.Software)
@@ -289,7 +284,6 @@ namespace Jastech.Framework.Device.Cameras
             CameraMil cameraMil = hUserData.Target as CameraMil;
 
             cameraMil.GrabCount++;
-            
             Console.WriteLine(cameraMil.GrabCount.ToString());
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();

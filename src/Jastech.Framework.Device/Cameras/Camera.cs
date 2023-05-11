@@ -81,8 +81,6 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract bool IsGrabbing();
 
-       // public abstract void SetOperationMode(TDIOperationMode operationMode);
-
         protected void ImageGrabbedCallback()
         {
             if (ImageGrabbed != null)
