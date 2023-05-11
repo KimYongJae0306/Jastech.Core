@@ -106,7 +106,7 @@ namespace Jastech.Framework.Device.Cameras
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-            ActiveTriggerCommand();
+           
 
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
@@ -129,6 +129,8 @@ namespace Jastech.Framework.Device.Cameras
                 for (int i = 0; i < BufferPoolCount; i++)
                     _grabImageBuffer[i] = MIL.MbufAllocColor(MilSystem.SystemId, 3, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
             }
+
+            ActiveTriggerCommand();
 
             return true;
         }
@@ -187,7 +189,6 @@ namespace Jastech.Framework.Device.Cameras
                     byte[] dataArray = new byte[ImageWidth * ImageHeight * ImageChannel];
 
                     MIL.MbufGet(LastGrabImage, dataArray);
-                    
                     return dataArray;
                 }
                 else
@@ -243,6 +244,7 @@ namespace Jastech.Framework.Device.Cameras
                     MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_SEQUENCE + MIL.M_COUNT(count), MIL.M_ASYNCHRONOUS, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
                 //}
             }
+            Thread.Sleep(100);
         }
 
         public override void GrabContinous()

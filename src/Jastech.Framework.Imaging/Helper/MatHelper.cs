@@ -14,6 +14,7 @@ namespace Jastech.Framework.Imaging.Helper
 {
     public static class MatHelper
     {
+        public static object lock1 =  new object();
         // Stride와 Width가 동일할 경우 사용
         public static Mat ByteArrayToMat(byte[] data, int width, int height, int channel)
         {

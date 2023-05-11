@@ -18,7 +18,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public SerialPortComm SerialPortComm { get; set; } = null;
 
         [JsonProperty]
-        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm
+        public double ResolutionAxisZ { get; set; } = 10.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm
 
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
@@ -92,20 +92,49 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             //****Example****
             //[설정값]
-            //Ball screw Pitch : 5 mm
+            //Ball screw Pitch : 5 mm(360도 회전시 Z축 Pitch)
             //Control Resolution : 10000 cts / mm-+
             //[입력값]
             //10 mm / sec
             //계산식 : 10[mm / sec] / ((360 / (5[mm] * 10000[cts]) / 360) * 5[mm]) = 100000[Hz]
             //Velocity TO Pulse(Hz) formula
+            //double hz = 1 / (BallScrewPitchAxisZ / value);
+            //double pulse = hz * ResolutionAxisZ;
+            double maxPulse = value / BallScrewPitchAxisZ;
 
-            int maxPulse = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * ResolutionAxisZ) / 360.0) * BallScrewPitchAxisZ));
-            maxPulse = (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
+            //int maxPulse = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * ResolutionAxisZ) / 360.0) * BallScrewPitchAxisZ));
+            //int maxPulse2 = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * 10000) / 360.0) * BallScrewPitchAxisZ));
+
+            maxPulse = MaxSppedAxisZ * 10;// (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
 
             string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
 
             SerialPortComm.Send(command);
         }
+
+        //public override void SetMotionMaxSpeed(double MaxSpped_um)
+        //{
+        //    //****Example****
+        //    //[설정값]
+        //    //Ball screw Pitch : 5 mm
+        //    //Control Resolution : 10000 cts / mm-+
+        //    //[입력값]
+        //    //10 mm / sec
+        //    //계산식 : 10[mm / sec] / ((360 / (5[mm] * 10000[cts]) / 360) * 5[mm]) = 100000[Hz]
+        //    //Velocity TO Pulse(Hz) formula
+
+        //    double MaxSpped_pulse = 
+        //    int maxPulse = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * ResolutionAxisZ) / 360.0) * BallScrewPitchAxisZ));
+        //    int maxPulse2 = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * 10000) / 360.0) * BallScrewPitchAxisZ));
+
+        //    maxPulse = (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
+        //    maxPulse2 = (maxPulse2 > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse2;
+
+        //    string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
+
+        //    SerialPortComm.Send(command);
+        //}
+
 
         public void SetAccDec(int value)
         {

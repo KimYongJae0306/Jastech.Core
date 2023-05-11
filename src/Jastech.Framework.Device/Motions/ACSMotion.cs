@@ -140,8 +140,9 @@ namespace Jastech.Framework.Device.Motions
 
         public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
         {
-            SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
-
+           // TurnOnServo(axisNo, true);
+            //SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
+            
             if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo, targetPosition))
                 Api.ToPointAsync(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, targetPosition);
         }
@@ -265,6 +266,8 @@ namespace Jastech.Framework.Device.Motions
             Api.SetDeceleration(axis, jogAcceleration);
             Api.SetKillDeceleration(axis, jogAcceleration * 2);
             Api.SetJerk(axis, jogJerk);
+
+            Thread.Sleep(300);
         }
 
         private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis, double targetPosition)

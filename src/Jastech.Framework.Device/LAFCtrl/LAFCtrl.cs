@@ -79,7 +79,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public int CenterofGravity { get; set; }
 
-        public double MPos { get; set; }
+        public double MPosPulse { get; set; }
 
         public bool IsNegativeLimit { get; set; }
 
@@ -90,7 +90,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             lock (_lock)
             {
                 CenterofGravity = centerOfCravity;
-                MPos = mPos;
+                MPosPulse = mPos;
                 IsNegativeLimit = isNegativeLimit;
                 IsPositiveLimit = isPositiveLimit;
             }
