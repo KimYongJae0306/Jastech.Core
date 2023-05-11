@@ -8,6 +8,7 @@ namespace Jastech.Framework.Comm.Protocol
 {
     public class NuriLAFProtocol : IProtocol
     {
+        private object _lock = new object();
         private string[] RequestDataArray = null;
 
         public bool MakePacket(byte[] unformattedPacket, out byte[] packet)
@@ -20,10 +21,13 @@ namespace Jastech.Framework.Comm.Protocol
 
             string requestData = Encoding.Default.GetString(packet);
 
-            if (requestData.Contains("uc rep"))
-                RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
-            else
-                RequestDataArray = null;
+            lock (_lock)
+            {
+                if (requestData.Contains("uc rep"))
+                    RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
+                else
+                    RequestDataArray = null;
+            }
 
             return true;
         }
@@ -37,16 +41,7 @@ namespace Jastech.Framework.Comm.Protocol
                 return false;
 
             if(RequestDataArray == null)
-            {
-                //packet = new byte[packetBuffer.Length];
-                //if (packet.Length > 0)
-                //{
-                //    Array.Copy(packetBuffer, packet, packet.Length);
-                //}
-                //string receiveData1 = Encoding.Default.GetString(packetBuffer);
-                //searchingLength = packet.Length;
                 return false;
-            }
 
             string receiveData = Encoding.Default.GetString(packetBuffer);
             string crlf = "\r\n";
@@ -57,17 +52,21 @@ namespace Jastech.Framework.Comm.Protocol
 
                 int count = 0;
                 Dictionary<int, int> searchIndexList = new Dictionary<int, int>();
-                foreach (var data in RequestDataArray)
+               
+                lock(_lock)
                 {
-                    if (data == ";uc")
-                        continue;
+                    foreach (var data in RequestDataArray)
+                    {
+                        if (data == ";uc")
+                            continue;
 
-                    bool isContain =splitMessage.Contains(data);
+                        bool isContain = splitMessage.Contains(data);
 
-                    if (isContain)
-                        searchIndexList.Add(splitMessage.IndexOf(data), data.Length);
-                    else
-                        count++;
+                        if (isContain)
+                            searchIndexList.Add(splitMessage.IndexOf(data), data.Length);
+                        else
+                            count++;
+                    }
                 }
 
                 if (count == 0)

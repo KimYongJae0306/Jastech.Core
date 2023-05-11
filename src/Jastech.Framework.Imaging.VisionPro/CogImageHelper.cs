@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -265,17 +266,33 @@ namespace Jastech.Framework.Imaging.VisionPro
         {
             if (colorFormat == ColorFormat.Gray)
             {
-                var dataSize = width * height;
-                var buffer = new SafeMalloc(dataSize);
-
-                Marshal.Copy(data, 0, buffer, dataSize);
-
                 CogImage8Root root = new CogImage8Root();
 
-                root.Initialize(width, height, buffer, width, buffer);
-                var cogImage = new CogImage8Grey();
-                cogImage.SetRoot(root);
-                return cogImage;
+                unsafe
+                {
+                    fixed(byte* dataPtr = data)
+                    {
+
+                        root.Initialize(width, height, (IntPtr)dataPtr, width, null);
+                        var cogImage = new CogImage8Grey();
+                        cogImage.SetRoot(root);
+                        
+                        return cogImage;
+                    }
+                }
+              
+
+                //var dataSize = width * height;
+                //var buffer = new SafeMalloc(dataSize);
+
+                //Marshal.Copy(data, 0, buffer, dataSize);
+
+                //CogImage8Root root = new CogImage8Root();
+
+                //root.Initialize(width, height, buffer, width, buffer);
+                //var cogImage = new CogImage8Grey();
+                //cogImage.SetRoot(root);
+                //return cogImage;
             }
             else if(colorFormat == ColorFormat.RGB24)
             {
@@ -302,6 +319,20 @@ namespace Jastech.Framework.Imaging.VisionPro
 
                 var cogImage = new CogImage24PlanarColor();
                 cogImage.SetRoots(cogRootR, cogRootG, cogRootB);
+
+                return cogImage;
+            }
+            return null;
+        }
+
+        public static ICogImage CovertImage(IntPtr ptr, int width, int height, ColorFormat colorFormat)
+        {
+            if (colorFormat == ColorFormat.Gray)
+            {
+                CogImage8Root root = new CogImage8Root();
+                root.Initialize(width, height, ptr, width, null);
+                var cogImage = new CogImage8Grey();
+                cogImage.SetRoot(root);
 
                 return cogImage;
             }

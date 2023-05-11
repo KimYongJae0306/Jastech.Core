@@ -68,8 +68,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (display.Image == null)
                 return;
 
-            display.PanX = display.Image.Width / 2 - point.X;
-            display.PanY = display.Image.Height / 2 - point.Y;
+            if(point != null)
+            {
+                if (point.X == 0 && point.Y == 0)
+                    return;
+
+                display.PanX = display.Image.Width / 2 - point.X;
+                display.PanY = display.Image.Height / 2 - point.Y;
+            }
         }
 
         public void ClearImage()

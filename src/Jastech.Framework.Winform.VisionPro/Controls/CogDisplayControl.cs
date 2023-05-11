@@ -592,11 +592,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        //private void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
-        //{
-        //    cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
-        //}
-
         private void btnPointToLine_Click(object sender, EventArgs e)
         {
             if (cogDisplay.Image == null)
@@ -630,6 +625,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 if (display.Image == null)
                     return;
+
+                if (display.Zoom < 0.2)
+                    display.Zoom = 0.2;
 
                 if (display.Zoom > 10)
                     display.Zoom = 10;
