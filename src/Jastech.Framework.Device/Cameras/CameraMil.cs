@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Device.Grabbers;
+﻿using Emgu.CV.Structure;
+using Jastech.Framework.Device.Grabbers;
 using Jastech.Framework.Imaging;
 using Jastech.Framework.Matrox;
 using Jastech.Framework.Util.Helper;
@@ -23,6 +24,8 @@ namespace Jastech.Framework.Device.Cameras
 
         private static object _lock = new object();
 
+        private bool _isContinuousGrab { get; set; } = false;
+
         private MilSystem MilSystem { get; set; } = null;
 
         private MIL_ID DigitizerId { get; set; }
@@ -36,6 +39,11 @@ namespace Jastech.Framework.Device.Cameras
         private MIL_DIG_HOOK_FUNCTION_PTR _processingFunctionPtr = null;
 
         private bool _isGrabbing { get; set; } = false;
+
+        private MIL_ID MilDisplay;
+
+        private MIL_ID MilImage;
+
         #endregion
 
         #region 속성
@@ -59,6 +67,14 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public CameraType CameraType { get; set; }
+
+        [JsonProperty]
+        public string DcfFile { get; set; } = "";
+
+        private Task UpdateLiveBufferTask { get; set; }
+
+        private CancellationTokenSource CancelUpdateLiveBufferTask { get; set; }
+     
         #endregion
 
         #region 이벤트
@@ -84,16 +100,7 @@ namespace Jastech.Framework.Device.Cameras
             if (MilSystem == null)
                 return false;
 
-            string dcfFile = GetDcfFile(CameraType);
-            if (MilSystemType == MilSystemType.Rapixo)
-                dcfFile = "";
-            else
-            {
-                if (dcfFile == "")
-                    return false;
-            }
-            
-            if (CreateDigitizerId(dcfFile) == false)
+            if (CreateDigitizerId(DcfFile) == false)
                 return false;
 
             MIL.MappControl(MIL.M_ERROR, MIL.M_PRINT_ENABLE);
@@ -106,7 +113,8 @@ namespace Jastech.Framework.Device.Cameras
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-           
+            ActiveTriggerCommand();
+            SetTDIOperationMode(TDIOperationMode);
 
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
@@ -122,7 +130,16 @@ namespace Jastech.Framework.Device.Cameras
             if (NumOfBand == 1)
             {
                 for (int i = 0; i < BufferPoolCount; i++)
-                    _grabImageBuffer[i] = MIL.MbufAlloc2d(MilSystem.SystemId, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
+                {
+                    //_grabImageBuffer[i] = MIL.MbufAlloc2d(MilSystem.SystemId, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
+                    _grabImageBuffer[i] = MIL.MbufAlloc2d(MilSystem.SystemId, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, ref MilImage); // MIL Display 사용시
+                }
+                
+                // MIL Display 사용시
+                //_grabImageBuffer[i] = MIL.MbufAlloc2d(MilSystem.SystemId, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB + MIL.M_DISP, ref MilImage); // MIL Display 사용시
+                //MIL.MdispAlloc(MilSystem.SystemId, MIL.M_DEFAULT, "M_DEFAULT", MIL.M_WINDOWED, ref MilDisplay);
+                //MIL.MdigGrabContinuous(DigitizerId, MilImage);
+                //MIL.MdispSelect(MilDisplay, MilImage);
             }
             else
             {
@@ -164,20 +181,6 @@ namespace Jastech.Framework.Device.Cameras
             return true;
         }
 
-        private string GetDcfFile(CameraType cameraType)
-        {
-            string dcfFile = "";
-            switch (cameraType)
-            {
-                case CameraType.VT_6k35c_trigger:
-                    dcfFile = "VT-6k3.5c_trigger.dcf";
-                    break;
-                default:
-                    break;
-            }
-            return dcfFile;
-        }
-
         public override byte[] GetGrabbedImage()
         {
             lock (_lock)
@@ -192,9 +195,7 @@ namespace Jastech.Framework.Device.Cameras
                     return dataArray;
                 }
                 else
-                {
                     return null;
-                }
             }
         }
 
@@ -209,11 +210,16 @@ namespace Jastech.Framework.Device.Cameras
             MIL.MdigGrab(DigitizerId, LastGrabImage);
             _isGrabbing = false;
         }
-        object testLock = new object();
+
         public override void GrabMulti(int grabCount)
         {
+            if (TDIOperationMode == TDIOperationMode.Area)
+                return;
+
             _isGrabbing = true;
+            _isContinuousGrab = false;
             GrabCount = 0;
+
             if (TriggerMode == TriggerMode.Software)
             {
                 if (_processingFunctionPtr == null)
@@ -226,18 +232,8 @@ namespace Jastech.Framework.Device.Cameras
                 if (_processingFunctionPtr == null)
                     _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-                //if(TDIOperationMode == TDIOperationMode.Area)
-                //{
-                //    MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-                //}
-                //else
-                //{
-                    //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
-                    // 정해진 GrabCount 만큼 영상 취득
-                    //int count = grabCount < BufferPoolCount ? grabCount : BufferPoolCount;
-                    int count = grabCount;
-                    MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_SEQUENCE + MIL.M_COUNT(count), MIL.M_ASYNCHRONOUS, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-                //}
+                int count = grabCount;
+                MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_SEQUENCE + MIL.M_COUNT(count), MIL.M_ASYNCHRONOUS, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
             }
             Thread.Sleep(100);
         }
@@ -245,30 +241,26 @@ namespace Jastech.Framework.Device.Cameras
         public override void GrabContinous()
         {
             _isGrabbing = true;
+            _isContinuousGrab = true;
             GrabCount = 0;
-            if (_processingFunctionPtr != null)
-                _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
 
-            // Stop 명령어 올때 까지 계속해서 Grab
-            MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_START, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
+            //MIL.MdispAlloc(MilSystem.SystemId, MIL.M_DEFAULT, "M_DEFAULT", MIL.M_WINDOWED, ref MilDisplay);
+            //MIL.MdigGrabContinuous(DigitizerId, MilImage);
+            //MIL.MdispSelect(MilDisplay, MilImage);
+
+            MIL.MdigGrabContinuous(DigitizerId, MilImage);
+            StartUpdateLiveBufferTask();
         }
+
         public override void Stop()
         {
             _isGrabbing = false;
-            if (TriggerMode == TriggerMode.Software)
-            {
-                MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_DEFAULT, _processingFunctionPtr,  GCHandle.ToIntPtr(_thisHandle));
-            }
+            if(_isContinuousGrab)
+                MIL.MdigHalt(DigitizerId);
             else
-            {
                 MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
-            }
-            //Thread.Sleep(50);
-        }
 
-        public override bool IsGrabbing()
-        {
-            return _isGrabbing;
+            StopUpdateLiveBufferTask();
         }
 
         static MIL_INT ProcessingFunction(MIL_INT HookType, MIL_ID HookId, IntPtr HookDataPtr)
@@ -291,6 +283,11 @@ namespace Jastech.Framework.Device.Cameras
             Logger.Debug(LogType.Device, message);
 
             return MIL.M_NULL;
+        }
+
+        public override bool IsGrabbing()
+        {
+            return _isGrabbing;
         }
 
         public override void SetExposureTime(double value)
@@ -332,8 +329,40 @@ namespace Jastech.Framework.Device.Cameras
             long width = (long)value;
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
         }
+
+        public void StartUpdateLiveBufferTask()
+        {
+            if (UpdateLiveBufferTask != null)
+                return;
+
+            CancelUpdateLiveBufferTask = new CancellationTokenSource();
+            UpdateLiveBufferTask = new Task(UpdateLiveBuffer, CancelUpdateLiveBufferTask.Token);
+            UpdateLiveBufferTask.Start();
+        }
+
+        public void StopUpdateLiveBufferTask()
+        {
+            if (UpdateLiveBufferTask == null)
+                return;
+
+            CancelUpdateLiveBufferTask.Cancel();
+            UpdateLiveBufferTask.Wait();
+            UpdateLiveBufferTask = null;
+        }
+
+        private void UpdateLiveBuffer()
+        {
+            while (true)
+            {
+                if (CancelUpdateLiveBufferTask.IsCancellationRequested)
+                    break;
+                LastGrabImage = MilImage;
+                ImageGrabbedCallback();
+                Thread.Sleep(0);
+            }
+        }
         #endregion
-    }
+        }
 
     public partial class CameraMil : ICameraTriggerable
     {
@@ -426,14 +455,10 @@ namespace Jastech.Framework.Device.Cameras
 
         public void SetTDIOperationMode(TDIOperationMode mode)
         {
-            if (TDIOperationMode == mode)
-                return;
             TDIOperationMode = mode;
-            return;
+   
             if (TDIOperationMode == TDIOperationMode.Area)
             {
-
-                SetTriggerMode(TriggerMode.Software);
                 long value = -1;
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_INT64, ref value);
 
@@ -448,10 +473,8 @@ namespace Jastech.Framework.Device.Cameras
                 StringBuilder valueString = new StringBuilder();
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
 
-                //SetTriggerMode(TriggerMode.Hardware);
                 if(valueString.ToString() != "TDI")
                     MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
-                //
             }
         }
     }

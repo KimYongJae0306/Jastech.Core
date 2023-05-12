@@ -11,13 +11,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
     public class VisionProCaliperResult : VisionResult
     {
-        #region 필드
-        #endregion
-
         #region 속성
         public long TactTime { get; set; } = 0;
-        public List<CaliperMatch> CaliperMatchList { get; set; } = new List<CaliperMatch>();
 
+        public List<CaliperMatch> CaliperMatchList { get; set; } = new List<CaliperMatch>();
+        #endregion
+
+        #region 메서드
         public bool Found
         {
             get => CaliperMatchList.Count() > 0;
@@ -43,24 +43,21 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
                 return maxCaliperMatch;
             }
         }
-        #endregion
 
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        #endregion
-
-        #region 메서드
+        public VisionProCaliperResult DeepCopy()
+        {
+            VisionProCaliperResult result = new VisionProCaliperResult();
+            result.TactTime = TactTime;
+            result.CaliperMatchList = CaliperMatchList.Select(x => x.DeepCopy()).ToList();
+            return result;
+        }
         #endregion
 
     }
 
     public class CaliperMatch
     {
+        #region 속성
         public PointF ReferencePos { get; set; }
 
         public double ReferenceWidth { get; set; }
@@ -76,6 +73,25 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public float Score { get; set; }
 
         public CogCompositeShape ResultGraphics { get; set; }
+        #endregion
+
+        #region 메서드
+        public CaliperMatch DeepCopy()
+        {
+            CaliperMatch caliperMatch = new CaliperMatch();
+
+            caliperMatch.ReferencePos = new PointF(ReferencePos.X, ReferencePos.Y);
+            caliperMatch.ReferenceWidth = ReferenceWidth;
+            caliperMatch.ReferenceHeight = ReferenceHeight;
+            caliperMatch.ReferenceRotation = ReferenceRotation;
+            caliperMatch.ReferenceSkew = ReferenceSkew;
+            caliperMatch.FoundPos = new PointF(FoundPos.X, FoundPos.Y);
+            caliperMatch.Score = Score;
+            caliperMatch.ResultGraphics = ResultGraphics.Copy(CogCopyShapeConstants.GeometryOnly); // 인자 확인 필요
+
+            return caliperMatch;
+        }
+        #endregion
     }
 }
 

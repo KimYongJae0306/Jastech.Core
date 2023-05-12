@@ -140,7 +140,6 @@ namespace Jastech.Framework.Device.Motions
 
         public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
         {
-           // TurnOnServo(axisNo, true);
             //SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
             
             if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo, targetPosition))
