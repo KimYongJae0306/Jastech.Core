@@ -234,7 +234,6 @@ namespace Jastech.Framework.Device.LAFCtrl
         public void RequestData(string command)
         {
             string makeData = MakeGetCommand(command);
-
             SerialPortComm.Send(makeData);
         }
 

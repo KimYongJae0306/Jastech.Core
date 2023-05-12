@@ -25,6 +25,10 @@ namespace Jastech.Framework.Comm.Protocol
             {
                 if (requestData.Contains("uc rep"))
                     RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
+                else if(requestData.Contains("uc"))
+                {
+                    RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
+                }
                 else
                     RequestDataArray = null;
             }
@@ -44,6 +48,7 @@ namespace Jastech.Framework.Comm.Protocol
                 return false;
 
             string receiveData = Encoding.Default.GetString(packetBuffer);
+      
             string crlf = "\r\n";
             int splitIndex = receiveData.IndexOf(crlf);
             if (splitIndex > 0) 
@@ -55,6 +60,8 @@ namespace Jastech.Framework.Comm.Protocol
                
                 lock(_lock)
                 {
+                    if (RequestDataArray == null)
+                        return false;
                     foreach (var data in RequestDataArray)
                     {
                         if (data == ";uc")
