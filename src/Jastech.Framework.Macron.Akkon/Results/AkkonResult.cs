@@ -9,43 +9,66 @@ namespace Jastech.Framework.Macron.Akkon.Results
 {
     public class AkkonResult
     {
-        [JsonProperty]
+        #region 속성
         public int StageNo { get; set; }
 
-        [JsonProperty]
         public int TabNo { get; set; }
 
-        [JsonProperty]
         public int AvgBlobCount { get; set; }
 
-        [JsonProperty]
         public float AvgLength { get; set; }
 
-        [JsonProperty]
         public List<LeadResult> LeadResultList = new List<LeadResult>();
+        #endregion
+
+        #region 메서드
+        public void Dispose()
+        {
+            LeadResultList.Clear();
+        }
+
+        public AkkonResult DeepCopy()
+        {
+            AkkonResult result = new AkkonResult();
+            result.StageNo = StageNo;
+            result.TabNo = TabNo;
+            result.AvgBlobCount = AvgBlobCount;
+            result.AvgLength = AvgLength;
+            result.LeadResultList = LeadResultList.Select(x => x.DeepCopy()).ToList();
+
+            return result;
+        }
+        #endregion
     }
 
     public class LeadResult
     {
-        [JsonProperty]
         public int Id { get; set; }
 
-        [JsonProperty]
         public bool IsGood { get; set; }
 
-        [JsonProperty]
         public float AvgStrength { get; set; }
 
-        [JsonProperty]
         public float LeadAvg { get; set; }
 
-        [JsonProperty]
         public float LeadStdDev { get; set; }
 
-        [JsonProperty]
         public float Length { get; set; }
 
-        [JsonProperty]
         public int BlobCount { get; set; }
+
+        public LeadResult DeepCopy()
+        {
+            LeadResult result = new LeadResult();
+            result.Id = Id;
+            result.IsGood = IsGood;
+            result.AvgStrength = AvgStrength;
+            result.LeadAvg = LeadAvg;
+            result.LeadStdDev = LeadStdDev;
+            result.Length = Length;
+            result.BlobCount = BlobCount;
+
+            return result;
+        }
     }
 }

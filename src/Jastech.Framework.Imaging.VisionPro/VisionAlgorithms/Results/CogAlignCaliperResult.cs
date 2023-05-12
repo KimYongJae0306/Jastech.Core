@@ -9,8 +9,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
     public class CogAlignCaliperResult : VisionResult
     {
+        #region 속성
         public List<VisionProCaliperResult> CogAlignResult { get; private set; } = new List<VisionProCaliperResult>();
+        #endregion
 
+        #region 메서드
         public void AddAlignResult(VisionProCaliperResult result)
         {
             CogAlignResult.Add(result);
@@ -20,5 +23,19 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         {
             CogAlignResult.AddRange(resultList);
         }
+        public void Dispose()
+        {
+            CogAlignResult.ForEach(x => x.Dispose());
+            CogAlignResult.Clear();
+        }
+
+        public CogAlignCaliperResult DeepCopy()
+        {
+            CogAlignCaliperResult result = new CogAlignCaliperResult();
+            result.CogAlignResult = CogAlignResult.Select(x => x.DeepCopy()).ToList();
+
+            return result;
+        }
+        #endregion
     }
 }

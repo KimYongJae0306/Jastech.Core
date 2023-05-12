@@ -13,25 +13,20 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
     public class CogPatternMatchingResult : VisionResult
     {
         #region 속성
-        [JsonProperty]
         public long TactTime { get; set; }
 
-        [JsonProperty]
         public List<PatternMatchPos> MatchPosList { get; set; } = new List<PatternMatchPos>();
 
-        [JsonProperty]
         public bool Found
         {
             get => MatchPosList.Count() > 0;
         }
 
-        [JsonProperty]
         public float MaxScore
         {
             get => MatchPosList.Max(x => x.Score);
         }
 
-        [JsonProperty]
         public PatternMatchPos MaxMatchPos
         {
             get
@@ -46,33 +41,42 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             }
         }
         #endregion
+
+        #region 메서드
+        public void Dispose()
+        {
+            MatchPosList.ForEach(x => x.Dispose());
+            MatchPosList.Clear();
+        }
+
+        public CogPatternMatchingResult DeepCopy()
+        {
+            CogPatternMatchingResult result = new CogPatternMatchingResult();
+            result.TactTime = TactTime;
+            result.MatchPosList = MatchPosList.Select(x => x.DeepCopy()).ToList();
+
+            return result;
+        }
+        #endregion
     }
 
     public class PatternMatchPos
     {
         #region 속성
-        [JsonProperty]
         public PointF ReferencePos { get; set; }
 
-        [JsonProperty]
         public float ReferenceWidth { get; set; }
 
-        [JsonProperty]
         public float ReferenceHeight { get; set; }
 
-        [JsonProperty]
         public PointF FoundPos { get; set; }
 
-        [JsonProperty]
         public float Score { get; set; }
 
-        [JsonProperty]
         public float Scale { get; set; }
 
-        [JsonProperty]
         public double Angle { get; set; }
 
-        [JsonIgnore]
         public CogCompositeShape ResultGraphics { get; set; }
         #endregion
 
@@ -80,6 +84,26 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public PointF TranslateOffset()
         {
             return new PointF(ReferencePos.X - FoundPos.X, ReferencePos.Y - FoundPos.Y);
+        }
+
+        public void Dispose()
+        {
+            ResultGraphics?.Dispose();
+        }
+
+        public PatternMatchPos DeepCopy()
+        {
+            PatternMatchPos matchPos = new PatternMatchPos();
+            matchPos.ReferencePos = new PointF(ReferencePos.X, ReferencePos.Y);
+            matchPos.ReferenceWidth = ReferenceWidth;
+            matchPos.ReferenceHeight = ReferenceHeight;
+            matchPos.FoundPos = new PointF(FoundPos.X, FoundPos.Y);
+            matchPos.Score = Score;
+            matchPos.Scale = Scale;
+            matchPos.Angle = Angle;
+            matchPos.ResultGraphics = ResultGraphics.CopyBase(CogCopyShapeConstants.GeometryOnly) as CogCompositeShape; // 인자 확인 필요
+
+            return matchPos;
         }
         #endregion
     }

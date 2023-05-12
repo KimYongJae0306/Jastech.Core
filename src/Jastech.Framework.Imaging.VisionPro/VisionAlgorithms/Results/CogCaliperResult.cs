@@ -15,9 +15,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public long TactTime { get; set; } = 0;
 
         public List<CaliperMatch> CaliperMatchList { get; set; } = new List<CaliperMatch>();
-        #endregion
 
-        #region 메서드
         public bool Found
         {
             get => CaliperMatchList.Count() > 0;
@@ -43,6 +41,14 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
                 return maxCaliperMatch;
             }
         }
+        #endregion
+
+        #region 메서드
+        public void Dispose()
+        {
+            CaliperMatchList.ForEach(x => x.Dispose());
+            CaliperMatchList.Clear();
+        }
 
         public VisionProCaliperResult DeepCopy()
         {
@@ -52,7 +58,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             return result;
         }
         #endregion
-
     }
 
     public class CaliperMatch
@@ -76,6 +81,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         #endregion
 
         #region 메서드
+        public void Dispose()
+        {
+            ResultGraphics?.Dispose();
+        }
+
         public CaliperMatch DeepCopy()
         {
             CaliperMatch caliperMatch = new CaliperMatch();
@@ -88,7 +98,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             caliperMatch.FoundPos = new PointF(FoundPos.X, FoundPos.Y);
             caliperMatch.Score = Score;
             caliperMatch.ResultGraphics = ResultGraphics.Copy(CogCopyShapeConstants.GeometryOnly); // 인자 확인 필요
-
+            
             return caliperMatch;
         }
         #endregion

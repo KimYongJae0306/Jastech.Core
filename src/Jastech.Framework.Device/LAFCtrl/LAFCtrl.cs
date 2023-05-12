@@ -11,19 +11,28 @@ namespace Jastech.Framework.Device.LAFCtrl
 {
     public abstract partial class LAFCtrl : IDevice
     {
+        #region 속성
         public bool IsLaserOn { get; protected set; }
 
         public LAFStatus Status { get; set; } = new LAFStatus();
+        #endregion
 
+        #region 이벤트
+        public event LAFEventHandler DataReceived;
+        #endregion
+
+        #region 델리게이트
+        public delegate void LAFEventHandler(string name, byte[] data);
+        #endregion
+
+        #region 생성자
         public LAFCtrl(string name)
         {
             Name = name;
         }
+        #endregion
 
-        public delegate void LAFEventHandler(string name, byte[] data);
-
-        public event LAFEventHandler DataReceived;
-
+        #region 메서드
         public abstract void SetMotionRelativeMove(Direction direction, double value);
 
         public abstract void SetMotionAbsoluteMove(double value);
@@ -44,6 +53,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             DataReceived?.Invoke(Name, data);
         }
+        #endregion
     }
 
     public abstract partial class LAFCtrl : IDevice
@@ -73,7 +83,14 @@ namespace Jastech.Framework.Device.LAFCtrl
 
     public class LAFStatus
     {
+        #region 필드
         private object _lock { get; set; } = new object();
+        #endregion
+
+        #region 속성
+        public bool IsLaserOn { get; set; }
+
+        public bool IsAutoFocusOn { get; set; }
 
         public string Name { get; set; }
 
@@ -84,22 +101,6 @@ namespace Jastech.Framework.Device.LAFCtrl
         public bool IsNegativeLimit { get; set; }
 
         public bool IsPositiveLimit { get; set; }
-
-        public void SetStatus(int centerOfCravity, double mPos, bool isNegativeLimit, bool isPositiveLimit)
-        {
-            lock (_lock)
-            {
-                CenterofGravity = centerOfCravity;
-                MPosPulse = mPos;
-                IsNegativeLimit = isNegativeLimit;
-                IsPositiveLimit = isPositiveLimit;
-            }
-        }
-
-        public LAFStatus GetStatus()
-        {
-            lock (_lock)
-                return this;
-        }
+        #endregion
     }
 }

@@ -157,11 +157,23 @@ namespace Jastech.Framework.Device.LAFCtrl
             SerialPortComm.Send(command);
         }
 
+        public void GetLaserOnValue()
+        {
+            string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF);
+            SerialPortComm.Send(command);
+        }
+
         public void SetAutoFocusOnOFF(bool isOn)
         {
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_AF_ONOFF, value);
+            SerialPortComm.Send(command);
+        }
+
+        public void GetAutoFocusValue()
+        {
+            string command = MakeSetCommand(CMD_WRITE_AF_ONOFF);
             SerialPortComm.Send(command);
         }
 
