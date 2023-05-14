@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Imaging.Result;
+﻿using AW;
+using Jastech.Framework.Imaging.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,20 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         #region 메서드
         public void AddAlignResult(VisionProCaliperResult result)
         {
+            if (result == null)
+                return;
+
             CogAlignResult.Add(result);
         }
 
         public void AddAlignResult(List<VisionProCaliperResult> resultList)
         {
+            if (resultList == null)
+                return;
+
+            if (resultList.Count <= 0)
+                return;
+
             CogAlignResult.AddRange(resultList);
         }
         public void Dispose()
@@ -32,7 +42,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public CogAlignCaliperResult DeepCopy()
         {
             CogAlignCaliperResult result = new CogAlignCaliperResult();
-            result.CogAlignResult = CogAlignResult.Select(x => x.DeepCopy()).ToList();
+            result.CogAlignResult = CogAlignResult?.Select(x => x.DeepCopy()).ToList();
 
             return result;
         }

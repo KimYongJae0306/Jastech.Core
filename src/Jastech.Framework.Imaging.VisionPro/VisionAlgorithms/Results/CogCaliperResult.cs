@@ -54,7 +54,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         {
             VisionProCaliperResult result = new VisionProCaliperResult();
             result.TactTime = TactTime;
-            result.CaliperMatchList = CaliperMatchList.Select(x => x.DeepCopy()).ToList();
+            if(CaliperMatchList.Count > 0)
+                result.CaliperMatchList = CaliperMatchList?.Select(x => x.DeepCopy()).ToList();
             return result;
         }
         #endregion
@@ -97,7 +98,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             caliperMatch.ReferenceSkew = ReferenceSkew;
             caliperMatch.FoundPos = new PointF(FoundPos.X, FoundPos.Y);
             caliperMatch.Score = Score;
-            caliperMatch.ResultGraphics = ResultGraphics.Copy(CogCopyShapeConstants.GeometryOnly); // 인자 확인 필요
+            caliperMatch.ResultGraphics = ResultGraphics?.Copy(CogCopyShapeConstants.GeometryOnly); // 인자 확인 필요
             
             return caliperMatch;
         }

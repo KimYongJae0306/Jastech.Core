@@ -105,7 +105,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             //int maxPulse = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * ResolutionAxisZ) / 360.0) * BallScrewPitchAxisZ));
             //int maxPulse2 = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * 10000) / 360.0) * BallScrewPitchAxisZ));
 
-            maxPulse = MaxSppedAxisZ * 10;// (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
+            maxPulse = 300000;//MaxSppedAxisZ * 10;// (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
 
             string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
 
