@@ -109,6 +109,8 @@ namespace Jastech.Framework.Device.Cameras
 #elif RELEASE
                         MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
+
+            SetImageHeight(1024);
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
