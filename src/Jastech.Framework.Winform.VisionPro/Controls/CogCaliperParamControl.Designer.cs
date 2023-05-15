@@ -33,11 +33,11 @@
             this.tlpCaliperParam = new System.Windows.Forms.TableLayoutPanel();
             this.lblEdgePolarity = new System.Windows.Forms.Label();
             this.tlpEdgePolarity = new System.Windows.Forms.TableLayoutPanel();
-            this.rdoDarkToLight = new System.Windows.Forms.RadioButton();
-            this.rdoLightToDark = new System.Windows.Forms.RadioButton();
             this.lblFilterSize = new System.Windows.Forms.Label();
             this.lblEdgeThreshold = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblDarkToLight = new System.Windows.Forms.Label();
+            this.lblLightToDark = new System.Windows.Forms.Label();
             this.tlpCaliperParam.SuspendLayout();
             this.tlpEdgePolarity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -110,8 +110,8 @@
             // 
             this.tlpEdgePolarity.ColumnCount = 1;
             this.tlpEdgePolarity.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpEdgePolarity.Controls.Add(this.rdoDarkToLight, 0, 0);
-            this.tlpEdgePolarity.Controls.Add(this.rdoLightToDark, 0, 1);
+            this.tlpEdgePolarity.Controls.Add(this.lblLightToDark, 0, 1);
+            this.tlpEdgePolarity.Controls.Add(this.lblDarkToLight, 0, 0);
             this.tlpEdgePolarity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpEdgePolarity.Location = new System.Drawing.Point(212, 0);
             this.tlpEdgePolarity.Margin = new System.Windows.Forms.Padding(0);
@@ -121,40 +121,6 @@
             this.tlpEdgePolarity.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpEdgePolarity.Size = new System.Drawing.Size(212, 80);
             this.tlpEdgePolarity.TabIndex = 1;
-            // 
-            // rdoDarkToLight
-            // 
-            this.rdoDarkToLight.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoDarkToLight.AutoSize = true;
-            this.rdoDarkToLight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoDarkToLight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoDarkToLight.Location = new System.Drawing.Point(0, 0);
-            this.rdoDarkToLight.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoDarkToLight.Name = "rdoDarkToLight";
-            this.rdoDarkToLight.Size = new System.Drawing.Size(212, 40);
-            this.rdoDarkToLight.TabIndex = 0;
-            this.rdoDarkToLight.TabStop = true;
-            this.rdoDarkToLight.Text = "DARK ▶ LIGHT";
-            this.rdoDarkToLight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoDarkToLight.UseVisualStyleBackColor = false;
-            this.rdoDarkToLight.CheckedChanged += new System.EventHandler(this.rdoDarkToLight_CheckedChanged);
-            // 
-            // rdoLightToDark
-            // 
-            this.rdoLightToDark.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdoLightToDark.AutoSize = true;
-            this.rdoLightToDark.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.rdoLightToDark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoLightToDark.Location = new System.Drawing.Point(0, 40);
-            this.rdoLightToDark.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoLightToDark.Name = "rdoLightToDark";
-            this.rdoLightToDark.Size = new System.Drawing.Size(212, 40);
-            this.rdoLightToDark.TabIndex = 0;
-            this.rdoLightToDark.TabStop = true;
-            this.rdoLightToDark.Text = "LIGHT ▶ DARK";
-            this.rdoLightToDark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdoLightToDark.UseVisualStyleBackColor = false;
-            this.rdoLightToDark.CheckedChanged += new System.EventHandler(this.rdoLightToDark_CheckedChanged);
             // 
             // lblFilterSize
             // 
@@ -197,6 +163,34 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(506, 192);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // lblDarkToLight
+            // 
+            this.lblDarkToLight.AutoSize = true;
+            this.lblDarkToLight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDarkToLight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDarkToLight.Location = new System.Drawing.Point(0, 0);
+            this.lblDarkToLight.Margin = new System.Windows.Forms.Padding(0);
+            this.lblDarkToLight.Name = "lblDarkToLight";
+            this.lblDarkToLight.Size = new System.Drawing.Size(212, 40);
+            this.lblDarkToLight.TabIndex = 4;
+            this.lblDarkToLight.Text = "DARK ▶ LIGHT";
+            this.lblDarkToLight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDarkToLight.Click += new System.EventHandler(this.lblDarkToLight_Click);
+            // 
+            // lblLightToDark
+            // 
+            this.lblLightToDark.AutoSize = true;
+            this.lblLightToDark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLightToDark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblLightToDark.Location = new System.Drawing.Point(0, 40);
+            this.lblLightToDark.Margin = new System.Windows.Forms.Padding(0);
+            this.lblLightToDark.Name = "lblLightToDark";
+            this.lblLightToDark.Size = new System.Drawing.Size(212, 40);
+            this.lblLightToDark.TabIndex = 3;
+            this.lblLightToDark.Text = "LIGHT ▶ DARK";
+            this.lblLightToDark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLightToDark.Click += new System.EventHandler(this.lblLightToDark_Click);
+            // 
             // CogCaliperParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -222,12 +216,12 @@
         private System.Windows.Forms.Label lblFilterSizeValue;
         private System.Windows.Forms.Label lblEdgeThresholdValue;
         private System.Windows.Forms.TableLayoutPanel tlpCaliperParam;
-        private System.Windows.Forms.RadioButton rdoDarkToLight;
-        private System.Windows.Forms.RadioButton rdoLightToDark;
         private System.Windows.Forms.TableLayoutPanel tlpEdgePolarity;
         private System.Windows.Forms.Label lblEdgePolarity;
         private System.Windows.Forms.Label lblFilterSize;
         private System.Windows.Forms.Label lblEdgeThreshold;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblDarkToLight;
+        private System.Windows.Forms.Label lblLightToDark;
     }
 }

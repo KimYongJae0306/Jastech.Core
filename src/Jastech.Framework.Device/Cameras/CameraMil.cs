@@ -109,6 +109,7 @@ namespace Jastech.Framework.Device.Cameras
 #elif RELEASE
                         MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
+            SetImageHeight(ImageHeight);
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
@@ -276,6 +277,7 @@ namespace Jastech.Framework.Device.Cameras
             CameraMil cameraMil = hUserData.Target as CameraMil;
 
             cameraMil.GrabCount++;
+            Console.WriteLine(cameraMil.GrabCount.ToString());
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
             string message = string.Format("Camera Name : {0} Grab Count : {1}", cameraMil.Name, cameraMil.GrabCount);
