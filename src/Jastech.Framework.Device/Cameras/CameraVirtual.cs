@@ -83,6 +83,11 @@ namespace Jastech.Framework.Device.Cameras
         {
             return false;
         }
+
+        public override void SetImageHeight(int value)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 

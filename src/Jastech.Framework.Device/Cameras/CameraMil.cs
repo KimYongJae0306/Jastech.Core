@@ -329,6 +329,17 @@ namespace Jastech.Framework.Device.Cameras
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
         }
 
+        public override void SetImageHeight(int value)
+        {
+            // 원본
+            //long height = (long)value;
+            //MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Height", MIL.M_TYPE_INT64, ref height);
+
+
+            MIL_INT height = value;
+            MIL.MdigControl(DigitizerId, MIL.M_SOURCE_SIZE_Y, height);
+        }
+
         public void StartUpdateLiveBufferTask()
         {
             if (UpdateLiveBufferTask != null)
@@ -361,7 +372,7 @@ namespace Jastech.Framework.Device.Cameras
             }
         }
         #endregion
-        }
+    }
 
     public partial class CameraMil : ICameraTriggerable
     {

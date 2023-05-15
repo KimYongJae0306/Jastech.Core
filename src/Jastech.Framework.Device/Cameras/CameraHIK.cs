@@ -218,6 +218,11 @@ namespace Jastech.Framework.Device.Cameras
         {
             //MVS 연결 후 작성 예정
         }
+
+        public override void SetImageHeight(int value)
+        {
+            //MVS 연결 후 작성 예정
+        }
         #endregion
 
     }

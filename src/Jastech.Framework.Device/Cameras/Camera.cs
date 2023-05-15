@@ -69,6 +69,8 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract void SetImageWidth(int value);
 
+        public abstract void SetImageHeight(int value);
+
         public abstract byte[] GetGrabbedImage();
 
         public abstract void GrabOnce();
