@@ -95,6 +95,7 @@ namespace Jastech.Framework.Macron.Akkon
                     return true;
             }
 
+            
             ATTWrapper.AWFreeInspectionFlag();
             ATTWrapper.AWDeleteInspManager();
             ATTWrapper.AWCreateInspManager(akkonParam.StageCount, akkonParam.TabCount);
