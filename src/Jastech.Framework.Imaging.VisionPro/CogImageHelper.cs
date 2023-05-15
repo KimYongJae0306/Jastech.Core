@@ -2,6 +2,7 @@
 using Cognex.VisionPro.ImageFile;
 using Cognex.VisionPro.ImageProcessing;
 using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

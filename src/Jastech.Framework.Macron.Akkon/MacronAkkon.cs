@@ -94,7 +94,6 @@ namespace Jastech.Framework.Macron.Akkon
                     && PrevAkkonParam.InspOption.InspResizeRatio == akkonParam.InspOption.InspResizeRatio)
                     return true;
             }
-
             ATTWrapper.AWFreeInspectionFlag();
             ATTWrapper.AWDeleteInspManager();
             ATTWrapper.AWCreateInspManager(akkonParam.StageCount, akkonParam.TabCount);
@@ -207,7 +206,7 @@ namespace Jastech.Framework.Macron.Akkon
             unsafe
             {
                 sw.Restart();
-
+                Console.WriteLine("Akkon Inpsection");
                 InspectDoneEvent.Reset();
                 ATTWrapper.AWATTFullInspection(stageNo, tabNo, (byte*)image.DataPointer.ToPointer(), image.Width, image.Height);
                 bool isInspected = false;

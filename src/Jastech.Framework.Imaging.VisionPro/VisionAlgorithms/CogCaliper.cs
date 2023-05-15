@@ -40,7 +40,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             var resultList = caliperParam.Run();
 
             sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds.ToString());
 
             result.TactTime = sw.ElapsedMilliseconds;
 
