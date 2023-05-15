@@ -86,15 +86,6 @@ namespace Jastech.Framework.Macron.Akkon
         {
             if (ThreadCnt < 0)
                 return false;
-
-            if(PrevAkkonParam != null)
-            {
-                //if (PrevAkkonParam.StageCount == akkonParam.StageCount && PrevAkkonParam.TabCount == akkonParam.TabCount &&
-                //    PrevAkkonParam.SliceWidth == akkonParam.SliceWidth && PrevAkkonParam.SliceHeight == akkonParam.SliceHeight
-                //    && PrevAkkonParam.InspOption.InspResizeRatio == akkonParam.InspOption.InspResizeRatio)
-                //    return true;
-            }
-
             
             ATTWrapper.AWFreeInspectionFlag();
             ATTWrapper.AWDeleteInspManager();
@@ -137,11 +128,7 @@ namespace Jastech.Framework.Macron.Akkon
             //    return;
 
             // 영상 크기만큼 Buffer 할당
-            for (int i = 0; i < 5; i++)
-            {
-                ATTWrapper.AWCreateAttFullImageBuffer(stageNo, i, imageWidth, imageHeight, resizeRatio);
-            }
-            //ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, imageWidth, imageHeight, resizeRatio);
+            ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, imageWidth, imageHeight, resizeRatio);
             CurImageSize = new System.Drawing.Size(imageWidth, imageHeight);
         }
 
