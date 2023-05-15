@@ -89,10 +89,10 @@ namespace Jastech.Framework.Macron.Akkon
 
             if(PrevAkkonParam != null)
             {
-                if (PrevAkkonParam.StageCount == akkonParam.StageCount && PrevAkkonParam.TabCount == akkonParam.TabCount &&
-                    PrevAkkonParam.SliceWidth == akkonParam.SliceWidth && PrevAkkonParam.SliceHeight == akkonParam.SliceHeight
-                    && PrevAkkonParam.InspOption.InspResizeRatio == akkonParam.InspOption.InspResizeRatio)
-                    return true;
+                //if (PrevAkkonParam.StageCount == akkonParam.StageCount && PrevAkkonParam.TabCount == akkonParam.TabCount &&
+                //    PrevAkkonParam.SliceWidth == akkonParam.SliceWidth && PrevAkkonParam.SliceHeight == akkonParam.SliceHeight
+                //    && PrevAkkonParam.InspOption.InspResizeRatio == akkonParam.InspOption.InspResizeRatio)
+                //    return true;
             }
 
             
@@ -112,8 +112,8 @@ namespace Jastech.Framework.Macron.Akkon
             if (PrevAkkonParam == null)
                 return;
 
-            if (PrevAkkonParam.ResizeRatio == resizeRatio && CurImageSize.Width == imageWidth && CurImageSize.Height == imageHeight)
-                return;
+            //if (PrevAkkonParam.ResizeRatio == resizeRatio && CurImageSize.Width == imageWidth && CurImageSize.Height == imageHeight)
+            //    return;
 
             CurImageSize = new System.Drawing.Size(imageWidth, imageHeight);
 
@@ -130,14 +130,18 @@ namespace Jastech.Framework.Macron.Akkon
         // 2-2번 이미지 사이즈만큼 Buffer 할당(개별)
         public void CreateImageBuffer(int stageNo, int tabNo, int imageWidth, int imageHeight, float resizeRatio)
         {
-            if (PrevAkkonParam == null)
-                return;
+            //if (PrevAkkonParam == null)
+            //    return;
 
-            if (PrevAkkonParam.ResizeRatio == resizeRatio && CurImageSize.Width == imageWidth && CurImageSize.Height == imageHeight)
-                return;
+            //if (PrevAkkonParam.ResizeRatio == resizeRatio && CurImageSize.Width == imageWidth && CurImageSize.Height == imageHeight)
+            //    return;
 
             // 영상 크기만큼 Buffer 할당
-            ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, imageWidth, imageHeight, resizeRatio);
+            for (int i = 0; i < 5; i++)
+            {
+                ATTWrapper.AWCreateAttFullImageBuffer(stageNo, i, imageWidth, imageHeight, resizeRatio);
+            }
+            //ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, imageWidth, imageHeight, resizeRatio);
             CurImageSize = new System.Drawing.Size(imageWidth, imageHeight);
         }
 
