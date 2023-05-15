@@ -19,7 +19,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 필드
         private VisionProCaliperParam CurrentParam;
         private Color _selectedColor = new Color();
-        private Color _nonSelectedColor = new Color();
+        private Color _noneSelectedColor = new Color();
         #endregion
 
         #region 속성
@@ -46,40 +46,20 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             IntializeUI();
         }
 
-        private void rdoDarkToLight_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdoDarkToLight.Checked)
-            {
-                SetEdgePolarity(CogCaliperPolarityConstants.DarkToLight);
-                rdoDarkToLight.BackColor = _selectedColor;
-            }
-            else
-                rdoDarkToLight.BackColor = _nonSelectedColor;
-        }
-
-        private void rdoLightToDark_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdoLightToDark.Checked)
-            {
-                SetEdgePolarity(CogCaliperPolarityConstants.LightToDark);
-                rdoLightToDark.BackColor = _selectedColor;
-            }
-            else
-                rdoLightToDark.BackColor = _nonSelectedColor;
-        }
-
         private void IntializeUI()
         {
             _selectedColor = Color.FromArgb(104, 104, 104);
-            _nonSelectedColor = Color.FromArgb(52, 52, 52);
+            _noneSelectedColor = Color.FromArgb(52, 52, 52);
         }
-        
-        private void SetEdgePolarity(CogCaliperPolarityConstants caliperPolarity)
-        {
-            if (CurrentParam == null)
-                return;
 
-            CurrentParam.CaliperTool.RunParams.Edge0Polarity = caliperPolarity;
+        private void lblDarkToLight_Click(object sender, EventArgs e)
+        {
+            CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.DarkToLight;
+        }
+
+        private void lblLightToDark_Click(object sender, EventArgs e)
+        {
+            CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
         }
 
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
@@ -117,14 +97,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CurrentParam = caliperParam;
 
             if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
-                rdoDarkToLight.Checked = true;
-            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
-                rdoLightToDark.Checked = true;
-            else
             {
-                rdoDarkToLight.Checked = false;
-                rdoLightToDark.Checked = false;
+                lblDarkToLight.BackColor = _selectedColor;
+                lblLightToDark.BackColor = _noneSelectedColor;
             }
+            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
+            {
+                lblDarkToLight.BackColor = _noneSelectedColor;
+                lblLightToDark.BackColor = _selectedColor;
+            }
+            else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DontCare)
+            {
+                lblDarkToLight.BackColor = _noneSelectedColor;
+                lblLightToDark.BackColor = _noneSelectedColor;
+            }
+            else { }
 
             lblFilterSizeValue.Text = caliperParam.CaliperTool.RunParams.FilterHalfSizeInPixels.ToString();
             lblEdgeThresholdValue.Text = caliperParam.CaliperTool.RunParams.ContrastThreshold.ToString();
@@ -135,5 +122,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return CurrentParam;
         }
         #endregion
+
+        
     }
 }
