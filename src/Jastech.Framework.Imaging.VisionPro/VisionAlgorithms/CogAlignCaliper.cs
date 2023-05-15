@@ -13,7 +13,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
     public class CogAlignCaliper : CogCaliper
     {
-        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount)
+        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount, double theta)
         {
             List<VisionProCaliperResult> resultList = new List<VisionProCaliperResult>();
 

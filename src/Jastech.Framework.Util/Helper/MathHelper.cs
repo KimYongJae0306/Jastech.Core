@@ -58,5 +58,29 @@ namespace Jastech.Framework.Util.Helper
 
             return result;
         }
+
+        public static double GetTheta(PointF referencePoint1, PointF referencePoint2)
+        {
+            double theta = 0.0;
+
+            if (referencePoint2.X > referencePoint1.X)
+                theta = Math.Atan2(referencePoint2.Y - referencePoint1.Y, referencePoint2.X - referencePoint1.X);
+            else
+                theta = Math.Atan2(referencePoint1.Y - referencePoint2.Y, referencePoint1.X - referencePoint2.X);
+
+            double degree = RadToDeg(theta);
+
+            return degree;
+        }
+
+        public static PointF GetCoordinate(PointF inputPoint, double degree)
+        {
+            PointF result = new PointF();
+
+            result.X = (float)(Math.Cos(degree) * inputPoint.X);
+            result.Y = (float)(Math.Sin(degree) * inputPoint.Y);
+
+            return result;
+        }
     }
 }

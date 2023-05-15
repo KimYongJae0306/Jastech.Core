@@ -278,7 +278,6 @@ namespace Jastech.Framework.Device.Cameras
             CameraMil cameraMil = hUserData.Target as CameraMil;
 
             cameraMil.GrabCount++;
-            Console.WriteLine(cameraMil.GrabCount.ToString());
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
             string message = string.Format("Camera Name : {0} Grab Count : {1}", cameraMil.Name, cameraMil.GrabCount);
