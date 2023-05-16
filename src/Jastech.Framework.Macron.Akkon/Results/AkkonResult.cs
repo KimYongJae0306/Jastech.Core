@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jastech.Framework.Imaging.Result;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Jastech.Framework.Macron.Akkon.Results
 
         public float AvgLength { get; set; }
 
+        public Judgement Judgement { get; set; }
+
         public List<LeadResult> LeadResultList = new List<LeadResult>();
         #endregion
 
@@ -34,6 +37,7 @@ namespace Jastech.Framework.Macron.Akkon.Results
             result.TabNo = TabNo;
             result.AvgBlobCount = AvgBlobCount;
             result.AvgLength = AvgLength;
+            result.Judgement = Judgement;
             result.LeadResultList = LeadResultList.Select(x => x.DeepCopy()).ToList();
 
             return result;
