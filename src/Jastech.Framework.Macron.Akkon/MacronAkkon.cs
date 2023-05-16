@@ -214,7 +214,7 @@ namespace Jastech.Framework.Macron.Akkon
         }
 
         // 6번 검사
-        public List<AkkonResult> Inspect(int stageNo, int tabNo, Mat image)
+        public AkkonResult Inspect(int stageNo, int tabNo, Mat image)
         {
             unsafe
             {
@@ -234,13 +234,13 @@ namespace Jastech.Framework.Macron.Akkon
                 {
                     if(AkkonResult != null)
                     {
-                        var results = GetAkkonResult(stageNo, tabNo, AkkonResult);
+                        var result = GetAkkonResult(stageNo, tabNo, AkkonResult);
 
-                        return results;
+                        return result;
                     }
                 }
             }
-            return new List<AkkonResult>();
+            return new AkkonResult();
         }
 
         public Mat GetDrawResultImage(Mat image, int stageNo, int tabNo, ref MacronAkkonParam akkonParam)
@@ -266,97 +266,52 @@ namespace Jastech.Framework.Macron.Akkon
         }
 
         // 7번 검사 결과
-        public static List<AkkonResult> GetAkkonResult(int stageNo, int tabNo, MVRESULT[][] akkonResultArray)
+        public static AkkonResult GetAkkonResult(int stageNo, int tabNo, MVRESULT[][] akkonResultArray)
         {
-            List<AkkonResult> resultList = new List<AkkonResult>();
+            if (akkonResultArray.Length <= 0)
+                return new AkkonResult();
 
-            for (int tab = 0; tab < akkonResultArray.Length; tab++)
+            AkkonResult akkonResult = new AkkonResult();
+            akkonResult.StageNo = stageNo;
+            akkonResult.TabNo = tabNo;
+
+            int blobCountSum = 0;
+            float lengthSum = 0;
+
+            for (int lead = 0; lead < akkonResultArray[0].Length; lead++)
             {
-                AkkonResult AkkonResult = new AkkonResult();
-                AkkonResult.StageNo = stageNo;
-                AkkonResult.TabNo = tabNo;
+                var result = akkonResultArray[0][lead];
 
-                int blobCountSum = 0;
-                float lengthSum = 0;
+                int id = result.s_nId;
+                bool judgement = result.s_bJudgement;
+                float avgStrength = result.s_fAvgStrength;
+                float leadAvg = result.s_fLeadAvg;
+                float leadStdDEV = result.s_fLeadStdDEV;
+                float length = result.s_fLength;
+                int blobCount = result.s_nNumBlobs;
 
-                for (int lead = 0; lead < akkonResultArray[tab].Length; lead++)
+                LeadResult leadResult = new LeadResult
                 {
-                    var result = akkonResultArray[tab][lead];
+                    Id = id,
+                    IsGood = judgement,
+                    AvgStrength = avgStrength,
+                    LeadAvg = leadAvg,
+                    LeadStdDev = leadStdDEV,
+                    Length = length,
+                    BlobCount = blobCount,
 
-                    int id = result.s_nId;
-                    bool judgement = result.s_bJudgement;
-                    float avgStrength = result.s_fAvgStrength;
-                    float leadAvg = result.s_fLeadAvg;
-                    float leadStdDEV = result.s_fLeadStdDEV;
-                    float length = result.s_fLength;
-                    int blobCount = result.s_nNumBlobs;
+                };
 
-                    LeadResult leadResult = new LeadResult
-                    {
-                        Id = id,
-                        IsGood = judgement,
-                        AvgStrength = avgStrength,
-                        LeadAvg = leadAvg,
-                        LeadStdDev = leadStdDEV,
-                        Length = length,
-                        BlobCount = blobCount,
-
-                    };
-
-                    AkkonResult.LeadResultList.Add(leadResult);
-                    blobCountSum += blobCount;
-                    lengthSum += length;
-                }
-
-                AkkonResult.AvgBlobCount = blobCountSum / akkonResultArray[tab].Length;
-                AkkonResult.AvgLength = lengthSum / akkonResultArray[tab].Length;
-
-                resultList.Add(AkkonResult);
+                akkonResult.LeadResultList.Add(leadResult);
+                blobCountSum += blobCount;
+                lengthSum += length;
             }
 
-            return resultList;
+            akkonResult.AvgBlobCount = blobCountSum / akkonResultArray[0].Length;
+            akkonResult.AvgLength = lengthSum / akkonResultArray[0].Length;
+
+            return akkonResult;
         }
-
-        //public bool PrepareInspect(MacronAkkonParam param, int stageNo, int[][] leadPoints)
-        //{
-        //    CreateDllBuffer(param);
-
-        //    SliceOverlapList.Clear();
-        //    TotalSliceCntList.Clear();
-
-        //    List<int> tabSliceOverLapList = new List<int>();
-        //    List<int> tabTotalSliceCountList = new List<int>();
-
-        //    unsafe
-        //    {
-        //        for (int tabNo = 0; tabNo < param.TabCount; tabNo++)
-        //        {
-        //            ATTWrapper.AWCreateAttFullImageBuffer(stageNo, tabNo, param.SliceWidth, param.SliceHeight, param.InspOption.InspResizeRatio);
-
-        //            bool readRoi = ATTWrapper.AWReadROI(stageNo, tabNo, leadPoints, param.InspOption.InspResizeRatio);// AWReadROI ResizeRatio : 1 로 고정(Macron 측과 약속)
-
-        //            if (readRoi == false)
-        //            {
-        //                Logger.Error(ErrorType.Macron, "AW ReadROI Fail.");
-        //                return false;
-        //            }
-
-        //            int sliceOverlap = ATTWrapper.AWCalcSliceOverlap(stageNo, tabNo);
-        //            int calcTotalSliceCount = ATTWrapper.AWCalcTotalSliceCnt(stageNo, tabNo, sliceOverlap, param.SliceWidth, param.SliceHeight, false);
-
-        //            tabSliceOverLapList.Add(sliceOverlap);
-        //            tabTotalSliceCountList.Add(calcTotalSliceCount);
-        //        }
-
-        //        SliceOverlapList.Add(tabSliceOverLapList);
-        //        TotalSliceCntList.Add(tabTotalSliceCountList);
-
-        //        int[][] intSliceCnt = TotalSliceCntList.Select(list => list.ToArray()).ToArray();
-        //        ATTWrapper.AWAllocInspectionFlag(intSliceCnt);
-        //    }
-
-        //    return true;
-        //}
 
         public void SetParam(int stageNo, int tabNo, MacronAkkonParam param)
         {
