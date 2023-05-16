@@ -99,6 +99,41 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
+        public static void WriteData(string csvPath, List<List<string>> inputDataList)
+        {
+            try
+            {
+                KillProcess(csvPath);
+
+                lock (_objLock)
+                {
+                    StreamWriter csvStreaWriter = new StreamWriter(csvPath, true);
+                    using (csvStreaWriter)
+                    {
+                        foreach (var datas in inputDataList)
+                        {
+                            string outputData = string.Empty;
+
+                            for (int i = 0; i < datas.Count; i++)
+                            {
+                                if (datas.Count - 1 == i)
+                                    outputData += datas[i].ToString();
+                                else
+                                    outputData += datas[i].ToString() + ",";
+
+
+                            }
+                            csvStreaWriter.WriteLine(outputData);
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.ToString());
+            }
+        }
+
         public static int GetRowCount(string csvPath)
         {
             try
