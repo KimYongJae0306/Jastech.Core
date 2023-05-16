@@ -152,14 +152,14 @@ namespace Jastech.Framework.Macron.Akkon
         // 4번 Inspection Param 설정
         public void SetAkkonParam(int stageNo, int tabNo, ref MacronAkkonParam akkonParam)
         {
+            TestSetParam(ref akkonParam);
+
             var inspParam = GetConvertMacronInsp(akkonParam.InspParam);
             var filterParam = GetConvertMacronFilter(akkonParam.FilterParam);
             var drawOption = GetConvertMacronDrawOption(akkonParam.DrawOption);
             var inspOption = GetConvertMacronInspOption(akkonParam.InspOption);
 
-            TestSetParam(ref akkonParam);
-            inspOption.s_bLogTrace = true;
-
+           
             ATTWrapper.AWSetAllPara(stageNo, tabNo, ref inspParam, ref filterParam, ref drawOption, ref inspOption);
 
             tempFilter = filterParam;
@@ -249,7 +249,7 @@ namespace Jastech.Framework.Macron.Akkon
             var filterParam = GetConvertMacronFilter(akkonParam.FilterParam);
             var drawOption = GetConvertMacronDrawOption(akkonParam.DrawOption);
             var inspOption = GetConvertMacronInspOption(akkonParam.InspOption);
-
+            inspOption.s_fInspResizeRatio = 0.5f;
             unsafe
             {
                 IntPtr unmanagedPointer = Marshal.AllocHGlobal(image.Width * image.Height * 3);
@@ -395,46 +395,47 @@ namespace Jastech.Framework.Macron.Akkon
 
         private void TestSetParam(ref MacronAkkonParam akkonParam)
         {
-            //inspParam.s_nFilterDir = 1;
-            //inspParam.s_fThWeight = 2;
-            //inspParam.s_nShadowOffset = 7;
-            //inspParam.s_fStrengthThreshold = 0;
-            //inspParam.s_eFilterType = EN_MVFILTERTYPE_WRAP._MV_FILTER_4;
-            //inspParam.s_eThMode = EN_THMODE_WRAP._MV_TH_WHITE;
-            //inspParam.s_eShadowDir = EN_SHADOWDIR_WRAP._MV_SHADOW_DN;
-            //inspParam.s_eStrengthBase = EN_STRENGTH_BASE_WRAP._MV_STRENGTH_ENH;
-            //inspParam.s_ePeakProp = EN_PEAK_PROP_WRAP._MV_PEAK_NORMAL;
-            //inspParam.s_nThPeak = 70;
-            //inspParam.s_nMinShadowWidth = 5;
-            //inspParam.s_fStrengthScaleFactor = 1.0f;
-            //inspParam.s_nInflateLeadSize = 0;
-            //inspParam.s_fPosTolerance = 1.0f;
-            //inspParam.s_nExtraLead = 0;
-            //inspParam.s_nRoiDivDistance = 200;
-            //inspParam.s_fStdDevLeadJudge = 0;
-            //inspParam.s_bImulInspection = false;
-            //inspParam.s_nAbsoluteThHi = 180;
-            //inspParam.s_nAbsoluteThLow = 0;
-            //inspParam.s_nImulInspectionThresh = 1;
-            //inspParam.s_bUseAbsTh = false;
-            //inspParam.s_fDLPeakProb = 0.9f;
-            //inspParam.s_fDLSizeProb = 0.9f;
-            //inspParam.s_nDLNetWorkType = 1;
-            //inspParam.s_nDLSperateCut = 0;
-            //inspParam.s_bEdgeFlip = false;
-            //inspParam.s_nDLPatchSizeX = 246;
-            //inspParam.s_nDLPatchSizeY = 0;
+            akkonParam.InspParam.FilterDir = 1;
+            akkonParam.InspParam.ThWeight = 2;
+            akkonParam.InspParam.ShadowOffset = 7;
+            akkonParam.InspParam.StrengthThreshold = 0;
+            akkonParam.InspParam.FilterType = EN_MVFILTERTYPE_WRAP._MV_FILTER_4;
+            akkonParam.InspParam.ThMode = EN_THMODE_WRAP._MV_TH_WHITE;
+            akkonParam.InspParam.ShadowDir = EN_SHADOWDIR_WRAP._MV_SHADOW_DN;
+            akkonParam.InspParam.StrengthBase = EN_STRENGTH_BASE_WRAP._MV_STRENGTH_ENH;
+            akkonParam.InspParam.PeakProp = EN_PEAK_PROP_WRAP._MV_PEAK_NORMAL;
+            akkonParam.InspParam.ThPeak = 70;
+            akkonParam.InspParam.MinShadowWidth = 5;
+            akkonParam.InspParam.StrengthScaleFactor = 1.0f;
+            akkonParam.InspParam.InflateLeadSize = 0;
+            akkonParam.InspParam.PosTolerance = 1.0f;
+            akkonParam.InspParam.ExtraLead = 0;
+            akkonParam.InspParam.RoiDivDistance = 200;
+            akkonParam.InspParam.StdDevLeadJudge = 0;
+            akkonParam.InspParam.ImulInspection = false;
+            akkonParam.InspParam.AbsoluteThHi = 180;
+            akkonParam.InspParam.AbsoluteThLow = 0;
+            akkonParam.InspParam.ImulInspectionThresh = 1;
+            akkonParam.InspParam.UseAbsTh = false;
+            akkonParam.InspParam.DLPeakProb = 0.9f;
+            akkonParam.InspParam.DLSizeProb = 0.9f;
+            akkonParam.InspParam.DLNetWorkType = 1;
+            akkonParam.InspParam.DLSperateCut = 0;
+            akkonParam.InspParam.EdgeFlip = false;
+            akkonParam.InspParam.DLPatchSizeX = 246;
+            akkonParam.InspParam.DLPatchSizeY = 0;
 
             //inspOption.s_nOverlap = 34;
-            //inspParam.s_nPanelInfo = 0;
-            //inspParam.s_nFilterDir = 2;
-            //inspParam.s_eFilterType = (EN_MVFILTERTYPE_WRAP)4;
-            //inspParam.s_nRoiDivDistance = 200;
-            //inspParam.s_nImulInspectionThresh = 200;
-            //inspOption.s_fPixelResolution = 0.07f;
-            //inspOption.s_fInspResizeRatio = 1;
-            //inspOption.s_bLogTrace = false;
+            akkonParam.InspParam.PanelInfo = 0;
+            akkonParam.InspParam.FilterDir = 2;
+            akkonParam.InspParam.FilterType = (EN_MVFILTERTYPE_WRAP)4;
+            akkonParam.InspParam.RoiDivDistance = 200;
+            akkonParam.InspParam.ImulInspectionThresh = 200;
+            akkonParam.InspOption.PixelResolution = 0.07f;
+            akkonParam.InspOption.LogTrace = false;
 
+            akkonParam.DrawOption.Contour = true;
+            akkonParam.DrawOption.Center = false;
             //GetConvertInspAkkonParam(inspParam, ref akkonParam.InspParam);
             //GetConvertFilterAkkonParam(filterParam, ref akkonParam.FilterParam);
             //GetConvertDrawOptionParam(drawOption, ref akkonParam.DrawOption);
