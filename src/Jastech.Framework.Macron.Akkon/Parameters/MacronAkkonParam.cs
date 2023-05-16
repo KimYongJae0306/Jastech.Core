@@ -25,20 +25,20 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public int AlarmNGCount { get; set; } = 60;
 
-        [JsonProperty]
-        public int SliceWidth { get; set; } = 2048;
+        //[JsonProperty]
+        //public int SliceWidth { get; set; } = 2048;
 
-        [JsonProperty]
-        public int SliceHeight { get; set; } = 3072;
+        //[JsonProperty]
+        //public int SliceHeight { get; set; } = 3072;
 
-        [JsonProperty]
-        public int StageCount { get; set; } = -1;
+        //[JsonProperty]
+        //public int StageCount { get; set; } = -1;
 
-        [JsonProperty]
-        public int TabCount { get; set; } = -1;
+        //[JsonProperty]
+        //public int TabCount { get; set; } = -1;
 
-        [JsonProperty]
-        public int ResizeRatio { get; set; } = 1;
+        //[JsonProperty]
+        //public int ResizeRatio { get; set; } = 1;
 
         [JsonProperty]
         public AkkonInspParam InspParam = new AkkonInspParam();
@@ -95,7 +95,7 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
 
             InspOption.LogTrace = false;
             InspOption.InspType = 0;
-            InspOption.InspResizeRatio = 1.0f;
+            //InspOption.InspResizeRatio = 1.0f;
             InspOption.PixelResolution = 0.07f; /*Main.DEFINE.LINE_SCAN_PIXEL_SIZE(0.0035) / Main.DEFINE.CAM_LENS_SCALE(5);*/
             InspOption.Overlap = 0; //  m_vvSliceOverlap[nStageNo][nTapNo];
             InspOption.RotOffset = 0;
@@ -444,8 +444,8 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public int InspType { get; set; } = 0; // 0 ThresholdMode, 1 DLMode0, 2 DLMode1, 3 DLMode2
 
-        [JsonProperty]
-        public float InspResizeRatio { get; set; } = 1.0f;
+        //[JsonProperty]
+        //public float InspResizeRatio { get; set; } = 1.0f; // 메크론 코드에 미사용이라고 기재됨
 
         [JsonProperty]
         public float PixelResolution { get; set; } = 0.0007f; /*Main.DEFINE.LINE_SCAN_PIXEL_SIZE(0.0035) / Main.DEFINE.CAM_LENS_SCALE(5);*/

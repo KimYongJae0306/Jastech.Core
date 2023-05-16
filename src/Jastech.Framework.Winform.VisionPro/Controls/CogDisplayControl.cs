@@ -556,7 +556,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
         {
-            cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
+            if(collection is ICogGraphicInteractive cogGraphic)
+                cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
         }
 
         public void SetInteractiveGraphics(string groupName, ICogRecord record)
