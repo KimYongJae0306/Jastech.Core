@@ -136,28 +136,45 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static void WriteData(string csvPath, List<string[]> inputData)
+        public static void WriteAllData(string csvPath, string[] headers, List<string[]> rowData)
         {
             try
             {
-                string outputData = string.Empty;
-
                 KillProcess(csvPath);
 
+                
                 lock (_objLock)
                 {
-                    StreamWriter csvStreaWriter = new StreamWriter(csvPath, true);
+                    StreamWriter csvStreaWriter = new StreamWriter(csvPath, false);
                     using (csvStreaWriter)
                     {
-                        for (int i = 0; i < inputData.Count; i++)
+                        string header = string.Empty;
+
+                        for (int i = 0; i < headers.Length; i++)
                         {
-                            if (inputData.Count == i)
-                                outputData += inputData[i];
+                            if (i == headers.Length)
+                                header += headers[i];
                             else
-                                outputData += inputData[i] + ",";
+                                header += headers[i] + ",";
                         }
 
-                        csvStreaWriter.WriteLine(outputData);
+                        csvStreaWriter.WriteLine(header);
+
+                        for (int rowIndex = 0; rowIndex < rowData.Count; rowIndex++)
+                        {
+                            string row = string.Empty;
+
+                            for (int i = 0; i < rowData[rowIndex].Length; i++)
+                            {
+                                if (i == rowData[rowIndex].Length)
+                                    row += rowData[rowIndex][i];
+                                else
+                                    row += rowData[rowIndex][i] + ",";
+
+                            }
+
+                            csvStreaWriter.WriteLine(row);
+                        }
                     }
                 }
             }
