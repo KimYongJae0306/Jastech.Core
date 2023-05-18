@@ -34,6 +34,8 @@ namespace Jastech.Framework.Util.Helper
                 string csvDirectory = csvPath.Substring(0, csvPath.LastIndexOf('\\'));
                 string outputData = string.Empty;
 
+                KillProcess(csvPath);
+
                 if (!Directory.Exists(csvDirectory))
                     Directory.CreateDirectory(csvDirectory);
 
@@ -134,6 +136,54 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
+        public static void WriteAllData(string csvPath, string[] headers, List<string[]> rowData)
+        {
+            try
+            {
+                KillProcess(csvPath);
+
+                
+                lock (_objLock)
+                {
+                    StreamWriter csvStreaWriter = new StreamWriter(csvPath, false);
+                    using (csvStreaWriter)
+                    {
+                        string header = string.Empty;
+
+                        for (int i = 0; i < headers.Length; i++)
+                        {
+                            if (i == headers.Length)
+                                header += headers[i];
+                            else
+                                header += headers[i] + ",";
+                        }
+
+                        csvStreaWriter.WriteLine(header);
+
+                        for (int rowIndex = 0; rowIndex < rowData.Count; rowIndex++)
+                        {
+                            string row = string.Empty;
+
+                            for (int i = 0; i < rowData[rowIndex].Length; i++)
+                            {
+                                if (i == rowData[rowIndex].Length)
+                                    row += rowData[rowIndex][i];
+                                else
+                                    row += rowData[rowIndex][i] + ",";
+
+                            }
+
+                            csvStreaWriter.WriteLine(row);
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.ToString());
+            }
+        }
+
         public static int GetRowCount(string csvPath)
         {
             try
@@ -183,6 +233,7 @@ namespace Jastech.Framework.Util.Helper
             try
             {
                 //string csvPath = GetCsvPath(fileName);
+                KillProcess(fileName);
 
                 int ColCount;
                 int RowCount;

@@ -19,6 +19,10 @@ namespace Jastech.Framework.Macron.Akkon.Results
 
         public float AvgLength { get; set; }
 
+        public float AvgStrength { get; set; }
+
+        public float AvgStd { get; set; }
+
         public Judgement Judgement { get; set; }
 
         public List<LeadResult> LeadResultList = new List<LeadResult>();
