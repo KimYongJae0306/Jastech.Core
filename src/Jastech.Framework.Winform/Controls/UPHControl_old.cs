@@ -13,8 +13,10 @@ using Jastech.Framework.Util.Helper;
 
 namespace Jastech.Framework.Winform.Controls
 {
-    public partial class UPHControl : UserControl
+    public partial class UPHControl_old : UserControl
     {
+        private string _filePath { get; set; } = string.Empty;
+
         private enum eGraphType
         {
             TOTAL_GRAPH,
@@ -34,7 +36,7 @@ namespace Jastech.Framework.Winform.Controls
         private Tuple<string[], List<string[]>> _readData = null;
         private string _isOpenFilePath = string.Empty;
 
-        public UPHControl()
+        public UPHControl_old()
         {
             InitializeComponent();
         }
@@ -48,6 +50,11 @@ namespace Jastech.Framework.Winform.Controls
         {
             InitializeLabels();
             InitializeDataGridView();
+        }
+
+        public void SetFilePath(string filePath)
+        {
+            _filePath = filePath.Trim();
         }
 
         private void InitializeLabels()
@@ -224,15 +231,10 @@ namespace Jastech.Framework.Winform.Controls
         {
             try
             {
-                string temp = Directory.GetCurrentDirectory() + @"\Log\AlignInspection_Stage1_Top.csv";
-                //string temp = Directory.GetCurrentDirectory();
-                temp += string.Format(@"\Log\[CST100]Akkon_Stage1_Bottom_{0}.csv", dateTime);
-
-                FileInfo fileInfo = new FileInfo(temp);
+                FileInfo fileInfo = new FileInfo(_filePath);
                 if (fileInfo.Exists)
                 {
-                    _isOpenFilePath = temp;
-                    return CSVHelper.ReadData(temp);
+                    return CSVHelper.ReadData(_filePath);
                 }
                 else
                     return null;

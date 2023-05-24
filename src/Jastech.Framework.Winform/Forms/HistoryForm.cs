@@ -15,7 +15,7 @@ namespace Jastech.Framework.Winform.Forms
     {
         #region 속성
         // Page Control
-        private UPHControl UPHControl { get; set; } = new UPHControl();
+        private UPHControl_old UPHControl { get; set; } = new UPHControl_old();
         #endregion
 
         private List<UserControl> PageControlList = null;

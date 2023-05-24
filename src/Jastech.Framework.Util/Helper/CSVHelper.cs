@@ -122,9 +122,8 @@ namespace Jastech.Framework.Util.Helper
                                     outputData += datas[i].ToString();
                                 else
                                     outputData += datas[i].ToString() + ",";
-
-
                             }
+
                             csvStreaWriter.WriteLine(outputData);
                         }
                     }

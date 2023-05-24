@@ -121,11 +121,17 @@
     <Compile Include="Controls\ROIJogControl.Designer.cs">
       <DependentUpon>ROIJogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UPHControl.cs">
+    <Compile Include="Controls\TrendControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UPHControl.designer.cs">
-      <DependentUpon>UPHControl.cs</DependentUpon>
+    <Compile Include="Controls\TrendControl.Designer.cs">
+      <DependentUpon>TrendControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UPHControl_old.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UPHControl_old.designer.cs">
+      <DependentUpon>UPHControl_old.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Figure.cs" />
     <Compile Include="Data\FigureManager.cs" />
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="Forms\KeyPadForm.Designer.cs">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MessageYesNoForm.cs">
       <SubType>Form</SubType>
@@ -207,8 +219,11 @@
     <EmbeddedResource Include="Controls\ROIJogControl.resx">
       <DependentUpon>ROIJogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UPHControl.resx">
-      <DependentUpon>UPHControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TrendControl.resx">
+      <DependentUpon>TrendControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UPHControl_old.resx">
+      <DependentUpon>UPHControl_old.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
@@ -218,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyPadForm.resx">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageYesNoForm.resx">
       <DependentUpon>MessageYesNoForm.cs</DependentUpon>

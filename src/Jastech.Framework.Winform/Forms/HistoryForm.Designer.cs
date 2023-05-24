@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.tlpHistoryItems = new System.Windows.Forms.TableLayoutPanel();
+            this.cdrMonthCalendar = new System.Windows.Forms.MonthCalendar();
             this.btnUPH = new System.Windows.Forms.Button();
             this.pnlPage = new System.Windows.Forms.Panel();
             this.tlpHistory = new System.Windows.Forms.TableLayoutPanel();
-            this.cdrMonthCalendar = new System.Windows.Forms.MonthCalendar();
             this.tlpHistoryItems.SuspendLayout();
             this.tlpHistory.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +54,15 @@
             this.tlpHistoryItems.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpHistoryItems.Size = new System.Drawing.Size(220, 750);
             this.tlpHistoryItems.TabIndex = 0;
+            // 
+            // cdrMonthCalendar
+            // 
+            this.cdrMonthCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cdrMonthCalendar.Location = new System.Drawing.Point(0, 0);
+            this.cdrMonthCalendar.Margin = new System.Windows.Forms.Padding(0);
+            this.cdrMonthCalendar.Name = "cdrMonthCalendar";
+            this.cdrMonthCalendar.TabIndex = 6;
+            this.cdrMonthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.cdrMonthCalendar_DateChanged);
             // 
             // btnUPH
             // 
@@ -93,15 +102,6 @@
             this.tlpHistory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpHistory.Size = new System.Drawing.Size(1029, 750);
             this.tlpHistory.TabIndex = 14;
-            // 
-            // cdrMonthCalendar
-            // 
-            this.cdrMonthCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cdrMonthCalendar.Location = new System.Drawing.Point(0, 0);
-            this.cdrMonthCalendar.Margin = new System.Windows.Forms.Padding(0);
-            this.cdrMonthCalendar.Name = "cdrMonthCalendar";
-            this.cdrMonthCalendar.TabIndex = 6;
-            this.cdrMonthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.cdrMonthCalendar_DateChanged);
             // 
             // HistoryForm
             // 
