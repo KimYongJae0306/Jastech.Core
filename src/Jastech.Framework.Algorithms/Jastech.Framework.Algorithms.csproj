@@ -68,7 +68,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Emgu.CV">
+      <Version>4.7.0.5276</Version>
+    </PackageReference>
     <PackageReference Include="Emgu.CV.Bitmap">
+      <Version>4.7.0.5276</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.runtime.windows">
       <Version>4.7.0.5276</Version>
     </PackageReference>
   </ItemGroup>
@@ -76,6 +82,10 @@
     <ProjectReference Include="..\Jastech.Framework.Imaging.Ipp\Jastech.Framework.Imaging.Ipp.csproj">
       <Project>{5B0AB97F-B524-4884-AA4E-B05A055EB9E9}</Project>
       <Name>Jastech.Framework.Imaging.Ipp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
+      <Project>{2380DA0F-851A-4430-9A43-E7B2DEEE29F2}</Project>
+      <Name>Jastech.Framework.Imaging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
