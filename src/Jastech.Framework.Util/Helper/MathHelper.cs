@@ -41,44 +41,27 @@ namespace Jastech.Framework.Util.Helper
             return rad * 180.0 / Math.PI;
         }
 
-        public static PointF ThetaCoordinate(PointF referencePoint1, PointF referencePoint2, PointF inputPoint)
-        {
-            PointF result = new PointF();
-            double theta = 0.0;
-
-            if (referencePoint2.X > referencePoint1.X) 
-                theta = Math.Atan2(referencePoint2.Y - referencePoint1.Y, referencePoint2.X - referencePoint1.X);
-            else
-                theta = Math.Atan2(referencePoint1.Y - referencePoint2.Y, referencePoint1.X - referencePoint2.X);
-
-            double degree = RadToDeg(theta);
-
-            result.X = (float)(Math.Cos(degree) * inputPoint.X);
-            result.Y = (float)(Math.Sin(degree) * inputPoint.Y);
-
-            return result;
-        }
-
         public static double GetTheta(PointF referencePoint1, PointF referencePoint2)
         {
-            double theta = 0.0;
-
-            if (referencePoint2.X > referencePoint1.X)
-                theta = Math.Atan2(referencePoint2.Y - referencePoint1.Y, referencePoint2.X - referencePoint1.X);
-            else
-                theta = Math.Atan2(referencePoint1.Y - referencePoint2.Y, referencePoint1.X - referencePoint2.X);
-
-            double degree = RadToDeg(theta);
-
-            return degree;
+            double theta = Math.Atan2(referencePoint2.Y - referencePoint1.Y, referencePoint2.X - referencePoint1.X);
+            return RadToDeg(theta);
         }
 
-        public static PointF GetCoordinate(PointF inputPoint, double degree)
+        public static PointF GetCoordinate(PointF inputPoint, double degree, PointF centerPoint, PointF left, PointF right)
         {
             PointF result = new PointF();
 
+            //PointF res = new PointF();
+            //res.X = (float)(Math.Cos(degree) * inputPoint.X);
+            //res.Y = (float)(Math.Sin(degree) * inputPoint.Y);
+
+            //result.X = (float)(Math.Cos(degree) * inputPoint.X) - (float)(Math.Sin(degree) * inputPoint.Y);
+            //result.Y = (float)(Math.Sin(degree) * inputPoint.X) + (float)(Math.Cos(degree) * inputPoint.Y);
+
+
             result.X = (float)(Math.Cos(degree) * inputPoint.X);
-            result.Y = (float)(Math.Sin(degree) * inputPoint.Y);
+            result.Y = (float)(Math.Cos(degree) * inputPoint.Y);
+
 
             return result;
         }

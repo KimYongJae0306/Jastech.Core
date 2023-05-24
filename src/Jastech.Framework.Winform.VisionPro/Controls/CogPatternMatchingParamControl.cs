@@ -123,6 +123,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public VisionProPatternMatchingParam GetCurrentParam()
         {
+            //if (CurrentParam == null)
+            //    return null;
+
             CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
             CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
 
