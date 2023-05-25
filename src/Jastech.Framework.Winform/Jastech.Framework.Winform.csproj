@@ -156,12 +156,6 @@
     <Compile Include="Forms\KeyPadForm.Designer.cs">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LogForm.Designer.cs">
-      <DependentUpon>LogForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MessageYesNoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,9 +227,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyPadForm.resx">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LogForm.resx">
-      <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageYesNoForm.resx">
       <DependentUpon>MessageYesNoForm.cs</DependentUpon>
