@@ -100,6 +100,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             return cogDisplay.Image;
         }
+
+        public void ClearImage()
+        {
+            cogDisplay.Image = null;
+        }
         
         public int ImageWidth()
         {

@@ -79,6 +79,12 @@
     <Compile Include="Controls\LAFJogControl.Designer.cs">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LineChartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LineChartControl.Designer.cs">
+      <DependentUpon>LineChartControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LiveViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,12 +96,6 @@
     </Compile>
     <Compile Include="Controls\DrawBoxControl.Designer.cs">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LogControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LogControl.Designer.cs">
-      <DependentUpon>LogControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MotionJogControl.cs">
       <SubType>UserControl</SubType>
@@ -127,23 +127,11 @@
     <Compile Include="Controls\TrendControl.Designer.cs">
       <DependentUpon>TrendControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UPHControl_old.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UPHControl_old.designer.cs">
-      <DependentUpon>UPHControl_old.cs</DependentUpon>
-    </Compile>
     <Compile Include="Data\Figure.cs" />
     <Compile Include="Data\FigureManager.cs" />
     <Compile Include="Data\LineDirectionFigure.cs" />
     <Compile Include="Data\RectangleFigure.cs" />
     <Compile Include="DeviceManager.cs" />
-    <Compile Include="Forms\HistoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HistoryForm.designer.cs">
-      <DependentUpon>HistoryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\KeyBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,14 +180,14 @@
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LineChartControl.resx">
+      <DependentUpon>LineChartControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LiveViewPanel.resx">
       <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LogControl.resx">
-      <DependentUpon>LogControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionJogControl.resx">
       <DependentUpon>MotionJogControl.cs</DependentUpon>
@@ -215,12 +203,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TrendControl.resx">
       <DependentUpon>TrendControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UPHControl_old.resx">
-      <DependentUpon>UPHControl_old.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HistoryForm.resx">
-      <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyBoardForm.resx">
       <DependentUpon>KeyBoardForm.cs</DependentUpon>
