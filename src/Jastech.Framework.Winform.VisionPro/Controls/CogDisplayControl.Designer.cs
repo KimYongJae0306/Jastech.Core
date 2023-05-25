@@ -75,6 +75,7 @@
             this.cogDisplay.Size = new System.Drawing.Size(741, 692);
             this.cogDisplay.TabIndex = 0;
             this.cogDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cogDisplay_MouseDown);
+            this.cogDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cogDisplay_MouseUp);
             this.cogDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cogDisplay_MouseMove);
             this.cogDisplay.Changed += new Cognex.VisionPro.CogChangedEventHandler(this.cogDisplay_Changed);
             // 

@@ -37,6 +37,13 @@ namespace Jastech.Framework.Imaging.Helper
             return new Mat();
         }
 
+        public static float[] MatToFloatArray(Mat mat)
+        {
+            float[] floatArray = new float[mat.Width * mat.Height * mat.NumberOfChannels];
+            Marshal.Copy(mat.DataPointer, floatArray, 0, floatArray.Length);
+            return floatArray;
+        }
+
         public static Mat DeepCopy(Mat mat)
         {
             byte[] data = MatHelper.MatToByteArray(mat);
