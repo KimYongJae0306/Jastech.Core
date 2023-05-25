@@ -37,10 +37,10 @@
             this.pnlLogType = new System.Windows.Forms.Panel();
             this.lblUPH = new System.Windows.Forms.Label();
             this.lblAkkonTrend = new System.Windows.Forms.Label();
+            this.lblLog = new System.Windows.Forms.Label();
+            this.lblImage = new System.Windows.Forms.Label();
             this.lblAlignTrend = new System.Windows.Forms.Label();
             this.pnlContents = new System.Windows.Forms.Panel();
-            this.lblImage = new System.Windows.Forms.Label();
-            this.lblLog = new System.Windows.Forms.Label();
             this.tlpLog.SuspendLayout();
             this.tlpBasicFunction.SuspendLayout();
             this.tlpContents.SuspendLayout();
@@ -92,6 +92,7 @@
             this.tvwLogPath.Name = "tvwLogPath";
             this.tvwLogPath.Size = new System.Drawing.Size(400, 659);
             this.tvwLogPath.TabIndex = 11;
+            this.tvwLogPath.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvwLogPath_NodeMouseClick);
             // 
             // cdrMonthCalendar
             // 
@@ -172,6 +173,30 @@
             this.lblAkkonTrend.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblAkkonTrend.Click += new System.EventHandler(this.lblAkkonTrend_Click);
             // 
+            // lblLog
+            // 
+            this.lblLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLog.Location = new System.Drawing.Point(20, 34);
+            this.lblLog.Margin = new System.Windows.Forms.Padding(0);
+            this.lblLog.Name = "lblLog";
+            this.lblLog.Size = new System.Drawing.Size(120, 60);
+            this.lblLog.TabIndex = 1;
+            this.lblLog.Text = "Log";
+            this.lblLog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLog.Click += new System.EventHandler(this.lblLog_Click);
+            // 
+            // lblImage
+            // 
+            this.lblImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblImage.Location = new System.Drawing.Point(179, 34);
+            this.lblImage.Margin = new System.Windows.Forms.Padding(0);
+            this.lblImage.Name = "lblImage";
+            this.lblImage.Size = new System.Drawing.Size(120, 60);
+            this.lblImage.TabIndex = 1;
+            this.lblImage.Text = "Image";
+            this.lblImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblImage.Click += new System.EventHandler(this.lblImage_Click);
+            // 
             // lblAlignTrend
             // 
             this.lblAlignTrend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -192,30 +217,6 @@
             this.pnlContents.Name = "pnlContents";
             this.pnlContents.Size = new System.Drawing.Size(784, 819);
             this.pnlContents.TabIndex = 9;
-            // 
-            // lblImage
-            // 
-            this.lblImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblImage.Location = new System.Drawing.Point(179, 34);
-            this.lblImage.Margin = new System.Windows.Forms.Padding(0);
-            this.lblImage.Name = "lblImage";
-            this.lblImage.Size = new System.Drawing.Size(120, 60);
-            this.lblImage.TabIndex = 1;
-            this.lblImage.Text = "Image";
-            this.lblImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblImage.Click += new System.EventHandler(this.lblImage_Click);
-            // 
-            // lblLog
-            // 
-            this.lblLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLog.Location = new System.Drawing.Point(20, 34);
-            this.lblLog.Margin = new System.Windows.Forms.Padding(0);
-            this.lblLog.Name = "lblLog";
-            this.lblLog.Size = new System.Drawing.Size(120, 60);
-            this.lblLog.TabIndex = 1;
-            this.lblLog.Text = "Log";
-            this.lblLog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLog.Click += new System.EventHandler(this.lblLog_Click);
             // 
             // LogForm
             // 

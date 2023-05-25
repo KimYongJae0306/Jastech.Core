@@ -1,54 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Jastech.Framework.Util.Helper;
+﻿using System.Windows.Forms;
+using System.IO;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class LogControl : UserControl
     {
+        #region 필드
+        #endregion
+
+        #region 속성
+        #endregion
+
+        #region 이벤트
+        #endregion
+
+        #region 델리게이트
+        #endregion
+
+        #region 생성자
         public LogControl()
         {
             InitializeComponent();
         }
+        #endregion
 
-        private delegate void AddLogDelegate(string message);
-
-        public void AddLog(string message)
+        #region 메서드
+        public void DisplayOnLogFile(string path)
         {
-            try
-            {
-                if (this.InvokeRequired)
-                {
-                    AddLogDelegate callBack = AddLog;
-                    BeginInvoke(callBack, message);
-                    return;
-                }
+            StreamReader sr = new StreamReader(path);
+            string contents = sr.ReadToEnd();
+            rtxLogMessage.Text = contents;
 
-                if (lstLogMessage.Items.Count >= 2000)
-                    lstLogMessage.Items.Clear();
-
-                string content = "[ " + Logger.GetTimeString(DateTime.Now) + " ] ";
-                content += message;
-
-                lstLogMessage.Items.Add(content);
-                lstLogMessage.SelectedIndex = lstLogMessage.Items.Count - 1;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name.ToString() + " : " + ex.Message);
-            }
+            sr.Close();
+            sr.Dispose();
         }
-
-        public void ClearLog()
-        {
-            lstLogMessage.Items.Clear();
-        }
+        #endregion
     }
 }

@@ -28,29 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstLogMessage = new System.Windows.Forms.ListBox();
+            this.rtxLogMessage = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // lstLogMessage
+            // rtxLogMessage
             // 
-            this.lstLogMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstLogMessage.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.lstLogMessage.FormattingEnabled = true;
-            this.lstLogMessage.HorizontalScrollbar = true;
-            this.lstLogMessage.ItemHeight = 15;
-            this.lstLogMessage.Location = new System.Drawing.Point(0, 0);
-            this.lstLogMessage.Margin = new System.Windows.Forms.Padding(0);
-            this.lstLogMessage.Name = "lstLogMessage";
-            this.lstLogMessage.Size = new System.Drawing.Size(300, 300);
-            this.lstLogMessage.TabIndex = 1;
+            this.rtxLogMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.rtxLogMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxLogMessage.ForeColor = System.Drawing.Color.White;
+            this.rtxLogMessage.Location = new System.Drawing.Point(0, 0);
+            this.rtxLogMessage.Name = "rtxLogMessage";
+            this.rtxLogMessage.Size = new System.Drawing.Size(300, 300);
+            this.rtxLogMessage.TabIndex = 0;
+            this.rtxLogMessage.Text = "";
             // 
             // LogControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.lstLogMessage);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.Controls.Add(this.rtxLogMessage);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "LogControl";
             this.Size = new System.Drawing.Size(300, 300);
             this.ResumeLayout(false);
@@ -59,6 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lstLogMessage;
+        private System.Windows.Forms.RichTextBox rtxLogMessage;
     }
 }
