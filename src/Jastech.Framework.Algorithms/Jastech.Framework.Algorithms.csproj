@@ -49,6 +49,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,7 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Akkon\AkkonAlgorithm.cs" />
-    <Compile Include="Akkon\Parameters\AkkonParameters.cs" />
+    <Compile Include="Akkon\Parameters\AkkonImageFilterParam.cs" />
+    <Compile Include="Akkon\Parameters\AkkonSlice.cs" />
+    <Compile Include="Akkon\Parameters\AkkonParam.cs" />
+    <Compile Include="Akkon\Parameters\AkkonROI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

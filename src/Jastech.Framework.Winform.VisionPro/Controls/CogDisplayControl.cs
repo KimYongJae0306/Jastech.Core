@@ -13,6 +13,7 @@ using Cognex.VisionPro.Dimensioning;
 using Cognex.VisionPro.Implementation;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using Jastech.Framework.Imaging.Result;
+using Cognex.VisionPro.Display;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -59,10 +60,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public event DrawViewRectDelegate DrawViewRectEventHandler;
 
         public event EventHandler DeleteEventHandler;
+
+        public event MoveImageDelegate MoveImageEventHandler;
         #endregion
 
         #region 델리게이트
         public delegate void DrawViewRectDelegate(CogRectangle viewRect);
+
+        public delegate void MoveImageDelegate(double panX, double panY, double zoom);
         #endregion
 
         #region 속성
@@ -88,12 +93,23 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogDisplayControl_Load(object sender, EventArgs e)
         {
             cogDisplayStatusBar.Display = cogDisplay;
+            
         }
 
         public void SetImage(ICogImage cogImage)
         {
-            cogDisplay.Image = cogImage;
+            if (cogImage == null)
+                cogDisplay.Image = null;
+            else
+                cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
             UpdateViewRect();
+        }
+
+        public void SetImagePosition(double panX, double panY, double zoom)
+        {
+            cogDisplay.Zoom = zoom;
+            cogDisplay.PanX = panX;
+            cogDisplay.PanY = panY;
         }
 
         public ICogImage GetImage()
@@ -131,6 +147,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
             int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
+
+            if (calcWidth == 0 || calcHeight == 0)
+                return null;
 
             rect.X = calcX;
             rect.Y = calcY;
@@ -200,12 +219,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (IsPanning)
             {
-                cogDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+                cogDisplay.MouseMode = CogDisplayMouseModeConstants.Pan;
                 btnPanning.BackColor = _selectedColor;
             }
             else
             {
-                cogDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pointer;
+                cogDisplay.MouseMode = CogDisplayMouseModeConstants.Pointer;
                 btnPanning.BackColor = _noneSelectColor;
             }
         }
@@ -231,6 +250,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 btnCrossLine.BackColor = _selectedColor;
             }
+        }
+
+        public void Clear()
+        {
+            ClearGraphic();
+            cogDisplay.Image = null;
         }
 
         public void ClearGraphic()
@@ -398,6 +423,19 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 }
             }
+
+            if(cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
+            {
+                MoveImageEventHandler(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
+            }
+        }
+
+        private void cogDisplay_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
+            {
+                MoveImageEventHandler(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
+            }
         }
 
         private void DrawCrossLine()
@@ -418,6 +456,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.StaticGraphics.Add(cogSegment, groupName);
 
             cogSegment.Dispose();
+        }
+
+        public void SetMouseMode(CogDisplayMouseModeConstants mode)
+        {
+            cogDisplay.MouseMode = mode;
         }
 
         private void DrawCustomCrossLine(double x, double y)
@@ -627,22 +670,30 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 if (display.Image == null)
                     return;
 
-                if (display.Zoom < 0.2)
-                    display.Zoom = 0.2;
-
-                if (display.Zoom > 10)
-                    display.Zoom = 10;
-
                 if (_updateViewRect)
                 {
                     _updateViewRect = false;
                     return;
                 }
                 string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames.Contains("SfAutoFitWithGraphics"))
+                    return;
+
+                if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
+                {
+                    if (display.Zoom < 0.2)
+                        display.Zoom = 0.2;
+
+                    if (display.Zoom > 10)
+                        display.Zoom = 10;
+                }
+
                 if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
                 {
                     if (DeleteResultGraphics())
                         DeleteEventHandler?.Invoke(sender, e);
+
+                    MoveImageEventHandler?.Invoke(display.PanX, display.PanY, display.Zoom);
                 }
 
                 UpdateViewRect();
@@ -652,7 +703,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void UpdateViewRect()
         {
             CogRectangle viewRect = GetViewRectangle();
-            DrawViewRectEventHandler?.Invoke(viewRect);
+            if(viewRect != null)
+                DrawViewRectEventHandler?.Invoke(viewRect);
         }
 
         public void UpdateViewRect(CogRectangle rect, double ratio)
