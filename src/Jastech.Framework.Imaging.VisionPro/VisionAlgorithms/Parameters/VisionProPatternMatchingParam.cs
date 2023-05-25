@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.ImageProcessing;
 using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
@@ -12,17 +13,8 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
-    public class VisionProPatternMatchingParam
+    public class VisionProPatternMatchingParam : PatternMatchingParam
     {
-        [JsonProperty]
-        public string Name { get; set; }
-
-        [JsonProperty]
-        public double Score { get; set; } = 70;
-
-        [JsonProperty]
-        public double MaxAngle { get; set; } = 1;
-
         [JsonIgnore]
         private CogPMAlignTool PMTool { get; set; }
 
