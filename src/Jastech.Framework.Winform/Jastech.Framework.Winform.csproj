@@ -79,12 +79,6 @@
     <Compile Include="Controls\LAFJogControl.Designer.cs">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LineChartControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LineChartControl.Designer.cs">
-      <DependentUpon>LineChartControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LiveViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -179,9 +173,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LineChartControl.resx">
-      <DependentUpon>LineChartControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LiveViewPanel.resx">
       <DependentUpon>LiveViewPanel.cs</DependentUpon>
