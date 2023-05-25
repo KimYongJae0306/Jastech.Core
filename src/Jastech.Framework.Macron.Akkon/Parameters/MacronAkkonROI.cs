@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Macron.Akkon.Parameters
 {
-    public class AkkonROI
+    public class MacronAkkonROI
     {
         [JsonProperty]
         public double CornerOriginX { get; set; } = 0.0;    // Left Top
@@ -34,9 +34,9 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         [JsonProperty]
         public double CornerOppositeY { get; set; } = 0.7;   // Right Bottom
 
-        public AkkonROI DeepCopy()
+        public MacronAkkonROI DeepCopy()
         {
-            return JsonConvertHelper.DeepCopy(this) as AkkonROI;
+            return JsonConvertHelper.DeepCopy(this) as MacronAkkonROI;
         }
     }
 }

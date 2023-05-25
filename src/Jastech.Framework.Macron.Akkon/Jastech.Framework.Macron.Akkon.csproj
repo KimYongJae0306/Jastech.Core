@@ -94,9 +94,9 @@
     </Compile>
     <Compile Include="MacronAkkon.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="Parameters\AkkonROI.cs" />
     <Compile Include="Parameters\MacronAkkonGroup.cs" />
     <Compile Include="Parameters\MacronAkkonParam.cs" />
+    <Compile Include="Parameters\MacronAkkonROI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\AkkonResult.cs" />
   </ItemGroup>

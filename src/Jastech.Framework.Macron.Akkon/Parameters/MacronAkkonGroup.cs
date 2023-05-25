@@ -36,7 +36,7 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
         public double Height { get; set; } = 100.0;// um
 
         [JsonProperty]
-        public List<AkkonROI> AkkonROIList { get; private set; } = new List<AkkonROI>();
+        public List<MacronAkkonROI> AkkonROIList { get; private set; } = new List<MacronAkkonROI>();
         #endregion
 
         #region 메서드
@@ -45,7 +45,7 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
             return JsonConvertHelper.DeepCopy(this) as MacronAkkonGroup;
         }
 
-        public void AddROI(AkkonROI roi)
+        public void AddROI(MacronAkkonROI roi)
         {
             AkkonROIList.Add(roi);
         }

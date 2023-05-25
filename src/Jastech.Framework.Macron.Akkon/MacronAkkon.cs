@@ -136,7 +136,7 @@ namespace Jastech.Framework.Macron.Akkon
         }
 
         //// 3번 ROI 설정
-        public bool SetConvertROIData(List<AkkonROI> roiList, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle, float resize = 1.0f)
+        public bool SetConvertROIData(List<MacronAkkonROI> roiList, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle, float resize = 1.0f)
         {
             int leadCount = roiList.Count();
 
@@ -323,13 +323,13 @@ namespace Jastech.Framework.Macron.Akkon
             ATTWrapper.AWSetAllPara(stageNo, tabNo, ref inspParam, ref filterParam, ref drawOption, ref inspOption);
         }
 
-        public List<AkkonROI> GetCalcROI(PointF startPoint, List<AkkonROI> orgROIList)
+        public List<MacronAkkonROI> GetCalcROI(PointF startPoint, List<MacronAkkonROI> orgROIList)
         {
-            List<AkkonROI> calcROIList = new List<AkkonROI>();
+            List<MacronAkkonROI> calcROIList = new List<MacronAkkonROI>();
 
             foreach (var roi in orgROIList)
             {
-                AkkonROI calcROI = new AkkonROI();
+                MacronAkkonROI calcROI = new MacronAkkonROI();
                 calcROI.CornerOppositeX = roi.CornerOppositeX - startPoint.X;
                 calcROI.CornerOppositeY = roi.CornerOppositeY - startPoint.Y;
 
@@ -616,7 +616,7 @@ namespace Jastech.Framework.Macron.Akkon
             inspOption.RotOffset = param.s_nRotOffset;
         }
 
-        private int[][] ConvertROI(List<AkkonROI> tabROIList, PointF centerPoint, PointF offset, double angle)
+        private int[][] ConvertROI(List<MacronAkkonROI> tabROIList, PointF centerPoint, PointF offset, double angle)
         {
             int leadCount = tabROIList.Count();
             if (leadCount <= 0)

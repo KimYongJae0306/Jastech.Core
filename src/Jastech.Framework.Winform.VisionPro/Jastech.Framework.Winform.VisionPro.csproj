@@ -270,9 +270,7 @@
     <Compile Include="Forms\CogAlignMaskingForm.Designer.cs">
       <DependentUpon>CogAlignMaskingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\LogForm.cs" />
     <Compile Include="Forms\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>

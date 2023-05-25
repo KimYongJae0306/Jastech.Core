@@ -91,9 +91,7 @@
     <Compile Include="Controls\DrawBoxControl.Designer.cs">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LogControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\LogControl.cs" />
     <Compile Include="Controls\LogControl.Designer.cs">
       <DependentUpon>LogControl.cs</DependentUpon>
     </Compile>
@@ -127,9 +125,7 @@
     <Compile Include="Controls\TrendControl.Designer.cs">
       <DependentUpon>TrendControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UPHControl_old.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\UPHControl_old.cs" />
     <Compile Include="Controls\UPHControl_old.designer.cs">
       <DependentUpon>UPHControl_old.cs</DependentUpon>
     </Compile>
@@ -138,9 +134,7 @@
     <Compile Include="Data\LineDirectionFigure.cs" />
     <Compile Include="Data\RectangleFigure.cs" />
     <Compile Include="DeviceManager.cs" />
-    <Compile Include="Forms\HistoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\HistoryForm.cs" />
     <Compile Include="Forms\HistoryForm.designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
