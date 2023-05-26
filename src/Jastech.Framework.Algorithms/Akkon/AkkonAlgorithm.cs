@@ -5,6 +5,9 @@ using Emgu.CV.Util;
 using Jastech.Framework.Algorithms.Akkon.Parameters;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Imaging.Ipp;
+using Jastech.Framework.Imaging.VisionAlgorithms;
+using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,13 +23,17 @@ namespace Jastech.Framework.Algorithms.Akkon
 {
     public partial class AkkonAlgorithm
     {
+        private OpencvContour OpencvContour { get; set; } = new OpencvContour();
+
+        private CogBlob CogBlob { get; set; } = new CogBlob();
+
         public List<AkkonBlob> Run(Mat mat, List<AkkonROI> roiList, AkkonParam parameters)
         {
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
 
             var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ResizeRatio);
 
-            //Parallel.For(0, AkkonInspecterList.Count(), i =>
+            //Parallel.For(0, AkkonSliceList.Count(), i =>
             for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
@@ -52,11 +59,6 @@ namespace Jastech.Framework.Algorithms.Akkon
                     roiThresMat.Dispose();
                     oneLeadMask.Dispose();
 
-                    var contours = new VectorOfVectorOfPoint();
-                    Mat hierarchy = new Mat();
-
-                    CvInvoke.FindContours(oneLeadMat, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
-
                     AkkonBlob akkonBlob = new AkkonBlob();
                     akkonBlob.LeadIndex = roi.LeadIndex;
                     akkonBlob.Lead = roi.DeepCopy();
@@ -65,43 +67,15 @@ namespace Jastech.Framework.Algorithms.Akkon
                     akkonBlob.LeadOffsetX = boundRect.X;
                     akkonBlob.LeadOffsetY = boundRect.Y;
 
-         
-                    float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
-                    if (contours.Size != 0)
+                    if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
+                    {
+                        var blobList = OpencvContour.Run(oneLeadMat);
+                        akkonBlob.BlobList.AddRange(blobList);
+                    }
+                    else if(parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
                     {
 
-                        for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
-                        { // hier-1 only
-                            if (hierarchyArray[idxContour * 4 + 3] > -0.5)
-                                continue;
-
-                            var contour = contours[idxContour];
-
-                            var hull = new VectorOfPoint();
-                            CvInvoke.ConvexHull(contour, hull, true);
-
-                            // Features
-                            Moments moments = CvInvoke.Moments(contour);
-                            Rectangle rect = CvInvoke.BoundingRectangle(contour);
-                            rect.X += 2;
-                            rect.Y += 2;
-                            if (CvInvoke.ContourArea(contour) != 0)
-                            {
-                                Blob blob = new Blob
-                                {
-                                    Points = contour.ToArray().ToList(),
-                                    Area = CvInvoke.ContourArea(contour),
-                                    CenterX = moments.M10 / moments.M00,
-                                    CenterY = moments.M01 / moments.M00,
-                                    BoundingRect = rect,
-                                };
-                                akkonBlob.BlobList.Add(blob);
-                            }
-                            else
-                            {
-                                int v = 1;
-                            }
-                        }
+                        CogBlob.Run(null, new Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProBlobParam());
                     }
                     akkonResultList.Add(akkonBlob);
                 }
@@ -109,7 +83,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 enhanceMat.Dispose();
                 maskMat.Dispose();
                 thresMat.Dispose();
-            }
+                }
             //});
 
             return akkonResultList;
@@ -128,7 +102,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             slice.EnhanceMat = enhanceMat.Clone();
 
             Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
-            //slice.ProcessingMat = maskMat.Clone();
 
             int lowThres = 0;
             int highThres = 255;
@@ -151,14 +124,9 @@ namespace Jastech.Framework.Algorithms.Akkon
                 Mat oneLeadMat = new Mat();
 
                 CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
-          
+
                 roiThresMat.Dispose();
                 oneLeadMask.Dispose();
-
-                var contours = new VectorOfVectorOfPoint();
-                Mat hierarchy = new Mat();
-
-                CvInvoke.FindContours(oneLeadMat, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
 
                 AkkonBlob akkonBlob = new AkkonBlob();
                 akkonBlob.LeadIndex = roi.LeadIndex;
@@ -168,47 +136,14 @@ namespace Jastech.Framework.Algorithms.Akkon
                 akkonBlob.LeadOffsetX = boundRect.X;
                 akkonBlob.LeadOffsetY = boundRect.Y;
 
-
-                float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
-                if (contours.Size != 0)
+                if (param.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
                 {
-
-                    for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
-                    { // hier-1 only
-                        if (hierarchyArray[idxContour * 4 + 3] > -0.5)
-                            continue;
-
-                        var contour = contours[idxContour];
-
-                        var hull = new VectorOfPoint();
-                        CvInvoke.ConvexHull(contour, hull, true);
-
-                        // Features
-                        Moments moments = CvInvoke.Moments(contour);
-                        Rectangle rect = CvInvoke.BoundingRectangle(contour);
-                        rect.X += 2;
-                        rect.Y += 2;
-                        if (CvInvoke.ContourArea(contour) != 0)
-                        {
-                            Blob blob = new Blob
-                            {
-                                Points = contour.ToArray().ToList(),
-                                Area = CvInvoke.ContourArea(contour),
-                                CenterX = moments.M10 / moments.M00,
-                                CenterY = moments.M01 / moments.M00,
-                                BoundingRect = rect,
-                            };
-                            akkonBlob.BlobList.Add(blob);
-                        }
-                        else
-                        {
-                            int v = 1;
-                        }
-                    }
+                    var blobList = OpencvContour.Run(oneLeadMat);
+                    akkonBlob.BlobList.AddRange(blobList);
                 }
+
                 akkonResultList.Add(akkonBlob);
             }
-
             enhanceMat.Dispose();
             maskMat.Dispose();
             thresMat.Dispose();
@@ -423,11 +358,6 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private void TempDrawLead(ref Mat mat, AkkonROI roi, Point StartPoint)
         {
-            //Point leftTop = new Point(roi.LeftTop.X, roi.LeftTop.Y);
-            //Point leftBottom = new Point(roi.LeftBottom.X, roi.LeftBottom.Y);
-            //Point rightTop = new Point(roi.RightTop.X, roi.RightTop.Y);
-            //Point rightBottom = new Point(roi.RightBottom.X, roi.RightBottom.Y);
-
             Point leftTop = new Point(roi.LeftTop.X + StartPoint.X, roi.LeftTop.Y + StartPoint.Y);
             Point leftBottom = new Point(roi.LeftBottom.X + StartPoint.X, roi.LeftBottom.Y + StartPoint.Y);
             Point rightTop = new Point(roi.RightTop.X + StartPoint.X, roi.RightTop.Y + StartPoint.Y);
@@ -437,8 +367,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             CvInvoke.Line(mat, leftTop, rightTop, new MCvScalar(255), 1);
             CvInvoke.Line(mat, rightTop, rightBottom, new MCvScalar(255), 1);
             CvInvoke.Line(mat, rightBottom, leftBottom, new MCvScalar(255), 1);
-
-            //mat.Save(@"D:\world22.bmp");
         }
 
         private bool IsAllContain(AkkonROI roi, Rectangle target)
@@ -475,7 +403,6 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private List<AkkonROI> GetResizeROI(List<AkkonROI> orgRoiList, double resizeRatio)
         {
-           
             if(resizeRatio == 1.0)
             {
                 return orgRoiList.Select(x => x.DeepCopy()).ToList();
@@ -726,7 +653,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             int width = mat.Width;
             int height = mat.Height;
 
-            //filterParam = GenerateFilter(2.0, 8, 16, 1.3);
             var calcKernel = GenerateFilter(filterParam);
             unsafe
             {
@@ -767,11 +693,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             IntPtr src8Ptr = mat.DataPointer;
             int width = mat.Width;
             int height = mat.Height;
-            // 기존 marcon Filter2 =>(sigma : 2, gusWidth : 8, logWidth : 16, scaleFactor : 1.3)
-            //filterParam = GenerateFilter(2.0, 8, 16, 1.3);
 
-            // 기존 marcon Filter2 =>(sigma: 1.5, gusWidth: 6, logWidth: 16, scaleFactor: 2.0)
-            //filterParam = GenerateFilter(1.5, 6, 16, 2.0);
             var calcKernel = GenerateFilter(filterParam);
             unsafe
             {
@@ -1060,5 +982,11 @@ namespace Jastech.Framework.Algorithms.Akkon
         Auto,
         White,
         Black,
+    }
+
+    public enum AkkonAlgoritmType
+    {
+        OpenCV,
+        Cognex,
     }
 }

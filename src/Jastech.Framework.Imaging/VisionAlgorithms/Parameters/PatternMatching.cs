@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionAlgorithms.Parameters
 {
-    public class PatternMatchingParam
+    public class PatternMatching
     {
         [JsonProperty]
         public string Name { get; set; }

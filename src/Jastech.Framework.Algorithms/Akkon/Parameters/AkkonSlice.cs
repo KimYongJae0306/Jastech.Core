@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -51,18 +52,5 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public List<Blob> BlobList = new List<Blob>();
 
-    }
-
-    public class Blob
-    {
-        public Rectangle BoundingRect;
-
-        public List<Point> Points = new List<Point>();
-
-        public double Area { get; set; } = 0.0;
-
-        public double CenterX { get; set; } = 0.0;
-
-        public double CenterY { get; set; } = 0.0;
     }
 }

@@ -10,6 +10,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     public class AkkonParam
     {
         #region 속성
+        public AkkonAlgoritmType AkkonAlgoritmType { get; set; } = AkkonAlgoritmType.OpenCV;
+
         public double ResizeRatio { get; set; } = 1.0;
 
         public int SliceCount { get; set; } = 50;
