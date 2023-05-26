@@ -1,9 +1,10 @@
 ﻿using AW;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
+using Jastech.Framework.Algorithms.Akkon.Parameters;
+using Jastech.Framework.Algorithms.Akkon.Results;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Macron.Akkon.Parameters;
-using Jastech.Framework.Macron.Akkon.Results;
 using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
@@ -136,7 +137,7 @@ namespace Jastech.Framework.Macron.Akkon
         }
 
         //// 3번 ROI 설정
-        public bool SetConvertROIData(List<MacronAkkonROI> roiList, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle, float resize = 1.0f)
+        public bool SetConvertROIData(List<AkkonROI> roiList, int stageNo, int tabNo, PointF centerPoint, PointF offset, double angle, float resize = 1.0f)
         {
             int leadCount = roiList.Count();
 
@@ -323,25 +324,26 @@ namespace Jastech.Framework.Macron.Akkon
             ATTWrapper.AWSetAllPara(stageNo, tabNo, ref inspParam, ref filterParam, ref drawOption, ref inspOption);
         }
 
-        public List<MacronAkkonROI> GetCalcROI(PointF startPoint, List<MacronAkkonROI> orgROIList)
+        public List<AkkonROI> GetCalcROI(PointF startPoint, List<AkkonROI> orgROIList)
         {
-            List<MacronAkkonROI> calcROIList = new List<MacronAkkonROI>();
+            List<AkkonROI> calcROIList = new List<AkkonROI>();
 
             foreach (var roi in orgROIList)
             {
-                MacronAkkonROI calcROI = new MacronAkkonROI();
-                calcROI.CornerOppositeX = roi.CornerOppositeX - startPoint.X;
-                calcROI.CornerOppositeY = roi.CornerOppositeY - startPoint.Y;
+                AkkonROI calcROI = new AkkonROI
+                {
+                    LeftTopX = roi.LeftTopX - startPoint.X,
+                    LeftTopY = roi.LeftTopY - startPoint.Y,
 
-                calcROI.CornerOriginX = roi.CornerOriginX - startPoint.X;
-                calcROI.CornerOriginY = roi.CornerOriginY - startPoint.Y;
+                    RightTopX = roi.RightTopX - startPoint.X,
+                    RightTopY = roi.RightTopY - startPoint.Y,
 
-                calcROI.CornerXX = roi.CornerXX - startPoint.X;
-                calcROI.CornerXY = roi.CornerXY - startPoint.Y;
+                    LeftBottomX = roi.LeftBottomX - startPoint.X,
+                    LeftBottomY = roi.LeftBottomY - startPoint.Y,
 
-                calcROI.CornerYX = roi.CornerYX - startPoint.X;
-                calcROI.CornerYY = roi.CornerYY - startPoint.Y;
-
+                    RightBottomX = roi.RightBottomX - startPoint.X,
+                    RightBottomY = roi.RightBottomY - startPoint.Y,
+                };
                 calcROIList.Add(calcROI);
             }
 
@@ -616,7 +618,7 @@ namespace Jastech.Framework.Macron.Akkon
             inspOption.RotOffset = param.s_nRotOffset;
         }
 
-        private int[][] ConvertROI(List<MacronAkkonROI> tabROIList, PointF centerPoint, PointF offset, double angle)
+        private int[][] ConvertROI(List<AkkonROI> tabROIList, PointF centerPoint, PointF offset, double angle)
         {
             int leadCount = tabROIList.Count();
             if (leadCount <= 0)
@@ -629,20 +631,20 @@ namespace Jastech.Framework.Macron.Akkon
                 leadPoint[i] = new int[8];
 
                 PointF cornerOriginPt = new PointF();
-                cornerOriginPt.X = (float)tabROIList[i].CornerOriginX;
-                cornerOriginPt.Y = (float)tabROIList[i].CornerOriginY;
+                cornerOriginPt.X = (float)tabROIList[i].LeftTopX;
+                cornerOriginPt.Y = (float)tabROIList[i].LeftTopY;
 
                 PointF cornerXPt = new PointF();
-                cornerXPt.X = (float)tabROIList[i].CornerXX;
-                cornerXPt.Y = (float)tabROIList[i].CornerXY;
+                cornerXPt.X = (float)tabROIList[i].RightTopX;
+                cornerXPt.Y = (float)tabROIList[i].RightTopY;
 
                 PointF cornerOppositePt = new PointF();
-                cornerOppositePt.X = (float)tabROIList[i].CornerOppositeX;
-                cornerOppositePt.Y = (float)tabROIList[i].CornerOppositeY;
+                cornerOppositePt.X = (float)tabROIList[i].RightBottomX;
+                cornerOppositePt.Y = (float)tabROIList[i].RightBottomY;
 
                 PointF cornerYPt = new PointF();
-                cornerYPt.X = (float)tabROIList[i].CornerYX;
-                cornerYPt.Y = (float)tabROIList[i].CornerYY;
+                cornerYPt.X = (float)tabROIList[i].LeftBottomX;
+                cornerYPt.Y = (float)tabROIList[i].LeftBottomY;
 
                 var calcCornerOriginPt = MatHelper.RotationPoint(cornerOriginPt, centerPoint, offset, angle);
                 var calcCornerXPt = MatHelper.RotationPoint(cornerXPt, centerPoint, offset, angle);

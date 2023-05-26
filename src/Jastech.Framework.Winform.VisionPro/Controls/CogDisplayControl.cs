@@ -176,7 +176,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                ICogImage cogImage = CogImageHelper.Load(dialog.FileName);
+                ICogImage cogImage = VisionProImageHelper.Load(dialog.FileName);
 
                 CogImage8Grey cog = (CogImage8Grey)cogImage;
                 ICogImage8PixelMemory memory= cog.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, cogImage.Width, cogImage.Height);
@@ -365,7 +365,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 {
                     EndPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
 
-                    Distance = CogMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length;
+                    Distance = VisionProMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length;
                     _stepPointToPoint = StepPointToPoint.Measure;
                 }
                 else if (_stepPointToPoint == StepPointToPoint.Measure)
@@ -375,7 +375,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     DrawToolList.Add(TrackingCogDistanceTool);
                     SetStaticGraphics(DrawToolList.Count.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
 
-                    Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
+                    Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(DrawToolList.Count.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
 
                     _stepPointToPoint = StepPointToPoint.Start;
@@ -420,7 +420,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                     SetStaticGraphics(groupName, TrackingCogDistanceTool.CreateLastRunRecord());
 
-                    Distance = CogMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
+                    Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(groupName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
                 }
                 else if (_stepPointToPoint == StepPointToPoint.Measure)
@@ -431,7 +431,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if(cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
             {
-                MoveImageEventHandler(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
+                MoveImageEventHandler?.Invoke(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
             }
         }
 
@@ -439,7 +439,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
             {
-                MoveImageEventHandler(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
+                MoveImageEventHandler?.Invoke(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
             }
         }
 
@@ -721,12 +721,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.PanX = panPointX;
         }
 
-        public void UpdateResult(CogPatternMatchingResult matchingResult)
+        public void UpdateResult(VisionProPatternMatchingResult matchingResult)
         {
             CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
 
             string groupName = "Result";
-            var matchingResultData = matchingResult.MaxMatchPos;
+            var matchingResultData = matchingResult.MaxMatchPos as VisionProPatternMatchPos;
             if (matchingResultData.ResultGraphics == null)
                 return;
 
@@ -745,7 +745,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void UpdateResult(CogAlignCaliperResult alignResult)
+        public void UpdateResult(VisionProAlignCaliperResult alignResult)
         {
             if (alignResult == null)
                 return;

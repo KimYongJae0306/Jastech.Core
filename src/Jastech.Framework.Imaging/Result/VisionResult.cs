@@ -8,6 +8,8 @@ namespace Jastech.Framework.Imaging.Result
 {
     public class VisionResult
     {
+        public long TactTime { get; set; }
+
         public Judgement Judgement { get; set; } = Judgement.Fail;
     }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Jastech.Framework.Util.Helper;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,99 +11,120 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 {
     public class AkkonROI
     {
+        [JsonProperty]
         public int LeadIndex { get; set; }
 
-        public Point LeftTop { get; set; }
+        [JsonProperty]
+        public double LeftTopX { get; set; } // CornerOriginX
 
-        public Point RightTop { get; set; }
+        [JsonProperty]
+        public double LeftTopY { get; set; } // CornerOriginY
 
-        public Point LeftBottom { get; set; }
+        [JsonProperty]
+        public double RightTopX { get; set; } // CornerOppositeX
 
-        public Point RightBottom { get; set; }
+        [JsonProperty]
+        public double RightTopY { get; set; } // CornerOppositeY
+
+        [JsonProperty]
+        public double LeftBottomX { get; set; } // CornerYX
+
+        [JsonProperty]
+        public double LeftBottomY { get; set; } // CornerYY
+
+        [JsonProperty]
+        public double RightBottomX { get; set; } // CornerOppositeX
+
+        [JsonProperty]
+        public double RightBottomY { get; set; } // CornerOppositeY
 
         public AkkonROI DeepCopy()
         {
-            AkkonROI roi = new AkkonROI();
-
-            roi.LeadIndex = LeadIndex;
-            roi.LeftTop = new Point(LeftTop.X, LeftTop.Y);
-            roi.RightTop = new Point(RightTop.X, RightTop.Y);
-            roi.LeftBottom = new Point(LeftBottom.X, LeftBottom.Y);
-            roi.RightBottom = new Point(RightBottom.X, RightBottom.Y);
-
-            return roi;
+            return JsonConvertHelper.DeepCopy(this) as AkkonROI;
         }
 
         public Rectangle GetBoundRect()
         {
             Rectangle rect = new Rectangle();
 
-            rect.X = GetMinX();
-            rect.Y = GetMinY();
-            int g = GetMaxX();
+            rect.X = (int)GetMinX();
+            rect.Y = (int)GetMinY();
 
-            rect.Width = Math.Abs(GetMaxX() - rect.X);
-            rect.Height = Math.Abs(GetMaxY() - rect.Y);
+            rect.Width = (int)Math.Abs(GetMaxX() - rect.X);
+            rect.Height = (int)Math.Abs(GetMaxY() - rect.Y);
 
             return rect;
         }
 
-        public int GetMinX()
+        public RectangleF GetBoundRectF()
         {
-            int minX = int.MaxValue;
-            if (LeftTop.X <= minX)
-                minX = LeftTop.X;
-            if (RightTop.X <= minX)
-                minX = RightTop.X;
-            if (LeftBottom.X <= minX)
-                minX = LeftBottom.X;
-            if (RightBottom.X <= minX)
-                minX = RightBottom.X;
+            RectangleF rect = new RectangleF();
+
+            rect.X = (float)GetMinX();
+            rect.Y = (float)GetMinY();
+
+            rect.Width = (float)Math.Abs(GetMaxX() - rect.X);
+            rect.Height = (float)Math.Abs(GetMaxY() - rect.Y);
+
+            return rect;
+        }
+
+        public double GetMinX()
+        {
+            double minX = double.MaxValue;
+            if (LeftTopX <= minX)
+                minX = LeftTopX;
+            if (RightTopX <= minX)
+                minX = RightTopX;
+            if (LeftBottomX <= minX)
+                minX = LeftBottomX;
+            if (RightBottomX <= minX)
+                minX = RightBottomX;
 
             return minX;
         }
 
-        private int GetMaxX()
+        private double GetMaxX()
         {
-            int maxX = int.MinValue;
-            if (LeftTop.X >= maxX)
-                maxX = LeftTop.X;
-            if (RightTop.X >= maxX)
-                maxX = RightTop.X;
-            if (LeftBottom.X >= maxX)
-                maxX = LeftBottom.X;
-            if (RightBottom.X >= maxX)
-                maxX = RightBottom.X;
+            double maxX = double.MinValue;
+            if (LeftTopX >= maxX)
+                maxX = LeftTopX;
+            if (RightTopX >= maxX)
+                maxX = RightTopX;
+            if (LeftBottomX >= maxX)
+                maxX = LeftBottomX;
+            if (RightBottomX >= maxX)
+                maxX = RightBottomX;
 
             return maxX;
         }
 
-        private int GetMinY()
+        private double GetMinY()
         {
-            int minY = int.MaxValue;
-            if (LeftTop.Y <= minY)
-                minY = LeftTop.Y;
-            if (RightTop.Y <= minY)
-                minY = RightTop.Y;
-            if (LeftBottom.Y <= minY)
-                minY = LeftBottom.Y;
-            if (RightBottom.Y <= minY)
-                minY = RightBottom.Y;
+            double minY = double.MaxValue;
+            if (LeftTopY <= minY)
+                minY = LeftTopY;
+            if (RightTopY <= minY)
+                minY = RightTopY;
+            if (LeftBottomY <= minY)
+                minY = LeftBottomY;
+            if (RightBottomY <= minY)
+                minY = RightBottomY;
 
             return minY;
         }
 
-        private int GetMaxY()
+        private double GetMaxY()
         {
-            int maxY = int.MinValue;
-            if (LeftTop.Y >= maxY)
-                maxY = LeftTop.Y;
-            if (RightTop.Y >= maxY)
-                maxY = RightTop.Y;
-            if (LeftBottom.Y >= maxY)
-                maxY = LeftBottom.Y;
-            if (RightBottom.Y >= maxY)
-                maxY = RightBottom.Y;
+            double maxY = double.MinValue;
+            if (LeftTopY >= maxY)
+                maxY = LeftTopY;
+            if (RightTopY >= maxY)
+                maxY = RightTopY;
+            if (LeftBottomY >= maxY)
+                maxY = LeftBottomY;
+            if (RightBottomY >= maxY)
+                maxY = RightBottomY;
 
             return maxY;
         }
