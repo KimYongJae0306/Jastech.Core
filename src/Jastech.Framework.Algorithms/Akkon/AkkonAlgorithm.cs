@@ -308,6 +308,9 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public List<AkkonSlice> PrepareInspect(Mat orgMat, List<AkkonROI> roiList, int sliceWidth, double resizeRatio)
         {
+            if (roiList.Count <= 0)
+                return new List<AkkonSlice>();
+
             var resizeRoiList = GetResizeROI(roiList, resizeRatio);
             Mat resizeMat = GetResizeMat(orgMat, resizeRatio);
 
@@ -327,7 +330,9 @@ namespace Jastech.Framework.Algorithms.Akkon
             }
 
             int roiIndex = 0;
-            int maxSliceCount = (int)((cropWorldMat.Width / sliceWidth) * 1.5); 
+            int maxSliceCount = (int)((cropWorldMat.Width / sliceWidth) * 1.5);
+            if (maxSliceCount < 1)
+                maxSliceCount = 1;
 
             List<AkkonSlice> sliceList = new List<AkkonSlice>();
             int startX = 0;
