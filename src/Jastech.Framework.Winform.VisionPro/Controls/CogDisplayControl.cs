@@ -686,8 +686,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
                 {
-                    if (display.Zoom < 0.2)
-                        display.Zoom = 0.2;
+                    //if (display.Zoom < 0.2)
+                    //    display.Zoom = 0.2;
 
                     if (display.Zoom > 10)
                         display.Zoom = 10;
