@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    public class CogPatternMatching : CogVision
+    public class VisionProPatternMatching : CogVision
     {
         #region 필드
         #endregion
@@ -30,9 +30,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         #endregion
 
         #region 메서드
-        public CogPatternMatchingResult Run(ICogImage image, VisionProPatternMatchingParam matchingParam)
+        public VisionProPatternMatchingResult Run(ICogImage image, VisionProPatternMatchingParam matchingParam)
         {
-            CogPatternMatchingResult result = new CogPatternMatchingResult();
+            VisionProPatternMatchingResult result = new VisionProPatternMatchingResult();
 
             if (image == null)
                 return result;
@@ -50,7 +50,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             result.TactTime = sw.ElapsedMilliseconds;
             if (resultList.Count > 0)
             {
-                PatternMatchPos match = new PatternMatchPos();
+                VisionProPatternMatchPos match = new VisionProPatternMatchPos();
 
                 CogRectangle trainRoi = matchingParam.GetTrainRegion() as CogRectangle;
                 var foundResult = resultList[0];

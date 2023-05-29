@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    class CogBead
+    class VisionProBead
     {
     }
 }

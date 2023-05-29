@@ -1,10 +1,18 @@
-﻿using Emgu.CV;
+﻿using Cognex.VisionPro;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Jastech.Framework.Algorithms.Akkon.Parameters;
+using Jastech.Framework.Algorithms.Akkon.Results;
 using Jastech.Framework.Imaging.Helper;
 using Jastech.Framework.Imaging.Ipp;
+using Jastech.Framework.Imaging.VisionAlgorithms;
+using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
+using Jastech.Framework.Imaging.VisionPro;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,17 +28,29 @@ namespace Jastech.Framework.Algorithms.Akkon
 {
     public partial class AkkonAlgorithm
     {
-        public List<AkkonBlob> Run(Mat mat, List<AkkonROI> roiList, AkkonParam parameters)
+        private object _lock = new object();
+
+        private OpencvContour OpencvContour { get; set; } = new OpencvContour();
+
+        private VisionProBlob CogBlob { get; set; } = new VisionProBlob();
+
+        public List<AkkonBlob> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters)
         {
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
-
             var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ResizeRatio);
 
-            //Parallel.For(0, AkkonInspecterList.Count(), i =>
-            for (int i = 0; i < AkkonSliceList.Count(); i++)
+            int max = 4;// Environment.ProcessorCount / 4;
+            ParallelOptions options = new ParallelOptions
+            {
+                MaxDegreeOfParallelism = max,
+            };
+            //Parallel.For(0, AkkonSliceList.Count(), options, i =>
+            Parallel.For(0, AkkonSliceList.Count(), i =>
+            //for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
                 Mat enhanceMat = EnhanceY(slice.Image, new AkkonImageFilterParam());
+
                 Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
 
                 int lowThres = 0;
@@ -52,11 +72,6 @@ namespace Jastech.Framework.Algorithms.Akkon
                     roiThresMat.Dispose();
                     oneLeadMask.Dispose();
 
-                    var contours = new VectorOfVectorOfPoint();
-                    Mat hierarchy = new Mat();
-
-                    CvInvoke.FindContours(oneLeadMat, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
-
                     AkkonBlob akkonBlob = new AkkonBlob();
                     akkonBlob.LeadIndex = roi.LeadIndex;
                     akkonBlob.Lead = roi.DeepCopy();
@@ -65,57 +80,36 @@ namespace Jastech.Framework.Algorithms.Akkon
                     akkonBlob.LeadOffsetX = boundRect.X;
                     akkonBlob.LeadOffsetY = boundRect.Y;
 
-         
-                    float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
-                    if (contours.Size != 0)
-                    {
+                    //if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
+                    //{
+                        var blobList = OpencvContour.Run(oneLeadMat);
+                        ClacResultFilter(ref blobList, parameters.ResultFilter);
+                        akkonBlob.BlobList.AddRange(blobList);
+                    //}
+                    //else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
+                    //{
+                    //    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
+                    //    var result = CogBlob.Run(cogImage, new VisionProBlobParam());
 
-                        for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
-                        { // hier-1 only
-                            if (hierarchyArray[idxContour * 4 + 3] > -0.5)
-                                continue;
+                    //    ClacResultFilter(ref result, parameters.ResultFilter);
+                    //    akkonBlob.BlobList.AddRange(result.BlobList);
+                    //}
 
-                            var contour = contours[idxContour];
+                    lock(_lock)
+                        akkonResultList.Add(akkonBlob);
 
-                            var hull = new VectorOfPoint();
-                            CvInvoke.ConvexHull(contour, hull, true);
-
-                            // Features
-                            Moments moments = CvInvoke.Moments(contour);
-                            Rectangle rect = CvInvoke.BoundingRectangle(contour);
-                            rect.X += 2;
-                            rect.Y += 2;
-                            if (CvInvoke.ContourArea(contour) != 0)
-                            {
-                                Blob blob = new Blob
-                                {
-                                    Points = contour.ToArray().ToList(),
-                                    Area = CvInvoke.ContourArea(contour),
-                                    CenterX = moments.M10 / moments.M00,
-                                    CenterY = moments.M01 / moments.M00,
-                                    BoundingRect = rect,
-                                };
-                                akkonBlob.BlobList.Add(blob);
-                            }
-                            else
-                            {
-                                int v = 1;
-                            }
-                        }
-                    }
-                    akkonResultList.Add(akkonBlob);
+                    Thread.Sleep(0);
                 }
 
                 enhanceMat.Dispose();
                 maskMat.Dispose();
                 thresMat.Dispose();
-            }
-            //});
-
+                //}
+            });
             return akkonResultList;
         }
 
-        public List<AkkonBlob> RunForDebug(ref AkkonSlice slice, AkkonParam param)
+        public List<AkkonBlob> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam param)
         {
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
 
@@ -128,7 +122,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             slice.EnhanceMat = enhanceMat.Clone();
 
             Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
-            //slice.ProcessingMat = maskMat.Clone();
 
             int lowThres = 0;
             int highThres = 255;
@@ -151,14 +144,9 @@ namespace Jastech.Framework.Algorithms.Akkon
                 Mat oneLeadMat = new Mat();
 
                 CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
-          
+
                 roiThresMat.Dispose();
                 oneLeadMask.Dispose();
-
-                var contours = new VectorOfVectorOfPoint();
-                Mat hierarchy = new Mat();
-
-                CvInvoke.FindContours(oneLeadMat, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
 
                 AkkonBlob akkonBlob = new AkkonBlob();
                 akkonBlob.LeadIndex = roi.LeadIndex;
@@ -168,47 +156,19 @@ namespace Jastech.Framework.Algorithms.Akkon
                 akkonBlob.LeadOffsetX = boundRect.X;
                 akkonBlob.LeadOffsetY = boundRect.Y;
 
-
-                float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
-                if (contours.Size != 0)
+                //if (param.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
                 {
-
-                    for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
-                    { // hier-1 only
-                        if (hierarchyArray[idxContour * 4 + 3] > -0.5)
-                            continue;
-
-                        var contour = contours[idxContour];
-
-                        var hull = new VectorOfPoint();
-                        CvInvoke.ConvexHull(contour, hull, true);
-
-                        // Features
-                        Moments moments = CvInvoke.Moments(contour);
-                        Rectangle rect = CvInvoke.BoundingRectangle(contour);
-                        rect.X += 2;
-                        rect.Y += 2;
-                        if (CvInvoke.ContourArea(contour) != 0)
-                        {
-                            Blob blob = new Blob
-                            {
-                                Points = contour.ToArray().ToList(),
-                                Area = CvInvoke.ContourArea(contour),
-                                CenterX = moments.M10 / moments.M00,
-                                CenterY = moments.M01 / moments.M00,
-                                BoundingRect = rect,
-                            };
-                            akkonBlob.BlobList.Add(blob);
-                        }
-                        else
-                        {
-                            int v = 1;
-                        }
-                    }
+                    var blobList = OpencvContour.Run(oneLeadMat);
+                    akkonBlob.BlobList.AddRange(blobList);
                 }
+                //else if (param.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
+                //{
+                //    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
+                //    var result = CogBlob.Run(cogImage, new Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProBlobParam());
+                //    akkonBlob.BlobList.AddRange(result.BlobList);
+                //}
                 akkonResultList.Add(akkonBlob);
             }
-
             enhanceMat.Dispose();
             maskMat.Dispose();
             thresMat.Dispose();
@@ -216,6 +176,37 @@ namespace Jastech.Framework.Algorithms.Akkon
             return akkonResultList;
         }
 
+        public void ClacResultFilter(ref List<BlobPos> BlobList, ResultFilter filter)
+        {
+            foreach (var blob in BlobList)
+            {
+                blob.IsPass = IsPassing(blob, filter);
+            }
+        }
+
+        public void ClacResultFilter(ref VisionProBlobResult blobResult, ResultFilter filter)
+        {
+            foreach (var blob in blobResult.BlobList)
+            {
+                blob.IsPass = IsPassing(blob, filter);
+            }
+        }
+        
+        private bool IsPassing(BlobPos blob, ResultFilter filter)
+        {
+            bool isPass = false;
+
+            if (filter.MinSize <= blob.Area && blob.Area <= filter.MaxSize)
+            {
+                isPass = false;
+            }
+            else
+            {
+                isPass = true;
+            }
+
+            return isPass;
+        }
         public List<Point[]> MergeContours(List<Point[]> contours)
         {
             List<Point[]> mergedContours = new List<Point[]>();
@@ -247,7 +238,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             return mergedContours;
         }
 
-        public List<Mat> GetSliceImageList(Mat mat, List<AkkonROI> roiList, AkkonParam parameters)
+        public List<Mat> GetSliceImageList(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters)
         {
             List<Mat> sliceImageList = new List<Mat>();
 
@@ -286,10 +277,10 @@ namespace Jastech.Framework.Algorithms.Akkon
             {
                 VectorOfPoint contour = new VectorOfPoint( new[]
                 {
-                    roi.LeftTop,
-                    roi.RightTop,
-                    roi.RightBottom,
-                    roi.LeftBottom,
+                    new Point((int)roi.LeftTopX, (int)roi.LeftTopY),
+                    new Point((int)roi.RightTopX, (int)roi.RightTopY),
+                    new Point((int)roi.RightBottomX, (int)roi.RightBottomY),
+                    new Point((int)roi.LeftBottomX, (int)roi.LeftBottomY),
                 });
                 contours.Push(contour);
             }
@@ -304,10 +295,10 @@ namespace Jastech.Framework.Algorithms.Akkon
             VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
             VectorOfPoint contour = new VectorOfPoint(new[]
             {
-                new Point(roi.LeftTop.X - offsetX, roi.LeftTop.Y - offsetY),
-                new Point(roi.RightTop.X - offsetX, roi.RightTop.Y - offsetY),
-                new Point(roi.RightBottom.X - offsetX, roi.RightBottom.Y - offsetY),
-                new Point(roi.LeftBottom.X - offsetX, roi.LeftBottom.Y - offsetY),
+                new Point((int)roi.LeftTopX - offsetX, (int)roi.LeftTopY - offsetY),
+                new Point((int)roi.RightTopX - offsetX, (int)roi.RightTopY - offsetY),
+                new Point((int)roi.RightBottomX - offsetX, (int)roi.RightBottomY - offsetY),
+                new Point((int)roi.LeftBottomX - offsetX, (int)roi.LeftBottomY - offsetY),
             });
             contours.Push(contour);
             CvInvoke.DrawContours(maskImage, contours, -1, new MCvScalar(255), -1);
@@ -317,6 +308,9 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public List<AkkonSlice> PrepareInspect(Mat orgMat, List<AkkonROI> roiList, int sliceWidth, double resizeRatio)
         {
+            if (roiList.Count <= 0)
+                return new List<AkkonSlice>();
+
             var resizeRoiList = GetResizeROI(roiList, resizeRatio);
             Mat resizeMat = GetResizeMat(orgMat, resizeRatio);
 
@@ -336,7 +330,9 @@ namespace Jastech.Framework.Algorithms.Akkon
             }
 
             int roiIndex = 0;
-            int maxSliceCount = (int)((cropWorldMat.Width / sliceWidth) * 1.5); 
+            int maxSliceCount = (int)((cropWorldMat.Width / sliceWidth) * 1.5);
+            if (maxSliceCount < 1)
+                maxSliceCount = 1;
 
             List<AkkonSlice> sliceList = new List<AkkonSlice>();
             int startX = 0;
@@ -384,10 +380,17 @@ namespace Jastech.Framework.Algorithms.Akkon
                         AkkonROI calcRoiFromSlicePoint = new AkkonROI();
 
                         calcRoiFromSlicePoint.LeadIndex = leadIndex;
-                        calcRoiFromSlicePoint.LeftTop = new Point(roi.LeftTop.X - sliceStartPoint.X, roi.LeftTop.Y - sliceStartPoint.Y);
-                        calcRoiFromSlicePoint.LeftBottom = new Point(roi.LeftBottom.X - sliceStartPoint.X, roi.LeftBottom.Y - sliceStartPoint.Y);
-                        calcRoiFromSlicePoint.RightTop = new Point(roi.RightTop.X - sliceStartPoint.X, roi.RightTop.Y - sliceStartPoint.Y);
-                        calcRoiFromSlicePoint.RightBottom = new Point(roi.RightBottom.X - sliceStartPoint.X, roi.RightBottom.Y - sliceStartPoint.Y);
+                        calcRoiFromSlicePoint.LeftTopX = roi.LeftTopX - sliceStartPoint.X;
+                        calcRoiFromSlicePoint.LeftTopY = roi.LeftTopY - sliceStartPoint.Y;
+
+                        calcRoiFromSlicePoint.LeftBottomX = roi.LeftBottomX - sliceStartPoint.X;
+                        calcRoiFromSlicePoint.LeftBottomY = roi.LeftBottomY - sliceStartPoint.Y;
+
+                        calcRoiFromSlicePoint.RightTopX = roi.RightTopX - sliceStartPoint.X;
+                        calcRoiFromSlicePoint.RightTopY = roi.RightTopY - sliceStartPoint.Y;
+
+                        calcRoiFromSlicePoint.RightBottomX = roi.RightBottomX - sliceStartPoint.X;
+                        calcRoiFromSlicePoint.RightBottomY = roi.RightBottomY - sliceStartPoint.Y;
 
                         // Slice 이미지 기준으로 변경
                         slice.CalcAkkonROIs.Add(calcRoiFromSlicePoint);
@@ -423,37 +426,30 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private void TempDrawLead(ref Mat mat, AkkonROI roi, Point StartPoint)
         {
-            //Point leftTop = new Point(roi.LeftTop.X, roi.LeftTop.Y);
-            //Point leftBottom = new Point(roi.LeftBottom.X, roi.LeftBottom.Y);
-            //Point rightTop = new Point(roi.RightTop.X, roi.RightTop.Y);
-            //Point rightBottom = new Point(roi.RightBottom.X, roi.RightBottom.Y);
-
-            Point leftTop = new Point(roi.LeftTop.X + StartPoint.X, roi.LeftTop.Y + StartPoint.Y);
-            Point leftBottom = new Point(roi.LeftBottom.X + StartPoint.X, roi.LeftBottom.Y + StartPoint.Y);
-            Point rightTop = new Point(roi.RightTop.X + StartPoint.X, roi.RightTop.Y + StartPoint.Y);
-            Point rightBottom = new Point(roi.RightBottom.X+ StartPoint.X, roi.RightBottom.Y + StartPoint.Y);
+            Point leftTop = new Point((int)roi.LeftTopX + StartPoint.X, (int)roi.LeftTopY + StartPoint.Y);
+            Point leftBottom = new Point((int)roi.LeftBottomX + StartPoint.X, (int)roi.LeftBottomY + StartPoint.Y);
+            Point rightTop = new Point((int)roi.RightTopX + StartPoint.X, (int)roi.RightTopY + StartPoint.Y);
+            Point rightBottom = new Point((int)roi.RightBottomX+ StartPoint.X, (int)roi.RightBottomY + StartPoint.Y);
 
             CvInvoke.Line(mat, leftTop, leftBottom, new MCvScalar(255), 1);
             CvInvoke.Line(mat, leftTop, rightTop, new MCvScalar(255), 1);
             CvInvoke.Line(mat, rightTop, rightBottom, new MCvScalar(255), 1);
             CvInvoke.Line(mat, rightBottom, leftBottom, new MCvScalar(255), 1);
-
-            //mat.Save(@"D:\world22.bmp");
         }
 
         private bool IsAllContain(AkkonROI roi, Rectangle target)
         {
             bool isAllContain = true;
-            if (target.Contains(roi.LeftTop) == false)
+            if (target.Contains(new Point((int)roi.LeftTopX, (int)roi.LeftTopY)) == false)
                 isAllContain &= false;
 
-            if (target.Contains(roi.LeftBottom) == false)
+            if (target.Contains(new Point((int)roi.LeftBottomX, (int)roi.LeftBottomY)) == false)
                 isAllContain &= false;
 
-            if (target.Contains(roi.RightTop) == false)
+            if (target.Contains(new Point((int)roi.RightTopX, (int)roi.RightTopY)) == false)
                 isAllContain &= false;
 
-            if (target.Contains(roi.RightBottom) == false)
+            if (target.Contains(new Point((int)roi.RightBottomX, (int)roi.RightBottomY)) == false)
                 isAllContain &= false;
 
             return isAllContain;
@@ -475,7 +471,6 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private List<AkkonROI> GetResizeROI(List<AkkonROI> orgRoiList, double resizeRatio)
         {
-           
             if(resizeRatio == 1.0)
             {
                 return orgRoiList.Select(x => x.DeepCopy()).ToList();
@@ -486,23 +481,18 @@ namespace Jastech.Framework.Algorithms.Akkon
 
                 foreach (var roi in orgRoiList)
                 {
-                    int leftTopX = (int)(roi.LeftTop.X * resizeRatio);
-                    int leftTopY = (int)(roi.LeftTop.Y * resizeRatio);
-
-                    int leftBottomX = (int)(roi.LeftBottom.X * resizeRatio);
-                    int leftBottomY = (int)(roi.LeftBottom.Y * resizeRatio);
-
-                    int rightTopX = (int)(roi.RightTop.X * resizeRatio);
-                    int rightTopY = (int)(roi.RightTop.Y * resizeRatio);
-
-                    int rightBottomX = (int)(roi.RightBottom.X * resizeRatio);
-                    int rightBottomY = (int)(roi.RightBottom.Y * resizeRatio);
-
                     AkkonROI calcRoi = new AkkonROI();
-                    calcRoi.LeftTop = new Point(leftTopX, leftTopY);
-                    calcRoi.LeftBottom = new Point(leftBottomX, leftBottomY);
-                    calcRoi.RightTop = new Point(rightTopX, rightTopY);
-                    calcRoi.RightBottom = new Point(rightBottomX, rightBottomY);
+                    calcRoi.LeftTopX = roi.LeftTopX * resizeRatio;
+                    calcRoi.LeftTopY = roi.LeftTopY * resizeRatio;
+
+                    calcRoi.LeftBottomX = roi.LeftBottomX * resizeRatio;
+                    calcRoi.LeftBottomY = roi.LeftBottomY * resizeRatio;
+
+                    calcRoi.RightTopX = roi.RightTopX * resizeRatio;
+                    calcRoi.RightTopY = roi.RightTopY * resizeRatio;
+
+                    calcRoi.RightBottomX = roi.RightBottomX * resizeRatio;
+                    calcRoi.RightBottomY = roi.RightBottomY * resizeRatio;
 
                     calcRoiList.Add(calcRoi);
                 }
@@ -513,41 +503,41 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private Rectangle GetBoundRect(List<AkkonROI> roiList)
         {
-            int minX = int.MaxValue;
-            int minY = int.MaxValue;
-            int maxX = int.MinValue;
-            int maxY = int.MinValue;
+            double minX = double.MaxValue;
+            double minY = double.MaxValue;
+            double maxX = double.MinValue;
+            double maxY = double.MinValue;
 
             List<AkkonROI> calcRoiList = new List<AkkonROI>();
             foreach (var roi in roiList)
             {
-                minX = minX > roi.LeftTop.X ? roi.LeftTop.X : minX;
-                minX = minX > roi.LeftBottom.X ? roi.LeftBottom.X : minX;
-                minX = minX > roi.RightTop.X ? roi.RightTop.X : minX;
-                minX = minX > roi.RightBottom.X ? roi.RightBottom.X : minX;
+                minX = minX > roi.LeftTopX ? roi.LeftTopX : minX;
+                minX = minX > roi.LeftBottomX ? roi.LeftBottomX : minX;
+                minX = minX > roi.RightTopX ? roi.RightTopX : minX;
+                minX = minX > roi.RightBottomX ? roi.RightBottomX : minX;
 
-                minY = minY > roi.LeftTop.Y ? roi.LeftTop.Y : minY;
-                minY = minY > roi.LeftBottom.Y ? roi.LeftBottom.Y : minY;
-                minY = minY > roi.RightTop.Y ? roi.RightTop.Y : minY;
-                minY = minY > roi.RightBottom.Y ? roi.RightBottom.Y : minY;
+                minY = minY > roi.LeftTopY ? roi.LeftTopY : minY;
+                minY = minY > roi.LeftBottomY ? roi.LeftBottomY : minY;
+                minY = minY > roi.RightTopY ? roi.RightTopY : minY;
+                minY = minY > roi.RightBottomY ? roi.RightBottomY : minY;
 
-                maxX = maxX < roi.LeftTop.X ? roi.LeftTop.X : maxX;
-                maxX = maxX < roi.LeftBottom.X ? roi.LeftBottom.X : maxX;
-                maxX = maxX < roi.RightTop.X ? roi.RightTop.X : maxX;
-                maxX = maxX < roi.RightBottom.X ? roi.RightBottom.X : maxX;
+                maxX = maxX < roi.LeftTopX ? roi.LeftTopX : maxX;
+                maxX = maxX < roi.LeftBottomX ? roi.LeftBottomX : maxX;
+                maxX = maxX < roi.RightTopX ? roi.RightTopX : maxX;
+                maxX = maxX < roi.RightBottomX ? roi.RightBottomX : maxX;
 
-                maxY = maxY < roi.LeftTop.Y ? roi.LeftTop.Y : maxY;
-                maxY = maxY < roi.LeftBottom.Y ? roi.LeftBottom.Y : maxY;
-                maxY = maxY < roi.RightTop.Y ? roi.RightTop.Y : maxY;
-                maxY = maxY < roi.RightBottom.Y ? roi.RightBottom.Y : maxY;
+                maxY = maxY < roi.LeftTopY ? roi.LeftTopY : maxY;
+                maxY = maxY < roi.LeftBottomY ? roi.LeftBottomY : maxY;
+                maxY = maxY < roi.RightTopY ? roi.RightTopY : maxY;
+                maxY = maxY < roi.RightBottomY ? roi.RightBottomY : maxY;
             }
 
             int tempValue = 30; // 너무 타이트하게 잡으면 영상처리 데이터가 부족할까봐 조금 크게 영역 지정
             Rectangle boundRect = new Rectangle();
-            boundRect.X = minX - tempValue;
-            boundRect.Y = minY - tempValue;
-            boundRect.Width = Math.Abs(maxX - minX) + tempValue * 2;
-            boundRect.Height = Math.Abs(maxY - minY) + tempValue * 2;
+            boundRect.X = (int)(minX - tempValue);
+            boundRect.Y = (int)(minY - tempValue);
+            boundRect.Width = (int)(Math.Abs(maxX - minX) + tempValue * 2);
+            boundRect.Height = (int)(Math.Abs(maxY - minY) + tempValue * 2);
 
             return boundRect;
         }
@@ -726,7 +716,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             int width = mat.Width;
             int height = mat.Height;
 
-            //filterParam = GenerateFilter(2.0, 8, 16, 1.3);
             var calcKernel = GenerateFilter(filterParam);
             unsafe
             {
@@ -767,11 +756,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             IntPtr src8Ptr = mat.DataPointer;
             int width = mat.Width;
             int height = mat.Height;
-            // 기존 marcon Filter2 =>(sigma : 2, gusWidth : 8, logWidth : 16, scaleFactor : 1.3)
-            //filterParam = GenerateFilter(2.0, 8, 16, 1.3);
 
-            // 기존 marcon Filter2 =>(sigma: 1.5, gusWidth: 6, logWidth: 16, scaleFactor: 2.0)
-            //filterParam = GenerateFilter(1.5, 6, 16, 2.0);
             var calcKernel = GenerateFilter(filterParam);
             unsafe
             {
@@ -1060,5 +1045,11 @@ namespace Jastech.Framework.Algorithms.Akkon
         Auto,
         White,
         Black,
+    }
+
+    public enum AkkonAlgoritmType
+    {
+        OpenCV,
+        Cognex,
     }
 }

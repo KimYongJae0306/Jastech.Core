@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro
 {
-    public static class CogFileHelper
+    public static class VisionProFileHelper
     {
 
         public static void SaveTool<T>(string path, T tool)

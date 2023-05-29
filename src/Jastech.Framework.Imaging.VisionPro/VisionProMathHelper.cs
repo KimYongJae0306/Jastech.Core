@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro
 {
-    public static partial class CogMathHelper
+    public static partial class VisionProMathHelper
     {
         public static CogDistanceResult GetDistance(PointF startPoint, PointF endPoint, double resolution = 1.0)
         {
@@ -29,7 +29,7 @@ namespace Jastech.Framework.Imaging.VisionPro
         }
     }
 
-    public static partial class CogMathHelper
+    public static partial class VisionProMathHelper
     {
         public class CogDistanceResult
         {

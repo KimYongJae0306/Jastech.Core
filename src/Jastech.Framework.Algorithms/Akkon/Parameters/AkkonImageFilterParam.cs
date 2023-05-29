@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,19 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 {
     public class AkkonImageFilterParam
     {
+        [JsonProperty]
         public string Name { get; set; } = "";
 
+        [JsonProperty]
         public double Sigma { get; set; } = 2.0;
 
+        [JsonProperty]
         public int GusWidth { get; set; } = 6;
 
+        [JsonProperty]
         public int LogWidth { get; set; } = 16;
 
+        [JsonProperty]
         public double ScaleFactor { get; set; } = 1.3;
     }
 

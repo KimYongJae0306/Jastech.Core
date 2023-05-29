@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
-    public class CogAlignCaliperResult : VisionResult
+    public class VisionProAlignCaliperResult : VisionResult
     {
         #region 속성
         public List<VisionProCaliperResult> CogAlignResult { get; private set; } = new List<VisionProCaliperResult>();
@@ -39,9 +39,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             CogAlignResult.Clear();
         }
 
-        public CogAlignCaliperResult DeepCopy()
+        public VisionProAlignCaliperResult DeepCopy()
         {
-            CogAlignCaliperResult result = new CogAlignCaliperResult();
+            VisionProAlignCaliperResult result = new VisionProAlignCaliperResult();
             result.CogAlignResult = CogAlignResult?.Select(x => x.DeepCopy()).ToList();
 
             return result;

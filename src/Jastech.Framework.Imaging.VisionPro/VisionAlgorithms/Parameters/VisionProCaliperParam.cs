@@ -76,7 +76,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             string fileName = string.Format(@"{0}.vpp", name);
             string path = Path.Combine(dirPath, fileName);
 
-            CogFileHelper.SaveTool<CogCaliperTool>(path, CaliperTool);
+            VisionProFileHelper.SaveTool<CogCaliperTool>(path, CaliperTool);
         }
 
         public void LoadTool(string dirPath, string name)
@@ -85,7 +85,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             string path = Path.Combine(dirPath, fileName);
 
             if (File.Exists(path))
-                CaliperTool = CogFileHelper.LoadTool(path) as CogCaliperTool;
+                CaliperTool = VisionProFileHelper.LoadTool(path) as CogCaliperTool;
             else
                 SaveTool(dirPath, name);
         }

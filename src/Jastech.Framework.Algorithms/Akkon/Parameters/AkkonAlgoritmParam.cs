@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +8,34 @@ using static Jastech.Framework.Algorithms.Akkon.AkkonAlgorithm;
 
 namespace Jastech.Framework.Algorithms.Akkon.Parameters
 {
-    public class AkkonParam
+    public class AkkonAlgoritmParam
     {
         #region 속성
+        [JsonProperty]
+        public AkkonAlgoritmType AkkonAlgoritmType { get; set; } = AkkonAlgoritmType.OpenCV;
+
+        [JsonProperty]
         public double ResizeRatio { get; set; } = 1.0;
 
+        [JsonProperty]
         public int SliceCount { get; set; } = 50;
 
+        [JsonProperty]
         public AkkonFilterDir FilterDir { get; set; } = AkkonFilterDir.Vertical;
 
+        [JsonProperty]
         public AkkonThresholdParam ThresParam { get; set; } = new AkkonThresholdParam();
 
+        [JsonProperty]
         public ResultFilter ResultFilter { get; set; } = new ResultFilter();
 
+        [JsonProperty]
         public DrawParam DrawOption { get; set; } = new DrawParam();
 
+        [JsonProperty]
         public string CurrentFilterName { get; set; } = "";
 
+        [JsonProperty]
         private List<AkkonImageFilterParam> ImageFilters { get; set; } = new List<AkkonImageFilterParam>();
         #endregion
 
@@ -115,30 +127,38 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
                 };
                 ImageFilters.Add(filter);
             }
+            CurrentFilterName = "User Filter";
         }
         #endregion
     }
 
     public class ResultFilter
     {
+        [JsonProperty]
         public double MinSize { get; set; } = 0;
 
+        [JsonProperty]
         public double MaxSize { get; set; } = 100.0;
     }
 
     public class DrawParam
     {
+        [JsonProperty]
         public bool ContainLeadROI { get; set; } = false;
 
+        [JsonProperty]
         public bool ContainLeadCount { get; set; } = false;
 
+        [JsonProperty]
         public bool ContainNG { get; set; } = false;
     }
 
     public class AkkonThresholdParam
     {
+        [JsonProperty]
         public double Weight { get; set; } = 1.0;
 
+        [JsonProperty]
         public AkkonThMode Mode { get; set; } = AkkonThMode.White;
     }
 

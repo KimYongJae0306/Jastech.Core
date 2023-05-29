@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro
 {
-    public static class CogImageHelper
+    public static class VisionProImageHelper
     {
         public static ICogImage Load(string fileName)
         {
@@ -426,6 +426,39 @@ namespace Jastech.Framework.Imaging.VisionPro
             //}
 
             return divideRegionList;
+        }
+
+
+        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect)
+        {
+            List<double> xPointList = new List<double>();
+
+            xPointList.Add(affineRect.CornerOriginX);
+            xPointList.Add(affineRect.CornerXX);
+            xPointList.Add(affineRect.CornerYX);
+            xPointList.Add(affineRect.CornerOppositeX);
+
+            List<double> yPointList = new List<double>();
+            yPointList.Add(affineRect.CornerOriginY);
+            yPointList.Add(affineRect.CornerXY);
+            yPointList.Add(affineRect.CornerYY);
+            yPointList.Add(affineRect.CornerOppositeY);
+
+            double minimumX = xPointList.Min();
+            double minimumY = yPointList.Min();
+            double maximumX = xPointList.Max();
+            double maximumY = yPointList.Max();
+
+            double width = maximumX - minimumX;
+            double height = maximumY - minimumY;
+
+            Rectangle rect = new Rectangle();
+            rect.X = (int)minimumX;
+            rect.Y = (int)minimumY;
+            rect.Width = (int)width;
+            rect.Height = (int)height;
+
+            return rect;
         }
     }
 }

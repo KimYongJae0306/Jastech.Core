@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System;
@@ -8,7 +9,7 @@ using System.Drawing;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    public class CogCaliper : CogVision
+    public class VisionProCaliper : CogVision
     {
         #region 필드
         #endregion
@@ -33,6 +34,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             if (image == null)
                 return result;
 
+            caliperParam.CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None;
+
             Stopwatch sw = new Stopwatch();
             sw.Restart();
 
@@ -42,7 +45,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             sw.Stop();
 
             result.TactTime = sw.ElapsedMilliseconds;
-
+            Console.WriteLine("Cali : " + sw.ElapsedMilliseconds);
             if (resultList == null)
                 return null;
 

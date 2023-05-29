@@ -76,9 +76,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\VisionResult.cs" />
     <Compile Include="SafeMalloc.cs" />
-    <Compile Include="VisionAlgorithms\BlobDetecting.cs" />
-    <Compile Include="VisionAlgorithms\Parameters\BlobParam.cs" />
-    <Compile Include="VisionAlgorithms\Parameters\PatternMatchingParam.cs" />
+    <Compile Include="VisionAlgorithms\BlobPos.cs" />
+    <Compile Include="VisionAlgorithms\OpencvContour.cs" />
+    <Compile Include="VisionAlgorithms\Parameters\PatternMatching.cs" />
+    <Compile Include="VisionAlgorithms\PatternMactchPos.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,5 +1,6 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Imaging.Result;
+using Jastech.Framework.Imaging.VisionAlgorithms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,10 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {
-    public class CogPatternMatchingResult : VisionResult
+    public class VisionProPatternMatchingResult : VisionResult
     {
         #region 속성
-        public long TactTime { get; set; }
-
-        public List<PatternMatchPos> MatchPosList { get; set; } = new List<PatternMatchPos>();
+        public List<VisionProPatternMatchPos> MatchPosList { get; set; } = new List<VisionProPatternMatchPos>();
 
         public bool Found
         {
@@ -27,12 +26,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             get => MatchPosList.Max(x => x.Score);
         }
 
-        public PatternMatchPos MaxMatchPos
+        public VisionProPatternMatchPos MaxMatchPos
         {
             get
             {
-                PatternMatchPos maxMatchPos = new PatternMatchPos();
-                foreach (PatternMatchPos matchPos in MatchPosList)
+                VisionProPatternMatchPos maxMatchPos = new VisionProPatternMatchPos();
+                foreach (VisionProPatternMatchPos matchPos in MatchPosList)
                 {
                     if (matchPos.Score > maxMatchPos.Score)
                         maxMatchPos = matchPos;
@@ -49,51 +48,33 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             MatchPosList.Clear();
         }
 
-        public CogPatternMatchingResult DeepCopy()
+        public VisionProPatternMatchingResult DeepCopy()
         {
-            CogPatternMatchingResult result = new CogPatternMatchingResult();
+            VisionProPatternMatchingResult result = new VisionProPatternMatchingResult();
             result.TactTime = TactTime;
-            result.MatchPosList = MatchPosList.Select(x => x.DeepCopy()).ToList();
-
+            result.MatchPosList = MatchPosList.Select(x => (VisionProPatternMatchPos)x.DeepCopy()).ToList();
+        
             return result;
         }
         #endregion
     }
 
-    public class PatternMatchPos
+    public class VisionProPatternMatchPos : PatternMatchPos
     {
         #region 속성
-        public PointF ReferencePos { get; set; }
-
-        public float ReferenceWidth { get; set; }
-
-        public float ReferenceHeight { get; set; }
-
-        public PointF FoundPos { get; set; }
-
-        public float Score { get; set; }
-
-        public float Scale { get; set; }
-
-        public double Angle { get; set; }
-
         public CogCompositeShape ResultGraphics { get; set; }
         #endregion
 
         #region 메서드
-        public PointF TranslateOffset()
-        {
-            return new PointF(ReferencePos.X - FoundPos.X, ReferencePos.Y - FoundPos.Y);
-        }
-
-        public void Dispose()
+        public override void Dispose()
         {
             ResultGraphics?.Dispose();
         }
 
-        public PatternMatchPos DeepCopy()
+        public override PatternMatchPos DeepCopy()
         {
-            PatternMatchPos matchPos = new PatternMatchPos();
+            VisionProPatternMatchPos matchPos = new VisionProPatternMatchPos();
+
             matchPos.ReferencePos = new PointF(ReferencePos.X, ReferencePos.Y);
             matchPos.ReferenceWidth = ReferenceWidth;
             matchPos.ReferenceHeight = ReferenceHeight;

@@ -8,7 +8,7 @@ namespace Jastech.Framework.Imaging.Result
 {
     public class VisionResult
     {
-        public Judgement Judgement { get; set; } = Judgement.FAIL;
+		public long TactTime { get; set; }
     }
 
     public enum Judgement

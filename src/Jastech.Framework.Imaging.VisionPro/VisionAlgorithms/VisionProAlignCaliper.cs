@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    public class CogAlignCaliper : CogCaliper
+    public class CogAlignCaliper : VisionProCaliper
     {
         public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount)
         {
@@ -19,7 +19,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
 
-            var rectList = CogImageHelper.DivideRegion(rect, leadCount);
+            var rectList = VisionProImageHelper.DivideRegion(rect, leadCount);
             if (rectList == null)
                 return resultList;
 

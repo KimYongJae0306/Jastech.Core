@@ -1,4 +1,6 @@
 ﻿using Emgu.CV;
+using Jastech.Framework.Imaging.VisionAlgorithms;
+using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -49,20 +51,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public double LeadOffsetY { get; set; }
 
-        public List<Blob> BlobList = new List<Blob>();
+        public List<BlobPos> BlobList = new List<BlobPos>();
 
-    }
-
-    public class Blob
-    {
-        public Rectangle BoundingRect;
-
-        public List<Point> Points = new List<Point>();
-
-        public double Area { get; set; } = 0.0;
-
-        public double CenterX { get; set; } = 0.0;
-
-        public double CenterY { get; set; } = 0.0;
     }
 }

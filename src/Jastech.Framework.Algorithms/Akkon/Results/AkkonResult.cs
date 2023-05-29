@@ -1,12 +1,11 @@
 ﻿using Jastech.Framework.Imaging.Result;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jastech.Framework.Macron.Akkon.Results
+namespace Jastech.Framework.Algorithms.Akkon.Results
 {
     public class AkkonResult
     {

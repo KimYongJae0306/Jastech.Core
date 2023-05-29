@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
-    public class VisionProPatternMatchingParam : PatternMatchingParam
+    public class VisionProPatternMatchingParam : PatternMatching
     {
         [JsonIgnore]
         private CogPMAlignTool PMTool { get; set; }
@@ -66,7 +66,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
                 var trainRegion = PMTool.Pattern.TrainRegion as CogRectangle;
 
                 //ICogImage trainImage =  CogImageHelper.CogCopyRegionTool(null, image, trainRegion, false);
-                ICogImage trainImage = CogImageHelper.CropImage(image, trainRegion);
+                ICogImage trainImage = VisionProImageHelper.CropImage(image, trainRegion);
 
                 PMTool.Pattern.TrainImage = trainImage;
                 PMTool.Pattern.Train();
@@ -179,7 +179,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (PMTool == null)
                 PMTool = new CogPMAlignTool();
 
-            CogFileHelper.SaveTool<CogPMAlignTool>(path, PMTool);
+            VisionProFileHelper.SaveTool<CogPMAlignTool>(path, PMTool);
         }
 
         public void LoadTool(string dirPath)
@@ -189,7 +189,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
             if (File.Exists(path))
             {
-                PMTool = CogFileHelper.LoadTool(path) as CogPMAlignTool;
+                PMTool = VisionProFileHelper.LoadTool(path) as CogPMAlignTool;
             }
             else
             {
