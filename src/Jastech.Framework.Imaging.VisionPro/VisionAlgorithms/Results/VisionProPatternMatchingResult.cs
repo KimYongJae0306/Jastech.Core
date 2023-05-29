@@ -14,6 +14,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
     public class VisionProPatternMatchingResult : VisionResult
     {
         #region 속성
+        public Judgement Judgement { get; set; } = Judgement.OK;
+
         public List<VisionProPatternMatchPos> MatchPosList { get; set; } = new List<VisionProPatternMatchPos>();
 
         public bool Found
