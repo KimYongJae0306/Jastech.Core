@@ -45,7 +45,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             sw.Stop();
 
             result.TactTime = sw.ElapsedMilliseconds;
-            Console.WriteLine("Cali : " + sw.ElapsedMilliseconds);
             if (resultList == null)
                 return null;
 

@@ -64,7 +64,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             VisionProCaliperParam param = new VisionProCaliperParam();
             param.CaliperTool = new CogCaliperTool(CaliperTool);
-
+            
             return param;
         }
 

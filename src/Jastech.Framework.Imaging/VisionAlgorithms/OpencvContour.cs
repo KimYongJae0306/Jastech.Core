@@ -24,14 +24,14 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
             Mat hierarchy = new Mat();
 
             CvInvoke.FindContours(image, contours, hierarchy, RetrType.External, chainApproxMethod);
-
-            float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
+            
             if (contours.Size != 0)
             {
+                float[]  hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
                 for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
                 { // hier-1 only
-                    if (hierarchyArray[idxContour * 4 + 3] > -0.5)
-                        continue;
+                        if (hierarchyArray[idxContour * 4 + 3] > -0.5)
+                            continue;
 
                     var contour = contours[idxContour];
 
