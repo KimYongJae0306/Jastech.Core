@@ -26,6 +26,9 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
         public double CenterY { get; set; } = 0.0;
 
         [JsonProperty]
+        public double Avg { get; set; } = 0.0;
+
+        [JsonProperty]
         public bool IsPass { get; set; } = false;
 
         public virtual void Dispose()

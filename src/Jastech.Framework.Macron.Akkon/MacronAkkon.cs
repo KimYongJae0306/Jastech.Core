@@ -153,14 +153,15 @@ namespace Jastech.Framework.Macron.Akkon
         // 4번 Inspection Param 설정
         public void SetAkkonParam(int stageNo, int tabNo, ref MacronAkkonParam akkonParam)
         {
-            TestSetParam(ref akkonParam);
+            //TestSetParam(ref akkonParam);
 
             var inspParam = GetConvertMacronInsp(akkonParam.InspParam);
             var filterParam = GetConvertMacronFilter(akkonParam.FilterParam);
             var drawOption = GetConvertMacronDrawOption(akkonParam.DrawOption);
             var inspOption = GetConvertMacronInspOption(akkonParam.InspOption);
+            inspOption.s_fInspResizeRatio = akkonParam.DrawOption.DrawResizeRatio;
+            inspOption.s_nOverlap = 46;
 
-           
             ATTWrapper.AWSetAllPara(stageNo, tabNo, ref inspParam, ref filterParam, ref drawOption, ref inspOption);
 
             tempFilter = filterParam;
@@ -382,7 +383,7 @@ namespace Jastech.Framework.Macron.Akkon
             akkonParam.InspParam.DLPatchSizeX = 246;
             akkonParam.InspParam.DLPatchSizeY = 0;
 
-            //inspOption.s_nOverlap = 34;
+            akkonParam.InspOption.Overlap = 34;
             akkonParam.InspParam.PanelInfo = 0;
             akkonParam.InspParam.FilterDir = 2;
             akkonParam.InspParam.FilterType = (EN_MVFILTERTYPE_WRAP)4;
@@ -600,7 +601,7 @@ namespace Jastech.Framework.Macron.Akkon
 
             optionParam.s_bLogTrace = param.LogTrace;
             optionParam.s_nInspType = param.InspType;
-            //optionParam.s_fInspResizeRatio = param.InspResizeRatio;
+            //optionParam.s_fInspResizeRatio = param.;
             optionParam.s_fPixelResolution = param.PixelResolution;
             optionParam.s_nOverlap = param.Overlap;
             optionParam.s_nRotOffset = param.RotOffset;

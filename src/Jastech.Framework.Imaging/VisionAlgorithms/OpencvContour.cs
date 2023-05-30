@@ -28,7 +28,6 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
             float[] hierarchyArray = MatHelper.MatToFloatArray(hierarchy);
             if (contours.Size != 0)
             {
-
                 for (int idxContour = 0; idxContour < contours.Size; ++idxContour)
                 { // hier-1 only
                     if (hierarchyArray[idxContour * 4 + 3] > -0.5)
@@ -40,13 +39,14 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
                     CvInvoke.ConvexHull(contour, hull, true);
 
                     //Features
-                   Moments moments = CvInvoke.Moments(contour);
+                    Moments moments = CvInvoke.Moments(contour);
                     Rectangle rect = CvInvoke.BoundingRectangle(contour);
-
+                    
                     BlobPos blob = new BlobPos
                     {
                         Points = contour.ToArray().ToList(),
                         Area = CvInvoke.ContourArea(contour),
+                        Avg = CvInvoke.Mean(contour).V0,
                         CenterX = moments.M10 / moments.M00,
                         CenterY = moments.M01 / moments.M00,
                         BoundingRect = rect,

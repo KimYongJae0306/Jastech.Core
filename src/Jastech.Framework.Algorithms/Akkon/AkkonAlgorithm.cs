@@ -80,12 +80,12 @@ namespace Jastech.Framework.Algorithms.Akkon
                     akkonBlob.LeadOffsetX = boundRect.X;
                     akkonBlob.LeadOffsetY = boundRect.Y;
 
-                    //if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
-                    //{
+                    if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
+                    {
                         var blobList = OpencvContour.Run(oneLeadMat);
                         ClacResultFilter(ref blobList, parameters.ResultFilter);
                         akkonBlob.BlobList.AddRange(blobList);
-                    //}
+                    }
                     //else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
                     //{
                     //    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
@@ -95,7 +95,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     //    akkonBlob.BlobList.AddRange(result.BlobList);
                     //}
 
-                    lock(_lock)
+                    lock (_lock)
                         akkonResultList.Add(akkonBlob);
 
                     Thread.Sleep(0);
