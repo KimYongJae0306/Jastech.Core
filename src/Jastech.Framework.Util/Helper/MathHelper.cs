@@ -47,7 +47,7 @@ namespace Jastech.Framework.Util.Helper
             return RadToDeg(theta);
         }
 
-        public static PointF GetCoordinate(PointF inputPoint, double degree, PointF centerPoint, PointF left, PointF right)
+        public static PointF GetCoordinate(PointF inputPoint, double degree)
         {
             PointF result = new PointF();
 
