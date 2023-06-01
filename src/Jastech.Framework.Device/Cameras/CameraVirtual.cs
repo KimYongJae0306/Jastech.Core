@@ -86,7 +86,17 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetImageHeight(int value)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public override int GetAnalogGain()
+        {
+            return 0;
+        }
+
+        public override double GetDigitalGain()
+        {
+            return 0.0;
         }
         #endregion
     }

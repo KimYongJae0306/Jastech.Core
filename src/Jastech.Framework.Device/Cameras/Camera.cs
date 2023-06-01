@@ -63,7 +63,11 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract void SetAnalogGain(int value);
 
+        public abstract int GetAnalogGain();
+
         public abstract void SetDigitalGain(double value);
+
+        public abstract double GetDigitalGain();
 
         public abstract void SetOffsetX(int value);
 
