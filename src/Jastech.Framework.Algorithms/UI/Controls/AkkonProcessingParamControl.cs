@@ -61,6 +61,9 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
             if (filter == null)
             {
+                // 기존 모델하고 안맞을때.
+                //CurrentParam.Initalize();
+                //CurrentParam.AddMacronFilter();
                 cbxFilterType.SelectedIndex = 0;
                 string currentFilterName = cbxFilterType.SelectedItem as string;
                 CurrentParam.CurrentFilterName = currentFilterName;

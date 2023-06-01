@@ -20,7 +20,7 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraMil : Camera, ICameraTriggerable, ICameraTDIavailable
     {
         #region 필드
-        const int BufferPoolCount = 10;
+        const int BufferPoolCount = 200;
 
         private static object _lock = new object();
 
@@ -280,6 +280,7 @@ namespace Jastech.Framework.Device.Cameras
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();
             string message = string.Format("Camera Name : {0} Grab Count : {1}", cameraMil.Name, cameraMil.GrabCount);
+            Console.WriteLine(message);
             Logger.Debug(LogType.Device, message);
 
             return MIL.M_NULL;
