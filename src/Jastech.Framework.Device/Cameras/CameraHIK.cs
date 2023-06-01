@@ -223,6 +223,16 @@ namespace Jastech.Framework.Device.Cameras
         {
             //MVS 연결 후 작성 예정
         }
+
+        public override int GetAnalogGain()
+        {
+            return 0;
+        }
+
+        public override double GetDigitalGain()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

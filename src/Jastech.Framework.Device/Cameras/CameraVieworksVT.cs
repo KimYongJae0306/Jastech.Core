@@ -212,6 +212,16 @@ namespace Jastech.Framework.Device.Cameras
         {
             throw new NotImplementedException();
         }
+
+        public override int GetAnalogGain()
+        {
+            return 0;
+        }
+
+        public override double GetDigitalGain()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 

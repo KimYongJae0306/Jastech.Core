@@ -298,8 +298,9 @@ namespace Jastech.Framework.Device.Cameras
 
         public override double GetExposureTime()
         {
-            // dcf 파일에서 설정함
-            return 0.0;
+            double ExposureTimeInus = 0;
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ExposureTime", MIL.M_TYPE_DOUBLE, ref ExposureTimeInus);
+            return ExposureTimeInus;
         }
 
         public override void ReverseX(bool reverse)
@@ -313,10 +314,26 @@ namespace Jastech.Framework.Device.Cameras
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "AnalogGain", MIL.M_TYPE_STRING, "X1");
         }
 
+        public override int GetAnalogGain()
+        {
+            int AnalogGainStringSize = 0;
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_STRING_SIZE, "AnalogGain", MIL.M_TYPE_MIL_INT, ref AnalogGainStringSize);
+            //string analogGain = "X" + AnalogGainStringSize;
+            return AnalogGainStringSize;
+        }
+
         public override void SetDigitalGain(double value)
         {
             double digitalGain = value;
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "DigitalGain", MIL.M_TYPE_DOUBLE, ref digitalGain);
+        }
+
+        public override double GetDigitalGain()
+        {
+            double digitalGain = 0;
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "DigitalGain", MIL.M_TYPE_DOUBLE, ref digitalGain);
+
+            return digitalGain;
         }
 
         public override void SetOffsetX(int value)
