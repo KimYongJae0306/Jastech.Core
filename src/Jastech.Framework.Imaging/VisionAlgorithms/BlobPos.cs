@@ -31,6 +31,14 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
         [JsonProperty]
         public bool IsPass { get; set; } = false;
 
+        public double Strength { get; set; }
+
+        public bool ShadowFound { get; set; }
+
+        public double ShadowPeak { get; set; }
+
+        public PixelInfo MaxPixelInfo { get; set; } = new PixelInfo();
+
         public virtual void Dispose()
         {
 
@@ -52,5 +60,14 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
 
             return blob;
         }
+    }
+
+    public class PixelInfo
+    {
+        public int Value;
+
+        public int ValueX;
+
+        public int ValueY;
     }
 }

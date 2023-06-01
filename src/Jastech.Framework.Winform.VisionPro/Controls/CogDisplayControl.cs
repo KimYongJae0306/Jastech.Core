@@ -14,6 +14,7 @@ using Cognex.VisionPro.Implementation;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using Jastech.Framework.Imaging.Result;
 using Cognex.VisionPro.Display;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -93,16 +94,22 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogDisplayControl_Load(object sender, EventArgs e)
         {
             cogDisplayStatusBar.Display = cogDisplay;
-            
         }
 
         public void SetImage(ICogImage cogImage)
         {
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
             if (cogImage == null)
                 cogDisplay.Image = null;
             else
                 cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
             UpdateViewRect();
+        }
+
+        public void DisposeImage()
+        {
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
+            cogDisplay.Image = null;
         }
 
         public void SetImagePosition(double panX, double panY, double zoom)
@@ -119,6 +126,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearImage()
         {
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = null;
         }
         
@@ -260,6 +268,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void Clear()
         {
             ClearGraphic();
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = null;
         }
 
@@ -788,6 +797,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
         }
+
+     
         #endregion
     }
 }

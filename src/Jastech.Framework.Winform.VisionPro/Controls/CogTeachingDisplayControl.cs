@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -55,6 +56,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public CogDisplayControl GetDisplay()
         {
             return CogDisplay;
+        }
+
+        public void DisposeImage()
+        {
+            CogDisplay.DisposeImage();
+            CogThumbnail.DisposeImage();
         }
     }
 }

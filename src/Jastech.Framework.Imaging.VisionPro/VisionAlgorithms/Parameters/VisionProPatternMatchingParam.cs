@@ -162,9 +162,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             param.Name = Name;
             param.Score = Score;
             param.MaxAngle = MaxAngle;
+
             if (PMTool != null)
                 param.PMTool = new CogPMAlignTool(PMTool);
-            
+
             return param;
         }
 
@@ -199,7 +200,20 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            PMTool?.Dispose();
+            if(PMTool != null)
+            {
+                PMTool.Pattern.TrainImage = null;
+                PMTool.Pattern.Dispose();
+                PMTool.Pattern = null;
+                PMTool.InputImage = null;
+                PMTool.RunParams.Dispose();
+                PMTool.RunParams = null;
+                if (PMTool.Results != null)
+                    PMTool.Results.Dispose();
+                PMTool.Dispose();
+            }
+            
+            PMTool = null;
         }
     }
 }

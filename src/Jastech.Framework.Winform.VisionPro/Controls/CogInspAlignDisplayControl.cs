@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -20,7 +21,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
-            if(cogLeftDisplay.Image != null)
+            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+            if (cogLeftDisplay.Image != null)
                 cogLeftDisplay.Image = null;
 
             cogLeftDisplay.Image = cogImage;
@@ -41,6 +43,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
+            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
             if (cogRightDisplay.Image != null)
                 cogRightDisplay.Image = null;
 
@@ -80,9 +83,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearImage()
         {
+            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
             cogLeftDisplay.InteractiveGraphics.Clear();
             cogLeftDisplay.Image = null;
 
+            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
             cogRightDisplay.InteractiveGraphics.Clear();
             cogRightDisplay.Image = null;
         }

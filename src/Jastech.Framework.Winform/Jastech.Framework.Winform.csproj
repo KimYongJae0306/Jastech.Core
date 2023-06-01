@@ -138,6 +138,12 @@
     <Compile Include="Forms\KeyPadForm.Designer.cs">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MessageYesNoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     <EmbeddedResource Include="Forms\KeyPadForm.resx">
       <DependentUpon>KeyPadForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageYesNoForm.resx">
       <DependentUpon>MessageYesNoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +270,10 @@
     <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
       <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
       <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework\Jastech.Framework.csproj">
+      <Project>{28E92A79-C5AB-4B93-9ABA-A9F40DE4DBCE}</Project>
+      <Name>Jastech.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +377,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Line_arrow_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engineer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engineer_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Operator_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Operator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maker_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgramExit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgramExit_White.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

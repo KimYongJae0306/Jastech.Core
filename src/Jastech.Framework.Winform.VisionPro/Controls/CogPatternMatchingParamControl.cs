@@ -14,6 +14,7 @@ using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Winform.VisionPro.Forms;
 using Jastech.Framework.Winform.Forms;
 using Cognex.VisionPro.Implementation;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -54,7 +55,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 ICogImage originImage = GetOriginImageHandler();
                 
                 if(CurrentParam.Train(originImage))
+                {
+                    cogPatternDisplay.Image = null;
                     cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
+                }
                 else
                 {
                     MessageConfirmForm form = new MessageConfirmForm();
@@ -79,11 +83,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogPatternDisplay.InteractiveGraphics.Clear();
             cogPatternDisplay.StaticGraphics.Clear();
 
+            CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
+
             if (CurrentParam.IsTrained())
             {
+                cogPatternDisplay.Image = null;
                 cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
                 CogPMAlignCurrentRecordConstants constants = CogPMAlignCurrentRecordConstants.TrainImage |
                                                         CogPMAlignCurrentRecordConstants.TrainImageMask;
+
                 SetStaticGraphics("Masking", CurrentParam.CreateCurrentRecord(constants));
             }
             else
@@ -144,6 +152,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetTrainImage(ICogImage image)
         {
+            cogPatternDisplay.Image = null;
             cogPatternDisplay.Image = image;
         }
 
@@ -182,6 +191,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (CurrentParam != null)
                 CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
+        }
+
+        public void DisposeImage()
+        {
+            CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
         }
         #endregion
     }

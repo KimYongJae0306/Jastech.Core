@@ -65,5 +65,20 @@ namespace Jastech.Framework.Util.Helper
 
             return result;
         }
+        
+        public static double GetDistance(Point point1, Point point2)
+        {
+            int dx = point2.X - point1.X;
+            int dy = point2.Y - point1.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        public static double GetSlope(PointF point1, PointF point2)
+        {
+            double deltaX = Math.Abs(point1.X - point2.X);
+            double deltaY = Math.Abs(point1.Y - point2.Y);
+
+            return deltaY / deltaX;
+        }
     }
 }

@@ -11,6 +11,7 @@ using static Jastech.Framework.Winform.VisionPro.Controls.CogDisplayControl;
 using Cognex.VisionPro;
 using System.IO;
 using Jastech.Framework.Imaging.VisionPro;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -69,7 +70,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (image == null)
                 return;
-
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = image;
             CogThumbnail.SetThumbnailImage(image);
         }

@@ -238,4 +238,28 @@
   <data name="ROI_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ROI_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Engineer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Engineer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Engineer_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Engineer_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Maker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Maker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Maker_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Maker_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Operator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Operator_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operator_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramExit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramExit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramExit_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramExit_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

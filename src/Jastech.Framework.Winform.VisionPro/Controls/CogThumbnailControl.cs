@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cognex.VisionPro;
+using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -48,6 +49,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             Scale = (double)newHeight / cogImage.Height;
             int newWidth = (int)((double)cogImage.Width * Scale);
 
+            CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
             ThumbnailImage = cogImage.ScaleImage(newWidth, newHeight);
             cogThumbnailDisplay.Image = ThumbnailImage;
             cogThumbnailDisplay.Fit();
@@ -72,6 +74,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             AddGraphics("ViewRect", rect);
 
             _prevViewRectangle = rect;
+        }
+
+        public void DisposeImage()
+        {
+            CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
         }
 
         private void ViewRect_Changed(object sender, CogChangedEventArgs e)

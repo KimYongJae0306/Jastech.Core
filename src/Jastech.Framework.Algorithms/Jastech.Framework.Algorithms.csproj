@@ -206,17 +206,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Akkon\AkkonAlgorithm.cs" />
+    <Compile Include="Akkon\BlobAlgorithm.cs" />
     <Compile Include="Akkon\Parameters\AkkonAlgoritmParam.cs" />
     <Compile Include="Akkon\Parameters\AkkonImageFilterParam.cs" />
     <Compile Include="Akkon\Parameters\AkkonSlice.cs" />
     <Compile Include="Akkon\Parameters\AkkonROI.cs" />
     <Compile Include="Akkon\Results\AkkonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Controls\AkkonProcessingParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AkkonProcessingParamControl.Designer.cs">
+      <DependentUpon>AkkonProcessingParamControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\AkkonParamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Controls\AkkonParamControl.Designer.cs">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\AkkonResultParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AkkonResultParamControl.Designer.cs">
+      <DependentUpon>AkkonResultParamControl.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -254,8 +267,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="UI\Controls\AkkonProcessingParamControl.resx">
+      <DependentUpon>AkkonProcessingParamControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\AkkonParamControl.resx">
       <DependentUpon>AkkonParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\AkkonResultParamControl.resx">
+      <DependentUpon>AkkonResultParamControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

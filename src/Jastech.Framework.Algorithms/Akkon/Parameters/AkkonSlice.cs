@@ -51,6 +51,18 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public double LeadOffsetY { get; set; }
 
+        public double LeadSlope { get; set; }
+
+        public double StdDev { get; set; }
+
+        public double Mean { get; set; }
+
+        public double LeadLengthX { get; set; }
+
+        public double LeadLengthY { get; set; }
+
+        public double DetectCount { get; set; }
+
         public List<BlobPos> BlobList = new List<BlobPos>();
 
     }

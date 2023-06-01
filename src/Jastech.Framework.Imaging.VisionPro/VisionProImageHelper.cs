@@ -17,6 +17,19 @@ namespace Jastech.Framework.Imaging.VisionPro
 {
     public static class VisionProImageHelper
     {
+        public static void Dispose(ref ICogImage cogImage)
+        {
+            if(cogImage is CogImage8Grey grey)
+            {
+                grey.Dispose();
+                grey = null;
+            }
+            if(cogImage is CogImage24PlanarColor color)
+            {
+                color.Dispose();
+                color = null;
+            }
+        }
         public static ICogImage Load(string fileName)
         {
             CogImageFile cogImageFile = new CogImageFile();
@@ -231,17 +244,17 @@ namespace Jastech.Framework.Imaging.VisionPro
     
         public static List<CogRectangleAffine> CreateRectangleAffine(List<PointF> topEdgePointList, List<PointF> bottomEdgePointList)
         {
-            //if (topEdgePointList.Count != bottomEdgePointList.Count)
-            //{
-            //    // Top, Bottom List 수가 같아야함
-            //    return null;
-            //}
+            if (topEdgePointList.Count != bottomEdgePointList.Count)
+            {
+                // Top, Bottom List 수가 같아야함
+                return null;
+            }
 
-            //if(topEdgePointList.Count % 2 != 0 || bottomEdgePointList.Count % 2 != 0)
-            //{
-            //    // Top, Bottom List 모두 짝수여야함
-            //    return null;
-            //}
+            if (topEdgePointList.Count % 2 != 0 || bottomEdgePointList.Count % 2 != 0)
+            {
+                // Top, Bottom List 모두 짝수여야함
+                return null;
+            }
             List<CogRectangleAffine> roiList = new List<CogRectangleAffine>();
 
             for (int i = 0; i < topEdgePointList.Count; i+= 2)

@@ -56,6 +56,11 @@ namespace Jastech.Framework.Macron.Akkon.Parameters
             if(AkkonROIList.Count > 0)
                 AkkonROIList.RemoveAt(index);
         }
+
+        public void Dispose()
+        {
+            AkkonROIList.Clear();
+        }
         #endregion
     }
 }

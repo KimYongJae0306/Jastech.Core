@@ -43,6 +43,26 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             return JsonConvertHelper.DeepCopy(this) as AkkonROI;
         }
 
+        public PointF GetLeftTopPoint()
+        {
+            return new PointF((float)LeftTopX, (float)LeftTopY);
+        }
+
+        public PointF GetLeftBottomPoint()
+        {
+            return new PointF((float)LeftBottomX, (float)LeftBottomY);
+        }
+
+        public PointF GetRightTopPoint()
+        {
+            return new PointF((float)RightTopX, (float)RightTopY);
+        }
+
+        public PointF GetRightBottomPoint()
+        {
+            return new PointF((float)RightBottomX, (float)RightBottomY);
+        }
+
         public Rectangle GetBoundRect()
         {
             Rectangle rect = new Rectangle();

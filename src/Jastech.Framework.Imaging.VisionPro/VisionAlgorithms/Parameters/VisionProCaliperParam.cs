@@ -92,7 +92,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
+            CaliperTool.InputImage = null;
+
+            CaliperTool.RunParams.Dispose();
+            if (CaliperTool.Results != null)
+                CaliperTool.Results.Dispose();
             CaliperTool?.Dispose();
+            CaliperTool = null;
         }
     }
 }

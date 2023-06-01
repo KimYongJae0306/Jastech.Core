@@ -13,6 +13,7 @@ using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,7 +38,7 @@ namespace Jastech.Framework.Algorithms.Akkon
         public List<AkkonBlob> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters)
         {
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
-            var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ResizeRatio);
+            var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
 
             int max = 4;// Environment.ProcessorCount / 4;
             ParallelOptions options = new ParallelOptions
@@ -49,18 +50,25 @@ namespace Jastech.Framework.Algorithms.Akkon
             //for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
-                Mat enhanceMat = EnhanceY(slice.Image, new AkkonImageFilterParam());
+
+                Mat enhanceMat = null;
+                var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
+
+                if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
+                    enhanceMat = EnhanceY(slice.Image, currentImageFilter);
+                else
+                    enhanceMat = EnhanceX(slice.Image, currentImageFilter);
 
                 Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
-
                 int lowThres = 0;
                 int highThres = 255;
-                CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ThresParam, out lowThres, out highThres);
-
+                CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
                 Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
 
                 foreach (var roi in slice.CalcAkkonROIs)
+                //Parallel.For(0, slice.CalcAkkonROIs.Count(), k =>
                 {
+                    //var roi = slice.CalcAkkonROIs[k];
                     Rectangle boundRect = roi.GetBoundRect();
 
                     Mat roiThresMat = new Mat(thresMat, boundRect);
@@ -69,9 +77,6 @@ namespace Jastech.Framework.Algorithms.Akkon
 
                     CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
 
-                    roiThresMat.Dispose();
-                    oneLeadMask.Dispose();
-
                     AkkonBlob akkonBlob = new AkkonBlob();
                     akkonBlob.LeadIndex = roi.LeadIndex;
                     akkonBlob.Lead = roi.DeepCopy();
@@ -79,28 +84,37 @@ namespace Jastech.Framework.Algorithms.Akkon
                     akkonBlob.OffsetToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
                     akkonBlob.LeadOffsetX = boundRect.X;
                     akkonBlob.LeadOffsetY = boundRect.Y;
+                    akkonBlob.LeadSlope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
+
+                    Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
 
                     if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
                     {
                         var blobList = OpencvContour.Run(oneLeadMat);
-                        ClacResultFilter(ref blobList, parameters.ResultFilter);
+                        FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
                         akkonBlob.BlobList.AddRange(blobList);
+                        ClacJudgement(enhanceCropMat, oneLeadMask,  ref akkonBlob, parameters.ResultFilterParam);
                     }
-                    //else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
-                    //{
-                    //    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
-                    //    var result = CogBlob.Run(cogImage, new VisionProBlobParam());
+                    else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
+                    {
+                        ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
+                        var result = CogBlob.Run(cogImage, new VisionProBlobParam());
 
-                    //    ClacResultFilter(ref result, parameters.ResultFilter);
-                    //    akkonBlob.BlobList.AddRange(result.BlobList);
-                    //}
+                        ClacResultFilter(ref result, parameters.ResultFilterParam);
+                        akkonBlob.BlobList.AddRange(result.BlobList);
+                    }
 
                     lock (_lock)
                         akkonResultList.Add(akkonBlob);
 
-                    Thread.Sleep(0);
-                }
+                    enhanceCropMat.Dispose();
+                    roiThresMat.Dispose();
+                    oneLeadMask.Dispose();
+                    oneLeadMat.Dispose();
 
+                    Thread.Sleep(0);
+                    }
+                //});
                 enhanceMat.Dispose();
                 maskMat.Dispose();
                 thresMat.Dispose();
@@ -109,15 +123,17 @@ namespace Jastech.Framework.Algorithms.Akkon
             return akkonResultList;
         }
 
-        public List<AkkonBlob> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam param)
+        public List<AkkonBlob> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam parameters)
         {
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
 
             Mat enhanceMat = null;
-            if (param.FilterDir == AkkonFilterDir.Vertical)
-                enhanceMat = EnhanceY(slice.Image, param.GetCurrentFilter());
+            var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
+
+            if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
+                enhanceMat = EnhanceY(slice.Image, currentImageFilter);
             else
-                enhanceMat = EnhanceX(slice.Image, param.GetCurrentFilter());
+                enhanceMat = EnhanceX(slice.Image, currentImageFilter);
 
             slice.EnhanceMat = enhanceMat.Clone();
 
@@ -125,7 +141,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
             int lowThres = 0;
             int highThres = 255;
-            CalcThreadholdLowHigh(enhanceMat, maskMat, param.ThresParam, out lowThres, out highThres);
+            CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
 
             Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
             slice.ProcessingMat = thresMat.Clone();
@@ -134,19 +150,16 @@ namespace Jastech.Framework.Algorithms.Akkon
             CvInvoke.BitwiseAnd(thresMat, enhanceMat, maskingImage);
 
             slice.MaskingMat = maskingImage.Clone();
-            maskingImage.Dispose();
+      
             foreach (var roi in slice.CalcAkkonROIs)
             {
                 Rectangle boundRect = roi.GetBoundRect();
 
                 Mat roiThresMat = new Mat(thresMat, boundRect);
+
                 Mat oneLeadMask = MakeMaskImage(new Size(boundRect.Width, boundRect.Height), roi, boundRect.X, boundRect.Y);
                 Mat oneLeadMat = new Mat();
-
                 CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
-
-                roiThresMat.Dispose();
-                oneLeadMask.Dispose();
 
                 AkkonBlob akkonBlob = new AkkonBlob();
                 akkonBlob.LeadIndex = roi.LeadIndex;
@@ -155,19 +168,29 @@ namespace Jastech.Framework.Algorithms.Akkon
                 akkonBlob.OffsetToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
                 akkonBlob.LeadOffsetX = boundRect.X;
                 akkonBlob.LeadOffsetY = boundRect.Y;
+                akkonBlob.LeadSlope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
 
-                //if (param.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
+                Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
+
+                if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.OpenCV)
                 {
                     var blobList = OpencvContour.Run(oneLeadMat);
+                    FindShadowPoint(enhanceCropMat, oneLeadMat,ref blobList, boundRect);
                     akkonBlob.BlobList.AddRange(blobList);
+                    ClacJudgement(enhanceCropMat, oneLeadMask, ref akkonBlob, parameters.ResultFilterParam);
                 }
-                //else if (param.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
-                //{
-                //    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
-                //    var result = CogBlob.Run(cogImage, new Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProBlobParam());
-                //    akkonBlob.BlobList.AddRange(result.BlobList);
-                //}
+                else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
+                {
+                    ICogImage cogImage = VisionProImageHelper.CovertImage(oneLeadMat.DataPointer, oneLeadMat.Width, oneLeadMat.Height, Imaging.ColorFormat.Gray);
+                    var result = CogBlob.Run(cogImage, new Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProBlobParam());
+                    akkonBlob.BlobList.AddRange(result.BlobList);
+                }
+
                 akkonResultList.Add(akkonBlob);
+
+                roiThresMat.Dispose();
+                oneLeadMask.Dispose();
+                maskingImage.Dispose();
             }
             enhanceMat.Dispose();
             maskMat.Dispose();
@@ -176,15 +199,170 @@ namespace Jastech.Framework.Algorithms.Akkon
             return akkonResultList;
         }
 
-        public void ClacResultFilter(ref List<BlobPos> BlobList, ResultFilter filter)
+        public void GetMaxValue(ref PixelInfo minPixelInfo, ref PixelInfo maxPixelInfo, Mat mat, List<Point> points)
         {
-            foreach (var blob in BlobList)
+            unsafe
             {
-                blob.IsPass = IsPassing(blob, filter);
+                mat = new Mat(@"D:\제목 없음.bmp", ImreadModes.Grayscale);
+                points = new List<Point>();
+                points.Add(new Point(0, 0));
+                points.Add(new Point(0, 99));
+                points.Add(new Point(99, 99));
+                points.Add(new Point(99, 0));
+
+                minPixelInfo.Value = int.MaxValue;
+                maxPixelInfo.Value = int.MinValue;
+
+                byte* dataPoint = (byte*)mat.DataPointer;
+                foreach (Point point in points)
+                {
+                    // 좌표가 이미지 범위를 벗어나는지 확인
+                    if (point.X < 0 || point.X >= mat.Width || point.Y < 0 || point.Y >= mat.Height)
+                        continue;
+
+                    int index = point.X + (mat.Step * point.Y);
+                    // 해당 좌표의 픽셀 값 가져오기
+                    int pixelValue = dataPoint[index];
+                    Console.WriteLine(pixelValue);
+                    // 최소값 업데이트
+                    if (pixelValue < minPixelInfo.Value)
+                    {
+                        minPixelInfo.Value = pixelValue;
+                        minPixelInfo.ValueX = point.X;
+                        minPixelInfo.ValueY = point.Y;
+                    }
+
+                    // 최대값 업데이트
+                    if (pixelValue > maxPixelInfo.Value)
+                    {
+                        maxPixelInfo.Value = pixelValue;
+                        maxPixelInfo.ValueX = point.X;
+                        maxPixelInfo.ValueY = point.Y;
+                    }
+                }
             }
         }
 
-        public void ClacResultFilter(ref VisionProBlobResult blobResult, ResultFilter filter)
+        public void GetMaxValue(ref PixelInfo minPixelInfo, ref PixelInfo maxPixelInfo, Mat mat, Rectangle rect)
+        {
+            unsafe
+            {
+                minPixelInfo.Value = int.MaxValue;
+                maxPixelInfo.Value = int.MinValue;
+
+                byte* dataPoint = (byte*)mat.DataPointer;
+
+                for (int h = rect.Y; h < rect.Y + rect.Height; h++)
+                {
+                    for (int w = rect.X; w < rect.X + rect.Width; w++)
+                    {
+                        int index = w + (mat.Step * h);
+                        if (index < 0)
+                            continue;
+                        if (mat.Step * mat.Height < index)
+                            continue;
+                        // 해당 좌표의 픽셀 값 가져오기
+                        int pixelValue = dataPoint[index];
+                        // 최소값 업데이트
+                        if (pixelValue < minPixelInfo.Value)
+                        {
+                            minPixelInfo.Value = pixelValue;
+                            minPixelInfo.ValueX = w;
+                            minPixelInfo.ValueY = h;
+                        }
+
+                        // 최대값 업데이트
+                        if (pixelValue > maxPixelInfo.Value)
+                        {
+                            maxPixelInfo.Value = pixelValue;
+                            maxPixelInfo.ValueX = w;
+                            maxPixelInfo.ValueY = h;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ClacJudgement(Mat dataMat, Mat maskMat, ref AkkonBlob akkonBlob, AkkonResultFilterParam filter)
+        {
+            PixelInfo minYInfo = new PixelInfo();
+            PixelInfo maxYInfo = new PixelInfo();
+            minYInfo.Value = int.MaxValue;
+            maxYInfo.Value = int.MinValue;
+
+            MCvScalar meanScalar = new MCvScalar();
+            MCvScalar stddevScalar = new MCvScalar();
+
+            CvInvoke.MeanStdDev(dataMat, ref meanScalar, ref stddevScalar, maskMat);
+
+            double scaleFactor = filter.AkkonStrengthScaleFactor;
+            int detectCount = 0;
+
+            int totalLengthX = (int)Math.Abs(akkonBlob.Lead.LeftTopX - akkonBlob.Lead.RightTopX);
+            List<double> lengthXList = new List<double>();
+
+            foreach (var blob in akkonBlob.BlobList)
+            {
+                double expandWidth = blob.BoundingRect.Width;
+                double expandHeight = blob.BoundingRect.Height * 2.0;
+                double expandX = blob.CenterX - (expandWidth / 2.0);
+                double expandY = blob.CenterY - (expandHeight / 2.0);
+                Rectangle expandROI = new Rectangle((int)expandX, (int)expandY, (int)expandWidth, (int)expandHeight);
+
+                PixelInfo min = new PixelInfo();
+                PixelInfo max = new PixelInfo();
+
+                GetMaxValue(ref min, ref max, dataMat, expandROI);
+                blob.MaxPixelInfo = max;
+
+                if (blob.ShadowFound)
+                    blob.Strength = Math.Abs(((double)blob.ShadowPeak - max.Value) / (255 * scaleFactor)) * 100;
+                else
+                    blob.Strength = Math.Abs(((double)min.Value - max.Value) / (255 * scaleFactor)) * 100;
+
+                blob.IsPass = IsPassing(blob, filter);
+
+                // LengthX, y = ax + b
+                double orgRightBottomY = akkonBlob.Lead.RightBottomY - akkonBlob.LeadOffsetY;
+                double orgLeftBottomX = akkonBlob.Lead.LeftBottomX - akkonBlob.LeadOffsetX;
+                double x = blob.CenterX;
+                double y = blob.CenterY;
+                double a = akkonBlob.LeadSlope;
+                double b = y - (a * x);
+                double newX = (orgRightBottomY - b) / a - orgLeftBottomX;
+
+                lengthXList.Add(newX);
+
+                // LengthY
+                if (minYInfo.Value > blob.CenterY)
+                {
+                    minYInfo.Value = (int)blob.CenterY;
+                    minYInfo.ValueX = (int)blob.CenterX;
+                    minYInfo.ValueY = (int)blob.CenterY;
+                }
+                if (maxYInfo.Value < blob.CenterY)
+                {
+                    maxYInfo.Value = (int)blob.CenterY;
+                    maxYInfo.ValueX = (int)blob.CenterX;
+                    maxYInfo.ValueY = (int)blob.CenterY;
+                }
+
+                if (blob.IsPass)
+                    detectCount++;
+            }
+            akkonBlob.DetectCount = detectCount;
+            akkonBlob.Mean = meanScalar.V0;
+            akkonBlob.StdDev = stddevScalar.V0;
+
+            if(lengthXList.Count > 0)
+                akkonBlob.LeadLengthX = Math.Abs(lengthXList.Max() - lengthXList.Min());
+
+            Point p1 = new Point(minYInfo.ValueX, minYInfo.ValueY);
+            Point p2 = new Point(maxYInfo.ValueX, maxYInfo.ValueY);
+            akkonBlob.LeadLengthY = MathHelper.GetDistance(p1, p2);
+        }
+
+        public void ClacResultFilter(ref VisionProBlobResult blobResult, AkkonResultFilterParam filter)
         {
             foreach (var blob in blobResult.BlobList)
             {
@@ -192,21 +370,25 @@ namespace Jastech.Framework.Algorithms.Akkon
             }
         }
         
-        private bool IsPassing(BlobPos blob, ResultFilter filter)
+        private bool IsPassing(BlobPos blob, AkkonResultFilterParam filter)
         {
-            bool isPass = false;
+            bool isPass = true; // Result Filter 통과 한 후보들
 
-            if (filter.MinSize <= blob.Area && blob.Area <= filter.MaxSize)
-            {
+            if (blob.Area < filter.MinArea && filter.MaxArea < blob.Area)
                 isPass = false;
-            }
-            else
-            {
-                isPass = true;
-            }
+
+            if (blob.BoundingRect.Width > filter.MaxWidth)
+                isPass = false;
+
+            if (blob.BoundingRect.Height > filter.MaxHeight)
+                isPass = false;
+
+            if (blob.Strength < filter.AkkonStrength)
+                isPass = false;
 
             return isPass;
         }
+
         public List<Point[]> MergeContours(List<Point[]> contours)
         {
             List<Point[]> mergedContours = new List<Point[]>();
@@ -242,7 +424,7 @@ namespace Jastech.Framework.Algorithms.Akkon
         {
             List<Mat> sliceImageList = new List<Mat>();
 
-            var AkkonInspecterList = PrepareInspect(mat, roiList, 2048, parameters.ResizeRatio);
+            var AkkonInspecterList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
 
             foreach (var inspector in AkkonInspecterList)
             {
@@ -272,6 +454,9 @@ namespace Jastech.Framework.Algorithms.Akkon
         private Mat MakeMaskImage(Mat mat, List<AkkonROI> roiList)
         {
             Mat maskImage = new Mat(new Size(mat.Width, mat.Height), DepthType.Cv8U, 1);
+            byte[] tempArray = new byte[mat.Step * mat.Height];
+            Marshal.Copy(tempArray, 0, maskImage.DataPointer, mat.Step * mat.Height);
+
             VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
             foreach (var roi in roiList)
             {
@@ -279,11 +464,12 @@ namespace Jastech.Framework.Algorithms.Akkon
                 {
                     new Point((int)roi.LeftTopX, (int)roi.LeftTopY),
                     new Point((int)roi.RightTopX, (int)roi.RightTopY),
-                    new Point((int)roi.RightBottomX, (int)roi.RightBottomY),
-                    new Point((int)roi.LeftBottomX, (int)roi.LeftBottomY),
+                    new Point((int)roi.RightBottomX, (int)roi.RightBottomY- 10),
+                    new Point((int)roi.LeftBottomX, (int)roi.LeftBottomY - 10),
                 });
                 contours.Push(contour);
             }
+          
             CvInvoke.DrawContours(maskImage, contours, -1, new MCvScalar(255), -1);
 
             return maskImage;
@@ -292,6 +478,9 @@ namespace Jastech.Framework.Algorithms.Akkon
         private Mat MakeMaskImage(Size size, AkkonROI roi, int offsetX, int offsetY)
         {
             Mat maskImage = new Mat(size, DepthType.Cv8U, 1);
+            byte[] dataArray = new byte[maskImage.Step * maskImage.Height];
+            Marshal.Copy(dataArray, 0, maskImage.DataPointer, maskImage.Step * maskImage.Height);
+       
             VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
             VectorOfPoint contour = new VectorOfPoint(new[]
             {
@@ -302,7 +491,6 @@ namespace Jastech.Framework.Algorithms.Akkon
             });
             contours.Push(contour);
             CvInvoke.DrawContours(maskImage, contours, -1, new MCvScalar(255), -1);
-
             return maskImage;
         }
 
@@ -542,7 +730,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             return boundRect;
         }
 
-        public void CalcThreadholdLowHigh(Mat srcMat, Mat maskMat, AkkonThresholdParam thresParam,  out int lowThres, out int highThres)
+        public void CalcThreadholdLowHigh(Mat srcMat, Mat maskMat, AkkonImagingParam imagingParam,  out int lowThres, out int highThres)
         {
             lowThres = 0;
             highThres = 255;
@@ -550,23 +738,23 @@ namespace Jastech.Framework.Algorithms.Akkon
             MCvScalar meanScalar = new MCvScalar();
             MCvScalar sigmaScalar = new MCvScalar();
             CvInvoke.MeanStdDev(srcMat, ref meanScalar, ref sigmaScalar, maskMat);
-         
-            AkkonThMode mode = AkkonThMode.Auto;
+
+            AkkonThMode mode = imagingParam.Mode;
             if (mode == AkkonThMode.Auto)
             {
-                var result = AutoCalcThreshold(srcMat, maskMat, thresParam.Weight, meanScalar.V0, sigmaScalar.V0);
+                var result = AutoCalcThreshold(srcMat, maskMat, imagingParam.Weight, meanScalar.V0, sigmaScalar.V0);
                 lowThres = result.Item1;
                 highThres = result.Item2;
             }
             else if(mode == AkkonThMode.White)
             {
-                highThres = (int)(meanScalar.V0 + sigmaScalar.V0 * thresParam.Weight);
+                highThres = (int)(meanScalar.V0 + sigmaScalar.V0 * imagingParam.Weight);
                 lowThres = 0;
             }
             else
             {
                 highThres = 255;
-                lowThres = (int)(meanScalar.V0 - sigmaScalar.V0 * thresParam.Weight);
+                lowThres = (int)(meanScalar.V0 - sigmaScalar.V0 * imagingParam.Weight);
             }
         }
 
@@ -1038,6 +1226,101 @@ namespace Jastech.Framework.Algorithms.Akkon
             t = x * x / (sigma * sigma);
             return (1.0 / (Math.Sqrt(Math.PI * 2) * sigma * sigma * sigma) * (t - 1.0) * Math.Exp(t / -2.0));
         }
+
+        private unsafe void FindShadowPoint(Mat enhMat, Mat binMat,ref List<BlobPos> blobList, Rectangle rcOneLead)
+        {
+            int nSearchOffset = 4;
+
+            int defectType = 0;
+            for (int i = 0; i < blobList.Count(); i++)
+            {
+                BlobPos blob = blobList[i];
+                Rectangle rcBlob = blob.BoundingRect;
+                Point ptCom = new Point((int)blob.CenterX, (int)blob.CenterY);
+                Point ptCenter = new Point(ptCom.X, ptCom.Y);
+
+                int bottom = rcBlob.Y + rcBlob.Height;
+                for (int y = ptCom.Y; y < rcBlob.Y + rcBlob.Height; y++)
+                {
+                    byte* pEnhLine = (byte*)(enhMat.DataPointer + (y + enhMat.Step));
+                    if (defectType == 0)
+                    {
+                        if(pEnhLine[ptCom.X] > 130)
+                        {
+                            bottom = y;
+                            break;
+                        }
+                    }
+                    else if(defectType == 1)
+                    {
+                        if (pEnhLine[ptCom.X] < 126)
+                        {
+                            bottom = y;
+                            break;
+                        }
+                    }
+                }
+                int nHeight = (int)Math.Min(10, rcBlob.Height * 1.5);
+                nHeight = Math.Max(5, nHeight);
+                int nLimit = Math.Min(bottom + nHeight, rcOneLead.Y + rcOneLead.Height);
+                int nShadowMin = 255;
+                int nShadowMax = 0;
+
+                int nSearchStart = Math.Max(ptCom.X - nSearchOffset, rcOneLead.X);
+                int nSearchEnd = Math.Min(ptCom.X + nSearchOffset, rcOneLead.X + rcOneLead.Width);
+
+                int nSearchStartY = bottom;
+                int nSearchEndY = nLimit;
+
+                int nSearchStartX = nSearchStart;
+                int nSearchEndX = nSearchEnd;
+
+                int scanpos = 0;
+                bool bShadowFound = false;
+                Point ptShadowMin = new Point();
+                for (int y = bottom; y < nLimit; y++)
+                {
+                    scanpos = y;
+                    byte* pMaskLine = (byte*)(binMat.DataPointer + (y + binMat.Step));
+                    byte* pEnhLine = (byte*)(enhMat.DataPointer + (y + enhMat.Step));
+
+                    for (int x = nSearchStart; x <= nSearchEnd; x++)
+                    {
+                        int shadowval = pEnhLine[x];
+
+                        if (!bShadowFound && pMaskLine[x] == 0)
+                        {
+                            // 이조건의 의미를 파악해 보자 .. 2018.04.11
+                            if (y - bottom > 1)
+                                bShadowFound = false;
+                            else if (y - bottom <= 1)
+                            {
+                                bShadowFound = true;
+                                ptCenter.Y = y;
+                            }
+                        }
+
+                        if (pMaskLine[x] == 0)
+                        {
+                            if (shadowval > nShadowMax)
+                            {
+                                nShadowMax = shadowval;
+                            }
+
+                            if (shadowval < nShadowMin)
+                            {
+                                nShadowMin = shadowval;
+
+                                ptShadowMin.Y = y;
+                                ptShadowMin.X = x;
+                            }
+                        }
+                    }
+                }
+                blob.ShadowFound = bShadowFound;
+                blob.ShadowPeak = nShadowMin;
+            }
+        }
     }
 
     public enum AkkonThMode
@@ -1052,4 +1335,13 @@ namespace Jastech.Framework.Algorithms.Akkon
         OpenCV,
         Cognex,
     }
+
+public enum ShadowDir
+{
+    TOP,
+    DN,
+    UP,
+    LEFT,
+    RIGHT,
+}
 }

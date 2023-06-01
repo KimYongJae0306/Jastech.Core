@@ -391,6 +391,15 @@ namespace Jastech.Framework.Winform.Controls
             else if (mode == DisplayMode.Drawing)
                 btnDrawLine.BackColor = _selectedColor;
         }
+
+        public void DisposeImage()
+        {
+           if(pbxDisplay.Image != null)
+            {
+                pbxDisplay.Image.Dispose();
+                pbxDisplay.Image = null;
+            }
+        }
         #endregion
     }
 
