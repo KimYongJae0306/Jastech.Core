@@ -21,6 +21,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -60,6 +62,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     enhanceMat = EnhanceX(slice.Image, currentImageFilter);
 
                 Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
+
                 int lowThres = 0;
                 int highThres = 255;
                 CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
@@ -93,7 +96,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                         var blobList = OpencvContour.Run(oneLeadMat);
                         FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
                         akkonBlob.BlobList.AddRange(blobList);
-                        ClacJudgement(enhanceCropMat, oneLeadMask,  ref akkonBlob, parameters.ResultFilterParam);
+                        ClacJudgement(enhanceCropMat, oneLeadMask, ref akkonBlob, parameters.ResultFilterParam);
                     }
                     else if (parameters.AkkonAlgoritmType == AkkonAlgoritmType.Cognex)
                     {
@@ -111,15 +114,14 @@ namespace Jastech.Framework.Algorithms.Akkon
                     roiThresMat.Dispose();
                     oneLeadMask.Dispose();
                     oneLeadMat.Dispose();
-
-                    Thread.Sleep(0);
-                    }
+                }
                 //});
-                enhanceMat.Dispose();
-                maskMat.Dispose();
-                thresMat.Dispose();
+                enhanceMat?.Dispose();
+                maskMat?.Dispose();
+                thresMat?.Dispose();
                 //}
             });
+
             return akkonResultList;
         }
 
