@@ -12,6 +12,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 {
     public class AkkonSlice
     {
+        public int Id { get; set; }
+
         public Mat Image { get; set; }
 
         public Rectangle WorldRect { get; set; }

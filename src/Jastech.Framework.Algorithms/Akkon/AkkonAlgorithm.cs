@@ -52,6 +52,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             //for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
+                slice.Id = i;
 
                 Mat enhanceMat = null;
                 var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
@@ -120,6 +121,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 maskMat?.Dispose();
                 thresMat?.Dispose();
                 //}
+                //Thread.Sleep(50);
             });
 
             return akkonResultList;
@@ -205,13 +207,6 @@ namespace Jastech.Framework.Algorithms.Akkon
         {
             unsafe
             {
-                mat = new Mat(@"D:\제목 없음.bmp", ImreadModes.Grayscale);
-                points = new List<Point>();
-                points.Add(new Point(0, 0));
-                points.Add(new Point(0, 99));
-                points.Add(new Point(99, 99));
-                points.Add(new Point(99, 0));
-
                 minPixelInfo.Value = int.MaxValue;
                 maxPixelInfo.Value = int.MinValue;
 
