@@ -51,7 +51,7 @@ namespace Jastech.Framework.Imaging.Helper
                 BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
                 IntPtr ptrData = bmpData.Scan0;
                 int stride = bmpData.Stride;
-                int imageBufferSize = stride * bmp.Width * bmp.Height;
+                int imageBufferSize = stride * bmp.Height;
                 byte* data = (byte*)(void*)ptrData;
 
                 for (int i = 0; i < points.Count(); i++)
