@@ -19,6 +19,10 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         public AkkonImagingParam CurrentParam { get; private set; } = null;
 
+        public OpenViewerDelegate OpenViewerDelegateEvent;
+
+        public delegate void OpenViewerDelegate();
+
         public AkkonProcessingParamControl()
         {
             InitializeComponent();
@@ -229,6 +233,11 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         public void UpdateData()
         {
             UpdateParams();
+        }
+
+        private void lblOpenViewer_Click(object sender, EventArgs e)
+        {
+            OpenViewerDelegateEvent?.Invoke();
         }
     }
 }

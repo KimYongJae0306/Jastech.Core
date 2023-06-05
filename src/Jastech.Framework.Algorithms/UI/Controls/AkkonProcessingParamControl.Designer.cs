@@ -48,6 +48,7 @@
             this.cbxFilterType = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblOpenViewer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblGusWidth
@@ -309,11 +310,27 @@
             this.label10.Text = "FILTERS";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // AkkonImageFilterParamControl
+            // lblOpenViewer
+            // 
+            this.lblOpenViewer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblOpenViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOpenViewer.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
+            this.lblOpenViewer.ForeColor = System.Drawing.Color.White;
+            this.lblOpenViewer.Location = new System.Drawing.Point(230, 57);
+            this.lblOpenViewer.Margin = new System.Windows.Forms.Padding(0);
+            this.lblOpenViewer.Name = "lblOpenViewer";
+            this.lblOpenViewer.Size = new System.Drawing.Size(234, 36);
+            this.lblOpenViewer.TabIndex = 104;
+            this.lblOpenViewer.Text = "Open Viewer";
+            this.lblOpenViewer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblOpenViewer.Click += new System.EventHandler(this.lblOpenViewer_Click);
+            // 
+            // AkkonProcessingParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.Controls.Add(this.lblOpenViewer);
             this.Controls.Add(this.lblGusWidth);
             this.Controls.Add(this.lblSigma);
             this.Controls.Add(this.lblThresholdWeight);
@@ -334,7 +351,7 @@
             this.Controls.Add(this.cbxFilterType);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label10);
-            this.Name = "AkkonImageFilterParamControl";
+            this.Name = "AkkonProcessingParamControl";
             this.Size = new System.Drawing.Size(483, 318);
             this.Load += new System.EventHandler(this.AkkonImageFilterParamControl_Load);
             this.ResumeLayout(false);
@@ -363,5 +380,6 @@
         private System.Windows.Forms.ComboBox cbxFilterType;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblOpenViewer;
     }
 }

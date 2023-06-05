@@ -331,13 +331,13 @@ namespace Jastech.Framework.Algorithms.Akkon
                 lengthXList.Add(newX);
 
                 // LengthY
-                if (minYInfo.Value > blob.CenterY)
+                if (blob.IsPass && minYInfo.Value > blob.CenterY)
                 {
                     minYInfo.Value = (int)blob.CenterY;
                     minYInfo.ValueX = (int)blob.CenterX;
                     minYInfo.ValueY = (int)blob.CenterY;
                 }
-                if (maxYInfo.Value < blob.CenterY)
+                if (blob.IsPass && maxYInfo.Value < blob.CenterY)
                 {
                     maxYInfo.Value = (int)blob.CenterY;
                     maxYInfo.ValueX = (int)blob.CenterX;
@@ -371,7 +371,7 @@ namespace Jastech.Framework.Algorithms.Akkon
         {
             bool isPass = true; // Result Filter 통과 한 후보들
 
-            if (blob.Area < filter.MinArea && filter.MaxArea < blob.Area)
+            if (blob.Area < filter.MinArea || filter.MaxArea < blob.Area)
                 isPass = false;
 
             if (blob.BoundingRect.Width > filter.MaxWidth)

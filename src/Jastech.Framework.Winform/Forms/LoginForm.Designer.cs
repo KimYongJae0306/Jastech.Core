@@ -29,111 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblCancel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblApply = new System.Windows.Forms.Label();
+            this.txtPasword = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.pbxExit = new System.Windows.Forms.PictureBox();
+            this.lblExit = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.pbxMaker = new System.Windows.Forms.PictureBox();
             this.lblMaker = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.pbxEngineer = new System.Windows.Forms.PictureBox();
             this.lblEngineer = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblOperator = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblExit = new System.Windows.Forms.Label();
-            this.lblCancelImage = new System.Windows.Forms.Label();
-            this.pbxExit = new System.Windows.Forms.PictureBox();
-            this.pbxMaker = new System.Windows.Forms.PictureBox();
-            this.pbxEngineer = new System.Windows.Forms.PictureBox();
             this.pbxOperator = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPasword = new System.Windows.Forms.TextBox();
-            this.lblApply = new System.Windows.Forms.Label();
+            this.lblOperator = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxExit)).BeginInit();
+            this.panel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxMaker)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEngineer)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOperator)).BeginInit();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(516, 305);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel11, 2, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 245);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(516, 60);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.lblCancelImage, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.lblCancel, 1, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(336, 0);
-            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 1;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(180, 60);
-            this.tableLayoutPanel11.TabIndex = 1;
-            // 
-            // lblCancel
-            // 
-            this.lblCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
-            this.lblCancel.ForeColor = System.Drawing.Color.White;
-            this.lblCancel.Location = new System.Drawing.Point(53, 0);
-            this.lblCancel.Name = "lblCancel";
-            this.lblCancel.Size = new System.Drawing.Size(124, 60);
-            this.lblCancel.TabIndex = 0;
-            this.lblCancel.Text = "Cancel";
-            this.lblCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCancel.Click += new System.EventHandler(this.lblCancel_Click);
             // 
             // panel1
             // 
@@ -145,10 +76,101 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(510, 239);
+            this.panel1.Size = new System.Drawing.Size(516, 305);
             this.panel1.TabIndex = 1;
+            // 
+            // lblApply
+            // 
+            this.lblApply.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblApply.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.lblApply.ForeColor = System.Drawing.Color.White;
+            this.lblApply.Location = new System.Drawing.Point(382, 168);
+            this.lblApply.Name = "lblApply";
+            this.lblApply.Size = new System.Drawing.Size(115, 50);
+            this.lblApply.TabIndex = 0;
+            this.lblApply.Text = "Apply";
+            this.lblApply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblApply.Click += new System.EventHandler(this.lblApply_Click);
+            // 
+            // txtPasword
+            // 
+            this.txtPasword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.txtPasword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPasword.Font = new System.Drawing.Font("맑은 고딕", 12F);
+            this.txtPasword.ForeColor = System.Drawing.Color.White;
+            this.txtPasword.Location = new System.Drawing.Point(144, 181);
+            this.txtPasword.Multiline = true;
+            this.txtPasword.Name = "txtPasword";
+            this.txtPasword.PasswordChar = '*';
+            this.txtPasword.Size = new System.Drawing.Size(230, 32);
+            this.txtPasword.TabIndex = 292;
+            this.txtPasword.Click += new System.EventHandler(this.txtPasword_Click);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(20, 168);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 50);
+            this.label1.TabIndex = 291;
+            this.label1.Text = "PASSWORD";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.tableLayoutPanel3);
+            this.panel2.Location = new System.Drawing.Point(382, 20);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(115, 131);
+            this.panel2.TabIndex = 290;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.pbxExit, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblExit, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(113, 129);
+            this.tableLayoutPanel3.TabIndex = 284;
+            // 
+            // pbxExit
+            // 
+            this.pbxExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxExit.Image = global::Jastech.Framework.Winform.Properties.Resources.ProgramExit_White;
+            this.pbxExit.Location = new System.Drawing.Point(3, 3);
+            this.pbxExit.Name = "pbxExit";
+            this.pbxExit.Size = new System.Drawing.Size(107, 73);
+            this.pbxExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxExit.TabIndex = 281;
+            this.pbxExit.TabStop = false;
+            this.pbxExit.Click += new System.EventHandler(this.pbxExit_Click);
+            // 
+            // lblExit
+            // 
+            this.lblExit.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.lblExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblExit.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.lblExit.ForeColor = System.Drawing.Color.White;
+            this.lblExit.Location = new System.Drawing.Point(0, 79);
+            this.lblExit.Margin = new System.Windows.Forms.Padding(0);
+            this.lblExit.Name = "lblExit";
+            this.lblExit.Size = new System.Drawing.Size(113, 50);
+            this.lblExit.TabIndex = 1;
+            this.lblExit.Text = "EXIT";
+            this.lblExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblExit.Click += new System.EventHandler(this.pbxExit_Click);
             // 
             // panel5
             // 
@@ -173,6 +195,18 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(113, 129);
             this.tableLayoutPanel6.TabIndex = 284;
+            // 
+            // pbxMaker
+            // 
+            this.pbxMaker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxMaker.Image = global::Jastech.Framework.Winform.Properties.Resources.Maker_White;
+            this.pbxMaker.Location = new System.Drawing.Point(3, 3);
+            this.pbxMaker.Name = "pbxMaker";
+            this.pbxMaker.Size = new System.Drawing.Size(107, 73);
+            this.pbxMaker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxMaker.TabIndex = 281;
+            this.pbxMaker.TabStop = false;
+            this.pbxMaker.Click += new System.EventHandler(this.lblMaker_Click);
             // 
             // lblMaker
             // 
@@ -213,6 +247,18 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(113, 129);
             this.tableLayoutPanel5.TabIndex = 284;
             // 
+            // pbxEngineer
+            // 
+            this.pbxEngineer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxEngineer.Image = ((System.Drawing.Image)(resources.GetObject("pbxEngineer.Image")));
+            this.pbxEngineer.Location = new System.Drawing.Point(3, 3);
+            this.pbxEngineer.Name = "pbxEngineer";
+            this.pbxEngineer.Size = new System.Drawing.Size(107, 73);
+            this.pbxEngineer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxEngineer.TabIndex = 281;
+            this.pbxEngineer.TabStop = false;
+            this.pbxEngineer.Click += new System.EventHandler(this.lblEngineer_Click);
+            // 
             // lblEngineer
             // 
             this.lblEngineer.BackColor = System.Drawing.Color.DarkSlateGray;
@@ -252,6 +298,18 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(113, 129);
             this.tableLayoutPanel4.TabIndex = 284;
             // 
+            // pbxOperator
+            // 
+            this.pbxOperator.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxOperator.Image = global::Jastech.Framework.Winform.Properties.Resources.Operator_White;
+            this.pbxOperator.Location = new System.Drawing.Point(3, 3);
+            this.pbxOperator.Name = "pbxOperator";
+            this.pbxOperator.Size = new System.Drawing.Size(107, 73);
+            this.pbxOperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxOperator.TabIndex = 281;
+            this.pbxOperator.TabStop = false;
+            this.pbxOperator.Click += new System.EventHandler(this.lblOperator_Click);
+            // 
             // lblOperator
             // 
             this.lblOperator.BackColor = System.Drawing.Color.DarkSlateGray;
@@ -267,146 +325,10 @@
             this.lblOperator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblOperator.Click += new System.EventHandler(this.lblOperator_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.tableLayoutPanel3);
-            this.panel2.Location = new System.Drawing.Point(382, 20);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(115, 131);
-            this.panel2.TabIndex = 290;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.pbxExit, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lblExit, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(113, 129);
-            this.tableLayoutPanel3.TabIndex = 284;
-            // 
-            // lblExit
-            // 
-            this.lblExit.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.lblExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblExit.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
-            this.lblExit.ForeColor = System.Drawing.Color.White;
-            this.lblExit.Location = new System.Drawing.Point(0, 79);
-            this.lblExit.Margin = new System.Windows.Forms.Padding(0);
-            this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(113, 50);
-            this.lblExit.TabIndex = 1;
-            this.lblExit.Text = "EXIT";
-            this.lblExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCancelImage
-            // 
-            this.lblCancelImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCancelImage.Image = global::Jastech.Framework.Winform.Properties.Resources.Cancel_White;
-            this.lblCancelImage.Location = new System.Drawing.Point(3, 3);
-            this.lblCancelImage.Margin = new System.Windows.Forms.Padding(3);
-            this.lblCancelImage.Name = "lblCancelImage";
-            this.lblCancelImage.Size = new System.Drawing.Size(44, 54);
-            this.lblCancelImage.TabIndex = 1;
-            this.lblCancelImage.Click += new System.EventHandler(this.lblCancel_Click);
-            // 
-            // pbxExit
-            // 
-            this.pbxExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxExit.Image = global::Jastech.Framework.Winform.Properties.Resources.ProgramExit_White;
-            this.pbxExit.Location = new System.Drawing.Point(3, 3);
-            this.pbxExit.Name = "pbxExit";
-            this.pbxExit.Size = new System.Drawing.Size(107, 73);
-            this.pbxExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxExit.TabIndex = 281;
-            this.pbxExit.TabStop = false;
-            // 
-            // pbxMaker
-            // 
-            this.pbxMaker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxMaker.Image = global::Jastech.Framework.Winform.Properties.Resources.Maker_White;
-            this.pbxMaker.Location = new System.Drawing.Point(3, 3);
-            this.pbxMaker.Name = "pbxMaker";
-            this.pbxMaker.Size = new System.Drawing.Size(107, 73);
-            this.pbxMaker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxMaker.TabIndex = 281;
-            this.pbxMaker.TabStop = false;
-            this.pbxMaker.Click += new System.EventHandler(this.lblMaker_Click);
-            // 
-            // pbxEngineer
-            // 
-            this.pbxEngineer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxEngineer.Image = ((System.Drawing.Image)(resources.GetObject("pbxEngineer.Image")));
-            this.pbxEngineer.Location = new System.Drawing.Point(3, 3);
-            this.pbxEngineer.Name = "pbxEngineer";
-            this.pbxEngineer.Size = new System.Drawing.Size(107, 73);
-            this.pbxEngineer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxEngineer.TabIndex = 281;
-            this.pbxEngineer.TabStop = false;
-            this.pbxEngineer.Click += new System.EventHandler(this.lblEngineer_Click);
-            // 
-            // pbxOperator
-            // 
-            this.pbxOperator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxOperator.Image = global::Jastech.Framework.Winform.Properties.Resources.Operator_White;
-            this.pbxOperator.Location = new System.Drawing.Point(3, 3);
-            this.pbxOperator.Name = "pbxOperator";
-            this.pbxOperator.Size = new System.Drawing.Size(107, 73);
-            this.pbxOperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxOperator.TabIndex = 281;
-            this.pbxOperator.TabStop = false;
-            this.pbxOperator.Click += new System.EventHandler(this.lblOperator_Click);
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(20, 168);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 50);
-            this.label1.TabIndex = 291;
-            this.label1.Text = "PASSWORD";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtPasword
-            // 
-            this.txtPasword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.txtPasword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPasword.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.txtPasword.ForeColor = System.Drawing.Color.White;
-            this.txtPasword.Location = new System.Drawing.Point(144, 181);
-            this.txtPasword.Multiline = true;
-            this.txtPasword.Name = "txtPasword";
-            this.txtPasword.PasswordChar = '*';
-            this.txtPasword.Size = new System.Drawing.Size(230, 32);
-            this.txtPasword.TabIndex = 292;
-            this.txtPasword.Click += new System.EventHandler(this.txtPasword_Click);
-            // 
-            // lblApply
-            // 
-            this.lblApply.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblApply.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
-            this.lblApply.ForeColor = System.Drawing.Color.White;
-            this.lblApply.Location = new System.Drawing.Point(382, 168);
-            this.lblApply.Name = "lblApply";
-            this.lblApply.Size = new System.Drawing.Size(115, 50);
-            this.lblApply.TabIndex = 0;
-            this.lblApply.Text = "Apply";
-            this.lblApply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblApply.Click += new System.EventHandler(this.lblApply_Click);
-            // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.tableLayoutPanel1);
+            this.panel6.Controls.Add(this.panel1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
@@ -426,22 +348,19 @@
             this.Text = "LoginForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             this.Load += new System.EventHandler(this.LoginForm_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel11.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxExit)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxMaker)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxEngineer)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxOperator)).EndInit();
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -449,12 +368,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.Label lblCancelImage;
-        private System.Windows.Forms.Label lblCancel;
         private System.Windows.Forms.Label lblOperator;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblEngineer;

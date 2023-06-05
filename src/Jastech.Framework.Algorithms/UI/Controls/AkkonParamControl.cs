@@ -10,34 +10,45 @@ using System.Windows.Forms;
 using Jastech.Framework.Algorithms.Akkon.Parameters;
 using Jastech.Framework.Algorithms.Akkon;
 using Jastech.Framework.Winform.Helper;
+using System.Diagnostics;
+using System.IO;
 
 namespace Jastech.Framework.Algorithms.UI.Controls
 {
     public partial class AkkonParamControl : UserControl
     {
+        #region 필드
         private Color _selectedColor = new Color();
 
         private Color _nonSelectedColor = new Color();
+        #endregion
 
+        #region 속성
         public bool UserMaker { get; set; } = false;
+
+        public string ViewerPath { get; set; } = "";
 
         public AkkonAlgoritmParam CurrentParam { get; set; } = null;
 
         private AkkonProcessingParamControl ProcessingParamControl { get; set; } = null;
 
         private AkkonResultParamControl ResultParamControl { get; set; } = null;
+        #endregion
 
+        #region 생성자
         public AkkonParamControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void AkkonParamControl_Load(object sender, EventArgs e)
         {
             InitializeUI();
             ShowResultParamControl();
 
-            if(UserMaker == false)
+            if (UserMaker == false)
             {
                 rdoImageParam.Visible = false;
             }
@@ -50,6 +61,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
             ProcessingParamControl = new AkkonProcessingParamControl();
             ProcessingParamControl.Dock = DockStyle.Fill;
+            ProcessingParamControl.OpenViewerDelegateEvent += OpenViewerDelegateEventFunction;
             ProcessingParamControl.SetParam(CurrentParam?.ImageFilterParam);
             pnlDisplay.Controls.Add(ProcessingParamControl);
 
@@ -58,6 +70,15 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             ResultParamControl.SetParam(CurrentParam?.ResultFilterParam, CurrentParam?.JudgementParam, CurrentParam?.DrawOption);
             ResultParamControl.UserMaker = UserMaker;
             pnlDisplay.Controls.Add(ResultParamControl);
+        }
+
+        private void OpenViewerDelegateEventFunction()
+        {
+            string filePath = Path.Combine(ViewerPath, "AkkonTester.exe");
+            if (File.Exists(filePath))
+            {
+                Process.Start(filePath);
+            }
         }
 
         public void SetParam(AkkonAlgoritmParam param)
@@ -75,7 +96,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         public AkkonAlgoritmParam GetCurrentParam()
         {
-            if(CurrentParam != null)
+            if (CurrentParam != null)
             {
                 CurrentParam.ImageFilterParam = ProcessingParamControl.CurrentParam;
                 CurrentParam.ResultFilterParam = ResultParamControl.ResultFilterParam;
@@ -104,14 +125,15 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         private void rdoResultParam_CheckedChanged(object sender, EventArgs e)
         {
-            if(rdoResultParam.Checked)
+            if (rdoResultParam.Checked)
                 ShowResultParamControl();
         }
 
         private void rdoImageParam_CheckedChanged(object sender, EventArgs e)
         {
-            if(rdoImageParam.Checked)
+            if (rdoImageParam.Checked)
                 ShowImageParamControl();
         }
+        #endregion
     }
 }

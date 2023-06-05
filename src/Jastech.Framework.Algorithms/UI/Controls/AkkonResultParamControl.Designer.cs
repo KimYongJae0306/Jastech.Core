@@ -51,7 +51,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.lblGrouping = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
+            this.lblLeadStdDevText = new System.Windows.Forms.Label();
             this.lblLeadLengthY = new System.Windows.Forms.Label();
             this.lblLeadStdDev = new System.Windows.Forms.Label();
             this.ckbContainArea = new System.Windows.Forms.CheckBox();
@@ -366,16 +366,16 @@
             this.label30.Text = "LengthY";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label29
+            // lblLeadStdDevText
             // 
-            this.label29.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
-            this.label29.ForeColor = System.Drawing.Color.White;
-            this.label29.Location = new System.Drawing.Point(259, 196);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(78, 28);
-            this.label29.TabIndex = 128;
-            this.label29.Text = "StdDev";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLeadStdDevText.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
+            this.lblLeadStdDevText.ForeColor = System.Drawing.Color.White;
+            this.lblLeadStdDevText.Location = new System.Drawing.Point(259, 196);
+            this.lblLeadStdDevText.Name = "lblLeadStdDevText";
+            this.lblLeadStdDevText.Size = new System.Drawing.Size(78, 28);
+            this.lblLeadStdDevText.TabIndex = 128;
+            this.lblLeadStdDevText.Text = "StdDev";
+            this.lblLeadStdDevText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblLeadLengthY
             // 
@@ -474,7 +474,7 @@
             this.Controls.Add(this.ckbContainArea);
             this.Controls.Add(this.lblLeadStdDev);
             this.Controls.Add(this.lblLeadLengthY);
-            this.Controls.Add(this.label29);
+            this.Controls.Add(this.lblLeadStdDevText);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.lblGrouping);
             this.Controls.Add(this.label26);
@@ -531,7 +531,7 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label lblGrouping;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lblLeadStdDevText;
         private System.Windows.Forms.Label lblLeadLengthY;
         private System.Windows.Forms.Label lblLeadStdDev;
         private System.Windows.Forms.CheckBox ckbContainArea;

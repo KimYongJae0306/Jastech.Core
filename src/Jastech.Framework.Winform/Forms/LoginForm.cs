@@ -13,18 +13,31 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class LoginForm : Form
     {
+        #region 속성
         public User CurrentUser { get; set; }
 
         public UserHanlder UserHandler { get; set; }
+        #endregion
 
+        #region 이벤트
+        public event StopProgramDelegate StopProgramEvent;
+        #endregion
+
+        #region 델리게이트
+        public delegate void StopProgramDelegate();
+        #endregion
+
+        #region 생성자
         public LoginForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            if(CurrentUser != null)
+            if (CurrentUser != null)
             {
                 UpdateUI(CurrentUser.Type);
             }
@@ -41,12 +54,12 @@ namespace Jastech.Framework.Winform.Forms
                 lblOperator.ForeColor = Color.Blue;
                 txtPasword.Enabled = false;
             }
-            else if(type == AuthorityType.Engineer)
+            else if (type == AuthorityType.Engineer)
             {
                 lblEngineer.ForeColor = Color.Blue;
                 txtPasword.Enabled = true;
             }
-            else if(type == AuthorityType.Maker)
+            else if (type == AuthorityType.Maker)
             {
                 lblMaker.ForeColor = Color.Blue;
                 txtPasword.Enabled = true;
@@ -84,7 +97,7 @@ namespace Jastech.Framework.Winform.Forms
             if (curType != AuthorityType.None)
             {
                 string password = txtPasword.Text;
-                if(CheckPassword(curType, password))
+                if (CheckPassword(curType, password))
                 {
                     CurrentUser = UserHandler.GetUser(curType);
                 }
@@ -96,14 +109,20 @@ namespace Jastech.Framework.Winform.Forms
                     return;
                 }
             }
+            else
+            {
+                CurrentUser = UserHandler.GetUser(AuthorityType.None);
+            }
             MessageConfirmForm form2 = new MessageConfirmForm();
             form2.Message = "Chaged User.";
             form2.ShowDialog();
+
+            this.Close();
         }
 
-        private bool CheckPassword(AuthorityType type , string password)
+        private bool CheckPassword(AuthorityType type, string password)
         {
-            if(UserHandler != null)
+            if (UserHandler != null)
             {
                 var user = UserHandler.GetUser(type);
                 if (user.Password == password)
@@ -131,9 +150,16 @@ namespace Jastech.Framework.Winform.Forms
             DialogResult = DialogResult.Yes;
         }
 
-        private void lblCancel_Click(object sender, EventArgs e)
+        private void pbxExit_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.No;
+            MessageYesNoForm form = new MessageYesNoForm();
+            form.Message = "Do you want to Program Exit?";
+
+            if (form.ShowDialog() == DialogResult.Yes)
+            {
+                StopProgramEvent?.Invoke();
+            }
         }
+        #endregion
     }
 }

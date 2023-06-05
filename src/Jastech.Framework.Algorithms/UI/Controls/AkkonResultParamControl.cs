@@ -37,6 +37,10 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             if(UserMaker == false)
             {
                 lblStrengthScaleText.Visible = false;
+                lblStrengthScaleFactor.Visible = false;
+
+                lblLeadStdDevText.Visible = false;
+                lblLeadStdDev.Visible = false;
             }
 
             _isLoading = false;
