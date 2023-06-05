@@ -33,8 +33,8 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
                         continue;
                     var contour = contours[idxContour];
 
-                    var hull = new VectorOfPoint();
-                    CvInvoke.ConvexHull(contour, hull, true);
+                    //var hull = new VectorOfPoint();
+                    //CvInvoke.ConvexHull(contour, hull, true);
 
                     //Features
                     double area = CvInvoke.ContourArea(contour);
