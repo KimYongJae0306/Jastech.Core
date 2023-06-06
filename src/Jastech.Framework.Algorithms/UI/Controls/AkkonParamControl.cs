@@ -101,6 +101,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
                 CurrentParam.ImageFilterParam = ProcessingParamControl.CurrentParam;
                 CurrentParam.ResultFilterParam = ResultParamControl.ResultFilterParam;
                 CurrentParam.JudgementParam = ResultParamControl.JudgementParam;
+                CurrentParam.DrawOption = ResultParamControl.DrawOption;
             }
 
             return CurrentParam;

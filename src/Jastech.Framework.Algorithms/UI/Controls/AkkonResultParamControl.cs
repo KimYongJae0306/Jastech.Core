@@ -149,26 +149,41 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         private void ckbContainLeadCount_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isLoading)
+                return;
+
             DrawOption.ContainLeadCount = ckbContainLeadCount.Checked;
         }
 
         private void ckbContainLeadROI_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isLoading)
+                return;
+
             DrawOption.ContainLeadROI = ckbContainLeadROI.Checked;
         }
 
         private void ckbContainNG_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isLoading)
+                return;
+
             DrawOption.ContainNG = ckbContainNG.Checked;
         }
 
         private void ckbContainArea_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isLoading)
+                return;
+
             DrawOption.ContainArea = ckbContainArea.Checked;
         }
 
         private void ckbContainStrength_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isLoading)
+                return;
+
             DrawOption.ContainStrength = ckbContainStrength.Checked;
         }
 
