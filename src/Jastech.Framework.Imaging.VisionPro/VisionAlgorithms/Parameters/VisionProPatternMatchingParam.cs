@@ -163,6 +163,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             param.Score = Score;
             param.MaxAngle = MaxAngle;
 
+            if (PMTool.InputImage is CogImage8Grey grey)
+                grey.Dispose();
+
+            if (PMTool.InputImage is CogImage24PlanarColor color)
+                color.Dispose();
+
+            PMTool.InputImage = null;
             if (PMTool != null)
                 param.PMTool = new CogPMAlignTool(PMTool);
 

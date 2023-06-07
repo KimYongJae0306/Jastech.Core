@@ -38,9 +38,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
             Stopwatch sw = new Stopwatch();
             sw.Restart();
+            // CopyParam을 Dispose하면 Image 객체가 사라짐. 따라서 Image는 외부에서 Dispose 해줘야함
+            VisionProCaliperParam copyParam = caliperParam.DeepCopy();
 
-            caliperParam.SetInputImage(image);
-            var resultList = caliperParam.Run();
+            copyParam.SetInputImage(image);
+            var resultList = copyParam.Run();
 
             sw.Stop();
 
@@ -52,7 +54,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             {
                 CaliperMatch match = new CaliperMatch();
 
-                CogRectangleAffine roi = caliperParam.GetRegion() as CogRectangleAffine;
+                CogRectangleAffine roi = copyParam.GetRegion() as CogRectangleAffine;
                 var foundResult = resultList[0];
 
                 match.ReferencePos = new PointF((float)roi.CenterX, (float)roi.CenterY);

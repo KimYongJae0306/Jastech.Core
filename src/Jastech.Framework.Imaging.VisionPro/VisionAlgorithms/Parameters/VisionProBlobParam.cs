@@ -21,7 +21,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         private CogBlobTool BlobTool { get; set; } = new CogBlobTool();
         #endregion
 
-
         #region 메서드
         public void SetInputImage(ICogImage image)
         {
@@ -41,6 +40,16 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             BlobTool.Run();
 
            return  BlobTool.Results;
+        }
+
+        public VisionProBlobParam DeepCopy()
+        {
+            VisionProBlobParam param = new VisionProBlobParam();
+            param.Name = Name;
+            if(BlobTool != null)
+                param.BlobTool = new CogBlobTool(BlobTool);
+
+            return param;
         }
 
         public void SaveTool(string dirPath)

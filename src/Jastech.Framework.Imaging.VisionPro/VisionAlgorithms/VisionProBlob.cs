@@ -36,9 +36,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
         {
             Stopwatch sw = new Stopwatch();
             sw.Restart();
-            
-            blobParam.SetInputImage(image);
-            var resultList = blobParam.Run();
+
+            // CopyParam을 Dispose하면 Image 객체가 사라짐. 따라서 Image는 외부에서 Dispose 해줘야함
+            VisionProBlobParam copyParam = blobParam.DeepCopy();
+
+            copyParam.SetInputImage(image);
+            var resultList = copyParam.Run();
             if (resultList == null)
                 return null;
 

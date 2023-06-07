@@ -63,6 +63,15 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public VisionProCaliperParam DeepCopy()
         {
             VisionProCaliperParam param = new VisionProCaliperParam();
+
+            if (CaliperTool.InputImage is CogImage8Grey grey)
+                grey.Dispose();
+
+            if (CaliperTool.InputImage is CogImage24PlanarColor color)
+                color.Dispose();
+
+            CaliperTool.InputImage = null;
+
             param.CaliperTool = new CogCaliperTool(CaliperTool);
             
             return param;

@@ -40,8 +40,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             Stopwatch sw = new Stopwatch();
             sw.Restart();
 
-            matchingParam.SetInputImage(image);
-            var resultList = matchingParam.Run();
+            VisionProPatternMatchingParam copyParam = matchingParam.DeepCopy();
+
+            // CopyParam을 Dispose하면 Image 객체가 사라짐. 따라서 Image는 외부에서 Dispose 해줘야함
+            copyParam.SetInputImage(image);
+            var resultList = copyParam.Run();
 
             if (resultList == null)
                 return null;
@@ -52,14 +55,14 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             {
                 VisionProPatternMatchPos match = new VisionProPatternMatchPos();
 
-                CogRectangle trainRoi = matchingParam.GetTrainRegion() as CogRectangle;
+                CogRectangle trainRoi = copyParam.GetTrainRegion() as CogRectangle;
                 var foundResult = resultList[0];
 
                 match.ReferencePos = new PointF((float)trainRoi.CenterX, (float)trainRoi.CenterY);
                 match.ReferenceWidth = (float)trainRoi.Width;
                 match.ReferenceHeight = (float)trainRoi.Height;
 
-           
+
                 match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);
                 match.Score = (float)foundResult.Score;
                 match.Angle = (float)foundResult.GetPose().Rotation;
