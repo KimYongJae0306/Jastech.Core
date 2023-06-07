@@ -194,6 +194,13 @@ namespace Jastech.Framework.Winform.Controls
                 }
                 pbxDisplay.Invalidate();
             }
+            else
+            {
+                if (FigureManager.GetSelectedFigure() is Figure figure)
+                {
+                    this.Cursor= figure.GetCursors(calcPoint);
+                }
+            }
         }
 
         private void pbxDisplay_MouseUp(object sender, MouseEventArgs e)

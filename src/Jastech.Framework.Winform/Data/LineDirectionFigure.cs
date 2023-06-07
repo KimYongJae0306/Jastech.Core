@@ -120,6 +120,16 @@ namespace Jastech.Framework.Winform.Data
         public override void CheckPointInFigure(PointF point)
         {
             float interval = 30;
+            foreach (var track in TrackRectangleList)
+            {
+                if (track.Contains(point))
+                {
+                    IsSelected = true;
+                    CurrentTrackPos = CheckTrackPos(point);
+                    return;
+                }
+            }
+
             foreach (var drawPt in DrawPoints)
             {
                 if (drawPt.X - interval <= point.X && point.X <= drawPt.X + interval)
@@ -133,15 +143,7 @@ namespace Jastech.Framework.Winform.Data
                 }
             }
 
-            foreach (var track in TrackRectangleList)
-            {
-                if (track.Contains(point))
-                {
-                    IsSelected = true;
-                    CurrentTrackPos = CheckTrackPos(point);
-                    return;
-                }
-            }
+            
          
             IsSelected = false;
             CurrentTrackPos = TrackPosType.None;
@@ -151,6 +153,7 @@ namespace Jastech.Framework.Winform.Data
         {
             if (IsSelected == false)
                 return TrackPosType.None;
+
 
             if (StartTrackRect.Contains(pt))
                 return TrackPosType.Start;
