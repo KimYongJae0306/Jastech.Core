@@ -85,6 +85,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public void Dispose()
         {
             ResultGraphics?.Dispose();
+            ResultGraphics = null;
         }
 
         public CaliperMatch DeepCopy()

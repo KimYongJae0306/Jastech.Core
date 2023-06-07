@@ -66,6 +66,52 @@ namespace Jastech.Framework.Util.Helper
             return result;
         }
         
+        public static PointF GetCoordi(PointF teachedLeftPoint, PointF teachedRightPoint, PointF searchedLeftPoint, PointF searchedRightPoint, PointF inputPoint)
+        {
+            // 티칭한 각도
+            double teachedTheta = Math.Atan2((teachedRightPoint.Y - teachedLeftPoint.Y), (teachedRightPoint.X - teachedLeftPoint.X));
+            if (teachedTheta > 180.0)
+                teachedTheta -= 360.0;
+
+            // 찾은 각도
+            double searchedTheta = Math.Atan2((searchedRightPoint.Y - searchedLeftPoint.Y), (searchedRightPoint.X - searchedLeftPoint.X));
+            if (searchedTheta > 180.0)
+                searchedTheta -= 360.0;
+
+            double diffTheta = searchedTheta - teachedTheta;
+
+
+            // 찾은 센터포인트
+            PointF searchedCenterPoint = new PointF();
+            searchedCenterPoint.X = (searchedLeftPoint.X + searchedRightPoint.X) / 2;
+            searchedCenterPoint.Y = (searchedLeftPoint.Y + searchedRightPoint.Y) / 2;
+
+            // 티칭한 센터포인트
+            PointF teachedCenterPoint = new PointF();
+            teachedCenterPoint.X = (teachedLeftPoint.X + teachedRightPoint.X) / 2;
+            teachedCenterPoint.Y = (teachedLeftPoint.Y + teachedRightPoint.Y) / 2;
+
+            // 센터끼리 틀어진 오프셋 값
+            double offsetX = searchedCenterPoint.X - teachedCenterPoint.X;
+            double offsetY = searchedCenterPoint.Y - teachedCenterPoint.Y;
+            PointF offset = new PointF((float)offsetX, (float)offsetY);
+
+
+            // 보정 전 좌표
+            inputPoint.X += offset.X;
+            inputPoint.Y += offset.Y;
+
+            // 센터, 옵셋, 각도, 출력
+            var xx = Math.Round(searchedCenterPoint.X + ((Math.Cos(diffTheta * (Math.PI / 180.0)) * (inputPoint.X - searchedCenterPoint.X)) - (Math.Sin(diffTheta * (Math.PI / 180.0)) * (inputPoint.Y - searchedCenterPoint.Y))));
+            var yy = Math.Round(searchedCenterPoint.Y + ((Math.Sin(diffTheta * (Math.PI / 180.0)) * (inputPoint.X - searchedCenterPoint.X)) + (Math.Cos(diffTheta * (Math.PI / 180.0)) * (inputPoint.Y - searchedCenterPoint.Y))));
+
+            PointF outputPoint = new PointF();
+            outputPoint.X = (float)xx;
+            outputPoint.Y = (float)yy;
+
+            return outputPoint;
+        }
+
         public static double GetDistance(Point point1, Point point2)
         {
             int dx = point2.X - point1.X;

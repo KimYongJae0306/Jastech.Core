@@ -69,6 +69,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
                 result.MatchPosList.Add(match);
             }
+
             return result;
         }
         #endregion

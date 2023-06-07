@@ -39,6 +39,9 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public List<AkkonBlob> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
+
             List<AkkonBlob> akkonResultList = new List<AkkonBlob>();
             var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
 
@@ -124,6 +127,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 //Thread.Sleep(50);
             });
 
+            sw.Stop();
+            Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
             return akkonResultList;
         }
 

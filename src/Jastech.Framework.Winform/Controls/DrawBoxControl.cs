@@ -229,7 +229,8 @@ namespace Jastech.Framework.Winform.Controls
                     return;
 
                 Graphics g = e.Graphics;
-                g.Clear(Color.White);
+                Color color = Color.FromArgb(52, 52, 52);
+                g.Clear(color);
 
                 Matrix matrix = new Matrix();
                 matrix.Translate((float)OffsetX, (float)OffsetY);
@@ -331,6 +332,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             MenuStripSelectedNone();
             DisplayMode = DisplayMode.None;
+            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 
@@ -338,6 +340,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             MenuStripSelectedNone();
             DisplayMode = DisplayMode.Panning;
+            this.Cursor = Cursors.Hand;
             UpdateDisplayModeUI(DisplayMode);
         }
 
@@ -345,6 +348,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             MenuStripSelectedNone();
             DisplayMode = DisplayMode.Drawing;
+            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 

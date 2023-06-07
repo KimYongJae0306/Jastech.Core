@@ -101,9 +101,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogDisplayHelper.DisposeDisplay(cogDisplay);
             if (cogImage == null)
                 cogDisplay.Image = null;
-            else
+            else//ASDF
                 cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
-            UpdateViewRect();
+            //UpdateViewRect();
         }
 
         public void DisposeImage()
@@ -274,8 +274,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearGraphic()
         {
+            //cogDisplay.StaticGraphics.Dispose();
             cogDisplay.StaticGraphics.Clear();
+            //cogDisplay.InteractiveGraphics.Dispose();
             cogDisplay.InteractiveGraphics.Clear();
+
+            //GC.Collect();
         }
 
         public void ClearGraphic(string groupName)

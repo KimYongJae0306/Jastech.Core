@@ -54,6 +54,25 @@ namespace Jastech.Framework.Winform.Controls
             e.Graphics.DrawRectangle(new Pen(Color.White), Rectangle.Round(_drawChartRect));
 
             DrawData(e.Graphics);
+            DrawInfo(e.Graphics);
+        }
+
+        private void DrawInfo(Graphics g)
+        {
+            if (Data == null)
+                return;
+            if (Data.Count() > 0)
+            {
+                double maxValue = Data.Max();
+                double minValue = Data.Min();
+
+                string maxString = string.Format("Max Value : {0}", maxValue);
+                string minString = string.Format("Min Value : {0}", minValue);
+
+                Font font = GetFontStyle(10, FontStyle.Bold);
+                g.DrawString(maxString, font, Brushes.White, new PointF(_drawChartRect.Right + 10, _drawChartRect.Top));
+                g.DrawString(minString, font, Brushes.White, new PointF(_drawChartRect.Right + 10, _drawChartRect.Top + 20));
+            }
         }
 
         private void UpdateDrawInfo()

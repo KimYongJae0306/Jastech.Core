@@ -202,9 +202,25 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             if(PMTool != null)
             {
+                if (PMTool.Pattern.TrainImage != null)
+                {
+                    if (PMTool.Pattern.TrainImage is CogImage8Grey grey)
+                        grey.Dispose();
+                    if (PMTool.Pattern.TrainImage is CogImage24PlanarColor color)
+                        color.Dispose();
+                }
                 PMTool.Pattern.TrainImage = null;
                 PMTool.Pattern.Dispose();
                 PMTool.Pattern = null;
+
+                if (PMTool.InputImage != null)
+                {
+                    if (PMTool.InputImage is CogImage8Grey grey)
+                        grey.Dispose();
+                    if (PMTool.InputImage is CogImage24PlanarColor color)
+                        color.Dispose();
+                }
+
                 PMTool.InputImage = null;
                 PMTool.RunParams.Dispose();
                 PMTool.RunParams = null;

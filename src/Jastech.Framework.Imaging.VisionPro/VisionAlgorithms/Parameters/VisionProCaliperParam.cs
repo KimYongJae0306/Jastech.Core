@@ -92,6 +92,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
+            if (CaliperTool.InputImage != null)
+            {
+                if (CaliperTool.InputImage is CogImage8Grey grey)
+                    grey.Dispose();
+                if (CaliperTool.InputImage is CogImage24PlanarColor color)
+                    color.Dispose();
+            }
             CaliperTool.InputImage = null;
 
             CaliperTool.RunParams.Dispose();

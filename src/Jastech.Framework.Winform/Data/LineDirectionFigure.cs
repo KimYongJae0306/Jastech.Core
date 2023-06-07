@@ -119,7 +119,7 @@ namespace Jastech.Framework.Winform.Data
 
         public override void CheckPointInFigure(PointF point)
         {
-            float interval = 10;
+            float interval = 30;
             foreach (var drawPt in DrawPoints)
             {
                 if (drawPt.X - interval <= point.X && point.X <= drawPt.X + interval)
@@ -158,7 +158,7 @@ namespace Jastech.Framework.Winform.Data
             if (EndTrackRect.Contains(pt))
                 return TrackPosType.End;
 
-            float interval = 10;
+            float interval = 30;
             foreach (var drawPt in DrawPoints)
             {
                 if (drawPt.X - interval <= pt.X && pt.X <= drawPt.X + interval)

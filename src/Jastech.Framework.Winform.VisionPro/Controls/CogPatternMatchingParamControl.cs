@@ -15,6 +15,8 @@ using Jastech.Framework.Winform.VisionPro.Forms;
 using Jastech.Framework.Winform.Forms;
 using Cognex.VisionPro.Implementation;
 using Jastech.Framework.Winform.VisionPro.Helper;
+using Jastech.Framework.Imaging.VisionPro;
+using Cognex.VisionPro.Display;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -52,10 +54,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 if (CurrentParam.GetSearchRegion() == null)
                     return;
 
+                CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
+
                 ICogImage originImage = GetOriginImageHandler();
-                
-                if(CurrentParam.Train(originImage))
+                if (CurrentParam.Train(originImage))
                 {
+                  
                     cogPatternDisplay.Image = null;
                     cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
                 }
@@ -152,6 +156,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetTrainImage(ICogImage image)
         {
+            CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
             cogPatternDisplay.Image = null;
             cogPatternDisplay.Image = image;
         }
