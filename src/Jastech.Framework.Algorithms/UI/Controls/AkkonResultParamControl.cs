@@ -75,7 +75,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
             // Draw Options
             ckbContainLeadCount.Checked = DrawOption.ContainLeadCount;
-            ckbContainLeadCount.Checked = DrawOption.ContainLeadROI;
+            ckbContainLeadROI.Checked = DrawOption.ContainLeadROI;
             ckbContainNG.Checked = DrawOption.ContainNG;
             ckbContainArea.Checked = DrawOption.ContainArea;
             ckbContainStrength.Checked = DrawOption.ContainStrength;

@@ -113,8 +113,6 @@
             // ckbContainLeadROI
             // 
             this.ckbContainLeadROI.AutoSize = true;
-            this.ckbContainLeadROI.Checked = true;
-            this.ckbContainLeadROI.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainLeadROI.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainLeadROI.ForeColor = System.Drawing.Color.White;
             this.ckbContainLeadROI.Location = new System.Drawing.Point(522, 96);
@@ -128,8 +126,6 @@
             // ckbContainNG
             // 
             this.ckbContainNG.AutoSize = true;
-            this.ckbContainNG.Checked = true;
-            this.ckbContainNG.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainNG.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainNG.ForeColor = System.Drawing.Color.White;
             this.ckbContainNG.Location = new System.Drawing.Point(522, 125);
@@ -143,8 +139,6 @@
             // ckbContainLeadCount
             // 
             this.ckbContainLeadCount.AutoSize = true;
-            this.ckbContainLeadCount.Checked = true;
-            this.ckbContainLeadCount.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainLeadCount.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainLeadCount.ForeColor = System.Drawing.Color.White;
             this.ckbContainLeadCount.Location = new System.Drawing.Point(522, 67);
@@ -410,8 +404,6 @@
             // ckbContainArea
             // 
             this.ckbContainArea.AutoSize = true;
-            this.ckbContainArea.Checked = true;
-            this.ckbContainArea.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainArea.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainArea.ForeColor = System.Drawing.Color.White;
             this.ckbContainArea.Location = new System.Drawing.Point(522, 154);
@@ -425,8 +417,6 @@
             // ckbContainStrength
             // 
             this.ckbContainStrength.AutoSize = true;
-            this.ckbContainStrength.Checked = true;
-            this.ckbContainStrength.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainStrength.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainStrength.ForeColor = System.Drawing.Color.White;
             this.ckbContainStrength.Location = new System.Drawing.Point(522, 183);
