@@ -60,17 +60,17 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
             // Result Filters
             lblGrouping.Text = ResultFilterParam.Grouping.ToString();
-            lblMinArea.Text = ResultFilterParam.MinArea.ToString();
-            lblMaxArea.Text = ResultFilterParam.MaxArea.ToString();
-            lblMaxWidth.Text = ResultFilterParam.MaxWidth.ToString();
-            lblMaxHeight.Text = ResultFilterParam.MaxHeight.ToString();
+            lblMinArea.Text = ResultFilterParam.MinArea_um.ToString();
+            lblMaxArea.Text = ResultFilterParam.MaxArea_um.ToString();
+            lblMaxWidth.Text = ResultFilterParam.MaxWidth_um.ToString();
+            lblMaxHeight.Text = ResultFilterParam.MaxHeight_um.ToString();
             lblStrength.Text = ResultFilterParam.AkkonStrength.ToString();
             lblStrengthScaleFactor.Text = ResultFilterParam.AkkonStrengthScaleFactor.ToString();
 
             // Judgement
             lblAkkonCount.Text = JudgementParam.AkkonCount.ToString();
-            lblLeadLengthX.Text = JudgementParam.LengthX.ToString();
-            lblLeadLengthY.Text = JudgementParam.LengthY.ToString();
+            lblLeadLengthX.Text = JudgementParam.LengthX_um.ToString();
+            lblLeadLengthY.Text = JudgementParam.LengthY_um.ToString();
             lblLeadStdDev.Text = JudgementParam.LeadStdDev.ToString();
 
             // Draw Options
@@ -90,25 +90,25 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         private void lblMinArea_Click(object sender, EventArgs e)
         {
             double minArea = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            ResultFilterParam.MinArea = minArea;
+            ResultFilterParam.MinArea_um = minArea;
         }
 
         private void lblMaxArea_Click(object sender, EventArgs e)
         {
             double maxArea = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            ResultFilterParam.MaxArea = maxArea;
+            ResultFilterParam.MaxArea_um = maxArea;
         }
 
         private void lblMaxWidth_Click(object sender, EventArgs e)
         {
             double maxWidth = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            ResultFilterParam.MaxWidth = maxWidth;
+            ResultFilterParam.MaxWidth_um = maxWidth;
         }
 
         private void lblMaxHeight_Click(object sender, EventArgs e)
         {
             double maxHeight = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            ResultFilterParam.MaxHeight = maxHeight;
+            ResultFilterParam.MaxHeight_um = maxHeight;
         }
 
         private void lblStrength_Click(object sender, EventArgs e)
@@ -132,13 +132,13 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         private void lblLeadLengthX_Click(object sender, EventArgs e)
         {
             double lengthX = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            JudgementParam.LengthX = lengthX;
+            JudgementParam.LengthX_um = lengthX;
         }
 
         private void lblLeadLengthY_Click(object sender, EventArgs e)
         {
             double lengthY = KeyPadHelper.SetLabelDoubleData((Label)sender);
-            JudgementParam.LengthX = lengthY;
+            JudgementParam.LengthY_um = lengthY;
         }
 
         private void lblLeadStdDev_Click(object sender, EventArgs e)

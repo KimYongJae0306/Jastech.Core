@@ -62,16 +62,19 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public int Grouping { get; set; } = 3;
 
         [JsonProperty]
-        public double MinArea { get; set; } = 3;
+        public double Resolution_um { get; set; } = 1.0;
 
         [JsonProperty]
-        public double MaxArea { get; set; } = 100.0;
+        public double MinArea_um { get; set; } = 3;
 
         [JsonProperty]
-        public double MaxWidth { get; set; } = 100.0;
+        public double MaxArea_um { get; set; } = 100.0;
 
         [JsonProperty]
-        public double MaxHeight { get; set; } = 100.0;
+        public double MaxWidth_um { get; set; } = 100.0;
+
+        [JsonProperty]
+        public double MaxHeight_um { get; set; } = 100.0;
 
         [JsonProperty]
         public double AkkonStrength { get; set; } = 5.0;
@@ -86,10 +89,10 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public int AkkonCount { get; set; } = 30;
 
         [JsonProperty]
-        public double LengthX { get; set; } = 10.0;
+        public double LengthX_um { get; set; } = 10.0;
 
         [JsonProperty]
-        public double LengthY { get; set; } = 10.0;
+        public double LengthY_um { get; set; } = 10.0;
 
         [JsonProperty]
         public double LeadStdDev { get; set; } = 1.0;

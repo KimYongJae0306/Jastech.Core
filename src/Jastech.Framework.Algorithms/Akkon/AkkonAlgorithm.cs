@@ -376,13 +376,19 @@ namespace Jastech.Framework.Algorithms.Akkon
         {
             bool isPass = true; // Result Filter 통과 한 후보들
 
-            if (blob.Area < filter.MinArea || filter.MaxArea < blob.Area)
+            double calcMinArea = filter.MinArea_um * filter.Resolution_um;
+            double calcMaxArea = filter.MaxArea_um * filter.Resolution_um;
+
+            double calcMaxWidth = filter.MaxWidth_um * filter.Resolution_um;
+            double calcMaxHeight = filter.MaxHeight_um * filter.Resolution_um;
+
+            if (blob.Area < calcMinArea || calcMaxArea < blob.Area)
                 isPass = false;
 
-            if (blob.BoundingRect.Width > filter.MaxWidth)
+            if (blob.BoundingRect.Width > calcMaxWidth)
                 isPass = false;
 
-            if (blob.BoundingRect.Height > filter.MaxHeight)
+            if (blob.BoundingRect.Height > calcMaxHeight)
                 isPass = false;
 
             if (blob.Strength < filter.AkkonStrength)

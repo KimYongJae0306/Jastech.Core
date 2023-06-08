@@ -39,9 +39,11 @@
             this.lblEdgeThreshold = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTest = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tlpCaliperParam.SuspendLayout();
             this.tlpEdgePolarity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblFilterSizeValue
@@ -84,18 +86,17 @@
             this.tlpCaliperParam.Controls.Add(this.tlpEdgePolarity, 2, 0);
             this.tlpCaliperParam.Controls.Add(this.lblFilterSize, 0, 1);
             this.tlpCaliperParam.Controls.Add(this.lblEdgeThreshold, 0, 2);
-            this.tlpCaliperParam.Controls.Add(this.lblTest, 2, 3);
             this.tlpCaliperParam.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpCaliperParam.Location = new System.Drawing.Point(0, 0);
             this.tlpCaliperParam.Margin = new System.Windows.Forms.Padding(0);
             this.tlpCaliperParam.Name = "tlpCaliperParam";
-            this.tlpCaliperParam.RowCount = 5;
+            this.tlpCaliperParam.RowCount = 4;
             this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpCaliperParam.Size = new System.Drawing.Size(424, 294);
+            this.tlpCaliperParam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpCaliperParam.Size = new System.Drawing.Size(424, 172);
             this.tlpCaliperParam.TabIndex = 2;
             // 
             // lblEdgePolarity
@@ -182,31 +183,51 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 424F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tlpCaliperParam, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(506, 294);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(659, 172);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // lblTest
             // 
             this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTest.Location = new System.Drawing.Point(212, 160);
+            this.lblTest.Location = new System.Drawing.Point(0, 120);
             this.lblTest.Margin = new System.Windows.Forms.Padding(0);
             this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(212, 40);
+            this.lblTest.Size = new System.Drawing.Size(200, 40);
             this.lblTest.TabIndex = 2;
             this.lblTest.Text = "Test";
             this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTest.Click += new System.EventHandler(this.lblTest_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel2.Controls.Add(this.lblTest, 0, 2);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(436, 0);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 172);
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // CogCaliperParamControl
             // 
@@ -217,13 +238,14 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "CogCaliperParamControl";
-            this.Size = new System.Drawing.Size(506, 294);
+            this.Size = new System.Drawing.Size(659, 172);
             this.Load += new System.EventHandler(this.CogCaliperParamControl_Load);
             this.tlpCaliperParam.ResumeLayout(false);
             this.tlpCaliperParam.PerformLayout();
             this.tlpEdgePolarity.ResumeLayout(false);
             this.tlpEdgePolarity.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -241,5 +263,6 @@
         private System.Windows.Forms.Label lblDarkToLight;
         private System.Windows.Forms.Label lblLightToDark;
         private System.Windows.Forms.Label lblTest;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
