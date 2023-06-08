@@ -225,4 +225,10 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         Vertical,
         Horizontal,
     }
+
+    public enum ROICloneDirection
+    {
+        Horizontal,
+        Vertical,
+    }
 }
