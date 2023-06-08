@@ -19,7 +19,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 필드
         private VisionProCaliperParam CurrentParam;
         private Color _selectedColor = new Color();
-        private Color _noneSelectedColor = new Color();
+        private Color _nonSelectedColor = new Color();
         #endregion
 
         #region 속성
@@ -53,7 +53,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void IntializeUI()
         {
             _selectedColor = Color.FromArgb(104, 104, 104);
-            _noneSelectedColor = Color.FromArgb(52, 52, 52);
+            _nonSelectedColor = Color.FromArgb(52, 52, 52);
         }
 
         private void lblDarkToLight_Click(object sender, EventArgs e)
@@ -103,17 +103,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DarkToLight)
             {
                 lblDarkToLight.BackColor = _selectedColor;
-                lblLightToDark.BackColor = _noneSelectedColor;
+                lblLightToDark.BackColor = _nonSelectedColor;
             }
             else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.LightToDark)
             {
-                lblDarkToLight.BackColor = _noneSelectedColor;
+                lblDarkToLight.BackColor = _nonSelectedColor;
                 lblLightToDark.BackColor = _selectedColor;
             }
             else if (caliperParam.CaliperTool.RunParams.Edge0Polarity == CogCaliperPolarityConstants.DontCare)
             {
-                lblDarkToLight.BackColor = _noneSelectedColor;
-                lblLightToDark.BackColor = _noneSelectedColor;
+                lblDarkToLight.BackColor = _nonSelectedColor;
+                lblLightToDark.BackColor = _nonSelectedColor;
             }
             else { }
 

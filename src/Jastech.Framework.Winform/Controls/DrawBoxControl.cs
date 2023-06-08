@@ -23,7 +23,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private Color _selectedColor = new Color();
 
-        private Color _noneSelectedColor = new Color();
+        private Color _nonSelectedColor = new Color();
 
         public object _lock = new object();
         #endregion
@@ -71,7 +71,7 @@ namespace Jastech.Framework.Winform.Controls
             this.UpdateStyles();
             
             _selectedColor = Color.FromArgb(104, 104, 104);
-            _noneSelectedColor = Color.FromArgb(52, 52, 52);
+            _nonSelectedColor = Color.FromArgb(52, 52, 52);
 
             DisplayMode = DisplayMode.None;
             UpdateDisplayModeUI(DisplayMode);
@@ -391,9 +391,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private void UpdateDisplayModeUI(DisplayMode mode)
         {
-            btnDrawNone.BackColor = _noneSelectedColor;
-            btnPanning.BackColor = _noneSelectedColor;
-            btnDrawLine.BackColor = _noneSelectedColor;
+            btnDrawNone.BackColor = _nonSelectedColor;
+            btnPanning.BackColor = _nonSelectedColor;
+            btnDrawLine.BackColor = _nonSelectedColor;
 
             if (mode == DisplayMode.None)
                 btnDrawNone.BackColor = _selectedColor;

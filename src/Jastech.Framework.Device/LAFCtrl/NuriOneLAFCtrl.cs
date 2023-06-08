@@ -202,7 +202,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             if (value * ResolutionAxisZ < 1)
                 return;
 
-            value = Math.Abs(value);
+            value = Math.Abs(value * 1000);
 
             int directionValue = direction == Direction.CW ? -1 : 1;
 

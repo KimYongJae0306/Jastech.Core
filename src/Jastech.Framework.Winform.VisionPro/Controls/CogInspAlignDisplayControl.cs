@@ -22,6 +22,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
             CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+
             if (cogLeftDisplay.Image != null)
                 cogLeftDisplay.Image = null;
 
@@ -32,9 +33,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
             foreach (var item in shape)
-            {
                 collect.Add(item);
-            }
 
             cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
 
@@ -58,9 +57,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
             foreach (var item in shape)
-            {
                 collect.Add(item);
-            }
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
             SetDisplayToCenter(cogRightDisplay, viewPoint);
