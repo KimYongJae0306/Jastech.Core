@@ -40,6 +40,7 @@
             this.nupdnMatchScore = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblTest = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogPatternDisplay)).BeginInit();
@@ -131,6 +132,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblTest);
             this.panel2.Controls.Add(this.nupdnMaxAngle);
             this.panel2.Controls.Add(this.nupdnMatchScore);
             this.panel2.Controls.Add(this.label3);
@@ -200,6 +202,19 @@
             this.label2.Text = "Score [%]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblTest
+            // 
+            this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTest.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTest.ForeColor = System.Drawing.Color.White;
+            this.lblTest.Location = new System.Drawing.Point(16, 125);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(192, 40);
+            this.lblTest.TabIndex = 21;
+            this.lblTest.Text = "Test";
+            this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTest.Click += new System.EventHandler(this.lblTest_Click);
+            // 
             // CogPatternMatchingParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -230,5 +245,6 @@
         private System.Windows.Forms.NumericUpDown nupdnMatchScore;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTest;
     }
 }
