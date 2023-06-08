@@ -48,23 +48,9 @@ namespace Jastech.Framework.Util.Helper
             return Math.Atan2(deltaY, deltaX);
         }
 
-        public static PointF GetCoordinate(PointF inputPoint, double degree)
+        public static double GetDiffAngle(PointF point1, PointF point2)
         {
-            PointF result = new PointF();
-
-            //PointF res = new PointF();
-            //res.X = (float)(Math.Cos(degree) * inputPoint.X);
-            //res.Y = (float)(Math.Sin(degree) * inputPoint.Y);
-
-            //result.X = (float)(Math.Cos(degree) * inputPoint.X) - (float)(Math.Sin(degree) * inputPoint.Y);
-            //result.Y = (float)(Math.Sin(degree) * inputPoint.X) + (float)(Math.Cos(degree) * inputPoint.Y);
-
-
-            result.X = (float)(Math.Cos(degree) * inputPoint.X);
-            result.Y = (float)(Math.Cos(degree) * inputPoint.Y);
-
-
-            return result;
+            return 0.0;
         }
         
         public static PointF GetCenterPoint(PointF point1, PointF point2)
@@ -90,52 +76,65 @@ namespace Jastech.Framework.Util.Helper
             return offset;
         }
 
-        public static PointF GetCoordinate(PointF inputPoint)
+        public static PointF GetCoordinate(PointF centerPoint, double diffRadian, PointF offset, PointF inputPoint)
         {
             PointF outputPoint = new PointF();
-
-
-            return outputPoint;
-        }
-
-        public static PointF GetCoordinate(PointF teachedLeftPoint, PointF teachedRightPoint, PointF searchedLeftPoint, PointF searchedRightPoint, PointF inputPoint)
-        {
-            // 티칭한 각도
-            double teachedRadian = GetRadian(teachedLeftPoint, teachedRightPoint);
-            if (teachedRadian > 180.0)
-                teachedRadian -= 360.0;
-
-            // 찾은 각도
-            double searchedRadian = GetRadian(searchedLeftPoint, searchedRightPoint);
-            if (searchedRadian > 180.0)
-                searchedRadian -= 360.0;
-
-            // 각도 차이
-            double diffRadian = searchedRadian - teachedRadian;
-
-            // 티칭한 센터포인트
-            PointF teachedCenterPoint = GetCenterPoint(teachedLeftPoint, teachedRightPoint);
-
-            // 찾은 센터포인트
-            PointF searchedCenterPoint = GetCenterPoint(searchedLeftPoint, searchedRightPoint);
-
-            // 센터끼리 틀어진 오프셋 값
-            PointF offset = GetOffset(teachedCenterPoint, searchedCenterPoint);
 
             // 보정 전 좌표
             inputPoint.X += offset.X;
             inputPoint.Y += offset.Y;
 
             // 센터, 옵셋, 각도, 출력
-            var coordinateX = Math.Round(searchedCenterPoint.X + ((Math.Cos(RadToDeg(diffRadian)) * (inputPoint.X - searchedCenterPoint.X)) - (Math.Sin(RadToDeg(diffRadian)) * (inputPoint.Y - searchedCenterPoint.Y))));
-            var coordinateY = Math.Round(searchedCenterPoint.Y + ((Math.Sin(RadToDeg(diffRadian)) * (inputPoint.X - searchedCenterPoint.X)) + (Math.Cos(RadToDeg(diffRadian)) * (inputPoint.Y - searchedCenterPoint.Y))));
-
-            PointF outputPoint = new PointF();
+            var coordinateX = Math.Round(centerPoint.X + ((Math.Cos(RadToDeg(diffRadian)) * (inputPoint.X - centerPoint.X)) - (Math.Sin(RadToDeg(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
+            var coordinateY = Math.Round(centerPoint.Y + ((Math.Sin(RadToDeg(diffRadian)) * (inputPoint.X - centerPoint.X)) + (Math.Cos(RadToDeg(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
 
             outputPoint.X = (float)coordinateX;
             outputPoint.Y = (float)coordinateY;
 
             return outputPoint;
+        }
+
+        public static PointF GetCoordinate(PointF teachedLeftPoint, PointF teachedRightPoint, PointF searchedLeftPoint, PointF searchedRightPoint, PointF inputPoint)
+        {
+            //// 티칭한 각도
+            //double teachedRadian = GetRadian(teachedLeftPoint, teachedRightPoint);
+            //if (teachedRadian > 180.0)
+            //    teachedRadian -= 360.0;
+
+            //// 찾은 각도
+            //double searchedRadian = GetRadian(searchedLeftPoint, searchedRightPoint);
+            //if (searchedRadian > 180.0)
+            //    searchedRadian -= 360.0;
+
+            //// 각도 차이
+            //double diffRadian = searchedRadian - teachedRadian;
+
+            //// 티칭한 센터포인트
+            //PointF teachedCenterPoint = GetCenterPoint(teachedLeftPoint, teachedRightPoint);
+
+            //// 찾은 센터포인트
+            //PointF searchedCenterPoint = GetCenterPoint(searchedLeftPoint, searchedRightPoint);
+
+            //// 센터끼리 틀어진 오프셋 값
+            //PointF offset = GetOffset(teachedCenterPoint, searchedCenterPoint);
+
+            //// 보정 전 좌표
+            //inputPoint.X += offset.X;
+            //inputPoint.Y += offset.Y;
+
+            //// 센터, 옵셋, 각도, 출력
+            //var coordinateX = Math.Round(searchedCenterPoint.X + ((Math.Cos(RadToDeg(diffRadian)) * (inputPoint.X - searchedCenterPoint.X)) - (Math.Sin(RadToDeg(diffRadian)) * (inputPoint.Y - searchedCenterPoint.Y))));
+            //var coordinateY = Math.Round(searchedCenterPoint.Y + ((Math.Sin(RadToDeg(diffRadian)) * (inputPoint.X - searchedCenterPoint.X)) + (Math.Cos(RadToDeg(diffRadian)) * (inputPoint.Y - searchedCenterPoint.Y))));
+
+            //PointF outputPoint = new PointF();
+
+            //outputPoint.X = (float)coordinateX;
+            //outputPoint.Y = (float)coordinateY;
+
+            //return GetCoordinate(searchedCenterPoint, diffRadian, offset, inputPoint);
+
+            PointF nn = new PointF();
+            return nn;
         }
 
         public static double GetDistance(Point point1, Point point2)
