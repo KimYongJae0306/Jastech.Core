@@ -61,14 +61,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.DarkToLight;
 
             lblDarkToLight.BackColor = _selectedColor;
-            lblLightToDark.BackColor = _noneSelectedColor;
+            lblLightToDark.BackColor = _nonSelectedColor;
         }
 
         private void lblLightToDark_Click(object sender, EventArgs e)
         {
             CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
 
-            lblDarkToLight.BackColor = _noneSelectedColor;
+            lblDarkToLight.BackColor = _nonSelectedColor;
             lblLightToDark.BackColor = _selectedColor;
         }
 
