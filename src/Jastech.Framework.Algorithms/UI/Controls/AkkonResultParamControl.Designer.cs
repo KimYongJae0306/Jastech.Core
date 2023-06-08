@@ -66,10 +66,10 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(13, 14);
+            this.label2.Location = new System.Drawing.Point(25, 14);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 40);
+            this.label2.Size = new System.Drawing.Size(235, 40);
             this.label2.TabIndex = 105;
             this.label2.Text = "RESULT FILTER";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -80,9 +80,9 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(21, 108);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 28);
+            this.label4.Size = new System.Drawing.Size(120, 28);
             this.label4.TabIndex = 106;
-            this.label4.Text = "Min Area";
+            this.label4.Text = "Min Area(um)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label16
@@ -91,9 +91,9 @@
             this.label16.ForeColor = System.Drawing.Color.White;
             this.label16.Location = new System.Drawing.Point(21, 150);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(78, 28);
+            this.label16.Size = new System.Drawing.Size(120, 28);
             this.label16.TabIndex = 107;
-            this.label16.Text = "Max Area";
+            this.label16.Text = "Max Area(um)";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
@@ -102,7 +102,7 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(494, 14);
+            this.label5.Location = new System.Drawing.Point(522, 14);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(224, 40);
@@ -113,11 +113,9 @@
             // ckbContainLeadROI
             // 
             this.ckbContainLeadROI.AutoSize = true;
-            this.ckbContainLeadROI.Checked = true;
-            this.ckbContainLeadROI.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainLeadROI.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainLeadROI.ForeColor = System.Drawing.Color.White;
-            this.ckbContainLeadROI.Location = new System.Drawing.Point(494, 96);
+            this.ckbContainLeadROI.Location = new System.Drawing.Point(522, 96);
             this.ckbContainLeadROI.Name = "ckbContainLeadROI";
             this.ckbContainLeadROI.Size = new System.Drawing.Size(147, 23);
             this.ckbContainLeadROI.TabIndex = 109;
@@ -128,11 +126,9 @@
             // ckbContainNG
             // 
             this.ckbContainNG.AutoSize = true;
-            this.ckbContainNG.Checked = true;
-            this.ckbContainNG.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainNG.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainNG.ForeColor = System.Drawing.Color.White;
-            this.ckbContainNG.Location = new System.Drawing.Point(494, 125);
+            this.ckbContainNG.Location = new System.Drawing.Point(522, 125);
             this.ckbContainNG.Name = "ckbContainNG";
             this.ckbContainNG.Size = new System.Drawing.Size(107, 23);
             this.ckbContainNG.TabIndex = 110;
@@ -143,11 +139,9 @@
             // ckbContainLeadCount
             // 
             this.ckbContainLeadCount.AutoSize = true;
-            this.ckbContainLeadCount.Checked = true;
-            this.ckbContainLeadCount.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainLeadCount.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainLeadCount.ForeColor = System.Drawing.Color.White;
-            this.ckbContainLeadCount.Location = new System.Drawing.Point(494, 67);
+            this.ckbContainLeadCount.Location = new System.Drawing.Point(522, 67);
             this.ckbContainLeadCount.Name = "ckbContainLeadCount";
             this.ckbContainLeadCount.Size = new System.Drawing.Size(164, 23);
             this.ckbContainLeadCount.TabIndex = 111;
@@ -161,7 +155,7 @@
             this.lblMinArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMinArea.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMinArea.ForeColor = System.Drawing.Color.White;
-            this.lblMinArea.Location = new System.Drawing.Point(137, 104);
+            this.lblMinArea.Location = new System.Drawing.Point(160, 104);
             this.lblMinArea.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinArea.Name = "lblMinArea";
             this.lblMinArea.Size = new System.Drawing.Size(100, 36);
@@ -176,7 +170,7 @@
             this.lblMaxArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxArea.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMaxArea.ForeColor = System.Drawing.Color.White;
-            this.lblMaxArea.Location = new System.Drawing.Point(137, 146);
+            this.lblMaxArea.Location = new System.Drawing.Point(160, 146);
             this.lblMaxArea.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxArea.Name = "lblMaxArea";
             this.lblMaxArea.Size = new System.Drawing.Size(100, 36);
@@ -191,7 +185,7 @@
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label8.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(251, 14);
+            this.label8.Location = new System.Drawing.Point(279, 14);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(224, 40);
@@ -203,7 +197,7 @@
             // 
             this.label13.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(259, 69);
+            this.label13.Location = new System.Drawing.Point(287, 69);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(78, 28);
             this.label13.TabIndex = 115;
@@ -214,11 +208,11 @@
             // 
             this.label12.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(259, 108);
+            this.label12.Location = new System.Drawing.Point(287, 108);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(78, 28);
+            this.label12.Size = new System.Drawing.Size(113, 28);
             this.label12.TabIndex = 116;
-            this.label12.Text = "LengthX";
+            this.label12.Text = "LengthX(um)";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblAkkonCount
@@ -227,7 +221,7 @@
             this.lblAkkonCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAkkonCount.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblAkkonCount.ForeColor = System.Drawing.Color.White;
-            this.lblAkkonCount.Location = new System.Drawing.Point(375, 65);
+            this.lblAkkonCount.Location = new System.Drawing.Point(403, 65);
             this.lblAkkonCount.Margin = new System.Windows.Forms.Padding(0);
             this.lblAkkonCount.Name = "lblAkkonCount";
             this.lblAkkonCount.Size = new System.Drawing.Size(100, 36);
@@ -242,7 +236,7 @@
             this.lblLeadLengthX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadLengthX.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblLeadLengthX.ForeColor = System.Drawing.Color.White;
-            this.lblLeadLengthX.Location = new System.Drawing.Point(375, 108);
+            this.lblLeadLengthX.Location = new System.Drawing.Point(403, 108);
             this.lblLeadLengthX.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadLengthX.Name = "lblLeadLengthX";
             this.lblLeadLengthX.Size = new System.Drawing.Size(100, 36);
@@ -257,9 +251,9 @@
             this.label24.ForeColor = System.Drawing.Color.White;
             this.label24.Location = new System.Drawing.Point(21, 192);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(98, 28);
+            this.label24.Size = new System.Drawing.Size(120, 28);
             this.label24.TabIndex = 119;
-            this.label24.Text = "Max Width";
+            this.label24.Text = "Max Width(um)";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label23
@@ -268,9 +262,9 @@
             this.label23.ForeColor = System.Drawing.Color.White;
             this.label23.Location = new System.Drawing.Point(21, 235);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(98, 28);
+            this.label23.Size = new System.Drawing.Size(136, 28);
             this.label23.TabIndex = 120;
-            this.label23.Text = "Max Height";
+            this.label23.Text = "Max Height(um)";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblMaxWidth
@@ -279,7 +273,7 @@
             this.lblMaxWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxWidth.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMaxWidth.ForeColor = System.Drawing.Color.White;
-            this.lblMaxWidth.Location = new System.Drawing.Point(137, 188);
+            this.lblMaxWidth.Location = new System.Drawing.Point(160, 188);
             this.lblMaxWidth.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxWidth.Name = "lblMaxWidth";
             this.lblMaxWidth.Size = new System.Drawing.Size(100, 36);
@@ -294,7 +288,7 @@
             this.lblMaxHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxHeight.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMaxHeight.ForeColor = System.Drawing.Color.White;
-            this.lblMaxHeight.Location = new System.Drawing.Point(137, 231);
+            this.lblMaxHeight.Location = new System.Drawing.Point(160, 231);
             this.lblMaxHeight.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxHeight.Name = "lblMaxHeight";
             this.lblMaxHeight.Size = new System.Drawing.Size(100, 36);
@@ -309,9 +303,9 @@
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(21, 276);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(98, 28);
+            this.label22.Size = new System.Drawing.Size(113, 28);
             this.label22.TabIndex = 123;
-            this.label22.Text = "Strength";
+            this.label22.Text = "Strength(%)";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStrength
@@ -320,7 +314,7 @@
             this.lblStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrength.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblStrength.ForeColor = System.Drawing.Color.White;
-            this.lblStrength.Location = new System.Drawing.Point(137, 272);
+            this.lblStrength.Location = new System.Drawing.Point(160, 272);
             this.lblStrength.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrength.Name = "lblStrength";
             this.lblStrength.Size = new System.Drawing.Size(100, 36);
@@ -335,9 +329,9 @@
             this.label26.ForeColor = System.Drawing.Color.White;
             this.label26.Location = new System.Drawing.Point(21, 62);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(98, 28);
+            this.label26.Size = new System.Drawing.Size(113, 28);
             this.label26.TabIndex = 125;
-            this.label26.Text = "Grouping";
+            this.label26.Text = "Grouping(px)";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblGrouping
@@ -346,7 +340,7 @@
             this.lblGrouping.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGrouping.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblGrouping.ForeColor = System.Drawing.Color.White;
-            this.lblGrouping.Location = new System.Drawing.Point(137, 62);
+            this.lblGrouping.Location = new System.Drawing.Point(160, 62);
             this.lblGrouping.Margin = new System.Windows.Forms.Padding(0);
             this.lblGrouping.Name = "lblGrouping";
             this.lblGrouping.Size = new System.Drawing.Size(100, 36);
@@ -359,18 +353,18 @@
             // 
             this.label30.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(259, 157);
+            this.label30.Location = new System.Drawing.Point(287, 157);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(78, 28);
+            this.label30.Size = new System.Drawing.Size(113, 28);
             this.label30.TabIndex = 127;
-            this.label30.Text = "LengthY";
+            this.label30.Text = "LengthY(um)";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblLeadStdDevText
             // 
             this.lblLeadStdDevText.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.lblLeadStdDevText.ForeColor = System.Drawing.Color.White;
-            this.lblLeadStdDevText.Location = new System.Drawing.Point(259, 196);
+            this.lblLeadStdDevText.Location = new System.Drawing.Point(287, 196);
             this.lblLeadStdDevText.Name = "lblLeadStdDevText";
             this.lblLeadStdDevText.Size = new System.Drawing.Size(78, 28);
             this.lblLeadStdDevText.TabIndex = 128;
@@ -383,7 +377,7 @@
             this.lblLeadLengthY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadLengthY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblLeadLengthY.ForeColor = System.Drawing.Color.White;
-            this.lblLeadLengthY.Location = new System.Drawing.Point(375, 153);
+            this.lblLeadLengthY.Location = new System.Drawing.Point(403, 153);
             this.lblLeadLengthY.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadLengthY.Name = "lblLeadLengthY";
             this.lblLeadLengthY.Size = new System.Drawing.Size(100, 36);
@@ -398,7 +392,7 @@
             this.lblLeadStdDev.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLeadStdDev.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblLeadStdDev.ForeColor = System.Drawing.Color.White;
-            this.lblLeadStdDev.Location = new System.Drawing.Point(375, 196);
+            this.lblLeadStdDev.Location = new System.Drawing.Point(403, 196);
             this.lblLeadStdDev.Margin = new System.Windows.Forms.Padding(0);
             this.lblLeadStdDev.Name = "lblLeadStdDev";
             this.lblLeadStdDev.Size = new System.Drawing.Size(100, 36);
@@ -410,11 +404,9 @@
             // ckbContainArea
             // 
             this.ckbContainArea.AutoSize = true;
-            this.ckbContainArea.Checked = true;
-            this.ckbContainArea.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainArea.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainArea.ForeColor = System.Drawing.Color.White;
-            this.ckbContainArea.Location = new System.Drawing.Point(494, 154);
+            this.ckbContainArea.Location = new System.Drawing.Point(522, 154);
             this.ckbContainArea.Name = "ckbContainArea";
             this.ckbContainArea.Size = new System.Drawing.Size(161, 23);
             this.ckbContainArea.TabIndex = 131;
@@ -425,11 +417,9 @@
             // ckbContainStrength
             // 
             this.ckbContainStrength.AutoSize = true;
-            this.ckbContainStrength.Checked = true;
-            this.ckbContainStrength.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbContainStrength.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainStrength.ForeColor = System.Drawing.Color.White;
-            this.ckbContainStrength.Location = new System.Drawing.Point(494, 183);
+            this.ckbContainStrength.Location = new System.Drawing.Point(522, 183);
             this.ckbContainStrength.Name = "ckbContainStrength";
             this.ckbContainStrength.Size = new System.Drawing.Size(187, 23);
             this.ckbContainStrength.TabIndex = 132;
@@ -443,7 +433,7 @@
             this.lblStrengthScaleText.ForeColor = System.Drawing.Color.White;
             this.lblStrengthScaleText.Location = new System.Drawing.Point(21, 316);
             this.lblStrengthScaleText.Name = "lblStrengthScaleText";
-            this.lblStrengthScaleText.Size = new System.Drawing.Size(113, 28);
+            this.lblStrengthScaleText.Size = new System.Drawing.Size(120, 28);
             this.lblStrengthScaleText.TabIndex = 133;
             this.lblStrengthScaleText.Text = "Strength Scale";
             this.lblStrengthScaleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -454,7 +444,7 @@
             this.lblStrengthScaleFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStrengthScaleFactor.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblStrengthScaleFactor.ForeColor = System.Drawing.Color.White;
-            this.lblStrengthScaleFactor.Location = new System.Drawing.Point(137, 312);
+            this.lblStrengthScaleFactor.Location = new System.Drawing.Point(160, 312);
             this.lblStrengthScaleFactor.Margin = new System.Windows.Forms.Padding(0);
             this.lblStrengthScaleFactor.Name = "lblStrengthScaleFactor";
             this.lblStrengthScaleFactor.Size = new System.Drawing.Size(100, 36);
@@ -499,7 +489,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Name = "AkkonResultParamControl";
-            this.Size = new System.Drawing.Size(723, 373);
+            this.Size = new System.Drawing.Size(781, 373);
             this.Load += new System.EventHandler(this.AkkonResultParamControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

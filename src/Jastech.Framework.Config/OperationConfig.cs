@@ -65,12 +65,6 @@ namespace Jastech.Framework.Config
         [JsonProperty]
         public ImageExtension ExtensionNGImage { get; set; } = ImageExtension.Bmp;
 
-        [JsonProperty]
-        public int AlignResultCount { get; set; } = 100;
-
-        [JsonProperty]
-        public int AkkonResultCount { get; set; } = 100;
-
         #endregion
     }
 }
