@@ -125,6 +125,10 @@
     <Compile Include="Motions\Motion.cs" />
     <Compile Include="Motions\MotionHandler.cs" />
     <Compile Include="Motions\VirtualMotion.cs" />
+    <Compile Include="Plcs\Melsec\MelsecPlc.cs" />
+    <Compile Include="Plcs\Melsec\Parsers\IMelsecParser.cs" />
+    <Compile Include="Plcs\Plc.cs" />
+    <Compile Include="Plcs\PlcDataStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,7 +157,6 @@
   <ItemGroup>
     <Folder Include="Cameras\Viewworks\" />
     <Folder Include="Motions\ACS\" />
-    <Folder Include="Plcs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

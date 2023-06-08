@@ -22,20 +22,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogPatternMatchingParamControl : UserControl
     {
-
         #region 필드
         private VisionProPatternMatchingParam CurrentParam;
         #endregion
 
-        #region 속성
-        #endregion
 
         #region 이벤트
         public GetOriginImageDelegate GetOriginImageHandler;
+
+        public TestActionDelegate TestActionEvent;
         #endregion
 
         #region 델리게이트
         public delegate ICogImage GetOriginImageDelegate();
+
+        public delegate void TestActionDelegate();
         #endregion
 
         #region 생성자
@@ -201,6 +202,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void DisposeImage()
         {
             CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
+        }
+
+
+        private void lblTest_Click(object sender, EventArgs e)
+        {
+            TestActionEvent?.Invoke();
         }
         #endregion
     }

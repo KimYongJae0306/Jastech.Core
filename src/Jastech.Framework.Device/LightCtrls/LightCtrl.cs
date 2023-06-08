@@ -29,7 +29,6 @@ namespace Jastech.Framework.Device.LightCtrls
         public IProtocol Protocol { get; set; } = null;
         #endregion
 
-
         #region 생성자
         public LightCtrl(string name, int totalChannelCount, IComm comm)
         {
