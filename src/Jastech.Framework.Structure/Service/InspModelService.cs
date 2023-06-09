@@ -38,6 +38,8 @@ namespace Jastech.Framework.Structure.Service
         public abstract InspModel Load(string filePath);
 
         public abstract void Save(string filePath, InspModel model);
+
+        public abstract void SaveExceptVpp(string filePath, InspModel model);
         #endregion
     }
 }
