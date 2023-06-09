@@ -24,30 +24,6 @@ namespace Jastech.Framework.Config
         public string SystemVersion { get; set; } = "1.0.0";
 
         [JsonProperty]
-        public float DistanceFromPreAlignToLineScanX { get; set; } = 1.0F;  //um
-
-        [JsonProperty]
-        public float DistanceFromPreAlignToLineScanY { get; set; } = 1.0F;  //um
-
-        [JsonProperty]
-        public float PreAlignToleranceX { get; set; } = 0.0F;  //um
-
-        [JsonProperty]
-        public float PreAlignToleranceY { get; set; } = 0.0F;  //um
-
-        [JsonProperty]
-        public float PreAlignToleranceTheta { get; set; } = 0.0F;  //degree
-
-        [JsonProperty]
-        public bool EnablePreAlign { get; set; } = true;
-
-        [JsonProperty]
-        public bool EnableAlign { get; set; } = true;
-
-        [JsonProperty]
-        public bool EnableAkkon { get; set; } = true;
-
-        [JsonProperty]
         public int DataStoringDuration { get; set; } = 30; //days
 
         [JsonProperty]

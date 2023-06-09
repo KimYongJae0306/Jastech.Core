@@ -9,14 +9,28 @@ namespace Jastech.Framework.Util.Helper
 {
     public static class StringHelper
     { 
-        /// <summary>
-        /// 문자열을 바이트 배열로 변환
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
         public static byte[] StringToByte(string str)
         {
             return Encoding.UTF8.GetBytes(str);
+        }
+
+        public static string ByteToString(byte[] strByte)
+        {
+            return Encoding.Default.GetString(strByte);
+        }
+
+        public static byte[] HexStringToByteArray(string hexString)
+        {
+            hexString = hexString.Replace(" ", string.Empty);
+
+            byte[] txtInByte = new byte[hexString.Length / 2];
+            int j = 0;
+            for (int i = 0; i < hexString.Length; i += 2)
+            {
+                txtInByte[j++] = Convert.ToByte(hexString.Substring(i, 2), 16);
+            }
+
+            return txtInByte;
         }
 
         public static Point GetTextPoint(TextPointDirection direction, Point p1, Point p2, Point p3, Point p4)

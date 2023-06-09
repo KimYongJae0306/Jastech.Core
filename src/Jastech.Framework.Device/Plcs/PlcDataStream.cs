@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Plcs
 {
+    public enum MessageType
+    {
+        Read,
+        Write,
+    }
+
     public class PlcDataStream
     {
         #region 필드

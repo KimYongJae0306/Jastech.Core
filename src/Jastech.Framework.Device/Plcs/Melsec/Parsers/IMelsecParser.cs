@@ -15,7 +15,7 @@ namespace Jastech.Framework.Device.Plcs.Melsec.Parsers
     public interface IMelsecParser
     {
         #region 속성
-        //MessageType MessageType { get; set; }
+        MessageType MessageType { get; set; }
 
         ParserType ParserType { get; set; }
 

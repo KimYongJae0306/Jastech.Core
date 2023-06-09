@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -91,6 +92,21 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 메서드
+
+        public static string GetDcfFile(CameraType cameraType)
+        {
+            string curDir = Environment.CurrentDirectory;
+            string dcfFilePath = "";
+            if (cameraType == CameraType.VT_6k35c_trigger)
+                dcfFilePath = System.IO.Path.Combine(curDir, "VT_6k3.5c_Trigger.dcf");
+
+
+            if (File.Exists(dcfFilePath) == false)
+                dcfFilePath = "";
+
+            return dcfFilePath;
+        }
+
         public override bool Initialize()
         {
             base.Initialize();

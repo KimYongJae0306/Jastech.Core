@@ -86,10 +86,12 @@
     <Compile Include="Protocol\PacketBuffer.cs" />
     <Compile Include="Protocol\Packet.cs" />
     <Compile Include="Protocol\StxEtxProtocol.cs" />
+    <Compile Include="Protocol\StxLtxProtocol.cs" />
     <Compile Include="Protocol\ViewworksVTSerialProtocol.cs" />
     <Compile Include="ReceivedPacket.cs" />
     <Compile Include="SerialPortComm.cs" />
     <Compile Include="SerialPortInfo.cs" />
+    <Compile Include="SocketComm.cs" />
     <Compile Include="TcpIpInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +103,10 @@
     <ProjectReference Include="..\Jastech.Framework.Util\Jastech.Framework.Util.csproj">
       <Project>{07EF86CC-AC6A-454E-B12B-EB63454A1DCA}</Project>
       <Name>Jastech.Framework.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jastech.Framework\Jastech.Framework.csproj">
+      <Project>{28e92a79-c5ab-4b93-9aba-a9f40de4dbce}</Project>
+      <Name>Jastech.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

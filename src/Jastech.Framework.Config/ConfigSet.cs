@@ -10,6 +10,10 @@ namespace Jastech.Framework.Config
 {
     public class ConfigSet
     {
+        #region 필드
+        private static ConfigSet _instance = null;
+        #endregion
+
         #region 속성
         public PathConfig Path { get; private set; } = new PathConfig();
 
@@ -27,7 +31,17 @@ namespace Jastech.Framework.Config
         #endregion
 
         #region 메서드
-        public virtual void Initialize()
+        public static ConfigSet Instance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ConfigSet();
+            }
+
+            return _instance;
+        }
+
+        public void Initialize()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";
@@ -37,7 +51,7 @@ namespace Jastech.Framework.Config
             Machine.Load(configPath, MachineConfigCreated);
         }
 
-        public virtual void Save()
+        public void Save()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";
@@ -47,7 +61,7 @@ namespace Jastech.Framework.Config
             Machine.Save(configPath);
         }
             
-        public virtual void Load()
+        public void Load()
         {
             string curDir = Environment.CurrentDirectory;
             string configPath = $"{curDir}\\..\\Config";

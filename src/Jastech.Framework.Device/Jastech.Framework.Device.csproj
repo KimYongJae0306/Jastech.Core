@@ -127,6 +127,8 @@
     <Compile Include="Motions\VirtualMotion.cs" />
     <Compile Include="Plcs\Melsec\MelsecPlc.cs" />
     <Compile Include="Plcs\Melsec\Parsers\IMelsecParser.cs" />
+    <Compile Include="Plcs\Melsec\Parsers\MelsecAsciiParser.cs" />
+    <Compile Include="Plcs\Melsec\Parsers\MelsecBinaryParser.cs" />
     <Compile Include="Plcs\Plc.cs" />
     <Compile Include="Plcs\PlcDataStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

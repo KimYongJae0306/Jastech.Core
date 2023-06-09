@@ -186,6 +186,7 @@ namespace Jastech.Framework.Util.Helper
     {
         System,
         Device,
+        Comm,
         Inspection,
         Imaging,
         Seq,
