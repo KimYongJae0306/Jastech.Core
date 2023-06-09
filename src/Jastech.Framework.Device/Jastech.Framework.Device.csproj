@@ -131,6 +131,7 @@
     <Compile Include="Plcs\Melsec\Parsers\MelsecBinaryParser.cs" />
     <Compile Include="Plcs\Plc.cs" />
     <Compile Include="Plcs\PlcDataStream.cs" />
+    <Compile Include="Plcs\PlcHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

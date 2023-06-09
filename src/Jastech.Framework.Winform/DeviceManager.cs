@@ -3,6 +3,7 @@ using Jastech.Framework.Device.Cameras;
 using Jastech.Framework.Device.LAFCtrl;
 using Jastech.Framework.Device.LightCtrls;
 using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Device.Plcs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Jastech.Framework.Winform
 
         public LAFCtrlHandler LAFCtrlHandler { get; private set; }
 
+        public PlcHandler PlcHandler { get; private set; }
+
         private ConfigSet ConfigSet { get; set; }
         #endregion
 
@@ -44,6 +47,7 @@ namespace Jastech.Framework.Winform
             MotionHandler = new MotionHandler();
             LightCtrlHandler = new LightCtrlHandler();
             LAFCtrlHandler = new LAFCtrlHandler();
+            PlcHandler = new PlcHandler();
         }
         #endregion
 
@@ -67,6 +71,7 @@ namespace Jastech.Framework.Winform
             var motions = devices.Where((d) => d is Motion).Cast<Motion>();
             var lafs = devices.Where((d) => d is LAFCtrl).Cast<LAFCtrl>();
             var lightCtrls = devices.Where((d) => d is LightCtrl).Cast<LightCtrl>();
+            var plcs = devices.Where((d) => d is Plc).Cast<Plc>();
 
             foreach (var camera in cameras)
             {
@@ -84,6 +89,10 @@ namespace Jastech.Framework.Winform
             {
                 LightCtrlHandler.Add(lightCtrl);
             }
+            foreach (var plc in plcs)
+            {
+                PlcHandler.Add(plc);
+            }
 
             bool cameraSuccess = CameraHandler.Initialize();
             Initialized?.Invoke(typeof(Camera), cameraSuccess);
@@ -96,14 +105,19 @@ namespace Jastech.Framework.Winform
 
             bool lightCtrlSuccess = LightCtrlHandler.Initialize();
             Initialized?.Invoke(typeof(LightCtrl), lightCtrlSuccess);
+
+            bool plcSuccess = PlcHandler.Initialize();
+            Initialized?.Invoke(typeof(Plc), plcSuccess);
         }
 
         public void Release()
         {
             ReleaseCamera();
+
             MotionHandler.Release();
             LAFCtrlHandler.Release();
             LightCtrlHandler.Release();
+            PlcHandler.Release();
         }
 
         private void ReleaseCamera()
