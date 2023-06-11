@@ -49,6 +49,7 @@ namespace Jastech.Framework.Matrox
                 pair.Value.Invoke(pair.Key);
             }
             DisposingActionMap.Clear();
+
             if (ApplicationId != MIL.M_NULL)
             {
                 //Logger.Debug(LoggerType.Imaging, "Free MIL Applications");

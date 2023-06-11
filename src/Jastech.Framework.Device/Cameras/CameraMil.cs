@@ -186,7 +186,6 @@ namespace Jastech.Framework.Device.Cameras
             MIL.MdigFree(DigitizerId);
             DigitizerId = MIL.M_NULL;
             //MIL.MbufFree(MilSystem.SystemId);
-
             return true;
         }
 

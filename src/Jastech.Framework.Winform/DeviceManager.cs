@@ -157,7 +157,7 @@ namespace Jastech.Framework.Winform
                     milCamera.Release();
                 }
             }
-
+            
             CameraHandler.Release();
 
         }
