@@ -18,7 +18,7 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = (double)prevData;
             keyPadForm.ShowDialog();
 
-            int inputData = Convert.ToInt16(keyPadForm.PadValue);
+            int inputData = Convert.ToInt32(keyPadForm.PadValue);
 
             label.Text = inputData.ToString();
 

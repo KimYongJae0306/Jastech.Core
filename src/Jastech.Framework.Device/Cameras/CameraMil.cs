@@ -175,14 +175,18 @@ namespace Jastech.Framework.Device.Cameras
                 return true;
 
             base.Release();
-            MIL.MdigFree(DigitizerId);
-            DigitizerId = MIL.M_NULL;
 
             for (int i = 0; i < _grabImageBuffer.Length; i++)
             {
                 MIL.MbufFree(_grabImageBuffer[i]);
                 _grabImageBuffer[i] = MIL.M_NULL;
             }
+            MIL.MbufFree(LastGrabImage);
+
+            MIL.MdigFree(DigitizerId);
+            DigitizerId = MIL.M_NULL;
+            //MIL.MbufFree(MilSystem.SystemId);
+
             return true;
         }
 
