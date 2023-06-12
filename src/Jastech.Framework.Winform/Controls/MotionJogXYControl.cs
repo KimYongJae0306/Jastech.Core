@@ -14,7 +14,7 @@ using Jastech.Framework.Device.LAFCtrl;
 
 namespace Jastech.Framework.Winform.Controls
 {
-    public partial class MotionJogControl : UserControl
+    public partial class MotionJogXYControl : UserControl
     {
         #region 필드
         #endregion
@@ -36,7 +36,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 생성자
-        public MotionJogControl()
+        public MotionJogXYControl()
         {
             InitializeComponent();
         }
@@ -104,6 +104,15 @@ namespace Jastech.Framework.Winform.Controls
             AxisHanlder.GetAxis(AxisName.Y).StopMove();
         }
 
+        private void btnJogStop_Click(object sender, EventArgs e)
+        {
+            Axis axisX = AxisHanlder.GetAxis(AxisName.X);
+            axisX.StopMove();
+
+            Axis axisY = AxisHanlder.GetAxis(AxisName.Y);
+            axisY.StopMove();
+        }
+
         private void MoveJog(Axis axis, Direction direction)
         {
             if (AxisHanlder == null)
@@ -149,14 +158,5 @@ namespace Jastech.Framework.Winform.Controls
             else { }
         }
         #endregion
-
-        private void btnJogStop_Click(object sender, EventArgs e)
-        {
-            Axis axisX = AxisHanlder.GetAxis(AxisName.X);
-            axisX.StopMove();
-
-            Axis axisY = AxisHanlder.GetAxis(AxisName.Z);
-            axisY.StopMove();
-        }
     }
 }

@@ -91,11 +91,17 @@
     <Compile Include="Controls\DrawBoxControl.Designer.cs">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MotionJogControl.cs">
+    <Compile Include="Controls\MotionJogXControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MotionJogControl.designer.cs">
-      <DependentUpon>MotionJogControl.cs</DependentUpon>
+    <Compile Include="Controls\MotionJogXControl.Designer.cs">
+      <DependentUpon>MotionJogXControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MotionJogXYControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MotionJogXYControl.designer.cs">
+      <DependentUpon>MotionJogXYControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MotionParameterCommonControl.cs">
       <SubType>UserControl</SubType>
@@ -186,8 +192,11 @@
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MotionJogControl.resx">
-      <DependentUpon>MotionJogControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\MotionJogXControl.resx">
+      <DependentUpon>MotionJogXControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MotionJogXYControl.resx">
+      <DependentUpon>MotionJogXYControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionParameterCommonControl.resx">
       <DependentUpon>MotionParameterCommonControl.cs</DependentUpon>

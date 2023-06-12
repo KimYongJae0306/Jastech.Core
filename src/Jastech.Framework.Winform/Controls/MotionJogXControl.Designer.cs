@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.Controls
 {
-    partial class MotionJogControl
+    partial class MotionJogXControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.tlpJogOperation = new System.Windows.Forms.TableLayoutPanel();
-            this.btnJogDownY = new System.Windows.Forms.Button();
             this.btnJogLeftX = new System.Windows.Forms.Button();
             this.btnJogRightX = new System.Windows.Forms.Button();
             this.btnJogStop = new System.Windows.Forms.Button();
-            this.btnJogUpY = new System.Windows.Forms.Button();
             this.tlpJogOperation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,11 +42,9 @@
             this.tlpJogOperation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tlpJogOperation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpJogOperation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpJogOperation.Controls.Add(this.btnJogDownY, 1, 2);
             this.tlpJogOperation.Controls.Add(this.btnJogLeftX, 0, 1);
             this.tlpJogOperation.Controls.Add(this.btnJogRightX, 2, 1);
             this.tlpJogOperation.Controls.Add(this.btnJogStop, 1, 1);
-            this.tlpJogOperation.Controls.Add(this.btnJogUpY, 1, 0);
             this.tlpJogOperation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpJogOperation.Location = new System.Drawing.Point(0, 0);
             this.tlpJogOperation.Margin = new System.Windows.Forms.Padding(0);
@@ -58,23 +54,7 @@
             this.tlpJogOperation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpJogOperation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpJogOperation.Size = new System.Drawing.Size(300, 300);
-            this.tlpJogOperation.TabIndex = 19;
-            // 
-            // btnJogDownY
-            // 
-            this.btnJogDownY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnJogDownY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnJogDownY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogDownY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Down_White;
-            this.btnJogDownY.Location = new System.Drawing.Point(99, 198);
-            this.btnJogDownY.Margin = new System.Windows.Forms.Padding(0);
-            this.btnJogDownY.Name = "btnJogDownY";
-            this.btnJogDownY.Size = new System.Drawing.Size(100, 102);
-            this.btnJogDownY.TabIndex = 6;
-            this.btnJogDownY.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnJogDownY.UseVisualStyleBackColor = false;
-            this.btnJogDownY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogDownY_MouseDown);
-            this.btnJogDownY.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogDownY_MouseUp);
+            this.tlpJogOperation.TabIndex = 20;
             // 
             // btnJogLeftX
             // 
@@ -123,30 +103,14 @@
             this.btnJogStop.UseVisualStyleBackColor = false;
             this.btnJogStop.Click += new System.EventHandler(this.btnJogStop_Click);
             // 
-            // btnJogUpY
-            // 
-            this.btnJogUpY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnJogUpY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnJogUpY.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.btnJogUpY.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Up_White;
-            this.btnJogUpY.Location = new System.Drawing.Point(99, 0);
-            this.btnJogUpY.Margin = new System.Windows.Forms.Padding(0);
-            this.btnJogUpY.Name = "btnJogUpY";
-            this.btnJogUpY.Size = new System.Drawing.Size(100, 99);
-            this.btnJogUpY.TabIndex = 5;
-            this.btnJogUpY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.btnJogUpY.UseVisualStyleBackColor = false;
-            this.btnJogUpY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogUpY_MouseDown);
-            this.btnJogUpY.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogUpY_MouseUp);
-            // 
-            // MotionJogControl
+            // MotionJogXControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.Controls.Add(this.tlpJogOperation);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            this.Name = "MotionJogControl";
+            this.Name = "MotionJogXControl";
             this.Size = new System.Drawing.Size(300, 300);
             this.tlpJogOperation.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -154,11 +118,10 @@
         }
 
         #endregion
+
         private System.Windows.Forms.TableLayoutPanel tlpJogOperation;
-        private System.Windows.Forms.Button btnJogDownY;
         private System.Windows.Forms.Button btnJogLeftX;
         private System.Windows.Forms.Button btnJogRightX;
         private System.Windows.Forms.Button btnJogStop;
-        private System.Windows.Forms.Button btnJogUpY;
     }
 }
