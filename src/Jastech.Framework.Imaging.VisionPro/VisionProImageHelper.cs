@@ -30,6 +30,7 @@ namespace Jastech.Framework.Imaging.VisionPro
                 color = null;
             }
         }
+
         public static ICogImage Load(string fileName)
         {
             CogImageFile cogImageFile = new CogImageFile();
@@ -440,7 +441,6 @@ namespace Jastech.Framework.Imaging.VisionPro
 
             return divideRegionList;
         }
-
 
         public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect)
         {
