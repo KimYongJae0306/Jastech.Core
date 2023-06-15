@@ -157,6 +157,7 @@ namespace Jastech.Framework.Device.Cameras
         {
             _isGrabbing = true;
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
+            _camera.MV_CC_StartGrabbing_NET();
         }
 
         public override void Stop()
@@ -231,7 +232,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public override double GetDigitalGain()
         {
-            throw new NotImplementedException();
+            return 0;
         }
         #endregion
 
@@ -265,6 +266,7 @@ namespace Jastech.Framework.Device.Cameras
             }
 
             // Trigger Source
+            TriggerSource = 7;
             result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)TriggerSource);
 
             if (result != MyCamera.MV_OK)

@@ -277,7 +277,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             return roiList;
         }
 
-        public static ICogImage CovertImage(byte[] data, int width, int height, ColorFormat colorFormat)
+        public static ICogImage ConvertImage(byte[] data, int width, int height, ColorFormat colorFormat)
         {
             if (colorFormat == ColorFormat.Gray)
             {
