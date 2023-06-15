@@ -34,6 +34,30 @@ namespace Jastech.Framework.Device.Plcs
         #endregion
 
         #region 메서드
+        public void AddData(byte[] byteData)
+        {
+            string hexStr = "";
+            foreach (byte bt in byteData)
+            {
+                hexStr += ((int)bt).ToString("X2");
+            }
+            _dataList.Append(hexStr);
+        }
+
+        public void AddSwapData(byte[] byteData)
+        {
+            string hexStr = "";
+            for (int i = 1; i >= 0; i--)
+            {
+                hexStr += ((int)byteData[i]).ToString("X2");
+            }
+            _dataList.Append(hexStr);
+        }
+
+        public void ClearData()
+        {
+            _dataList.Clear();
+        }
         #endregion
     }
 }
