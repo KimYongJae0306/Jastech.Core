@@ -151,7 +151,7 @@ namespace Jastech.Framework.Winform.Controls
                     targetPosition = currentPosition + JogPitch;
                 else { }
 
-                axis.MoveTo(targetPosition);
+                axis.StartAbsoluteMove(targetPosition);
             }
             else if (JogMode == JogMode.Increase)
                 axis.JogMove(direction);

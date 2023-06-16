@@ -41,9 +41,16 @@ namespace Jastech.Framework.Device.Motions
             Motion = motion;    
         }
 
-        public bool StartMove(float position, AxisMovingParam movingParam = null)
+        public bool StartAbsoluteMove(float position, AxisMovingParam movingParam = null)
         {
-            Motion.MoveTo(AxisNo, position, movingParam.Velocity, movingParam.Acceleration);
+            Motion.StartAbsoluteMove(AxisNo, position, movingParam.Velocity, movingParam.Acceleration);
+
+            return true;
+        }
+
+        public bool StartRelativeMove(float amount, AxisMovingParam movingParam = null)
+        {
+            Motion.StartRelativeMove(AxisNo, amount, movingParam.Velocity, movingParam.Acceleration);
 
             return true;
         }
@@ -78,12 +85,20 @@ namespace Jastech.Framework.Device.Motions
             return Motion.GetActualPosition(AxisNo);
         }
 
-        public void MoveTo(double targetPosition, AxisMovingParam movingParam = null)
+        public void StartAbsoluteMove(double targetPosition, AxisMovingParam movingParam = null)
         {
             if(movingParam == null)
-                Motion.MoveTo(AxisNo, targetPosition, 10, 10);
+                Motion.StartAbsoluteMove(AxisNo, targetPosition, 10, 10);
             else
-                Motion.MoveTo(AxisNo, targetPosition, movingParam.Velocity, movingParam.Acceleration);
+                Motion.StartAbsoluteMove(AxisNo, targetPosition, movingParam.Velocity, movingParam.Acceleration);
+        }
+
+        public void StartRelativeMove(double amount, AxisMovingParam movingParam = null)
+        {
+            if (movingParam == null)
+                Motion.StartRelativeMove(AxisNo, amount, 10, 10);
+            else
+                Motion.StartRelativeMove(AxisNo, amount, movingParam.Velocity, movingParam.Acceleration);
         }
 
         public void SetDefaultParameter(double velocity = 10, double accdec = 10)

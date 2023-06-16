@@ -138,12 +138,20 @@ namespace Jastech.Framework.Device.Motions
             return Api.GetFPosition((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
-        public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
+        public override void StartAbsoluteMove(int axisNo, double targetPosition, double velocity, double accdec)
         {
             SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
             
-            if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo, targetPosition))
+            if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo))
                 Api.ToPointAsync(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, targetPosition);
+        }
+
+        public override void StartRelativeMove(int axisNo, double amount, double velocity, double accdec)
+        {
+            SetBasicParameter((ACS.SPiiPlusNET.Axis)axisNo, velocity, accdec);
+
+            if (ReadyToMove((ACS.SPiiPlusNET.Axis)axisNo))
+                Api.ToPoint(MotionFlags.ACSC_AMF_RELATIVE, (ACS.SPiiPlusNET.Axis)axisNo, amount);
         }
 
         public override void SetDefaultParameter(int axisNo, double velocity = 10, double accdec = 10)
@@ -269,7 +277,7 @@ namespace Jastech.Framework.Device.Motions
             Thread.Sleep(300);
         }
 
-        private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis, double targetPosition)
+        private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis)
         {
             // Release axis event
             Api.FaultClear(axis);

@@ -57,7 +57,12 @@ namespace Jastech.Framework.Device.Motions
 
         }
 
-        public override void MoveTo(int axisNo, double targetPosition, double velocity, double accdec)
+        public override void StartAbsoluteMove(int axisNo, double targetPosition, double velocity, double accdec)
+        {
+
+        }
+
+        public override void StartRelativeMove(int axisNo, double amount, double velocity, double accdec)
         {
 
         }
