@@ -21,7 +21,7 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraMil : Camera, ICameraTriggerable, ICameraTDIavailable
     {
         #region 필드
-        const int BufferPoolCount = 200;
+        public static int BufferPoolCount = 10;
 
         private static object _lock = new object();
 

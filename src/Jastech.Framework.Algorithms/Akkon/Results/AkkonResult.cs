@@ -17,31 +17,31 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public AkkonJudgement AkkonCountJudgement { get; set; }
 
-        public int AkkonCount_Left_Avg { get; set; }
+        public int LeftCount_Avg { get; set; }
 
-        public int AkkonCount_Left_Min { get; set; }
+        public int LeftCount_Min { get; set; }
 
-        public int AkkonCount_Left_Max { get; set; }
+        public int LeftCount_Max { get; set; }
 
-        public int AkkonCount_Right_Avg { get; set; }
+        public int RightCount_Avg { get; set; }
 
-        public int AkkonCount_Right_Min { get; set; }
+        public int RightCount_Min { get; set; }
 
-        public int AkkonCount_Right_Max { get; set; }
+        public int RightCount_Max { get; set; }
 
         public Judgement LengthJudgement { get; set; }
 
-        public float Length_Left_Avg { get; set; }
+        public float Length_Left_Avg { get; set; }       //um
 
-        public float Length_Left_Min { get; set; }
+        public float Length_Left_Min { get; set; }      //um
 
-        public float Length_Left_Max { get; set; }
+        public float Length_Left_Max { get; set; }      //um
 
-        public float Length_Right_Avg { get; set; }
+        public float Length_Right_Avg { get; set; }     //um
 
-        public float Length_Right_Min { get; set; }
+        public float Length_Right_Min { get; set; }     //um
 
-        public float Length_Right_Max { get; set; }
+        public float Length_Right_Max { get; set; }     //um
 
         public List<AkkonLeadResult> LeadResultList = new List<AkkonLeadResult>();
         #endregion
