@@ -37,7 +37,9 @@ namespace Jastech.Framework.Device.Motions
 
         public abstract double GetActualPosition(int axisNo);
 
-        public abstract void MoveTo(int axisNo, double targetPosition, double velocity, double accdec);
+        public abstract void StartAbsoluteMove(int axisNo, double targetPosition, double velocity, double accdec);
+
+        public abstract void StartRelativeMove(int axisNo, double amount,  double velocity, double accdec);
 
         public abstract void SetDefaultParameter(int axisNo, double velocity = 10, double accdec = 10);
 
