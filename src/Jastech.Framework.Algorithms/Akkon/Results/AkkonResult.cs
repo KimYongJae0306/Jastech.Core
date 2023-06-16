@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Imaging.Result;
+﻿using Jastech.Framework.Algorithms.Akkon.Parameters;
+using Jastech.Framework.Imaging.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,39 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
     public class AkkonResult
     {
         #region 속성
-        public int StageNo { get; set; }
+        public string UnitName { get; set; }
 
         public int TabNo { get; set; }
 
-        public int AvgBlobCount { get; set; }
+        public AkkonJudgement AkkonCountJudgement { get; set; }
 
-        public float AvgLength { get; set; }
+        public int AkkonCount_Left_Avg { get; set; }
 
-        public float AvgStrength { get; set; }
+        public int AkkonCount_Left_Min { get; set; }
 
-        public float AvgStd { get; set; }
+        public int AkkonCount_Left_Max { get; set; }
 
-        public Judgement Judgement { get; set; }
+        public int AkkonCount_Right_Avg { get; set; }
 
-        public List<LeadResult> LeadResultList = new List<LeadResult>();
+        public int AkkonCount_Right_Min { get; set; }
+
+        public int AkkonCount_Right_Max { get; set; }
+
+        public Judgement LengthJudgement { get; set; }
+
+        public float Length_Left_Avg { get; set; }
+
+        public float Length_Left_Min { get; set; }
+
+        public float Length_Left_Max { get; set; }
+
+        public float Length_Right_Avg { get; set; }
+
+        public float Length_Right_Min { get; set; }
+
+        public float Length_Right_Max { get; set; }
+
+        public List<AkkonLeadResult> LeadResultList = new List<AkkonLeadResult>();
         #endregion
 
         #region 메서드
@@ -32,22 +51,9 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
         {
             LeadResultList.Clear();
         }
-
-        public AkkonResult DeepCopy()
-        {
-            AkkonResult result = new AkkonResult();
-            result.StageNo = StageNo;
-            result.TabNo = TabNo;
-            result.AvgBlobCount = AvgBlobCount;
-            result.AvgLength = AvgLength;
-            result.Judgement = Judgement;
-            result.LeadResultList = LeadResultList.Select(x => x.DeepCopy()).ToList();
-
-            return result;
-        }
         #endregion
     }
-
+    
     public class LeadResult
     {
         public int Id { get; set; }
@@ -77,5 +83,13 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
             return result;
         }
+    }
+
+    public enum AkkonJudgement
+    {
+        OK = 1,
+        NG_Akkon = 2,
+        NG_AlignMiss = 3,
+        OK_Manual = 4,
     }
 }

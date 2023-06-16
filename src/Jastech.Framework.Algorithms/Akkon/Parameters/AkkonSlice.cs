@@ -1,4 +1,6 @@
 ﻿using Emgu.CV;
+using Jastech.Framework.Algorithms.Akkon.Results;
+using Jastech.Framework.Imaging.Result;
 using Jastech.Framework.Imaging.VisionAlgorithms;
 using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using System;
@@ -22,8 +24,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public List<AkkonROI> CalcAkkonROIs { get; set; } = new List<AkkonROI>();
 
-        public List<AkkonBlob> ResultList { get; set; } = new List<AkkonBlob>();
-
+        public List<AkkonLeadResult> LeadResultList { get; set; } = new List<AkkonLeadResult>();
+        
         // Debug 용 속성
         public Mat EnhanceMat { get; set; } = null;
 
@@ -35,37 +37,48 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         {
             Image?.Dispose();
             CalcAkkonROIs.Clear();
-            ResultList.Clear();
+            LeadResultList.Clear();
         }
     }
     
-    public class AkkonBlob
+    public class AkkonLeadResult
     {
-        public int LeadIndex { get; set; }
+        public int Index { get; set; }
 
         public AkkonROI Lead { get; set; }
+
+        public LeadContainPos ContainPos { get; set; }
 
         public double OffsetToWorldX { get; set; }
 
         public double OffsetToWorldY { get; set; }
 
-        public double LeadOffsetX { get; set; }
+        public double OffsetX { get; set; }
 
-        public double LeadOffsetY { get; set; }
+        public double OffsetY { get; set; }
 
-        public double LeadSlope { get; set; }
+        public double Slope { get; set; }
 
         public double StdDev { get; set; }
 
         public double Mean { get; set; }
 
-        public double LeadLengthX { get; set; }
+        public double LengthX { get; set; }
 
-        public double LeadLengthY { get; set; }
+        public double LengthY { get; set; }
 
-        public double DetectCount { get; set; }
+        public int DetectCount { get; set; }
+
+        public Judgement CountJudgement { get; set; }
+
+        public Judgement LengthJudgement { get; set; }
 
         public List<BlobPos> BlobList = new List<BlobPos>();
+    }
 
+    public enum LeadContainPos
+    {
+        Left,
+        Right,
     }
 }

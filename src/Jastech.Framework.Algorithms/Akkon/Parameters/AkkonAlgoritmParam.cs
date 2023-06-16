@@ -12,9 +12,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     {
         #region 속성
         [JsonProperty]
-        public AkkonAlgoritmType AkkonAlgoritmType { get; set; } = AkkonAlgoritmType.OpenCV;
-
-        [JsonProperty]
         public AkkonImagingParam ImageFilterParam { get; set; } = new AkkonImagingParam();
 
         [JsonProperty]
