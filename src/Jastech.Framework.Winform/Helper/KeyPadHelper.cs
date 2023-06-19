@@ -12,7 +12,9 @@ namespace Jastech.Framework.Winform.Helper
     {
         public static int SetLabelIntegerData(Label label)
         {
-            double prevData = Convert.ToDouble(label.Text);
+            double prevData = 0;
+            if (label.Text != "")
+                prevData = Convert.ToDouble(label.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = (double)prevData;
@@ -27,7 +29,9 @@ namespace Jastech.Framework.Winform.Helper
 
         public static double SetLabelDoubleData(Label label)
         {
-            double prevData = Convert.ToDouble(label.Text);
+            double prevData = 0;
+            if (label.Text != "")
+                prevData = Convert.ToDouble(label.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = prevData;

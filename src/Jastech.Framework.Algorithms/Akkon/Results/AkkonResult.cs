@@ -31,17 +31,17 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public Judgement LengthJudgement { get; set; }
 
-        public float Length_Left_Avg { get; set; }       //um
+        public float Length_Left_Avg_um { get; set; }       //um
 
-        public float Length_Left_Min { get; set; }      //um
+        public float Length_Left_Min_um { get; set; }      //um
 
-        public float Length_Left_Max { get; set; }      //um
+        public float Length_Left_Max_um { get; set; }      //um
 
-        public float Length_Right_Avg { get; set; }     //um
+        public float Length_Right_Avg_um { get; set; }     //um
 
-        public float Length_Right_Min { get; set; }     //um
+        public float Length_Right_Min_um { get; set; }     //um
 
-        public float Length_Right_Max { get; set; }     //um
+        public float Length_Right_Max_um { get; set; }     //um
 
         public List<AkkonLeadResult> LeadResultList = new List<AkkonLeadResult>();
         #endregion
