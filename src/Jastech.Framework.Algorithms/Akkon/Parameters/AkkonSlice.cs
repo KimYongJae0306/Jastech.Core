@@ -63,9 +63,9 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public double Mean { get; set; }
 
-        public double LengthX { get; set; }
+        public double LengthX_um { get; set; }
 
-        public double LengthY { get; set; }
+        public double LengthY_um { get; set; }
 
         public int DetectCount { get; set; }
 

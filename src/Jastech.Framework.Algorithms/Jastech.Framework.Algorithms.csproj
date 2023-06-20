@@ -207,7 +207,6 @@
   <ItemGroup>
     <Compile Include="Akkon\AkkonAlgorithm.cs" />
     <Compile Include="Akkon\BlobAlgorithm.cs" />
-    <Compile Include="Akkon\MultiAkkonAlgorithm.cs" />
     <Compile Include="Akkon\Parameters\AkkonAlgoritmParam.cs" />
     <Compile Include="Akkon\Parameters\AkkonGroup.cs" />
     <Compile Include="Akkon\Parameters\AkkonImageFilterParam.cs" />

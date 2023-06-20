@@ -102,7 +102,6 @@ namespace Jastech.Framework.Algorithms.Akkon
                     FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
 
                     leadResult.BlobList.AddRange(blobList);
-
                     ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, resolution_um);
                  
                     lock (_lock)
@@ -175,6 +174,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
                 var blobList = OpencvContour.Run(oneLeadMat);
                 FindShadowPoint(enhanceCropMat, oneLeadMat,ref blobList, boundRect);
+
                 leadResult.BlobList.AddRange(blobList);
                 ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, resolution_um);
 
@@ -340,20 +340,18 @@ namespace Jastech.Framework.Algorithms.Akkon
             leadResult.StdDev = stddevScalar.V0;
 
             if(lengthXList.Count > 0)
-                leadResult.LengthX = Math.Abs(lengthXList.Max() - lengthXList.Min());
+                leadResult.LengthX_um = Math.Abs(lengthXList.Max() - lengthXList.Min()) * resolution_um;
 
             Point p1 = new Point(minYInfo.ValueX, minYInfo.ValueY);
             Point p2 = new Point(maxYInfo.ValueX, maxYInfo.ValueY);
-            leadResult.LengthY = MathHelper.GetDistance(p1, p2);
+            leadResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
 
             if (leadResult.DetectCount < param.JudgementParam.AkkonCount)
                 leadResult.CountJudgement = Judgement.OK;
             else
                 leadResult.CountJudgement = Judgement.NG;
 
-
-            double lengthY_um = leadResult.LengthY * resolution_um;
-            if (lengthY_um > param.JudgementParam.LengthY_um)
+            if (leadResult.LengthY_um > param.JudgementParam.LengthY_um)
                 leadResult.LengthJudgement = Judgement.OK;
             else
                 leadResult.LengthJudgement = Judgement.NG;
