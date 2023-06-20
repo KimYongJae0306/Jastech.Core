@@ -3,7 +3,7 @@ using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
@@ -17,7 +17,7 @@ namespace Jastech.Framework.Comm
         #region 생성자
         public SocketComm(string ipAddress, int port, SocketCommType socketCommType)
         {
-            IPAddress = ipAddress;
+            IpAddress = ipAddress;
             Port = port;
             SocketCommType = socketCommType;
         }
@@ -25,7 +25,7 @@ namespace Jastech.Framework.Comm
 
         #region 속성
         [JsonProperty]
-        public string IPAddress { get; }
+        public string IpAddress { get; }
 
         [JsonProperty]
         public int Port { get; }
@@ -62,7 +62,7 @@ namespace Jastech.Framework.Comm
 
             Protocol = protocol;
             ReconnectionTask = Task.Run(() => ReconnectionLoop());
-
+            Connect();
             return true;
         }
 
@@ -81,13 +81,21 @@ namespace Jastech.Framework.Comm
 
         public bool Connect()
         {
-            ProtocolType type = SocketCommType == SocketCommType.Tcp ? ProtocolType.Tcp : ProtocolType.Udp;
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, type)
+            if(SocketCommType == SocketCommType.Tcp)
             {
-                NoDelay = true,
-                SendBufferSize = BufferLength,
-                ReceiveBufferSize = BufferLength,
-            };
+                Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                {
+                    NoDelay = true,
+                    SendBufferSize = BufferLength,
+                    ReceiveBufferSize = BufferLength,
+                };
+            }
+           else if(SocketCommType == SocketCommType.Udp)
+            {
+                Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), Port));
+            }
+
             bool isSuccessed = BeginConnect();
             return isSuccessed;
         }
@@ -96,7 +104,7 @@ namespace Jastech.Framework.Comm
         {
             try
             {
-                Socket.BeginConnect(IPAddress, Port, new AsyncCallback(Socket_Connected), Socket);
+                Socket.BeginConnect(IpAddress, Port, new AsyncCallback(Socket_Connected), Socket);
 
                 Thread.Sleep(700);
 
@@ -288,7 +296,7 @@ namespace Jastech.Framework.Comm
             Ping pingSender = new Ping();
             try
             {
-                PingReply reply = pingSender.Send(IPAddress);
+                PingReply reply = pingSender.Send(IpAddress);
                 if (reply.Status == IPStatus.Success)
                     return true;
                 else

@@ -59,6 +59,28 @@ namespace Jastech.Framework.Device.Plcs
             _dataList.Append(hexStr);
         }
 
+        public void Add16BitData(short value)
+        {
+            string hexStr = "";
+            byte[] valueByte = BitConverter.GetBytes(value);
+            for (int i = 1; i >= 0; i--)
+            {
+                hexStr += ((int)valueByte[i]).ToString("X2");
+            }
+            _dataList.Append(hexStr);
+        }
+
+        public void AddSwap16BitData(short value)
+        {
+            string hexStr = "";
+            byte[] valueByte = BitConverter.GetBytes(value);
+            for (int i = 0; i <= 1; i++)
+            {
+                hexStr += ((int)valueByte[i]).ToString("X2");
+            }
+            _dataList.Append(hexStr);
+        }
+
         // ok
         public void AddSwap32BitData(int value)
         {
@@ -68,8 +90,9 @@ namespace Jastech.Framework.Device.Plcs
             {
                 hexStr += ((int)valueByte[i]).ToString("X2");
             }
-
+            _dataList.Append(hexStr);
         }
+
 
         // ok
         public void Add32BitData(int value)
@@ -80,6 +103,7 @@ namespace Jastech.Framework.Device.Plcs
             {
                 hexStr += ((int)valueByte[i]).ToString("X2");
             }
+            _dataList.Append(hexStr);
         }
         #endregion
     }

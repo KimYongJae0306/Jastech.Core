@@ -25,10 +25,14 @@ namespace Jastech.Framework.Device.Plcs.Melsec
             : base(name)
         {
             Communication = communication;
+            MelsecParser = melsecParser;
         }
 
         public override bool Initialize()
         {
+            if (Communication == null)
+                return false;
+
             if(Communication.GetType() == typeof(SocketComm))
             {
                 if (MelsecParser.GetType() == typeof(MelsecBinaryParser))
@@ -46,7 +50,18 @@ namespace Jastech.Framework.Device.Plcs.Melsec
                     asciiProtocol.UseSwap = false;
                 }
             }
+
+            if (Communication == null || Protocol == null)
+                return false;
+            Communication.Initialize(Protocol);
+            Communication.Received += Data_Received;
             return base.Initialize();
+        }
+
+        private void Data_Received(byte[] packet)
+        {
+            MelsecParser.Parse(packet, out byte[] data);
+            OnPlcReceived(data);
         }
 
         public override void Write(string address, byte[] value)
