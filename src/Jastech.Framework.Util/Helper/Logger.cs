@@ -190,6 +190,7 @@ namespace Jastech.Framework.Util.Helper
         Inspection,
         Imaging,
         Seq,
+        Calibration,
         Error,
     }
 
