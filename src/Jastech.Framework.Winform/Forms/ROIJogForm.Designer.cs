@@ -1,6 +1,6 @@
-﻿namespace Jastech.Framework.Winform.Controls
+﻿namespace Jastech.Framework.Winform.Forms
 {
-    partial class ROIJogControl
+    partial class ROIJogForm
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ROIJogControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ROIJogForm));
             this.tlpTeachJog = new System.Windows.Forms.TableLayoutPanel();
             this.pnlMode = new System.Windows.Forms.Panel();
             this.pnlMoveMode = new System.Windows.Forms.Panel();
@@ -564,6 +564,7 @@
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ROIJogControl";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ROIJogControl_FormClosed);
             this.Load += new System.EventHandler(this.ROIJogControl_Load);
             this.tlpTeachJog.ResumeLayout(false);
             this.pnlMode.ResumeLayout(false);

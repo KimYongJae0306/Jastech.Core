@@ -12,9 +12,9 @@ using System.Security.Cryptography.X509Certificates;
 using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Helper;
 
-namespace Jastech.Framework.Winform.Controls
+namespace Jastech.Framework.Winform.Forms
 {
-    public partial class ROIJogControl : Form
+    public partial class ROIJogForm : Form
     {
         #region 필드
         private Color _selectedColor = new Color();
@@ -33,10 +33,12 @@ namespace Jastech.Framework.Winform.Controls
 
         #region 델리게이트
         public delegate void SendClickEventDelegate(string jogType, int JogScale, ROIType roiType = ROIType.ROI);
+
+        public Action CloseEventDelegate;
         #endregion
 
         #region 생성자
-        public ROIJogControl()
+        public ROIJogForm()
         {
             InitializeComponent();
         }
@@ -213,6 +215,12 @@ namespace Jastech.Framework.Winform.Controls
         private void lblZoomInVertical_Click(object sender, EventArgs e)
         {
             SendEventHandler("ZoomInVertical", JogScale, ROIType);
+        }
+
+        private void ROIJogControl_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (CloseEventDelegate != null)
+                CloseEventDelegate();
         }
         #endregion
     }
