@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
 using Jastech.Framework.Device.Motions;
 using Jastech.Framework.Structure;
+using Jastech.Framework.Winform.Helper;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -87,62 +88,30 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblVelocityValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Velocity = SetLabelDoubleData(sender);
+            MovingParam.Velocity = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblAccelerationTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Acceleration = SetLabelDoubleData(sender);
+            MovingParam.Acceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblDecelerationTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Deceleration = SetLabelDoubleData(sender);
+            MovingParam.Deceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblMovingTimeOutValue_Click(object sender, EventArgs e)
         {
-            MovingParam.MovingTimeOut = SetLabelDoubleData(sender);
+            MovingParam.MovingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.AfterWaitTime = SetLabelIntegerData(sender);
+            MovingParam.AfterWaitTime = KeyPadHelper.SetLabelIntegerData((Label)sender);
         }
 
-        private double SetLabelDoubleData(object sender)
-        {
-            Label lbl = sender as Label;
-            double prevData = Convert.ToDouble(lbl.Text);
 
-            KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = prevData;
-            keyPadForm.ShowDialog();
-
-            double inputData = keyPadForm.PadValue;
-
-            Label label = (Label)sender;
-            label.Text = inputData.ToString();
-
-            return inputData;
-        }
-
-        private int SetLabelIntegerData(object sender)
-        {
-            Label lbl = sender as Label;
-            int prevData = Convert.ToInt32(lbl.Text);
-
-            KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = (double)prevData;
-            keyPadForm.ShowDialog();
-
-            int inputData = Convert.ToInt16(keyPadForm.PadValue);
-
-            Label label = (Label)sender;
-            label.Text = inputData.ToString();
-
-            return inputData;
-        }
         #endregion
     }
 }

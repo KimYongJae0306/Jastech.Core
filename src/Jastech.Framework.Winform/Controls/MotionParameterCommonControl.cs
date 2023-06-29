@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
 using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Winform.Helper;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -87,49 +88,32 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblJogLowSpeedValue_Click(object sender, EventArgs e)
         {
-            CommonParam.JogLowSpeed = SetLabelDoubleData(sender);
+            CommonParam.JogLowSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
         {
-            CommonParam.JogHighSpeed = SetLabelDoubleData(sender);
+            CommonParam.JogHighSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblMoveToleranceValue_Click(object sender, EventArgs e)
         {
-            CommonParam.MoveTolerance = SetLabelDoubleData(sender);
+            CommonParam.MoveTolerance = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblNegativeLimitValue_Click(object sender, EventArgs e)
         {
-            CommonParam.NegativeLimit = SetLabelDoubleData(sender);
+            CommonParam.NegativeLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblPositiveLimitValue_Click(object sender, EventArgs e)
         {
-            CommonParam.PositiveLimit = SetLabelDoubleData(sender);
+            CommonParam.PositiveLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
 
         private void lblHomingTimeOutValue_Click(object sender, EventArgs e)
         {
-            CommonParam.HommingTimeOut = SetLabelDoubleData(sender);
-        }
-
-        private double SetLabelDoubleData(object sender)
-        {
-            Label lbl = sender as Label;
-            double prevData = Convert.ToDouble(lbl.Text);
-
-            KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = prevData;
-            keyPadForm.ShowDialog();
-
-            double inputData = keyPadForm.PadValue;
-
-            Label label = (Label)sender;
-            label.Text = inputData.ToString();
-
-            return inputData;
+            CommonParam.HommingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
         }
         #endregion
     }

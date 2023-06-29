@@ -11,6 +11,7 @@ using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Cognex.VisionPro;
 using Jastech.Framework.Winform.Forms;
+using Jastech.Framework.Winform.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {
@@ -74,32 +75,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
         {
-            int filterSize = SetLabelIntegerData(sender);
-            if(filterSize > 0)
+            int filterSize = KeyPadHelper.SetLabelIntegerData((Label)sender);
+            if (filterSize > 0)
                 CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
         }
 
         private void lblEdgeThresholdValue_Click(object sender, EventArgs e)
         {
-            int edgeThreshold = SetLabelIntegerData(sender);
+            int edgeThreshold = KeyPadHelper.SetLabelIntegerData((Label)sender);
             CurrentParam.CaliperTool.RunParams.ContrastThreshold = edgeThreshold;
-        }
-
-        private int SetLabelIntegerData(object sender)
-        {
-            Label lbl = sender as Label;
-            int prevData = Convert.ToInt32(lbl.Text);
-
-            KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = (double)prevData;
-            keyPadForm.ShowDialog();
-
-            int inputData = Convert.ToInt16(keyPadForm.PadValue);
-
-            Label label = (Label)sender;
-            label.Text = inputData.ToString();
-
-            return inputData;
         }
 
         public void UpdateData(VisionProCaliperParam caliperParam)

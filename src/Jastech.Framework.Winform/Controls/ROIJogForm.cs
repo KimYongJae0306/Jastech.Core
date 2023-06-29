@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Jastech.Framework.Winform.Forms;
 using System.Security.Cryptography.X509Certificates;
 using Jastech.Framework.Util.Helper;
+using Jastech.Framework.Winform.Helper;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -54,23 +55,6 @@ namespace Jastech.Framework.Winform.Controls
             _nonSelectedColor = Color.FromArgb(52, 52, 52);
             ShowMoveCommandPanel();
             SetROIType(ROIType);
-        }
-
-        private int SetLabelIntegerData(object sender)
-        {
-            Label lbl = sender as Label;
-            int prevData = Convert.ToInt32(lbl.Text);
-
-            KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = (double)prevData;
-            keyPadForm.ShowDialog();
-
-            int inputData = Convert.ToInt16(keyPadForm.PadValue);
-
-            Label label = (Label)sender;
-            label.Text = inputData.ToString();
-
-            return inputData;
         }
 
         public void SetTeachingItem(TeachingItem teachingItem)
@@ -135,7 +119,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblJogScale_Click(object sender, EventArgs e)
         {
-            JogScale = SetLabelIntegerData(sender);
+            JogScale = KeyPadHelper.SetLabelIntegerData((Label)sender);
         }
 
         private void lblROIMode_Click(object sender, EventArgs e)
