@@ -35,7 +35,5 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         #region 메서드
         #endregion
-
-
     }
 }

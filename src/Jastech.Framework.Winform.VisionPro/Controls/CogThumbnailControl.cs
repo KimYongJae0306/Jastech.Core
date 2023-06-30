@@ -21,7 +21,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 속성
         private ICogImage ThumbnailImage { get; set; } = null;
 
-        private double Scale { get; set; }
+        private double _scale { get; set; } = 0.0;
         #endregion
 
         #region 이벤트
@@ -46,8 +46,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 return;
 
             int newHeight = this.cogThumbnailDisplay.Height;
-            Scale = (double)newHeight / cogImage.Height;
-            int newWidth = (int)((double)cogImage.Width * Scale);
+            _scale = (double)newHeight / cogImage.Height;
+            int newWidth = (int)((double)cogImage.Width * _scale);
 
             CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
             ThumbnailImage = cogImage.ScaleImage(newWidth, newHeight);
@@ -57,7 +57,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void DrawViewRect(CogRectangle rect)
         {
-            if (Scale == 0)
+            if (_scale == 0)
                 return;
 
             if (Equals(rect, _prevViewRectangle))

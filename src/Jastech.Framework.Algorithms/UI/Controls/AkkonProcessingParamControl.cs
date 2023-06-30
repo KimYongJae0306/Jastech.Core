@@ -137,6 +137,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             }
             catch (Exception err)
             {
+                Console.WriteLine(err.ToString());
                 throw;
             }
         }

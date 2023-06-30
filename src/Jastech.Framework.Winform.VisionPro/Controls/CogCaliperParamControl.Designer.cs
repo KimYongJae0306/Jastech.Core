@@ -38,8 +38,8 @@
             this.lblFilterSize = new System.Windows.Forms.Label();
             this.lblEdgeThreshold = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTest = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTest = new System.Windows.Forms.Label();
             this.tlpCaliperParam.SuspendLayout();
             this.tlpEdgePolarity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -198,19 +198,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(659, 172);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // lblTest
-            // 
-            this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTest.Location = new System.Drawing.Point(0, 120);
-            this.lblTest.Margin = new System.Windows.Forms.Padding(0);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(200, 40);
-            this.lblTest.TabIndex = 2;
-            this.lblTest.Text = "Test";
-            this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblTest.Click += new System.EventHandler(this.lblTest_Click);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -228,6 +215,19 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 172);
             this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // lblTest
+            // 
+            this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTest.Location = new System.Drawing.Point(0, 120);
+            this.lblTest.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(200, 40);
+            this.lblTest.TabIndex = 2;
+            this.lblTest.Text = "Test";
+            this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTest.Click += new System.EventHandler(this.lblTest_Click);
             // 
             // CogCaliperParamControl
             // 
