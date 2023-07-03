@@ -40,7 +40,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 필드
         private bool _updateViewRect { get; set; } = false;
 
-        private Color _noneSelectColor { get; set; } = SystemColors.Control;
+        private Color _nonSelectedColor { get; set; } = SystemColors.Control;
 
         private Color _selectedColor { get; set; } = Color.DarkSeaGreen;
 
@@ -238,7 +238,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             else
             {
                 cogDisplay.MouseMode = CogDisplayMouseModeConstants.Pointer;
-                btnPanning.BackColor = _noneSelectColor;
+                btnPanning.BackColor = _nonSelectedColor;
             }
         }
 
@@ -254,7 +254,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 _displayMode = DisplayMode.None;
                 cogDisplay.StaticGraphics.Remove(groupName);
 
-                btnCrossLine.BackColor = _noneSelectColor;
+                btnCrossLine.BackColor = _nonSelectedColor;
             }
             else
             {
@@ -318,7 +318,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (btnCustomCrossLine.BackColor == _selectedColor)
             {
-                btnCustomCrossLine.BackColor = _noneSelectColor;
+                btnCustomCrossLine.BackColor = _nonSelectedColor;
                 _displayMode = DisplayMode.None;
 
                 if (IsContainGroupNameInStaticGraphics(groupName))
@@ -341,7 +341,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (btnPointToPoint.BackColor == _selectedColor)
             {
                 DeleteStaticGraphics("Tracking");
-                btnPointToPoint.BackColor = _noneSelectColor;
+                btnPointToPoint.BackColor = _nonSelectedColor;
                 _stepPointToPoint = StepPointToPoint.Start;
                 _displayMode = DisplayMode.None;
             }
@@ -663,7 +663,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (btnPointToLine.BackColor == _selectedColor)
             {
                 DeleteStaticGraphics("Tracking");
-                btnPointToLine.BackColor = _noneSelectColor;
+                btnPointToLine.BackColor = _nonSelectedColor;
                 _stepPointToPoint = StepPointToPoint.Start;
                 _displayMode = DisplayMode.None;
             }
@@ -677,8 +677,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void ClearSelect()
         {
-            btnPointToPoint.BackColor = _noneSelectColor;
-            btnPointToLine.BackColor = _noneSelectColor;
+            btnPointToPoint.BackColor = _nonSelectedColor;
+            btnPointToLine.BackColor = _nonSelectedColor;
         }
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
