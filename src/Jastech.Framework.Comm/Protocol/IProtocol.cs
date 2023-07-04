@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jastech.Framework.Comm.Protocol
+﻿namespace Jastech.Framework.Comm.Protocol
 {
     public interface IProtocol
     {

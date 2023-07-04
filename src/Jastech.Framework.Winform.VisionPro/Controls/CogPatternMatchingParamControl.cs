@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Cognex.VisionPro;
-using Cognex.VisionPro.PMAlign;
-using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms;
-using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
-using Jastech.Framework.Winform.VisionPro.Forms;
-using Jastech.Framework.Winform.Forms;
+﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Implementation;
+using Cognex.VisionPro.PMAlign;
+using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Jastech.Framework.Winform.Forms;
+using Jastech.Framework.Winform.VisionPro.Forms;
 using Jastech.Framework.Winform.VisionPro.Helper;
-using Jastech.Framework.Imaging.VisionPro;
-using Cognex.VisionPro.Display;
+using System;
+using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {

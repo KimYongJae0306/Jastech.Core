@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jastech.Framework.Structure.Service
+﻿namespace Jastech.Framework.Structure.Service
 {
     public interface IInspModelService
     {

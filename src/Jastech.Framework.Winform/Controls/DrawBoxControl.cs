@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Jastech.Framework.Imaging.Helper;
+using Jastech.Framework.Winform.Data;
+using Jastech.Framework.Winform.Forms;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using Jastech.Framework.Winform.Data;
-using System.Drawing.Imaging;
-using Jastech.Framework.Imaging.Helper;
-using System.Diagnostics;
-using Jastech.Framework.Winform.Forms;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.Controls
 {

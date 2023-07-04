@@ -1,16 +1,9 @@
-﻿using Emgu.CV.Structure;
-using Jastech.Framework.Device.Grabbers;
+﻿using Jastech.Framework.Device.Grabbers;
 using Jastech.Framework.Imaging;
-using Jastech.Framework.Matrox;
-using Jastech.Framework.Util.Helper;
 using Matrox.MatroxImagingLibrary;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;

@@ -1,11 +1,7 @@
-﻿using Jastech.Framework.Device.LightCtrls;
-using Jastech.Framework.Device.Motions;
+﻿using Jastech.Framework.Device.Motions;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Structure
 {

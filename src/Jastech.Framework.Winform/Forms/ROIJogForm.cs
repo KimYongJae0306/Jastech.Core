@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Jastech.Framework.Winform.Helper;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jastech.Framework.Winform.Forms;
-using System.Security.Cryptography.X509Certificates;
-using Jastech.Framework.Util.Helper;
-using Jastech.Framework.Winform.Helper;
 
 namespace Jastech.Framework.Winform.Forms
 {

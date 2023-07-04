@@ -2,8 +2,6 @@
 using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 

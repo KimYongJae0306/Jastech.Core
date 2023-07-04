@@ -1,10 +1,6 @@
-﻿using AW;
-using Jastech.Framework.Imaging.Result;
-using System;
+﻿using Jastech.Framework.Imaging.Result;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {

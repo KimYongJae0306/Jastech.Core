@@ -1,17 +1,12 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.ImageFile;
 using Cognex.VisionPro.ImageProcessing;
-using Cognex.VisionPro.PMAlign;
-using Jastech.Framework.Util.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro
 {

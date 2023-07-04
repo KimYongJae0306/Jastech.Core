@@ -2,12 +2,7 @@
 using Jastech.Framework.Comm.Protocol;
 using Jastech.Framework.Device.Plcs.Melsec.Parsers;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Plcs.Melsec
 {

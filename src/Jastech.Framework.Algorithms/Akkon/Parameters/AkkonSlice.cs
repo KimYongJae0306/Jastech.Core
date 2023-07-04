@@ -1,14 +1,8 @@
 ﻿using Emgu.CV;
-using Jastech.Framework.Algorithms.Akkon.Results;
 using Jastech.Framework.Imaging.Result;
 using Jastech.Framework.Imaging.VisionAlgorithms;
-using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Algorithms.Akkon.Parameters
 {

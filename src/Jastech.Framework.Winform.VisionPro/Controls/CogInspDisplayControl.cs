@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cognex.VisionPro;
+using Jastech.Framework.Winform.VisionPro.Helper;
+using System;
 using System.Windows.Forms;
 using static Jastech.Framework.Winform.VisionPro.Controls.CogDisplayControl;
-using Cognex.VisionPro;
-using System.IO;
-using Jastech.Framework.Imaging.VisionPro;
-using Jastech.Framework.Winform.VisionPro.Helper;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
 {

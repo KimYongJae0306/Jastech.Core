@@ -1,14 +1,9 @@
 ﻿using ACS.SPiiPlusNET;
-using Jastech.Framework.Comm.Protocol;
 using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.Motions

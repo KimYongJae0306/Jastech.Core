@@ -1,13 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Blob;
-using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {

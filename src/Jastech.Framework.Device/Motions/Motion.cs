@@ -1,10 +1,4 @@
-﻿using Jastech.Framework.Comm.Protocol;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.Motions

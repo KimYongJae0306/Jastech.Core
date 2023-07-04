@@ -1,13 +1,9 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Imaging.Result;
 using Jastech.Framework.Imaging.VisionAlgorithms;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 {

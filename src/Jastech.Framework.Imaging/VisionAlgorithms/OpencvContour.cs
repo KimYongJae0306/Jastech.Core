@@ -2,15 +2,9 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Util;
 using Jastech.Framework.Imaging.Helper;
-using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionAlgorithms
 {

@@ -1,11 +1,7 @@
-﻿using Jastech.Framework.Matrox;
-using Jastech.Framework.Util.Helper;
+﻿using Jastech.Framework.Util.Helper;
 using Matrox.MatroxImagingLibrary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Device.Grabbers
 {

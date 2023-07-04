@@ -1,15 +1,10 @@
 ﻿using Cognex.VisionPro;
-using Cognex.VisionPro.ImageProcessing;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
