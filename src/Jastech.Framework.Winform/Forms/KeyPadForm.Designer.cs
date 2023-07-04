@@ -307,11 +307,13 @@
             this.Controls.Add(this.lblTextMessage);
             this.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "KeyPadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "  ";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPadForm_KeyPress);
             this.ResumeLayout(false);
 
         }

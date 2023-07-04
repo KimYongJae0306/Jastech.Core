@@ -13,12 +13,17 @@ namespace Jastech.Framework.Winform.Forms
     public partial class KeyBoardForm : Form
     {
         #region 필드
+        private Color _selectedColor;
+        private Color _nonSelectedColor;
+
         private bool _isKorean = false;
         private bool _isCapitalLetter = false;
         #endregion
 
         #region 속성
         public string KeyValue { get; set; } = string.Empty;
+
+        public string PreviousValue { get; set; }
         #endregion
 
         #region 이벤트
@@ -40,9 +45,9 @@ namespace Jastech.Framework.Winform.Forms
             _isKorean = chkToggleLanguage.Checked;
 
             if (_isKorean)
-                chkToggleLanguage.BackColor = Color.DeepSkyBlue;
+                chkToggleLanguage.BackColor = _selectedColor;
             else
-                chkToggleLanguage.BackColor = Color.White;
+                chkToggleLanguage.BackColor = _nonSelectedColor;
 
             ToggleLanguage(_isKorean, _isCapitalLetter);
         }
@@ -58,18 +63,18 @@ namespace Jastech.Framework.Winform.Forms
                 chkCapsLock.Checked = true;
                 chkShiftLeft.Checked = true;
                 chkShiftRight.Checked = true;
-                chkCapsLock.BackColor = Color.DeepSkyBlue;
-                chkShiftLeft.BackColor = Color.DeepSkyBlue;
-                chkShiftRight.BackColor = Color.DeepSkyBlue;
+                chkCapsLock.BackColor = _selectedColor;
+                chkShiftLeft.BackColor = _selectedColor;
+                chkShiftRight.BackColor = _selectedColor;
             }
             else
             {
                 chkCapsLock.Checked = false;
                 chkShiftLeft.Checked = false;
                 chkShiftRight.Checked = false;
-                chkCapsLock.BackColor = Color.White;
-                chkShiftLeft.BackColor = Color.White;
-                chkShiftRight.BackColor = Color.White;
+                chkCapsLock.BackColor = _nonSelectedColor;
+                chkShiftLeft.BackColor = _nonSelectedColor;
+                chkShiftRight.BackColor = _nonSelectedColor;
             }
 
             ToggleLanguage(_isKorean, _isCapitalLetter);
@@ -211,5 +216,58 @@ namespace Jastech.Framework.Winform.Forms
             }
         }
         #endregion
+
+        private void KeyBoardForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string message = lblTextMessage.Text;
+            btnEnter.Focus();
+
+            if (e.KeyChar == Convert.ToChar(Keys.Back))
+            {
+                if (message == "")
+                    return;
+
+                lblTextMessage.Text = message.Substring(0, message.Length - 1);
+                return;
+            }
+
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                KeyValue = lblTextMessage.Text;
+
+                this.DialogResult = DialogResult.OK;
+                Close();
+            }
+
+            if (e.KeyChar == Convert.ToChar(Keys.Escape))
+            {
+                if (MessageBox.Show("Do you want cancel?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    KeyValue = PreviousValue;
+                    this.DialogResult = DialogResult.No;
+                    Close();
+                }
+            }
+
+            lblTextMessage.Text += e.KeyChar.ToString();
+        }
+
+        private void KeyBoardForm_Load(object sender, EventArgs e)
+        {
+            Application.Idle += new EventHandler(Application_Idle);
+            InitializeUI();
+        }
+
+
+        private void Application_Idle(object sender, EventArgs e)
+        {
+            chkCapsLock.Checked = Control.IsKeyLocked(Keys.CapsLock);
+        }
+
+        private void InitializeUI()
+        {
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _nonSelectedColor = Color.FromArgb(52, 52, 52);
+        }
     }
 }
