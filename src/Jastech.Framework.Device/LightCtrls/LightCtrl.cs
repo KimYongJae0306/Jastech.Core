@@ -35,6 +35,8 @@ namespace Jastech.Framework.Device.LightCtrls
         #endregion
 
         #region 메서드
+        public abstract bool TurnOn(LightValue lightValue);
+
         public abstract bool TurnOff();
 
         public abstract bool TurnOn(int channel, int level);

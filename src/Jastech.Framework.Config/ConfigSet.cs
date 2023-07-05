@@ -15,6 +15,8 @@ namespace Jastech.Framework.Config
         public OperationConfig Operation { get; private set; } = new OperationConfig();
 
         public MachineConfig Machine { get; private set; } = new MachineConfig();
+
+
         #endregion
 
         #region 이벤트
@@ -66,6 +68,5 @@ namespace Jastech.Framework.Config
             Path.Load<MachineConfig>(configPath);
         }
         #endregion
-
     }
 }
