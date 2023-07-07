@@ -15,11 +15,12 @@ namespace Jastech.Framework.Comm
     public class SocketComm : IComm
     {
         #region 생성자
-        public SocketComm(string ipAddress, int port, SocketCommType socketCommType)
+        public SocketComm(string ipAddress, int port, SocketCommType socketCommType, int udpLocalPort = 0)
         {
             IpAddress = ipAddress;
             Port = port;
             SocketCommType = socketCommType;
+            LocalPort = udpLocalPort;
         }
         #endregion
 
@@ -29,6 +30,9 @@ namespace Jastech.Framework.Comm
 
         [JsonProperty]
         public int Port { get; }
+
+        [JsonProperty]
+        public int LocalPort { get; }
 
         [JsonProperty]
         public SocketCommType SocketCommType { get; set; }
@@ -93,7 +97,7 @@ namespace Jastech.Framework.Comm
            else if(SocketCommType == SocketCommType.Udp)
             {
                 Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), Port));
+                Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 9031/*Port*/));
             }
 
             bool isSuccessed = BeginConnect();

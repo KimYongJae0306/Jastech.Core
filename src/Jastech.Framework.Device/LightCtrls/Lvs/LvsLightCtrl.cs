@@ -67,6 +67,16 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             return SendLightPacket(channel, 0);
         }
 
+        public override bool TurnOn(LightValue lightValue)
+        {
+            bool result = true;
+            for (int channel = 0; channel < TotalChannelCount; channel++)
+            {
+                result |= TurnOn(channel, lightValue.Get(channel));
+            }
+            return result;
+        }
+
         public override bool TurnOn(int channel, int level)
         {
             if (SendSelectChannel(channel) == false)

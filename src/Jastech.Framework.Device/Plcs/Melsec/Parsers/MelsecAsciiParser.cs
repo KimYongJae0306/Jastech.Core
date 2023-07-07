@@ -20,13 +20,13 @@ namespace Jastech.Framework.Device.Plcs.Melsec.Parsers
 
         public int DataLength { get; set; }
 
-        public byte NetworkNo { get; } = 0;
+        public byte NetworkNo { get; set; } = 0;
 
         public byte PlcNo { get; } = 0xff;
 
         public short ModuleIoNo { get; } = 0x03FF;
 
-        public byte ModuleDeviceNo { get; } = 0;
+        public byte ModuleDeviceNo { get; set; } = 0;
 
         public short CpuInspectorData { get; } = 0x0010;
 

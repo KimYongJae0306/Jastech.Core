@@ -66,6 +66,5 @@ namespace Jastech.Framework.Config
             Path.Load<MachineConfig>(configPath);
         }
         #endregion
-
     }
 }

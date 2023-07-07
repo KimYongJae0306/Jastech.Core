@@ -30,6 +30,11 @@
             return true;
         }
 
+        public override bool TurnOn(LightValue lightValue)
+        {
+            return true;
+        }
+
         public override bool TurnOn(int channel, int level)
         {
             return true;
