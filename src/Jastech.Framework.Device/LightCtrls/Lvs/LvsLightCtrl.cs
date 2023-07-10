@@ -9,7 +9,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
     public class LvsLightCtrl : LightCtrl
     {
         #region 속성
-        public ILvsParser Parser { get; private set; }
+        public ILvsParser Parser { get; set; }
 
         public ManualResetEvent DataReceivedEvent { get; private set; } = new ManualResetEvent(false);
         #endregion
@@ -30,7 +30,8 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
                 if (Parser.GetType() == typeof(LvsSerialParser))
                 {
                     // STX : 0x01, Etx : 0x04
-                    Protocol = new StxEtxProtocol(new byte[] { 0x01 }, new byte[] { 0x04 }, new byte[] { 0x01 }, new byte[] { 0x04 });
+                    //Protocol = new StxEtxProtocol(new byte[] { 0x01 }, new byte[] { 0x04 }, new byte[] { 0x06 }, new byte[] { 0x06 });
+                    Protocol = new StxEtxProtocol(new byte[] { 0x01 }, new byte[] { 0x04 }, new byte[] { }, new byte[] { 0x06 });
                 }
             }
             Communition.Received += Communition_Received;
@@ -89,11 +90,14 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
         {
             DataReceivedEvent.Reset();
 
+            byte channelBit = new byte();
+            channelBit += (byte)Math.Pow(2, channel - 1);
+
             byte[] dataArray = new byte[4];
             Parser.OpMode = 0x00;                        // [OPMode] Write : 0x00, Read : 0x01
             Parser.DataLength = 0x01;                        // [DataLength]
             Parser.Address = 0x20;                        // [Address] Channel Select Register : 0x20 
-            Parser.Value = Convert.ToByte(channel);     // Channel
+            Parser.Value = channelBit;                  // Channel
 
             Parser.Serialize(out byte[] serializedData);
             if (Protocol.MakePacket(serializedData, out byte[] sendData))

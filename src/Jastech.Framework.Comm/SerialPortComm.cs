@@ -20,7 +20,7 @@ namespace Jastech.Framework.Comm
         {
             PortName = portName;
             BaudRate = baudRate;
-            Parity = parity;
+            Parity =  parity;
             DataBits = dataBits;
             StopBits = stopBits;
         }
@@ -125,11 +125,7 @@ namespace Jastech.Framework.Comm
             if (Protocol == null)
                 return false;
 
-            if (!Protocol.MakePacket(data, out byte[] packet))
-                return false;
-
-            string gg = Encoding.Default.GetString(packet);
-            SerialPort.Write(packet, 0, packet.Length);
+            SerialPort.Write(data, 0, data.Length);
             return true;
         }
 
@@ -153,6 +149,7 @@ namespace Jastech.Framework.Comm
 
             var readPacketBuffer = new byte[readCount];
             Array.Copy(reservedPacketBuffer, readPacketBuffer, readPacketBuffer.Length);
+
             ReceivedPacketBuffer.Enqueue(readPacketBuffer);
             if (!ReceivedPacketBuffer.Dequeue(Protocol, out List<byte[]> datas))
                 return;
