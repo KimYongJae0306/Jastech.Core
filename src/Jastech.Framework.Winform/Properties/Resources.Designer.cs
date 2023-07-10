@@ -243,6 +243,16 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Down_White {
+            get {
+                object obj = ResourceManager.GetObject("Down_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Edit {
             get {
                 object obj = ResourceManager.GetObject("Edit", resourceCulture);
@@ -353,6 +363,16 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Next_White {
+            get {
+                object obj = ResourceManager.GetObject("Next_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap None {
             get {
                 object obj = ResourceManager.GetObject("None", resourceCulture);
@@ -396,6 +416,16 @@ namespace Jastech.Framework.Winform.Properties {
         internal static System.Drawing.Bitmap Pointer_White {
             get {
                 object obj = ResourceManager.GetObject("Pointer_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Prev_White {
+            get {
+                object obj = ResourceManager.GetObject("Prev_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -526,6 +556,16 @@ namespace Jastech.Framework.Winform.Properties {
         internal static System.Drawing.Bitmap Stop_Circle_White {
             get {
                 object obj = ResourceManager.GetObject("Stop_Circle_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Up_White {
+            get {
+                object obj = ResourceManager.GetObject("Up_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

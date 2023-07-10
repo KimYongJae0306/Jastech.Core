@@ -79,24 +79,23 @@ namespace Jastech.Framework.Device.Plcs
         }
 
         // ok
-        public void AddSwap32BitData(int value)
+        public void Add32BitData(int value)
         {
             string hexStr = "";
             byte[] valueByte = BitConverter.GetBytes(value);
-            for (int i = 0; i < 4; i++)
+            for (int i = 3; i >= 0; i--)
             {
                 hexStr += ((int)valueByte[i]).ToString("X2");
             }
             _dataList.Append(hexStr);
         }
 
-
         // ok
-        public void Add32BitData(int value)
+        public void AddSwap32BitData(int value)
         {
             string hexStr = "";
             byte[] valueByte = BitConverter.GetBytes(value);
-            for (int i = 3; i >= 0; i--)
+            for (int i = 0; i < 4; i++)
             {
                 hexStr += ((int)valueByte[i]).ToString("X2");
             }

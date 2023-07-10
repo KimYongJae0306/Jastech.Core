@@ -411,5 +411,17 @@
   <ItemGroup>
     <None Include="Resources\ProgramExit_White.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Down_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Up_White.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

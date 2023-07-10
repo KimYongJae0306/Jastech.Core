@@ -262,4 +262,16 @@
   <data name="ProgramExit_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgramExit_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Next_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Next_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Prev_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Prev_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Down_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Down_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Up_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Up_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
