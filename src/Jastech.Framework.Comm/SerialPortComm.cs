@@ -108,6 +108,8 @@ namespace Jastech.Framework.Comm
             if (SerialPort == null)
                 return false;
 
+            SerialPort.DataReceived -= SerialPort_Protocol_DataReceived;
+
             if (SerialPort.IsOpen)
             {
                 SerialPort.Close();

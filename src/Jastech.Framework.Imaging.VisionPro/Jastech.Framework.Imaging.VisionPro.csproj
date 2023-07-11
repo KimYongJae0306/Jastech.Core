@@ -53,9 +53,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ATTWrapperd">
-      <HintPath>..\..\..\Jastech.Library\Macron\Debug\ATTWrapperd.dll</HintPath>
-    </Reference>
     <Reference Include="Cognex.VisionPro, Version=65.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.dll</HintPath>
