@@ -66,9 +66,9 @@
 
         }
 
-        public override void StartHome(int axisNo)
+        public override bool StartHome(int axisNo)
         {
-
+            return true;
         }
 
         public override void StopMove(int axisNo)

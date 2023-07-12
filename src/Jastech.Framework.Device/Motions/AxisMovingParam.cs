@@ -15,7 +15,7 @@ namespace Jastech.Framework.Device.Motions
         public double Deceleration { get; set; } = 30;
 
         [JsonProperty]
-        public double MovingTimeOut { get; set; } = 3 * 1000; // ms
+        public double MovingTimeOut { get; set; } = 30 * 1000; // ms
 
         [JsonProperty]
         public int AfterWaitTime { get; set; } = 0; // ms

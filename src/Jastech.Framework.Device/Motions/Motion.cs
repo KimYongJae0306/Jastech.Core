@@ -39,7 +39,7 @@ namespace Jastech.Framework.Device.Motions
 
         public abstract bool WaitForDone(int axisNo);
 
-        public abstract void StartHome(int axisNo);
+        public abstract bool StartHome(int axisNo);
 
         public abstract string GetCurrentMotionStatus(int axisNo);
 

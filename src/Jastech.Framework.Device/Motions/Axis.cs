@@ -19,6 +19,9 @@ namespace Jastech.Framework.Device.Motions
 
         [JsonProperty]
         public int HomeOrder { get; set; } = -1;
+
+        [JsonIgnore]
+        public bool IsHomeFound { get; set; }
         #endregion
 
         #region 생성자 
@@ -106,9 +109,10 @@ namespace Jastech.Framework.Device.Motions
             return Motion.WaitForDone(AxisNo);
         }
 
-        public void StartHome()
+        public bool StartHome()
         {
-            Motion.StartHome(AxisNo);
+            IsHomeFound = Motion.StartHome(AxisNo);
+            return IsHomeFound;
         }
 
         public string GetCurrentMotionStatus()

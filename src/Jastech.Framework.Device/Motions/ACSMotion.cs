@@ -197,9 +197,9 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        public override void StartHome(int axisNo)
+        public override bool StartHome(int axisNo)
         {
-            Home(axisNo);
+            return Home(axisNo);
         }
 
         public override string GetCurrentMotionStatus(int axisNo)
@@ -368,13 +368,15 @@ namespace Jastech.Framework.Device.Motions
                 return false;
         }
 
-        private void Home(int axisNo)
+        private bool Home(int axisNo)
         {
             if (!Api.IsConnected)
-                return;
+                return false;
 
             ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
             Api.RunBuffer((ProgramBuffer)axis, null);
+           // Api.GetAxisState
+            return true;
         }
         #endregion
     }
