@@ -29,8 +29,6 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             {
                 if (Parser.GetType() == typeof(LvsSerialParser))
                 {
-                    // STX : 0x01, Etx : 0x04
-                    //Protocol = new StxEtxProtocol(new byte[] { 0x01 }, new byte[] { 0x04 }, new byte[] { 0x06 }, new byte[] { 0x06 });
                     Protocol = new StxEtxProtocol(new byte[] { 0x01 }, new byte[] { 0x04 }, new byte[] { }, new byte[] { 0x06 });
                 }
             }
