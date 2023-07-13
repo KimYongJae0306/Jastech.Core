@@ -121,7 +121,8 @@ namespace Jastech.Framework.Comm
         {
             if (SerialPort == null)
                 return false;
-            if (!SerialPort.IsOpen)
+
+            if (SerialPort.IsOpen == false)
                 return false;
 
             if (Protocol == null)
