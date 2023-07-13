@@ -84,6 +84,28 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
+        public static void Debug(LogType logType, string logMessage, DateTime dateTime)
+        {
+            string logpath = GetDebugPath();
+            string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+
+            if (!Directory.Exists(strDir))
+                Directory.CreateDirectory(strDir);
+
+            string time = GetTimeString(dateTime);
+            string message = "[" + time + "] " + "[" + logType.ToString() + "] " + logMessage;
+            message = message.Replace("\r\n", "");
+
+            lock (_objLock)
+            {
+                StreamWriter log = new StreamWriter(logpath, true);
+                using (log)
+                {
+                    log.WriteLine(message);
+                }
+            }
+        }
+
         private static string GetDebugPath()
         {
             string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + "Debug.log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -111,7 +133,7 @@ namespace Jastech.Framework.Util.Helper
                 Directory.CreateDirectory(strDir);
 
             string time = GetTimeString(DateTime.Now);
-            string message = "[" + time + "] " +"[" +logType.ToString()+"] "  + logMessage;
+            string message = "[" + time + "] " + "[" + logType.ToString() + "] " + logMessage;
             message = message.Replace("\r\n", "");
 
             lock (_objLock)
@@ -124,22 +146,24 @@ namespace Jastech.Framework.Util.Helper
             }
         }
 
-        public static void WriteException(LogType logType, Exception exception)
+        public static void Error(ErrorType logType, string logMessage, DateTime dateTime)
         {
-            string logpath = GetLogPath(logType);
+            string logpath = GetErrorLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
-            string time = GetTimeString(DateTime.Now);
-            string logMessage = "[" + time + "] " + exception.StackTrace + " : " + exception.Message;
-            logMessage = logMessage.Replace("\r\n", "");
+
             if (!Directory.Exists(strDir))
                 Directory.CreateDirectory(strDir);
+
+            string time = GetTimeString(dateTime);
+            string message = "[" + time + "] " +"[" +logType.ToString()+"] "  + logMessage;
+            message = message.Replace("\r\n", "");
 
             lock (_objLock)
             {
                 StreamWriter log = new StreamWriter(logpath, true);
                 using (log)
                 {
-                    log.WriteLine(logMessage);
+                    log.WriteLine(message);
                 }
             }
         }
