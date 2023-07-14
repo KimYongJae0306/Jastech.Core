@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Jastech.Framework.Device
 {
-    public interface IDevice
+    public interface IDevice : IDisposable
     {
         #region 속성
         [JsonProperty]

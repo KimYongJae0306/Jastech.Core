@@ -75,7 +75,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
             OnLAFReceived(data);
 
-            ResponseReceivedEvent.Set();
+            //ResponseReceivedEvent.Set();
         }
 
         private void SetDefaultParameter()
