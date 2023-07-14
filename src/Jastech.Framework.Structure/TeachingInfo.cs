@@ -85,10 +85,10 @@ namespace Jastech.Framework.Structure
             AxisInfoList.Where(x => x.Name == name.ToString()).First().CenterOfGravity = centerOfGravity;
         }
 
-        public AxisMovingParam GetMovingParams(string axisName)
-        {
-            return AxisInfoList.Where(x => x.Name == axisName).First().MovingParam;
-        }
+        //public AxisMovingParam GetMovingParams(string axisName)
+        //{
+        //    return AxisInfoList.Where(x => x.Name == axisName).First().MovingParam;
+        //}
 
         public AxisMovingParam GetMovingParams(AxisName name)
         {
