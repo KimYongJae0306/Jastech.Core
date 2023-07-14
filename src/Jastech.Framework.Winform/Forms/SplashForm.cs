@@ -14,7 +14,6 @@ namespace Jastech.Framework.Winform.Forms
     {
         #region 필드
         private Thread _workingThread = null;
-
         private bool _doConfigAction = false;
         #endregion
 
@@ -37,13 +36,15 @@ namespace Jastech.Framework.Winform.Forms
         #endregion
 
         #region 생성자
+        #endregion
+
+        #region 메서드
+        #endregion
         public SplashForm()
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region 메서드
         private void SplashForm_Load(object sender, EventArgs e)
         {
             lblTitle.Text = Title;
@@ -95,6 +96,6 @@ namespace Jastech.Framework.Winform.Forms
             this.progressBar.Value = progressPos;
             this.lblProgressMessage.Text = progressMessage;
         }
-        #endregion
+
     }
 }

@@ -56,6 +56,12 @@ namespace Jastech.Framework.Comm
         #region 메서드
         public bool Initialize(IProtocol protocol)
         {
+            if (SerialPort != null)
+                return false;
+
+            if (protocol == null)
+                return false;
+
             Protocol = protocol;
             SerialPort = new SerialPort(PortName, BaudRate, Parity, DataBits, StopBits);
             SerialPort.DataReceived += SerialPort_Protocol_DataReceived;
