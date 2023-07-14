@@ -8,9 +8,6 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionJogXYControl : UserControl
     {
-        #region 필드
-        #endregion
-
         #region 속성
         private AxisHandler AxisHanlder { get; set; } = null;
 
@@ -19,12 +16,6 @@ namespace Jastech.Framework.Winform.Controls
         public JogMode JogMode { get; set; } = JogMode.Jog;
 
         public double JogPitch { get; set; } = 1.0;
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자

@@ -7,19 +7,10 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionParameterVariableControl : UserControl
     {
-        #region 필드
-        #endregion
-
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
 
         public AxisMovingParam MovingParam { get; set; } = null;
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자

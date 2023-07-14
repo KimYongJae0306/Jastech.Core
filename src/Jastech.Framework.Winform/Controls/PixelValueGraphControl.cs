@@ -8,6 +8,7 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class PixelValueGraphControl : UserControl
     {
+        #region 속성
         public DoubleBufferPanel pnlDrawChart = null;
 
         public int DefaultMaxAxisX { get; set; } = 100;
@@ -27,12 +28,16 @@ namespace Jastech.Framework.Winform.Controls
         public Pen GridPen { get; set; } = new Pen(Color.White);
 
         public byte[] Data { get; set; } = null;
+        #endregion
 
+        #region 생성자
         public PixelValueGraphControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void PixelValueGraphControl_Load(object sender, EventArgs e)
         {
             pnlDrawChart = new DoubleBufferPanel();
@@ -40,6 +45,7 @@ namespace Jastech.Framework.Winform.Controls
             pnlDrawChart.Dock = DockStyle.Fill;
             pnlDrawChart.Paint += DoubleBuffering_Paint;
         }
+
         private void DoubleBuffering_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -87,7 +93,7 @@ namespace Jastech.Framework.Winform.Controls
 
             float intervalValue = 0;
 
-            if(Data == null)
+            if (Data == null)
                 intervalValue = ((float)DefaultMaxAxisX / NumAxisX);
             else
                 intervalValue = ((float)Data.Length / NumAxisX);
@@ -112,7 +118,7 @@ namespace Jastech.Framework.Winform.Controls
                 int value = (int)(intervalValue * i);
                 string valueString = value.ToString();
                 SizeF textSize = g.MeasureString(valueString, font);
-                g.DrawString(value.ToString(), font, Brushes.White, new PointF(x - textSize.Width /2, y2));
+                g.DrawString(value.ToString(), font, Brushes.White, new PointF(x - textSize.Width / 2, y2));
             }
         }
 
@@ -187,5 +193,6 @@ namespace Jastech.Framework.Winform.Controls
         {
             pnlDrawChart?.Invalidate();
         }
+        #endregion
     }
 }

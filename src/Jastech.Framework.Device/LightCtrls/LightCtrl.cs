@@ -57,9 +57,7 @@ namespace Jastech.Framework.Device.LightCtrls
             if (Protocol == null || Communition == null)
                 return false;
 
-            if (Communition.Initialize(Protocol) == false)
-                return false;
-
+            Communition.Initialize(Protocol);
             bool isConnected = Communition.Connect();
             return isConnected;
         }
