@@ -160,7 +160,8 @@ namespace Jastech.Framework.Device.Cameras
 
     public enum CameraType
     {
-        VT_6k35c_trigger,
+        VT_4K5X_H200,
+        VT_6K3_5X_H160,
     }
 
     public enum TriggerMode

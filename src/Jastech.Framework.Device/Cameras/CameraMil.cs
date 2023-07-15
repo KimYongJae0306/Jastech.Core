@@ -90,8 +90,10 @@ namespace Jastech.Framework.Device.Cameras
         {
             string curDir = Environment.CurrentDirectory;
             string dcfFilePath = "";
-            if (cameraType == CameraType.VT_6k35c_trigger)
-                dcfFilePath = System.IO.Path.Combine(curDir, "VT_6k3.5c_Trigger.dcf");
+            if (cameraType == CameraType.VT_6K3_5X_H160)
+                dcfFilePath = System.IO.Path.Combine(curDir, "VT_6K3.5X_H160.dcf");
+            else if (cameraType == CameraType.VT_4K5X_H200)
+                dcfFilePath = System.IO.Path.Combine(curDir, "VT_4K5X_H200.dcf");
 
 
             if (File.Exists(dcfFilePath) == false)
