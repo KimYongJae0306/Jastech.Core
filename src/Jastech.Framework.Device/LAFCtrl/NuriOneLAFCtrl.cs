@@ -105,7 +105,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
             string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
 
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         //public override void SetMotionMaxSpeed(double MaxSpped_um)
@@ -141,7 +141,7 @@ namespace Jastech.Framework.Device.LAFCtrl
                 value = 200;
 
             string command = MakeSetCommand(CMD_WRITE_ACCELDECEL, value.ToString());
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void SetLaserOnOff(bool isOn)
@@ -150,13 +150,13 @@ namespace Jastech.Framework.Device.LAFCtrl
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF, value);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void GetLaserOnValue()
         {
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void SetAutoFocusOnOFF(bool isOn)
@@ -164,13 +164,13 @@ namespace Jastech.Framework.Device.LAFCtrl
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_AF_ONOFF, value);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void GetAutoFocusValue()
         {
             string command = MakeSetCommand(CMD_WRITE_AF_ONOFF);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void SetMotionEnable(bool isOn)
@@ -178,19 +178,19 @@ namespace Jastech.Framework.Device.LAFCtrl
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_MOTION_ENABLE, value);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionStop()
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_STOP);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionZeroSet()
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_ZERO);
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionRelativeMove(Direction direction, double value)
@@ -205,32 +205,44 @@ namespace Jastech.Framework.Device.LAFCtrl
             int moveAmount = Convert.ToInt32(value * ResolutionAxisZ) * directionValue;
 
             string command = MakeSetCommand(CMD_WRITE_MOTION_RELATIVE_MOVE, moveAmount.ToString());
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionAbsoluteMove(double value)
         {
             int targetPosition = Convert.ToInt32(value * ResolutionAxisZ);
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionPositiveLimit(double value)
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, value.ToString());
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public override void SetMotionNegativeLimit(double value)
         {
             string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, value.ToString());
-            SerialPortComm.Send(command);
+            Send(command);
         }
 
         public void RequestData(string command)
         {
             string makeData = MakeGetCommand(command);
-            SerialPortComm.Send(makeData);
+            Send(makeData);
+        }
+
+        private void Send(string command)
+        {
+            if (command == "")
+                return;
+
+            byte[] serializedData = Encoding.UTF8.GetBytes(command);
+            if (Protocol.MakePacket(serializedData, out byte[] sendData))
+            {
+                SerialPortComm.Send(sendData);
+            }
         }
 
         private string MakeSetCommand(string command, string value = "")
@@ -251,26 +263,6 @@ namespace Jastech.Framework.Device.LAFCtrl
             string command = MakeSetCommand(CMD_WRITE_FOCUS_POSITION, offset.ToString());
             SerialPortComm.Send(command);
         }
-
-        //public override void SetMotionNegativeLimit(double value)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override void SetMotionPositiveLimit(double value)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override void SetMotionMaxSpeed(double value)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override void SetMotionZeroSet()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 
     public partial class NuriOneLAFCtrl
