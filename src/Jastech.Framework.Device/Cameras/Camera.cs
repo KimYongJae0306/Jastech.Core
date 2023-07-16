@@ -40,6 +40,9 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonIgnore]
         public int GrabCount { get; set; } = 0;
+
+        [JsonProperty]
+        public bool IsReverseX { get; set; }
         #endregion
 
         #region 이벤트
@@ -149,7 +152,7 @@ namespace Jastech.Framework.Device.Cameras
         {
             // 이 코드를 변경하지 마세요. 'Dispose(bool disposing)' 메서드에 정리 코드를 입력합니다.
             Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
         }
     }
     public enum SensorType

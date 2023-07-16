@@ -31,12 +31,12 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogUpZ_Click(object sender, EventArgs e)
         {
-            SelectedLafCtrl?.SetMotionRelativeMove(Direction.CW, MoveAmount);
+            SelectedLafCtrl?.SetMotionRelativeMove(Direction.CCW, MoveAmount);
         }
 
         private void btnJogDownZ_Click(object sender, EventArgs e)
         {
-            SelectedLafCtrl?.SetMotionRelativeMove(Direction.CCW, MoveAmount);
+            SelectedLafCtrl?.SetMotionRelativeMove(Direction.CW, MoveAmount);
         }
     }
 }

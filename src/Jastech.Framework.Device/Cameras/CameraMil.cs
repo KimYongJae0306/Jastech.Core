@@ -124,7 +124,7 @@ namespace Jastech.Framework.Device.Cameras
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
-
+            
             ActiveTriggerCommand();
             SetTDIOperationMode(TDIOperationMode);
 
@@ -304,8 +304,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetExposureTime(double value)
         {
-            long exposureTimeInus = (long)value;
-            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ExposureTime", MIL.M_TYPE_DOUBLE, ref exposureTimeInus);
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ExposureTime", MIL.M_TYPE_STRING, value.ToString());
         }
 
         public override double GetExposureTime()
@@ -323,7 +322,7 @@ namespace Jastech.Framework.Device.Cameras
         public override void SetAnalogGain(int value)
         {
             string analogGain = "X" + value.ToString();
-            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "AnalogGain", MIL.M_TYPE_STRING, "X1");
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "AnalogGain", MIL.M_TYPE_STRING, analogGain);
         }
 
         public override int GetAnalogGain()

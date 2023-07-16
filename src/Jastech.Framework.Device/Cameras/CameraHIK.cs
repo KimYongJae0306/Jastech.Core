@@ -3,6 +3,7 @@ using Jastech.Framework.Util.Helper;
 using MvCamCtrl.NET;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.Composition.Primitives;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -78,6 +79,8 @@ namespace Jastech.Framework.Device.Cameras
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
 
             ActiveTriggerCommand();
+
+            ReverseX(IsReverseX);
 
             PayLoadSize = GetPayLoadSize();
 
@@ -194,6 +197,12 @@ namespace Jastech.Framework.Device.Cameras
         public override void ReverseX(bool reverse)
         {
             //MVS 연결 후 작성 예정
+            int nRet = _camera.MV_CC_SetBoolValue_NET("ReverseX", reverse);
+            if (nRet != MyCamera.MV_OK)
+            {
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Reverse failed({0}). Name : {1}", reverse, Name));
+                return;
+            }
         }
 
         public override void SetAnalogGain(int value)
