@@ -42,7 +42,7 @@ namespace Jastech.Framework.Device.Motions
 
         public void AddAxis(List<Axis> axisList)
         {
-            AxisList.AddRange(AxisList);
+            AxisList.AddRange(axisList);
         }
 
         public Axis GetAxis(AxisName name)
@@ -97,6 +97,9 @@ namespace Jastech.Framework.Device.Motions
 
                     foreach (var axis in homeAxisList)
                     {
+                        if (axis.Name == AxisName.Z.ToString())
+                            continue;
+
                         axis.IsHomeFound = false;
                         axis.StartHome();
                     }

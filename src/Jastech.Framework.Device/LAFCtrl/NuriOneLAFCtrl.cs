@@ -14,7 +14,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public SerialPortComm SerialPortComm { get; set; } = null;
 
         [JsonProperty]
-        public double ResolutionAxisZ { get; set; } = 10.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm
+        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm
 
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
@@ -195,22 +195,21 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionRelativeMove(Direction direction, double value)
         {
-            if (value * ResolutionAxisZ < 1)
-                return;
+            //if (value * ResolutionAxisZ < 1)
+            //    return;
 
-            value = Math.Abs(value * 1000);
+            value = Math.Abs(value);
 
             int directionValue = direction == Direction.CW ? -1 : 1;
 
-            int moveAmount = Convert.ToInt32(value * ResolutionAxisZ) * directionValue;
-
+            double moveAmount = Convert.ToDouble(value * ResolutionAxisZ) * directionValue;
             string command = MakeSetCommand(CMD_WRITE_MOTION_RELATIVE_MOVE, moveAmount.ToString());
             Send(command);
         }
 
         public override void SetMotionAbsoluteMove(double value)
         {
-            int targetPosition = Convert.ToInt32(value * ResolutionAxisZ);
+            double targetPosition = value;
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
             Send(command);
         }

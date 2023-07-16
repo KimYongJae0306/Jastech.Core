@@ -44,7 +44,7 @@ namespace Jastech.Framework.Winform.Controls
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
             Axis axis = AxisHanlder.GetAxis(AxisName.X);
-            MoveJog(axis, Direction.CCW);
+            MoveJog(axis, Direction.CW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
@@ -58,7 +58,7 @@ namespace Jastech.Framework.Winform.Controls
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
             Axis axis = AxisHanlder.GetAxis(AxisName.X);
-            MoveJog(axis, Direction.CW);
+            MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
