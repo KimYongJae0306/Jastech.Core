@@ -13,7 +13,7 @@ namespace Jastech.Framework.Device.Motions
         public string Name { get; set; }
 
         [JsonProperty]
-        public List<Axis> AxisList { get; private set; } = new List<Axis>();
+        private List<Axis> AxisList { get; set; } = new List<Axis>();
 
         private Task HomeTask { get; set; }
 
@@ -51,6 +51,11 @@ namespace Jastech.Framework.Device.Motions
                 return AxisList.Where(x => x.Name == name.ToString()).First();
         
             return null;
+        }
+
+        public List<Axis> GetAxisList()
+        {
+            return AxisList;
         }
 
         public void StopMove()

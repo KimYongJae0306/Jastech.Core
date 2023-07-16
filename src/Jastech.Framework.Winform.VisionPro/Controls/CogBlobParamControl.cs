@@ -6,7 +6,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     public partial class CogBlobParamControl : UserControl
     {
         #region 필드
-        private CogBlobTool BlobTool = null;
         #endregion
 
         #region 속성

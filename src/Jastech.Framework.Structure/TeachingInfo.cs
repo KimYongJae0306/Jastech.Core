@@ -14,14 +14,14 @@ namespace Jastech.Framework.Structure
         public string Description { get; set; } = string.Empty;
 
         [JsonProperty]
-        public List<TeachingAxisInfo> AxisInfoList = new List<TeachingAxisInfo>();
+        private List<TeachingAxisInfo> AxisInfoList { get; set; } = new List<TeachingAxisInfo>();
 
         public void CreateTeachingInfo(string name, string description, AxisHandler axisHandler)
         {
             Name = name;
             Description = description;
 
-            foreach (var axis in axisHandler.AxisList)
+            foreach (var axis in axisHandler.GetAxisList())
                 AddAxisParam(axis);
         }
 
@@ -85,10 +85,10 @@ namespace Jastech.Framework.Structure
             AxisInfoList.Where(x => x.Name == name.ToString()).First().CenterOfGravity = centerOfGravity;
         }
 
-        //public AxisMovingParam GetMovingParams(string axisName)
-        //{
-        //    return AxisInfoList.Where(x => x.Name == axisName).First().MovingParam;
-        //}
+        public TeachingAxisInfo GetAxisInfo(AxisName name)
+        {
+            return AxisInfoList.Where(x => x.Name == name.ToString()).First();
+        }
 
         public AxisMovingParam GetMovingParams(AxisName name)
         {
