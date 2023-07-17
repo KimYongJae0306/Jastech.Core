@@ -81,6 +81,7 @@ namespace Jastech.Framework.Device.Cameras
             ActiveTriggerCommand();
 
             ReverseX(IsReverseX);
+            SetExposureTime(Exposure);
 
             PayLoadSize = GetPayLoadSize();
 

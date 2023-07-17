@@ -69,6 +69,11 @@ namespace Jastech.Framework.Comm
             return true;
         }
 
+        public void Dispose()
+        {
+            Release();
+        }
+
         public bool Release()
         {
             if (SerialPort == null)
@@ -86,6 +91,7 @@ namespace Jastech.Framework.Comm
             try
             {
                 SerialPort.Open();
+                SerialPort.DiscardInBuffer();
             }
             catch (Exception ex)
             {

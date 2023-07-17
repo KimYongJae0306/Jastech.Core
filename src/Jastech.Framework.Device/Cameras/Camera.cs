@@ -43,6 +43,9 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public bool IsReverseX { get; set; }
+
+        [JsonProperty]
+        public double Exposure { get; set; }
         #endregion
 
         #region 이벤트

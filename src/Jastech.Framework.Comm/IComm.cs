@@ -1,8 +1,9 @@
 ﻿using Jastech.Framework.Comm.Protocol;
+using System;
 
 namespace Jastech.Framework.Comm
 {
-    public interface IComm
+    public interface IComm : IDisposable
     {
         #region 속성
         event ReceivedEventHandler Received;

@@ -102,7 +102,7 @@ namespace Jastech.Framework.Device.Motions
 
                     foreach (var axis in homeAxisList)
                     {
-                        if (axis.Name == AxisName.Z.ToString())
+                        if (axis.Name == AxisName.Z0.ToString())
                             continue;
 
                         axis.IsHomeFound = false;

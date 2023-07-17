@@ -141,7 +141,7 @@ namespace Jastech.Framework.Device.Motions
     {
         X,
         Y,
-        Z,
+        Z0,
         Z1,
         Z2,
         T,

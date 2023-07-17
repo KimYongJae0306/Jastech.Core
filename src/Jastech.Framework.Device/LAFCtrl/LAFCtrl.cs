@@ -3,7 +3,7 @@ using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.LAFCtrl
 {
-    public abstract partial class LAFCtrl : IDevice
+    public abstract partial class LAFCtrl : IDevice, IDisposable
     {
         #region 속성
         public bool IsLaserOn { get; protected set; }

@@ -70,15 +70,28 @@ namespace Jastech.Framework.Comm
             return true;
         }
 
+        public void Dispose()
+        {
+            Release();
+        }
+
         public bool Release()
         {
-            if (Socket == null)
-                return false;
-
-            if (Socket.Connected)
+            if (Socket != null)
             {
-                Socket.Disconnect(false);
-                Socket.Dispose();
+                try
+                {
+                    if (Socket.Connected == true)
+                        Socket.Shutdown(SocketShutdown.Both);
+                    Socket.Close();
+                }
+                catch (SocketException se)
+                {
+                    Logger.Error(ErrorType.Comm, "Fail to close the socket" + se.Message);
+                    return false;
+                }
+
+                Socket = null;
             }
             return true;
         }
