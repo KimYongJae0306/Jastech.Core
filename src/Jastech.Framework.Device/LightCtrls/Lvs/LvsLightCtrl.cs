@@ -45,6 +45,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
 
         public override bool Release()
         {
+            Communition.Received -= Communition_Received;
             return base.Release();
         }
 

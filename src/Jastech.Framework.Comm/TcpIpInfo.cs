@@ -19,7 +19,6 @@ namespace Jastech.Framework.Comm
         }
         #endregion
 
-
         #region 속성 
         [JsonProperty]
         public string IpAddress { get; set; }
@@ -27,7 +26,6 @@ namespace Jastech.Framework.Comm
         [JsonProperty]
         public int PortNo { get; set; }
         #endregion
-
 
         #region 메서드 
         public TcpIpInfo Clone()

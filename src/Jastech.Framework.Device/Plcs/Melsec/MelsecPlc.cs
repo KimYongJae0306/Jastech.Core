@@ -53,6 +53,13 @@ namespace Jastech.Framework.Device.Plcs.Melsec
             return base.Initialize();
         }
 
+        public override bool Release()
+        {
+            base.Release();
+            Communication.Release();
+            return true;
+        }
+
         private void Data_Received(byte[] packet)
         {
             MelsecParser.Parse(packet, out byte[] data);
