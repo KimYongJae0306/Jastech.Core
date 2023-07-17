@@ -75,6 +75,11 @@ namespace Jastech.Framework.Device
             {
                 success &= device.Release();
             }
+
+            foreach (var device in Devices)
+            {
+                device.Dispose();
+            }
             return success;
         }
         #endregion

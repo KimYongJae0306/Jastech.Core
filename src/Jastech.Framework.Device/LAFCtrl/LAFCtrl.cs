@@ -103,7 +103,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             // 이 코드를 변경하지 마세요. 'Dispose(bool disposing)' 메서드에 정리 코드를 입력합니다.
             Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
         }
     }
 

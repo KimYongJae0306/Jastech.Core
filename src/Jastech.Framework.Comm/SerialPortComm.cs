@@ -11,11 +11,6 @@ namespace Jastech.Framework.Comm
     public class SerialPortComm : IComm
     {
         #region 생성자
-        public SerialPortComm()
-        {
-
-        }
-
         public SerialPortComm(string portName, int baudRate, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.One)
         {
             PortName = portName;
