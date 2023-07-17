@@ -14,7 +14,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public SerialPortComm SerialPortComm { get; set; } = null;
 
         [JsonProperty]
-        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm
+        public double ResolutionAxisZ { get; set; } = 1000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm // 믿지마
 
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
@@ -78,31 +78,15 @@ namespace Jastech.Framework.Device.LAFCtrl
             //ResponseReceivedEvent.Set();
         }
 
-        private void SetDefaultParameter()
+        public override void SetDefaultParameter()
         {
-            SetMotionMaxSpeed(1000);
+            SetMotionMaxSpeed(30);
             SetAccDec(100);
         }
 
-        public override void SetMotionMaxSpeed(double value)
+        public override void SetMotionMaxSpeed(double velocity)
         {
-            //****Example****
-            //[설정값]
-            //Ball screw Pitch : 5 mm(360도 회전시 Z축 Pitch)
-            //Control Resolution : 10000 cts / mm-+
-            //[입력값]
-            //10 mm / sec
-            //계산식 : 10[mm / sec] / ((360 / (5[mm] * 10000[cts]) / 360) * 5[mm]) = 100000[Hz]
-            //Velocity TO Pulse(Hz) formula
-            //double hz = 1 / (BallScrewPitchAxisZ / value);
-            //double pulse = hz * ResolutionAxisZ;
-            double maxPulse = value / BallScrewPitchAxisZ;
-
-            //int maxPulse = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * ResolutionAxisZ) / 360.0) * BallScrewPitchAxisZ));
-            //int maxPulse2 = Convert.ToInt32(value / ((360.0 / (BallScrewPitchAxisZ * 10000) / 360.0) * BallScrewPitchAxisZ));
-
-            maxPulse = 300000;//MaxSppedAxisZ * 10;// (maxPulse > MaxSppedAxisZ) ? MaxSppedAxisZ : maxPulse;
-
+            double maxPulse = velocity * ResolutionAxisZ;
             string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
 
             Send(command);
@@ -134,7 +118,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public void SetAccDec(int value)
         {
-            // Min : 1 Max : 200
+            // Min : 1 Max : 20
             if (value < 1)
                 value = 1;
             if (value > 200)
