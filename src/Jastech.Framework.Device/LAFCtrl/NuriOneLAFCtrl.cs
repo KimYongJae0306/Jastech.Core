@@ -49,8 +49,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
             if (SerialPortComm.Connect())
             {
+                SetBaudRate(115200);                // 누리원테크 확인 결과, 첫 연결은 9600으로 연결 후 통신속도를 115200으로 변경
                 SetDefaultParameter();
-
                 SetLaserOnOff(true);
                 return true;
             }
@@ -141,6 +141,12 @@ namespace Jastech.Framework.Device.LAFCtrl
                 value = 200;
 
             string command = MakeSetCommand(CMD_WRITE_ACCELDECEL, value.ToString());
+            Send(command);
+        }
+
+        private void SetBaudRate(int baudRate)
+        {
+            string command = MakeSetCommand(CMD_WRITE_BAUDRATE, baudRate.ToString());
             Send(command);
         }
 
