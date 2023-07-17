@@ -143,7 +143,6 @@ namespace Jastech.Framework.Device.Motions
         Y,
         Z0,
         Z1,
-        Z2,
         T,
     }
 }
