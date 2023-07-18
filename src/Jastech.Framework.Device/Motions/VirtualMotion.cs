@@ -23,7 +23,7 @@
 
         public override string GetCurrentMotionStatus(int axisNo)
         {
-            return "";
+            return "Done";
         }
 
         public override bool IsEnable(int axisNo)

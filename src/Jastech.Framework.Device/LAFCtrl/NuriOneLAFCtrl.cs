@@ -142,7 +142,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public void SetLaserOnOff(bool isOn)
         {
-            IsLaserOn = isOn;
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF, value);
