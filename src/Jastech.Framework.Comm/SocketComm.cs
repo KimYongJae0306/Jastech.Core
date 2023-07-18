@@ -200,24 +200,28 @@ namespace Jastech.Framework.Comm
             {
                 if (!ReconnectionRequested)
                 {
-                    if (Socket.Connected)
+                    if(Socket != null)
                     {
-                        int readCount = Socket.EndReceive(result);
-
-                        if (readCount != 0)
+                        if (Socket.Connected)
                         {
-                            var readPacketBuffer = new byte[readCount];
-                            Array.Copy(ReservedPacketBuffer, 0, readPacketBuffer, 0, readCount);
-                            ReceivedPacketBuffer.Enqueue(readPacketBuffer);
-                            if (ReceivedPacketBuffer.Dequeue(Protocol, out List<byte[]> datas))
+                            int readCount = Socket.EndReceive(result);
+
+                            if (readCount != 0)
                             {
-                                foreach (var data in datas)
+                                var readPacketBuffer = new byte[readCount];
+                                Array.Copy(ReservedPacketBuffer, 0, readPacketBuffer, 0, readCount);
+                                ReceivedPacketBuffer.Enqueue(readPacketBuffer);
+                                if (ReceivedPacketBuffer.Dequeue(Protocol, out List<byte[]> datas))
                                 {
-                                    Received?.Invoke(data);
+                                    foreach (var data in datas)
+                                    {
+                                        Received?.Invoke(data);
+                                    }
                                 }
                             }
                         }
                     }
+                 
                 }
                 this.Receive();
             }

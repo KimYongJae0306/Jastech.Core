@@ -108,11 +108,10 @@
             // pnlMoveMode
             // 
             this.pnlMoveMode.Controls.Add(this.tlpDirectionMove);
-            this.pnlMoveMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMoveMode.Location = new System.Drawing.Point(0, 0);
+            this.pnlMoveMode.Location = new System.Drawing.Point(159, 145);
             this.pnlMoveMode.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMoveMode.Name = "pnlMoveMode";
-            this.pnlMoveMode.Size = new System.Drawing.Size(326, 291);
+            this.pnlMoveMode.Size = new System.Drawing.Size(167, 146);
             this.pnlMoveMode.TabIndex = 4;
             // 
             // tlpDirectionMove
@@ -135,7 +134,7 @@
             this.tlpDirectionMove.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpDirectionMove.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpDirectionMove.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpDirectionMove.Size = new System.Drawing.Size(326, 291);
+            this.tlpDirectionMove.Size = new System.Drawing.Size(167, 146);
             this.tlpDirectionMove.TabIndex = 0;
             // 
             // lblMove
@@ -144,10 +143,10 @@
             this.lblMove.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMove.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMove.Image = global::Jastech.Framework.Winform.Properties.Resources.ROIMoveMode_White;
-            this.lblMove.Location = new System.Drawing.Point(108, 96);
+            this.lblMove.Location = new System.Drawing.Point(55, 48);
             this.lblMove.Margin = new System.Windows.Forms.Padding(0);
             this.lblMove.Name = "lblMove";
-            this.lblMove.Size = new System.Drawing.Size(108, 96);
+            this.lblMove.Size = new System.Drawing.Size(55, 48);
             this.lblMove.TabIndex = 6;
             this.lblMove.Text = "MOVE";
             this.lblMove.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -158,10 +157,10 @@
             this.lblMoveRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMoveRight.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMoveRight.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Right_White;
-            this.lblMoveRight.Location = new System.Drawing.Point(216, 96);
+            this.lblMoveRight.Location = new System.Drawing.Point(110, 48);
             this.lblMoveRight.Margin = new System.Windows.Forms.Padding(0);
             this.lblMoveRight.Name = "lblMoveRight";
-            this.lblMoveRight.Size = new System.Drawing.Size(110, 96);
+            this.lblMoveRight.Size = new System.Drawing.Size(57, 48);
             this.lblMoveRight.TabIndex = 10;
             this.lblMoveRight.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblMoveRight.Click += new System.EventHandler(this.lblMoveRight_Click);
@@ -172,10 +171,10 @@
             this.lblMoveUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMoveUp.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMoveUp.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Up_White;
-            this.lblMoveUp.Location = new System.Drawing.Point(108, 0);
+            this.lblMoveUp.Location = new System.Drawing.Point(55, 0);
             this.lblMoveUp.Margin = new System.Windows.Forms.Padding(0);
             this.lblMoveUp.Name = "lblMoveUp";
-            this.lblMoveUp.Size = new System.Drawing.Size(108, 96);
+            this.lblMoveUp.Size = new System.Drawing.Size(55, 48);
             this.lblMoveUp.TabIndex = 10;
             this.lblMoveUp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblMoveUp.Click += new System.EventHandler(this.lblMoveUp_Click);
@@ -186,10 +185,10 @@
             this.lblMoveLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMoveLeft.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMoveLeft.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Left_White;
-            this.lblMoveLeft.Location = new System.Drawing.Point(0, 96);
+            this.lblMoveLeft.Location = new System.Drawing.Point(0, 48);
             this.lblMoveLeft.Margin = new System.Windows.Forms.Padding(0);
             this.lblMoveLeft.Name = "lblMoveLeft";
-            this.lblMoveLeft.Size = new System.Drawing.Size(108, 96);
+            this.lblMoveLeft.Size = new System.Drawing.Size(55, 48);
             this.lblMoveLeft.TabIndex = 10;
             this.lblMoveLeft.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblMoveLeft.Click += new System.EventHandler(this.lblMoveLeft_Click);
@@ -200,10 +199,10 @@
             this.lblMoveDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMoveDown.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMoveDown.Image = global::Jastech.Framework.Winform.Properties.Resources.Arrow_Down_White;
-            this.lblMoveDown.Location = new System.Drawing.Point(108, 192);
+            this.lblMoveDown.Location = new System.Drawing.Point(55, 96);
             this.lblMoveDown.Margin = new System.Windows.Forms.Padding(0);
             this.lblMoveDown.Name = "lblMoveDown";
-            this.lblMoveDown.Size = new System.Drawing.Size(108, 99);
+            this.lblMoveDown.Size = new System.Drawing.Size(55, 50);
             this.lblMoveDown.TabIndex = 10;
             this.lblMoveDown.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblMoveDown.Click += new System.EventHandler(this.lblMoveDown_Click);
@@ -211,11 +210,10 @@
             // pnlSizeMode
             // 
             this.pnlSizeMode.Controls.Add(this.tlpDirectionSize);
-            this.pnlSizeMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSizeMode.Location = new System.Drawing.Point(0, 0);
+            this.pnlSizeMode.Location = new System.Drawing.Point(0, 145);
             this.pnlSizeMode.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSizeMode.Name = "pnlSizeMode";
-            this.pnlSizeMode.Size = new System.Drawing.Size(326, 291);
+            this.pnlSizeMode.Size = new System.Drawing.Size(159, 146);
             this.pnlSizeMode.TabIndex = 10;
             // 
             // tlpDirectionSize
@@ -237,7 +235,7 @@
             this.tlpDirectionSize.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpDirectionSize.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpDirectionSize.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpDirectionSize.Size = new System.Drawing.Size(326, 291);
+            this.tlpDirectionSize.Size = new System.Drawing.Size(159, 146);
             this.tlpDirectionSize.TabIndex = 0;
             // 
             // lblSize
@@ -246,10 +244,10 @@
             this.lblSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSize.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSize.Image = global::Jastech.Framework.Winform.Properties.Resources.ROISizeMode_White;
-            this.lblSize.Location = new System.Drawing.Point(108, 96);
+            this.lblSize.Location = new System.Drawing.Point(53, 48);
             this.lblSize.Margin = new System.Windows.Forms.Padding(0);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(108, 96);
+            this.lblSize.Size = new System.Drawing.Size(53, 48);
             this.lblSize.TabIndex = 6;
             this.lblSize.Text = "SIZE";
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -260,10 +258,10 @@
             this.lblZoomInVertical.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblZoomInVertical.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblZoomInVertical.Image = global::Jastech.Framework.Winform.Properties.Resources.Caret_Vertical_Expand_White;
-            this.lblZoomInVertical.Location = new System.Drawing.Point(108, 0);
+            this.lblZoomInVertical.Location = new System.Drawing.Point(53, 0);
             this.lblZoomInVertical.Margin = new System.Windows.Forms.Padding(0);
             this.lblZoomInVertical.Name = "lblZoomInVertical";
-            this.lblZoomInVertical.Size = new System.Drawing.Size(108, 96);
+            this.lblZoomInVertical.Size = new System.Drawing.Size(53, 48);
             this.lblZoomInVertical.TabIndex = 11;
             this.lblZoomInVertical.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblZoomInVertical.Click += new System.EventHandler(this.lblZoomInVertical_Click);
@@ -274,10 +272,10 @@
             this.lblZoomOutHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblZoomOutHorizontal.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblZoomOutHorizontal.Image = global::Jastech.Framework.Winform.Properties.Resources.Caret_Horizontal_Focus_White;
-            this.lblZoomOutHorizontal.Location = new System.Drawing.Point(0, 96);
+            this.lblZoomOutHorizontal.Location = new System.Drawing.Point(0, 48);
             this.lblZoomOutHorizontal.Margin = new System.Windows.Forms.Padding(0);
             this.lblZoomOutHorizontal.Name = "lblZoomOutHorizontal";
-            this.lblZoomOutHorizontal.Size = new System.Drawing.Size(108, 96);
+            this.lblZoomOutHorizontal.Size = new System.Drawing.Size(53, 48);
             this.lblZoomOutHorizontal.TabIndex = 11;
             this.lblZoomOutHorizontal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblZoomOutHorizontal.Click += new System.EventHandler(this.lblZoomOutHorizontal_Click);
@@ -288,10 +286,10 @@
             this.lblZoomInHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblZoomInHorizontal.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblZoomInHorizontal.Image = global::Jastech.Framework.Winform.Properties.Resources.Caret_Horizontal_Expand_White;
-            this.lblZoomInHorizontal.Location = new System.Drawing.Point(216, 96);
+            this.lblZoomInHorizontal.Location = new System.Drawing.Point(106, 48);
             this.lblZoomInHorizontal.Margin = new System.Windows.Forms.Padding(0);
             this.lblZoomInHorizontal.Name = "lblZoomInHorizontal";
-            this.lblZoomInHorizontal.Size = new System.Drawing.Size(110, 96);
+            this.lblZoomInHorizontal.Size = new System.Drawing.Size(53, 48);
             this.lblZoomInHorizontal.TabIndex = 11;
             this.lblZoomInHorizontal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblZoomInHorizontal.Click += new System.EventHandler(this.lblZoomInHorizontal_Click);
@@ -302,10 +300,10 @@
             this.lblZoomOutVertical.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblZoomOutVertical.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblZoomOutVertical.Image = global::Jastech.Framework.Winform.Properties.Resources.Caret_Vertical_Focus_White;
-            this.lblZoomOutVertical.Location = new System.Drawing.Point(108, 192);
+            this.lblZoomOutVertical.Location = new System.Drawing.Point(53, 96);
             this.lblZoomOutVertical.Margin = new System.Windows.Forms.Padding(0);
             this.lblZoomOutVertical.Name = "lblZoomOutVertical";
-            this.lblZoomOutVertical.Size = new System.Drawing.Size(108, 99);
+            this.lblZoomOutVertical.Size = new System.Drawing.Size(53, 50);
             this.lblZoomOutVertical.TabIndex = 11;
             this.lblZoomOutVertical.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblZoomOutVertical.Click += new System.EventHandler(this.lblZoomOutVertical_Click);
@@ -345,13 +343,13 @@
             this.tlpMovePixel.Controls.Add(this.lblJogScale, 0, 1);
             this.tlpMovePixel.Controls.Add(this.lblMovePixel, 0, 0);
             this.tlpMovePixel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMovePixel.Location = new System.Drawing.Point(0, 96);
+            this.tlpMovePixel.Location = new System.Drawing.Point(0, 97);
             this.tlpMovePixel.Margin = new System.Windows.Forms.Padding(0);
             this.tlpMovePixel.Name = "tlpMovePixel";
             this.tlpMovePixel.RowCount = 2;
             this.tlpMovePixel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMovePixel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMovePixel.Size = new System.Drawing.Size(110, 96);
+            this.tlpMovePixel.Size = new System.Drawing.Size(110, 97);
             this.tlpMovePixel.TabIndex = 8;
             // 
             // lblJogScale
@@ -364,7 +362,7 @@
             this.lblJogScale.Location = new System.Drawing.Point(9, 57);
             this.lblJogScale.Margin = new System.Windows.Forms.Padding(9);
             this.lblJogScale.Name = "lblJogScale";
-            this.lblJogScale.Size = new System.Drawing.Size(92, 30);
+            this.lblJogScale.Size = new System.Drawing.Size(92, 31);
             this.lblJogScale.TabIndex = 8;
             this.lblJogScale.Text = "1";
             this.lblJogScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -395,7 +393,7 @@
             this.tlpMoveSize.RowCount = 2;
             this.tlpMoveSize.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMoveSize.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMoveSize.Size = new System.Drawing.Size(110, 96);
+            this.tlpMoveSize.Size = new System.Drawing.Size(110, 97);
             this.tlpMoveSize.TabIndex = 6;
             // 
             // lblSizeMode
@@ -405,7 +403,7 @@
             this.lblSizeMode.Location = new System.Drawing.Point(0, 48);
             this.lblSizeMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblSizeMode.Name = "lblSizeMode";
-            this.lblSizeMode.Size = new System.Drawing.Size(110, 48);
+            this.lblSizeMode.Size = new System.Drawing.Size(110, 49);
             this.lblSizeMode.TabIndex = 6;
             this.lblSizeMode.Text = "Size";
             this.lblSizeMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -432,21 +430,21 @@
             this.tlpROIType.Controls.Add(this.lblTrainMode, 0, 1);
             this.tlpROIType.Controls.Add(this.lblROIMode, 0, 0);
             this.tlpROIType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpROIType.Location = new System.Drawing.Point(0, 192);
+            this.tlpROIType.Location = new System.Drawing.Point(0, 194);
             this.tlpROIType.Margin = new System.Windows.Forms.Padding(0);
             this.tlpROIType.Name = "tlpROIType";
             this.tlpROIType.RowCount = 3;
             this.tlpROIType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpROIType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpROIType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpROIType.Size = new System.Drawing.Size(110, 99);
+            this.tlpROIType.Size = new System.Drawing.Size(110, 97);
             this.tlpROIType.TabIndex = 7;
             // 
             // lblOriginMode
             // 
             this.lblOriginMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblOriginMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOriginMode.Location = new System.Drawing.Point(0, 66);
+            this.lblOriginMode.Location = new System.Drawing.Point(0, 64);
             this.lblOriginMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblOriginMode.Name = "lblOriginMode";
             this.lblOriginMode.Size = new System.Drawing.Size(110, 33);
@@ -459,10 +457,10 @@
             // 
             this.lblTrainMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTrainMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTrainMode.Location = new System.Drawing.Point(0, 33);
+            this.lblTrainMode.Location = new System.Drawing.Point(0, 32);
             this.lblTrainMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblTrainMode.Name = "lblTrainMode";
-            this.lblTrainMode.Size = new System.Drawing.Size(110, 33);
+            this.lblTrainMode.Size = new System.Drawing.Size(110, 32);
             this.lblTrainMode.TabIndex = 8;
             this.lblTrainMode.Text = "Train";
             this.lblTrainMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -475,7 +473,7 @@
             this.lblROIMode.Location = new System.Drawing.Point(0, 0);
             this.lblROIMode.Margin = new System.Windows.Forms.Padding(0);
             this.lblROIMode.Name = "lblROIMode";
-            this.lblROIMode.Size = new System.Drawing.Size(110, 33);
+            this.lblROIMode.Size = new System.Drawing.Size(110, 32);
             this.lblROIMode.TabIndex = 7;
             this.lblROIMode.Text = "ROI";
             this.lblROIMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -516,10 +514,10 @@
             this.lblSkewCW.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSkewCW.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSkewCW.Image = global::Jastech.Framework.Winform.Properties.Resources.Skew_CW;
-            this.lblSkewCW.Location = new System.Drawing.Point(0, 192);
+            this.lblSkewCW.Location = new System.Drawing.Point(0, 194);
             this.lblSkewCW.Margin = new System.Windows.Forms.Padding(0);
             this.lblSkewCW.Name = "lblSkewCW";
-            this.lblSkewCW.Size = new System.Drawing.Size(108, 99);
+            this.lblSkewCW.Size = new System.Drawing.Size(108, 97);
             this.lblSkewCW.TabIndex = 11;
             this.lblSkewCW.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblSkewCW.Click += new System.EventHandler(this.lblSkewCW_Click);
@@ -531,10 +529,10 @@
             this.lblSkewZero.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSkewZero.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSkewZero.Image = ((System.Drawing.Image)(resources.GetObject("lblSkewZero.Image")));
-            this.lblSkewZero.Location = new System.Drawing.Point(0, 96);
+            this.lblSkewZero.Location = new System.Drawing.Point(0, 97);
             this.lblSkewZero.Margin = new System.Windows.Forms.Padding(0);
             this.lblSkewZero.Name = "lblSkewZero";
-            this.lblSkewZero.Size = new System.Drawing.Size(108, 96);
+            this.lblSkewZero.Size = new System.Drawing.Size(108, 97);
             this.lblSkewZero.TabIndex = 10;
             this.lblSkewZero.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblSkewZero.Click += new System.EventHandler(this.lblSkewZero_Click);
@@ -548,12 +546,12 @@
             this.lblSkewCCW.Location = new System.Drawing.Point(0, 0);
             this.lblSkewCCW.Margin = new System.Windows.Forms.Padding(0);
             this.lblSkewCCW.Name = "lblSkewCCW";
-            this.lblSkewCCW.Size = new System.Drawing.Size(108, 96);
+            this.lblSkewCCW.Size = new System.Drawing.Size(108, 97);
             this.lblSkewCCW.TabIndex = 11;
             this.lblSkewCCW.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblSkewCCW.Click += new System.EventHandler(this.lblSkewCCW_Click);
             // 
-            // ROIJogControl
+            // ROIJogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -563,7 +561,7 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ROIJogControl";
+            this.Name = "ROIJogForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ROIJogControl_FormClosed);
             this.Load += new System.EventHandler(this.ROIJogControl_Load);
             this.tlpTeachJog.ResumeLayout(false);
