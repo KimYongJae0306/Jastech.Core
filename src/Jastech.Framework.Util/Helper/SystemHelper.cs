@@ -29,6 +29,7 @@ namespace Jastech.Framework.Util.Helper
 
         public static void SetSystemTime(DateTime dateTime)
         {
+            // Visual Studio 관리자 권한일 때만 적용 됨
             SystemTime systemTime = new SystemTime();
             systemTime.Year = (ushort)dateTime.Year;
             systemTime.Month = (ushort)dateTime.Month;

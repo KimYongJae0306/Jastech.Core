@@ -9,7 +9,7 @@ namespace Jastech.Framework.Util.Native
 {
     public static class Win32APIWrapper
     {
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool SetSystemTime(ref SystemTime systemTime);
     }
 
