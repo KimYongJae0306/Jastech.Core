@@ -40,10 +40,10 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             InitializeUI();
             ShowResultParamControl();
 
-            if (UserMaker == false)
-            {
-                rdoImageParam.Visible = false;
-            }
+            //if (UserMaker == false)
+            //{
+            //    rdoImageParam.Visible = false;
+            //}
         }
 
         private void InitializeUI()
