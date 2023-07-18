@@ -34,7 +34,7 @@ namespace Jastech.Framework.Device.Cameras
 
         private bool _isGrabbing { get; set; } = false;
 
-        private MIL_ID MilDisplay;
+        private MIL_ID MilDisplay; // MIL Display 사용시 사용
 
         private MIL_ID MilImage;
 

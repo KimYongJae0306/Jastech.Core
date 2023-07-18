@@ -123,12 +123,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.EdgeBlob.dll</HintPath>
     </Reference>
-    <Reference Include="Cognex.VisionPro.EdgeInspect">
-      <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.EdgeInspect.dll</HintPath>
-    </Reference>
-    <Reference Include="Cognex.VisionPro.EdgeInspect.Controls">
-      <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.EdgeInspect.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="Cognex.VisionPro.FG1394DCAM, Version=65.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Jastech.Library\Cognex\9.6\Cognex.VisionPro.FG1394DCAM.dll</HintPath>
