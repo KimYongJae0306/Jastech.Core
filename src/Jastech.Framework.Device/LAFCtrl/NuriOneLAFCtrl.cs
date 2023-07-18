@@ -62,9 +62,15 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             if (SerialPortComm != null)
             {
+                SetTrackingOnOFF(false);
+                Thread.Sleep(50);
+                SetLaserOnOff(false);
+                Thread.Sleep(50);
+
                 SerialPortComm.Received -= SerialPortComm_Received;
                 SerialPortComm.Disconnect();
             }
+
             base.Release();
             return true;
         }
@@ -149,7 +155,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             Send(command);
         }
 
-        public void SetAutoFocusOnOFF(bool isOn)
+        public void SetTrackingOnOFF(bool isOn)
         {
             string value = Convert.ToInt16(isOn).ToString();
 
