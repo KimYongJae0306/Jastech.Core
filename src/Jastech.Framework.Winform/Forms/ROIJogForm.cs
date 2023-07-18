@@ -9,23 +9,26 @@ namespace Jastech.Framework.Winform.Forms
     {
         #region 필드
         private Color _selectedColor = new Color();
+
         private Color _nonSelectedColor = new Color();
         #endregion
 
         #region 속성
         public TeachingItem TeachingItem { get; set; } = TeachingItem.Mark;
+
         public ROIType ROIType { get; private set; } = ROIType.ROI;
+
         public int JogScale { get; private set; } = 1;
         #endregion
 
         #region 이벤트
         public event SendClickEventDelegate SendEventHandler;
+
+        public Action CloseEventDelegate;
         #endregion
 
         #region 델리게이트
         public delegate void SendClickEventDelegate(string jogType, int JogScale, ROIType roiType = ROIType.ROI);
-
-        public Action CloseEventDelegate;
         #endregion
 
         #region 생성자

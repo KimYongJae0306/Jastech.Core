@@ -5,19 +5,10 @@ namespace Jastech.Framework.Winform.Forms
 {
     public partial class KeyPadForm : Form
     {
-        #region 필드
-        #endregion
-
         #region 속성
         public double PadValue { get; set; }
 
         public double PreviousValue { get; set; }
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자
@@ -31,14 +22,7 @@ namespace Jastech.Framework.Winform.Forms
         private void btnNumber_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-
-            if (lblTextMessage.Text == "")
-            {
-                //if (button.Text == "0" || button.Text == ".")
-                //    return;
-            }
             lblTextMessage.Text += button.Text;
-
             btnEnter.Focus();
         }
 

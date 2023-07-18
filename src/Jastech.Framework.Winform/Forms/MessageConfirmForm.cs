@@ -14,11 +14,18 @@ namespace Jastech.Framework.Winform.Forms
         public string Message { get; set; } = "";
         #endregion
 
+        #region 델리게이트
+        public delegate void UpdateDataDele();
+        #endregion
+
+        #region 생성자
         public MessageConfirmForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void WarningMessageForm_Load(object sender, EventArgs e)
         {
             UpdateData();
@@ -31,7 +38,6 @@ namespace Jastech.Framework.Winform.Forms
             Close();
         }
 
-        public delegate void UpdateDataDele();
         private void UpdateData()
         {
             if (this.InvokeRequired)
@@ -56,5 +62,6 @@ namespace Jastech.Framework.Winform.Forms
                 Location = new Point(this.Left - (_mousePoint.X - e.X), this.Top - (_mousePoint.Y - e.Y));
             }
         }
+        #endregion
     }
 }

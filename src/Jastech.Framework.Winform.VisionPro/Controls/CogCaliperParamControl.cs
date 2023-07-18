@@ -11,12 +11,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     public partial class CogCaliperParamControl : UserControl
     {
         #region 필드
-        private VisionProCaliperParam CurrentParam;
         private Color _selectedColor = new Color();
+
         private Color _nonSelectedColor = new Color();
         #endregion
 
         #region 속성
+        private VisionProCaliperParam CurrentParam;
         #endregion
 
         #region 이벤트

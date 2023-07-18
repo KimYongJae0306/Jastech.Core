@@ -8,9 +8,11 @@ namespace Jastech.Framework.Winform.Forms
     {
         #region 필드
         private Color _selectedColor;
+
         private Color _nonSelectedColor;
 
         private bool _isKorean = false;
+
         private bool _isCapitalLetter = false;
         #endregion
 
@@ -18,12 +20,6 @@ namespace Jastech.Framework.Winform.Forms
         public string KeyValue { get; set; } = string.Empty;
 
         public string PreviousValue { get; set; }
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자
@@ -209,7 +205,6 @@ namespace Jastech.Framework.Winform.Forms
                 Close();
             }
         }
-        #endregion
 
         private void KeyBoardForm_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -261,7 +256,8 @@ namespace Jastech.Framework.Winform.Forms
         private void InitializeUI()
         {
             _selectedColor = Color.FromArgb(52, 52, 52);
-            _nonSelectedColor = Color.FromArgb(104, 104, 104); 
+            _nonSelectedColor = Color.FromArgb(104, 104, 104);
         }
+        #endregion
     }
 }

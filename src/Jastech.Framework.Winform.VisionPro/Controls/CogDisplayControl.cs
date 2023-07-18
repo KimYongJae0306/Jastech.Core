@@ -44,12 +44,24 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private DisplayMode _displayMode { get; set; } = DisplayMode.None;
 
         private StepPointToPoint _stepPointToPoint = StepPointToPoint.Start;
+        #endregion
 
+        #region 속성
         private Point StartPoint { get; set; }
 
         private Point EndPoint { get; set; }
 
         private double Distance { get; set; }
+
+        public double PixelResolution { get; set; } = 1.0;
+
+        private CogDistancePointPointTool TrackingCogDistanceTool = new CogDistancePointPointTool();
+
+        private List<CogToolBase> DrawToolList = new List<CogToolBase>();
+
+        public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
+
+        public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
         #endregion
 
         #region 이벤트
@@ -65,19 +77,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public delegate void MoveImageDelegate(double panX, double panY, double zoom);
         #endregion
-
-        #region 속성
-        public double PixelResolution { get; set; } = 1.0;
-
-        private CogDistancePointPointTool TrackingCogDistanceTool = new CogDistancePointPointTool();
-
-        private List<CogToolBase> DrawToolList = new List<CogToolBase>();
-
-        public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
-
-        public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
-        #endregion
-
+ 
         #region 생성자
         public CogDisplayControl()
         {
@@ -96,9 +96,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogDisplayHelper.DisposeDisplay(cogDisplay);
             if (cogImage == null)
                 cogDisplay.Image = null;
-            else//ASDF
+            else
                 cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
-            //UpdateViewRect();
         }
 
         public void DisposeImage()
@@ -269,12 +268,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearGraphic()
         {
-            //cogDisplay.StaticGraphics.Dispose();
             cogDisplay.StaticGraphics.Clear();
-            //cogDisplay.InteractiveGraphics.Dispose();
             cogDisplay.InteractiveGraphics.Clear();
-
-            //GC.Collect();
         }
 
         public void ClearGraphic(string groupName)
@@ -796,8 +791,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
         }
-
-     
         #endregion
     }
 }

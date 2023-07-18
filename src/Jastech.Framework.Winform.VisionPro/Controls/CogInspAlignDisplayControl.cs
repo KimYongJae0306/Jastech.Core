@@ -8,11 +8,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogInspAlignDisplayControl : UserControl
     {
+        #region 생성자
         public CogInspAlignDisplayControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
             CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
@@ -62,7 +65,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (display.Image == null)
                 return;
 
-            if(point != null)
+            if (point != null)
             {
                 if (point.X == 0 && point.Y == 0)
                     return;
@@ -82,5 +85,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.InteractiveGraphics.Clear();
             cogRightDisplay.Image = null;
         }
+        #endregion
     }
 }

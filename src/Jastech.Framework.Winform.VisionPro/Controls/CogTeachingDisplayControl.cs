@@ -6,17 +6,24 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogTeachingDisplayControl : UserControl
     {
+        #region 속성
         private CogDisplayControl CogDisplay { get; set; }
 
         private CogThumbnailControl CogThumbnail { get; set; }
+        #endregion
 
+        #region 이벤트
         public event EventHandler DeleteEventHandler;
+        #endregion
 
+        #region 생성자
         public CogTeachingDisplayControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void CogTeachingDisplayControl_Load(object sender, EventArgs e)
         {
             AddControls();
@@ -55,5 +62,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogDisplay.DisposeImage();
             CogThumbnail.DisposeImage();
         }
+        #endregion
     }
 }

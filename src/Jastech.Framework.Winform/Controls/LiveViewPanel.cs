@@ -8,32 +8,27 @@ namespace Jastech.Framework.Winform.Controls
     public partial class LiveViewPanel : UserControl
     {
         #region 필드
+        private Bitmap _originBitmap = null;
+
+        private Point _mouseUpPoint = new Point();
+
+        private Point _mouseDownPoint = new Point();
         #endregion
 
         #region 속성
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        #endregion
-
-        #region 메서드
-        #endregion
-
         public DoubleBufferPanel DoubleBufferPanel { get; set; } = null;
 
         public byte[] ImageSource { get; set; } = null;
+        #endregion
 
+        #region 생성자
         public LiveViewPanel()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void LiveViewPanel_Load(object sender, EventArgs e)
         {
             DoubleBufferPanel = new DoubleBufferPanel() { Dock = DockStyle.Fill };
@@ -45,7 +40,6 @@ namespace Jastech.Framework.Winform.Controls
             DoubleBufferPanel.MouseUp += DoubleBufferPanel_MouseUp;
         }
 
-        private Point _mouseUpPoint = new Point();
         private void DoubleBufferPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -66,14 +60,13 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
 
-        private Point _mouseDownPoint = new Point();
         private void DoubleBufferPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 _mouseDownPoint = e.Location;
         }
 
-        
+
         private void DoubleBufferPanel_MouseWheel(object sender, MouseEventArgs e)
         {
             if (ModifierKeys != Keys.Control)
@@ -91,7 +84,7 @@ namespace Jastech.Framework.Winform.Controls
             {
                 ratio *= 0.9;
             }
-            
+
             int width = Convert.ToInt32(pnlLiveView.Width * ratio);
             int height = Convert.ToInt32(pnlLiveView.Height * ratio);
 
@@ -124,16 +117,10 @@ namespace Jastech.Framework.Winform.Controls
             g.SmoothingMode = SmoothingMode.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-            //DrawImage(g);
         }
 
-        Bitmap _originBitmap = null;
         private void DrawImage(Graphics g)
         {
-            //if (ImageSource == null)
-            //    return;
-
             Bitmap newBmp = new Bitmap(pnlLiveView.Width, pnlLiveView.Height);
             Rectangle drawRect = new Rectangle(0, 0, newBmp.Width, newBmp.Height);
 
@@ -148,5 +135,6 @@ namespace Jastech.Framework.Winform.Controls
                 newBmp = null;
             }
         }
+        #endregion
     }
 }

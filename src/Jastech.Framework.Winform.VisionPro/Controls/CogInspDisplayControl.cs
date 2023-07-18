@@ -20,9 +20,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public event DrawViewRectDelegate DrawViewRectEventHandler;
         #endregion
 
-        #region 델리게이트
-        #endregion
-
         #region 생성자
         public CogInspDisplayControl()
         {
@@ -40,14 +37,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             // 이벤트 등록(중요)
             CogThumbnail.UpdateRectEventHandler += UpdateViewRect;
             DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
-
-            //// TestCode
-            //string path = @"D:\Tab1.bmp";
-            //if(File.Exists(path))
-            //{
-            //    ICogImage cogImage = CogImageHelper.Load(path);
-            //    SetImage(cogImage);
-            //}
         }
 
         private void AddControls()

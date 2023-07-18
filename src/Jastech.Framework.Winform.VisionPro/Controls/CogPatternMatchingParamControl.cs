@@ -16,7 +16,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private VisionProPatternMatchingParam CurrentParam;
         #endregion
 
-
         #region 이벤트
         public GetOriginImageDelegate GetOriginImageHandler;
 
@@ -30,14 +29,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 생성자
-        #endregion
-
-        #region 메서드
         public CogPatternMatchingParamControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void lblAddPattern_Click(object sender, EventArgs e)
         {
             if (GetOriginImage() != null)
