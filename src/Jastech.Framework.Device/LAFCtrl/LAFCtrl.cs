@@ -118,7 +118,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         #region 속성
         public bool IsLaserOn { get; set; }
 
-        public bool IsAutoFocusOn { get; set; }
+        public bool IsTrackingOn { get; set; }
 
         public string Name { get; set; }
 
