@@ -1,22 +1,12 @@
 ﻿using Jastech.Framework.Imaging;
 using Newtonsoft.Json;
 using System;
+using System.Threading;
 
 namespace Jastech.Framework.Device.Cameras
 {
     public abstract partial class Camera : IDevice
     {
-        #region 생성자
-        public Camera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
-        {
-            Name = name;
-            ImageWidth = imageWidth;
-            ImageHeight = imageHeight;
-            ColorFormat = colorFormat;
-            SensorType = sensorType;
-        }
-        #endregion
-
         #region 속성
         [JsonProperty]
         public int ImageWidth { get; protected set; }
@@ -42,10 +32,18 @@ namespace Jastech.Framework.Device.Cameras
         public int GrabCount { get; set; } = 0;
 
         [JsonProperty]
-        public bool IsReverseX { get; set; }
+        public bool IsReverseX { get; set; } = false;
 
         [JsonProperty]
-        public double Exposure { get; set; }
+        public double Exposure { get; set; } = 5000;
+
+        [JsonProperty]
+        public int AnalogGain { get; set; } = 1;
+
+        [JsonProperty]
+        public int OnceGrabResponseTimeMs { get; set; } = 1000;
+
+        protected ManualResetEvent OnceGrabEvent { get; set; } = new ManualResetEvent(false);
         #endregion
 
         #region 이벤트
@@ -54,6 +52,17 @@ namespace Jastech.Framework.Device.Cameras
 
         #region 델리게이트
         public delegate void CameraEventDelegate(Camera camera);
+        #endregion
+
+        #region 생성자
+        public Camera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+        {
+            Name = name;
+            ImageWidth = imageWidth;
+            ImageHeight = imageHeight;
+            ColorFormat = colorFormat;
+            SensorType = sensorType;
+        }
         #endregion
 
         #region 메서드

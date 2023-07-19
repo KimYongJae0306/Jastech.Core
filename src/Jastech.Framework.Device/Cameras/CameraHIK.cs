@@ -110,6 +110,7 @@ namespace Jastech.Framework.Device.Cameras
                 LastImageData = temp;
             }
             ImageGrabbedCallback();
+            OnceGrabEvent.Set();
         }
         public override bool Release()
         {
@@ -140,10 +141,13 @@ namespace Jastech.Framework.Device.Cameras
         public override void GrabOnce()
         {
             Stop();
+            OnceGrabEvent.Reset();
 
             _isGrabbing = true;
             SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_SINGLE);
             _camera.MV_CC_StartGrabbing_NET();
+
+            OnceGrabEvent.WaitOne(OnceGrabResponseTimeMs);
         }
 
         public override void GrabMulti(int grabCount)
