@@ -165,6 +165,7 @@
             this.Controls.Add(this.tableLayoutPanel3);
             this.Name = "CogInspAlignDisplayControl";
             this.Size = new System.Drawing.Size(895, 402);
+            this.Load += new System.EventHandler(this.CogInspAlignDisplayControl_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogRightDisplay)).EndInit();

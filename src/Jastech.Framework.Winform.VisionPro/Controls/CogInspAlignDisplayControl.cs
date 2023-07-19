@@ -16,6 +16,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 메서드
+        private void CogInspAlignDisplayControl_Load(object sender, System.EventArgs e)
+        {
+            cogLeftDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+            cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+        }
+
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
             CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
