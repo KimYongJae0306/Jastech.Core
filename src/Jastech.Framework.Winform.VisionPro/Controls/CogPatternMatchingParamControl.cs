@@ -48,7 +48,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 ICogImage originImage = GetOriginImageHandler();
                 if (CurrentParam.Train(originImage))
                 {
-                  
                     cogPatternDisplay.Image = null;
                     cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
                 }

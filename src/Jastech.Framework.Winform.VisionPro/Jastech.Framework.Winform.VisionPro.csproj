@@ -246,6 +246,12 @@
     <Compile Include="Controls\CogPatternMatchingParamControl.Designer.cs">
       <DependentUpon>CogPatternMatchingParamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CogPreAlignDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CogPreAlignDisplayControl.Designer.cs">
+      <DependentUpon>CogPreAlignDisplayControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CogThumbnailControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogPatternMatchingParamControl.resx">
       <DependentUpon>CogPatternMatchingParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CogPreAlignDisplayControl.resx">
+      <DependentUpon>CogPreAlignDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogThumbnailControl.resx">
       <DependentUpon>CogThumbnailControl.cs</DependentUpon>
