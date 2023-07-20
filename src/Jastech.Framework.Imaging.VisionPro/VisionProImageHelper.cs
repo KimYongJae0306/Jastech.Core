@@ -335,12 +335,21 @@ namespace Jastech.Framework.Imaging.VisionPro
             return null;
         }
 
-        public static ICogImage CovertImage(IntPtr ptr, int width, int height, ColorFormat colorFormat)
+        public static ICogImage CovertImage(IntPtr ptr, int width, int height, int stride, ColorFormat colorFormat)
         {
             if (colorFormat == ColorFormat.Gray)
             {
                 CogImage8Root root = new CogImage8Root();
-                root.Initialize(width, height, ptr, width, null);
+
+                byte[] buffer = new byte[stride * height];
+                Marshal.Copy(ptr, buffer, 0, stride * height);
+
+                IntPtr copyPtr = Marshal.AllocHGlobal(stride * height);
+                Marshal.Copy(buffer, 0, copyPtr, stride * height);
+        
+
+
+                root.Initialize(width, height, copyPtr, stride, null);
                 var cogImage = new CogImage8Grey();
                 cogImage.SetRoot(root);
 

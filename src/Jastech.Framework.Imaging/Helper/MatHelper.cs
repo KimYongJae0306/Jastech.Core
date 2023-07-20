@@ -76,6 +76,15 @@ namespace Jastech.Framework.Imaging.Helper
             return boundMatOrigin;
         }
 
+        public static Mat Resize(Mat sourceMat, double resizeRatio)
+        {
+            Mat resizeMat = new Mat();
+            Size newSize = new Size((int)(sourceMat.Width * resizeRatio), (int)(sourceMat.Height * resizeRatio));
+            CvInvoke.Resize(sourceMat, resizeMat, newSize);
+
+            return resizeMat;
+        }
+
         public static byte[] MatToByteArray(Mat mat)
         {
             byte[] output = new byte[mat.Width * mat.Height * mat.NumberOfChannels];
