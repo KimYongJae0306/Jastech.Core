@@ -215,6 +215,7 @@
     <Compile Include="VisionAlgorithms\Results\VisionProAlignCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\VisionProCaliperResult.cs" />
     <Compile Include="VisionAlgorithms\Results\VisionProPatternMatchingResult.cs" />
+    <Compile Include="VisionProShapeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
