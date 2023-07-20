@@ -25,7 +25,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private OpencvContour OpencvContour { get; set; } = new OpencvContour();
 
-        public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, double resolution_um)
+        public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um)
         {
             Stopwatch sw = new Stopwatch();
             sw.Restart();
@@ -112,7 +112,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             return leadResultList;
         }
 
-        public List<AkkonLeadResult> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam parameters, double resolution_um)
+        public List<AkkonLeadResult> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam parameters, float resolution_um)
         {
             List<AkkonLeadResult> leadResultList = new List<AkkonLeadResult>();
 
@@ -257,7 +257,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             }
         }
 
-        public void ClacJudgement(Mat dataMat, Mat maskMat, ref AkkonLeadResult leadResult, AkkonAlgoritmParam param, double resolution_um)
+        public void ClacJudgement(Mat dataMat, Mat maskMat, ref AkkonLeadResult leadResult, AkkonAlgoritmParam param, float resolution_um)
         {
             PixelInfo minYInfo = new PixelInfo();
             PixelInfo maxYInfo = new PixelInfo();
