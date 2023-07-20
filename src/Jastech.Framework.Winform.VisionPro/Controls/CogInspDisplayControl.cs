@@ -50,7 +50,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (image == null)
                 return;
-            CogDisplayHelper.DisposeDisplay(cogDisplay);
+            //CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = image;
             CogThumbnail.SetThumbnailImage(image);
         }
