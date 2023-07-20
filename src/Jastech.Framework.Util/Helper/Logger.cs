@@ -27,6 +27,9 @@ namespace Jastech.Framework.Util.Helper
         {
             string logpath = GetLogPath(logType);
             string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+            string time = GetTimeString(DateTime.Now);
+            string message = "[" + time + "] " + "[" + logType.ToString() + "] " + logMessage;
+            message = message.Replace("\r\n", "");
 
             if (!Directory.Exists(strDir))
                 Directory.CreateDirectory(strDir);
@@ -36,7 +39,7 @@ namespace Jastech.Framework.Util.Helper
                 StreamWriter log = new StreamWriter(logpath, true);
                 using (log)
                 {
-                    log.WriteLine(logMessage);
+                    log.WriteLine(message);
                 }
             }
         }
