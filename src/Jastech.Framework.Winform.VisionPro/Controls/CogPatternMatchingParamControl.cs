@@ -48,7 +48,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 ICogImage originImage = GetOriginImageHandler();
                 if (CurrentParam.Train(originImage))
                 {
-                    cogPatternDisplay.Image = null;
+                    DisposePatternDisplay();
                     cogPatternDisplay.Image = CurrentParam.GetTrainedPatternImage();
                 }
                 else
@@ -71,7 +71,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             nupdnMatchScore.Value = (decimal)matchingParam.Score;
             nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
             CurrentParam = matchingParam;
-
+            if(CurrentParam.ChangedTrained == null)
+            {
+                CurrentParam.ChangedTrained += Tool_ChangedTrained;
+            }
             cogPatternDisplay.InteractiveGraphics.Clear();
             cogPatternDisplay.StaticGraphics.Clear();
 
@@ -87,7 +90,24 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 SetStaticGraphics("Masking", CurrentParam.CreateCurrentRecord(constants));
             }
             else
-                cogPatternDisplay.Image = null;
+            {
+                DisposePatternDisplay();
+            }
+               
+        }
+
+        private void DisposePatternDisplay()
+        {
+            CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
+            cogPatternDisplay.Image = null;
+        }
+
+        private void Tool_ChangedTrained(bool isTrained)
+        {
+            if(isTrained == false)
+            {
+                DisposePatternDisplay();
+            }
         }
 
         private void SetStaticGraphics(string groupName, ICogRecord record)
@@ -128,7 +148,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
             CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
-
             return CurrentParam;
         }
 
@@ -145,7 +164,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void SetTrainImage(ICogImage image)
         {
             CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
-            cogPatternDisplay.Image = null;
+            DisposePatternDisplay();
             cogPatternDisplay.Image = image;
         }
 

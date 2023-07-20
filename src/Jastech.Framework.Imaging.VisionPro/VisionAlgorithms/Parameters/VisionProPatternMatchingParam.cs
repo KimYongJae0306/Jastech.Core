@@ -13,6 +13,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonIgnore]
         private CogPMAlignTool PMTool { get; set; }
 
+        public ChangedTrainedDelegate ChangedTrained;
+
+        public delegate void ChangedTrainedDelegate(bool isTrained);
+
         public void SetTrainRegion(CogRectangle roi)
         {
             if (PMTool == null)
@@ -23,6 +27,15 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             PMTool.Pattern.Origin.TranslationX = rect.CenterX;
             PMTool.Pattern.Origin.TranslationY = rect.CenterY;
             PMTool.Pattern.TrainRegion = rect;
+            PMTool.Pattern.TrainRegion.Changed += TrainRegion_Changed;
+        }
+
+        private void TrainRegion_Changed(object sender, CogChangedEventArgs e)
+        {
+            if(sender is CogPMAlignPattern tool)
+            {
+                ChangedTrained?.Invoke(tool.Trained);
+            }
         }
 
         public ICogRegion GetTrainRegion()
@@ -90,6 +103,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (PMTool.Pattern.Trained == false)
                 return null;
 
+            PMTool.Pattern.Changed -= TrainRegion_Changed;
+            PMTool.Pattern.Changed += TrainRegion_Changed;
+   
             return PMTool.Pattern.GetTrainedPatternImage();
         }
 
