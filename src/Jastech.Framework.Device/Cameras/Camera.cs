@@ -23,10 +23,10 @@ namespace Jastech.Framework.Device.Cameras
         public SensorType SensorType { get; protected set; }
 
         [JsonProperty]
-        public double PixelResolution_um { get; set; } = 1;
+        public float PixelResolution_um { get; set; } = 0.35F;
 
         [JsonProperty]
-        public double LensScale { get; set; } = 1;
+        public float LensScale { get; set; } = 10F;
 
         [JsonIgnore]
         public int GrabCount { get; set; } = 0;

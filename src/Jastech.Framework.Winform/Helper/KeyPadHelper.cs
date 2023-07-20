@@ -39,5 +39,22 @@ namespace Jastech.Framework.Winform.Helper
 
             return inputData;
         }
+
+        public static float SetLabelFloatData(Label label)
+        {
+            float prevData = 0;
+            if (label.Text != "")
+                prevData = Convert.ToSingle(label.Text);
+
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = prevData;
+            keyPadForm.ShowDialog();
+
+            float inputData = Convert.ToSingle(keyPadForm.PadValue);
+
+            label.Text = inputData.ToString();
+
+            return inputData;
+        }
     }
 }

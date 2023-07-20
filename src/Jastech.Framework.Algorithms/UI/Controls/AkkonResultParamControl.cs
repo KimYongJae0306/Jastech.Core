@@ -82,37 +82,37 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         private void lblMinArea_Click(object sender, EventArgs e)
         {
-            double minArea = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float minArea = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.MinArea_um = minArea;
         }
 
         private void lblMaxArea_Click(object sender, EventArgs e)
         {
-            double maxArea = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float maxArea = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.MaxArea_um = maxArea;
         }
 
         private void lblMaxWidth_Click(object sender, EventArgs e)
         {
-            double maxWidth = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float maxWidth = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.MaxWidth_um = maxWidth;
         }
 
         private void lblMaxHeight_Click(object sender, EventArgs e)
         {
-            double maxHeight = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float maxHeight = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.MaxHeight_um = maxHeight;
         }
 
         private void lblStrength_Click(object sender, EventArgs e)
         {
-            double strength = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float strength = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.AkkonStrength = strength;
         }
 
         private void lblStrengthScaleFactor_Click(object sender, EventArgs e)
         {
-            double strengthScaleFactor = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float strengthScaleFactor = KeyPadHelper.SetLabelFloatData((Label)sender);
             ResultFilterParam.AkkonStrengthScaleFactor = strengthScaleFactor;
         }
 
@@ -124,19 +124,19 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         private void lblLeadLengthX_Click(object sender, EventArgs e)
         {
-            double lengthX = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float lengthX = KeyPadHelper.SetLabelFloatData((Label)sender);
             JudgementParam.LengthX_um = lengthX;
         }
 
         private void lblLeadLengthY_Click(object sender, EventArgs e)
         {
-            double lengthY = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float lengthY = KeyPadHelper.SetLabelFloatData((Label)sender);
             JudgementParam.LengthY_um = lengthY;
         }
 
         private void lblLeadStdDev_Click(object sender, EventArgs e)
         {
-            double stddev = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float stddev = KeyPadHelper.SetLabelFloatData((Label)sender);
             JudgementParam.LeadStdDev = stddev;
         }
 

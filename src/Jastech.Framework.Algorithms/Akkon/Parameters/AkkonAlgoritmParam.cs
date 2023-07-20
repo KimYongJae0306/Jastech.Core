@@ -54,25 +54,25 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public int Grouping { get; set; } = 3;
 
         [JsonProperty]
-        public double Resolution_um { get; set; } = 1.0;
+        public float Resolution_um { get; set; } = 1.0F;
 
         [JsonProperty]
-        public double MinArea_um { get; set; } = 3;
+        public float MinArea_um { get; set; } = 3F;
 
         [JsonProperty]
-        public double MaxArea_um { get; set; } = 100.0;
+        public float MaxArea_um { get; set; } = 100.0F;
 
         [JsonProperty]
-        public double MaxWidth_um { get; set; } = 100.0;
+        public float MaxWidth_um { get; set; } = 100.0F;
 
         [JsonProperty]
-        public double MaxHeight_um { get; set; } = 100.0;
+        public float MaxHeight_um { get; set; } = 100.0F;
 
         [JsonProperty]
-        public double AkkonStrength { get; set; } = 5.0;
+        public float AkkonStrength { get; set; } = 5.0F;
 
         [JsonProperty]
-        public double AkkonStrengthScaleFactor { get; set; } = 1.0;
+        public float AkkonStrengthScaleFactor { get; set; } = 1.0F;
     }
 
     public class AkkonJudgementParam
@@ -81,13 +81,13 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public int AkkonCount { get; set; } = 30;
 
         [JsonProperty]
-        public double LengthX_um { get; set; } = 10.0;
+        public float LengthX_um { get; set; } = 10.0F;
 
         [JsonProperty]
-        public double LengthY_um { get; set; } = 10.0;
+        public float LengthY_um { get; set; } = 10.0F;
 
         [JsonProperty]
-        public double LeadStdDev { get; set; } = 1.0;
+        public float LeadStdDev { get; set; } = 1.0F;
     }
 
     public class DrawParam

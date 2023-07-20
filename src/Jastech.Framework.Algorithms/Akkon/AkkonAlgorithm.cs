@@ -39,8 +39,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 MaxDegreeOfParallelism = max,
             };
             //Parallel.For(0, AkkonSliceList.Count(), options, i =>
-            Parallel.For(0, AkkonSliceList.Count(), i =>
-            //for (int i = 0; i < AkkonSliceList.Count(); i++)
+            //Parallel.For(0, AkkonSliceList.Count(), i =>
+            for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
                 slice.Id = i;
@@ -104,8 +104,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 enhanceMat?.Dispose();
                 maskMat?.Dispose();
                 thresMat?.Dispose();
-            //}
-            });
+            }
+            //});
 
             sw.Stop();
             Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
