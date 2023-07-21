@@ -37,19 +37,11 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     
     public class AkkonLeadResult
     {
-        public int Index { get; set; }
-
-        public AkkonROI Lead { get; set; }
-
         public LeadContainPos ContainPos { get; set; }
 
-        public double OffsetToWorldX { get; set; }
+        public AkkonROI Roi { get; set; } 
 
-        public double OffsetToWorldY { get; set; }
-
-        public double OffsetX { get; set; }
-
-        public double OffsetY { get; set; }
+        public AkkonOffset Offset { get; set; } = new AkkonOffset();
 
         public double Slope { get; set; }
 
@@ -57,17 +49,38 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public double Mean { get; set; }
 
+        public AkkonCountResult CountResult { get; set; } = new AkkonCountResult();
+
+        public AkkonLengthResult LengthResult { get; set; } = new AkkonLengthResult();
+
+        public List<BlobPos> BlobList = new List<BlobPos>();
+    }
+
+    public class AkkonLengthResult
+    {
+        public Judgement Judgement { get; set; }
+
         public double LengthX_um { get; set; }
 
         public double LengthY_um { get; set; }
+    }
+
+    public class AkkonCountResult
+    {
+        public Judgement Judgement { get; set; }
 
         public int DetectCount { get; set; }
+    }
 
-        public Judgement CountJudgement { get; set; }
+    public class AkkonOffset
+    {
+        public double ToWorldX { get; set; }
 
-        public Judgement LengthJudgement { get; set; }
+        public double ToWorldY { get; set; }
 
-        public List<BlobPos> BlobList = new List<BlobPos>();
+        public double X { get; set; }
+
+        public double Y { get; set; }
     }
 
     public enum LeadContainPos

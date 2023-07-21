@@ -8,7 +8,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     public class AkkonROI
     {
         [JsonProperty]
-        public int LeadIndex { get; set; }
+        public int Index { get; set; }
 
         [JsonProperty]
         public double LeftTopX { get; set; } // CornerOriginX
