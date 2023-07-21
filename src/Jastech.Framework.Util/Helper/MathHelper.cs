@@ -43,11 +43,6 @@ namespace Jastech.Framework.Util.Helper
             double deltaY = referencePoint2.Y - referencePoint2.Y;
             return Math.Atan2(deltaY, deltaX);
         }
-
-        public static double GetDiffAngle(PointF point1, PointF point2)
-        {
-            return 0.0;
-        }
         
         public static PointF GetCenterPoint(PointF point1, PointF point2)
         {
