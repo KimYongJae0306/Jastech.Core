@@ -65,7 +65,6 @@ namespace Jastech.Framework.Winform.Controls
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
         }
-
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
             if (JogMode == JogMode.Increase)
