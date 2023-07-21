@@ -13,6 +13,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonIgnore]
         private CogPMAlignTool PMTool { get; set; }
 
+        public CogPMAlignTool GetTool()
+        {
+            return PMTool;
+        }
+
         public ChangedTrainedDelegate ChangedTrained;
 
         public delegate void ChangedTrainedDelegate(bool isTrained);
