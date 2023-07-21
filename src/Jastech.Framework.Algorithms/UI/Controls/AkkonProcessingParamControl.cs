@@ -162,7 +162,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         private void lblResizeRatio_Click(object sender, EventArgs e)
         {
-            double resizeRatio = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            float resizeRatio = KeyPadHelper.SetLabelFloatData((Label)sender);
             CurrentParam.ResizeRatio = resizeRatio;
         }
 

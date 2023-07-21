@@ -59,7 +59,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
             ResultParamControl = new AkkonResultParamControl();
             ResultParamControl.Dock = DockStyle.Fill;
-            ResultParamControl.SetParam(CurrentParam?.ResultFilterParam, CurrentParam?.JudgementParam, CurrentParam?.DrawOption);
+            ResultParamControl.SetParam(CurrentParam?.ShapeFilterParam, CurrentParam?.JudgementParam, CurrentParam?.DrawOption);
             ResultParamControl.UserMaker = UserMaker;
             pnlDisplay.Controls.Add(ResultParamControl);
         }
@@ -77,7 +77,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         {
             CurrentParam = param;
             ProcessingParamControl?.SetParam(CurrentParam.ImageFilterParam);
-            ResultParamControl?.SetParam(CurrentParam.ResultFilterParam, CurrentParam.JudgementParam, CurrentParam?.DrawOption);
+            ResultParamControl?.SetParam(CurrentParam.ShapeFilterParam, CurrentParam.JudgementParam, CurrentParam?.DrawOption);
         }
 
         public void UpdateData()
@@ -91,7 +91,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             if (CurrentParam != null)
             {
                 CurrentParam.ImageFilterParam = ProcessingParamControl.CurrentParam;
-                CurrentParam.ResultFilterParam = ResultParamControl.ResultFilterParam;
+                CurrentParam.ShapeFilterParam = ResultParamControl.ShapeFilterParam;
                 CurrentParam.JudgementParam = ResultParamControl.JudgementParam;
                 CurrentParam.DrawOption = ResultParamControl.DrawOption;
             }

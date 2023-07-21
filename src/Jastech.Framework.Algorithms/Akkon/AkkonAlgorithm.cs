@@ -32,6 +32,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
             List<AkkonLeadResult> leadResultList = new List<AkkonLeadResult>();
             var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
+            float calcReslution_um = resolution_um / parameters.ImageFilterParam.ResizeRatio;
 
             int max = 4;// Environment.ProcessorCount / 4;
             ParallelOptions options = new ParallelOptions
@@ -39,8 +40,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 MaxDegreeOfParallelism = max,
             };
             //Parallel.For(0, AkkonSliceList.Count(), options, i =>
-            //Parallel.For(0, AkkonSliceList.Count(), i =>
-            for (int i = 0; i < AkkonSliceList.Count(); i++)
+            Parallel.For(0, AkkonSliceList.Count(), i =>
+            //for (int i = 0; i < AkkonSliceList.Count(); i++)
             {
                 var slice = AkkonSliceList[i];
                 slice.Id = i;
@@ -60,6 +61,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
                 Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
 
+               
                 foreach (var roi in slice.CalcAkkonROIs)
                 {
                     Rectangle boundRect = roi.GetBoundRect();
@@ -90,7 +92,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
 
                     leadResult.BlobList.AddRange(blobList);
-                    ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, resolution_um);
+                    ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
                  
                     lock (_lock)
                         leadResultList.Add(leadResult);
@@ -103,8 +105,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 enhanceMat?.Dispose();
                 maskMat?.Dispose();
                 thresMat?.Dispose();
-            }
-            //});
+            //}
+            });
 
             sw.Stop();
             Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
@@ -116,6 +118,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             List<AkkonLeadResult> leadResultList = new List<AkkonLeadResult>();
 
             Mat enhanceMat = null;
+            float calcReslution_um = resolution_um / parameters.ImageFilterParam.ResizeRatio;
             var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
 
             if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
@@ -138,7 +141,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             CvInvoke.BitwiseAnd(thresMat, enhanceMat, maskingImage);
 
             slice.MaskingMat = maskingImage.Clone();
-      
+          
             foreach (var roi in slice.CalcAkkonROIs)
             {
                 Rectangle boundRect = roi.GetBoundRect();
@@ -163,7 +166,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 FindShadowPoint(enhanceCropMat, oneLeadMat,ref blobList, boundRect);
 
                 leadResult.BlobList.AddRange(blobList);
-                ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, resolution_um);
+                ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
 
                 leadResultList.Add(leadResult);
 
@@ -267,114 +270,132 @@ namespace Jastech.Framework.Algorithms.Akkon
 
             CvInvoke.MeanStdDev(dataMat, ref meanScalar, ref stddevScalar, maskMat);
 
-            double scaleFactor = param.ResultFilterParam.AkkonStrengthScaleFactor;
-            int detectCount = 0;
+            float scaleFactor = param.ShapeFilterParam.AkkonStrengthScaleFactor;
+
+            int akkonCount = 0;
 
             int totalLengthX = (int)Math.Abs(leadResult.Roi.LeftTopX - leadResult.Roi.RightTopX);
             List<double> lengthXList = new List<double>();
 
             foreach (var blob in leadResult.BlobList)
             {
-                double expandWidth = blob.BoundingRect.Width;
-                double expandHeight = blob.BoundingRect.Height * 2.0;
-                double expandX = blob.CenterX - (expandWidth / 2.0);
-                double expandY = blob.CenterY - (expandHeight / 2.0);
-                Rectangle expandROI = new Rectangle((int)expandX, (int)expandY, (int)expandWidth, (int)expandHeight);
+                blob.Strength = GetStrength(blob, dataMat, scaleFactor);
+                blob.IsAkkonShape = CheckShapeFilter(blob, param.ShapeFilterParam, resolution_um);
 
-                PixelInfo min = new PixelInfo();
-                PixelInfo max = new PixelInfo();
-
-                GetMaxValue(ref min, ref max, dataMat, expandROI);
-                blob.MaxPixelInfo = max;
-
-                if (blob.ShadowFound)
-                    blob.Strength = Math.Abs(((double)blob.ShadowPeak - max.Value) / (255 * scaleFactor)) * 100;
-                else
-                    blob.Strength = Math.Abs(((double)min.Value - max.Value) / (255 * scaleFactor)) * 100;
-
-                blob.IsPass = IsPassing(blob, param.ResultFilterParam);
-
-                // LengthX, y = ax + b
-                double orgRightBottomY = leadResult.Roi.RightBottomY - leadResult.Offset.Y;
-                double orgLeftBottomX = leadResult.Roi.LeftBottomX - leadResult.Offset.X;
-                double x = blob.CenterX;
-                double y = blob.CenterY;
-                double a = leadResult.Slope;
-                double b = y - (a * x);
-                double newX = (orgRightBottomY - b) / a - orgLeftBottomX;
-
-                lengthXList.Add(newX);
-
-                // LengthY
-                if (blob.IsPass && minYInfo.Value > blob.CenterY)
+                if (blob.IsAkkonShape)
                 {
-                    minYInfo.Value = (int)blob.CenterY;
-                    minYInfo.ValueX = (int)blob.CenterX;
-                    minYInfo.ValueY = (int)blob.CenterY;
-                }
-                if (blob.IsPass && maxYInfo.Value < blob.CenterY)
-                {
-                    maxYInfo.Value = (int)blob.CenterY;
-                    maxYInfo.ValueX = (int)blob.CenterX;
-                    maxYInfo.ValueY = (int)blob.CenterY;
-                }
+                    double calcLengthX = GetCalcLengthX(blob, leadResult);
+                    lengthXList.Add(calcLengthX); // LengthX
 
-                if (blob.IsPass)
-                    detectCount++;
+                    // LengthY
+                    if (minYInfo.Value > blob.CenterY)
+                    {
+                        minYInfo.Value = (int)blob.CenterY;
+                        minYInfo.ValueX = (int)blob.CenterX;
+                        minYInfo.ValueY = (int)blob.CenterY;
+                    }
+                    if (maxYInfo.Value < blob.CenterY)
+                    {
+                        maxYInfo.Value = (int)blob.CenterY;
+                        maxYInfo.ValueX = (int)blob.CenterX;
+                        maxYInfo.ValueY = (int)blob.CenterY;
+                    }
+                    akkonCount++;
+                }
             }
-            leadResult.CountResult.DetectCount = detectCount;
+
+            leadResult.AkkonCount = akkonCount;
             leadResult.Mean = meanScalar.V0;
             leadResult.StdDev = stddevScalar.V0;
 
-            if(lengthXList.Count > 0)
-                leadResult.LengthResult.LengthX_um = Math.Abs(lengthXList.Max() - lengthXList.Min()) * resolution_um;
+            if (lengthXList.Count > 0)
+                leadResult.LengthX_um = Math.Abs(lengthXList.Max() - lengthXList.Min()) * resolution_um;
 
             Point p1 = new Point(minYInfo.ValueX, minYInfo.ValueY);
             Point p2 = new Point(maxYInfo.ValueX, maxYInfo.ValueY);
-            leadResult.LengthResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
+            leadResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
 
-            if (leadResult.CountResult.DetectCount < param.JudgementParam.AkkonCount)
-                leadResult.CountResult.Judgement = Judgement.OK;
-            else
-                leadResult.CountResult.Judgement = Judgement.NG;
 
-            if (leadResult.LengthResult.LengthY_um > param.JudgementParam.LengthY_um)
-                leadResult.LengthResult.Judgement = Judgement.OK;
-            else
-                leadResult.LengthResult.Judgement = Judgement.NG;
+            bool isNg = false;
+
+            if (leadResult.AkkonCount < param.JudgementParam.AkkonCount)
+                isNg |= true;
+
+
+            if (leadResult.LengthY_um > param.JudgementParam.LengthY_um)
+                isNg |= true;
+
+            leadResult.Judgement = isNg ? Judgement.NG : Judgement.OK;
         }
 
-        public void ClacResultFilter(ref VisionProBlobResult blobResult, AkkonResultFilterParam filter)
+        private void GetBlobAreaPixelMinMax(BlobPos blob, Mat mat, out PixelInfo minPixelInfo, out PixelInfo maxPixelInfo)
         {
-            foreach (var blob in blobResult.BlobList)
-            {
-                blob.IsPass = IsPassing(blob, filter);
-            }
+            minPixelInfo = new PixelInfo();
+            maxPixelInfo = new PixelInfo();
+
+            double expandWidth = blob.BoundingRect.Width;
+            double expandHeight = blob.BoundingRect.Height * 2.0;
+            double expandX = blob.CenterX - (expandWidth / 2.0);
+            double expandY = blob.CenterY - (expandHeight / 2.0);
+            Rectangle expandROI = new Rectangle((int)expandX, (int)expandY, (int)expandWidth, (int)expandHeight);
+
+            GetMaxValue(ref minPixelInfo, ref maxPixelInfo, mat, expandROI);
         }
-        
-        private bool IsPassing(BlobPos blob, AkkonResultFilterParam filter)
+
+        private double GetCalcLengthX(BlobPos blob, AkkonLeadResult leadResult)
         {
-            bool isPass = true; // Result Filter 통과 한 후보들
+            // LengthX, y = ax + b
+            double orgRightBottomY = leadResult.Roi.RightBottomY - leadResult.Offset.Y;
+            double orgLeftBottomX = leadResult.Roi.LeftBottomX - leadResult.Offset.X;
+            double x = blob.CenterX;
+            double y = blob.CenterY;
+            double a = leadResult.Slope;
+            double b = y - (a * x);
+            double newX = (orgRightBottomY - b) / a - orgLeftBottomX;
 
-            double calcMinArea = filter.MinArea_um * filter.Resolution_um;
-            double calcMaxArea = filter.MaxArea_um * filter.Resolution_um;
+            return newX;
+        }
 
-            double calcMaxWidth = filter.MaxWidth_um * filter.Resolution_um;
-            double calcMaxHeight = filter.MaxHeight_um * filter.Resolution_um;
+        private double GetStrength(BlobPos blob, Mat mat, float scaleFactor)
+        {
+            double strength = 0;
 
-            if (blob.Area < calcMinArea || calcMaxArea < blob.Area)
-                isPass = false;
+            GetBlobAreaPixelMinMax(blob, mat, out PixelInfo minInfo, out PixelInfo maxInfo);
 
-            if (blob.BoundingRect.Width > calcMaxWidth)
-                isPass = false;
+            blob.MaxPixelInfo = maxInfo;
 
-            if (blob.BoundingRect.Height > calcMaxHeight)
-                isPass = false;
+            if (blob.ShadowFound)
+                strength = Math.Abs(((double)blob.ShadowPeak - maxInfo.Value) / (255 * scaleFactor)) * 100;
+            else
+                strength = Math.Abs(((double)minInfo.Value - maxInfo.Value) / (255 * scaleFactor)) * 100;
 
-            if (blob.Strength < filter.AkkonStrength)
-                isPass = false;
+            return strength;
+        }
 
-            return isPass;
+        private bool CheckShapeFilter(BlobPos blob, AkkonShapeFilterParam filterParam, float resolution_um)
+        {
+            bool isAkkon = true;
+
+            double area_um = blob.Area * resolution_um;
+            double width_um = blob.BoundingRect.Width * resolution_um;
+            double height_um = blob.BoundingRect.Height * resolution_um;
+
+            if (area_um < filterParam.MinArea_um)
+                isAkkon &= false;
+
+            if (area_um > filterParam.MaxArea_um)
+                isAkkon &= false;
+
+            if (width_um > filterParam.MaxWidth_um)
+                isAkkon &= false;
+
+            if (height_um > filterParam.MaxHeight_um)
+                isAkkon &= false;
+
+            if (blob.Strength < filterParam.MinAkkonStrength)
+                isAkkon &= false;
+
+            return isAkkon;
         }
 
         public List<Point[]> MergeContours(List<Point[]> contours)

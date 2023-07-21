@@ -6,11 +6,14 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     public class AkkonAlgoritmParam
     {
         #region 속성
+        //[JsonProperty]
+        //public float Resolution_um { get; set; } = 1.0F;
+
         [JsonProperty]
         public AkkonImagingParam ImageFilterParam { get; set; } = new AkkonImagingParam();
 
         [JsonProperty]
-        public AkkonResultFilterParam ResultFilterParam { get; set; } = new AkkonResultFilterParam();
+        public AkkonShapeFilterParam ShapeFilterParam { get; set; } = new AkkonShapeFilterParam();
 
         [JsonProperty]
         public AkkonJudgementParam JudgementParam { get; set; } = new AkkonJudgementParam();
@@ -30,46 +33,28 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         {
             ImageFilterParam.ClearFilter();
         }
-
-        //public int GetImageFilterCount()
-        //{
-        //    return ImageFilterParam.Filters.Count();
-        //}
-
-        //public void AddMacronFilter()
-        //{
-        //    ImageFilterParam.AddMacronFilter();
-        //}
-
-        //public AkkonImageFilterParam GetCurrentFilter()
-        //{
-        //    return ImageFilterParam.GetCurrentFilter();
-        //}
         #endregion
     }
 
-    public class AkkonResultFilterParam
+    public class AkkonShapeFilterParam
     {
         [JsonProperty]
         public int Grouping { get; set; } = 3;
 
         [JsonProperty]
-        public float Resolution_um { get; set; } = 1.0F;
+        public float MinArea_um { get; set; } = 2F;
 
         [JsonProperty]
-        public float MinArea_um { get; set; } = 3F;
+        public float MaxArea_um { get; set; } = 10.0F;
 
         [JsonProperty]
-        public float MaxArea_um { get; set; } = 100.0F;
+        public float MaxWidth_um { get; set; } = 20.0F;
 
         [JsonProperty]
-        public float MaxWidth_um { get; set; } = 100.0F;
+        public float MaxHeight_um { get; set; } = 20.0F;
 
         [JsonProperty]
-        public float MaxHeight_um { get; set; } = 100.0F;
-
-        [JsonProperty]
-        public float AkkonStrength { get; set; } = 5.0F;
+        public float MinAkkonStrength { get; set; } = 20.0F;
 
         [JsonProperty]
         public float AkkonStrengthScaleFactor { get; set; } = 1.0F;
@@ -81,10 +66,10 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public int AkkonCount { get; set; } = 30;
 
         [JsonProperty]
-        public float LengthX_um { get; set; } = 10.0F;
+        public float LengthX_um { get; set; } = 20.0F;
 
         [JsonProperty]
-        public float LengthY_um { get; set; } = 10.0F;
+        public float LengthY_um { get; set; } = 20.0F;
 
         [JsonProperty]
         public float LeadStdDev { get; set; } = 1.0F;
@@ -111,10 +96,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     public class AkkonImagingParam
     {
         [JsonProperty]
-        public double ResizeRatio { get; set; } = 1.0;
-
-        [JsonProperty]
-        public int SliceCount { get; set; } = 50;
+        public float ResizeRatio { get; set; } = 0.5F;
 
         [JsonProperty]
         public AkkonFilterDir FilterDir { get; set; } = AkkonFilterDir.Vertical;

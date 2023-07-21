@@ -11,7 +11,7 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 
         public bool UserMaker { get; set; } = false;
 
-        public AkkonResultFilterParam ResultFilterParam { get; private set; } = null;
+        public AkkonShapeFilterParam ShapeFilterParam { get; private set; } = null;
 
         public AkkonJudgementParam JudgementParam { get; private set; } = null;
 
@@ -39,9 +39,9 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             _isLoading = false;
         }
 
-        public void SetParam(AkkonResultFilterParam resultParam, AkkonJudgementParam judgementParam, DrawParam drawOption)
+        public void SetParam(AkkonShapeFilterParam shapeParam, AkkonJudgementParam judgementParam, DrawParam drawOption)
         {
-            ResultFilterParam = resultParam;
+            ShapeFilterParam = shapeParam;
             JudgementParam = judgementParam;
             DrawOption = drawOption;
         }
@@ -51,14 +51,14 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             if (JudgementParam == null || DrawOption == null)
                 return;
 
-            // Result Filters
-            lblGrouping.Text = ResultFilterParam.Grouping.ToString();
-            lblMinArea.Text = ResultFilterParam.MinArea_um.ToString();
-            lblMaxArea.Text = ResultFilterParam.MaxArea_um.ToString();
-            lblMaxWidth.Text = ResultFilterParam.MaxWidth_um.ToString();
-            lblMaxHeight.Text = ResultFilterParam.MaxHeight_um.ToString();
-            lblStrength.Text = ResultFilterParam.AkkonStrength.ToString();
-            lblStrengthScaleFactor.Text = ResultFilterParam.AkkonStrengthScaleFactor.ToString();
+            // Shape
+            lblGrouping.Text = ShapeFilterParam.Grouping.ToString();
+            lblMinArea.Text = ShapeFilterParam.MinArea_um.ToString();
+            lblMaxArea.Text = ShapeFilterParam.MaxArea_um.ToString();
+            lblMaxWidth.Text = ShapeFilterParam.MaxWidth_um.ToString();
+            lblMaxHeight.Text = ShapeFilterParam.MaxHeight_um.ToString();
+            lblStrength.Text = ShapeFilterParam.MinAkkonStrength.ToString();
+            lblStrengthScaleFactor.Text = ShapeFilterParam.AkkonStrengthScaleFactor.ToString();
 
             // Judgement
             lblAkkonCount.Text = JudgementParam.AkkonCount.ToString();
@@ -77,43 +77,43 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         private void lblGrouping_Click(object sender, EventArgs e)
         {
             int grouping = KeyPadHelper.SetLabelIntegerData((Label)sender);
-            ResultFilterParam.Grouping = grouping;
+            ShapeFilterParam.Grouping = grouping;
         }
 
         private void lblMinArea_Click(object sender, EventArgs e)
         {
             float minArea = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MinArea_um = minArea;
+            ShapeFilterParam.MinArea_um = minArea;
         }
 
         private void lblMaxArea_Click(object sender, EventArgs e)
         {
             float maxArea = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxArea_um = maxArea;
+            ShapeFilterParam.MaxArea_um = maxArea;
         }
 
         private void lblMaxWidth_Click(object sender, EventArgs e)
         {
             float maxWidth = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxWidth_um = maxWidth;
+            ShapeFilterParam.MaxWidth_um = maxWidth;
         }
 
         private void lblMaxHeight_Click(object sender, EventArgs e)
         {
             float maxHeight = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxHeight_um = maxHeight;
+            ShapeFilterParam.MaxHeight_um = maxHeight;
         }
 
         private void lblStrength_Click(object sender, EventArgs e)
         {
             float strength = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.AkkonStrength = strength;
+            ShapeFilterParam.MinAkkonStrength = strength;
         }
 
         private void lblStrengthScaleFactor_Click(object sender, EventArgs e)
         {
             float strengthScaleFactor = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.AkkonStrengthScaleFactor = strengthScaleFactor;
+            ShapeFilterParam.AkkonStrengthScaleFactor = strengthScaleFactor;
         }
 
         private void lblAkkonCount_Click(object sender, EventArgs e)

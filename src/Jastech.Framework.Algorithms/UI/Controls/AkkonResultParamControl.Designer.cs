@@ -71,7 +71,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(235, 40);
             this.label2.TabIndex = 105;
-            this.label2.Text = "RESULT FILTER";
+            this.label2.Text = "SHAPE FILTER";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -303,9 +303,9 @@
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(21, 276);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(113, 28);
+            this.label22.Size = new System.Drawing.Size(136, 28);
             this.label22.TabIndex = 123;
-            this.label22.Text = "Strength(%)";
+            this.label22.Text = "Min Strength(%)";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStrength

@@ -25,7 +25,7 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
         public double Avg { get; set; } = 0.0;
 
         [JsonProperty]
-        public bool IsPass { get; set; } = false;
+        public bool IsAkkonShape { get; set; } = false;
 
         public double Strength { get; set; }
 
