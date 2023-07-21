@@ -71,16 +71,15 @@ namespace Jastech.Framework.Algorithms.Akkon
                     CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
 
                     AkkonLeadResult leadResult = new AkkonLeadResult();
-                    leadResult.Index = roi.LeadIndex;
-                    leadResult.Lead = roi.DeepCopy();
-                    leadResult.OffsetToWorldX = slice.StartPoint.X + slice.WorldRect.X;
-                    leadResult.OffsetToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
-                    leadResult.OffsetX = boundRect.X;
-                    leadResult.OffsetY = boundRect.Y;
+                    leadResult.Roi = roi.DeepCopy();
+                    leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
+                    leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
+                    leadResult.Offset.X = boundRect.X;
+                    leadResult.Offset.Y = boundRect.Y;
                     leadResult.Slope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
 
                     double calcHalfWidth = (mat.Width * parameters.ImageFilterParam.ResizeRatio) / 2.0;
-                    if (leadResult.OffsetToWorldX < calcHalfWidth)
+                    if (leadResult.Offset.ToWorldX < calcHalfWidth)
                         leadResult.ContainPos = LeadContainPos.Left;
                     else
                         leadResult.ContainPos = LeadContainPos.Right;
@@ -151,12 +150,11 @@ namespace Jastech.Framework.Algorithms.Akkon
                 CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
 
                 AkkonLeadResult leadResult = new AkkonLeadResult();
-                leadResult.Index = roi.LeadIndex;
-                leadResult.Lead = roi.DeepCopy();
-                leadResult.OffsetToWorldX = slice.StartPoint.X + slice.WorldRect.X;
-                leadResult.OffsetToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
-                leadResult.OffsetX = boundRect.X;
-                leadResult.OffsetY = boundRect.Y;
+                leadResult.Roi = roi.DeepCopy();
+                leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
+                leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
+                leadResult.Offset.X = boundRect.X;
+                leadResult.Offset.Y = boundRect.Y;
                 leadResult.Slope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
 
                 Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
@@ -272,7 +270,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             double scaleFactor = param.ResultFilterParam.AkkonStrengthScaleFactor;
             int detectCount = 0;
 
-            int totalLengthX = (int)Math.Abs(leadResult.Lead.LeftTopX - leadResult.Lead.RightTopX);
+            int totalLengthX = (int)Math.Abs(leadResult.Roi.LeftTopX - leadResult.Roi.RightTopX);
             List<double> lengthXList = new List<double>();
 
             foreach (var blob in leadResult.BlobList)
@@ -297,8 +295,8 @@ namespace Jastech.Framework.Algorithms.Akkon
                 blob.IsPass = IsPassing(blob, param.ResultFilterParam);
 
                 // LengthX, y = ax + b
-                double orgRightBottomY = leadResult.Lead.RightBottomY - leadResult.OffsetY;
-                double orgLeftBottomX = leadResult.Lead.LeftBottomX - leadResult.OffsetX;
+                double orgRightBottomY = leadResult.Roi.RightBottomY - leadResult.Offset.Y;
+                double orgLeftBottomX = leadResult.Roi.LeftBottomX - leadResult.Offset.X;
                 double x = blob.CenterX;
                 double y = blob.CenterY;
                 double a = leadResult.Slope;
@@ -324,26 +322,26 @@ namespace Jastech.Framework.Algorithms.Akkon
                 if (blob.IsPass)
                     detectCount++;
             }
-            leadResult.DetectCount = detectCount;
+            leadResult.CountResult.DetectCount = detectCount;
             leadResult.Mean = meanScalar.V0;
             leadResult.StdDev = stddevScalar.V0;
 
             if(lengthXList.Count > 0)
-                leadResult.LengthX_um = Math.Abs(lengthXList.Max() - lengthXList.Min()) * resolution_um;
+                leadResult.LengthResult.LengthX_um = Math.Abs(lengthXList.Max() - lengthXList.Min()) * resolution_um;
 
             Point p1 = new Point(minYInfo.ValueX, minYInfo.ValueY);
             Point p2 = new Point(maxYInfo.ValueX, maxYInfo.ValueY);
-            leadResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
+            leadResult.LengthResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
 
-            if (leadResult.DetectCount < param.JudgementParam.AkkonCount)
-                leadResult.CountJudgement = Judgement.OK;
+            if (leadResult.CountResult.DetectCount < param.JudgementParam.AkkonCount)
+                leadResult.CountResult.Judgement = Judgement.OK;
             else
-                leadResult.CountJudgement = Judgement.NG;
+                leadResult.CountResult.Judgement = Judgement.NG;
 
-            if (leadResult.LengthY_um > param.JudgementParam.LengthY_um)
-                leadResult.LengthJudgement = Judgement.OK;
+            if (leadResult.LengthResult.LengthY_um > param.JudgementParam.LengthY_um)
+                leadResult.LengthResult.Judgement = Judgement.OK;
             else
-                leadResult.LengthJudgement = Judgement.NG;
+                leadResult.LengthResult.Judgement = Judgement.NG;
         }
 
         public void ClacResultFilter(ref VisionProBlobResult blobResult, AkkonResultFilterParam filter)
@@ -557,7 +555,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     {
                         AkkonROI calcRoiFromSlicePoint = new AkkonROI();
 
-                        calcRoiFromSlicePoint.LeadIndex = leadIndex;
+                        calcRoiFromSlicePoint.Index = leadIndex;
                         calcRoiFromSlicePoint.LeftTopX = roi.LeftTopX - sliceStartPoint.X;
                         calcRoiFromSlicePoint.LeftTopY = roi.LeftTopY - sliceStartPoint.Y;
 
