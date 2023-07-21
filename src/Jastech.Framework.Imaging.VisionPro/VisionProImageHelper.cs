@@ -205,7 +205,34 @@ namespace Jastech.Framework.Imaging.VisionPro
             return cogImage;
         }
 
+        public static ICogImage CogCopyRegionTool(ICogImage destImage, ICogImage inputImage, CogRectangleAffine rect, bool alignmentEnabled)
+        {
+            CogCopyRegionTool regionTool = new CogCopyRegionTool();
+
+            regionTool.DestinationImage = destImage;
+            regionTool.InputImage = inputImage;
+            regionTool.Region = rect;
+
+            regionTool.RunParams.ImageAlignmentEnabled = alignmentEnabled;
+            regionTool.Run();
+
+            ICogImage cogImage = regionTool.OutputImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
+
+            regionTool.Dispose();
+
+            return cogImage;
+        }
+
         public static ICogImage CropImage(ICogImage sourceImage, CogRectangle rect)
+        {
+            CogCopyRegionTool regionTool = new CogCopyRegionTool();
+            regionTool.InputImage = sourceImage;
+            regionTool.Region = rect;
+            regionTool.Run();
+            return regionTool.OutputImage;
+        }
+
+        public static ICogImage CropImage(ICogImage sourceImage, CogRectangleAffine rect)
         {
             CogCopyRegionTool regionTool = new CogCopyRegionTool();
             regionTool.InputImage = sourceImage;

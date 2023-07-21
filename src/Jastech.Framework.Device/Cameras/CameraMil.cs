@@ -399,6 +399,11 @@ namespace Jastech.Framework.Device.Cameras
             CancelUpdateLiveBufferTask = new CancellationTokenSource();
             UpdateLiveBufferTask = new Task(UpdateLiveBuffer, CancelUpdateLiveBufferTask.Token);
             UpdateLiveBufferTask.Start();
+            
+            while(UpdateLiveBufferTask.Status != TaskStatus.Running)
+            {
+                Thread.Sleep(50);
+            }
         }
 
         public void StopUpdateLiveBufferTask()
