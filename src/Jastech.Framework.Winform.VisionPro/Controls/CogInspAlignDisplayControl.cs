@@ -22,7 +22,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
         }
 
-        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
+        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
         {
             //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
             cogLeftDisplay.Image = cogImage;
@@ -34,10 +34,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             foreach (var item in shape)
                 collect.Add(item);
 
-            cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+            if(centerPoint.X != 0 && centerPoint.Y != 0)
+            {
+                cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                var gg = cogLeftDisplay.Zoom;
+                cogLeftDisplay.Zoom = 0.5;
+                cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
+                cogLeftDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
+            }
         }
 
-        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
+        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
         {
             cogRightDisplay.Image = cogImage;
             cogRightDisplay.StaticGraphics.Clear();
@@ -52,6 +59,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+            if (centerPoint.X != 0 && centerPoint.Y != 0)
+            {
+                cogRightDisplay.Zoom = 0.5;
+                cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
+                cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
+            }
         }
 
         public void SetDisplayToCenter(CogRecordDisplay display, Point point)

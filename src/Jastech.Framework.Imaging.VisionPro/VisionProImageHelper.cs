@@ -187,25 +187,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             return outputImage;
         }
 
-        public static ICogImage CogCopyRegionTool(ICogImage destImage, ICogImage inputImage, CogRectangle rect, bool alignmentEnabled)
-        {
-            CogCopyRegionTool regionTool = new CogCopyRegionTool();
-
-            regionTool.DestinationImage = destImage;
-            regionTool.InputImage = inputImage;
-            regionTool.Region = rect;
-
-            regionTool.RunParams.ImageAlignmentEnabled = alignmentEnabled;
-            regionTool.Run();
-
-            ICogImage cogImage = regionTool.OutputImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
-
-            regionTool.Dispose();
-
-            return cogImage;
-        }
-
-        public static ICogImage CogCopyRegionTool(ICogImage destImage, ICogImage inputImage, CogRectangleAffine rect, bool alignmentEnabled)
+        public static ICogImage CogCopyRegionTool(ICogImage destImage, ICogImage inputImage, ICogRegion rect, bool alignmentEnabled)
         {
             CogCopyRegionTool regionTool = new CogCopyRegionTool();
 
@@ -228,6 +210,15 @@ namespace Jastech.Framework.Imaging.VisionPro
             CogCopyRegionTool regionTool = new CogCopyRegionTool();
             regionTool.InputImage = sourceImage;
             regionTool.Region = rect;
+            regionTool.Run();
+            return regionTool.OutputImage;
+        }
+
+        public static ICogImage CropImage(ICogImage sourceImage, CogPolygon polygon)
+        {
+            CogCopyRegionTool regionTool = new CogCopyRegionTool();
+            regionTool.InputImage = sourceImage;
+            regionTool.Region = polygon;
             regionTool.Run();
             return regionTool.OutputImage;
         }
@@ -267,22 +258,27 @@ namespace Jastech.Framework.Imaging.VisionPro
     
         public static List<CogRectangleAffine> CreateRectangleAffine(List<PointF> topEdgePointList, List<PointF> bottomEdgePointList)
         {
-            if (topEdgePointList.Count != bottomEdgePointList.Count)
-            {
-                // Top, Bottom List 수가 같아야함
-                return null;
-            }
-
+            
             if (topEdgePointList.Count % 2 != 0 || bottomEdgePointList.Count % 2 != 0)
             {
                 // Top, Bottom List 모두 짝수여야함
                 return null;
             }
+
+            int indexMax = topEdgePointList.Count;
+            if (topEdgePointList.Count != bottomEdgePointList.Count)
+            {
+                // Top, Bottom List 수가 같아야함
+                //return null;
+
+                indexMax = topEdgePointList.Count > bottomEdgePointList.Count ? bottomEdgePointList.Count : topEdgePointList.Count;
+            }
+
             List<CogRectangleAffine> roiList = new List<CogRectangleAffine>();
 
             for (int i = 0; i < topEdgePointList.Count; i+= 2)
             {
-                if (i + 1 >= topEdgePointList.Count)
+                if (i + 1 >= indexMax)
                     break;
                 CogRectangleAffine roi = new CogRectangleAffine();
                 double originX = topEdgePointList[i].X;
@@ -295,8 +291,7 @@ namespace Jastech.Framework.Imaging.VisionPro
                 roi.SetOriginCornerXCornerY(originX, originY, cornerXX, cornerXY, cornerYX, cornerYY);
                 roiList.Add(roi);
             }
-
-            return roiList;
+            return roiList; 
         }
 
         public static ICogImage ConvertImage(byte[] data, int width, int height, ColorFormat colorFormat)
