@@ -46,6 +46,11 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             AkkonROIList.Add(roi);
         }
 
+        //public void AddROI(List<AkkonROI> roiList)
+        //{
+        //    AkkonROIList.AddRange(roiList);
+        //}
+
         public void DeleteROI(int index)
         {
             if (AkkonROIList.Count > 0)
