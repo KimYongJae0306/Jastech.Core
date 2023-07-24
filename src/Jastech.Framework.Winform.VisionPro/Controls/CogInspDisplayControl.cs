@@ -110,6 +110,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
             int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
 
+            if (calcWidth == 0)
+                calcWidth = 1;
+            if (calcHeight == 0)
+                calcHeight = 1;
+
             rect.X = calcX;
             rect.Y = calcY;
             rect.Width = calcWidth;
