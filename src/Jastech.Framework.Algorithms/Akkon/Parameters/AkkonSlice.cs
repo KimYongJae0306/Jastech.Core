@@ -37,7 +37,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     
     public class AkkonLeadResult
     {
-        public Judgement Judgement { get; set; }
+        public Judgment Judgement { get; set; }
 
         public LeadContainPos ContainPos { get; set; }
 
