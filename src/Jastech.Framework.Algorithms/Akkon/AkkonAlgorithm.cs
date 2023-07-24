@@ -325,7 +325,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             if (leadResult.LengthY_um > param.JudgementParam.LengthY_um)
                 isNg |= true;
 
-            leadResult.Judgement = isNg ? Judgement.NG : Judgement.OK;
+            leadResult.Judgement = isNg ? Judgment.NG : Judgment.OK;
         }
 
         private void GetBlobAreaPixelMinMax(BlobPos blob, Mat mat, out PixelInfo minPixelInfo, out PixelInfo maxPixelInfo)

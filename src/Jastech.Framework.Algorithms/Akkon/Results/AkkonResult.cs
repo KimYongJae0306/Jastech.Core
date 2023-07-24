@@ -25,7 +25,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public int RightCount_Max { get; set; }
 
-        public Judgement LengthJudgement { get; set; }
+        public Judgment LengthJudgement { get; set; }
 
         public float Length_Left_Avg_um { get; set; }       //um
 
@@ -50,6 +50,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
         #endregion
     }
     
+
+
     public class LeadResult
     {
         public int Id { get; set; }
