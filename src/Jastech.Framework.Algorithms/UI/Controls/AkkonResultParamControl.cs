@@ -7,27 +7,34 @@ namespace Jastech.Framework.Algorithms.UI.Controls
 {
     public partial class AkkonResultParamControl : UserControl
     {
+        #region 필드
         private bool _isLoading = false;
+        #endregion
 
+        #region 속성
         public bool UserMaker { get; set; } = false;
 
-        public AkkonResultFilterParam ResultFilterParam { get; private set; } = null;
+        public AkkonShapeFilterParam ShapeFilterParam { get; private set; } = null;
 
         public AkkonJudgementParam JudgementParam { get; private set; } = null;
 
         public DrawParam DrawOption { get; set; } = null;
+        #endregion
 
+        #region 생성자
         public AkkonResultParamControl()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 메서드
         private void AkkonResultParamControl_Load(object sender, EventArgs e)
         {
             _isLoading = true;
             UpdateParams();
 
-            if(UserMaker == false)
+            if (UserMaker == false)
             {
                 lblStrengthScaleText.Visible = false;
                 lblStrengthScaleFactor.Visible = false;
@@ -39,9 +46,9 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             _isLoading = false;
         }
 
-        public void SetParam(AkkonResultFilterParam resultParam, AkkonJudgementParam judgementParam, DrawParam drawOption)
+        public void SetParam(AkkonShapeFilterParam shapeParam, AkkonJudgementParam judgementParam, DrawParam drawOption)
         {
-            ResultFilterParam = resultParam;
+            ShapeFilterParam = shapeParam;
             JudgementParam = judgementParam;
             DrawOption = drawOption;
         }
@@ -51,14 +58,14 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             if (JudgementParam == null || DrawOption == null)
                 return;
 
-            // Result Filters
-            lblGrouping.Text = ResultFilterParam.Grouping.ToString();
-            lblMinArea.Text = ResultFilterParam.MinArea_um.ToString();
-            lblMaxArea.Text = ResultFilterParam.MaxArea_um.ToString();
-            lblMaxWidth.Text = ResultFilterParam.MaxWidth_um.ToString();
-            lblMaxHeight.Text = ResultFilterParam.MaxHeight_um.ToString();
-            lblStrength.Text = ResultFilterParam.AkkonStrength.ToString();
-            lblStrengthScaleFactor.Text = ResultFilterParam.AkkonStrengthScaleFactor.ToString();
+            // Shape
+            lblGrouping.Text = ShapeFilterParam.Grouping.ToString();
+            lblMinArea.Text = ShapeFilterParam.MinArea_um.ToString();
+            lblMaxArea.Text = ShapeFilterParam.MaxArea_um.ToString();
+            lblMinSize.Text = ShapeFilterParam.MinSize_um.ToString();
+            lblMaxSize.Text = ShapeFilterParam.MaxSize_um.ToString();
+            lblStrength.Text = ShapeFilterParam.MinAkkonStrength.ToString();
+            lblStrengthScaleFactor.Text = ShapeFilterParam.AkkonStrengthScaleFactor.ToString();
 
             // Judgement
             lblAkkonCount.Text = JudgementParam.AkkonCount.ToString();
@@ -70,6 +77,9 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             ckbContainLeadCount.Checked = DrawOption.ContainLeadCount;
             ckbContainLeadROI.Checked = DrawOption.ContainLeadROI;
             ckbContainNG.Checked = DrawOption.ContainNG;
+
+            //ckbContainSize
+            ckbContainSize.Checked = DrawOption.ContainSize;
             ckbContainArea.Checked = DrawOption.ContainArea;
             ckbContainStrength.Checked = DrawOption.ContainStrength;
         }
@@ -77,43 +87,43 @@ namespace Jastech.Framework.Algorithms.UI.Controls
         private void lblGrouping_Click(object sender, EventArgs e)
         {
             int grouping = KeyPadHelper.SetLabelIntegerData((Label)sender);
-            ResultFilterParam.Grouping = grouping;
+            ShapeFilterParam.Grouping = grouping;
         }
 
         private void lblMinArea_Click(object sender, EventArgs e)
         {
             float minArea = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MinArea_um = minArea;
+            ShapeFilterParam.MinArea_um = minArea;
         }
 
         private void lblMaxArea_Click(object sender, EventArgs e)
         {
             float maxArea = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxArea_um = maxArea;
+            ShapeFilterParam.MaxArea_um = maxArea;
         }
 
-        private void lblMaxWidth_Click(object sender, EventArgs e)
+        private void lblMinSize_Click(object sender, EventArgs e)
         {
-            float maxWidth = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxWidth_um = maxWidth;
+            float minSize = KeyPadHelper.SetLabelFloatData((Label)sender);
+            ShapeFilterParam.MinSize_um = minSize;
         }
 
-        private void lblMaxHeight_Click(object sender, EventArgs e)
+        private void lblMaxSize_Click(object sender, EventArgs e)
         {
-            float maxHeight = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.MaxHeight_um = maxHeight;
+            float maxSize = KeyPadHelper.SetLabelFloatData((Label)sender);
+            ShapeFilterParam.MaxSize_um = maxSize;
         }
 
         private void lblStrength_Click(object sender, EventArgs e)
         {
             float strength = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.AkkonStrength = strength;
+            ShapeFilterParam.MinAkkonStrength = strength;
         }
 
         private void lblStrengthScaleFactor_Click(object sender, EventArgs e)
         {
             float strengthScaleFactor = KeyPadHelper.SetLabelFloatData((Label)sender);
-            ResultFilterParam.AkkonStrengthScaleFactor = strengthScaleFactor;
+            ShapeFilterParam.AkkonStrengthScaleFactor = strengthScaleFactor;
         }
 
         private void lblAkkonCount_Click(object sender, EventArgs e)
@@ -180,9 +190,18 @@ namespace Jastech.Framework.Algorithms.UI.Controls
             DrawOption.ContainStrength = ckbContainStrength.Checked;
         }
 
+        private void ckbContainSize_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            DrawOption.ContainSize = ckbContainSize.Checked;
+        }
+
         public void UpdateData()
         {
             UpdateParams();
         }
+        #endregion
     }
 }

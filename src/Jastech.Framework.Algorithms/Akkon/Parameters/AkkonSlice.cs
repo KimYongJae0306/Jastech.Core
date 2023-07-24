@@ -37,6 +37,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     
     public class AkkonLeadResult
     {
+        public Judgement Judgement { get; set; }
+
         public LeadContainPos ContainPos { get; set; }
 
         public AkkonROI Roi { get; set; } 
@@ -49,27 +51,13 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         public double Mean { get; set; }
 
-        public AkkonCountResult CountResult { get; set; } = new AkkonCountResult();
-
-        public AkkonLengthResult LengthResult { get; set; } = new AkkonLengthResult();
-
-        public List<BlobPos> BlobList = new List<BlobPos>();
-    }
-
-    public class AkkonLengthResult
-    {
-        public Judgement Judgement { get; set; }
-
         public double LengthX_um { get; set; }
 
         public double LengthY_um { get; set; }
-    }
 
-    public class AkkonCountResult
-    {
-        public Judgement Judgement { get; set; }
+        public int AkkonCount { get; set; }
 
-        public int DetectCount { get; set; }
+        public List<BlobPos> BlobList = new List<BlobPos>();
     }
 
     public class AkkonOffset
