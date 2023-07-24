@@ -6,9 +6,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
     public class AkkonAlgoritmParam
     {
         #region 속성
-        //[JsonProperty]
-        //public float Resolution_um { get; set; } = 1.0F;
-
         [JsonProperty]
         public AkkonImagingParam ImageFilterParam { get; set; } = new AkkonImagingParam();
 
@@ -23,7 +20,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         #endregion
 
         #region 메서드
-      
         public void Initalize()
         {
             ImageFilterParam.Initalize();
@@ -45,13 +41,13 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public float MinArea_um { get; set; } = 2F;
 
         [JsonProperty]
-        public float MaxArea_um { get; set; } = 10.0F;
+        public float MaxArea_um { get; set; } = 50.0F;
 
         [JsonProperty]
-        public float MaxWidth_um { get; set; } = 20.0F;
+        public float MinSize_um { get; set; } = 2.0F;
 
         [JsonProperty]
-        public float MaxHeight_um { get; set; } = 20.0F;
+        public float MaxSize_um { get; set; } = 15.0F;
 
         [JsonProperty]
         public float MinAkkonStrength { get; set; } = 20.0F;
@@ -85,6 +81,9 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
         [JsonProperty]
         public bool ContainNG { get; set; } = false;
+
+        [JsonProperty]
+        public bool ContainSize { get; set; } = false;
 
         [JsonProperty]
         public bool ContainArea { get; set; } = false;

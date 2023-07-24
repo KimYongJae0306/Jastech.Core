@@ -377,19 +377,19 @@ namespace Jastech.Framework.Algorithms.Akkon
             bool isAkkon = true;
 
             double area_um = blob.Area * resolution_um;
-            double width_um = blob.BoundingRect.Width * resolution_um;
-            double height_um = blob.BoundingRect.Height * resolution_um;
+            double pixelSize = (blob.BoundingRect.Width + blob.BoundingRect.Height) / 2.0;
+            double size_um = pixelSize * resolution_um;
+
+            if (size_um < filterParam.MinSize_um)
+                isAkkon &= false;
+
+            if (size_um > filterParam.MaxSize_um)
+                isAkkon &= false;
 
             if (area_um < filterParam.MinArea_um)
                 isAkkon &= false;
 
             if (area_um > filterParam.MaxArea_um)
-                isAkkon &= false;
-
-            if (width_um > filterParam.MaxWidth_um)
-                isAkkon &= false;
-
-            if (height_um > filterParam.MaxHeight_um)
                 isAkkon &= false;
 
             if (blob.Strength < filterParam.MinAkkonStrength)

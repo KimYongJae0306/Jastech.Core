@@ -44,8 +44,8 @@
             this.lblLeadLengthX = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.lblMaxWidth = new System.Windows.Forms.Label();
-            this.lblMaxHeight = new System.Windows.Forms.Label();
+            this.lblMinSize = new System.Windows.Forms.Label();
+            this.lblMaxSize = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lblStrength = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.ckbContainStrength = new System.Windows.Forms.CheckBox();
             this.lblStrengthScaleText = new System.Windows.Forms.Label();
             this.lblStrengthScaleFactor = new System.Windows.Forms.Label();
+            this.ckbContainSize = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label2
@@ -78,7 +79,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(21, 108);
+            this.label4.Location = new System.Drawing.Point(21, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 28);
             this.label4.TabIndex = 106;
@@ -89,7 +90,7 @@
             // 
             this.label16.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(21, 150);
+            this.label16.Location = new System.Drawing.Point(21, 234);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(120, 28);
             this.label16.TabIndex = 107;
@@ -155,7 +156,7 @@
             this.lblMinArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMinArea.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMinArea.ForeColor = System.Drawing.Color.White;
-            this.lblMinArea.Location = new System.Drawing.Point(160, 104);
+            this.lblMinArea.Location = new System.Drawing.Point(160, 188);
             this.lblMinArea.Margin = new System.Windows.Forms.Padding(0);
             this.lblMinArea.Name = "lblMinArea";
             this.lblMinArea.Size = new System.Drawing.Size(100, 36);
@@ -170,7 +171,7 @@
             this.lblMaxArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxArea.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
             this.lblMaxArea.ForeColor = System.Drawing.Color.White;
-            this.lblMaxArea.Location = new System.Drawing.Point(160, 146);
+            this.lblMaxArea.Location = new System.Drawing.Point(160, 230);
             this.lblMaxArea.Margin = new System.Windows.Forms.Padding(0);
             this.lblMaxArea.Name = "lblMaxArea";
             this.lblMaxArea.Size = new System.Drawing.Size(100, 36);
@@ -249,53 +250,53 @@
             // 
             this.label24.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(21, 192);
+            this.label24.Location = new System.Drawing.Point(21, 108);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(120, 28);
             this.label24.TabIndex = 119;
-            this.label24.Text = "Max Width(um)";
+            this.label24.Text = "Min Size(um)";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(21, 235);
+            this.label23.Location = new System.Drawing.Point(21, 151);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(136, 28);
             this.label23.TabIndex = 120;
-            this.label23.Text = "Max Height(um)";
+            this.label23.Text = "Max Size(um)";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblMaxWidth
+            // lblMinSize
             // 
-            this.lblMaxWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblMaxWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMaxWidth.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.lblMaxWidth.ForeColor = System.Drawing.Color.White;
-            this.lblMaxWidth.Location = new System.Drawing.Point(160, 188);
-            this.lblMaxWidth.Margin = new System.Windows.Forms.Padding(0);
-            this.lblMaxWidth.Name = "lblMaxWidth";
-            this.lblMaxWidth.Size = new System.Drawing.Size(100, 36);
-            this.lblMaxWidth.TabIndex = 121;
-            this.lblMaxWidth.Text = "0";
-            this.lblMaxWidth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMaxWidth.Click += new System.EventHandler(this.lblMaxWidth_Click);
+            this.lblMinSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblMinSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMinSize.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
+            this.lblMinSize.ForeColor = System.Drawing.Color.White;
+            this.lblMinSize.Location = new System.Drawing.Point(160, 104);
+            this.lblMinSize.Margin = new System.Windows.Forms.Padding(0);
+            this.lblMinSize.Name = "lblMinSize";
+            this.lblMinSize.Size = new System.Drawing.Size(100, 36);
+            this.lblMinSize.TabIndex = 121;
+            this.lblMinSize.Text = "0";
+            this.lblMinSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMinSize.Click += new System.EventHandler(this.lblMinSize_Click);
             // 
-            // lblMaxHeight
+            // lblMaxSize
             // 
-            this.lblMaxHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.lblMaxHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMaxHeight.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
-            this.lblMaxHeight.ForeColor = System.Drawing.Color.White;
-            this.lblMaxHeight.Location = new System.Drawing.Point(160, 231);
-            this.lblMaxHeight.Margin = new System.Windows.Forms.Padding(0);
-            this.lblMaxHeight.Name = "lblMaxHeight";
-            this.lblMaxHeight.Size = new System.Drawing.Size(100, 36);
-            this.lblMaxHeight.TabIndex = 122;
-            this.lblMaxHeight.Text = "0";
-            this.lblMaxHeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMaxHeight.Click += new System.EventHandler(this.lblMaxHeight_Click);
+            this.lblMaxSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblMaxSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMaxSize.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold);
+            this.lblMaxSize.ForeColor = System.Drawing.Color.White;
+            this.lblMaxSize.Location = new System.Drawing.Point(160, 147);
+            this.lblMaxSize.Margin = new System.Windows.Forms.Padding(0);
+            this.lblMaxSize.Name = "lblMaxSize";
+            this.lblMaxSize.Size = new System.Drawing.Size(100, 36);
+            this.lblMaxSize.TabIndex = 122;
+            this.lblMaxSize.Text = "0";
+            this.lblMaxSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMaxSize.Click += new System.EventHandler(this.lblMaxSize_Click);
             // 
             // label22
             // 
@@ -406,7 +407,7 @@
             this.ckbContainArea.AutoSize = true;
             this.ckbContainArea.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainArea.ForeColor = System.Drawing.Color.White;
-            this.ckbContainArea.Location = new System.Drawing.Point(522, 154);
+            this.ckbContainArea.Location = new System.Drawing.Point(522, 182);
             this.ckbContainArea.Name = "ckbContainArea";
             this.ckbContainArea.Size = new System.Drawing.Size(161, 23);
             this.ckbContainArea.TabIndex = 131;
@@ -419,7 +420,7 @@
             this.ckbContainStrength.AutoSize = true;
             this.ckbContainStrength.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.ckbContainStrength.ForeColor = System.Drawing.Color.White;
-            this.ckbContainStrength.Location = new System.Drawing.Point(522, 183);
+            this.ckbContainStrength.Location = new System.Drawing.Point(522, 211);
             this.ckbContainStrength.Name = "ckbContainStrength";
             this.ckbContainStrength.Size = new System.Drawing.Size(187, 23);
             this.ckbContainStrength.TabIndex = 132;
@@ -453,11 +454,25 @@
             this.lblStrengthScaleFactor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblStrengthScaleFactor.Click += new System.EventHandler(this.lblStrengthScaleFactor_Click);
             // 
+            // ckbContainSize
+            // 
+            this.ckbContainSize.AutoSize = true;
+            this.ckbContainSize.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
+            this.ckbContainSize.ForeColor = System.Drawing.Color.White;
+            this.ckbContainSize.Location = new System.Drawing.Point(522, 153);
+            this.ckbContainSize.Name = "ckbContainSize";
+            this.ckbContainSize.Size = new System.Drawing.Size(156, 23);
+            this.ckbContainSize.TabIndex = 135;
+            this.ckbContainSize.Text = "Contain Size Value";
+            this.ckbContainSize.UseVisualStyleBackColor = true;
+            this.ckbContainSize.CheckedChanged += new System.EventHandler(this.ckbContainSize_CheckedChanged);
+            // 
             // AkkonResultParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.Controls.Add(this.ckbContainSize);
             this.Controls.Add(this.lblStrengthScaleFactor);
             this.Controls.Add(this.lblStrengthScaleText);
             this.Controls.Add(this.ckbContainStrength);
@@ -470,8 +485,8 @@
             this.Controls.Add(this.label26);
             this.Controls.Add(this.lblStrength);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.lblMaxHeight);
-            this.Controls.Add(this.lblMaxWidth);
+            this.Controls.Add(this.lblMaxSize);
+            this.Controls.Add(this.lblMinSize);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.lblLeadLengthX);
@@ -514,8 +529,8 @@
         private System.Windows.Forms.Label lblLeadLengthX;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label lblMaxWidth;
-        private System.Windows.Forms.Label lblMaxHeight;
+        private System.Windows.Forms.Label lblMinSize;
+        private System.Windows.Forms.Label lblMaxSize;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblStrength;
         private System.Windows.Forms.Label label26;
@@ -528,5 +543,6 @@
         private System.Windows.Forms.CheckBox ckbContainStrength;
         private System.Windows.Forms.Label lblStrengthScaleText;
         private System.Windows.Forms.Label lblStrengthScaleFactor;
+        private System.Windows.Forms.CheckBox ckbContainSize;
     }
 }
