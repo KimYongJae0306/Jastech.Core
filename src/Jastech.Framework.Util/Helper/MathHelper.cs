@@ -29,7 +29,7 @@ namespace Jastech.Framework.Util.Helper
 
         public static double DegToRad(double deg)
         {
-            return deg / 180.0 * Math.PI;
+            return deg * Math.PI / 180.0;
         }
 
         public static double RadToDeg(double rad)
@@ -37,10 +37,10 @@ namespace Jastech.Framework.Util.Helper
             return rad * 180.0 / Math.PI;
         }
 
-        public static double GetRadian(PointF referencePoint1, PointF referencePoint2)
+        public static double GetRadian(PointF leftPoint, PointF rightPoint)
         {
-            double deltaX = referencePoint2.X - referencePoint1.X;
-            double deltaY = referencePoint2.Y - referencePoint2.Y;
+            double deltaX = rightPoint.X - leftPoint.X;
+            double deltaY = rightPoint.Y - leftPoint.Y;
             return Math.Atan2(deltaY, deltaX);
         }
         
@@ -69,18 +69,24 @@ namespace Jastech.Framework.Util.Helper
 
         public static PointF GetCoordinate(PointF centerPoint, double diffRadian, PointF offset, PointF inputPoint)
         {
+            //PointF outputPoint = new PointF();
+
+            //// 보정 전 좌표
+            //inputPoint.X += offset.X;
+            //inputPoint.Y += offset.Y;
+
+            //// 센터, 옵셋, 각도, 출력
+            //var coordinateX = Math.Round(centerPoint.X + ((Math.Cos(DegToRad(diffRadian)) * (inputPoint.X - centerPoint.X)) - (Math.Sin(DegToRad(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
+            //var coordinateY = Math.Round(centerPoint.Y + ((Math.Sin(DegToRad(diffRadian)) * (inputPoint.X - centerPoint.X)) + (Math.Cos(DegToRad(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
+
+            //outputPoint.X = (float)coordinateX;
+            //outputPoint.Y = (float)coordinateY;
+
+            //return outputPoint;
+
             PointF outputPoint = new PointF();
 
-            // 보정 전 좌표
-            inputPoint.X += offset.X;
-            inputPoint.Y += offset.Y;
-
-            // 센터, 옵셋, 각도, 출력
-            var coordinateX = Math.Round(centerPoint.X + ((Math.Cos(RadToDeg(diffRadian)) * (inputPoint.X - centerPoint.X)) - (Math.Sin(RadToDeg(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
-            var coordinateY = Math.Round(centerPoint.Y + ((Math.Sin(RadToDeg(diffRadian)) * (inputPoint.X - centerPoint.X)) + (Math.Cos(RadToDeg(diffRadian)) * (inputPoint.Y - centerPoint.Y))));
-
-            outputPoint.X = (float)coordinateX;
-            outputPoint.Y = (float)coordinateY;
+            inputPoint.X -= centerPoint.X;
 
             return outputPoint;
         }

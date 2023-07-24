@@ -56,6 +56,14 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         {
             AkkonROIList.Clear();
         }
+
+        public void ReNewalROIList(List<AkkonROI> roiList)
+        {
+            if (AkkonROIList.Count > 0)
+                AkkonROIList.Clear();
+
+            AkkonROIList.AddRange(roiList);
+        }
         #endregion
     }
 }

@@ -59,6 +59,30 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             return new PointF((float)RightBottomX, (float)RightBottomY);
         }
 
+        public void SetLeftTopPoint(PointF rightBottom)
+        {
+            LeftTopX = rightBottom.X;
+            LeftTopY = rightBottom.Y;
+        }
+
+        public void SetRightTopPoint(PointF rightTop)
+        {
+            RightTopX = rightTop.X;
+            RightTopY = rightTop.Y;
+        }
+
+        public void SetLeftBottomPoint(PointF leftBottom)
+        {
+            LeftBottomX = leftBottom.X;
+            LeftBottomY = leftBottom.Y;
+        }
+
+        public void SetRightBottomPoint(PointF rightBottom)
+        {
+            RightBottomX = rightBottom.X;
+            RightBottomY = rightBottom.Y;
+        }
+
         public Rectangle GetBoundRect()
         {
             Rectangle rect = new Rectangle();
