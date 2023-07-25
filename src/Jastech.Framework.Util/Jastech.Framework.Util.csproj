@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoordinateTransform.cs" />
     <Compile Include="Helper\CSVHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\JsonConvertHelper.cs" />
