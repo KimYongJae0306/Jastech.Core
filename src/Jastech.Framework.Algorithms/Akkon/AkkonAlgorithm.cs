@@ -1153,8 +1153,8 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private AkkonImageKernel GenerateFilter(AkkonImageFilterParam filterParam)
         {
-            double s_lfGusFltPeak = 71;
-            double s_lfLOGFltPeak = 100;
+            double s_lfGusFltPeak = 71; // 메크론 71
+            double s_lfLOGFltPeak = 50; // 메크론 50
 
             int gusAnc = filterParam.GusWidth / 2;
 
