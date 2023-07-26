@@ -55,7 +55,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (Equals(rect, _prevViewRectangle))
                 return;
-
+ 
             rect.Color = CogColorConstants.Yellow;
             rect.LineWidthInScreenPixels = 2;
             rect.Interactive = true;
@@ -65,7 +65,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogThumbnailDisplay.StaticGraphics.Clear();
             cogThumbnailDisplay.InteractiveGraphics.Clear();
             AddGraphics("ViewRect", rect);
-
             _prevViewRectangle = rect;
         }
 
@@ -89,7 +88,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (cogThumbnailDisplay.Image == null || cogRegion == null)
                 return;
-
             cogThumbnailDisplay.InteractiveGraphics.Add(cogRegion as ICogGraphicInteractive, groupName, false);
         }
 

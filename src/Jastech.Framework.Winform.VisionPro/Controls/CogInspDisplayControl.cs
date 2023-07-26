@@ -35,8 +35,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             AddControls();
 
             // 이벤트 등록(중요)
-            CogThumbnail.UpdateRectEventHandler += UpdateViewRect;
+            
             DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
+            CogThumbnail.UpdateRectEventHandler += UpdateViewRect;
         }
 
         private void AddControls()
@@ -73,21 +74,55 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
+            //if (sender is CogRecordDisplay display)
+            //{
+            //    if (display.Image == null)
+            //        return;
+
+            //    if (display.Zoom < 0.2)
+            //        display.Zoom = 0.2;
+
+            //    if (display.Zoom > 10)
+            //        display.Zoom = 10;
+
+            //    if (_updateViewRect)
+            //    {
+            //        _updateViewRect = false;
+            //        return;
+            //    }
+
+            //    UpdateViewRect();
+            //}
+
             if (sender is CogRecordDisplay display)
             {
                 if (display.Image == null)
                     return;
 
-                if (display.Zoom < 0.2)
-                    display.Zoom = 0.2;
-
-                if (display.Zoom > 10)
-                    display.Zoom = 10;
-
                 if (_updateViewRect)
                 {
                     _updateViewRect = false;
                     return;
+                }
+                string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames.Contains("SfAutoFitWithGraphics"))
+                    return;
+
+                if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
+                {
+                    //if (display.Zoom < 0.2)
+                    //    display.Zoom = 0.2;
+
+                    if (display.Zoom > 10)
+                        display.Zoom = 10;
+                }
+
+                if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
+                {
+                    //if (DeleteResultGraphics())
+                    //    DeleteEventHandler?.Invoke(sender, e);
+
+                    //MoveImageEventHandler?.Invoke(display.PanX, display.PanY, display.Zoom);
                 }
 
                 UpdateViewRect();
@@ -97,7 +132,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void UpdateViewRect()
         {
             CogRectangle viewRect = GetViewRectangle();
-            DrawViewRectEventHandler?.Invoke(viewRect);
+            if (viewRect != null)
+                DrawViewRectEventHandler?.Invoke(viewRect);
         }
 
         public CogRectangle GetViewRectangle()
@@ -110,10 +146,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
             int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
 
-            if (calcWidth == 0)
-                calcWidth = 1;
-            if (calcHeight == 0)
-                calcHeight = 1;
+            if (calcWidth == 0 || calcHeight == 0)
+                return null;
 
             rect.X = calcX;
             rect.Y = calcY;

@@ -740,7 +740,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             var result = matchingResult.Judgement;
 
             DrawResultLabel("Result : " + result.ToString(), 0);
-            if (result != Judgment.FAIL)
+            if (result != Judgement.FAIL)
             {
                 DrawResultLabel("Score : " + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
                 DrawResultLabel("X : " + matchingResult.MaxMatchPos.FoundPos.X.ToString("0.000"), 2);

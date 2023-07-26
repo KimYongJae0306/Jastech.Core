@@ -11,7 +11,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public int TabNo { get; set; }
 
-        public AkkonJudgement AkkonCountJudgement { get; set; }
+        public Judgement CountJudgement { get; set; }
 
         public int LeftCount_Avg { get; set; }
 
@@ -25,7 +25,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public int RightCount_Max { get; set; }
 
-        public Judgment LengthJudgement { get; set; }
+        public Judgement LengthJudgement { get; set; }
 
         public float Length_Left_Avg_um { get; set; }       //um
 
@@ -43,6 +43,14 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
         #endregion
 
         #region 메서드
+        public bool IsAkkonGood()
+        {
+            if (CountJudgement == Judgement.OK && LengthJudgement == Judgement.OK)
+                return true;
+            else
+                return false;
+        }
+
         public void Dispose()
         {
             LeadResultList.Clear();

@@ -52,6 +52,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
 
             cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+            cogLeftDisplay.Fit();
         }
 
         public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
@@ -74,6 +75,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+            cogRightDisplay.Fit();
         }
 
         public void ClearImage()

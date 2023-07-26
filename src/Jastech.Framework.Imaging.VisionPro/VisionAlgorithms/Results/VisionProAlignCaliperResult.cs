@@ -7,7 +7,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
     public class VisionProAlignCaliperResult : VisionResult
     {
         #region 속성
-        public Judgment Judgement { get; set; } = Judgment.OK;
+        public Judgement Judgement { get; set; } = Judgement.OK;
 
         public List<VisionProCaliperResult> CogAlignResult { get; private set; } = new List<VisionProCaliperResult>();
         #endregion

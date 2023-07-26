@@ -46,6 +46,7 @@
             this.menuPanningMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuROIMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFitZoom = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSaveImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -237,38 +238,46 @@
             this.menuPointerMode,
             this.menuPanningMode,
             this.menuROIMode,
-            this.menuFitZoom});
+            this.menuFitZoom,
+            this.menuSaveImage});
             this.ctxDisplayMode.Name = "contextMenuStrip";
-            this.ctxDisplayMode.Size = new System.Drawing.Size(120, 92);
+            this.ctxDisplayMode.Size = new System.Drawing.Size(181, 136);
             this.ctxDisplayMode.Opening += new System.ComponentModel.CancelEventHandler(this.ctxDisplayMode_Opening);
             // 
             // menuPointerMode
             // 
             this.menuPointerMode.Name = "menuPointerMode";
-            this.menuPointerMode.Size = new System.Drawing.Size(119, 22);
+            this.menuPointerMode.Size = new System.Drawing.Size(180, 22);
             this.menuPointerMode.Text = "Pointer";
             this.menuPointerMode.Click += new System.EventHandler(this.menuPointerMode_Click);
             // 
             // menuPanningMode
             // 
             this.menuPanningMode.Name = "menuPanningMode";
-            this.menuPanningMode.Size = new System.Drawing.Size(119, 22);
+            this.menuPanningMode.Size = new System.Drawing.Size(180, 22);
             this.menuPanningMode.Text = "Panning";
             this.menuPanningMode.Click += new System.EventHandler(this.menuPanningMode_Click);
             // 
             // menuROIMode
             // 
             this.menuROIMode.Name = "menuROIMode";
-            this.menuROIMode.Size = new System.Drawing.Size(119, 22);
+            this.menuROIMode.Size = new System.Drawing.Size(180, 22);
             this.menuROIMode.Text = "ROI";
             this.menuROIMode.Click += new System.EventHandler(this.menuROIMode_Click);
             // 
             // menuFitZoom
             // 
             this.menuFitZoom.Name = "menuFitZoom";
-            this.menuFitZoom.Size = new System.Drawing.Size(119, 22);
+            this.menuFitZoom.Size = new System.Drawing.Size(180, 22);
             this.menuFitZoom.Text = "FitZoom";
             this.menuFitZoom.Click += new System.EventHandler(this.menuFitZoom_Click);
+            // 
+            // menuSaveImage
+            // 
+            this.menuSaveImage.Name = "menuSaveImage";
+            this.menuSaveImage.Size = new System.Drawing.Size(180, 22);
+            this.menuSaveImage.Text = "Save Image";
+            this.menuSaveImage.Click += new System.EventHandler(this.menuSaveImage_Click);
             // 
             // DrawBoxControl
             // 
@@ -310,5 +319,6 @@
         private System.Windows.Forms.Button btnFitZoom;
         private System.Windows.Forms.ToolStripMenuItem menuFitZoom;
         private System.Windows.Forms.Button btnDeleteFigure;
+        private System.Windows.Forms.ToolStripMenuItem menuSaveImage;
     }
 }
