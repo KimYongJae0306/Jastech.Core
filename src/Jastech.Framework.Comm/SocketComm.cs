@@ -81,8 +81,10 @@ namespace Jastech.Framework.Comm
             {
                 try
                 {
-                    if (Socket.Connected == true)
+                    if (IsConnected())
+                    {
                         Socket.Shutdown(SocketShutdown.Both);
+                    }
                     Socket.Close();
                 }
                 catch (SocketException se)
@@ -125,7 +127,7 @@ namespace Jastech.Framework.Comm
 
                 Thread.Sleep(700);
 
-                if (!Socket.Connected)
+                if (IsConnected() == false)
                 {
                     throw new SocketException();
                 }
@@ -164,7 +166,7 @@ namespace Jastech.Framework.Comm
 
         public bool Disconnect()
         {
-            if (!Socket.Connected)
+            if (IsConnected() == false)
                 return false;
 
             Socket.Disconnect(true);
@@ -175,7 +177,7 @@ namespace Jastech.Framework.Comm
         {
             try
             {
-                if (Socket == null || Socket.Connected == false)
+                if (IsConnected())
                     return false;
 
                 bool ok = data.Length == Socket.Send(data);
@@ -201,7 +203,7 @@ namespace Jastech.Framework.Comm
                 if (!ReconnectionRequested)
                 {
                     Socket tempSock = (Socket)result.AsyncState;
-                    if (Socket.Connected)
+                    if (IsConnected())
                     {
                         int readCount = tempSock.EndReceive(result);
 
@@ -285,7 +287,7 @@ namespace Jastech.Framework.Comm
                         while (true)
                         {
                             timer.ThrowIfTimeOut();
-                            if (Socket.Connected)
+                            if (IsConnected())
                                 break;
 
                             Thread.Sleep(10);
