@@ -5,7 +5,7 @@
 		public long TactTime { get; set; }
     }
 
-    public enum Judgment
+    public enum Judgement
     {
         OK,
         NG,
