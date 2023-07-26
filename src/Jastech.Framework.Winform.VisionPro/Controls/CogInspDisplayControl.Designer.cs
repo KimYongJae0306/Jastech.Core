@@ -57,11 +57,12 @@
             // pnlThumbnail
             // 
             this.pnlThumbnail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.pnlThumbnail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlThumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlThumbnail.Location = new System.Drawing.Point(3, 333);
-            this.pnlThumbnail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlThumbnail.Location = new System.Drawing.Point(0, 331);
+            this.pnlThumbnail.Margin = new System.Windows.Forms.Padding(0);
             this.pnlThumbnail.Name = "pnlThumbnail";
-            this.pnlThumbnail.Size = new System.Drawing.Size(814, 46);
+            this.pnlThumbnail.Size = new System.Drawing.Size(820, 50);
             this.pnlThumbnail.TabIndex = 3;
             // 
             // pnlDisplay
