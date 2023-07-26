@@ -405,6 +405,19 @@ namespace Jastech.Framework.Winform.Controls
                 pbxDisplay.Image = null;
             }
         }
+
+        private void menuSaveImage_Click(object sender, EventArgs e)
+        {
+            if (pbxDisplay.Image == null)
+                return;
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "BMP File(*.bmp)|*.bmp;";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                pbxDisplay.Image.Save(dialog.FileName);
+            }
+        }
         #endregion
     }
 
