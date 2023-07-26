@@ -51,9 +51,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 VisionProPatternMatchPos match = new VisionProPatternMatchPos();
 
                 CogRectangle trainRoi = copyParam.GetTrainRegion() as CogRectangle;
+                var trainOrigin = copyParam.GetOrigin();
                 var foundResult = resultList[0];
 
-                match.ReferencePos = new PointF((float)trainRoi.CenterX, (float)trainRoi.CenterY);
+                match.ReferencePos = new PointF((float)trainOrigin.TranslationX, (float)trainOrigin.TranslationY);
                 match.ReferenceWidth = (float)trainRoi.Width;
                 match.ReferenceHeight = (float)trainRoi.Height;
 
