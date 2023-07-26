@@ -57,7 +57,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(405, 240);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(405, 200);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -73,7 +73,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(201, 240);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(201, 200);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // cogRightDisplay
@@ -92,7 +92,7 @@
             this.cogRightDisplay.MouseWheelSensitivity = 1D;
             this.cogRightDisplay.Name = "cogRightDisplay";
             this.cogRightDisplay.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("cogRightDisplay.OcxState")));
-            this.cogRightDisplay.Size = new System.Drawing.Size(201, 200);
+            this.cogRightDisplay.Size = new System.Drawing.Size(201, 160);
             this.cogRightDisplay.TabIndex = 2;
             // 
             // label1
@@ -122,7 +122,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(201, 240);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(201, 200);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cogLeftDisplay
@@ -141,7 +141,7 @@
             this.cogLeftDisplay.MouseWheelSensitivity = 1D;
             this.cogLeftDisplay.Name = "cogLeftDisplay";
             this.cogLeftDisplay.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("cogLeftDisplay.OcxState")));
-            this.cogLeftDisplay.Size = new System.Drawing.Size(201, 200);
+            this.cogLeftDisplay.Size = new System.Drawing.Size(201, 160);
             this.cogLeftDisplay.TabIndex = 3;
             // 
             // lblAlignViewer
@@ -167,7 +167,7 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "CogPreAlignDisplayControl";
-            this.Size = new System.Drawing.Size(405, 240);
+            this.Size = new System.Drawing.Size(405, 200);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogRightDisplay)).EndInit();
