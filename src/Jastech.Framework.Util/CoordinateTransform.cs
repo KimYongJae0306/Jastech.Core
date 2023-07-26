@@ -58,7 +58,7 @@ namespace Jastech.Framework.Util
             OffsetPoint =  MathHelper.GetOffset(referenceCenterPoint, targetCenterPoint);
         }
 
-        private PointF GetOffsetPoint()
+        public PointF GetOffsetPoint()
         {
             return OffsetPoint;
         }
@@ -82,7 +82,7 @@ namespace Jastech.Framework.Util
             DiffAngle = referenceDegree - targetDegree;
         }
 
-        private double GetDiffAngle()
+        public double GetDiffAngle()
         {
             return DiffAngle;
         }
