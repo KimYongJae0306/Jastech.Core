@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System.Drawing;
 using System.Windows.Forms;
@@ -35,15 +36,32 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 메서드
         public void SetThumbnailImage(ICogImage cogImage)
         {
+            //if (cogImage == null)
+            //    return;
+
+            //Cognex.VisionPro.ImageProcessing.CogImageConvertTool tlqkf = new Cognex.VisionPro.ImageProcessing.CogImageConvertTool();
+            //tlqkf.InputImage = cogImage;
+            //tlqkf.Run();
+
+            //CogImage8Grey c8 = tlqkf.OutputImage as CogImage8Grey;
+
+
             if (cogImage == null)
                 return;
 
+            CogImage8Grey cogImage8Grey = new CogImage8Grey();
+
+            if (cogImage is CogImage24PlanarColor)
+                cogImage8Grey = VisionProImageHelper.Convert24PlanarColorToGrey(cogImage as CogImage24PlanarColor);
+            else if (cogImage is CogImage8Grey)
+                cogImage8Grey = cogImage as CogImage8Grey;
+
             int newHeight = this.cogThumbnailDisplay.Height;
-            _scale = (double)newHeight / cogImage.Height;
-            int newWidth = (int)((double)cogImage.Width * _scale);
+            _scale = (double)newHeight / cogImage8Grey.Height;
+            int newWidth = (int)((double)cogImage8Grey.Width * _scale);
 
             CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
-            ThumbnailImage = cogImage.ScaleImage(newWidth, newHeight);
+            ThumbnailImage = cogImage8Grey.ScaleImage(newWidth, newHeight);
             cogThumbnailDisplay.Image = ThumbnailImage;
             cogThumbnailDisplay.Fit();
         }
