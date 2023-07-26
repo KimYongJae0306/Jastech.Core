@@ -110,7 +110,7 @@ namespace Jastech.Framework.Comm
            else if(SocketCommType == SocketCommType.Udp)
             {
                 Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 9031/*Port*/));
+                Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), LocalPort));
             }
 
             bool isSuccessed = BeginConnect();
