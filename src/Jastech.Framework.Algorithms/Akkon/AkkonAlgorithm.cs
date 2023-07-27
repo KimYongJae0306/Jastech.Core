@@ -25,6 +25,8 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         private OpencvContour OpencvContour { get; set; } = new OpencvContour();
 
+        public Mat ResizeMat { get; set; } = null;
+
         public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um)
         {
             Stopwatch sw = new Stopwatch();
@@ -508,7 +510,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 return new List<AkkonSlice>();
 
             var resizeRoiList = GetResizeROI(roiList, resizeRatio);
-            Mat resizeMat = GetResizeMat(orgMat, resizeRatio);
+            ResizeMat = GetResizeMat(orgMat, resizeRatio);
 
             Rectangle worldRect = GetBoundRect(resizeRoiList);
 
@@ -517,12 +519,11 @@ namespace Jastech.Framework.Algorithms.Akkon
             if(resizeRatio == 1.0)
             {
                 cropWorldMat = MatHelper.CropRoi(orgMat, worldRect);
-                //resizeMat.Dispose(); -> 여긴 Dispose 필요 없음. ResizeRatio(1.0)일 경우 참조
+                ResizeMat = orgMat;
             }
             else
             {
-                cropWorldMat = MatHelper.CropRoi(resizeMat, worldRect);
-                resizeMat.Dispose();
+                cropWorldMat = MatHelper.CropRoi(ResizeMat, worldRect);
             }
 
             int roiIndex = 0;

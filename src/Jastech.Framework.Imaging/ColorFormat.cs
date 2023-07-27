@@ -10,6 +10,6 @@
     {
         Jpg,
         Bmp,
-        Png,
+        //Png,
     }
 }

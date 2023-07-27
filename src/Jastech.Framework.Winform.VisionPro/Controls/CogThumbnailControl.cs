@@ -36,16 +36,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 메서드
         public void SetThumbnailImage(ICogImage cogImage)
         {
-            //if (cogImage == null)
-            //    return;
-
-            //Cognex.VisionPro.ImageProcessing.CogImageConvertTool tlqkf = new Cognex.VisionPro.ImageProcessing.CogImageConvertTool();
-            //tlqkf.InputImage = cogImage;
-            //tlqkf.Run();
-
-            //CogImage8Grey c8 = tlqkf.OutputImage as CogImage8Grey;
-
-
             if (cogImage == null)
                 return;
 
@@ -61,6 +51,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             int newWidth = (int)((double)cogImage8Grey.Width * _scale);
 
             CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
+            cogThumbnailDisplay.StaticGraphics.Clear();
+            cogThumbnailDisplay.InteractiveGraphics.Clear();
+            cogThumbnailDisplay.Image = null;
+
             ThumbnailImage = cogImage8Grey.ScaleImage(newWidth, newHeight);
             cogThumbnailDisplay.Image = ThumbnailImage;
             cogThumbnailDisplay.Fit();
@@ -88,7 +82,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void DisposeImage()
         {
+            cogThumbnailDisplay.StaticGraphics.Clear();
+            cogThumbnailDisplay.InteractiveGraphics.Clear();
             CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
+            cogThumbnailDisplay.Image = null;
         }
 
         private void ViewRect_Changed(object sender, CogChangedEventArgs e)

@@ -51,8 +51,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (image == null)
                 return;
-            //CogDisplayHelper.DisposeDisplay(cogDisplay);
-            cogDisplay.Image = image;
+            
+            cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
             CogThumbnail.SetThumbnailImage(image);
         }
 
@@ -65,11 +65,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.PanX = panPointX;
         }
 
-        public void Clear()
+        public void ClearImage()
         {
             cogDisplay.StaticGraphics.Clear();
             cogDisplay.InteractiveGraphics.Clear();
+            CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = null;
+
+            CogThumbnail.DisposeImage();
         }
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)

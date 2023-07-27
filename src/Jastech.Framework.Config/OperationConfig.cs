@@ -31,11 +31,33 @@ namespace Jastech.Framework.Config
         public bool SaveImageNG { get; set; } = true;
 
         [JsonProperty]
-        public ImageExtension ExtensionOKImage { get; set; } = ImageExtension.Bmp;
+        public ImageExtension ExtensionOKImage { get; set; } = ImageExtension.Jpg;
 
         [JsonProperty]
         public ImageExtension ExtensionNGImage { get; set; } = ImageExtension.Bmp;
 
+        #endregion
+
+        #region 메서드
+        public string GetExtensionOKImage()
+        {
+            if (ExtensionOKImage == ImageExtension.Bmp)
+                return ".bmp";
+            else if (ExtensionOKImage == ImageExtension.Jpg)
+                return ".jpg";
+            else
+                return ".bmp";
+        }
+
+        public string GetExtensionNGImage()
+        {
+            if (ExtensionNGImage == ImageExtension.Bmp)
+                return ".bmp";
+            else if (ExtensionNGImage == ImageExtension.Jpg)
+                return ".jpg";
+            else
+                return ".bmp";
+        }
         #endregion
     }
 }
