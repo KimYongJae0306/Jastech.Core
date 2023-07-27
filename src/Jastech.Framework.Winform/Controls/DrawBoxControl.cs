@@ -43,7 +43,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 이벤트
-        public event FigureDataDelegate FigureDataDelegateEventHanlder;
+        public event FigureDataDelegate FigureDataDelegateEventHandler;
         #endregion
 
         #region 델리게이트
@@ -260,12 +260,12 @@ namespace Jastech.Framework.Winform.Controls
 
                 if (FigureManager.IsSelected())
                 {
-                    if (FigureDataDelegateEventHanlder != null)
+                    if (FigureDataDelegateEventHandler != null)
                     {
                         byte[] dataArray = GetDataArray(OrgImage as Bitmap, FigureManager.GetSelectedFigure());
 
                         if (dataArray != null)
-                            FigureDataDelegateEventHanlder(dataArray);
+                            FigureDataDelegateEventHandler(dataArray);
                     }
                 }
             }

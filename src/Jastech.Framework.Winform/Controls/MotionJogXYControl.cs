@@ -9,7 +9,7 @@ namespace Jastech.Framework.Winform.Controls
     public partial class MotionJogXYControl : UserControl
     {
         #region 속성
-        private AxisHandler AxisHanlder { get; set; } = null;
+        private AxisHandler AxisHandler { get; set; } = null;
 
         public JogSpeedMode JogSpeedMode { get; set; } = JogSpeedMode.Slow;
 
@@ -26,79 +26,79 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        public void SetAxisHanlder(AxisHandler axisHandler)
+        public void SetAxisHandler(AxisHandler axisHandler)
         {
-            AxisHanlder = axisHandler;
+            AxisHandler = axisHandler;
         }
 
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
-            Axis axis = AxisHanlder.GetAxis(AxisName.X);
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHanlder == null)
+            if (AxisHandler == null)
                 return;
 
-            AxisHanlder.GetAxis(AxisName.X).StopMove();
+            AxisHandler.GetAxis(AxisName.X).StopMove();
         }
 
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
-            Axis axis = AxisHanlder.GetAxis(AxisName.X);
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHanlder == null)
+            if (AxisHandler == null)
                 return;
 
-            AxisHanlder.GetAxis(AxisName.X).StopMove();
+            AxisHandler.GetAxis(AxisName.X).StopMove();
         }
 
         private void btnJogDownY_MouseDown(object sender, MouseEventArgs e)
         {
-            Axis axis = AxisHanlder.GetAxis(AxisName.Y);
+            Axis axis = AxisHandler.GetAxis(AxisName.Y);
             MoveJog(axis, Direction.CW);
         }
 
         private void btnJogDownY_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHanlder == null)
+            if (AxisHandler == null)
                 return;
 
-            AxisHanlder.GetAxis(AxisName.Y).StopMove();
+            AxisHandler.GetAxis(AxisName.Y).StopMove();
         }
 
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
-            Axis axis = AxisHanlder.GetAxis(AxisName.Y);
+            Axis axis = AxisHandler.GetAxis(AxisName.Y);
             MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogUpY_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHanlder == null)
+            if (AxisHandler == null)
                 return;
 
-            AxisHanlder.GetAxis(AxisName.Y).StopMove();
+            AxisHandler.GetAxis(AxisName.Y).StopMove();
         }
 
         private void btnJogStop_Click(object sender, EventArgs e)
         {
-            Axis axisX = AxisHanlder.GetAxis(AxisName.X);
+            Axis axisX = AxisHandler.GetAxis(AxisName.X);
             axisX.StopMove();
 
-            Axis axisY = AxisHanlder.GetAxis(AxisName.Y);
+            Axis axisY = AxisHandler.GetAxis(AxisName.Y);
             axisY.StopMove();
         }
 
         private void MoveJog(Axis axis, Direction direction)
         {
-            if (AxisHanlder == null)
+            if (AxisHandler == null)
                 return;
             if (axis == null)
                 return;

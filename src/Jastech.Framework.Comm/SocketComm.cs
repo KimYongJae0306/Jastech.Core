@@ -177,7 +177,7 @@ namespace Jastech.Framework.Comm
         {
             try
             {
-                if (IsConnected())
+                if (IsConnected() == false)
                     return false;
 
                 bool ok = data.Length == Socket.Send(data);
@@ -221,6 +221,11 @@ namespace Jastech.Framework.Comm
                             }
                         }
                         this.Receive();
+                    }
+                    else
+                    {
+                        Logger.Error(ErrorType.Comm, $"Socket_DataReceived:Socket not connected.");
+                        ReconnectionRequested = true;
                     }
                 }
             }
