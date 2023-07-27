@@ -14,7 +14,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public SerialPortComm SerialPortComm { get; set; } = null;
 
         [JsonProperty]
-        public double ResolutionAxisZ { get; set; } = 1000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm // 믿지마
+        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm 
 
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
