@@ -105,12 +105,11 @@ namespace Jastech.Framework.Device.Cameras
         public override bool Initialize()
         {
             base.Initialize();
-        
+            
             MilSystem = GrabberMil.GetMilSystem(MilSystemType, SystemNum);
 
             if (MilSystem == null)
                 return false;
-
             if (CreateDigitizerId(DcfFile) == false)
                 return false;
 

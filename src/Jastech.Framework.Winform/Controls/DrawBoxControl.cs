@@ -408,14 +408,14 @@ namespace Jastech.Framework.Winform.Controls
 
         private void menuSaveImage_Click(object sender, EventArgs e)
         {
-            if (pbxDisplay.Image == null)
+            if (OrgImage == null)
                 return;
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "BMP File(*.bmp)|*.bmp;";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                pbxDisplay.Image.Save(dialog.FileName);
+                OrgImage.Save(dialog.FileName);
             }
         }
         #endregion

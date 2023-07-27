@@ -15,24 +15,24 @@ namespace Jastech.Framework.Comm
     public class SocketComm : IComm
     {
         #region 생성자
-        public SocketComm(string ipAddress, int port, SocketCommType socketCommType, int udpLocalPort = 0)
+        public SocketComm(string ipAddress, int port, SocketCommType socketCommType, int localPort)
         {
             IpAddress = ipAddress;
             Port = port;
             SocketCommType = socketCommType;
-            LocalPort = udpLocalPort;
+            LocalPort = localPort;
         }
         #endregion
 
         #region 속성
         [JsonProperty]
-        public string IpAddress { get; }
+        public string IpAddress { get; set; }
 
         [JsonProperty]
-        public int Port { get; }
+        public int Port { get; set; }
 
         [JsonProperty]
-        public int LocalPort { get; }
+        public int LocalPort { get; set; }
 
         [JsonProperty]
         public SocketCommType SocketCommType { get; set; }
@@ -201,7 +201,7 @@ namespace Jastech.Framework.Comm
                 if (!ReconnectionRequested)
                 {
                     Socket tempSock = (Socket)result.AsyncState;
-                    if (Socket.Connected)
+                    if (IsConnected())
                     {
                         int readCount = tempSock.EndReceive(result);
 

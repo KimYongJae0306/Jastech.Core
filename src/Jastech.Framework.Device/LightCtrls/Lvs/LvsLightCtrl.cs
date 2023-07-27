@@ -1,6 +1,7 @@
 ﻿using Jastech.Framework.Comm;
 using Jastech.Framework.Comm.Protocol;
 using Jastech.Framework.Device.LightCtrls.Lvs.Parser;
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 
@@ -11,7 +12,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
         #region 속성
         public ILvsParser Parser { get; set; }
 
-        public ManualResetEvent DataReceivedEvent { get; private set; } = new ManualResetEvent(false);
+        private ManualResetEvent DataReceivedEvent { get; set; } = new ManualResetEvent(false);
         #endregion
 
         #region 생성자
