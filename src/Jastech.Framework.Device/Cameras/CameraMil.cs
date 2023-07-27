@@ -489,6 +489,13 @@ namespace Jastech.Framework.Device.Cameras
         public void SetTDIScanDriection(TDIDirectionType direction)
         {
             TDIDirection = direction;
+
+            // GET
+            //long ScanDirectionStringSize = -1;
+            //MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_STRING_SIZE, "ScanDirection", MIL.M_TYPE_MIL_INT, ref ScanDirectionStringSize);
+
+            string directionString = TDIDirection.ToString();
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ScanDirection", MIL.M_TYPE_STRING, directionString);
         }
 
         public void SetTDIOperationMode(TDIOperationMode mode)
