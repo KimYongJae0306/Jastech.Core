@@ -51,6 +51,9 @@
             this.cogThumbnailDisplay.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("cogThumbnailDisplay.OcxState")));
             this.cogThumbnailDisplay.Size = new System.Drawing.Size(230, 209);
             this.cogThumbnailDisplay.TabIndex = 0;
+            this.cogThumbnailDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cogThumbnailDisplay_MouseDown);
+            this.cogThumbnailDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cogThumbnailDisplay_MouseUp);
+            this.cogThumbnailDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cogThumbnailDisplay_MouseMove);
             // 
             // CogThumbnailControl
             // 
