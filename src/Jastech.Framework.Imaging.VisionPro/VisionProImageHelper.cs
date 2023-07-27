@@ -477,5 +477,15 @@ namespace Jastech.Framework.Imaging.VisionPro
 
             return rect;
         }
+
+        public static CogImage8Grey Convert24PlanarColorToGrey(CogImage24PlanarColor colorImage)
+        {
+            CogImageConvertTool imageConvertTool = new CogImageConvertTool();
+            imageConvertTool.InputImage = colorImage;
+            imageConvertTool.Run();
+
+            CogImage8Grey outputImage = imageConvertTool.OutputImage as CogImage8Grey;
+            return outputImage;
+        }
     }
 }
