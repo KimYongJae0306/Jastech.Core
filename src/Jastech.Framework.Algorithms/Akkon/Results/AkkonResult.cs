@@ -11,7 +11,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public int TabNo { get; set; }
 
-        public Judgement CountJudgement { get; set; }
+        public Judgement CountJudgement { get; set; } = Judgement.FAIL;
 
         public int LeftCount_Avg { get; set; }
 

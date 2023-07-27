@@ -100,6 +100,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             double ratio = clientPoint.X / (double)cogThumbnailDisplay.Width;
 
             UpdateRectEventHandler?.Invoke(rect, ratio);
+
+            //DrawViewRect(rect);
         }
 
         public void AddGraphics(string groupName, ICogRegion cogRegion, bool checkForDuplicates = false)
@@ -119,5 +121,33 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return false;
         }
         #endregion
+
+        private bool _isThumbnailMove = false;
+
+        private void cogThumbnailDisplay_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (sender.GetType() == cogThumbnailDisplay.GetType())
+            {
+                //UpdateDisplayFromThumbnailEvent(sender);
+                ViewRect_Changed(sender, null);
+                _isThumbnailMove = true;
+            }
+        }
+
+        private void cogThumbnailDisplay_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender.GetType() == cogThumbnailDisplay.GetType() && _isThumbnailMove)
+            {
+                //UpdateDisplayFromThumbnailEvent(sender);
+                ViewRect_Changed(sender, null);
+            }
+        }
+
+        private void cogThumbnailDisplay_MouseUp(object sender, MouseEventArgs e)
+        {
+            _isThumbnailMove = false;
+        }
+
+        
     }
 }
