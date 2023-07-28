@@ -149,7 +149,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(106, 28);
             this.label7.TabIndex = 97;
-            this.label7.Text = "Resize Ratio";
+            this.label7.Text = "Enhance";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label15
