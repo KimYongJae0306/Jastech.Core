@@ -65,7 +65,18 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetDefaultParameter()
         {
-            throw new System.NotImplementedException();
+        }
+
+        public override void SetTrackingOnOFF(bool isOn)
+        {
+        }
+
+        public override void SetLaserOnOff(bool isOn)
+        {
+        }
+
+        public override void SetMotionEnable(bool isOn)
+        {
         }
     }
 }

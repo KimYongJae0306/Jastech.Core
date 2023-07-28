@@ -43,6 +43,12 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetCenterOfGravity(int value);
 
+        public abstract void SetTrackingOnOFF(bool isOn);
+
+        public abstract void SetLaserOnOff(bool isOn);
+
+        public abstract void SetMotionEnable(bool isOn);
+
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);

@@ -140,7 +140,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             Send(command);
         }
 
-        public void SetLaserOnOff(bool isOn)
+        public override void SetLaserOnOff(bool isOn)
         {
             string value = Convert.ToInt16(isOn).ToString();
 
@@ -154,7 +154,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             Send(command);
         }
 
-        public void SetTrackingOnOFF(bool isOn)
+        public override void SetTrackingOnOFF(bool isOn)
         {
             string value = Convert.ToInt16(isOn).ToString();
 
@@ -168,7 +168,7 @@ namespace Jastech.Framework.Device.LAFCtrl
             Send(command);
         }
 
-        public void SetMotionEnable(bool isOn)
+        public override void SetMotionEnable(bool isOn)
         {
             string value = Convert.ToInt16(isOn).ToString();
 
