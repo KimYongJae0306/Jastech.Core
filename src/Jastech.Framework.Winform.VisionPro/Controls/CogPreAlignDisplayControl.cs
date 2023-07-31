@@ -71,12 +71,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
 
             cogRightDisplay.Fit();
-
-            string tlqkfrudfh = @"D:\test_right.bmp";
-            ICogImage tlqkf = cogRightDisplay.Image;
-
-
-            VisionProImageHelper.Save(tlqkf, tlqkfrudfh);
         }
 
         public void ClearImage()
