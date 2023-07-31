@@ -152,7 +152,7 @@ namespace Jastech.Framework.Imaging.Helper
             return adAngle * Math.PI / 180.0;
         }
 
-        public static Mat ColorChannelSprate(Mat mat, ColorChannel colorChannel)
+        public static Mat ColorChannelSeperate(Mat mat, ColorChannel colorChannel)
         {
             int idx = (int)colorChannel;
             Mat rtMat;

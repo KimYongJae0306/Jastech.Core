@@ -82,7 +82,11 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract void SetOffsetX(int value);
 
+        public abstract int GetOffsetX();
+
         public abstract void SetImageWidth(int value);
+
+        public abstract int GetImageWidth();
 
         public abstract void SetImageHeight(int value);
 

@@ -244,6 +244,16 @@ namespace Jastech.Framework.Device.Cameras
         {
             return 0;
         }
+
+        public override int GetOffsetX()
+        {
+            return 0;
+        }
+
+        public override int GetImageWidth()
+        {
+            return 0;
+        }
         #endregion
 
     }

@@ -348,13 +348,30 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetOffsetX(int value)
         {
-            // dcf 파일에서 설정함
+            long offsetX = (long)value;
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OffsetX", MIL.M_TYPE_INT64, ref offsetX);
+        }
+
+        public override int GetOffsetX()
+        {
+            int offsetX = 0;
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OffsetX", MIL.M_TYPE_INT64, ref offsetX);
+
+            return offsetX;
         }
 
         public override void SetImageWidth(int value)
         {
             long width = (long)value;
             MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
+        }
+
+        public override int GetImageWidth()
+        {
+            int width = 0;
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "Width", MIL.M_TYPE_INT64, ref width);
+
+            return width;
         }
 
         public override void SetImageHeight(int value)

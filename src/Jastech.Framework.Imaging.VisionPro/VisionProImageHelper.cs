@@ -48,7 +48,7 @@ namespace Jastech.Framework.Imaging.VisionPro
                 bmp.Append(image);
                 bmp.Close();
             }
-            else if(extension == ".jpg" || extension == "jpeg")
+            else if(extension == ".jpg" || extension == ".jpeg")
             {
                 CogImageFileJPEG jpg = new CogImageFileJPEG();
                 jpg.Open(fileName, CogImageFileModeConstants.Write);

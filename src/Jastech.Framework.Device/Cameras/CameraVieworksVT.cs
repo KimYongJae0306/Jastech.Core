@@ -219,6 +219,16 @@ namespace Jastech.Framework.Device.Cameras
         {
             throw new NotImplementedException();
         }
+
+        public override int GetOffsetX()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetImageWidth()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 

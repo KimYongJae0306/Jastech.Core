@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 메서드
-        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
+        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shapes)
         {
             CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
 
@@ -46,16 +47,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.StaticGraphics.Clear();
             cogLeftDisplay.InteractiveGraphics.Clear();
 
-            CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
+            foreach (var item in shapes)
+                cogLeftDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
 
-            foreach (var item in shape)
-                collect.Add(item);
-
-            cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
             cogLeftDisplay.Fit();
         }
 
-        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
+        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shapes)
         {
             CogDisplayHelper.DisposeDisplay(cogRightDisplay);
             if (cogRightDisplay.Image != null)
@@ -66,16 +64,19 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
 
-            if (shape == null)
+            if (shapes == null)
                 return;
 
-            CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
+            foreach (var item in shapes)
+                cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
 
-            foreach (var item in shape)
-                collect.Add(item);
-
-            cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
             cogRightDisplay.Fit();
+
+            string tlqkfrudfh = @"D:\test_right.bmp";
+            ICogImage tlqkf = cogRightDisplay.Image;
+
+
+            VisionProImageHelper.Save(tlqkf, tlqkfrudfh);
         }
 
         public void ClearImage()
