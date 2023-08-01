@@ -78,8 +78,8 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public CameraMil(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
-          : base(name, imageWidth, imageHeight, colorFormat, sensorType)
+        public CameraMil(string name, int imageWidth, int imageHeight, int offsetX, ColorFormat colorFormat, SensorType sensorType)
+          : base(name, imageWidth, imageHeight, offsetX, colorFormat, sensorType)
         {
         }
         #endregion
@@ -120,6 +120,7 @@ namespace Jastech.Framework.Device.Cameras
                         MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
             SetImageHeight(ImageHeight);
+            SetOffsetX(OffsetX);
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);

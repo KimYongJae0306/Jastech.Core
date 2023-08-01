@@ -57,8 +57,8 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public CameraVieworksVT(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
-           : base(name, imageWidth, imageHeight, colorFormat, sensorType)
+        public CameraVieworksVT(string name, int imageWidth, int imageHeight, int offsetX, ColorFormat colorFormat, SensorType sensorType)
+           : base(name, imageWidth, imageHeight, offsetX, colorFormat, sensorType)
         {
         }
         #endregion
