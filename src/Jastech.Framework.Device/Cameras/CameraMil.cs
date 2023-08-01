@@ -78,8 +78,8 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public CameraMil(string name, int imageWidth, int imageHeight, int offsetX, ColorFormat colorFormat, SensorType sensorType)
-          : base(name, imageWidth, imageHeight, offsetX, colorFormat, sensorType)
+        public CameraMil(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
+          : base(name, imageWidth, imageHeight, colorFormat, sensorType)
         {
         }
         #endregion
@@ -121,6 +121,7 @@ namespace Jastech.Framework.Device.Cameras
 #endif
             SetImageHeight(ImageHeight);
             SetOffsetX(OffsetX);
+            Thread.Sleep(50);
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
             _processingFunctionPtr = new MIL_DIG_HOOK_FUNCTION_PTR(ProcessingFunction);
@@ -414,7 +415,7 @@ namespace Jastech.Framework.Device.Cameras
                     break;
                 LastGrabImage = MilImage;
                 ImageGrabbedCallback();
-                Thread.Sleep(0);
+                Thread.Sleep(10);
             }
         }
         #endregion

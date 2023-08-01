@@ -15,7 +15,7 @@ namespace Jastech.Framework.Device.Cameras
         public int ImageHeight { get; protected set; }
 
         [JsonProperty]
-        public int OffsetX { get; protected set; }
+        public int OffsetX { get; set; }
 
         public int ImageChannel { get => ColorFormat == ColorFormat.RGB24 ? 3 : 1; }
 
@@ -58,12 +58,11 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 생성자
-        public Camera(string name, int imageWidth, int imageHeight, int offsetX, ColorFormat colorFormat, SensorType sensorType)
+        public Camera(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
         {
             Name = name;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
-            OffsetX = offsetX;
             ColorFormat = colorFormat;
             SensorType = sensorType;
         }

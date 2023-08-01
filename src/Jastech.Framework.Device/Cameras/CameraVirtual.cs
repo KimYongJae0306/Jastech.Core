@@ -5,8 +5,8 @@ namespace Jastech.Framework.Device.Cameras
     public partial class CameraVirtual : Camera , ICameraTDIavailable, ICameraTriggerable, ICameraPRNUavailable
     {
         #region 생성자
-        public CameraVirtual(string name, int imageWidth, int imageHeight, int offsetX, in ColorFormat colorFormat, SensorType sensorType) 
-            : base(name, imageWidth, imageHeight, offsetX, colorFormat, sensorType)
+        public CameraVirtual(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType) 
+            : base(name, imageWidth, imageHeight, colorFormat, sensorType)
         {
         }
         #endregion
