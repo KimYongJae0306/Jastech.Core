@@ -32,6 +32,8 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
+        public BufferNumber TriggerBuffer { get; set; }
+
         public Api Api { get; set; } = null;
         #endregion
 
@@ -74,12 +76,18 @@ namespace Jastech.Framework.Device.Motions
             if (ConnectType == ACSConnectType.Serial)
             {
                 if (OpenSerialPort())
+                {
+                    SetTriggerMode(TriggerBuffer);
                     return true;
+                }
             }
             else if(ConnectType == ACSConnectType.Ethernet)
             {
                 if (ConectEthernet())
+                {
+                    SetTriggerMode(TriggerBuffer);
                     return true;
+                }
             }
 
             return false;
@@ -378,7 +386,27 @@ namespace Jastech.Framework.Device.Motions
            // Api.GetAxisState
             return true;
         }
+
+        private void SetTriggerMode(BufferNumber triggerBuffer)
+        {
+            if (!Api.IsConnected)
+                return;
+
+            Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
+        }
         #endregion
+    }
+
+    public enum BufferNumber
+    {
+        Buffer0 = 0,
+        Buffer1 = 1,
+        Buffer2 = 2,
+        Buffer3 = 3,    
+        Buffer4 = 4,
+        Buffer5 = 5,
+        Buffer6 = 5,
+        Buffer7 = 5,
     }
 
     public enum ACSConnectType
