@@ -32,7 +32,7 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
-        public BufferNumber TriggerBuffer { get; set; }
+        public ACSBufferNumber TriggerBuffer { get; set; }
 
         public Api Api { get; set; } = null;
         #endregion
@@ -387,7 +387,7 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private void SetTriggerMode(BufferNumber triggerBuffer)
+        private void SetTriggerMode(ACSBufferNumber triggerBuffer)
         {
             if (!Api.IsConnected)
                 return;
@@ -397,7 +397,7 @@ namespace Jastech.Framework.Device.Motions
         #endregion
     }
 
-    public enum BufferNumber
+    public enum ACSBufferNumber
     {
         Buffer0 = 0,
         Buffer1 = 1,
@@ -405,8 +405,8 @@ namespace Jastech.Framework.Device.Motions
         Buffer3 = 3,    
         Buffer4 = 4,
         Buffer5 = 5,
-        Buffer6 = 5,
-        Buffer7 = 5,
+        Buffer6 = 6,
+        Buffer7 = 7,
     }
 
     public enum ACSConnectType

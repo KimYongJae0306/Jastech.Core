@@ -275,12 +275,14 @@ namespace Jastech.Framework.Winform.Controls
         private void btnDrawNone_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.None;
+            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 
         private void btnDrawLine_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Drawing;
+            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 
@@ -297,6 +299,7 @@ namespace Jastech.Framework.Winform.Controls
         private void btnPanning_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Panning;
+            this.Cursor = Cursors.Hand;
             UpdateDisplayModeUI(DisplayMode);
         }
 
