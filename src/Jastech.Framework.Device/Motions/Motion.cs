@@ -28,6 +28,8 @@ namespace Jastech.Framework.Device.Motions
 
         public abstract void StopMove(int axisNo);
 
+        public abstract bool IsMoving(int axisNo);
+
         public abstract void JogMove(int axisNo, Direction direction);
 
         public abstract double GetActualPosition(int axisNo);
