@@ -17,6 +17,9 @@ namespace Jastech.Framework.Device.Cameras
         [JsonProperty]
         public int OffsetX { get; set; }
 
+        [JsonProperty]
+        public bool ReverseX { get; set; } = false;
+
         public int ImageChannel { get => ColorFormat == ColorFormat.RGB24 ? 3 : 1; }
 
         [JsonProperty]
@@ -35,7 +38,7 @@ namespace Jastech.Framework.Device.Cameras
         public int GrabCount { get; set; } = 0;
 
         [JsonProperty]
-        public bool IsReverseX { get; set; } = false;
+        public bool EnableReverseX { get; set; } = false;
 
         [JsonProperty]
         public double Exposure { get; set; } = 5000;
@@ -73,7 +76,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public abstract double GetExposureTime();
 
-        public abstract void ReverseX(bool reverse);
+        public abstract void SetReverseX(bool reverse);
 
         public abstract void SetAnalogGain(int value);
 

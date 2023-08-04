@@ -32,8 +32,10 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
+        [JsonProperty]
         public ACSBufferNumber TriggerBuffer { get; set; }
 
+        [JsonIgnore]
         public Api Api { get; set; } = null;
         #endregion
 
@@ -391,6 +393,10 @@ namespace Jastech.Framework.Device.Motions
         {
             if (!Api.IsConnected)
                 return;
+            if(triggerBuffer == ACSBufferNumber.Buffer0 || triggerBuffer == ACSBufferNumber.Buffer1)
+            {
+                int g1 = 1;
+            }
 
             Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
         }
