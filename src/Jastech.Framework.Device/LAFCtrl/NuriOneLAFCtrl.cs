@@ -58,6 +58,11 @@ namespace Jastech.Framework.Device.LAFCtrl
                 return false;
         }
 
+        public override bool IsConnected()
+        {
+            return SerialPortComm.IsConnected();
+        }
+
         public override bool Release()
         {
             if (SerialPortComm != null)

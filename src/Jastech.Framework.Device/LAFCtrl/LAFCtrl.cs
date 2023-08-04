@@ -70,7 +70,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public virtual bool IsConnected()
         {
-            return true;
+            return false;
         }
 
         public virtual bool Release()

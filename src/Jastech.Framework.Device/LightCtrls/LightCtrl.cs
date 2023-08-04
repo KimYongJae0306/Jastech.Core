@@ -65,6 +65,11 @@ namespace Jastech.Framework.Device.LightCtrls
             return isConnected;
         }
 
+        public virtual bool IsConnected()
+        {
+            return false;
+        }
+
         public virtual bool Release()
         {
             bool isSuccess = true;

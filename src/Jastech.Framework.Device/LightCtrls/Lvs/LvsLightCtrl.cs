@@ -39,6 +39,11 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             return true;
         }
 
+        public override bool IsConnected()
+        {
+            return Communition.IsConnected();
+        }
+
         private void Communition_Received(byte[] data)
         {
             DataReceivedEvent.Set();
