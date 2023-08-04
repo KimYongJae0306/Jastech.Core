@@ -76,6 +76,11 @@
 
         }
 
+        public override bool IsMoving(int axisNo)
+        {
+            return false;
+        }
+
         public override void TurnOnServo(int axisNo, bool bOnOff)
         {
 

@@ -131,6 +131,12 @@ namespace Jastech.Framework.Device.Motions
             Api.Kill((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
+        public override bool IsMoving(int axisNo)
+        {
+            // 확인 필요.
+            return Api.GetAxisState((ACS.SPiiPlusNET.Axis)axisNo) == AxisStates.ACSC_AST_MOVE ? true : false;
+        }
+
         public override void JogMove(int axisNo, Direction direction)
         {
             Api.Jog(MotionFlags.ACSC_NONE, (ACS.SPiiPlusNET.Axis)axisNo, (double)direction);

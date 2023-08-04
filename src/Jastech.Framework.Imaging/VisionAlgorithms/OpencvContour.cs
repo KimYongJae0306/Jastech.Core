@@ -50,7 +50,6 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
                     }
                 }
             }
-
             return blobList;
         }
     }

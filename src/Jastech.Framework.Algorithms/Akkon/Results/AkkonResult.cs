@@ -9,7 +9,7 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
         #region 속성
         public string UnitName { get; set; }
 
-        public Judgement Judgement { get; set; } = Judgement.OK;
+        public Judgement Judgement { get; set; } = Judgement.NG;
 
         public int TabNo { get; set; }
 
