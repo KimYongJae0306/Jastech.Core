@@ -399,10 +399,6 @@ namespace Jastech.Framework.Device.Motions
         {
             if (!Api.IsConnected)
                 return;
-            if(triggerBuffer == ACSBufferNumber.Buffer0 || triggerBuffer == ACSBufferNumber.Buffer1)
-            {
-                int g1 = 1;
-            }
 
             Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
         }
