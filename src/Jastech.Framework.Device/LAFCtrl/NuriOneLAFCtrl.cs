@@ -195,6 +195,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionRelativeMove(Direction direction, double value)
         {
+            if(value == 0)
+            {
+                int g1 = 1;
+            }
             //if (value * ResolutionAxisZ < 1)
             //    return;
 
@@ -209,7 +213,11 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionAbsoluteMove(double value)
         {
-            double targetPosition = value;
+            if (value == 0)
+            {
+                int g1 = 1;
+            }
+            double targetPosition = value * ResolutionAxisZ;
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
             Send(command);
         }

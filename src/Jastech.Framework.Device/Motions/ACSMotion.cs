@@ -135,6 +135,8 @@ namespace Jastech.Framework.Device.Motions
 
         public override bool IsMoving(int axisNo)
         {
+            //var gg = Api.GetAxisStateAsync((ACS.SPiiPlusNET.Axis)axisNo).Ret;
+            var value = Api.GetAxisState((ACS.SPiiPlusNET.Axis)axisNo);
             // 확인 필요.
             return Api.GetAxisState((ACS.SPiiPlusNET.Axis)axisNo) == AxisStates.ACSC_AST_MOVE ? true : false;
         }
