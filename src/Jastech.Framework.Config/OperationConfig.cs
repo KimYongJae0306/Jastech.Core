@@ -16,9 +16,6 @@ namespace Jastech.Framework.Config
         public string LastModelName { get; set; } = "";
 
         [JsonProperty]
-        public string SystemVersion { get; set; } = "1.0.0";
-
-        [JsonProperty]
         public int DataStoringDuration { get; set; } = 30; //days
 
         [JsonProperty]
