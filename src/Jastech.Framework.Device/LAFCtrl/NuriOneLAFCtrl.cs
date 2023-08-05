@@ -2,6 +2,7 @@
 using Jastech.Framework.Comm.Protocol;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
@@ -126,6 +127,30 @@ namespace Jastech.Framework.Device.LAFCtrl
         //    SerialPortComm.Send(command);
         //}
 
+        public override bool IsInPosition(double targetValue)
+        {
+            double calcTargetValue = targetValue * ResolutionAxisZ;
+            if (Math.Abs(Status.MPosPulse - calcTargetValue) <= 0.0001)
+                return true;
+
+            return false;
+        }
+
+        public override bool MoveWaitDone(double targetValue, int timeOut_mm)
+        {
+            double calcTargetValue = targetValue * ResolutionAxisZ;
+            while (IsInPosition(calcTargetValue) == false)
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Restart();
+                if (sw.ElapsedMilliseconds >= timeOut_mm)
+                {
+                    return false;
+                }
+                Thread.Sleep(10);
+            }
+            return true;
+        }
 
         public void SetAccDec(int value)
         {
@@ -195,10 +220,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionRelativeMove(Direction direction, double value)
         {
-            if(value == 0)
-            {
-                int g1 = 1;
-            }
             //if (value * ResolutionAxisZ < 1)
             //    return;
 
@@ -213,10 +234,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionAbsoluteMove(double value)
         {
-            if (value == 0)
-            {
-                int g1 = 1;
-            }
             double targetPosition = value * ResolutionAxisZ;
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
             Send(command);

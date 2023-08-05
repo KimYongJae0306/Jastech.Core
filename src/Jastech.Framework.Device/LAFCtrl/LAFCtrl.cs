@@ -49,6 +49,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionEnable(bool isOn);
 
+        public abstract bool IsInPosition(double targetValue);
+
+        public abstract bool MoveWaitDone(double targetValue, int timeOut_mm);
+
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);
