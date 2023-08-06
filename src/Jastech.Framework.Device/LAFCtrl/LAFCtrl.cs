@@ -64,6 +64,8 @@ namespace Jastech.Framework.Device.LAFCtrl
     {
         #region 속성
         public string Name { get; protected set; }
+
+        public string AxisName { get; set; }
         #endregion
 
         #region 메서드

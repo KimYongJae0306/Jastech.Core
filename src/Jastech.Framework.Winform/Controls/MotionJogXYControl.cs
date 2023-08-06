@@ -31,57 +31,105 @@ namespace Jastech.Framework.Winform.Controls
             AxisHandler = axisHandler;
         }
 
+        private void btnJogLeftX_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CW);
+        }
+
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
         }
 
+        private void btnJogRightX_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CCW);
+        }
+
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
         }
 
+        private void btnJogDownY_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.Y);
+            MoveJog(axis, Direction.CW);
+        }
+
         private void btnJogDownY_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.Y);
             MoveJog(axis, Direction.CW);
         }
 
         private void btnJogDownY_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.Y).StopMove();
         }
 
+        private void btnJogUpY_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.Y);
+            MoveJog(axis, Direction.CCW);
+        }
+
         private void btnJogUpY_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.Y);
             MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogUpY_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.Y).StopMove();

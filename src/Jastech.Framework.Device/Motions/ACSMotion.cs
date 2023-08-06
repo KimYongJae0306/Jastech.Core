@@ -287,7 +287,7 @@ namespace Jastech.Framework.Device.Motions
             Api.SetKillDeceleration(axis, jogAcceleration * 2);
             Api.SetJerk(axis, jogJerk);
 
-            Thread.Sleep(300);
+            Thread.Sleep(50);
         }
 
         private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis)

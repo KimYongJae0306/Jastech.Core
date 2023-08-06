@@ -129,8 +129,9 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override bool IsInPosition(double targetValue)
         {
-            double calcTargetValue = targetValue * ResolutionAxisZ;
-            if (Math.Abs(Status.MPosPulse - calcTargetValue) <= 0.0001)
+            double calcTargetValue = targetValue / ResolutionAxisZ;
+            double calcMPos = Status.MPosPulse * ResolutionAxisZ;
+            if (Math.Abs(calcMPos - calcTargetValue) <= 0.0001)
                 return true;
 
             return false;
@@ -224,12 +225,14 @@ namespace Jastech.Framework.Device.LAFCtrl
             //    return;
 
             value = Math.Abs(value);
-
+            Console.WriteLine("LAF : " + value.ToString() +"   " + Status.MPosPulse);
             int directionValue = direction == Direction.CW ? -1 : 1;
 
             double moveAmount = Convert.ToDouble(value * ResolutionAxisZ) * directionValue;
             string command = MakeSetCommand(CMD_WRITE_MOTION_RELATIVE_MOVE, moveAmount.ToString());
             Send(command);
+
+            Thread.Sleep(50);
         }
 
         public override void SetMotionAbsoluteMove(double value)

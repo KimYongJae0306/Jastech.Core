@@ -73,6 +73,7 @@
             this.btnJogDownY.TabIndex = 6;
             this.btnJogDownY.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnJogDownY.UseVisualStyleBackColor = false;
+            this.btnJogDownY.Click += new System.EventHandler(this.btnJogDownY_Click);
             this.btnJogDownY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogDownY_MouseDown);
             this.btnJogDownY.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogDownY_MouseUp);
             // 
@@ -89,6 +90,7 @@
             this.btnJogLeftX.TabIndex = 1;
             this.btnJogLeftX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogLeftX.UseVisualStyleBackColor = false;
+            this.btnJogLeftX.Click += new System.EventHandler(this.btnJogLeftX_Click);
             this.btnJogLeftX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogLeftX_MouseDown);
             this.btnJogLeftX.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogLeftX_MouseUp);
             // 
@@ -105,6 +107,7 @@
             this.btnJogRightX.TabIndex = 2;
             this.btnJogRightX.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnJogRightX.UseVisualStyleBackColor = false;
+            this.btnJogRightX.Click += new System.EventHandler(this.btnJogRightX_Click);
             this.btnJogRightX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogRightX_MouseDown);
             this.btnJogRightX.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogRightX_MouseUp);
             // 
@@ -136,6 +139,7 @@
             this.btnJogUpY.TabIndex = 5;
             this.btnJogUpY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpY.UseVisualStyleBackColor = false;
+            this.btnJogUpY.Click += new System.EventHandler(this.btnJogUpY_Click);
             this.btnJogUpY.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogUpY_MouseDown);
             this.btnJogUpY.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogUpY_MouseUp);
             // 
