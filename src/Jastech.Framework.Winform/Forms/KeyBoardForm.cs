@@ -161,32 +161,32 @@ namespace Jastech.Framework.Winform.Forms
         private void btnInput_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            lblTextMessage.Text += btn.Text;
+            txtPassword.Text += btn.Text;
         }
 
         private void btnBackSpace_Click(object sender, EventArgs e)
         {
-            string message = lblTextMessage.Text;
+            string message = txtPassword.Text;
 
             if (message == string.Empty)
                 return;
 
-            lblTextMessage.Text = message.Substring(0, message.Length - 1);
+            txtPassword.Text = message.Substring(0, message.Length - 1);
         }
 
         private void btnTab_Click(object sender, EventArgs e)
         {
-            lblTextMessage.Text += "\t";
+            txtPassword.Text += "\t";
         }
 
         private void btnSpace_Click(object sender, EventArgs e)
         {
-            lblTextMessage.Text += " ";
+            txtPassword.Text += " ";
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
-            KeyValue = lblTextMessage.Text;
+            KeyValue = txtPassword.Text;
 
             this.DialogResult = DialogResult.OK;
             Close();
@@ -194,7 +194,7 @@ namespace Jastech.Framework.Winform.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            lblTextMessage.Text = string.Empty;
+            txtPassword.Text = string.Empty;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -208,7 +208,7 @@ namespace Jastech.Framework.Winform.Forms
 
         private void KeyBoardForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string message = lblTextMessage.Text;
+            string message = txtPassword.Text;
             btnEnter.Focus();
 
             if (e.KeyChar == Convert.ToChar(Keys.Back))
@@ -216,13 +216,13 @@ namespace Jastech.Framework.Winform.Forms
                 if (message == "")
                     return;
 
-                lblTextMessage.Text = message.Substring(0, message.Length - 1);
+                txtPassword.Text = message.Substring(0, message.Length - 1);
                 return;
             }
 
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                KeyValue = lblTextMessage.Text;
+                KeyValue = txtPassword.Text;
 
                 this.DialogResult = DialogResult.OK;
                 Close();
@@ -238,7 +238,7 @@ namespace Jastech.Framework.Winform.Forms
                 }
             }
 
-            lblTextMessage.Text += e.KeyChar.ToString();
+            txtPassword.Text += e.KeyChar.ToString();
         }
 
         private void KeyBoardForm_Load(object sender, EventArgs e)

@@ -50,6 +50,7 @@
             this.pbxOperator = new System.Windows.Forms.PictureBox();
             this.lblOperator = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.lblCancel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -68,6 +69,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblCancel);
             this.panel1.Controls.Add(this.lblApply);
             this.panel1.Controls.Add(this.txtPasword);
             this.panel1.Controls.Add(this.label1);
@@ -335,6 +337,19 @@
             this.panel6.Size = new System.Drawing.Size(518, 307);
             this.panel6.TabIndex = 1;
             // 
+            // lblCancel
+            // 
+            this.lblCancel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCancel.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold);
+            this.lblCancel.ForeColor = System.Drawing.Color.White;
+            this.lblCancel.Location = new System.Drawing.Point(20, 231);
+            this.lblCancel.Name = "lblCancel";
+            this.lblCancel.Size = new System.Drawing.Size(477, 50);
+            this.lblCancel.TabIndex = 293;
+            this.lblCancel.Text = "Cancel";
+            this.lblCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCancel.Click += new System.EventHandler(this.lblCancel_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -389,5 +404,6 @@
         private System.Windows.Forms.TextBox txtPasword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label lblCancel;
     }
 }
