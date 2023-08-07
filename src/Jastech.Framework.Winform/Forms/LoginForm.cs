@@ -108,7 +108,7 @@ namespace Jastech.Framework.Winform.Forms
                 CurrentUser = UserHandler.GetUser(AuthorityType.None);
             }
             MessageConfirmForm form2 = new MessageConfirmForm();
-            form2.Message = "Chaged User.";
+            form2.Message = "Changed User.";
             form2.ShowDialog();
 
             this.Close();
@@ -153,6 +153,11 @@ namespace Jastech.Framework.Winform.Forms
             {
                 StopProgramEvent?.Invoke();
             }
+        }
+
+        private void lblCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
         #endregion
     }

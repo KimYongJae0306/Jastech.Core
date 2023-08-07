@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTextMessage = new System.Windows.Forms.Label();
             this.btnQuotationMark = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
@@ -86,18 +85,8 @@
             this.chkCapsLock = new System.Windows.Forms.CheckBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // lblTextMessage
-            // 
-            this.lblTextMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTextMessage.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTextMessage.ForeColor = System.Drawing.Color.White;
-            this.lblTextMessage.Location = new System.Drawing.Point(290, 19);
-            this.lblTextMessage.Name = "lblTextMessage";
-            this.lblTextMessage.Size = new System.Drawing.Size(682, 59);
-            this.lblTextMessage.TabIndex = 18;
-            this.lblTextMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnQuotationMark
             // 
@@ -958,12 +947,25 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // txtPassword
+            // 
+            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.txtPassword.Font = new System.Drawing.Font("맑은 고딕", 15F, System.Drawing.FontStyle.Bold);
+            this.txtPassword.ForeColor = System.Drawing.Color.White;
+            this.txtPassword.Location = new System.Drawing.Point(290, 17);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.ReadOnly = true;
+            this.txtPassword.Size = new System.Drawing.Size(682, 34);
+            this.txtPassword.TabIndex = 293;
+            // 
             // KeyBoardForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(1258, 542);
             this.ControlBox = false;
+            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.chkCapsLock);
@@ -1021,7 +1023,6 @@
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.btnQuotationMark);
-            this.Controls.Add(this.lblTextMessage);
             this.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.KeyPreview = true;
@@ -1034,12 +1035,11 @@
             this.Load += new System.EventHandler(this.KeyBoardForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyBoardForm_KeyPress);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblTextMessage;
         private System.Windows.Forms.Button btnQuotationMark;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn2;
@@ -1097,5 +1097,6 @@
         private System.Windows.Forms.CheckBox chkCapsLock;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txtPassword;
     }
 }
