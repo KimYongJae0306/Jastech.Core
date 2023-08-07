@@ -114,7 +114,7 @@ namespace Jastech.Framework.Device.Cameras
                 return -1;
         }
 
-        public override void ReverseX(bool reverse)
+        public override void SetReverseX(bool reverse)
         {
             string message = MakeSetCommand(SetReverseXCmd, reverse == false ? 0 : 1);
             SendMessage(message);

@@ -20,7 +20,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override bool IsConnected()
         {
-            return true;
+            return false;
         }
 
         public override void SetMotionRelativeMove(AxisMovingParam.Direction direction, double value)
@@ -77,6 +77,16 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionEnable(bool isOn)
         {
+        }
+
+        public override bool IsInPosition(double targetValue)
+        {
+            return true;
+        }
+
+        public override bool MoveWaitDone(double targetValue, int timeOut_mm)
+        {
+            return true;
         }
     }
 }

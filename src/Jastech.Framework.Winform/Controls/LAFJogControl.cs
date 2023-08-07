@@ -10,6 +10,7 @@ namespace Jastech.Framework.Winform.Controls
         public LAFCtrl SelectedLafCtrl { get; private set; } = null;
 
         public JogMode JogMode { get; set; } = JogMode.Jog;
+
         public JogSpeedMode JogSpeedMode { get; set; } = JogSpeedMode.Slow;
 
         public double MoveAmount { get; set; } = 0.1;
@@ -19,11 +20,6 @@ namespace Jastech.Framework.Winform.Controls
             InitializeComponent();
         }
 
-        private void LAFJogControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void SetSelectedLafCtrl(LAFCtrl lafctrl)
         {
             SelectedLafCtrl = lafctrl;
@@ -31,12 +27,67 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogUpZ_Click(object sender, EventArgs e)
         {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            MoveJog(Direction.CCW);
+        }
+
+        private void btnJogUpZ_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (JogMode == JogMode.Jog)
+                return;
+
             SelectedLafCtrl?.SetMotionRelativeMove(Direction.CCW, MoveAmount);
+        }
+
+        private void btnJogUpZ_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (JogMode == JogMode.Jog)
+                return;
+
+            SelectedLafCtrl?.SetMotionStop();
         }
 
         private void btnJogDownZ_Click(object sender, EventArgs e)
         {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            MoveJog(Direction.CW);
+        }
+
+        private void btnJogDownZ_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (JogMode == JogMode.Jog)
+                return;
+
             SelectedLafCtrl?.SetMotionRelativeMove(Direction.CW, MoveAmount);
+        }
+
+        private void btnJogDownZ_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (JogMode == JogMode.Jog)
+                return;
+
+            SelectedLafCtrl?.SetMotionStop();
+        }
+
+        private void MoveJog(Direction direction)
+        {
+            double targetPosition = 0.0;
+            var currentPosition = 0.0;
+
+            if (SelectedLafCtrl is NuriOneLAFCtrl nuriOne)
+                currentPosition = SelectedLafCtrl.Status.MPosPulse / nuriOne.ResolutionAxisZ;
+
+            if (direction == Direction.CCW)
+                targetPosition = currentPosition + MoveAmount;
+            else if (direction == Direction.CW)
+                targetPosition = currentPosition - MoveAmount;
+            else { }
+
+            SelectedLafCtrl?.SetMotionAbsoluteMove(targetPosition);
         }
     }
 }

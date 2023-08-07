@@ -32,8 +32,10 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
-        public BufferNumber TriggerBuffer { get; set; }
+        [JsonProperty]
+        public ACSBufferNumber TriggerBuffer { get; set; }
 
+        [JsonIgnore]
         public Api Api { get; set; } = null;
         #endregion
 
@@ -129,6 +131,14 @@ namespace Jastech.Framework.Device.Motions
         public override void StopMove(int axisNo)
         {
             Api.Kill((ACS.SPiiPlusNET.Axis)axisNo);
+        }
+
+        public override bool IsMoving(int axisNo)
+        {
+            //var gg = Api.GetAxisStateAsync((ACS.SPiiPlusNET.Axis)axisNo).Ret;
+            var value = Api.GetAxisState((ACS.SPiiPlusNET.Axis)axisNo);
+            // 확인 필요.
+            return Api.GetAxisState((ACS.SPiiPlusNET.Axis)axisNo) == AxisStates.ACSC_AST_MOVE ? true : false;
         }
 
         public override void JogMove(int axisNo, Direction direction)
@@ -277,7 +287,7 @@ namespace Jastech.Framework.Device.Motions
             Api.SetKillDeceleration(axis, jogAcceleration * 2);
             Api.SetJerk(axis, jogJerk);
 
-            Thread.Sleep(300);
+            Thread.Sleep(50);
         }
 
         private bool ReadyToMove(ACS.SPiiPlusNET.Axis axis)
@@ -387,7 +397,7 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private void SetTriggerMode(BufferNumber triggerBuffer)
+        private void SetTriggerMode(ACSBufferNumber triggerBuffer)
         {
             if (!Api.IsConnected)
                 return;
@@ -397,7 +407,7 @@ namespace Jastech.Framework.Device.Motions
         #endregion
     }
 
-    public enum BufferNumber
+    public enum ACSBufferNumber
     {
         Buffer0 = 0,
         Buffer1 = 1,
@@ -405,8 +415,8 @@ namespace Jastech.Framework.Device.Motions
         Buffer3 = 3,    
         Buffer4 = 4,
         Buffer5 = 5,
-        Buffer6 = 5,
-        Buffer7 = 5,
+        Buffer6 = 6,
+        Buffer7 = 7,
     }
 
     public enum ACSConnectType

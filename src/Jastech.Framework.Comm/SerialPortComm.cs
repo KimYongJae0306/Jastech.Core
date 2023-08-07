@@ -101,7 +101,7 @@ namespace Jastech.Framework.Comm
             if (SerialPort == null)
                 return false;
 
-            return !SerialPort.IsOpen;
+            return SerialPort.IsOpen;
         }
 
         public bool Disconnect()

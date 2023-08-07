@@ -49,6 +49,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionEnable(bool isOn);
 
+        public abstract bool IsInPosition(double targetValue);
+
+        public abstract bool MoveWaitDone(double targetValue, int timeOut_mm);
+
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);
@@ -60,6 +64,8 @@ namespace Jastech.Framework.Device.LAFCtrl
     {
         #region 속성
         public string Name { get; protected set; }
+
+        public string AxisName { get; set; }
         #endregion
 
         #region 메서드
@@ -70,7 +76,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public virtual bool IsConnected()
         {
-            return true;
+            return false;
         }
 
         public virtual bool Release()

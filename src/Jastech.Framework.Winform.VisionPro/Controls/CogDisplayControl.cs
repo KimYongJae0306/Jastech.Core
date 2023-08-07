@@ -179,35 +179,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 ICogImage cogImage = VisionProImageHelper.Load(dialog.FileName);
-
-                CogImage8Grey cog = (CogImage8Grey)cogImage;
-                ICogImage8PixelMemory memory= cog.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, cogImage.Width, cogImage.Height);
-
-                IntPtr ptrData = memory.Scan0;
-                byte[] data = new byte[memory.Stride * memory.Height];
-
-                System.Runtime.InteropServices.Marshal.Copy((IntPtr)ptrData, data, 0, memory.Stride * memory.Height);
-                int stride = memory.Stride;
-
-                for (int h = 0; h < cogImage.Height; h++)
-                {
-                    for (int w = 0; w < cogImage.Width; w++)
-                    {
-                        int index = h * stride + w;
-                        int value = Convert.ToInt32(data[index]);
-                        if (value >= 40)
-                        {
-                            data[index] = 0;
-                            break;
-                        }
-                        else
-                        {
-                            data[index] = 255;
-                            break;
-                        }
-                    }
-                }
-
                 _displayMode = DisplayMode.None;
             }
         }

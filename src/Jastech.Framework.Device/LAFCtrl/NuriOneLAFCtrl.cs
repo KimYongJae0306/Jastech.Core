@@ -2,6 +2,7 @@
 using Jastech.Framework.Comm.Protocol;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
@@ -56,6 +57,11 @@ namespace Jastech.Framework.Device.LAFCtrl
             }
             else
                 return false;
+        }
+
+        public override bool IsConnected()
+        {
+            return SerialPortComm.IsConnected();
         }
 
         public override bool Release()
@@ -121,6 +127,31 @@ namespace Jastech.Framework.Device.LAFCtrl
         //    SerialPortComm.Send(command);
         //}
 
+        public override bool IsInPosition(double targetValue)
+        {
+            double calcTargetValue = targetValue / ResolutionAxisZ;
+            double calcMPos = Status.MPosPulse * ResolutionAxisZ;
+            if (Math.Abs(calcMPos - calcTargetValue) <= 0.0001)
+                return true;
+
+            return false;
+        }
+
+        public override bool MoveWaitDone(double targetValue, int timeOut_mm)
+        {
+            double calcTargetValue = targetValue * ResolutionAxisZ;
+            while (IsInPosition(calcTargetValue) == false)
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Restart();
+                if (sw.ElapsedMilliseconds >= timeOut_mm)
+                {
+                    return false;
+                }
+                Thread.Sleep(10);
+            }
+            return true;
+        }
 
         public void SetAccDec(int value)
         {
@@ -194,17 +225,19 @@ namespace Jastech.Framework.Device.LAFCtrl
             //    return;
 
             value = Math.Abs(value);
-
+            Console.WriteLine("LAF : " + value.ToString() +"   " + Status.MPosPulse);
             int directionValue = direction == Direction.CW ? -1 : 1;
 
             double moveAmount = Convert.ToDouble(value * ResolutionAxisZ) * directionValue;
             string command = MakeSetCommand(CMD_WRITE_MOTION_RELATIVE_MOVE, moveAmount.ToString());
             Send(command);
+
+            Thread.Sleep(50);
         }
 
         public override void SetMotionAbsoluteMove(double value)
         {
-            double targetPosition = value;
+            double targetPosition = value * ResolutionAxisZ;
             string command = MakeSetCommand(CMD_WRITE_MOTION_ABSOLUTE_MOVE, targetPosition.ToString());
             Send(command);
         }

@@ -37,7 +37,7 @@ namespace Jastech.Framework.Device.Cameras
             
         }
 
-        public override void ReverseX(bool reverse)
+        public override void SetReverseX(bool reverse)
         {
 
         }

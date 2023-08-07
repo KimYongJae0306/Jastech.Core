@@ -31,29 +31,53 @@ namespace Jastech.Framework.Winform.Controls
             AxisHandler = axisHandler;
         }
 
+        private void btnJogLeftX_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CW);
+        }
+
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CW);
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
         }
 
+        private void btnJogRightX_Click(object sender, EventArgs e)
+        {
+            if (JogMode == JogMode.Increase)
+                return;
+
+            Axis axis = AxisHandler.GetAxis(AxisName.X);
+            MoveJog(axis, Direction.CCW);
+        }
+
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
+            if (JogMode == JogMode.Jog)
+                return;
+
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (AxisHandler == null)
+            if (JogMode == JogMode.Jog)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
@@ -67,10 +91,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void MoveJog(Axis axis, Direction direction)
         {
-            if (AxisHandler == null)
-                return;
-
-            if (!axis.IsEnable())
+            if (axis.IsEnable() == false)
             {
                 MessageConfirmForm form = new MessageConfirmForm();
                 form.Message = axis.Name + " Axis is ServoOff.";
@@ -110,5 +131,7 @@ namespace Jastech.Framework.Winform.Controls
             else { }
         }
         #endregion
+
+        
     }
 }

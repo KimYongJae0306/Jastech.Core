@@ -137,6 +137,7 @@ namespace Jastech.Framework.Structure
             info.TargetPosition = TargetPosition;
             info.Offset = Offset;
             info.CenterOfGravity = CenterOfGravity;
+
             info.MovingParam = MovingParam.DeepCopy();
 
             return info;

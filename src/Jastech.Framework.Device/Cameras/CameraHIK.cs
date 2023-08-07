@@ -80,7 +80,7 @@ namespace Jastech.Framework.Device.Cameras
 
             ActiveTriggerCommand();
 
-            ReverseX(IsReverseX);
+            SetReverseX(EnableReverseX);
             SetExposureTime(Exposure);
 
             PayLoadSize = GetPayLoadSize();
@@ -199,7 +199,7 @@ namespace Jastech.Framework.Device.Cameras
             return (double)stFloatVal.fCurValue;
         }
 
-        public override void ReverseX(bool reverse)
+        public override void SetReverseX(bool reverse)
         {
             //MVS 연결 후 작성 예정
             int nRet = _camera.MV_CC_SetBoolValue_NET("ReverseX", reverse);

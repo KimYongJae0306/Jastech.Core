@@ -69,6 +69,8 @@
             this.btnJogDownZ.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnJogDownZ.UseVisualStyleBackColor = false;
             this.btnJogDownZ.Click += new System.EventHandler(this.btnJogDownZ_Click);
+            this.btnJogDownZ.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogDownZ_MouseDown);
+            this.btnJogDownZ.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogDownZ_MouseUp);
             // 
             // btnJogUpZ
             // 
@@ -84,6 +86,8 @@
             this.btnJogUpZ.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnJogUpZ.UseVisualStyleBackColor = false;
             this.btnJogUpZ.Click += new System.EventHandler(this.btnJogUpZ_Click);
+            this.btnJogUpZ.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnJogUpZ_MouseDown);
+            this.btnJogUpZ.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnJogUpZ_MouseUp);
             // 
             // LAFJogControl
             // 
@@ -94,7 +98,6 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "LAFJogControl";
             this.Size = new System.Drawing.Size(100, 300);
-            this.Load += new System.EventHandler(this.LAFJogControl_Load);
             this.tlpJogOperation.ResumeLayout(false);
             this.ResumeLayout(false);
 

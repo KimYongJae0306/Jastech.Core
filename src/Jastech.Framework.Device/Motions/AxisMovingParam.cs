@@ -25,6 +25,7 @@ namespace Jastech.Framework.Device.Motions
         public AxisMovingParam DeepCopy()
         {
             AxisMovingParam param = new AxisMovingParam();
+
             param.Velocity = Velocity;
             param.Acceleration = Acceleration;
             param.Deceleration = Deceleration;

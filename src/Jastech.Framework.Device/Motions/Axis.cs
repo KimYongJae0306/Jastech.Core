@@ -39,20 +39,6 @@ namespace Jastech.Framework.Device.Motions
             Motion = motion;    
         }
 
-        public bool StartAbsoluteMove(float position, AxisMovingParam movingParam = null)
-        {
-            Motion.StartAbsoluteMove(AxisNo, position, movingParam.Velocity, movingParam.Acceleration);
-
-            return true;
-        }
-
-        public bool StartRelativeMove(float amount, AxisMovingParam movingParam = null)
-        {
-            Motion.StartRelativeMove(AxisNo, amount, movingParam.Velocity, movingParam.Acceleration);
-
-            return true;
-        }
-
         public void StopMove()
         {
             Motion.StopMove(AxisNo);

@@ -7,7 +7,6 @@
 
     public enum Judgement
     {
-        None,
         OK,
         NG,
         FAIL,

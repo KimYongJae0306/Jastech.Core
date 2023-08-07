@@ -53,6 +53,11 @@ namespace Jastech.Framework.Device.Plcs.Melsec
             return base.Initialize();
         }
 
+        public override bool IsConnected()
+        {
+            return Communication.IsConnected();
+        }
+
         public override bool Release()
         {
             base.Release();

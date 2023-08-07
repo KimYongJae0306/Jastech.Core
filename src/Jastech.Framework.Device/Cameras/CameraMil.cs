@@ -2,6 +2,7 @@
 using Jastech.Framework.Imaging;
 using Matrox.MatroxImagingLibrary;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -119,8 +120,11 @@ namespace Jastech.Framework.Device.Cameras
 #elif RELEASE
                         MIL.MdigControl(MilDigitizerId, MIL.M_GRAB_TIMEOUT, 5000);
 #endif
-            SetImageHeight(ImageHeight);
+
+            //SetImageHeight(ImageHeight);
+            SetImageWidth(ImageWidth);
             SetOffsetX(OffsetX);
+            SetReverseX(EnableReverseX);
             Thread.Sleep(50);
             // MIL M_GRAB_END 콜백 등록
             _thisHandle = GCHandle.Alloc(this);
@@ -315,9 +319,9 @@ namespace Jastech.Framework.Device.Cameras
             return ExposureTimeInus;
         }
 
-        public override void ReverseX(bool reverse)
+        public override void SetReverseX(bool isReverse)
         {
-            // dcf 파일에서 설정함
+            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ReverseX", MIL.M_TYPE_BOOLEAN, ref isReverse);
         }
 
         public override void SetAnalogGain(int value)
@@ -329,7 +333,7 @@ namespace Jastech.Framework.Device.Cameras
         public override int GetAnalogGain()
         {
             int AnalogGainStringSize = 0;
-            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_STRING_SIZE, "AnalogGain", MIL.M_TYPE_MIL_INT, ref AnalogGainStringSize);
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE, "AnalogGain", MIL.M_TYPE_MIL_INT, ref AnalogGainStringSize);
             //string analogGain = "X" + AnalogGainStringSize;
             return AnalogGainStringSize;
         }
