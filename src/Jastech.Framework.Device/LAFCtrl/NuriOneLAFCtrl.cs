@@ -129,8 +129,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override bool IsInPosition(double targetValue)
         {
-            double calcTargetValue = targetValue / ResolutionAxisZ;
-            double calcMPos = Status.MPosPulse * ResolutionAxisZ;
+            double calcTargetValue = targetValue;// / ResolutionAxisZ;
+            double calcMPos = Status.MPosPulse;// * ResolutionAxisZ;
             if (Math.Abs(calcMPos - calcTargetValue) <= 0.0001)
                 return true;
 
@@ -244,13 +244,15 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionPositiveLimit(double value)
         {
-            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, value.ToString());
+            double positiveLimit = value * ResolutionAxisZ;
+            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, positiveLimit.ToString());
             Send(command);
         }
 
         public override void SetMotionNegativeLimit(double value)
         {
-            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, value.ToString());
+            double negativeLimit = value * ResolutionAxisZ;
+            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, negativeLimit.ToString());
             Send(command);
         }
 
