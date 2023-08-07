@@ -45,6 +45,11 @@ namespace Jastech.Framework.Device.Motions
             AxisList.AddRange(axisList);
         }
 
+        public void AddAxis(Axis axis)
+        {
+            AxisList.Add(axis);
+        }
+
         public Axis GetAxis(AxisName name)
         {
             if(AxisList.Where(x => x.Name == name.ToString()).Count() > 0)
