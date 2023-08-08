@@ -156,6 +156,12 @@
     <Compile Include="Forms\MessageConfirmForm.Designer.cs">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ROIJogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageConfirmForm.resx">
       <DependentUpon>MessageConfirmForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgressForm.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ROIJogForm.resx">
       <DependentUpon>ROIJogForm.cs</DependentUpon>
