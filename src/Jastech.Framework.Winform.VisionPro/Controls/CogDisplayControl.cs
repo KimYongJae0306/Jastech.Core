@@ -690,10 +690,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void UpdateViewRect(CogRectangle rect, double ratio)
         {
             _updateViewRect = true;
-
-            double panPointX = (double)cogDisplay.Image.Width * ratio;
-            panPointX = (cogDisplay.Image.Width / 2) - panPointX;
-            cogDisplay.PanX = panPointX;
+            if(cogDisplay.Image != null)
+            {
+                double panPointX = (double)cogDisplay.Image.Width * ratio;
+                panPointX = (cogDisplay.Image.Width / 2) - panPointX;
+                cogDisplay.PanX = panPointX;
+            }
         }
 
         public void UpdateResult(VisionProPatternMatchingResult matchingResult)

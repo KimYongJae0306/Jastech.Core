@@ -245,16 +245,16 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionPositiveLimit(double value)
         {
-            double positiveLimit = value * ResolutionAxisZ;
-            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, positiveLimit.ToString());
-            Send(command);
+            //double positiveLimit = value * ResolutionAxisZ;
+            //string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, positiveLimit.ToString());
+            //Send(command);
         }
 
         public override void SetMotionNegativeLimit(double value)
         {
-            double negativeLimit = value * ResolutionAxisZ;
-            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, negativeLimit.ToString());
-            Send(command);
+            //double negativeLimit = value * ResolutionAxisZ;
+            //string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, negativeLimit.ToString());
+            //Send(command);
         }
 
         public void RequestData(string command)

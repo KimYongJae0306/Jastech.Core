@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.Motions
@@ -71,7 +72,8 @@ namespace Jastech.Framework.Device.Motions
 
         public void StartAbsoluteMove(double targetPosition, AxisMovingParam movingParam = null)
         {
-            if(movingParam == null)
+            Console.WriteLine("targetPosition : " + targetPosition.ToString());
+            if (movingParam == null)
                 Motion.StartAbsoluteMove(AxisNo, targetPosition, 10, 10);
             else
                 Motion.StartAbsoluteMove(AxisNo, targetPosition, movingParam.Velocity, movingParam.Acceleration);
