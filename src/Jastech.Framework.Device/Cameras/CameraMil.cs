@@ -294,7 +294,7 @@ namespace Jastech.Framework.Device.Cameras
 
             // get a reference to the DigHookUserData object
             CameraMil cameraMil = hUserData.Target as CameraMil;
-            Console.WriteLine(cameraMil.GrabCount.ToString());
+            //Console.WriteLine(cameraMil.GrabCount.ToString());
             cameraMil.GrabCount++;
             cameraMil.LastGrabImage = currentImageId;
             cameraMil.ImageGrabbedCallback();

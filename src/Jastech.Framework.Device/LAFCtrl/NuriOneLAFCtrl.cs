@@ -191,6 +191,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
             string command = MakeSetCommand(CMD_WRITE_AF_ONOFF, value);
             Send(command);
+            Console.WriteLine("SetTracking : " + isOn);
         }
 
         public void GetAutoFocusValue()
