@@ -131,7 +131,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             double calcTargetValue = targetValue;// / ResolutionAxisZ;
             double calcMPos = Status.MPosPulse;// * ResolutionAxisZ;
-            if (Math.Abs(calcMPos - calcTargetValue) <= 0.0001)
+            if (Math.Abs(calcMPos - calcTargetValue) <= 1)
                 return true;
 
             return false;

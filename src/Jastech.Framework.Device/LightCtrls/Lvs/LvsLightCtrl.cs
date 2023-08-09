@@ -46,7 +46,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
 
         private void Communition_Received(byte[] data)
         {
-            DataReceivedEvent.Set();
+            //DataReceivedEvent.Set();
         }
 
         public override bool Release()
@@ -93,7 +93,7 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
 
         public bool SendSelectChannel(int channel)
         {
-            DataReceivedEvent.Reset();
+            //DataReceivedEvent.Reset();
 
             byte channelBit = new byte();
             channelBit += (byte)Math.Pow(2, channel - 1);
@@ -109,13 +109,13 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             {
                 Communition.Send(sendData);
             }
-
-            return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
+            return true;
+            //return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
         }
 
         public bool SendLightPacket(int channel, int level)
         {
-            DataReceivedEvent.Reset();
+           // DataReceivedEvent.Reset();
 
             byte[] dataArray = new byte[4];
             Parser.OpMode = 0x00;                    // [OPMode] Write : 0x00, Read : 0x01
@@ -128,8 +128,8 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             {
                 Communition.Send(sendData);
             }
-
-            return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
+            return true;
+            //return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
         }
         #endregion
     }
