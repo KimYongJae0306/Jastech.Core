@@ -75,6 +75,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogThumbnail.DisposeImage();
         }
 
+        public void ClearGraphic()
+        {
+            cogDisplay.StaticGraphics.Clear();
+            cogDisplay.InteractiveGraphics.Clear();
+        }
+
+        public void ClearThumbnail()
+        {
+            CogThumbnail.DisposeImage();
+        }
+
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
             //if (sender is CogRecordDisplay display)

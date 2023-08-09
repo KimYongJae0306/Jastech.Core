@@ -22,13 +22,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
         }
 
-        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
+        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
         {
             //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-
-            if (cogLeftDisplay.Image != null)
-                cogLeftDisplay.Image = null;
-
             cogLeftDisplay.Image = cogImage;
             cogLeftDisplay.StaticGraphics.Clear();
             cogLeftDisplay.InteractiveGraphics.Clear();
@@ -39,18 +35,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
 
             cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-
-            SetDisplayToCenter(cogLeftDisplay, viewPoint);
         }
 
-        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
+        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape)
         {
-            //CogDisplayHelper.DisposeDisplay(cogRightDisplay);
-            if (cogRightDisplay.Image != null)
-                cogRightDisplay.Image = null;
-
             cogRightDisplay.Image = cogImage;
-
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
 
@@ -63,7 +52,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 collect.Add(item);
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-            SetDisplayToCenter(cogRightDisplay, viewPoint);
         }
 
         public void SetDisplayToCenter(CogRecordDisplay display, Point point)
@@ -90,6 +78,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogDisplayHelper.DisposeDisplay(cogRightDisplay);
             cogRightDisplay.InteractiveGraphics.Clear();
             cogRightDisplay.Image = null;
+        }
+
+        public void ClearGraphics()
+        {
+            cogLeftDisplay.InteractiveGraphics.Clear();
+            cogRightDisplay.InteractiveGraphics.Clear();
         }
         #endregion
     }
