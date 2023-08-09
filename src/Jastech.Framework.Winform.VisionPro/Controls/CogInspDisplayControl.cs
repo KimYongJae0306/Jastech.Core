@@ -60,9 +60,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             _updateViewRect = true;
 
-            double panPointX = (double)cogDisplay.Image.Width * ratio;
-            panPointX = (cogDisplay.Image.Width / 2) - panPointX;
-            cogDisplay.PanX = panPointX;
+            if(cogDisplay.Image != null)
+            {
+                double panPointX = (double)cogDisplay.Image.Width * ratio;
+                panPointX = (cogDisplay.Image.Width / 2) - panPointX;
+                cogDisplay.PanX = panPointX;
+            }
         }
 
         public void ClearImage()
