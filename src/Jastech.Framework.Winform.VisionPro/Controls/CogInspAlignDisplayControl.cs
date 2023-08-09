@@ -24,7 +24,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
-            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+            //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
 
             if (cogLeftDisplay.Image != null)
                 cogLeftDisplay.Image = null;
@@ -45,7 +45,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, Point viewPoint)
         {
-            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
+            //CogDisplayHelper.DisposeDisplay(cogRightDisplay);
             if (cogRightDisplay.Image != null)
                 cogRightDisplay.Image = null;
 
