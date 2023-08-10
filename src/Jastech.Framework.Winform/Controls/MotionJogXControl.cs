@@ -33,7 +33,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogLeftX_Click(object sender, EventArgs e)
         {
-            if (JogMode == JogMode.Increase)
+            if (JogMode == JogMode.Jog)
                 return;
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
@@ -42,7 +42,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
         {
-            if (JogMode == JogMode.Jog)
+            if (JogMode == JogMode.Increase)
                 return;
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
@@ -51,7 +51,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (JogMode == JogMode.Jog)
+            if (JogMode == JogMode.Increase)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
@@ -59,7 +59,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogRightX_Click(object sender, EventArgs e)
         {
-            if (JogMode == JogMode.Increase)
+            if (JogMode == JogMode.Jog)
                 return;
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
@@ -68,7 +68,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
-            if (JogMode == JogMode.Jog)
+            if (JogMode == JogMode.Increase)
                 return;
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
@@ -77,7 +77,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)
         {
-            if (JogMode == JogMode.Jog)
+            if (JogMode == JogMode.Increase)
                 return;
 
             AxisHandler.GetAxis(AxisName.X).StopMove();
@@ -113,7 +113,7 @@ namespace Jastech.Framework.Winform.Controls
             }
             else { }
 
-            if (JogMode == JogMode.Jog)
+            if (JogMode == JogMode.Increase)
             {
                 double currentPosition = axis.GetActualPosition();
                 double targetPosition = 0.0;
@@ -126,7 +126,7 @@ namespace Jastech.Framework.Winform.Controls
 
                 axis.StartAbsoluteMove(targetPosition);
             }
-            else if (JogMode == JogMode.Increase)
+            else if (JogMode == JogMode.Jog)
                 axis.JogMove(direction);
             else { }
         }
