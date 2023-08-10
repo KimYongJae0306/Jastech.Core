@@ -32,7 +32,6 @@ namespace Jastech.Framework.Config
 
         [JsonProperty]
         public ImageExtension ExtensionNGImage { get; set; } = ImageExtension.Bmp;
-
         #endregion
 
         #region 메서드
