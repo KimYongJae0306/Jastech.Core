@@ -37,27 +37,36 @@ namespace Jastech.Framework.Comm.Protocol
 
         public bool ParsingReceivedPacket(byte[] packetBuffer, out byte[] packet, out int searchingLength)
         {
+            //packet = new byte[packetBuffer.Length];
+            //if (packet.Length > 0)
+            //{
+            //    Array.Copy(packetBuffer, packet, packet.Length);
+            //}
+            //searchingLength = packet.Length;
+            //return true;
+
             packet = null;
             searchingLength = -1;
 
             if (packetBuffer == null)
                 return false;
 
-            if(RequestDataArray == null)
+            if (RequestDataArray == null)
                 return false;
 
             string receiveData = Encoding.Default.GetString(packetBuffer);
-      
+            //MLLAF3:
             string crlf = "\r\n";
+            //string crlf = "MLLAF";
             int splitIndex = receiveData.IndexOf(crlf);
-            if (splitIndex > 0) 
+            if (splitIndex > 0)
             {
                 string splitMessage = receiveData.Substring(splitIndex + crlf.Length);
 
                 int count = 0;
                 Dictionary<int, int> searchIndexList = new Dictionary<int, int>();
-               
-                lock(_lock)
+
+                lock (_lock)
                 {
                     if (RequestDataArray == null)
                         return false;
@@ -82,11 +91,11 @@ namespace Jastech.Framework.Comm.Protocol
                         int maxKey = searchIndexList.Keys.Max();
                         searchIndexList.TryGetValue(maxKey, out int value);
                         searchingLength = splitIndex + maxKey + value;
-                        
+
                         packet = new byte[splitMessage.Length];
 
                         Array.Copy(packetBuffer, splitIndex + crlf.Length, packet, 0, packet.Length);
-                        
+
                         return true;
                     }
                 }

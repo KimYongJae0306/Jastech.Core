@@ -160,7 +160,7 @@ namespace Jastech.Framework.Comm
 
             foreach (var data in datas)
             {
-                if(data != null)
+                if (data != null)
                     Received?.Invoke(data);
             }
         }

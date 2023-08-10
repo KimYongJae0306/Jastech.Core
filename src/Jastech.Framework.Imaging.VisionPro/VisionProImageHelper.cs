@@ -414,10 +414,10 @@ namespace Jastech.Framework.Imaging.VisionPro
                 divideRegion.CenterX = centerX + dX;
                 divideRegion.CenterY = centerY + dY;
 
-                //if (index % 2 == 0) //좌측부분 ROI
-                //    divideRegion.Rotation = divideRegion.Rotation - 3.14;
-                //divideRegion.CenterX = centerX + (interval * index);
-                //divideRegion.CenterY = centerY;
+                if (index % 2 == 0) //좌측부분 ROI
+                    divideRegion.Rotation = divideRegion.Rotation - 3.14;
+                divideRegion.CenterX = centerX + (interval * index);
+                divideRegion.CenterY = centerY;
 
                 divideRegionList.Add(divideRegion);
             }

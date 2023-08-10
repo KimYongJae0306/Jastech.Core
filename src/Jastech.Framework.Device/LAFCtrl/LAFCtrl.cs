@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Device.LAFCtrl
@@ -63,9 +64,14 @@ namespace Jastech.Framework.Device.LAFCtrl
     public abstract partial class LAFCtrl : IDevice
     {
         #region 속성
+        [JsonProperty]
         public string Name { get; protected set; }
 
+        [JsonProperty]
         public string AxisName { get; set; }
+
+        [JsonProperty]
+        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm 
         #endregion
 
         #region 메서드
@@ -139,6 +145,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         public bool IsNegativeLimit { get; set; }
 
         public bool IsPositiveLimit { get; set; }
+
+        public bool IsBusy { get; set; }
         #endregion
     }
 }

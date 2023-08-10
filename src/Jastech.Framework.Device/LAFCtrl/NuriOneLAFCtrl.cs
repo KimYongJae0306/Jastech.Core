@@ -3,9 +3,12 @@ using Jastech.Framework.Comm.Protocol;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Jastech.Framework.Device.LAFCtrl
 {
@@ -13,9 +16,6 @@ namespace Jastech.Framework.Device.LAFCtrl
     {
         [JsonProperty]
         public SerialPortComm SerialPortComm { get; set; } = null;
-
-        [JsonProperty]
-        public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm 
 
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
@@ -26,11 +26,23 @@ namespace Jastech.Framework.Device.LAFCtrl
         [JsonProperty]
         public int PacketResponseTimeMs { get; set; } = 100;
 
+        [JsonIgnore]
         public NuriLAFProtocol Protocol { get; set; }
 
+        [JsonIgnore]
         protected ManualResetEvent ResponseReceivedEvent { get; set; } = new ManualResetEvent(false);
 
+        [JsonIgnore]
         private string LastReceivedData { get; set; }
+
+        [JsonIgnore]
+        public bool IsLaserOn { get; set; }
+
+        [JsonIgnore]
+        public bool IsTrackingOn { get; set; }
+
+        [JsonIgnore]
+        private bool IsGetMessageOn { get; set; } = false;
 
         public NuriOneLAFCtrl(string name)
          : base(name)
@@ -81,13 +93,61 @@ namespace Jastech.Framework.Device.LAFCtrl
             return true;
         }
 
+        string text = "";
         private void SerialPortComm_Received(byte[] data)
         {
             LastReceivedData = Encoding.Default.GetString(data);
+            if (IsGetMessageOn == false)
+                OnLAFReceived(data);
+            else
+            {
+                string temp = LastReceivedData;
+                if (temp.Contains("MLLAF3:uc lasergate"))
+                {
+                    CheckText(ref temp);
 
-            OnLAFReceived(data);
+                    string text = "lasergate";
+                    int index = temp.IndexOf(text);
+                    int startIndex = index + text.Length;
+                    int size = text.Length - startIndex;
+                    string valueString = temp.Substring(startIndex, 2).Trim();
+                    IsLaserOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                }
 
-            //ResponseReceivedEvent.Set();
+                if (temp.Contains("MLLAF3:uc motiontrack"))
+                {
+                    CheckText(ref temp);
+
+                    string text = "motiontrack";
+                    int index = temp.IndexOf(text);
+                    int startIndex = index + text.Length;
+                    int size = text.Length - startIndex;
+                    string valueString = temp.Substring(startIndex, 2).Trim();
+
+                    IsTrackingOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                }
+            }
+
+            ResponseReceivedEvent.Set();
+            IsGetMessageOn = false;
+        }
+
+        private void CheckText(ref string value)
+        {
+            while (value.Contains("\n4"))
+                value = value.Replace("\n4", "");
+
+            while (value.Contains("\n"))
+                value = value.Replace("\n", "");
+
+            while (value.Contains("\r"))
+                value = value.Replace("\r", "");
+
+            while (value.Contains("0x00000000"))
+                value = value.Replace("0x00000000", "");
+
+            while (value.Contains("0x00000001"))
+                value = value.Replace("0x00000001", "");
         }
 
         public override void SetDefaultParameter()
@@ -99,6 +159,9 @@ namespace Jastech.Framework.Device.LAFCtrl
         public override void SetMotionMaxSpeed(double velocity)
         {
             double maxPulse = velocity * ResolutionAxisZ;
+            if (maxPulse < 0.0001)
+                maxPulse = 0.0001;
+
             string command = MakeSetCommand(CMD_WRITE_MOTION_MAX_SPEED, maxPulse.ToString());
 
             Send(command);
@@ -173,20 +236,25 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetLaserOnOff(bool isOn)
         {
+            ResponseReceivedEvent.WaitOne(1000);
             string value = Convert.ToInt16(isOn).ToString();
-
+            IsGetMessageOn = true;
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF, value);
             Send(command);
         }
 
         public void GetLaserOnValue()
         {
+            ResponseReceivedEvent.WaitOne(1000);
+            IsGetMessageOn = true;
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF);
             Send(command);
         }
 
         public override void SetTrackingOnOFF(bool isOn)
         {
+            ResponseReceivedEvent.WaitOne(1000);
+            IsGetMessageOn = true;
             string value = Convert.ToInt16(isOn).ToString();
 
             string command = MakeSetCommand(CMD_WRITE_AF_ONOFF, value);
@@ -225,6 +293,8 @@ namespace Jastech.Framework.Device.LAFCtrl
             //if (value * ResolutionAxisZ < 1)
             //    return;
 
+            if (value <= 0.0001)
+                value = 0.0001;
             value = Math.Abs(value);
             Console.WriteLine("LAF : " + value.ToString() +"   " + Status.MPosPulse);
             int directionValue = direction == Direction.CW ? -1 : 1;
@@ -259,6 +329,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public void RequestData(string command)
         {
+            if (IsGetMessageOn)
+                return;
             string makeData = MakeGetCommand(command);
             Send(makeData);
         }
@@ -268,6 +340,8 @@ namespace Jastech.Framework.Device.LAFCtrl
             if (command == "")
                 return;
 
+            ResponseReceivedEvent.WaitOne(1000);
+            ResponseReceivedEvent.Reset();
             byte[] serializedData = Encoding.UTF8.GetBytes(command);
             if (Protocol.MakePacket(serializedData, out byte[] sendData))
             {
