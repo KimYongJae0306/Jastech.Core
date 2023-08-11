@@ -62,7 +62,6 @@ namespace Jastech.Framework.Algorithms.Akkon
                 int highThres = 255;
                 CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
                 Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
-
                
                 foreach (var roi in slice.CalcAkkonROIs)
                 {
