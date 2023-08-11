@@ -55,6 +55,8 @@ namespace Jastech.Framework.Comm.Protocol
                 return false;
 
             string receiveData = Encoding.Default.GetString(packetBuffer);
+            //Console.WriteLine(receiveData);
+
             //MLLAF3:
             string crlf = "\r\n";
             //string crlf = "MLLAF";
