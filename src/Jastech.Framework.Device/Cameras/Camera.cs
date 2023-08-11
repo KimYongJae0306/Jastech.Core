@@ -29,7 +29,7 @@ namespace Jastech.Framework.Device.Cameras
         public SensorType SensorType { get; protected set; }
 
         [JsonProperty]
-        public float PixelResolution_um { get; set; } = 0.35F;
+        public float PixelResolution_um { get; set; } = 3.5F;
 
         [JsonProperty]
         public float LensScale { get; set; } = 10F;
@@ -48,6 +48,15 @@ namespace Jastech.Framework.Device.Cameras
 
         [JsonProperty]
         public int OnceGrabResponseTimeMs { get; set; } = 1000;
+
+        [JsonIgnore]
+        public double Resolution
+        {
+            get
+            {
+                return PixelResolution_um / LensScale;
+            }
+        }
 
         protected ManualResetEvent OnceGrabEvent { get; set; } = new ManualResetEvent(false);
         #endregion

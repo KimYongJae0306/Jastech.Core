@@ -27,8 +27,14 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public Mat ResizeMat { get; set; } = null;
 
-        public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um)
+        public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um, ref Judgement tabJudgement)
         {
+            if(roiList.Count() == 0)
+            {
+
+            }
+
+            bool isTabNG = false;
             Stopwatch sw = new Stopwatch();
             sw.Restart();
 
@@ -96,7 +102,12 @@ namespace Jastech.Framework.Algorithms.Akkon
                     ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
                  
                     lock (_lock)
+                    {
+                        if (leadResult.Judgement != Judgement.OK)
+                            isTabNG = true;
+
                         leadResultList.Add(leadResult);
+                    }
 
                     enhanceCropMat.Dispose();
                     roiThresMat.Dispose();
@@ -108,6 +119,11 @@ namespace Jastech.Framework.Algorithms.Akkon
                 thresMat?.Dispose();
             //}
             });
+
+            if (isTabNG)
+                tabJudgement = Judgement.NG;
+            else
+                tabJudgement = Judgement.OK;
 
             sw.Stop();
             Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
@@ -316,9 +332,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             Point p2 = new Point(maxYInfo.ValueX, maxYInfo.ValueY);
             leadResult.LengthY_um = MathHelper.GetDistance(p1, p2) * resolution_um;
 
-
             bool isNg = false;
-
             if (leadResult.AkkonCount < param.JudgementParam.AkkonCount)
                 isNg |= true;
 
