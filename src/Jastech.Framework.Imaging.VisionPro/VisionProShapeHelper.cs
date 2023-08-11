@@ -15,7 +15,6 @@ namespace Jastech.Framework.Imaging.VisionPro
             CogRectangleAffine cogRectAffine = new CogRectangleAffine();
 
             cogRectAffine.SetOriginCornerXCornerY(leftTop.X, leftTop.Y, rightTop.X, rightTop.Y, leftBottom.X, leftBottom.Y);
-
             return cogRectAffine;
         }
     }

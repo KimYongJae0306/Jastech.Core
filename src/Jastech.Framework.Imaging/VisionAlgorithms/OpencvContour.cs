@@ -14,7 +14,7 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
         {
             List<BlobPos> blobList = new List<BlobPos>();
 
-           var contours = new VectorOfVectorOfPoint();
+            var contours = new VectorOfVectorOfPoint();
             Mat hierarchy = new Mat();
             CvInvoke.FindContours(image, contours, hierarchy, retryType, chainApproxMethod);
 

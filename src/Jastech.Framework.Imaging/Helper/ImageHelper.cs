@@ -104,67 +104,129 @@ namespace Jastech.Framework.Imaging.Helper
 
         public static void GetEdgePoint(byte[] topArray, byte[] bottomArray, int edgeValue, int leadPitch, ref List<int> topEdgeList, ref List<int> bottomEdgeList)
         {
-            if (topArray.Length != bottomArray.Length)
-                return;
-
-            List<int> edgePointList = new List<int>();
-
-            int prevTopValue = 0;
-            bool topFindedStartEdge = false;
-            int prevBottompValue = 0;
-            bool bottomFindedStartEdge = false;
+            var prevValue = 0;
+            int ignore = 0;
+            bool enableIgnore = false;
             for (int i = 0; i < topArray.Length; i++)
             {
-                int topData = topArray[i];
-               
-                if (topFindedStartEdge == false)
+                var value = topArray[i];
+                if (i == 0)
+                    prevValue = value;
+
+                if (prevValue != value)
                 {
-                    if (topData == edgeValue)
+                    if(prevValue == 0 && value == edgeValue)
                     {
-                        topFindedStartEdge = true;
+                        ignore++;
                         topEdgeList.Add(i);
-
                     }
-                }
-                else
-                {
-                    if (prevTopValue != topData)
+                    else if(prevValue == edgeValue && value == 0)
                     {
-                        int lastIndex = topEdgeList.Last();
-                        if(lastIndex + leadPitch < i)
-                        {
-                            topFindedStartEdge = false;
-                            topEdgeList.Add(i);
-                        }
+                        topEdgeList.Add(i);
+                        ignore++;
                     }
-                }
+                    prevValue = value;
 
-                prevTopValue = topData;
-
-                int bottomData = bottomArray[i];
-                if (bottomFindedStartEdge == false)
-                {
-                    if (bottomData == edgeValue)
+                    if(ignore > leadPitch)
                     {
-                        bottomFindedStartEdge = true;
+                        ignore = 0;
+                        enableIgnore = false;
+                    }
+                    if (ignore == 1)
+                        enableIgnore = true;
+                }
+            }
+            ignore = 0;
+            enableIgnore = false;
+            prevValue = 0;
+            for (int i = 0; i < bottomArray.Length; i++)
+            {
+                var value = bottomArray[i];
+                if (i == 0)
+                    prevValue = value;
+                if (prevValue != value)
+                {
+                    if (prevValue == 0 && value == edgeValue)
+                    {
                         bottomEdgeList.Add(i);
                     }
-                }
-                else
-                {
-                    if (prevBottompValue != bottomData)
+                    else if (prevValue == edgeValue && value == 0)
                     {
-                        int lastIndex = bottomEdgeList.Last();
-                        if (lastIndex + leadPitch < i)
-                        {
-                            bottomFindedStartEdge = false;
-                            bottomEdgeList.Add(i);
-                        }
+                        bottomEdgeList.Add(i);
                     }
-                }
+                    prevValue = value;
 
-                prevBottompValue = bottomData;
+                    if (ignore > leadPitch)
+                    {
+                        ignore = 0;
+                        enableIgnore = false;
+                    }
+                    if (ignore == 1)
+                        enableIgnore = true;
+                }
             }
         }
+            //if (topArray.Length != bottomArray.Length)
+            //    return;
+
+            //List<int> edgePointList = new List<int>();
+
+            //int prevTopValue = 0;
+            //bool topFindedStartEdge = false;
+            //int prevBottompValue = 0;
+            //bool bottomFindedStartEdge = false;
+            //for (int i = 0; i < topArray.Length; i++)
+            //{
+            //    int topData = topArray[i];
+               
+            //    if (topFindedStartEdge == false)
+            //    {
+            //        if (topData == edgeValue)
+            //        {
+            //            topFindedStartEdge = true;
+            //            topEdgeList.Add(i);
+
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (prevTopValue != topData)
+            //        {
+            //            int lastIndex = topEdgeList.Last();
+            //            if(lastIndex + leadPitch < i)
+            //            {
+            //                topFindedStartEdge = false;
+            //                topEdgeList.Add(i);
+            //            }
+            //        }
+            //    }
+
+            //    prevTopValue = topData;
+
+            //    int bottomData = bottomArray[i];
+            //    if (bottomFindedStartEdge == false)
+            //    {
+            //        if (bottomData == edgeValue)
+            //        {
+            //            bottomFindedStartEdge = true;
+            //            bottomEdgeList.Add(i);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (prevBottompValue != bottomData)
+            //        {
+            //            int lastIndex = bottomEdgeList.Last();
+            //            if (lastIndex + leadPitch < i)
+            //            {
+            //                bottomFindedStartEdge = false;
+            //                bottomEdgeList.Add(i);
+            //            }
+            //        }
+            //    }
+
+            //    prevBottompValue = bottomData;
+            //}
+       // }
     }
 }
