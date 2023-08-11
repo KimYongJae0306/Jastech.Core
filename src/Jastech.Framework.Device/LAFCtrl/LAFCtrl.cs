@@ -74,7 +74,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm 
 
         [JsonProperty]
-        public double HomePosition_mm { get; set; } = 0.002;
+        public double HomePosition_mm { get; set; } = 0.02;
         #endregion
 
         #region 메서드
