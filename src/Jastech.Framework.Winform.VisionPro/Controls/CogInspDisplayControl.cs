@@ -52,8 +52,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (image == null)
                 return;
             
-            cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
-            CogThumbnail.SetThumbnailImage(image);
+            lock(image)
+            {
+                cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                CogThumbnail.SetThumbnailImage(image);
+            }
+            
         }
 
         public void UpdateViewRect(CogRectangle rect, double ratio)

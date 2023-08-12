@@ -93,7 +93,6 @@ namespace Jastech.Framework.Device.LAFCtrl
             return true;
         }
 
-        string text = "";
         private void SerialPortComm_Received(byte[] data)
         {
             LastReceivedData = Encoding.Default.GetString(data);
