@@ -38,7 +38,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             VisionProPatternMatchingParam copyParam = matchingParam.DeepCopy();
             var tl = copyParam.GetTool();
             tl.RunParams.RunAlgorithm = CogPMAlignRunAlgorithmConstants.PatMax;
-            tl.RunParams.ScoreUsingClutter = false;
+            //tl.RunParams.ScoreUsingClutter = false;
             //tl.RunParams.AcceptThreshold = 0.3;
             // CopyParam을 Dispose하면 Image 객체가 사라짐. 따라서 Image는 외부에서 Dispose 해줘야함
             copyParam.SetInputImage(image);
