@@ -732,9 +732,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             string groupName = "Result";
 
             foreach (var item in alignResult.CogAlignResult)
-            {
                 resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
-            }
             
             SetInteractiveGraphics(groupName, resultGraphic);
 
@@ -744,6 +742,23 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             //    DrawResultLabel("Y :" + alignResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);
             //    DrawResultLabel("X :" + alignResult.MaxCaliperMatch.FoundPos.Y.ToString("0.000"), 3);
             //}
+        }
+
+        public void UpdateResult(List<VisionProAlignCaliperResult> alignCaliperResultList)
+        {
+            if (alignCaliperResultList.Count <= 0)
+                return;
+
+            CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
+            string groupName = "Result";
+
+            foreach (var caliperResult in alignCaliperResultList)
+            {
+                foreach (var item in caliperResult.CogAlignResult)
+                    resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
+            }
+
+            SetInteractiveGraphics(groupName, resultGraphic);
         }
 
         private void DrawResultLabel(string text, int index = 0)

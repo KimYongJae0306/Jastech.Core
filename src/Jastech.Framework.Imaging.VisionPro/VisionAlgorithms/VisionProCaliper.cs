@@ -64,7 +64,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.FoundPos = new PointF((float)foundResult.PositionX, (float)foundResult.PositionY);
                 match.Score = (float)foundResult.Score;
 
-                match.ResultGraphics = foundResult.CreateResultGraphics(Cognex.VisionPro.Caliper.CogCaliperResultGraphicConstants.Edges);
+                match.ResultGraphics = foundResult.CreateResultGraphics(CogCaliperResultGraphicConstants.Edges);
 
                 result.CaliperMatchList.Add(match);
 
