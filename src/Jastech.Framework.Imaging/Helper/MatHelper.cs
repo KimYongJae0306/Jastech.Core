@@ -207,6 +207,9 @@ namespace Jastech.Framework.Imaging.Helper
 
         public static Mat ColorChannelSeperate(Mat mat, ColorChannel colorChannel)
         {
+            if (mat == null)
+                return null;
+                     
             int idx = (int)colorChannel;
             Mat rtMat;
 

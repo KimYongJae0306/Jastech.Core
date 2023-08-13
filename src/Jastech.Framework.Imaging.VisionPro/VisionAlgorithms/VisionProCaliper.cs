@@ -65,7 +65,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.Score = (float)foundResult.Score;
 
                 match.ResultGraphics = foundResult.CreateResultGraphics(CogCaliperResultGraphicConstants.Edges);
-
+                //match.ResultGraphics = caliperParam.CreateCurrentRecord(CogCaliperCurrentRecordConstants.All);
                 result.CaliperMatchList.Add(match);
 
                 return result;
