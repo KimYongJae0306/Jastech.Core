@@ -409,14 +409,14 @@ namespace Jastech.Framework.Device.Motions
 
     public enum ACSBufferNumber
     {
-        Buffer0 = 0,
-        Buffer1 = 1,
+        Homing_Unit1 = 0,
+        Homing_Unit2 = 1,
         Buffer2 = 2,
         Buffer3 = 3,    
-        Buffer4 = 4,
-        Buffer5 = 5,
-        Buffer6 = 6,
-        Buffer7 = 7,
+        CameraTrigger_Unit1 = 4,
+        CameraTrigger_Unit2 = 5,
+        LAFTrigger_Unit1 = 6,
+        LAFTrigger_Unit2 = 7,
     }
 
     public enum ACSConnectType
