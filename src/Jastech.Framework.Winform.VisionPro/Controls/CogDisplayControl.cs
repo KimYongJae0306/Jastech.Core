@@ -670,8 +670,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
                 {
-                    if (DeleteResultGraphics())
-                        DeleteEventHandler?.Invoke(sender, e);
+                    //if (DeleteResultGraphics())
+                    //    DeleteEventHandler?.Invoke(sender, e);
 
                     MoveImageEventHandler?.Invoke(display.PanX, display.PanY, display.Zoom);
                 }
@@ -758,6 +758,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
             }
 
+            SetInteractiveGraphics(groupName, resultGraphic);
+        }
+
+        public void UpdateGraphic(List<CogCompositeShape> CogCompositeShapeList)
+        {
+            if (CogCompositeShapeList.Count <= 0)
+                return;
+
+            CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
+            string groupName = "Result";
+
+            foreach (var shape in CogCompositeShapeList)
+            {
+                resultGraphic.Add(shape);
+            }
             SetInteractiveGraphics(groupName, resultGraphic);
         }
 

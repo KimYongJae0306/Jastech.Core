@@ -10,6 +10,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
     public class VisionProPatternMatchingResult : VisionResult
     {
         #region 속성
+        public string Name { get; set; } = "";
+
         public Judgement Judgement { get; set; } = Judgement.FAIL;
 
         public List<VisionProPatternMatchPos> MatchPosList { get; set; } = new List<VisionProPatternMatchPos>();
@@ -49,6 +51,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         public VisionProPatternMatchingResult DeepCopy()
         {
             VisionProPatternMatchingResult result = new VisionProPatternMatchingResult();
+            result.Name = Name;
             result.TactTime = TactTime;
             result.MatchPosList = MatchPosList.Select(x => (VisionProPatternMatchPos)x.DeepCopy()).ToList();
         
