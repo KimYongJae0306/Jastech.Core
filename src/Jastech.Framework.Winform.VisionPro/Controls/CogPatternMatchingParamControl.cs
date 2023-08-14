@@ -20,6 +20,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public GetOriginImageDelegate GetOriginImageHandler;
 
         public TestActionDelegate TestActionEvent;
+
+        public TestActionDelegate ClearActionEvent;
         #endregion
 
         #region 델리게이트
@@ -223,5 +225,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             TestActionEvent?.Invoke();
         }
         #endregion
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            ClearActionEvent?.Invoke();
+        }
     }
 }

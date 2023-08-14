@@ -210,7 +210,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             string path = Path.Combine(dirPath, fileName);
 
             if (PMTool == null)
+            {
                 PMTool = new CogPMAlignTool();
+                PMTool.RunParams.RunAlgorithm = CogPMAlignRunAlgorithmConstants.PatQuick;
+                PMTool.RunParams.AcceptThreshold = 0.1;
+                PMTool.RunParams.ApproximateNumberToFind = 1;
+                PMTool.RunParams.ScoreUsingClutter = false;
+            }
 
             VisionProFileHelper.SaveTool<CogPMAlignTool>(path, PMTool);
         }

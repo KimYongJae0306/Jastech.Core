@@ -36,7 +36,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             sw.Restart();
 
             VisionProPatternMatchingParam copyParam = matchingParam.DeepCopy();
-            var tl = copyParam.GetTool();
             //tl.RunParams.RunAlgorithm = CogPMAlignRunAlgorithmConstants.PatMax;
             //tl.RunParams.ScoreUsingClutter = false;
             //tl.RunParams.AcceptThreshold = 0.3;
@@ -53,13 +52,19 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             {
                 VisionProPatternMatchPos match = new VisionProPatternMatchPos();
 
-                CogRectangle trainRoi = copyParam.GetTrainRegion() as CogRectangle;
+                //CogRectangle trainRoi = copyParam.GetTrainRegion() as CogRectangle;
+                //testc Code
+                CogRectangleAffine trainRoi = copyParam.GetTrainRegion() as CogRectangleAffine;
                 var trainOrigin = copyParam.GetOrigin();
                 var foundResult = resultList[0];
 
                 match.ReferencePos = new PointF((float)trainOrigin.TranslationX, (float)trainOrigin.TranslationY);
-                match.ReferenceWidth = (float)trainRoi.Width;
-                match.ReferenceHeight = (float)trainRoi.Height;
+                //match.ReferenceWidth = (float)trainRoi.Width;
+                //match.ReferenceHeight = (float)trainRoi.Height;
+
+                //match.ReferenceWidth = (float)trainRoi.Width;
+                //match.ReferenceHeight = (float)trainRoi.Height;
+
 
 
                 match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);

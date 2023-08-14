@@ -707,12 +707,32 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (matchingResultData.ResultGraphics == null)
                 return;
 
+            var result = matchingResult.Judgement;
+            CogColorConstants color = CogColorConstants.Cyan;
+            if (result != Judgement.OK)
+            {
+                color = CogColorConstants.Red;
+                foreach (var shape in matchingResultData.ResultGraphics.Shapes)
+                {
+                    if(shape is CogPointMarker pointMarker)
+                        pointMarker.Color = color;
+
+                    if (shape is CogRectangleAffine cogRectangleAffine)
+                        cogRectangleAffine.Color = color;
+
+                    if (shape is CogRectangle cogRectangle)
+                        cogRectangle.Color = color;
+                }
+            }
+
+            //matchingResultData.ResultGraphics.Color = color;
+            //matchingResultData.ResultGraphics.DragColor = color;
+   
             resultGraphic.Add(matchingResultData.ResultGraphics);
             SetInteractiveGraphics(groupName, resultGraphic);
 
-            var result = matchingResult.Judgement;
 
-            DrawResultLabel("Result : " + result.ToString(), 0);
+            DrawResultLabel("Result : " + result.ToString(), 0, color);
             if (result != Judgement.FAIL)
             {
                 DrawResultLabel("Score : " + (matchingResult.MaxScore * 100).ToString("0.000"), 1);
@@ -776,7 +796,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             SetInteractiveGraphics(groupName, resultGraphic);
         }
 
-        private void DrawResultLabel(string text, int index = 0)
+        private void DrawResultLabel(string text, int index = 0, CogColorConstants color = CogColorConstants.Cyan)
         {
             CogGraphicLabel cogLabel = new CogGraphicLabel();
             int intervalY = 20;
