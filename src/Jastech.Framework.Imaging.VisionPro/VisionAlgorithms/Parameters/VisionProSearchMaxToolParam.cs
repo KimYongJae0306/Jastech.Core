@@ -185,7 +185,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             if (SearchMaxTool == null)
                 return null;
-            SearchMaxTool.Pattern.Train();
+            //SearchMaxTool.Pattern.Train();
             SearchMaxTool.Run();
 
             return SearchMaxTool.Results;

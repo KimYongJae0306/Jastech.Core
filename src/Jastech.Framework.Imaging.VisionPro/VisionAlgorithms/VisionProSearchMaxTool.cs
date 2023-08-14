@@ -26,7 +26,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
             VisionProSearchMaxToolParam copyParam = matchingParam.DeepCopy();
             copyParam.SetInputImage(image);
+
             copyParam.GetTool().RunParams.AcceptThreshold = 0.1;
+
             var resultList = copyParam.Run();
 
             if (resultList == null)
