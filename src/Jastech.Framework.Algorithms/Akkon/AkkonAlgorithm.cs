@@ -29,10 +29,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um, ref Judgement tabJudgement)
         {
-            if(roiList.Count() == 0)
-            {
-
-            }
+            roiList =  roiList.OrderBy(x => x.LeftTopX).ToList();
 
             bool isTabNG = false;
             Stopwatch sw = new Stopwatch();
