@@ -175,7 +175,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public void TrainImageMask(CogImage8Grey image)
         {
             PMTool.Pattern.TrainImageMask = image;
-            PMTool.Pattern.Train();
+            //PMTool.Pattern.Train();
         }
 
         public VisionProPatternMatchingParam DeepCopy()

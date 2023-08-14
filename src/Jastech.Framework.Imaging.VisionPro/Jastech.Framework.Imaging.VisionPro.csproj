@@ -196,8 +196,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VisionAlgorithms\Parameters\VisionProSearchMaxToolParam.cs" />
     <Compile Include="VisionAlgorithms\Results\VisionProBlobResult.cs" />
+    <Compile Include="VisionAlgorithms\Results\VisionProSearchMaxResult.cs" />
     <Compile Include="VisionAlgorithms\VisionProHelper.cs" />
+    <Compile Include="VisionAlgorithms\VisionProSearchMaxTool.cs" />
     <Compile Include="VisionProFileHelper.cs" />
     <Compile Include="VisionProImageHelper.cs" />
     <Compile Include="VisionProMathHelper.cs" />

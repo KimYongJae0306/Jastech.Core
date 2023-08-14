@@ -1,18 +1,22 @@
 ﻿using Cognex.VisionPro;
-using Cognex.VisionPro.PMAlign;
+using Cognex.VisionPro.SearchMax;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
-    public class VisionProPatternMatching : CogVision
+    public class VisionProSearchMaxTool : CogVision
     {
-        #region 메서드
-        public VisionProPatternMatchingResult Run(ICogImage image, VisionProPatternMatchingParam matchingParam)
+        public VisionProSearchMaxResult Run(ICogImage image, VisionProSearchMaxToolParam matchingParam)
         {
-            VisionProPatternMatchingResult result = new VisionProPatternMatchingResult();
+            VisionProSearchMaxResult result = new VisionProSearchMaxResult();
 
             if (image == null)
                 return result;
@@ -20,9 +24,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             Stopwatch sw = new Stopwatch();
             sw.Restart();
 
-            VisionProPatternMatchingParam copyParam = matchingParam.DeepCopy();
-            // CopyParam을 Dispose하면 Image 객체가 사라짐. 따라서 Image는 외부에서 Dispose 해줘야함
+            VisionProSearchMaxToolParam copyParam = matchingParam.DeepCopy();
             copyParam.SetInputImage(image);
+            copyParam.GetTool().RunParams.AcceptThreshold = 0.1;
             var resultList = copyParam.Run();
 
             if (resultList == null)
@@ -41,19 +45,18 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.ReferencePos = new PointF((float)trainOrigin.TranslationX, (float)trainOrigin.TranslationY);
                 match.ReferenceWidth = (float)trainRoi.Width;
                 match.ReferenceHeight = (float)trainRoi.Height;
-                
+
                 match.FoundPos = new PointF((float)foundResult.GetPose().TranslationX, (float)foundResult.GetPose().TranslationY);
                 match.Score = (float)foundResult.Score;
                 match.Angle = (float)foundResult.GetPose().Rotation;
                 match.Scale = (float)foundResult.GetPose().Scaling;
-                match.ResultGraphics = foundResult.CreateResultGraphics(CogPMAlignResultGraphicConstants.MatchRegion
-                                                                        | CogPMAlignResultGraphicConstants.Origin);
+                match.ResultGraphics = foundResult.CreateResultGraphics(CogSearchMaxResultGraphicConstants.MatchRegion
+                                                                        | CogSearchMaxResultGraphicConstants.Origin);
 
                 result.MatchPosList.Add(match);
             }
 
             return result;
         }
-        #endregion
     }
 }
