@@ -75,6 +75,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 CurrentParam.ChangedTrained += Tool_ChangedTrained;
             }
+            CurrentParam.GetOrigin().Changed += CogPatternMatchingParamControl_Changed;
             cogPatternDisplay.InteractiveGraphics.Clear();
             cogPatternDisplay.StaticGraphics.Clear();
 
@@ -94,6 +95,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 DisposePatternDisplay();
             }
                
+        }
+
+        private void CogPatternMatchingParamControl_Changed(object sender, CogChangedEventArgs e)
+        {
+            if(CurrentParam != null)
+                CurrentParam.GetOrigin().Rotation = 0;
         }
 
         private void DisposePatternDisplay()
