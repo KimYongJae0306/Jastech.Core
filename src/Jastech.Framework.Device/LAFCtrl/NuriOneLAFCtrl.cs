@@ -124,6 +124,7 @@ namespace Jastech.Framework.Device.LAFCtrl
                     string valueString = temp.Substring(startIndex, 2).Trim();
 
                     IsTrackingOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                    Console.WriteLine("Tracking : " + IsTrackingOn + "  " + Name.ToString());
                 }
             }
 
