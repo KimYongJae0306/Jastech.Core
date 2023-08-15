@@ -187,7 +187,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     form.Initialize(CurrentParam);
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        CurrentParam.TrainImageMask(form.GetCurrentParam().GetTrainImageMask());
+                        var maskingImage = form.GetCurrentParam().GetTrainImageMask();
+                        if(maskingImage != null)
+                        {
+                            CurrentParam.TrainImageMask(maskingImage);
+                            CurrentParam.GetTool().Pattern.Train();
+                        }
 
                         UpdateData(CurrentParam);
                     }
