@@ -243,6 +243,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.InteractiveGraphics.Clear();
         }
 
+        public void Refresh()
+        {
+            cogDisplay.Refresh();
+        }
+
         public void ClearGraphic(string groupName)
         {
             DeleteStaticGraphics(groupName);
