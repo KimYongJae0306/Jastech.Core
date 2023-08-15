@@ -24,26 +24,6 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
             for (int leadIndex = 0; leadIndex < rectList.Count; leadIndex++)
             {
-                //if (leadIndex % 2 == 0)
-                //{
-                //    caliperParam.CaliperTool.RunParams.Edge0Polarity = polarityConstants;
-                //}
-                //else
-                //{
-                //    if (polarityConstants == CogCaliperPolarityConstants.DarkToLight)
-                //    {
-                //        caliperParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
-                //    }
-                //    else if (polarityConstants == CogCaliperPolarityConstants.LightToDark)
-                //    {
-                //        caliperParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.DarkToLight;
-                //    }
-                //    else
-                //    {
-                //        caliperParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.DontCare;
-                //    }
-                //}
-
                 caliperParam.CaliperTool.Region = rectList[leadIndex];
                 caliperParam.CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None;
 
@@ -53,8 +33,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 var currentResult = Run(image, caliperParam);
 
                 sw.Stop();
-                if (currentResult != null)
-                    resultList.Add(currentResult);
+                resultList.Add(currentResult);
             }
 
             caliperParam.CaliperTool.RunParams.Edge0Polarity = polarityConstants;

@@ -60,19 +60,18 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.ReferenceHeight = roi.SideYLength;
                 match.ReferenceRotation = roi.Rotation;
                 match.ReferenceSkew = roi.Skew;
-
+                
                 match.FoundPos = new PointF((float)foundResult.PositionX, (float)foundResult.PositionY);
                 match.Score = (float)foundResult.Score;
 
                 match.ResultGraphics = foundResult.CreateResultGraphics(CogCaliperResultGraphicConstants.Edges);
-                //match.ResultGraphics = caliperParam.CreateCurrentRecord(CogCaliperCurrentRecordConstants.All);
                 result.CaliperMatchList.Add(match);
 
                 return result;
             }
             else
             {
-                return null;
+                return result;
             }
         }
         #endregion

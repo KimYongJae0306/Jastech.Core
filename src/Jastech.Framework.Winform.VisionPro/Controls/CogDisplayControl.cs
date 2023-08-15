@@ -752,7 +752,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             string groupName = "Result";
 
             foreach (var item in alignResult.CogAlignResult)
-                resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
+            {
+                if (item == null)
+                    continue;
+                if(item.MaxCaliperMatch.ResultGraphics != null)
+                    resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
+            }
+                
             
             SetInteractiveGraphics(groupName, resultGraphic);
 

@@ -48,6 +48,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
         {
             var image = (CogImage8Grey)cogImageMaskEdit.MaskImage.CopyBase(CogImageCopyModeConstants.SharePixels);
             CurrentParam.TrainImageMask(image);
+            CurrentParam.GetTool().Pattern.Train();
             DialogResult = DialogResult.OK;
         }
 
