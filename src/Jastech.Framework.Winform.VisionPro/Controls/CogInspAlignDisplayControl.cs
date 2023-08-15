@@ -32,7 +32,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
             foreach (var item in shape)
-                collect.Add(item);
+            {
+                if(item != null)
+                    collect.Add(item);
+            }
 
             if(centerPoint.X != 0 && centerPoint.Y != 0)
             {
@@ -56,7 +59,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
             foreach (var item in shape)
-                collect.Add(item);
+            {
+                if (item != null)
+                    collect.Add(item);
+            }
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
             if (centerPoint.X != 0 && centerPoint.Y != 0)
