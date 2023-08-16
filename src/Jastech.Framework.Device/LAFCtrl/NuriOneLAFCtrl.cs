@@ -191,32 +191,6 @@ namespace Jastech.Framework.Device.LAFCtrl
         //    SerialPortComm.Send(command);
         //}
 
-        public override bool IsInPosition(double targetValue)
-        {
-            double calcTargetValue = targetValue;// / ResolutionAxisZ;
-            double calcMPos = Status.MPosPulse;// * ResolutionAxisZ;
-            if (Math.Abs(calcMPos - calcTargetValue) <= 1)
-                return true;
-
-            return false;
-        }
-
-        public override bool MoveWaitDone(double targetValue, int timeOut_mm)
-        {
-            double calcTargetValue = targetValue * ResolutionAxisZ;
-            while (IsInPosition(calcTargetValue) == false)
-            {
-                Stopwatch sw = new Stopwatch();
-                sw.Restart();
-                if (sw.ElapsedMilliseconds >= timeOut_mm)
-                {
-                    return false;
-                }
-                Thread.Sleep(10);
-            }
-            return true;
-        }
-
         public void SetAccDec(int value)
         {
             // Min : 1 Max : 20

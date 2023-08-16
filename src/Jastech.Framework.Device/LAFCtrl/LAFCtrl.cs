@@ -54,10 +54,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetYWindow(int start, int width);
 
-        public abstract bool IsInPosition(double targetValue);
-
-        public abstract bool MoveWaitDone(double targetValue, int timeOut_mm);
-
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);
