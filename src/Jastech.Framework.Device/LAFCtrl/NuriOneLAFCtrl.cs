@@ -1,6 +1,7 @@
 ﻿using Jastech.Framework.Comm;
 using Jastech.Framework.Comm.Protocol;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -327,6 +328,20 @@ namespace Jastech.Framework.Device.LAFCtrl
             //Send(command);
         }
 
+        public override void SetVroOnOff(bool isOn)
+        {
+            int value = isOn ? 1 : 0;
+            string command = MakeSetCommand(CMD_VRO, value.ToString());
+            Send(command);
+        }
+
+        public override void SetYWindow(int start, int width)
+        {
+            string value = start.ToString() + " " + width.ToString();
+            string command = MakeSetCommand(CMD_Y_WINDOW, value.ToString());
+            Send(command);
+        }
+
         public void RequestData(string command)
         {
             if (IsGetMessageOn)
@@ -387,6 +402,9 @@ namespace Jastech.Framework.Device.LAFCtrl
         const string CMD_READ_STATUS_REPORT = "uc rep cog mpos ls1 ls2";                // GET Sensor Status (cog mpos -limit +limit)
         const string CMD_WRITE_BAUDRATE = "baud %s 0";                                  // SET Focus Position Value (cog)
         const string CMD_WRITE_ACCELDECEL = "uc motionacctcms";                         // SET Motion Acceleration/Deceleration
+        const string CMD_VRO = "uc vro";                                                // SET VRO
+        const string CMD_Y_WINDOW = "uc ywindow";                                       // SET Y Window "start width"
+
         const int AF_SENSOR_PORT_RES_WAIT = 200;
         #endregion
     }

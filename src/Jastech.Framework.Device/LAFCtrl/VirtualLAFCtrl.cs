@@ -88,5 +88,15 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             return true;
         }
+
+        public override void SetVroOnOff(bool isOn)
+        {
+            
+        }
+
+        public override void SetYWindow(int start, int width)
+        {
+            
+        }
     }
 }

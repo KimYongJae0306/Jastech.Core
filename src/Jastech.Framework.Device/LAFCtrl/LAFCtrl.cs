@@ -50,6 +50,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionEnable(bool isOn);
 
+        public abstract void SetVroOnOff(bool isOn);
+
+        public abstract void SetYWindow(int start, int width);
+
         public abstract bool IsInPosition(double targetValue);
 
         public abstract bool MoveWaitDone(double targetValue, int timeOut_mm);
