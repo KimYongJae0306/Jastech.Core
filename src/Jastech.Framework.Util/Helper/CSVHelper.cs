@@ -33,10 +33,10 @@ namespace Jastech.Framework.Util.Helper
 
                 KillProcess(csvPath);
 
-                if (!Directory.Exists(csvDirectory))
+                if (Directory.Exists(csvDirectory) == false)
                     Directory.CreateDirectory(csvDirectory);
 
-                if (!File.Exists(csvPath))
+                if (File.Exists(csvPath) == false)
                 {
                     lock (_objLock)
                     {
