@@ -9,7 +9,7 @@ namespace Jastech.Framework.Winform.Controls
     public partial class PixelValueGraphControl : UserControl
     {
         #region 속성
-        public DoubleBufferPanel pnlDrawChart = null;
+        public DoubleBufferedPanel pnlDrawChart = null;
 
         public int DefaultMaxAxisX { get; set; } = 100;
 
@@ -40,7 +40,7 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void PixelValueGraphControl_Load(object sender, EventArgs e)
         {
-            pnlDrawChart = new DoubleBufferPanel();
+            pnlDrawChart = new DoubleBufferedPanel();
             pnlChart.Controls.Add(pnlDrawChart);
             pnlDrawChart.Dock = DockStyle.Fill;
             pnlDrawChart.Paint += DoubleBuffering_Paint;

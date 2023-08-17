@@ -2,9 +2,9 @@
 
 namespace Jastech.Framework.Winform.Controls
 {
-    public class DoubleBufferPanel : Panel
+    public class DoubleBufferedPanel : Panel
     {
-        public DoubleBufferPanel()
+        public DoubleBufferedPanel()
         {
             SetStyle(ControlStyles.DoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
