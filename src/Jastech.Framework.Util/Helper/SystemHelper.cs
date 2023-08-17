@@ -11,20 +11,20 @@ namespace Jastech.Framework.Util.Helper
     {
         public static void StartChecker(string path)
         {
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    using (Process process = Process.GetCurrentProcess())
-                    {
-                        using (var file = File.AppendText(path))
-                        {
-                            file.WriteLine(process.WorkingSet64);
-                        }
-                    }
-                    Thread.Sleep(1000);
-                }
-            });
+            //Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        using (Process process = Process.GetCurrentProcess())
+            //        {
+            //            using (var file = File.AppendText(path))
+            //            {
+            //                file.WriteLine(process.WorkingSet64);
+            //            }
+            //        }
+            //        Thread.Sleep(1000);
+            //    }
+            //});
         }
 
         public static void SetSystemTime(DateTime dateTime)
