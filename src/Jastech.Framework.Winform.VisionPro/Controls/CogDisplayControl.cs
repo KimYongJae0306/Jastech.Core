@@ -243,7 +243,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.InteractiveGraphics.Clear();
         }
 
-        public void Refresh()
+        public void DisplayRefresh()
         {
             cogDisplay.Refresh();
         }

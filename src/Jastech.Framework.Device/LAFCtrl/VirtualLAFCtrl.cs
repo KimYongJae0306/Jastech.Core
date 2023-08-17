@@ -79,14 +79,14 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
         }
 
-        public override bool IsInPosition(double targetValue)
+        public override void SetVroOnOff(bool isOn)
         {
-            return true;
+            
         }
 
-        public override bool MoveWaitDone(double targetValue, int timeOut_mm)
+        public override void SetYWindow(int start, int width)
         {
-            return true;
+            
         }
     }
 }
