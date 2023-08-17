@@ -46,11 +46,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             AkkonROIList.Add(roi);
         }
 
-        //public void AddROI(List<AkkonROI> roiList)
-        //{
-        //    AkkonROIList.AddRange(roiList);
-        //}
-
         public void DeleteROI(int index)
         {
             if (AkkonROIList.Count > 0)
@@ -60,14 +55,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public void Dispose()
         {
             AkkonROIList.Clear();
-        }
-
-        public void ReNewalROIList(List<AkkonROI> roiList)
-        {
-            if (AkkonROIList.Count > 0)
-                AkkonROIList.Clear();
-
-            AkkonROIList.AddRange(roiList);
         }
         #endregion
     }

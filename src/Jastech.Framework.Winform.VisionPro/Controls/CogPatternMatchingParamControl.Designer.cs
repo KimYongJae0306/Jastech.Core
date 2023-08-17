@@ -36,12 +36,12 @@
             this.cogPatternDisplay = new Cognex.VisionPro.Display.CogDisplay();
             this.lblTrain = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblClear = new System.Windows.Forms.Label();
             this.lblTest = new System.Windows.Forms.Label();
             this.nupdnMaxAngle = new System.Windows.Forms.NumericUpDown();
             this.nupdnMatchScore = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblClear = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogPatternDisplay)).BeginInit();
@@ -146,6 +146,19 @@
             this.panel2.Size = new System.Drawing.Size(226, 382);
             this.panel2.TabIndex = 0;
             // 
+            // lblClear
+            // 
+            this.lblClear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblClear.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblClear.ForeColor = System.Drawing.Color.White;
+            this.lblClear.Location = new System.Drawing.Point(16, 177);
+            this.lblClear.Name = "lblClear";
+            this.lblClear.Size = new System.Drawing.Size(192, 40);
+            this.lblClear.TabIndex = 22;
+            this.lblClear.Text = "Clear";
+            this.lblClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
+            // 
             // lblTest
             // 
             this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -190,9 +203,13 @@
             this.nupdnMatchScore.Location = new System.Drawing.Point(128, 25);
             this.nupdnMatchScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMatchScore.Name = "nupdnMatchScore";
+            this.nupdnMatchScore.ReadOnly = true;
             this.nupdnMatchScore.Size = new System.Drawing.Size(80, 27);
             this.nupdnMatchScore.TabIndex = 13;
             this.nupdnMatchScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nupdnMatchScore.ValueChanged += new System.EventHandler(this.nupdnMatchScore_ValueChanged);
+            this.nupdnMatchScore.Click += new System.EventHandler(this.nupdnMatchScore_Click);
+            this.nupdnMatchScore.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nupdnMatchScore_KeyPress);
             this.nupdnMatchScore.Leave += new System.EventHandler(this.nupdnMatchScore_Leave);
             // 
             // label3
@@ -216,19 +233,6 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Score [%]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblClear
-            // 
-            this.lblClear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblClear.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblClear.ForeColor = System.Drawing.Color.White;
-            this.lblClear.Location = new System.Drawing.Point(16, 177);
-            this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(192, 40);
-            this.lblClear.TabIndex = 22;
-            this.lblClear.Text = "Clear";
-            this.lblClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
             // 
             // CogPatternMatchingParamControl
             // 
