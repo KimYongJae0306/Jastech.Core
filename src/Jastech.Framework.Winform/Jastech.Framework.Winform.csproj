@@ -67,10 +67,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DoubleBufferPanel.cs">
+    <Compile Include="Controls\DoubleBufferedDatagridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DoubleBufferPicturebox.cs">
+    <Compile Include="Controls\DoubleBufferedDatagridView.Designer.cs">
+      <DependentUpon>DoubleBufferedDatagridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DoubleBufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DoubleBufferedPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
@@ -114,6 +120,12 @@
     </Compile>
     <Compile Include="Controls\PixelValueGraphControl.Designer.cs">
       <DependentUpon>PixelValueGraphControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StyledCalender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\StyledCalender.Designer.cs">
+      <DependentUpon>StyledCalender.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TrendControl.cs">
       <SubType>UserControl</SubType>

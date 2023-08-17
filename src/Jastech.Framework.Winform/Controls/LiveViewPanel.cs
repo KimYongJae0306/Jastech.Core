@@ -16,7 +16,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public DoubleBufferPanel DoubleBufferPanel { get; set; } = null;
+        public DoubleBufferedPanel DoubleBufferPanel { get; set; } = null;
 
         public byte[] ImageSource { get; set; } = null;
         #endregion
@@ -31,7 +31,7 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void LiveViewPanel_Load(object sender, EventArgs e)
         {
-            DoubleBufferPanel = new DoubleBufferPanel() { Dock = DockStyle.Fill };
+            DoubleBufferPanel = new DoubleBufferedPanel() { Dock = DockStyle.Fill };
             pnlLiveView.Controls.Add(DoubleBufferPanel);
 
             DoubleBufferPanel.Paint += DoubleBufferPanel_Paint;
