@@ -747,6 +747,39 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
+        public void UpdateResult(List<VisionProPatternMatchingResult> matchingResultList)
+        {
+            CogGraphicInteractiveCollection resultGraphic = new CogGraphicInteractiveCollection();
+
+            foreach (var matchingResult in matchingResultList)
+            {
+                string groupName = "Result";
+                var matchingResultData = matchingResult.MaxMatchPos as VisionProPatternMatchPos;
+                if (matchingResultData.ResultGraphics == null)
+                    return;
+
+                var result = matchingResult.Judgement;
+                CogColorConstants color = CogColorConstants.Cyan;
+                if (result != Judgement.OK)
+                {
+                    color = CogColorConstants.Red;
+                    foreach (var shape in matchingResultData.ResultGraphics.Shapes)
+                    {
+                        if (shape is CogPointMarker pointMarker)
+                            pointMarker.Color = color;
+
+                        if (shape is CogRectangleAffine cogRectangleAffine)
+                            cogRectangleAffine.Color = color;
+
+                        if (shape is CogRectangle cogRectangle)
+                            cogRectangle.Color = color;
+                    }
+                }
+                resultGraphic.Add(matchingResultData.ResultGraphics);
+                SetInteractiveGraphics(groupName, resultGraphic);
+            }
+        }
+
         public void UpdateResult(VisionProAlignCaliperResult alignResult)
         {
             if (alignResult == null)
@@ -768,11 +801,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             SetInteractiveGraphics(groupName, resultGraphic);
 
             DrawResultLabel("Result :" + alignResult.Judgement.ToString(), 0);
-            //if (alignResult.Judgement != Result.Fail)
-            //{
-            //    DrawResultLabel("Y :" + alignResult.MaxCaliperMatch.FoundPos.X.ToString("0.000"), 2);
-            //    DrawResultLabel("X :" + alignResult.MaxCaliperMatch.FoundPos.Y.ToString("0.000"), 3);
-            //}
         }
 
         public void UpdateResult(List<VisionProAlignCaliperResult> alignCaliperResultList)

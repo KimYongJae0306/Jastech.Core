@@ -13,7 +13,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     public partial class CogPatternMatchingParamControl : UserControl
     {
         #region 필드
-        private VisionProPatternMatchingParam CurrentParam;
+        private VisionProPatternMatchingParam CurrentParam; 
         #endregion
 
         #region 이벤트
@@ -96,7 +96,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 DisposePatternDisplay();
             }
-               
         }
 
         private void CogPatternMatchingParamControl_Changed(object sender, CogChangedEventArgs e)
@@ -229,11 +228,34 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             TestActionEvent?.Invoke();
         }
-        #endregion
 
         private void lblClear_Click(object sender, EventArgs e)
         {
             ClearActionEvent?.Invoke();
+        }
+
+        private void nupdnMatchScore_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void nupdnMatchScore_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void nupdnMatchScore_Click(object sender, EventArgs e)
+        {
+            KeyPadForm keyPadForm = new KeyPadForm();
+            keyPadForm.PreviousValue = Convert.ToDouble(nupdnMatchScore.Value.ToString());
+            keyPadForm.ShowDialog();
+
+            int inputData = Convert.ToInt16(keyPadForm.PadValue);
+
+            nupdnMatchScore.Value = inputData;
+
+            if (CurrentParam != null)
+                CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
         }
     }
 }

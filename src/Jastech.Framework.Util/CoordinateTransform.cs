@@ -26,28 +26,6 @@ namespace Jastech.Framework.Util
             TargetData.SetPoint(leftPoint, rightPoint);
         }
 
-        //public CoordinateTransform DeepCopy()
-        //{
-        //    CoordinateTransform coordinateTransform = new CoordinateTransform();
-
-        //    coordinateTransform.DiffRadian = DiffRadian;
-        //    coordinateTransform.OffsetPoint = OffsetPoint;
-
-        //    if (ReferenceData != null)
-        //        coordinateTransform.ReferenceData = ReferenceData.DeepCopy();
-
-        //    if (TargetData != null)
-        //        coordinateTransform.TargetData = TargetData.DeepCopy();
-
-        //    return coordinateTransform;
-        //}
-
-        //public void Dispose()
-        //{
-        //    ReferenceData.Dispose();
-        //    TargetData.Dispose();
-        //}
-
         private void SetOffsetPoint()
         {
             if (ReferenceData == null || TargetData == null)
