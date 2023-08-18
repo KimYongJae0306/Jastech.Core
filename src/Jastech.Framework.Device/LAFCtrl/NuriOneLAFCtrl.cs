@@ -22,7 +22,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
 
         [JsonProperty]
-        public int MaxSppedAxisZ { get; set; } = 300000;            // Hz
+        public int MaxSppedAxisZ { get; set; } = 200000;            // Hz
 
         [JsonProperty]
         public int PacketResponseTimeMs { get; set; } = 100;
@@ -97,6 +97,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         private void SerialPortComm_Received(byte[] data)
         {
             LastReceivedData = Encoding.Default.GetString(data);
+            //Console.WriteLine(LastReceivedData);
             if (IsGetMessageOn == false)
                 OnLAFReceived(data);
             else
@@ -125,7 +126,11 @@ namespace Jastech.Framework.Device.LAFCtrl
                     string valueString = temp.Substring(startIndex, 2).Trim();
 
                     IsTrackingOn = Convert.ToInt16(valueString) == 1 ? true : false;
-                    Console.WriteLine("Tracking : " + IsTrackingOn + "  " + Name.ToString());
+                    Console.WriteLine("-------------------------Tracking : " + IsTrackingOn + "  " + Name.ToString());
+                }
+                if(temp.Contains("uc motionrefpos"))
+                {
+                    int g1 = 1;
                 }
             }
 
@@ -153,8 +158,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetDefaultParameter()
         {
-            SetMotionMaxSpeed(30);
-            SetAccDec(100);
+            SetMotionMaxSpeed(20);
+            SetAccDec(15);
         }
 
         public override void SetMotionMaxSpeed(double velocity)
@@ -228,6 +233,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetTrackingOnOFF(bool isOn)
         {
+            //if (isOn == false)
+            //    return;
             ResponseReceivedEvent.WaitOne(1000);
             IsGetMessageOn = true;
             string value = Convert.ToInt16(isOn).ToString();
@@ -350,9 +357,11 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetCenterOfGravity(int value)
         {
+            ResponseReceivedEvent.WaitOne(1000);
+            IsGetMessageOn = true;
             int offset = (value > 10000) ? 9999 : value;
             offset = (value < -10000) ? -9999 : value;
-
+      
             string command = MakeSetCommand(CMD_WRITE_FOCUS_POSITION, offset.ToString());
             SerialPortComm.Send(command);
         }
