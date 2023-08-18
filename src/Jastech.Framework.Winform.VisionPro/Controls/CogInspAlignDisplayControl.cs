@@ -19,6 +19,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogInspAlignDisplayControl_Load(object sender, System.EventArgs e)
         {
             cogLeftDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+            cogCenterDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
             cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
         }
 
@@ -72,6 +73,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                 cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
             }
+        }
+
+        public void UpdateCenterDisplay(ICogImage cogImage)
+        {
+            cogCenterDisplay.Image = cogImage;
+            cogCenterDisplay.StaticGraphics.Clear();
+            cogCenterDisplay.InteractiveGraphics.Clear();
         }
 
         public void SetDisplayToCenter(CogRecordDisplay display, Point point)
