@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System.Collections.Generic;
 using System.Drawing;
@@ -77,6 +78,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateCenterDisplay(ICogImage cogImage)
         {
+            CogDisplayHelper.DisposeDisplay(cogCenterDisplay);
+
             if(cogImage == null)
             {
                 cogCenterDisplay.Image = cogLeftDisplay.Image;
@@ -84,9 +87,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             else
             {
                 cogCenterDisplay.Image = cogImage;
+                cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
+                cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;
             }
-            cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
-            cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;
+            
             cogCenterDisplay.StaticGraphics.Clear();
             cogCenterDisplay.InteractiveGraphics.Clear();
         }
