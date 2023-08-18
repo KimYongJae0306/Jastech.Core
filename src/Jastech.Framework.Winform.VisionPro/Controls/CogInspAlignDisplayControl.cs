@@ -77,7 +77,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateCenterDisplay(ICogImage cogImage)
         {
-            cogCenterDisplay.Image = cogImage;
+            if(cogImage == null)
+            {
+                cogCenterDisplay.Image = cogLeftDisplay.Image;
+            }
+            else
+            {
+                cogCenterDisplay.Image = cogImage;
+            }
+            cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
+            cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;
             cogCenterDisplay.StaticGraphics.Clear();
             cogCenterDisplay.InteractiveGraphics.Clear();
         }

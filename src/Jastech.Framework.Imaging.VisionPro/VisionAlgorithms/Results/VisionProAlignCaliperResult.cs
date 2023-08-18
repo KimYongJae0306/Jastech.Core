@@ -31,6 +31,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 
             CogAlignResult.AddRange(resultList);
         }
+
         public void Dispose()
         {
             CogAlignResult.ForEach(x => x.Dispose());
