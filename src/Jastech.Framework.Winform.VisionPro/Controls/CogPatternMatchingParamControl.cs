@@ -252,6 +252,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             int inputData = Convert.ToInt16(keyPadForm.PadValue);
 
+            if (inputData >= 100)
+                inputData = 100;
+            if(inputData <= 0)
+                inputData = 0;
+
             nupdnMatchScore.Value = inputData;
 
             if (CurrentParam != null)
