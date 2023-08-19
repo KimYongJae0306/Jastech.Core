@@ -93,6 +93,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
             else
             {
+                cogCenterDisplay.Zoom = 0.5;
                 cogCenterDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels); ;
                 cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
                 cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;

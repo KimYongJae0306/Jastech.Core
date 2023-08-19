@@ -159,7 +159,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public override void SetDefaultParameter()
         {
             SetMotionMaxSpeed(20);
-            SetAccDec(70);
+            SetAccDec(15);
         }
 
         public override void SetMotionMaxSpeed(double velocity)
