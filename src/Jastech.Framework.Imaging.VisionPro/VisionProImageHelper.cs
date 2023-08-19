@@ -363,15 +363,15 @@ namespace Jastech.Framework.Imaging.VisionPro
             {
                 CogImage8Root root = new CogImage8Root();
 
-                byte[] buffer = new byte[stride * height];
-                Marshal.Copy(ptr, buffer, 0, stride * height);
+                //byte[] buffer = new byte[stride * height];
+                //Marshal.Copy(ptr, buffer, 0, stride * height);
 
-                IntPtr copyPtr = Marshal.AllocHGlobal(stride * height);
-                Marshal.Copy(buffer, 0, copyPtr, stride * height);
+                //IntPtr copyPtr = Marshal.AllocHGlobal(stride * height);
+                //Marshal.Copy(buffer, 0, copyPtr, stride * height);
         
 
 
-                root.Initialize(width, height, copyPtr, stride, null);
+                root.Initialize(width, height, ptr, stride, null);
                 var cogImage = new CogImage8Grey();
                 cogImage.SetRoot(root);
 
