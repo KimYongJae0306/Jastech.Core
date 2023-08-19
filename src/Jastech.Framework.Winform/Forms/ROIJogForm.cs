@@ -220,6 +220,11 @@ namespace Jastech.Framework.Winform.Forms
             if (CloseEventDelegate != null)
                 CloseEventDelegate();
         }
+
+        private void lblClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         #endregion
     }
 
