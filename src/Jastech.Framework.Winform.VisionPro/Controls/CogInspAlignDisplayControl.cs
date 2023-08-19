@@ -26,8 +26,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
         {
+            if (cogImage == null)
+                return;
             //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            cogLeftDisplay.Image = cogImage;
+            cogLeftDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
             cogLeftDisplay.StaticGraphics.Clear();
             cogLeftDisplay.InteractiveGraphics.Clear();
 
@@ -43,7 +45,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
                 var gg = cogLeftDisplay.Zoom;
-                cogLeftDisplay.Zoom = 0.5;
+                cogLeftDisplay.Zoom = 0.25;
                 cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                 cogLeftDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
             }
@@ -51,7 +53,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
         {
-            cogRightDisplay.Image = cogImage;
+            if (cogImage == null)
+                return;
+
+            cogRightDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
 
@@ -69,7 +74,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
             if (centerPoint.X != 0 && centerPoint.Y != 0)
             {
-                cogRightDisplay.Zoom = 0.5;
+                cogRightDisplay.Zoom = 0.25;
                 cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
                 cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                 cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
@@ -78,15 +83,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateCenterDisplay(ICogImage cogImage)
         {
-            CogDisplayHelper.DisposeDisplay(cogCenterDisplay);
+            if (cogImage == null)
+                return;
+            //CogDisplayHelper.DisposeDisplay(cogCenterDisplay);
 
-            if(cogImage == null)
+            if (cogImage == null)
             {
                 cogCenterDisplay.Image = cogLeftDisplay.Image;
             }
             else
             {
-                cogCenterDisplay.Image = cogImage;
+                cogCenterDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels); ;
                 cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
                 cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;
             }
@@ -112,13 +119,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearImage()
         {
-            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            cogLeftDisplay.InteractiveGraphics.Clear();
-            cogLeftDisplay.Image = null;
+            //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+            //cogLeftDisplay.InteractiveGraphics.Clear();
+            //cogLeftDisplay.Image = null;
 
-            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
-            cogRightDisplay.InteractiveGraphics.Clear();
-            cogRightDisplay.Image = null;
+            //CogDisplayHelper.DisposeDisplay(cogRightDisplay);
+            //cogRightDisplay.InteractiveGraphics.Clear();
+            //cogRightDisplay.Image = null;
         }
 
         public void ClearGraphics()
@@ -127,5 +134,79 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.InteractiveGraphics.Clear();
         }
         #endregion
+
+        private void cogLeftDisplay_Changed(object sender, CogChangedEventArgs e)
+        {
+            if (sender is CogRecordDisplay display)
+            {
+                if (display.Image == null)
+                    return;
+
+                string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames.Contains("SfAutoFitWithGraphics"))
+                    return;
+
+                if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
+                {
+                    //if (display.Zoom < 0.2)
+                    //    display.Zoom = 0.2;
+
+                    if (display.Zoom > 10)
+                        display.Zoom = 10;
+                }
+
+                if (flagNames == "SfZoom" || flagNames == "SfPanX" || flagNames == "SfPanY")
+                {
+                    //if (DeleteResultGraphics())
+                    //    DeleteEventHandler?.Invoke(sender, e);
+
+                    //MoveImageEventHandler?.Invoke(display.PanX, display.PanY, display.Zoom);
+                }
+            }
+        }
+
+        private void cogCenterDisplay_Changed(object sender, CogChangedEventArgs e)
+        {
+            if (sender is CogRecordDisplay display)
+            {
+                if (display.Image == null)
+                    return;
+
+                string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames.Contains("SfAutoFitWithGraphics"))
+                    return;
+
+                if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
+                {
+                    //if (display.Zoom < 0.2)
+                    //    display.Zoom = 0.2;
+
+                    if (display.Zoom > 10)
+                        display.Zoom = 10;
+                }
+            }
+        }
+
+        private void cogRightDisplay_Changed(object sender, CogChangedEventArgs e)
+        {
+            if (sender is CogRecordDisplay display)
+            {
+                if (display.Image == null)
+                    return;
+
+                string flagNames = e.GetStateFlagNames(sender);
+                if (flagNames.Contains("SfAutoFitWithGraphics"))
+                    return;
+
+                if (flagNames.Contains("SfZoom") || flagNames.Contains("SfMaintainImageRegion"))
+                {
+                    //if (display.Zoom < 0.2)
+                    //    display.Zoom = 0.2;
+
+                    if (display.Zoom > 10)
+                        display.Zoom = 10;
+                }
+            }
+        }
     }
 }

@@ -95,26 +95,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
         {
-            //if (sender is CogRecordDisplay display)
-            //{
-            //    if (display.Image == null)
-            //        return;
-
-            //    if (display.Zoom < 0.2)
-            //        display.Zoom = 0.2;
-
-            //    if (display.Zoom > 10)
-            //        display.Zoom = 10;
-
-            //    if (_updateViewRect)
-            //    {
-            //        _updateViewRect = false;
-            //        return;
-            //    }
-
-            //    UpdateViewRect();
-            //}
-
             if (sender is CogRecordDisplay display)
             {
                 if (display.Image == null)
