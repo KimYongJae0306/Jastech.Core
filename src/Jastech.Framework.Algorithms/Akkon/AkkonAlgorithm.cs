@@ -77,6 +77,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
 
                     AkkonLeadResult leadResult = new AkkonLeadResult();
+                    leadResult.Id = roi.Index;
                     leadResult.Roi = roi.DeepCopy();
                     leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
                     leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
