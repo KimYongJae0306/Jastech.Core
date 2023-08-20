@@ -88,5 +88,10 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             
         }
+
+        public override void SetAccDec(int value)
+        {
+            
+        }
     }
 }

@@ -21,8 +21,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         [JsonProperty]
         public double BallScrewPitchAxisZ { get; set; } = 2.0;      // mm
 
-        [JsonProperty]
-        public int MaxSppedAxisZ { get; set; } = 200000;            // Hz
+        
 
         [JsonProperty]
         public int PacketResponseTimeMs { get; set; } = 100;
@@ -158,8 +157,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetDefaultParameter()
         {
-            SetMotionMaxSpeed(20);
-            SetAccDec(15);
+            SetMotionMaxSpeed(MaxSppedAxisZ);
+            SetAccDec(AccDec);
         }
 
         public override void SetMotionMaxSpeed(double velocity)
@@ -173,6 +172,16 @@ namespace Jastech.Framework.Device.LAFCtrl
             Send(command);
         }
 
+        public override void SetAccDec(int value)
+        {
+            if (value < 1)
+                value = 1;
+            if (value > 200)
+                value = 200;
+
+            string command = MakeSetCommand(CMD_WRITE_ACCELDECEL, value.ToString());
+            Send(command);
+        }
         //public override void SetMotionMaxSpeed(double MaxSpped_um)
         //{
         //    //****Example****
@@ -195,18 +204,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         //    SerialPortComm.Send(command);
         //}
-
-        public void SetAccDec(int value)
-        {
-            // Min : 1 Max : 20
-            if (value < 1)
-                value = 1;
-            if (value > 200)
-                value = 200;
-
-            string command = MakeSetCommand(CMD_WRITE_ACCELDECEL, value.ToString());
-            Send(command);
-        }
 
         private void SetBaudRate(int baudRate)
         {
