@@ -65,7 +65,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 int highThres = 255;
                 CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
                 Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
-               
+
                 foreach (var roi in slice.CalcAkkonROIs)
                 {
                     Rectangle boundRect = roi.GetBoundRect();
@@ -77,6 +77,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                     CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
 
                     AkkonLeadResult leadResult = new AkkonLeadResult();
+                    leadResult.Id = roi.Index;
                     leadResult.Roi = roi.DeepCopy();
                     leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
                     leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
@@ -124,7 +125,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
             sw.Stop();
             Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
-            return leadResultList;
+            return leadResultList.OrderBy(x => x.Id).ToList();
         }
 
         public List<AkkonLeadResult> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam parameters, float resolution_um)

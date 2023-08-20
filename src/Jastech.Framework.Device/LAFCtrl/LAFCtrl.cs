@@ -34,6 +34,8 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetMotionPositiveLimit(double value);
 
+        public abstract void SetAccDec(int value);
+
         public abstract void SetMotionMaxSpeed(double value);
 
         public abstract void SetDefaultParameter();
@@ -75,6 +77,12 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         [JsonProperty]
         public double HomePosition_mm { get; set; } = 0.02;
+
+        [JsonProperty]
+        public int MaxSppedAxisZ { get; set; } = 20;            // Hz
+
+        [JsonProperty]
+        public int AccDec { get; set; } = 15;            // Hz
         #endregion
 
         #region 메서드

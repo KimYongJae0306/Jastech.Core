@@ -17,5 +17,23 @@ namespace Jastech.Framework.Imaging.VisionPro
             cogRectAffine.SetOriginCornerXCornerY(leftTop.X, leftTop.Y, rightTop.X, rightTop.Y, leftBottom.X, leftBottom.Y);
             return cogRectAffine;
         }
+
+        public static CogRectangleAffine AddOffsetToCogRectAffine(CogRectangleAffine originRegion, PointF offset)
+        {
+            CogRectangleAffine roi = new CogRectangleAffine(originRegion);
+
+            PointF inputPoint = new PointF();
+            inputPoint.X = (float)roi.CenterX;
+            inputPoint.Y = (float)roi.CenterY;
+
+            PointF newPoint = new PointF();
+            newPoint.X = inputPoint.X + offset.X;
+            newPoint.Y = inputPoint.Y + offset.Y;
+
+            roi.CenterX = newPoint.X;
+            roi.CenterY = newPoint.Y;
+
+            return roi;
+        }
     }
 }
