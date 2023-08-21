@@ -129,7 +129,6 @@ namespace Jastech.Framework.Device.LAFCtrl
                 }
                 if(temp.Contains("uc motionrefpos"))
                 {
-                    int g1 = 1;
                 }
             }
 
