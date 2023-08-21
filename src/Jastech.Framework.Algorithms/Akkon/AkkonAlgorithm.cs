@@ -519,7 +519,7 @@ namespace Jastech.Framework.Algorithms.Akkon
         {
             if (roiList.Count <= 0)
                 return new List<AkkonSlice>();
-
+            roiList = roiList.OrderBy(x => x.LeftTopX).ToList();
             var resizeRoiList = GetResizeROI(roiList, resizeRatio);
             ResizeMat = GetResizeMat(orgMat, resizeRatio);
 
