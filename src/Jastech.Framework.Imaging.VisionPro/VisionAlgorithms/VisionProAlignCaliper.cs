@@ -29,15 +29,15 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
                 if(isPanel)
                 {
-                    if (leadIndex % 2 == 0)
-                    {
-                        caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
-                        var scorerPosition = new CogCaliperScorerPosition();
-                        scorerPosition.Enabled = true;
-                        caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
+                    //if (leadIndex % 2 == 0)
+                    //{
+                    //    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
+                    //    var scorerPosition = new CogCaliperScorerPosition();
+                    //    scorerPosition.Enabled = true;
+                    //    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
 
-                    }
-                    else
+                    //}
+                    //else
                     {
                         caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
                         var scorerPosition = new CogCaliperScorerPosition();
