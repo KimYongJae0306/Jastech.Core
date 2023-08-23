@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 
@@ -66,6 +67,38 @@ namespace Jastech.Framework.Util.Helper
             {
                 return;
             }
+        }
+
+        public static DataTable CsvToDataTable(string fullPath)
+        {
+            DataTable dataTable = new DataTable();
+
+            if (fullPath.ToLower().Contains(".csv") == false)
+                return dataTable;
+
+            using (FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    for (int rowIndex = 0; !sr.EndOfStream; rowIndex++)
+                    {
+                        if (rowIndex == 0)
+                        {
+                            string[] header = sr.ReadLine().Split(',');
+                            foreach (string columnName in header.Where(name => name != ""))
+                                dataTable.Columns.Add(columnName);
+                        }
+                        else
+                        {
+                            string[] body = sr.ReadLine().Split(',');
+                            dataTable.Rows.Add(body);
+                        }
+                    }
+                    sr.Close();
+                }
+            }
+
+            return dataTable;
         }
     }
 }
