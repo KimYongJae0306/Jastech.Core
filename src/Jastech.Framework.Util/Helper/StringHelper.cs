@@ -72,7 +72,7 @@ namespace Jastech.Framework.Util.Helper
             return min;
         }
 
-        public static T StringToEnum<T>(string value) where T : struct, Enum
+        public static T StringToEnum<T>(string value) where T : struct
         {
             if (Enum.TryParse(value, true, out T result))
                 return result;
