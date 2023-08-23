@@ -700,6 +700,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 double panPointX = (double)cogDisplay.Image.Width * ratio;
                 panPointX = (cogDisplay.Image.Width / 2) - panPointX;
                 cogDisplay.PanX = panPointX;
+
+                UpdateViewRect();
             }
         }
 

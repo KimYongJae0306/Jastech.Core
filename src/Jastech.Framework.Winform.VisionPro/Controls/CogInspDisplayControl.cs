@@ -69,11 +69,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             lock (image)
             {
-              
                 cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
                 CogThumbnail.SetThumbnailImage(image, null);
-
-               
             }
         }
 
