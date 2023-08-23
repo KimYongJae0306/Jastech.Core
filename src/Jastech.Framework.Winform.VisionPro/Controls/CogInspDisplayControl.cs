@@ -56,6 +56,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             
             lock(image)
             {
+                _updateViewRect = true;
                 cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
                 CogThumbnail.SetThumbnailImage(image, cogRectangleAffines);
             }
@@ -68,8 +69,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             lock (image)
             {
+              
                 cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
                 CogThumbnail.SetThumbnailImage(image, null);
+
+               
             }
         }
 
@@ -80,8 +84,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if(cogDisplay.Image != null)
             {
                 double panPointX = (double)cogDisplay.Image.Width * ratio;
-                panPointX = (cogDisplay.Image.Width / 2) - panPointX;
-                cogDisplay.PanX = panPointX;
+                double calcPanPointX = (cogDisplay.Image.Width / 2) - panPointX;
+                cogDisplay.PanX = calcPanPointX;
+
+                CogThumbnail.PrevViewRectangle.X = panPointX - (CogThumbnail.PrevViewRectangle.Width / 2.0);
+
+                UpdateViewRect();
             }
         }
 
