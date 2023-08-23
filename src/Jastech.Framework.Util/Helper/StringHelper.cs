@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Jastech.Framework.Util.Helper
@@ -68,6 +70,14 @@ namespace Jastech.Framework.Util.Helper
                     min = value;
             }
             return min;
+        }
+
+        public static T StringToEnum<T>(string value) where T : struct, Enum
+        {
+            if (Enum.TryParse(value, true, out T result))
+                return result;
+            else
+                throw new InvalidEnumArgumentException($"{typeof(T).Name}에는 {value}의 값이 존재하지 않습니다.");
         }
     }
 
