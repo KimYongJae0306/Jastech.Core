@@ -101,5 +101,15 @@ namespace Jastech.Framework.Imaging.Helper
             }
             return edgePointList;
         }
+
+        public static Rectangle GetBoundingBox(List<Point> pointList)
+        {
+            int minX = pointList.Min(x => x.X);
+            int maxX = pointList.Max(x => x.X);
+            int minY = pointList.Min(x => x.Y);
+            int maxY = pointList.Max(x => x.Y);
+
+            return new Rectangle(minX, minY, Math.Abs(maxX - minX), Math.Abs(maxY - minY));
+        }
     }
 }

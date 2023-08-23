@@ -1,6 +1,8 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using static Jastech.Framework.Winform.VisionPro.Controls.CogDisplayControl;
 
@@ -47,7 +49,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             pnlThumbnail.Controls.Add(CogThumbnail);
         }
 
-        public void SetImage(ICogImage image)
+        public void SetImage(ICogImage image, List<CogRectangleAffine> cogRectangleAffines)
         {
             if (image == null)
                 return;
@@ -55,9 +57,20 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             lock(image)
             {
                 cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
-                CogThumbnail.SetThumbnailImage(image);
+                CogThumbnail.SetThumbnailImage(image, cogRectangleAffines);
             }
-            
+        }
+
+        public void SetImage(ICogImage image)
+        {
+            if (image == null)
+                return;
+
+            lock (image)
+            {
+                cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                CogThumbnail.SetThumbnailImage(image, null);
+            }
         }
 
         public void UpdateViewRect(CogRectangle rect, double ratio)

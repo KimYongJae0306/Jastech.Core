@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -60,6 +61,52 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogThumbnailDisplay.Fit();
         }
 
+        public void SetThumbnailImage(ICogImage cogImage, List<CogRectangleAffine> cogRectangleAffines)
+        {
+            if (cogImage == null)
+                return;
+
+            CogImage8Grey cogImage8Grey = new CogImage8Grey();
+
+            if (cogImage is CogImage24PlanarColor)
+                cogImage8Grey = VisionProImageHelper.Convert24PlanarColorToGrey(cogImage as CogImage24PlanarColor);
+            else if (cogImage is CogImage8Grey)
+                cogImage8Grey = cogImage as CogImage8Grey;
+
+            int newHeight = this.cogThumbnailDisplay.Height;
+            _scale = (double)newHeight / cogImage8Grey.Height;
+            int newWidth = (int)((double)cogImage8Grey.Width * _scale);
+
+            CogDisplayHelper.DisposeDisplay(cogThumbnailDisplay);
+            cogThumbnailDisplay.StaticGraphics.Clear();
+            cogThumbnailDisplay.InteractiveGraphics.Clear();
+            cogThumbnailDisplay.Image = null;
+
+            ThumbnailImage = cogImage8Grey.ScaleImage(newWidth, newHeight);
+            cogThumbnailDisplay.Image = ThumbnailImage;
+            cogThumbnailDisplay.Fit();
+
+            if(cogRectangleAffines != null)
+            {
+                CogGraphicCollection collect = new CogGraphicCollection();
+                foreach (var affine in cogRectangleAffines)
+                {
+                    CogRectangleAffine calcAffine = new CogRectangleAffine();
+                    PointF leftTop = new PointF((float)affine.CornerOriginX, (float)affine.CornerOriginY);
+                    PointF rightTop = new PointF((float)affine.CornerXX, (float)affine.CornerXY);
+                    PointF leftBottom = new PointF((float)affine.CornerYX, (float)affine.CornerYY);
+
+                    var newAffine = VisionProShapeHelper.ConvertToCogRectAffine(leftTop, rightTop, leftBottom);
+                    newAffine.LineWidthInScreenPixels = 1;
+                    newAffine.Color = CogColorConstants.Red;
+
+                    collect.Add(newAffine);
+                }
+                if (collect.Count > 0)
+                    cogThumbnailDisplay.StaticGraphics.AddList(collect, "NG");
+            }
+        }
+
         public void DrawViewRect(CogRectangle rect)
         {
             if (_scale == 0)
@@ -74,11 +121,28 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             rect.GraphicDOFEnable = CogRectangleDOFConstants.Position;
             rect.Changed += ViewRect_Changed;
 
-            cogThumbnailDisplay.StaticGraphics.Clear();
-            cogThumbnailDisplay.InteractiveGraphics.Clear();
-            AddGraphics("ViewRect", rect);
+            //cogThumbnailDisplay.StaticGraphics.Clear();
+            //cogThumbnailDisplay.InteractiveGraphics.Clear();
+
+            string groupName = "ViewRect";
+            if(IsContainGroupNameInInteractiveGraphics(groupName))
+                cogThumbnailDisplay.InteractiveGraphics.Remove(groupName);
+
+            AddGraphics(groupName, rect);
             _prevViewRectangle = rect;
         }
+
+
+        private bool IsContainGroupNameInInteractiveGraphics(string groupName)
+        {
+            foreach (var value in cogThumbnailDisplay.InteractiveGraphics.ZOrderGroups)
+            {
+                if (groupName == (string)value)
+                    return true;
+            }
+            return false;
+        }
+
 
         public void DisposeImage()
         {
@@ -94,7 +158,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             Point mousePoint = new Point(MousePosition.X, MousePosition.Y);
             Point clientPoint = cogThumbnailDisplay.PointToClient(mousePoint);
-            double ratio = clientPoint.X / (double)cogThumbnailDisplay.Width;
+            double ratio = clientPoint.X / (double)(cogThumbnailDisplay.Width);
 
             UpdateRectEventHandler?.Invoke(rect, ratio);
 
