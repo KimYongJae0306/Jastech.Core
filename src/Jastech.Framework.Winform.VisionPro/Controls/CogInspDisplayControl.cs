@@ -1,6 +1,8 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using static Jastech.Framework.Winform.VisionPro.Controls.CogDisplayControl;
 
@@ -47,17 +49,32 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             pnlThumbnail.Controls.Add(CogThumbnail);
         }
 
-        public void SetImage(ICogImage image)
+        public void SetImage(ICogImage image, List<CogRectangleAffine> cogRectangleAffines)
         {
             if (image == null)
                 return;
             
             lock(image)
             {
+                _updateViewRect = true;
                 cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
-                CogThumbnail.SetThumbnailImage(image);
+                CogThumbnail.SetThumbnailImage(image, cogRectangleAffines);
             }
-            
+        }
+
+        public void SetImage(ICogImage image)
+        {
+            if (image == null)
+                return;
+
+            lock (image)
+            {
+              
+                cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                CogThumbnail.SetThumbnailImage(image, null);
+
+               
+            }
         }
 
         public void UpdateViewRect(CogRectangle rect, double ratio)
@@ -67,8 +84,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if(cogDisplay.Image != null)
             {
                 double panPointX = (double)cogDisplay.Image.Width * ratio;
-                panPointX = (cogDisplay.Image.Width / 2) - panPointX;
-                cogDisplay.PanX = panPointX;
+                double calcPanPointX = (cogDisplay.Image.Width / 2) - panPointX;
+                cogDisplay.PanX = calcPanPointX;
+
+                CogThumbnail.PrevViewRectangle.X = panPointX - (CogThumbnail.PrevViewRectangle.Width / 2.0);
+
+                UpdateViewRect();
             }
         }
 
