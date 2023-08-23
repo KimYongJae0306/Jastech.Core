@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Emgu.CV.Rapid;
 using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System.Drawing;
@@ -125,7 +126,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (sender.GetType() == cogThumbnailDisplay.GetType())
             {
-                //UpdateDisplayFromThumbnailEvent(sender);
+                UpdateDisplayFromThumbnailEvent(sender);
                 ViewRect_Changed(sender, null);
                 _isThumbnailMove = true;
             }
@@ -135,7 +136,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (sender.GetType() == cogThumbnailDisplay.GetType() && _isThumbnailMove)
             {
-                //UpdateDisplayFromThumbnailEvent(sender);
+                UpdateDisplayFromThumbnailEvent(sender);
                 ViewRect_Changed(sender, null);
             }
         }
@@ -145,6 +146,59 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             _isThumbnailMove = false;
         }
 
-        
+        void UpdateDisplayFromThumbnailEvent(object sender)
+        {
+            if (cogThumbnailDisplay.Image == null)
+                return;
+
+            CogRecordDisplay thumbnailDisplay = (CogRecordDisplay)sender;
+
+            CogRectangle rect = new CogRectangle();
+            rect.Width = _prevViewRectangle.Width;
+            rect.Height = _prevViewRectangle.Height;
+
+            int x = MousePosition.X;
+            int y = MousePosition.Y;
+            Point mousePos = new Point(x, y);
+            Point mousePosPtoClient = thumbnailDisplay.PointToClient(mousePos);
+            Point mousePosPtoScreen = thumbnailDisplay.PointToScreen(mousePos);
+            double ratio = (double)mousePosPtoClient.X / (double)thumbnailDisplay.Width;
+            double panPointX = (double)thumbnailDisplay.Image.Width * ratio;
+            panPointX = (thumbnailDisplay.Image.Width / 2) - panPointX;
+            //thumbnailDisplay.PanX = panPointX;
+
+            var t = cogThumbnailDisplay.Zoom;
+
+            int gg = 0;
+
+            rect.X = MousePosition.X - (int)(_prevViewRectangle.Width * ratio / 2.0);
+            rect.Y = MousePosition.Y - (int)(_prevViewRectangle.Height * ratio / 2.0);
+            rect.Color = CogColorConstants.Yellow;
+            rect.LineWidthInScreenPixels = 2;
+            rect.Interactive = true;
+            rect.GraphicDOFEnable = CogRectangleDOFConstants.Position;
+            rect.Changed += ViewRect_Changed;
+
+            cogThumbnailDisplay.StaticGraphics.Clear();
+            cogThumbnailDisplay.InteractiveGraphics.Clear();
+            AddGraphics("ViewRect", rect);
+
+            //Point mousePos = new Point(x, y); //프로그램 내 좌표
+            //Point mousePosPtoClient = thumbnailDisplay.PointToClient(mousePos);  //picbox 내 좌표, 해당 좌표 할당
+            //Point mousePosPtoScreen = thumbnailDisplay.PointToScreen(mousePos);  //스크린 내 좌표 (좌우 스크린 합친듯?)
+
+            //this.Text = x.ToString() + ", " + y.ToString() +
+            //    "//, " + mousePosPtoClient.X.ToString() + ", " + mousePosPtoClient.Y.ToString() + "//width : " + thumbnailDisplay.Width.ToString();
+
+            //double ratio = (double)mousePosPtoClient.X / (double)thumbnailDisplay.Width;
+
+            //double panPointX = (double)_cogRecordDisplay.Image.Width * ratio;
+
+            //if (_cogRecordDisplay.Zoom > 0 && _cogRecordDisplay.Zoom < 0.2)
+            //    _cogRecordDisplay.Zoom = 0.5;
+
+            //panPointX = (_cogRecordDisplay.Image.Width / 2) - panPointX;
+            //_cogRecordDisplay.PanX = panPointX;
+        }
     }
 }
