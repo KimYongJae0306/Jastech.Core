@@ -81,11 +81,15 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void DrawLine(CogLineSegment cogLine)
+        public void DrawLineLeftDisplay(CogLineSegment cogLine)
         {
             cogLeftDisplay.StaticGraphics.Add(cogLine, "line");
         }
 
+        public void DrawLineRightDisplay(CogLineSegment cogLine)
+        {
+            cogRightDisplay.StaticGraphics.Add(cogLine, "line");
+        }
         public void DrawLine(CogLine cogLine)
         {
             cogLeftDisplay.StaticGraphics.Add(cogLine, "line");
