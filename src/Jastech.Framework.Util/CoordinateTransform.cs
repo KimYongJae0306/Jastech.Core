@@ -83,13 +83,6 @@ namespace Jastech.Framework.Util
             var targetCenterPoint = TargetData.GetCenterPoint();
             var referenceCenterPoint = ReferenceData.GetCenterPoint();
 
-            //Console.WriteLine("diffAngle : " + diffAngle.ToString());
-            //Console.WriteLine("offsetPoint : " + offsetPoint.ToString());
-            //Console.WriteLine("inputPoint : " + inputPoint.ToString());
-            //Console.WriteLine("targetCenterPoint : " + targetCenterPoint.ToString());
-            //Console.WriteLine();
-            //Console.WriteLine();
-
             return MathHelper.GetCoordinate(targetCenterPoint, diffAngle, offsetPoint, inputPoint);
         }
     }
