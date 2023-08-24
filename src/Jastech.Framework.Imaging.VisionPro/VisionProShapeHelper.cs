@@ -22,16 +22,18 @@ namespace Jastech.Framework.Imaging.VisionPro
         {
             CogRectangleAffine roi = new CogRectangleAffine(originRegion);
 
-            PointF inputPoint = new PointF();
-            inputPoint.X = (float)roi.CenterX;
-            inputPoint.Y = (float)roi.CenterY;
+            roi.CenterX += offset.X;
+            roi.CenterY += offset.Y;
+            //PointF inputPoint = new PointF();
+            //inputPoint.X = (float)roi.CenterX;
+            //inputPoint.Y = (float)roi.CenterY;
 
-            PointF newPoint = new PointF();
-            newPoint.X = inputPoint.X + offset.X;
-            newPoint.Y = inputPoint.Y + offset.Y;
+            //PointF newPoint = new PointF();
+            //newPoint.X = inputPoint.X + offset.X;
+            //newPoint.Y = inputPoint.Y + offset.Y;
 
-            roi.CenterX = newPoint.X;
-            roi.CenterY = newPoint.Y;
+            //roi.CenterX = newPoint.X;
+            //roi.CenterY = newPoint.Y;
 
             return roi;
         }
