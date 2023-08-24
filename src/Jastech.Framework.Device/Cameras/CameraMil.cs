@@ -255,6 +255,8 @@ namespace Jastech.Framework.Device.Cameras
                 int count = grabCount;
                 MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_SEQUENCE + MIL.M_COUNT(count), MIL.M_ASYNCHRONOUS, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
             }
+
+            Thread.Sleep(50);
         }
 
         public override void GrabContinous()
@@ -411,7 +413,7 @@ namespace Jastech.Framework.Device.Cameras
                 return;
 
             CancelUpdateLiveBufferTask.Cancel();
-            UpdateLiveBufferTask.Wait();
+            //UpdateLiveBufferTask.Wait();
             UpdateLiveBufferTask = null;
         }
 

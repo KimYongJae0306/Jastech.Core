@@ -132,7 +132,7 @@ namespace Jastech.Framework.Device.LAFCtrl
                 }
             }
 
-            ResponseReceivedEvent.Set();
+            //ResponseReceivedEvent.Set();
             IsGetMessageOn = false;
         }
 
@@ -190,7 +190,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetLaserOnOff(bool isOn)
         {
-            ResponseReceivedEvent.WaitOne(1000);
+            //ResponseReceivedEvent.WaitOne(1000);
             string value = Convert.ToInt16(isOn).ToString();
             IsGetMessageOn = true;
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF, value);
@@ -199,7 +199,7 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public void GetLaserOnValue()
         {
-            ResponseReceivedEvent.WaitOne(1000);
+            //ResponseReceivedEvent.WaitOne(1000);
             IsGetMessageOn = true;
             string command = MakeSetCommand(CMD_WRITE_LASER_ONOFF);
             Send(command);
@@ -209,7 +209,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             //if (isOn == false)
             //    return;
-            ResponseReceivedEvent.WaitOne(1000);
+            //ResponseReceivedEvent.WaitOne(1000);
             IsGetMessageOn = true;
             string value = Convert.ToInt16(isOn).ToString();
 
@@ -309,8 +309,8 @@ namespace Jastech.Framework.Device.LAFCtrl
             if (command == "")
                 return;
 
-            ResponseReceivedEvent.WaitOne(1000);
-            ResponseReceivedEvent.Reset();
+            //ResponseReceivedEvent.WaitOne(1000);
+            //ResponseReceivedEvent.Reset();
             byte[] serializedData = Encoding.UTF8.GetBytes(command);
 
             if (Protocol.MakePacket(serializedData, out byte[] sendData))
