@@ -91,7 +91,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogThumbnailDisplay.Image = ThumbnailImage;
             cogThumbnailDisplay.Fit();
 
-            if(cogRectangleAffines != null)
+            if (cogRectangleAffines != null)
             {
                 CogGraphicCollection collect = new CogGraphicCollection();
                 foreach (var affine in cogRectangleAffines)
