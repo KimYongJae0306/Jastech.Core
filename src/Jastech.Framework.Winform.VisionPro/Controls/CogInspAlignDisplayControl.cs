@@ -9,6 +9,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogInspAlignDisplayControl : UserControl
     {
+        #region 속성
+        public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
+
+        public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
+        #endregion
+
         #region 생성자
         public CogInspAlignDisplayControl()
         {
@@ -24,7 +30,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
         }
 
-        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
+        public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shapeList, List<CogLineSegment> lineSegmentList, PointF centerPoint)
         {
             if (cogImage == null)
                 return;
@@ -35,10 +41,19 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
-            foreach (var item in shape)
+            foreach (var shape in shapeList)
             {
-                if(item != null)
-                    collect.Add(item);
+                if (shape != null)
+                {
+                    shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
+                    collect.Add(shape);
+                }
+            }
+
+            foreach (var lineSegment in lineSegmentList)
+            {
+                if(lineSegment != null)
+                    DrawLineLeftDisplay(lineSegment);
             }
 
             if(centerPoint.X != 0 && centerPoint.Y != 0)
@@ -51,7 +66,72 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
         }
 
-        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shape, PointF centerPoint)
+        public void DrawLeftResult(string text, int index = 0, CogColorConstants color = CogColorConstants.Cyan)
+        {
+            if (cogLeftDisplay.Image == null)
+                return;
+
+            CogGraphicLabel cogLabel = new CogGraphicLabel();
+            int intervalY = 20;
+            double scaleX = ((double)cogLeftDisplay.Width / cogLeftDisplay.Image.Width);
+            float fontSize = (float)((cogLeftDisplay.Image.Width / TextFontSize) * scaleX);
+            double fontPitch = (fontSize / cogLeftDisplay.Zoom);
+
+            cogLabel.Text = text;
+            cogLabel.Color = CogColorConstants.Cyan;
+            cogLabel.Font = new Font(TextFontFamily, fontSize);
+            cogLabel.Alignment = CogGraphicLabelAlignmentConstants.TopLeft;
+
+            PointF drawPoint = LeftMappingPoint(0, 0);
+            cogLabel.X = drawPoint.X;
+            cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index * intervalY);
+
+            cogLeftDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
+        }
+
+        private PointF LeftMappingPoint(double x, double y)
+        {
+            double calcX, calcY;
+
+            cogLeftDisplay.GetTransform("#", "*").MapPoint(x, y, out calcX, out calcY);
+
+            return new PointF((float)calcX, (float)calcY);
+        }
+
+
+        public void DrawRightResult(string text, int index = 0, CogColorConstants color = CogColorConstants.Cyan)
+        {
+            if (cogRightDisplay.Image == null)
+                return;
+
+            CogGraphicLabel cogLabel = new CogGraphicLabel();
+            int intervalY = 20;
+            double scaleX = ((double)cogRightDisplay.Width / cogRightDisplay.Image.Width);
+            float fontSize = (float)((cogRightDisplay.Image.Width / TextFontSize) * scaleX);
+            double fontPitch = (fontSize / cogRightDisplay.Zoom);
+
+            cogLabel.Text = text;
+            cogLabel.Color = CogColorConstants.Cyan;
+            cogLabel.Font = new Font(TextFontFamily, fontSize);
+            cogLabel.Alignment = CogGraphicLabelAlignmentConstants.TopLeft;
+
+            PointF drawPoint = RightMappingPoint(0, 0);
+            cogLabel.X = drawPoint.X;
+            cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index * intervalY);
+
+            cogRightDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
+        }
+
+        private PointF RightMappingPoint(double x, double y)
+        {
+            double calcX, calcY;
+
+            cogRightDisplay.GetTransform("#", "*").MapPoint(x, y, out calcX, out calcY);
+
+            return new PointF((float)calcX, (float)calcY);
+        }
+
+        public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shapeList, List<CogLineSegment> lineSegmentList, PointF centerPoint)
         {
             if (cogImage == null)
                 return;
@@ -60,15 +140,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
 
-            if (shape == null)
-                return;
-
             CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
 
-            foreach (var item in shape)
+            foreach (var shape in shapeList)
             {
-                if (item != null)
-                    collect.Add(item);
+                if (shape != null)
+                {
+                    shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
+                    collect.Add(shape);
+                }
+            }
+
+            foreach (var lineSegment in lineSegmentList)
+            {
+                if (lineSegment != null)
+                    DrawLineRightDisplay(lineSegment);
             }
 
             cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
