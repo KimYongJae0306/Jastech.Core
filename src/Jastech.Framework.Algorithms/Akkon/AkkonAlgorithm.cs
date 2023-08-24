@@ -27,6 +27,10 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public Mat ResizeMat { get; set; } = null;
 
+        public bool UseOverCount { get; set; } = false;
+
+        public int LeadAkkonShapeMaxCount { get; set; } = 50;
+
         public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um, ref Judgement tabJudgement)
         {
             roiList =  roiList.OrderBy(x => x.LeftTopX).ToList();
@@ -292,8 +296,16 @@ namespace Jastech.Framework.Algorithms.Akkon
             int totalLengthX = (int)Math.Abs(leadResult.Roi.LeftTopX - leadResult.Roi.RightTopX);
             List<double> lengthXList = new List<double>();
 
+            int count = 0;
             foreach (var blob in leadResult.BlobList)
             {
+                count++;
+                if(UseOverCount)
+                {
+                    if(LeadAkkonShapeMaxCount <= count)
+                        break;
+                }
+
                 blob.Strength = GetStrength(blob, dataMat, scaleFactor);
                 blob.IsAkkonShape = CheckShapeFilter(blob, param.ShapeFilterParam, resolution_um);
 
