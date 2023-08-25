@@ -35,7 +35,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogImage == null)
                 return;
             //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            cogLeftDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
+            cogLeftDisplay.Image = cogImage;//.CopyBase(CogImageCopyModeConstants.CopyPixels);
             cogLeftDisplay.StaticGraphics.Clear();
             cogLeftDisplay.InteractiveGraphics.Clear();
 
@@ -136,7 +136,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogImage == null)
                 return;
 
-            cogRightDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
+            cogRightDisplay.Image = cogImage;//.CopyBase(CogImageCopyModeConstants.CopyPixels);
             cogRightDisplay.StaticGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
 

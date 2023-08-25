@@ -49,7 +49,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             pnlThumbnail.Controls.Add(CogThumbnail);
         }
 
-        public void SetImage(ICogImage image, List<CogRectangleAffine> cogRectangleAffines)
+        public void SetImage(ICogImage image, List<CogRectangleAffine> cogRectangleAffines, bool isDeepCopy = true)
         {
             if (image == null)
                 return;
@@ -57,19 +57,27 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             lock(image)
             {
                 _updateViewRect = true;
-                cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                if (isDeepCopy)
+                    cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                else
+                    cogDisplay.Image = image;
+
+
                 CogThumbnail.SetThumbnailImage(image, cogRectangleAffines);
             }
         }
 
-        public void SetImage(ICogImage image)
+        public void SetImage(ICogImage image, bool isDeepCopy = true)
         {
             if (image == null)
                 return;
 
             lock (image)
             {
-                cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                if (isDeepCopy)
+                    cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                else
+                    cogDisplay.Image = image;
                 CogThumbnail.SetThumbnailImage(image, null);
             }
         }
