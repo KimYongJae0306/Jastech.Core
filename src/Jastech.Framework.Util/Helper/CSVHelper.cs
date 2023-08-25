@@ -274,7 +274,7 @@ namespace Jastech.Framework.Util.Helper
                     item.Kill();
             }
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(20);
         }
         #endregion
     }
