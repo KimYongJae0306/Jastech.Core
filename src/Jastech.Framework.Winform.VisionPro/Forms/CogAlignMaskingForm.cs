@@ -41,6 +41,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
         public void Initialize(VisionProPatternMatchingParam param)
         {
             OriginParam = param;
+            CurrentParam = param.DeepCopy();
         }
 
         private void lblApply_Click(object sender, EventArgs e)
