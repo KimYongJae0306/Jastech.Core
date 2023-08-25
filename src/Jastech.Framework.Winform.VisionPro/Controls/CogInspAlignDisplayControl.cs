@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -308,6 +309,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         display.Zoom = 10;
                 }
             }
+        }
+
+        public void Enable(bool isEnable)
+        {
+            cogLeftDisplay.Enabled = isEnable;
+            cogCenterDisplay.Enabled = isEnable;
+            cogRightDisplay.Enabled = isEnable;
         }
     }
 }

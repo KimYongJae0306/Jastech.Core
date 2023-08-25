@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Display;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogInspDisplayControl_Load(object sender, EventArgs e)
         {
             cogDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
-
             AddControls();
 
             // 이벤트 등록(중요)
@@ -49,6 +49,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             pnlThumbnail.Controls.Add(CogThumbnail);
         }
 
+        public delegate void EnableDele(bool isEnable);
+
+        public void Enable(bool isEnable)
+        {
+            if(this.InvokeRequired)
+            {
+                EnableDele callback = Enable;
+                BeginInvoke(callback, isEnable);
+                return;
+            }
+
+            cogDisplay.Enabled = isEnable;
+            CogThumbnail.Enabled = isEnable;
+        }
+
         public void SetImage(ICogImage image, List<CogRectangleAffine> cogRectangleAffines, bool isDeepCopy = true)
         {
             if (image == null)
@@ -61,7 +76,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     cogDisplay.Image = image.CopyBase(CogImageCopyModeConstants.CopyPixels);
                 else
                     cogDisplay.Image = image;
-
 
                 CogThumbnail.SetThumbnailImage(image, cogRectangleAffines);
             }
