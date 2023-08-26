@@ -229,6 +229,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (File.Exists(path))
             {
                 PMTool = VisionProFileHelper.LoadTool(path) as CogPMAlignTool;
+                //PMTool.Pattern.Origin.
             }
             else
             {

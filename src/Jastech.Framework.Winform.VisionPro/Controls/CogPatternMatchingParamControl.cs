@@ -73,10 +73,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             nupdnMatchScore.Value = (decimal)matchingParam.Score;
             nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
             CurrentParam = matchingParam;
+
             if(CurrentParam.ChangedTrained == null)
-            {
                 CurrentParam.ChangedTrained += Tool_ChangedTrained;
-            }
+
             CurrentParam.GetOrigin().Changed += CogPatternMatchingParamControl_Changed;
             cogPatternDisplay.InteractiveGraphics.Clear();
             cogPatternDisplay.StaticGraphics.Clear();
@@ -93,9 +93,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 SetStaticGraphics("Masking", CurrentParam.CreateCurrentRecord(constants));
             }
             else
-            {
                 DisposePatternDisplay();
-            }
         }
 
         private void CogPatternMatchingParamControl_Changed(object sender, CogChangedEventArgs e)
@@ -113,9 +111,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void Tool_ChangedTrained(bool isTrained)
         {
             if(isTrained == false)
-            {
                 DisposePatternDisplay();
-            }
         }
 
         private void SetStaticGraphics(string groupName, ICogRecord record)
@@ -132,19 +128,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     if (subRecord.Content != null)
                     {
                         CogGraphicCollection graphics = subRecord.Content as CogGraphicCollection;
+
                         foreach (ICogGraphic graphic in graphics)
-                        {
                             cogPatternDisplay.StaticGraphics.Add(graphic as ICogGraphicInteractive, groupName);
-                        }
                     }
                 }
                 else if (typeof(CogGraphicInteractiveCollection).IsAssignableFrom(subRecord.ContentType))
                 {
                     if (subRecord.Content != null)
-                    {
                         cogPatternDisplay.StaticGraphics.AddList(subRecord.Content as CogGraphicCollection, groupName);
-                    }
                 }
+
                 SetStaticGraphics(groupName, subRecord);
             }
         }
@@ -156,6 +150,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
             CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
+
             return CurrentParam;
         }
 
@@ -166,6 +161,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 ICogImage originImage = GetOriginImageHandler();
                 return originImage;
             }
+
             return null;
         }
 
@@ -202,7 +198,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 MessageConfirmForm form = new MessageConfirmForm();
                 form.Message = "Not Trained.";
                 form.ShowDialog();
-
             }
         }
 
@@ -222,7 +217,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CogDisplayHelper.DisposeDisplay(cogPatternDisplay);
         }
-
 
         private void lblTest_Click(object sender, EventArgs e)
         {
