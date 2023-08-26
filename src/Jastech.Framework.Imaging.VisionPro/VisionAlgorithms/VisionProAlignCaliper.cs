@@ -14,7 +14,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
 
-            var rectList = VisionProImageHelper.DivideRegion(rect, leadCount);
+            var rectList = VisionProShapeHelper.DivideRegion(rect, leadCount);
             if (rectList == null)
                 return resultList;
 

@@ -592,6 +592,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (record == null)
                 return;
+
             foreach (CogRecord subRecord in record.SubRecords)
             {
                 if (typeof(ICogGraphic).IsAssignableFrom(subRecord.ContentType))
@@ -604,19 +605,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     if (subRecord.Content != null)
                     {
                         CogGraphicCollection graphics = subRecord.Content as CogGraphicCollection;
+
                         foreach (ICogGraphic graphic in graphics)
-                        {
                             cogDisplay.InteractiveGraphics.Add(graphic as ICogGraphicInteractive, groupName, false);
-                        }
                     }
                 }
                 else if (typeof(CogGraphicInteractiveCollection).IsAssignableFrom(subRecord.ContentType))
                 {
                     if (subRecord.Content != null)
-                    {
                         cogDisplay.InteractiveGraphics.AddList(subRecord.Content as CogGraphicInteractiveCollection, groupName, false);
-                    }
                 }
+
                 SetInteractiveGraphics(groupName, subRecord);
             }
         }
