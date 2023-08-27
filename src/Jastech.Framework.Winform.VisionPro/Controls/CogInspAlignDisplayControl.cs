@@ -99,7 +99,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return new PointF((float)calcX, (float)calcY);
         }
 
-
         public void DrawRightResult(string text, int index = 0, CogColorConstants color = CogColorConstants.Cyan)
         {
             if (cogRightDisplay.Image == null)
