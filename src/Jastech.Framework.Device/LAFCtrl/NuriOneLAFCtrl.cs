@@ -1,5 +1,6 @@
 ﻿using Jastech.Framework.Comm;
 using Jastech.Framework.Comm.Protocol;
+using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -122,10 +123,22 @@ namespace Jastech.Framework.Device.LAFCtrl
                     int index = temp.IndexOf(text);
                     int startIndex = index + text.Length;
                     int size = text.Length - startIndex;
-                    string valueString = temp.Substring(startIndex, 2).Trim();
+                    try
+                    {
+                        string valueString = temp.Substring(startIndex, 2).Trim();
 
-                    IsTrackingOn = Convert.ToInt16(valueString) == 1 ? true : false;
-                    Console.WriteLine("-------------------------Tracking : " + IsTrackingOn + "  " + Name.ToString());
+                        IsTrackingOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                        Console.WriteLine("-------------------------Tracking : " + IsTrackingOn + "  " + Name.ToString());
+                    }
+                    catch (Exception err)
+                    {
+                        // 위험한 코드 재현되면 그때 정리 해야함
+                        string message = string.Format("NuriOne SerialPortComm_Received : {0}, {1}", temp, err);
+                        Logger.Error(ErrorType.Etc, message);
+                        IsTrackingOn = !IsTrackingOn;
+                        Console.WriteLine(message);
+                    }
+                    
                 }
                 if(temp.Contains("uc motionrefpos"))
                 {

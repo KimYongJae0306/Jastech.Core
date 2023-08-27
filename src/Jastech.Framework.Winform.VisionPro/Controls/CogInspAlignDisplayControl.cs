@@ -10,10 +10,30 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 {
     public partial class CogInspAlignDisplayControl : UserControl
     {
+        #region 필드
+        private Color _selectedColor;
+
+        private Color _noneSelectedColor;
+        #endregion
+
         #region 속성
         public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
 
         public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
+
+        public bool IsLeftResultImageView { get; set; } = true;
+
+        public bool IsRightResultImageView { get; set; } = true;
+        #endregion
+
+        #region 델리게이트
+        public delegate void UpdateImage(bool isResult);
+        #endregion
+
+        #region 이벤트
+        public UpdateImage UpdateLeftImage;
+
+        public UpdateImage UpdateRightImage;
         #endregion
 
         #region 생성자
@@ -29,42 +49,65 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
             cogCenterDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
             cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+
+            _selectedColor = Color.FromArgb(104, 104, 104);
+            _noneSelectedColor = Color.FromArgb(52, 52, 52);
+
+            UpdateButton();
         }
 
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shapeList, List<CogLineSegment> lineSegmentList, PointF centerPoint)
         {
             if (cogImage == null)
                 return;
-            //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            cogLeftDisplay.Image = cogImage;//.CopyBase(CogImageCopyModeConstants.CopyPixels);
-            cogLeftDisplay.StaticGraphics.Clear();
-            cogLeftDisplay.InteractiveGraphics.Clear();
 
-            CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
-
-            foreach (var shape in shapeList)
+            if (IsLeftResultImageView == false)
             {
-                if (shape != null)
+                //UpdateLeftImage?.Invoke(IsLeftResultImageView);
+                UpdateLeftDisplay(cogImage);
+            }
+            else
+            {
+                cogLeftDisplay.Image = cogImage;
+                cogLeftDisplay.StaticGraphics.Clear();
+                cogLeftDisplay.InteractiveGraphics.Clear();
+
+                CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
+
+                foreach (var shape in shapeList)
                 {
-                    shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
-                    collect.Add(shape);
+                    if (shape != null)
+                    {
+                        shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
+                        collect.Add(shape);
+                    }
+                }
+
+                foreach (var lineSegment in lineSegmentList)
+                {
+                    if (lineSegment != null)
+                        DrawLineLeftDisplay(lineSegment);
+                }
+
+                if (centerPoint.X != 0 && centerPoint.Y != 0)
+                {
+                    cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                    var gg = cogLeftDisplay.Zoom;
+                    cogLeftDisplay.Zoom = 0.25;
+                    cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
+                    cogLeftDisplay.PanY = (cogImage.Height / 2) - (centerPoint.Y);// + cogLeftDisplay.Height;
                 }
             }
+        }
 
-            foreach (var lineSegment in lineSegmentList)
-            {
-                if(lineSegment != null)
-                    DrawLineLeftDisplay(lineSegment);
-            }
+        public void UpdateLeftDisplay(ICogImage cogImage)
+        {
+            if (cogImage == null)
+                return;
 
-            if(centerPoint.X != 0 && centerPoint.Y != 0)
-            {
-                cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-                var gg = cogLeftDisplay.Zoom;
-                cogLeftDisplay.Zoom = 0.25;
-                cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
-                cogLeftDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
-            }
+            cogLeftDisplay.Image = cogImage;
+            cogLeftDisplay.StaticGraphics.Clear();
+            cogLeftDisplay.InteractiveGraphics.Clear();
         }
 
         public void DrawLeftResult(string text, int index = 0, CogColorConstants color = CogColorConstants.Cyan)
@@ -136,35 +179,52 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogImage == null)
                 return;
 
-            cogRightDisplay.Image = cogImage;//.CopyBase(CogImageCopyModeConstants.CopyPixels);
-            cogRightDisplay.StaticGraphics.Clear();
-            cogRightDisplay.InteractiveGraphics.Clear();
-
-            CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
-
-            foreach (var shape in shapeList)
+            if(IsRightResultImageView == false)
             {
-                if (shape != null)
+                UpdateRightDisplay(cogImage);
+            }
+            else
+            {
+                cogRightDisplay.Image = cogImage;
+                cogRightDisplay.StaticGraphics.Clear();
+                cogRightDisplay.InteractiveGraphics.Clear();
+
+                CogGraphicInteractiveCollection collect = new CogGraphicInteractiveCollection();
+
+                foreach (var shape in shapeList)
                 {
-                    shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
-                    collect.Add(shape);
+                    if (shape != null)
+                    {
+                        shape.CompositionMode = CogCompositeShapeCompositionModeConstants.Uniform;
+                        collect.Add(shape);
+                    }
+                }
+
+                foreach (var lineSegment in lineSegmentList)
+                {
+                    if (lineSegment != null)
+                        DrawLineRightDisplay(lineSegment);
+                }
+
+                cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                if (centerPoint.X != 0 && centerPoint.Y != 0)
+                {
+                    cogRightDisplay.Zoom = 0.25;
+                    cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                    cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
+                    cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
                 }
             }
+        }
 
-            foreach (var lineSegment in lineSegmentList)
-            {
-                if (lineSegment != null)
-                    DrawLineRightDisplay(lineSegment);
-            }
+        public void UpdateRightDisplay(ICogImage cogImage)
+        {
+            if (cogImage == null)
+                return;
 
-            cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-            if (centerPoint.X != 0 && centerPoint.Y != 0)
-            {
-                cogRightDisplay.Zoom = 0.25;
-                cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-                cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
-                cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
-            }
+            cogRightDisplay.Image = cogImage;
+            cogRightDisplay.StaticGraphics.Clear();
+            cogRightDisplay.InteractiveGraphics.Clear();
         }
 
         public void DrawLineLeftDisplay(CogLineSegment cogLine)
@@ -315,6 +375,59 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.Enabled = isEnable;
             cogCenterDisplay.Enabled = isEnable;
             cogRightDisplay.Enabled = isEnable;
+        }
+
+        private void UpdateButton()
+        {
+            if (IsLeftResultImageView)
+            {
+                btnLeftSourceImage.BackColor = _noneSelectedColor;
+                btnLeftResultImage.BackColor = _selectedColor;
+            }
+            else
+            {
+                btnLeftSourceImage.BackColor = _selectedColor;
+                btnLeftResultImage.BackColor = _noneSelectedColor;
+            }
+
+            if (IsRightResultImageView)
+            {
+                btnRightSourceImage.BackColor = _noneSelectedColor;
+                btnRightResultImage.BackColor = _selectedColor;
+            }
+            else
+            {
+                btnRightSourceImage.BackColor = _selectedColor;
+                btnRightResultImage.BackColor = _noneSelectedColor;
+            }
+        }
+
+        private void btnLeftSourceImage_Click(object sender, EventArgs e)
+        {
+            IsLeftResultImageView = false;
+            UpdateButton();
+            UpdateLeftImage?.Invoke(IsLeftResultImageView);
+        }
+
+        private void btnLeftResultImage_Click(object sender, EventArgs e)
+        {
+            IsLeftResultImageView = true;
+            UpdateButton();
+            UpdateLeftImage?.Invoke(IsLeftResultImageView);
+        }
+
+        private void btnRightSourceImage_Click(object sender, EventArgs e)
+        {
+            IsRightResultImageView = false;
+            UpdateButton();
+            UpdateRightImage?.Invoke(IsRightResultImageView);
+        }
+
+        private void btnRightResultImage_Click(object sender, EventArgs e)
+        {
+            IsRightResultImageView = true;
+            UpdateButton();
+            UpdateRightImage?.Invoke(IsRightResultImageView);
         }
     }
 }
