@@ -214,6 +214,7 @@ namespace Jastech.Framework.Util.Helper
         Imaging,
         Seq,
         Error,
+        Parameter,
     }
 
     public enum ErrorType

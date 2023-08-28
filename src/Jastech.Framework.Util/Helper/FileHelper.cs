@@ -84,13 +84,13 @@ namespace Jastech.Framework.Util.Helper
                     {
                         if (rowIndex == 0)
                         {
-                            string[] header = sr.ReadLine().Split(',');
-                            foreach (string columnName in header.Where(name => name != ""))
+                            string[] header = sr.ReadLine().Split(',').Where(name => name != "").ToArray();
+                            foreach (string columnName in header)
                                 dataTable.Columns.Add(columnName);
                         }
                         else
                         {
-                            string[] body = sr.ReadLine().Split(',');
+                            string[] body = sr.ReadLine().Split(',').Where(data => data != "").ToArray();
                             dataTable.Rows.Add(body);
                         }
                     }
