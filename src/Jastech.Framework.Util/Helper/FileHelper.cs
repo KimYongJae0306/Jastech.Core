@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -99,6 +100,36 @@ namespace Jastech.Framework.Util.Helper
             }
 
             return dataTable;
+        }
+
+        public static void FindDirectoriesWithFiles(List<string> paths, DirectoryInfo directory)
+        {
+            if (directory.GetFiles().Length > 0)
+                paths.Add(directory.FullName);
+            else
+            {
+                foreach (var childDirectory in directory.GetDirectories())
+                    FindDirectoriesWithFiles(paths, childDirectory);
+            }
+        }
+
+        public static void FindDirectories(List<string> paths, DirectoryInfo directory)
+        {
+            foreach (var childDirectory in directory.GetDirectories())
+                FindDirectories(paths, childDirectory);
+        }
+
+        public static List<string> GetDirectoryList(string directoryPath)
+        {
+            List<string> directoryList = new List<string>();
+
+            DirectoryInfo path = new DirectoryInfo(directoryPath);
+            DirectoryInfo[] dir = path.GetDirectories();
+
+            for (int index = 0; index < dir.Length; index++)
+                FindDirectoriesWithFiles(directoryList, dir[index]);
+
+            return directoryList;
         }
     }
 }
