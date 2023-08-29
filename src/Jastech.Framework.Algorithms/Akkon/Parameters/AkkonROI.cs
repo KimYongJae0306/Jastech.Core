@@ -96,6 +96,27 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             return rect;
         }
 
+        public AkkonROI GetRecoveryResizeROI(float resizeRatio)
+        {
+            if (resizeRatio == 0)
+                return null;
+
+            AkkonROI calcRoi = new AkkonROI();
+            calcRoi.LeftTopX = LeftTopX / resizeRatio;
+            calcRoi.LeftTopY = LeftTopY / resizeRatio;
+
+            calcRoi.LeftBottomX = LeftBottomX / resizeRatio;
+            calcRoi.LeftBottomY = LeftBottomY / resizeRatio;
+
+            calcRoi.RightTopX = RightTopX / resizeRatio;
+            calcRoi.RightTopY = RightTopY / resizeRatio;
+
+            calcRoi.RightBottomX = RightBottomX / resizeRatio;
+            calcRoi.RightBottomY = RightBottomY / resizeRatio;
+
+            return calcRoi;
+        }
+
         public RectangleF GetBoundRectF()
         {
             RectangleF rect = new RectangleF();

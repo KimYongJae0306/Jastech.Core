@@ -13,6 +13,8 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public int TabNo { get; set; }
 
+        public float ResizeRatio { get; set; }
+
         public int LeftCount_Avg { get; set; }
 
         public int LeftCount_Min { get; set; }
@@ -37,13 +39,16 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
 
         public float Length_Right_Max_um { get; set; }     //um
 
-        public List<AkkonLeadResult> LeadResultList = new List<AkkonLeadResult>();
+        public List<AkkonLeadResult> LeadResultList { get; set; } = new List<AkkonLeadResult>();
+
+        public List<AkkonROI> TrackingROIList { get; set; } = new List<AkkonROI>();
         #endregion
 
         #region 메서드
         public void Dispose()
         {
             LeadResultList.Clear();
+            TrackingROIList.Clear();
         }
         #endregion
     }
