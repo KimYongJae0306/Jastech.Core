@@ -1,7 +1,9 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Display;
 using Jastech.Framework.Imaging.VisionPro;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +16,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private Color _selectedColor;
 
         private Color _noneSelectedColor;
+
+        private List<ToolStripItem> _leftContextMenuItems;
+        private List<ToolStripItem> _rightContextMenuItems;
+        private List<ToolStripItem> _centerContextMenuItems;
         #endregion
 
         #region 속성
@@ -276,6 +282,38 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 display.PanX = display.Image.Width / 2 - point.X;
                 display.PanY = display.Image.Height / 2 - point.Y;
             }
+        }
+
+        public void UseAllContextMenu(bool useAllItems)
+        {
+            if (_leftContextMenuItems == null)
+                _leftContextMenuItems = cogLeftDisplay.ContextMenuStrip.Items.Cast<ToolStripItem>().ToList();
+            if (_rightContextMenuItems == null)
+                _rightContextMenuItems = cogRightDisplay.ContextMenuStrip.Items.Cast<ToolStripItem>().ToList();
+            if (_centerContextMenuItems == null)
+                _centerContextMenuItems = cogCenterDisplay.ContextMenuStrip.Items.Cast<ToolStripItem>().ToList();
+
+            SetMenuStrip(cogLeftDisplay, _leftContextMenuItems, useAllItems);
+            SetMenuStrip(cogRightDisplay, _rightContextMenuItems, useAllItems);
+            SetMenuStrip(cogCenterDisplay, _centerContextMenuItems, useAllItems);
+        }
+
+        private void SetMenuStrip(CogRecordDisplay cogDisplay, List<ToolStripItem> items, bool useAllItems)
+        {
+            ToolStripItem[] menuItems;
+
+            if (useAllItems)
+                menuItems = _leftContextMenuItems.ToArray();
+            else
+            {
+                int startIndex = (int)CogContextItemName.Pointer;
+                int takeCount = (int)CogContextItemName.ContextSpliter2 - startIndex;
+                menuItems = items.Skip(startIndex).Take(takeCount).ToArray();
+            }
+
+            cogDisplay.ContextMenuStrip.Items.Clear();
+            if (menuItems != null)
+                cogDisplay.ContextMenuStrip.Items.AddRange(menuItems);
         }
 
         public void ClearImage()
