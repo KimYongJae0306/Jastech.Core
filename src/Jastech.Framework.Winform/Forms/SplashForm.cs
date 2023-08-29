@@ -47,7 +47,7 @@ namespace Jastech.Framework.Winform.Forms
         private void SplashForm_Load(object sender, EventArgs e)
         {
             lblTitle.Text = Title;
-            lblVersionText.Text = "Verion" + Version;
+            lblVersionText.Text = "Version" + Version;
 
             SplashActionTimer.Start();
         }
