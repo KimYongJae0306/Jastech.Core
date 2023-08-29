@@ -4,6 +4,7 @@ using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using static Jastech.Framework.Winform.VisionPro.Controls.CogDisplayControl;
 
@@ -13,6 +14,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     {
         #region 필드
         private bool _updateViewRect { get; set; } = false;
+
+        private List<ToolStripItem> _contextMenuItems;
         #endregion
 
         #region 속성
@@ -177,6 +180,27 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 DrawViewRectEventHandler?.Invoke(viewRect);
         }
 
+        public void UseAllContextMenu(bool useAllItems)
+        {
+            ToolStripItem[] menuItems;
+
+            if (_contextMenuItems == null)
+                _contextMenuItems = cogDisplay.ContextMenuStrip.Items.Cast<ToolStripItem>().ToList();
+
+            if (useAllItems)
+                menuItems = _contextMenuItems.ToArray();
+            else
+            {
+                int startIndex = (int)CogContextItemName.Pointer;
+                int takeCount = (int)CogContextItemName.ContextSpliter4 - startIndex;
+                menuItems = _contextMenuItems.Skip(startIndex).Take(takeCount).ToArray();
+            }
+
+            cogDisplay.ContextMenuStrip.Items.Clear();
+            if (menuItems != null)
+                cogDisplay.ContextMenuStrip.Items.AddRange(menuItems);
+        }
+
         public CogRectangle GetViewRectangle()
         {
             CogRectangle rect = new CogRectangle();
@@ -198,5 +222,35 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             return rect;
         }
         #endregion
+    }
+    public enum CogContextItemName
+    {
+        Pointer = 0,                          // Pointer
+        Pan,                                  // Pan
+        Zoom_In,                              // Zoom In
+        Zoom_Out,                             // Zoom Out
+        Touch,                                // Touch
+
+        ContextSpliter1,
+        Pixel_Grid,                           // Pixel Grid
+        Subpixel_Grid,                        // Subpixel Grid
+        Show_Tool_Tips,                       // Show Tool Tips
+        Zoom_Wheel,                           // Zoom Wheel
+
+        ContextSpliter2,
+        Fit_Image,                            // Fit Image
+        Fit_Image_And_Graphics,               // Fit Image & Graphics
+        Zoom_100_Percent,                     // Zoom 100%
+
+        ContextSpliter3,
+        Auto_Fit_Image,                       // Auto Fit Image
+        Auto_Fit_Image_With_Graphics,         // Auto Fit Image With Graphics
+        Maintain_Image_Region,                // Maintain Image Region
+
+        ContextSpliter4,
+        Colormap = 19,                        // Colormap...
+        Save_Image_to_File = 20,              // Save Image to File...
+        Increase_Touch_Distance = 21,         // Increase Touch Distance
+        Decrease_Touch_Distance = 22,         // Decrease Touch Distance
     }
 }
