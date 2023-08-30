@@ -33,15 +33,9 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cogRightDisplay = new Cognex.VisionPro.CogRecordDisplay();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRightResultImage = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRightSourceImage = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLeftResultImage = new System.Windows.Forms.Button();
             this.lblAlignViewer = new System.Windows.Forms.Label();
-            this.btnLeftSourceImage = new System.Windows.Forms.Button();
             this.cogLeftDisplay = new Cognex.VisionPro.CogRecordDisplay();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.cogCenterDisplay = new Cognex.VisionPro.CogRecordDisplay();
@@ -49,9 +43,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogRightDisplay)).BeginInit();
-            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogLeftDisplay)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogCenterDisplay)).BeginInit();
@@ -81,7 +73,7 @@
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.cogRightDisplay, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(933, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -111,38 +103,6 @@
             this.cogRightDisplay.TabIndex = 2;
             this.cogRightDisplay.Changed += new Cognex.VisionPro.CogChangedEventHandler(this.cogRightDisplay_Changed);
             // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel6.Controls.Add(this.btnRightResultImage, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.btnRightSourceImage, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(449, 40);
-            this.tableLayoutPanel6.TabIndex = 2;
-            // 
-            // btnRightResultImage
-            // 
-            this.btnRightResultImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRightResultImage.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnRightResultImage.ForeColor = System.Drawing.Color.White;
-            this.btnRightResultImage.Location = new System.Drawing.Point(379, 0);
-            this.btnRightResultImage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnRightResultImage.Name = "btnRightResultImage";
-            this.btnRightResultImage.Size = new System.Drawing.Size(70, 40);
-            this.btnRightResultImage.TabIndex = 2;
-            this.btnRightResultImage.Text = "R";
-            this.btnRightResultImage.UseVisualStyleBackColor = false;
-            this.btnRightResultImage.Click += new System.EventHandler(this.btnRightResultImage_Click);
-            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
@@ -152,30 +112,16 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(309, 40);
+            this.label1.Size = new System.Drawing.Size(449, 40);
             this.label1.TabIndex = 2;
             this.label1.Text = "RIGHT";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnRightSourceImage
-            // 
-            this.btnRightSourceImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRightSourceImage.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnRightSourceImage.ForeColor = System.Drawing.Color.White;
-            this.btnRightSourceImage.Location = new System.Drawing.Point(309, 0);
-            this.btnRightSourceImage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnRightSourceImage.Name = "btnRightSourceImage";
-            this.btnRightSourceImage.Size = new System.Drawing.Size(70, 40);
-            this.btnRightSourceImage.TabIndex = 1;
-            this.btnRightSourceImage.Text = "S";
-            this.btnRightSourceImage.UseVisualStyleBackColor = false;
-            this.btnRightSourceImage.Click += new System.EventHandler(this.btnRightSourceImage_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblAlignViewer, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cogLeftDisplay, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -187,38 +133,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(449, 501);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel5.Controls.Add(this.btnLeftResultImage, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.lblAlignViewer, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnLeftSourceImage, 1, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(449, 40);
-            this.tableLayoutPanel5.TabIndex = 5;
-            // 
-            // btnLeftResultImage
-            // 
-            this.btnLeftResultImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLeftResultImage.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnLeftResultImage.ForeColor = System.Drawing.Color.White;
-            this.btnLeftResultImage.Location = new System.Drawing.Point(379, 0);
-            this.btnLeftResultImage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLeftResultImage.Name = "btnLeftResultImage";
-            this.btnLeftResultImage.Size = new System.Drawing.Size(70, 40);
-            this.btnLeftResultImage.TabIndex = 2;
-            this.btnLeftResultImage.Text = "R";
-            this.btnLeftResultImage.UseVisualStyleBackColor = false;
-            this.btnLeftResultImage.Click += new System.EventHandler(this.btnLeftResultImage_Click);
-            // 
             // lblAlignViewer
             // 
             this.lblAlignViewer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
@@ -228,24 +142,10 @@
             this.lblAlignViewer.Location = new System.Drawing.Point(0, 0);
             this.lblAlignViewer.Margin = new System.Windows.Forms.Padding(0);
             this.lblAlignViewer.Name = "lblAlignViewer";
-            this.lblAlignViewer.Size = new System.Drawing.Size(309, 40);
+            this.lblAlignViewer.Size = new System.Drawing.Size(449, 40);
             this.lblAlignViewer.TabIndex = 2;
             this.lblAlignViewer.Text = "LEFT";
             this.lblAlignViewer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnLeftSourceImage
-            // 
-            this.btnLeftSourceImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLeftSourceImage.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnLeftSourceImage.ForeColor = System.Drawing.Color.White;
-            this.btnLeftSourceImage.Location = new System.Drawing.Point(309, 0);
-            this.btnLeftSourceImage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLeftSourceImage.Name = "btnLeftSourceImage";
-            this.btnLeftSourceImage.Size = new System.Drawing.Size(70, 40);
-            this.btnLeftSourceImage.TabIndex = 1;
-            this.btnLeftSourceImage.Text = "S";
-            this.btnLeftSourceImage.UseVisualStyleBackColor = false;
-            this.btnLeftSourceImage.Click += new System.EventHandler(this.btnLeftSourceImage_Click);
             // 
             // cogLeftDisplay
             // 
@@ -329,9 +229,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogRightDisplay)).EndInit();
-            this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogLeftDisplay)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cogCenterDisplay)).EndInit();
@@ -350,12 +248,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private Cognex.VisionPro.CogRecordDisplay cogCenterDisplay;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button btnLeftResultImage;
-        private System.Windows.Forms.Button btnLeftSourceImage;
         private System.Windows.Forms.Label lblAlignViewer;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Button btnRightResultImage;
-        private System.Windows.Forms.Button btnRightSourceImage;
     }
 }
