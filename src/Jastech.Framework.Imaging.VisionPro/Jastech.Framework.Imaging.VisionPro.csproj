@@ -196,6 +196,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VisionAlgorithms\Parameters\VisionProPointMarkerParam.cs" />
     <Compile Include="VisionAlgorithms\Parameters\VisionProSearchMaxToolParam.cs" />
     <Compile Include="VisionAlgorithms\Results\VisionProBlobResult.cs" />
     <Compile Include="VisionAlgorithms\Results\VisionProSearchMaxResult.cs" />

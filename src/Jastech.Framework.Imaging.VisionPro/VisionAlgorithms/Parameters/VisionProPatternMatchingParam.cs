@@ -66,8 +66,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void SetOrigin(CogTransform2DLinear origin)
         {
-            CogTransform2DLinear newOrigin = new CogTransform2DLinear(origin);
-            PMTool.Pattern.Origin = new CogTransform2DLinear(newOrigin);
+            PMTool.Pattern.Origin = origin;
         }
 
         public CogTransform2DLinear GetOrigin()
