@@ -38,12 +38,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             //PointMarker.GetCenterRotationSize(out x, out y, out rotation, out size);
             //CogTransform2DLinear aa = new CogTransform2DLinear();
             //aa.TranslationX = x;
-            //aa.TranslationY = y;
+            //aa.TranslationY = y;,
 
             return PointMarker.GetParentFromChildTransform() as CogTransform2DLinear;
         }
 
-        public void SetOriginPoint(double x, double y, double rotation = 0, int size = 100)
+        public void SetOriginPoint(double x, double y, int size = 100, double rotation = 0)
         {
             if(PointMarker != null)
                 PointMarker.Changed -= PointMarker_Changed;
