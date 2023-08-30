@@ -12,6 +12,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     {
         #region 필드
         private double _scale { get; set; } = 0.0;
+
+        private bool _isThumbnailMove = false;
         #endregion
 
         #region 속성
@@ -38,6 +40,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 메서드
+
+        private void CogThumbnailControl_Load(object sender, System.EventArgs e)
+        {
+            cogThumbnailDisplay.ContextMenuStrip.Items.Clear();
+        }
+
         public void SetThumbnailImage(ICogImage cogImage)
         {
             isUpdate = true;
@@ -195,9 +203,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             return false;
         }
-        #endregion
-
-        private bool _isThumbnailMove = false;
 
         private void cogThumbnailDisplay_MouseDown(object sender, MouseEventArgs e)
         {
@@ -220,5 +225,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             _isThumbnailMove = false;
         }
+        #endregion
     }
 }
