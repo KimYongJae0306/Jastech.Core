@@ -96,27 +96,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             return rect;
         }
 
-        public AkkonROI GetRecoveryResizeROI(float resizeRatio)
-        {
-            if (resizeRatio == 0)
-                return null;
-
-            AkkonROI calcRoi = new AkkonROI();
-            calcRoi.LeftTopX = LeftTopX / resizeRatio;
-            calcRoi.LeftTopY = LeftTopY / resizeRatio;
-
-            calcRoi.LeftBottomX = LeftBottomX / resizeRatio;
-            calcRoi.LeftBottomY = LeftBottomY / resizeRatio;
-
-            calcRoi.RightTopX = RightTopX / resizeRatio;
-            calcRoi.RightTopY = RightTopY / resizeRatio;
-
-            calcRoi.RightBottomX = RightBottomX / resizeRatio;
-            calcRoi.RightBottomY = RightBottomY / resizeRatio;
-
-            return calcRoi;
-        }
-
         public RectangleF GetBoundRectF()
         {
             RectangleF rect = new RectangleF();
@@ -128,6 +107,15 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
             rect.Height = (float)Math.Abs(GetMaxY() - rect.Y);
 
             return rect;
+        }
+
+        public PointF GetCenterPoint()
+        {
+            var rect = GetBoundRectF();
+
+            float centerX = rect.X + (rect.Width / 2.0F);
+            float centerY = rect.Y + (rect.Height / 2.0F);
+            return new PointF(centerX, centerY);
         }
 
         public double GetMinX()
