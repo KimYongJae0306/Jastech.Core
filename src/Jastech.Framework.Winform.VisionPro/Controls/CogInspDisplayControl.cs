@@ -248,9 +248,9 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         Maintain_Image_Region,                // Maintain Image Region
 
         ContextSpliter4,
-        Colormap = 19,                        // Colormap...
-        Save_Image_to_File = 20,              // Save Image to File...
-        Increase_Touch_Distance = 21,         // Increase Touch Distance
-        Decrease_Touch_Distance = 22,         // Decrease Touch Distance
+        Colormap,                        // Colormap...
+        Save_Image_to_File,              // Save Image to File...
+        Increase_Touch_Distance,         // Increase Touch Distance
+        Decrease_Touch_Distance,         // Decrease Touch Distance
     }
 }

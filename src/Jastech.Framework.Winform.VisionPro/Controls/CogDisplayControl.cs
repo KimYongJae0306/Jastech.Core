@@ -9,6 +9,7 @@ using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.VisionPro.Controls
@@ -44,6 +45,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private DisplayMode _displayMode { get; set; } = DisplayMode.None;
 
         private StepPointToPoint _stepPointToPoint = StepPointToPoint.Start;
+
+        private List<ToolStripItem> _contextMenuItems;
         #endregion
 
         #region 속성
@@ -854,6 +857,27 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLabel.Y = drawPoint.Y + (index * fontPitch) + (index * intervalY);
 
             cogDisplay.StaticGraphics.Add(cogLabel as ICogGraphic, "Result");
+        }
+
+        public void UseAllContextMenu(bool useAllItems)
+        {
+            ToolStripItem[] menuItems;
+
+            if (_contextMenuItems == null)
+                _contextMenuItems = cogDisplay.ContextMenuStrip.Items.Cast<ToolStripItem>().ToList();
+
+            if (useAllItems)
+                menuItems = _contextMenuItems.ToArray();
+            else
+            {
+                int startIndex = (int)CogContextItemName.Pointer;
+                int takeCount = (int)CogContextItemName.ContextSpliter4 - startIndex;
+                menuItems = _contextMenuItems.Skip(startIndex).Take(takeCount).ToArray();
+            }
+
+            cogDisplay.ContextMenuStrip.Items.Clear();
+            if (menuItems != null)
+                cogDisplay.ContextMenuStrip.Items.AddRange(menuItems);
         }
         #endregion
     }

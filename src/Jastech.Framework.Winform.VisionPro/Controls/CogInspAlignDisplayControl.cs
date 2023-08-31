@@ -307,7 +307,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             else
             {
                 int startIndex = (int)CogContextItemName.Pointer;
-                int takeCount = (int)CogContextItemName.ContextSpliter2 - startIndex;
+                int takeCount = (int)CogContextItemName.ContextSpliter4 - startIndex;
                 menuItems = items.Skip(startIndex).Take(takeCount).ToArray();
             }
 
