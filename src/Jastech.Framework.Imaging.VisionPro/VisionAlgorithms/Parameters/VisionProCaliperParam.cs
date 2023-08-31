@@ -8,7 +8,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
     public class VisionProCaliperParam
     {
         [JsonIgnore]
-        public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool { LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None};
+        public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool { LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None };
 
         public void SetInputImage(ICogImage image)
         {

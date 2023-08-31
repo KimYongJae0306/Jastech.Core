@@ -63,10 +63,10 @@
             this.lblSkewZero = new System.Windows.Forms.Label();
             this.lblSkewCCW = new System.Windows.Forms.Label();
             this.tlpROIJog = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlTop = new System.Windows.Forms.Panel();
-            this.lblAlarm = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblClose = new System.Windows.Forms.Label();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.lblAlarm = new System.Windows.Forms.Label();
             this.tlpTeachJog.SuspendLayout();
             this.pnlMode.SuspendLayout();
             this.pnlMoveMode.SuspendLayout();
@@ -81,8 +81,8 @@
             this.pnlSkew.SuspendLayout();
             this.tlpSkew.SuspendLayout();
             this.tlpROIJog.SuspendLayout();
-            this.pnlTop.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpTeachJog
@@ -577,29 +577,6 @@
             this.tlpROIJog.Size = new System.Drawing.Size(544, 380);
             this.tlpROIJog.TabIndex = 2;
             // 
-            // pnlTop
-            // 
-            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
-            this.pnlTop.Controls.Add(this.lblAlarm);
-            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTop.ForeColor = System.Drawing.Color.White;
-            this.pnlTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlTop.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(544, 60);
-            this.pnlTop.TabIndex = 2;
-            // 
-            // lblAlarm
-            // 
-            this.lblAlarm.AutoSize = true;
-            this.lblAlarm.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblAlarm.ForeColor = System.Drawing.Color.White;
-            this.lblAlarm.Location = new System.Drawing.Point(10, 10);
-            this.lblAlarm.Name = "lblAlarm";
-            this.lblAlarm.Size = new System.Drawing.Size(97, 30);
-            this.lblAlarm.TabIndex = 1;
-            this.lblAlarm.Text = "ROI JOG";
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.lblClose);
@@ -624,6 +601,31 @@
             this.lblClose.Text = "CLOSE";
             this.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblClose.Click += new System.EventHandler(this.lblClose_Click);
+            // 
+            // pnlTop
+            // 
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
+            this.pnlTop.Controls.Add(this.lblAlarm);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTop.ForeColor = System.Drawing.Color.White;
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(544, 60);
+            this.pnlTop.TabIndex = 2;
+            this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.pnlTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            // 
+            // lblAlarm
+            // 
+            this.lblAlarm.AutoSize = true;
+            this.lblAlarm.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblAlarm.ForeColor = System.Drawing.Color.White;
+            this.lblAlarm.Location = new System.Drawing.Point(10, 10);
+            this.lblAlarm.Name = "lblAlarm";
+            this.lblAlarm.Size = new System.Drawing.Size(97, 30);
+            this.lblAlarm.TabIndex = 1;
+            this.lblAlarm.Text = "ROI JOG";
             // 
             // ROIJogForm
             // 
@@ -654,9 +656,9 @@
             this.tlpSkew.ResumeLayout(false);
             this.tlpSkew.PerformLayout();
             this.tlpROIJog.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

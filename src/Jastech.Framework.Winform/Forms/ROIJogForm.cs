@@ -11,6 +11,8 @@ namespace Jastech.Framework.Winform.Forms
         private Color _selectedColor = new Color();
 
         private Color _nonSelectedColor = new Color();
+
+        private Point _mousePoint;
         #endregion
 
         #region 속성
@@ -224,6 +226,17 @@ namespace Jastech.Framework.Winform.Forms
         private void lblClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            _mousePoint = new Point(e.X, e.Y);
+        }
+
+        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                Location = new Point(this.Left - (_mousePoint.X - e.X), this.Top - (_mousePoint.Y - e.Y));
         }
         #endregion
     }

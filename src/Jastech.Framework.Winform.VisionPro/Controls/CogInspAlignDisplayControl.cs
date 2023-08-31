@@ -50,16 +50,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #endregion
 
         #region 메서드
-        private void CogInspAlignDisplayControl_Load(object sender, System.EventArgs e)
+        private void CogInspAlignDisplayControl_Load(object sender, EventArgs e)
         {
-            cogLeftDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
-            cogCenterDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
-            cogRightDisplay.MouseMode = Cognex.VisionPro.Display.CogDisplayMouseModeConstants.Pan;
+            cogLeftDisplay.MouseMode = CogDisplayMouseModeConstants.Pan;
+            cogCenterDisplay.MouseMode = CogDisplayMouseModeConstants.Pan;
+            cogRightDisplay.MouseMode = CogDisplayMouseModeConstants.Pan;
 
             _selectedColor = Color.FromArgb(104, 104, 104);
             _noneSelectedColor = Color.FromArgb(52, 52, 52);
-
-            UpdateButton();
         }
 
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shapeList, List<CogLineSegment> lineSegmentList, PointF centerPoint)
@@ -413,59 +411,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.Enabled = isEnable;
             cogCenterDisplay.Enabled = isEnable;
             cogRightDisplay.Enabled = isEnable;
-        }
-
-        private void UpdateButton()
-        {
-            if (IsLeftResultImageView)
-            {
-                btnLeftSourceImage.BackColor = _noneSelectedColor;
-                btnLeftResultImage.BackColor = _selectedColor;
-            }
-            else
-            {
-                btnLeftSourceImage.BackColor = _selectedColor;
-                btnLeftResultImage.BackColor = _noneSelectedColor;
-            }
-
-            if (IsRightResultImageView)
-            {
-                btnRightSourceImage.BackColor = _noneSelectedColor;
-                btnRightResultImage.BackColor = _selectedColor;
-            }
-            else
-            {
-                btnRightSourceImage.BackColor = _selectedColor;
-                btnRightResultImage.BackColor = _noneSelectedColor;
-            }
-        }
-
-        private void btnLeftSourceImage_Click(object sender, EventArgs e)
-        {
-            IsLeftResultImageView = false;
-            UpdateButton();
-            UpdateLeftImage?.Invoke(IsLeftResultImageView);
-        }
-
-        private void btnLeftResultImage_Click(object sender, EventArgs e)
-        {
-            IsLeftResultImageView = true;
-            UpdateButton();
-            UpdateLeftImage?.Invoke(IsLeftResultImageView);
-        }
-
-        private void btnRightSourceImage_Click(object sender, EventArgs e)
-        {
-            IsRightResultImageView = false;
-            UpdateButton();
-            UpdateRightImage?.Invoke(IsRightResultImageView);
-        }
-
-        private void btnRightResultImage_Click(object sender, EventArgs e)
-        {
-            IsRightResultImageView = true;
-            UpdateButton();
-            UpdateRightImage?.Invoke(IsRightResultImageView);
         }
     }
 }
