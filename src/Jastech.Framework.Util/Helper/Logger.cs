@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 
 namespace Jastech.Framework.Util.Helper
@@ -40,6 +42,30 @@ namespace Jastech.Framework.Util.Helper
                 using (log)
                 {
                     log.WriteLine(message);
+                }
+            }
+        }
+
+        public static void Write(LogType logType, string[] logMessages)
+        {
+            string logpath = GetLogPath(logType);
+            string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+
+            if (!Directory.Exists(strDir))
+                Directory.CreateDirectory(strDir);
+
+            lock (_objLock)
+            {
+                StreamWriter log = new StreamWriter(logpath, true);
+                using (log)
+                {
+                    for (int index = 0; index < logMessages.Length; index++)
+                    {
+                        string message = logMessages[index];
+                        message = message.Replace("\r\n", "");
+
+                        log.WriteLine(message);
+                    }
                 }
             }
         }
@@ -203,6 +229,29 @@ namespace Jastech.Framework.Util.Helper
             return strTime;
         }
         #endregion
+    }
+
+    public class ParamTrackingLogger
+    {
+        private readonly List<string> _paramChangeLogMessages = new List<string>();
+
+        ~ParamTrackingLogger() => ClearChangedLog();
+
+        public void AddChangedLog(string message)
+        {
+            string fullMessage = $"[{Logger.GetTimeString(DateTime.UtcNow)}] {message}";
+            _paramChangeLogMessages?.Add(fullMessage);
+        }
+
+        public void ClearChangedLog() => _paramChangeLogMessages?.Clear();
+        
+        public void WriteLogToFile()
+        {
+            string[] messages = _paramChangeLogMessages?.ToArray();
+
+            Logger.Write(LogType.Parameter, messages);
+            ClearChangedLog();
+        }
     }
 
     public enum LogType
