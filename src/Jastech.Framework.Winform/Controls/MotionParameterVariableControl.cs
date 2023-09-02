@@ -1,4 +1,5 @@
 ﻿using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Helper;
 using System;
 using System.Windows.Forms;
@@ -7,6 +8,10 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionParameterVariableControl : UserControl
     {
+        #region 필드
+        private readonly ParamTrackingLogger _paramLogger = new ParamTrackingLogger();
+        #endregion
+
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
 
@@ -70,27 +75,61 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblVelocityValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Velocity = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldVelocity = MovingParam.Velocity;
+            double newVelocity = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            MovingParam.Velocity = newVelocity;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Velocity", oldVelocity, newVelocity);
         }
 
         private void lblAccelerationTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Acceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldAcceleration = MovingParam.Acceleration;
+            double newAcceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            MovingParam.Acceleration = newAcceleration;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldAcceleration, newAcceleration);
         }
 
         private void lblDecelerationTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.Deceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldDeceleration = MovingParam.Deceleration;
+            double newDeceleration = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            MovingParam.Deceleration = newDeceleration;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldDeceleration, newDeceleration);
         }
 
         private void lblMovingTimeOutValue_Click(object sender, EventArgs e)
         {
-            MovingParam.MovingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldMovingTimeOut = MovingParam.MovingTimeOut;
+            double newMovingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            MovingParam.MovingTimeOut = newMovingTimeOut;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldMovingTimeOut, newMovingTimeOut);
         }
 
         private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
         {
-            MovingParam.AfterWaitTime = KeyPadHelper.SetLabelIntegerData((Label)sender);
+            int oldAfterWaitTime = MovingParam.AfterWaitTime;
+            int newAfterWaitTime = KeyPadHelper.SetLabelIntegerData((Label)sender);
+
+            MovingParam.AfterWaitTime = newAfterWaitTime;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldAfterWaitTime, newAfterWaitTime);
+        }
+
+        public void WriteChangeLog()
+        {
+            if (_paramLogger.IsEmpty == false)
+            {
+                _paramLogger.AddLog($"{SelectedAxis.Name} Motion Variable changed.");
+                _paramLogger.WriteLogToFile();
+            }
         }
         #endregion
     }
