@@ -207,9 +207,7 @@
             this.nupdnMatchScore.Size = new System.Drawing.Size(80, 27);
             this.nupdnMatchScore.TabIndex = 13;
             this.nupdnMatchScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nupdnMatchScore.ValueChanged += new System.EventHandler(this.nupdnMatchScore_ValueChanged);
             this.nupdnMatchScore.Click += new System.EventHandler(this.nupdnMatchScore_Click);
-            this.nupdnMatchScore.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nupdnMatchScore_KeyPress);
             this.nupdnMatchScore.Leave += new System.EventHandler(this.nupdnMatchScore_Leave);
             // 
             // label3
