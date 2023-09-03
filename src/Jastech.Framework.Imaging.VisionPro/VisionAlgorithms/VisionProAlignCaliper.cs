@@ -45,7 +45,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 
                         var scorerPositionNeg = new CogCaliperScorerPositionNeg();
                         scorerPositionNeg.Enabled = true;
-
+                        //scorerPosition.SetXYParameters(0, -100, -10000, 1, 0.1);
+                        scorerPosition.SetXYParameters(0, 0, 10000, 1, 0.1);
                         caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
                         caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPositionNeg);
                     }

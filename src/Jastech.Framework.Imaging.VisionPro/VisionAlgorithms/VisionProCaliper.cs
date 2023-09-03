@@ -62,6 +62,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 match.ReferenceSkew = roi.Skew;
                 
                 match.FoundPos = new PointF((float)foundResult.PositionX, (float)foundResult.PositionY);
+                match.FoundPosX = foundResult.PositionX;
+                match.FoundPosY = foundResult.PositionY;
                 match.Score = (float)foundResult.Score;
 
                 match.ResultGraphics = foundResult.CreateResultGraphics(CogCaliperResultGraphicConstants.Edges);

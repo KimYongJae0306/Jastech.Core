@@ -71,6 +71,10 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
 
         public PointF FoundPos { get; set; }
 
+        public double FoundPosX { get; set; }
+
+        public double FoundPosY { get; set; }
+
         public float Score { get; set; }
 
         public CogCompositeShape ResultGraphics { get; set; }
@@ -93,6 +97,8 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
             caliperMatch.ReferenceRotation = ReferenceRotation;
             caliperMatch.ReferenceSkew = ReferenceSkew;
             caliperMatch.FoundPos = new PointF(FoundPos.X, FoundPos.Y);
+            caliperMatch.FoundPosX = FoundPos.X;
+            caliperMatch.FoundPosY = FoundPos.Y;
             caliperMatch.Score = Score;
             caliperMatch.ResultGraphics = ResultGraphics?.Copy(CogCopyShapeConstants.GeometryOnly); // 인자 확인 필요
             
