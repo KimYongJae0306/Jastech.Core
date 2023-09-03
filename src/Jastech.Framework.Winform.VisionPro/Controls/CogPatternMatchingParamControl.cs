@@ -3,6 +3,7 @@ using Cognex.VisionPro.Implementation;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Winform.Forms;
+using Jastech.Framework.Winform.Helper;
 using Jastech.Framework.Winform.VisionPro.Forms;
 using Jastech.Framework.Winform.VisionPro.Helper;
 using System;
@@ -22,12 +23,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public TestActionDelegate TestActionEvent;
 
         public TestActionDelegate ClearActionEvent;
+
+        public event ParameterValueChangedEventHandler MarkParamChanged;
         #endregion
 
         #region 델리게이트
         public delegate ICogImage GetOriginImageDelegate();
 
         public delegate void TestActionDelegate();
+
+        public delegate void ParameterValueChangedEventHandler(string component, int channel, double oldValue, double newValue);
         #endregion
 
         #region 생성자
@@ -228,19 +233,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             ClearActionEvent?.Invoke();
         }
 
-        private void nupdnMatchScore_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void nupdnMatchScore_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
         private void nupdnMatchScore_Click(object sender, EventArgs e)
         {
             KeyPadForm keyPadForm = new KeyPadForm();
+            
             keyPadForm.PreviousValue = Convert.ToDouble(nupdnMatchScore.Value.ToString());
             keyPadForm.ShowDialog();
 
@@ -248,7 +244,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (inputData >= 100)
                 inputData = 100;
-            if(inputData <= 0)
+            if (inputData <= 0)
                 inputData = 0;
 
             nupdnMatchScore.Value = inputData;
@@ -256,5 +252,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (CurrentParam != null)
                 CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
         }
+        #endregion
     }
 }

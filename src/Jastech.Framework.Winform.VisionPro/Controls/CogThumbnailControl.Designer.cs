@@ -63,6 +63,7 @@
             this.Controls.Add(this.cogThumbnailDisplay);
             this.Name = "CogThumbnailControl";
             this.Size = new System.Drawing.Size(230, 209);
+            this.Load += new System.EventHandler(this.CogThumbnailControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cogThumbnailDisplay)).EndInit();
             this.ResumeLayout(false);
 

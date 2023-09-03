@@ -1,4 +1,5 @@
 ﻿using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Helper;
 using System;
 using System.Windows.Forms;
@@ -7,6 +8,10 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionParameterCommonControl : UserControl
     {
+        #region 필드
+        private readonly ParamTrackingLogger _paramLogger = new ParamTrackingLogger();
+        #endregion
+
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
 
@@ -71,32 +76,71 @@ namespace Jastech.Framework.Winform.Controls
 
         private void lblJogLowSpeedValue_Click(object sender, EventArgs e)
         {
-            CommonParam.JogLowSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldSpeed = CommonParam.JogLowSpeed;
+            double newSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            
+            CommonParam.JogLowSpeed = newSpeed;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogLowSpeed", oldSpeed, newSpeed);
         }
 
         private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
         {
-            CommonParam.JogHighSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldSpeed = CommonParam.JogHighSpeed;
+            double newSpeed = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            CommonParam.JogHighSpeed = newSpeed;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogHighSpeed", oldSpeed, newSpeed);
         }
 
         private void lblMoveToleranceValue_Click(object sender, EventArgs e)
         {
-            CommonParam.MoveTolerance = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldTolerance = CommonParam.MoveTolerance;
+            double newTolerance = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            CommonParam.MoveTolerance = newTolerance;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldTolerance, newTolerance);
         }
 
         private void lblNegativeLimitValue_Click(object sender, EventArgs e)
         {
-            CommonParam.NegativeLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldNegativeLimit = CommonParam.NegativeLimit;
+            double newNegativeLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            CommonParam.NegativeLimit = newNegativeLimit;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldNegativeLimit, newNegativeLimit);
         }
 
         private void lblPositiveLimitValue_Click(object sender, EventArgs e)
         {
-            CommonParam.PositiveLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldPositiveLimit = CommonParam.PositiveLimit;
+            double newPositiveLimit = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            CommonParam.PositiveLimit = newPositiveLimit;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldPositiveLimit, newPositiveLimit);
         }
 
         private void lblHomingTimeOutValue_Click(object sender, EventArgs e)
         {
-            CommonParam.HommingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
+            double oldHommingTimeOut = CommonParam.HommingTimeOut;
+            double newHommingTimeOut = KeyPadHelper.SetLabelDoubleData((Label)sender);
+
+            CommonParam.HommingTimeOut = newHommingTimeOut;
+
+            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldHommingTimeOut, newHommingTimeOut);
+        }
+
+        public void WriteChangeLog()
+        {
+            if (_paramLogger.IsEmpty == false)
+            {
+                _paramLogger.AddLog($"{SelectedAxis.Name} Motion Parameter changed.");
+                _paramLogger.WriteLogToFile();
+            }
         }
         #endregion
     }

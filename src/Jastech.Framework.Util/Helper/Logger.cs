@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
+using System.Reflection.Emit;
 
 namespace Jastech.Framework.Util.Helper
 {
@@ -8,7 +11,7 @@ namespace Jastech.Framework.Util.Helper
         #region 필드
         private static string _logDir = "";
 
-        private static object _objLock = new object();
+        private readonly static object _objLock = new object();
         #endregion
 
         #region 메서드
@@ -40,6 +43,30 @@ namespace Jastech.Framework.Util.Helper
                 using (log)
                 {
                     log.WriteLine(message);
+                }
+            }
+        }
+
+        public static void Write(LogType logType, string[] logMessages)
+        {
+            string logpath = GetLogPath(logType);
+            string strDir = logpath.Substring(0, logpath.LastIndexOf('\\'));
+
+            if (!Directory.Exists(strDir))
+                Directory.CreateDirectory(strDir);
+
+            lock (_objLock)
+            {
+                StreamWriter log = new StreamWriter(logpath, true);
+                using (log)
+                {
+                    for (int index = 0; index < logMessages.Length; index++)
+                    {
+                        string message = logMessages[index];
+                        message = message.Replace("\r\n", "");
+
+                        log.WriteLine(message);
+                    }
                 }
             }
         }
@@ -203,6 +230,37 @@ namespace Jastech.Framework.Util.Helper
             return strTime;
         }
         #endregion
+    }
+
+    public class ParamTrackingLogger
+    {
+        private readonly List<string> _paramChangedLogMessages = new List<string>();
+
+        public bool IsEmpty => _paramChangedLogMessages.Count == 0;
+
+        ~ParamTrackingLogger() => ClearChangedLog();
+
+        public void AddLog(string message)
+        {
+            string fullMessage = $"[{Logger.GetTimeString(DateTime.Now)}] {message}";
+            _paramChangedLogMessages?.Add(fullMessage);
+        }
+
+        public void WriteLogToFile()
+        {
+            string[] messages = _paramChangedLogMessages?.ToArray();
+            if (messages != null)
+                Logger.Write(LogType.Parameter, messages);
+
+            ClearChangedLog();
+        }
+
+        public void AddChangeHistory<T>(string component, string parameter, T oldValue, T newValue)
+        {
+            AddLog($"{component} {parameter} value changed. {oldValue} -> {newValue}");
+        }
+
+        public void ClearChangedLog() => _paramChangedLogMessages?.Clear();
     }
 
     public enum LogType
