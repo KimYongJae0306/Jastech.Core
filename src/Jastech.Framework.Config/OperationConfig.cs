@@ -19,7 +19,7 @@ namespace Jastech.Framework.Config
         public int DataStoringDuration { get; set; } = 30; //days
 
         [JsonProperty]
-        public int DataStiringCapcity { get; set; } = 80; //percent
+        public int DataStoringCapacity { get; set; } = 80; //percent
 
         [JsonProperty]
         public bool SaveImageOK { get; set; } = true;

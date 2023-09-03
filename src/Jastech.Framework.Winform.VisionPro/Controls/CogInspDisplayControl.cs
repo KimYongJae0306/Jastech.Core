@@ -122,7 +122,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             CogDisplayHelper.DisposeDisplay(cogDisplay);
             cogDisplay.Image = null;
 
-            CogThumbnail.DisposeImage();
+            CogThumbnail?.DisposeImage();
         }
 
         public void ClearGraphic()
@@ -133,7 +133,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearThumbnail()
         {
-            CogThumbnail.DisposeImage();
+            CogThumbnail?.DisposeImage();
         }
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
