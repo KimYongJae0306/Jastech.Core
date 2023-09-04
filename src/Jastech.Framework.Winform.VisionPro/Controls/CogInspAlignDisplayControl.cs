@@ -326,7 +326,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.InteractiveGraphics.Clear();
             cogRightDisplay.InteractiveGraphics.Clear();
         }
-        #endregion
 
         private void cogLeftDisplay_Changed(object sender, CogChangedEventArgs e)
         {
@@ -408,5 +407,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogCenterDisplay.Enabled = isEnable;
             cogRightDisplay.Enabled = isEnable;
         }
+        #endregion
     }
 }
