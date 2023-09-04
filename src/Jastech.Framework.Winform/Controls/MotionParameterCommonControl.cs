@@ -8,10 +8,6 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionParameterCommonControl : UserControl
     {
-        #region 필드
-        private readonly ParamTrackingLogger _paramLogger = new ParamTrackingLogger();
-        #endregion
-
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
 
@@ -81,7 +77,7 @@ namespace Jastech.Framework.Winform.Controls
             
             CommonParam.JogLowSpeed = newSpeed;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogLowSpeed", oldSpeed, newSpeed);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogLowSpeed", oldSpeed, newSpeed);
         }
 
         private void lblJogHighSpeedValue_Click(object sender, EventArgs e)
@@ -91,7 +87,7 @@ namespace Jastech.Framework.Winform.Controls
 
             CommonParam.JogHighSpeed = newSpeed;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogHighSpeed", oldSpeed, newSpeed);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "JogHighSpeed", oldSpeed, newSpeed);
         }
 
         private void lblMoveToleranceValue_Click(object sender, EventArgs e)
@@ -101,7 +97,7 @@ namespace Jastech.Framework.Winform.Controls
 
             CommonParam.MoveTolerance = newTolerance;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldTolerance, newTolerance);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldTolerance, newTolerance);
         }
 
         private void lblNegativeLimitValue_Click(object sender, EventArgs e)
@@ -111,7 +107,7 @@ namespace Jastech.Framework.Winform.Controls
 
             CommonParam.NegativeLimit = newNegativeLimit;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldNegativeLimit, newNegativeLimit);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldNegativeLimit, newNegativeLimit);
         }
 
         private void lblPositiveLimitValue_Click(object sender, EventArgs e)
@@ -121,7 +117,7 @@ namespace Jastech.Framework.Winform.Controls
 
             CommonParam.PositiveLimit = newPositiveLimit;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldPositiveLimit, newPositiveLimit);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldPositiveLimit, newPositiveLimit);
         }
 
         private void lblHomingTimeOutValue_Click(object sender, EventArgs e)
@@ -131,15 +127,15 @@ namespace Jastech.Framework.Winform.Controls
 
             CommonParam.HommingTimeOut = newHommingTimeOut;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldHommingTimeOut, newHommingTimeOut);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MoveTolerance", oldHommingTimeOut, newHommingTimeOut);
         }
 
         public void WriteChangeLog()
         {
-            if (_paramLogger.IsEmpty == false)
+            if (ParamTrackingLogger.IsEmpty == false)
             {
-                _paramLogger.AddLog($"{SelectedAxis.Name} Motion Parameter changed.");
-                _paramLogger.WriteLogToFile();
+                ParamTrackingLogger.AddLog($"{SelectedAxis.Name} Motion Parameter changed.");
+                ParamTrackingLogger.WriteLogToFile();
             }
         }
         #endregion

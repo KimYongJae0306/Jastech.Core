@@ -8,10 +8,6 @@ namespace Jastech.Framework.Winform.Controls
 {
     public partial class MotionParameterVariableControl : UserControl
     {
-        #region 필드
-        private readonly ParamTrackingLogger _paramLogger = new ParamTrackingLogger();
-        #endregion
-
         #region 속성
         private Axis SelectedAxis { get; set; } = null;
 
@@ -80,7 +76,7 @@ namespace Jastech.Framework.Winform.Controls
 
             MovingParam.Velocity = newVelocity;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Velocity", oldVelocity, newVelocity);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "Velocity", oldVelocity, newVelocity);
         }
 
         private void lblAccelerationTimeValue_Click(object sender, EventArgs e)
@@ -90,7 +86,7 @@ namespace Jastech.Framework.Winform.Controls
 
             MovingParam.Acceleration = newAcceleration;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldAcceleration, newAcceleration);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldAcceleration, newAcceleration);
         }
 
         private void lblDecelerationTimeValue_Click(object sender, EventArgs e)
@@ -100,7 +96,7 @@ namespace Jastech.Framework.Winform.Controls
 
             MovingParam.Deceleration = newDeceleration;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldDeceleration, newDeceleration);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "Acceleration", oldDeceleration, newDeceleration);
         }
 
         private void lblMovingTimeOutValue_Click(object sender, EventArgs e)
@@ -110,7 +106,7 @@ namespace Jastech.Framework.Winform.Controls
 
             MovingParam.MovingTimeOut = newMovingTimeOut;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldMovingTimeOut, newMovingTimeOut);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldMovingTimeOut, newMovingTimeOut);
         }
 
         private void lblAfterWaitTimeValue_Click(object sender, EventArgs e)
@@ -120,15 +116,15 @@ namespace Jastech.Framework.Winform.Controls
 
             MovingParam.AfterWaitTime = newAfterWaitTime;
 
-            _paramLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldAfterWaitTime, newAfterWaitTime);
+            ParamTrackingLogger.AddChangeHistory($"{SelectedAxis.Name}", "MovingTimeOut", oldAfterWaitTime, newAfterWaitTime);
         }
 
         public void WriteChangeLog()
         {
-            if (_paramLogger.IsEmpty == false)
+            if (ParamTrackingLogger.IsEmpty == false)
             {
-                _paramLogger.AddLog($"{SelectedAxis.Name} Motion Variable changed.");
-                _paramLogger.WriteLogToFile();
+                ParamTrackingLogger.AddLog($"{SelectedAxis.Name} Motion Variable changed.");
+                ParamTrackingLogger.WriteLogToFile();
             }
         }
         #endregion

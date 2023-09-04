@@ -232,21 +232,19 @@ namespace Jastech.Framework.Util.Helper
         #endregion
     }
 
-    public class ParamTrackingLogger
+    public static class ParamTrackingLogger
     {
-        private readonly List<string> _paramChangedLogMessages = new List<string>();
+        private static readonly List<string> _paramChangedLogMessages = new List<string>();
 
-        public bool IsEmpty => _paramChangedLogMessages.Count == 0;
+        public static bool IsEmpty => _paramChangedLogMessages.Count == 0;
 
-        ~ParamTrackingLogger() => ClearChangedLog();
-
-        public void AddLog(string message)
+        public static void AddLog(string message)
         {
             string fullMessage = $"[{Logger.GetTimeString(DateTime.Now)}] {message}";
             _paramChangedLogMessages?.Add(fullMessage);
         }
 
-        public void WriteLogToFile()
+        public static void WriteLogToFile()
         {
             string[] messages = _paramChangedLogMessages?.ToArray();
             if (messages != null)
@@ -255,12 +253,12 @@ namespace Jastech.Framework.Util.Helper
             ClearChangedLog();
         }
 
-        public void AddChangeHistory<T>(string component, string parameter, T oldValue, T newValue)
+        public static void AddChangeHistory<T>(string component, string parameter, T oldValue, T newValue)
         {
             AddLog($"{component} {parameter} value changed. {oldValue} -> {newValue}");
         }
 
-        public void ClearChangedLog() => _paramChangedLogMessages?.Clear();
+        public static void ClearChangedLog() => _paramChangedLogMessages?.Clear();
     }
 
     public enum LogType

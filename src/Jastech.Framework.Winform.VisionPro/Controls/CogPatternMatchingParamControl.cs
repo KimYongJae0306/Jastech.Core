@@ -6,6 +6,7 @@ using Jastech.Framework.Winform.Forms;
 using Jastech.Framework.Winform.Helper;
 using Jastech.Framework.Winform.VisionPro.Forms;
 using Jastech.Framework.Winform.VisionPro.Helper;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +33,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public delegate void TestActionDelegate();
 
-        public delegate void ParameterValueChangedEventHandler(string component, int channel, double oldValue, double newValue);
+        public delegate void ParameterValueChangedEventHandler(string component, string parameter, double oldValue, double newValue);
         #endregion
 
         #region 생성자
@@ -235,22 +236,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void nupdnMatchScore_Click(object sender, EventArgs e)
         {
-            KeyPadForm keyPadForm = new KeyPadForm();
+            double oldScore = CurrentParam.Score;
+            double newScore = 0;// KeyPadHelper.SetLabelDoubleData(nupdnMatchScore);
             
-            keyPadForm.PreviousValue = Convert.ToDouble(nupdnMatchScore.Value.ToString());
-            keyPadForm.ShowDialog();
-
-            int inputData = Convert.ToInt16(keyPadForm.PadValue);
-
-            if (inputData >= 100)
-                inputData = 100;
-            if (inputData <= 0)
-                inputData = 0;
-
-            nupdnMatchScore.Value = inputData;
+            if (newScore >= 100)
+                newScore = 100;
+            if (newScore <= 0)
+                newScore = 0;
 
             if (CurrentParam != null)
-                CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
+                CurrentParam.Score = newScore;
+
+            MarkParamChanged?.Invoke(CurrentParam.Name, "MarkScore", oldScore, newScore);
         }
         #endregion
     }

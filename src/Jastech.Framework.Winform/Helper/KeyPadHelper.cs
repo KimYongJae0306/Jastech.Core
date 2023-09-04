@@ -13,7 +13,7 @@ namespace Jastech.Framework.Winform.Helper
                 prevData = Convert.ToDouble(label.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
-            keyPadForm.PreviousValue = (double)prevData;
+            keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
             int inputData = Convert.ToInt32(keyPadForm.PadValue);
