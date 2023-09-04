@@ -312,13 +312,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearImage()
         {
-            //CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            //cogLeftDisplay.InteractiveGraphics.Clear();
-            //cogLeftDisplay.Image = null;
+            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+            cogLeftDisplay.InteractiveGraphics.Clear();
+            cogLeftDisplay.Image = null;
 
-            //CogDisplayHelper.DisposeDisplay(cogRightDisplay);
-            //cogRightDisplay.InteractiveGraphics.Clear();
-            //cogRightDisplay.Image = null;
+            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
+            cogRightDisplay.InteractiveGraphics.Clear();
+            cogRightDisplay.Image = null;
+
+            CogDisplayHelper.DisposeDisplay(cogCenterDisplay);
+            cogCenterDisplay.InteractiveGraphics.Clear();
+            cogCenterDisplay.Image = null;
         }
 
         public void ClearGraphics()
