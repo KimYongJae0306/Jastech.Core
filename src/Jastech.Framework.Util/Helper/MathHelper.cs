@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace Jastech.Framework.Util.Helper
 {
@@ -91,6 +93,27 @@ namespace Jastech.Framework.Util.Helper
             double deltaY = Math.Abs(point1.Y - point2.Y);
 
             return deltaY / deltaX;
+        }
+
+        public static double GetSampleStandardDeviation(List<double> valueList, double mean)
+        {
+            double squaredDifferencesSum = valueList.Sum(value => Math.Pow(value - mean, 2));
+            double squaredDifferencesMean = squaredDifferencesSum / (valueList.Count - 1);
+            double standardDeviation = Math.Sqrt(squaredDifferencesMean);
+
+            return standardDeviation;
+        }
+
+        public static double GetPopulationStandardDeviation(List<double> valueList, double mean)
+        {
+            if (valueList.Count < 2)
+                return 0;
+
+            double squaredDifferencesSum = valueList.Sum(value => Math.Pow(value - mean, 2));
+            double squaredDifferencesMean = squaredDifferencesSum / valueList.Count;
+            double standardDeviation = Math.Sqrt(squaredDifferencesMean);
+
+            return standardDeviation;
         }
     }
 }
