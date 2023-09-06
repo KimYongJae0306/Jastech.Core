@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -93,6 +94,18 @@ namespace Jastech.Framework.Util.Helper
             double deltaY = Math.Abs(point1.Y - point2.Y);
 
             return deltaY / deltaX;
+        }
+
+        public static T GetFloorDecimal<T>(T value, int decimalPlaces) where T : struct, IConvertible
+        {
+            if (typeof(T) == typeof(double) || typeof(T) == typeof(float))
+            {
+                double factor = Math.Pow(10, decimalPlaces);
+                double result = Math.Floor(Convert.ToDouble(value) * factor) / factor;
+                return (T)Convert.ChangeType(result, typeof(T));
+            }
+            else
+                throw new ArgumentException($"{typeof(T)} is not Decimal type.");
         }
 
         public static double GetSampleStandardDeviation(List<double> valueList, double mean)

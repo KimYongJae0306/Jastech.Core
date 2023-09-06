@@ -6,11 +6,11 @@ namespace Jastech.Framework.Winform.Helper
 {
     public static class KeyPadHelper
     {
-        public static int SetLabelIntegerData(Label label)
+        public static int SetLabelIntegerData(Control control)
         {
             double prevData = 0;
-            if (label.Text != "")
-                prevData = Convert.ToDouble(label.Text);
+            if (control.Text != "")
+                prevData = Convert.ToDouble(control.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = prevData;
@@ -18,16 +18,16 @@ namespace Jastech.Framework.Winform.Helper
 
             int inputData = Convert.ToInt32(keyPadForm.PadValue);
 
-            label.Text = inputData.ToString();
+            control.Text = inputData.ToString();
 
             return inputData;
         }
 
-        public static double SetLabelDoubleData(Label label)
+        public static double SetLabelDoubleData(Control control)
         {
             double prevData = 0;
-            if (label.Text != "")
-                prevData = Convert.ToDouble(label.Text);
+            if (control.Text != "")
+                prevData = Convert.ToDouble(control.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = prevData;
@@ -35,16 +35,16 @@ namespace Jastech.Framework.Winform.Helper
 
             double inputData = keyPadForm.PadValue;
 
-            label.Text = inputData.ToString();
+            control.Text = inputData.ToString();
 
             return inputData;
         }
 
-        public static float SetLabelFloatData(Label label)
+        public static float SetLabelFloatData(Control control)
         {
             float prevData = 0;
-            if (label.Text != "")
-                prevData = Convert.ToSingle(label.Text);
+            if (control.Text != "")
+                prevData = Convert.ToSingle(control.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = prevData;
@@ -52,7 +52,7 @@ namespace Jastech.Framework.Winform.Helper
 
             float inputData = Convert.ToSingle(keyPadForm.PadValue);
 
-            label.Text = inputData.ToString();
+            control.Text = inputData.ToString();
 
             return inputData;
         }

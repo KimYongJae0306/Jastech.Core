@@ -237,7 +237,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void nupdnMatchScore_Click(object sender, EventArgs e)
         {
             double oldScore = CurrentParam.Score;
-            double newScore = 0;// KeyPadHelper.SetLabelDoubleData(nupdnMatchScore);
+            double newScore = KeyPadHelper.SetLabelDoubleData(nupdnMatchScore);
             
             if (newScore >= 100)
                 newScore = 100;
