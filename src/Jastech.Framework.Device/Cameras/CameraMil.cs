@@ -132,6 +132,7 @@ namespace Jastech.Framework.Device.Cameras
             
             ActiveTriggerCommand();
             SetTDIOperationMode(TDIOperationMode);
+            SetTDIScanDriection(TDIDirection);
 
             MIL_INT tempValue = 0;
             MIL_INT width = 0;
@@ -162,8 +163,6 @@ namespace Jastech.Framework.Device.Cameras
                 for (int i = 0; i < BufferPoolCount; i++)
                     _grabImageBuffer[i] = MIL.MbufAllocColor(MilSystem.SystemId, 3, width, height, MIL.M_UNSIGNED + 8, MIL.M_IMAGE + MIL.M_PROC + MIL.M_GRAB, MIL.M_NULL);
             }
-
-            ActiveTriggerCommand();
 
             return true;
         }
@@ -516,14 +515,11 @@ namespace Jastech.Framework.Device.Cameras
 
         public void SetTDIScanDriection(TDIDirectionType direction)
         {
-            TDIDirection = direction;
+            StringBuilder valueString = new StringBuilder();
+            MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "ScanDirection", MIL.M_TYPE_STRING, valueString);
 
-            // GET
-            //long ScanDirectionStringSize = -1;
-            //MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_STRING_SIZE, "ScanDirection", MIL.M_TYPE_MIL_INT, ref ScanDirectionStringSize);
-
-            string directionString = TDIDirection.ToString();
-            MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ScanDirection", MIL.M_TYPE_STRING, directionString);
+            if (valueString.ToString() != $"{direction}")
+                MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "ScanDirection", MIL.M_TYPE_STRING, $"{direction}");
         }
 
         public void SetTDIOperationMode(TDIOperationMode mode)
