@@ -107,6 +107,36 @@ namespace Jastech.Framework.Imaging.VisionPro
             return newRoi;
         }
 
+        public static CogRectangleAffine MoveOffsetY(CogRectangleAffine rect, double offsetY, double skew)
+        {
+            CogRectangleAffine newRoi = new CogRectangleAffine(rect);
+
+            newRoi.CenterX = rect.CenterX - offsetY * skew;
+            newRoi.CenterY = rect.CenterY + offsetY;
+
+            return newRoi;
+        }
+
+        public static CogRectangleAffine MoveOffsetX(CogRectangleAffine rect, double offsetX, double skew)
+        {
+            CogRectangleAffine newRoi = new CogRectangleAffine(rect);
+
+            newRoi.CenterX = rect.CenterX + offsetX;
+            newRoi.CenterY = rect.CenterY - offsetX / skew;
+
+            return newRoi;
+        }
+
+        public static PointF GetOffsetBetweenCenterPointOfAffineRectangles(CogRectangleAffine rect1, CogRectangleAffine rect2)
+        {
+            PointF offset = new PointF();
+
+            offset.X = Convert.ToSingle(rect2.CenterX - rect1.CenterX);
+            offset.Y = Convert.ToSingle(rect2.CenterY - rect1.CenterY);
+
+            return offset;
+        }
+
         public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect)
         {
             List<double> xPointList = new List<double>();
