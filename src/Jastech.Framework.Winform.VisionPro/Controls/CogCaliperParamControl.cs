@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
+using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Helper;
 using System;
 using System.Drawing;
@@ -24,12 +25,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public GetOriginImageDelegate GetOriginImageHandler;
 
         public TestActionDelegate TestActionEvent;
+
+        public event ParameterValueChangedEventHandler CaliperParamChanged;
         #endregion
 
         #region 델리게이트
         public delegate ICogImage GetOriginImageDelegate();
 
         public delegate void TestActionDelegate();
+
+        public delegate void ParameterValueChangedEventHandler(string component, string parameter, double oldValue, double newValue);
         #endregion
 
         #region 생성자
@@ -53,31 +58,58 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void lblDarkToLight_Click(object sender, EventArgs e)
         {
-            CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.DarkToLight;
+            var old0Polarity = CurrentParam.CaliperTool.RunParams.Edge0Polarity;
+            var new0Polarity = CogCaliperPolarityConstants.DarkToLight;
 
-            lblDarkToLight.BackColor = _selectedColor;
-            lblLightToDark.BackColor = _nonSelectedColor;
+            if (old0Polarity != new0Polarity)
+            {
+                CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
+
+                lblDarkToLight.BackColor = _selectedColor;
+                lblLightToDark.BackColor = _nonSelectedColor;
+
+                ParamTrackingLogger.AddChangeHistory("Caliper Param", "Edge0Polarity", old0Polarity, new0Polarity);
+            }
         }
 
         private void lblLightToDark_Click(object sender, EventArgs e)
         {
-            CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
+            var old0Polarity = CurrentParam.CaliperTool.RunParams.Edge0Polarity;
+            var new0Polarity = CogCaliperPolarityConstants.LightToDark;
 
-            lblDarkToLight.BackColor = _nonSelectedColor;
-            lblLightToDark.BackColor = _selectedColor;
+            if (old0Polarity != new0Polarity)
+            {
+                CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
+
+                lblDarkToLight.BackColor = _nonSelectedColor;
+                lblLightToDark.BackColor = _selectedColor;
+
+                ParamTrackingLogger.AddChangeHistory("Caliper Param", "Edge0Polarity", old0Polarity, new0Polarity);
+            }
         }
 
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
         {
-            int filterSize = KeyPadHelper.SetLabelIntegerData((Label)sender);
-            if (filterSize > 0)
-                CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = filterSize;
+            if (sender is Label label)
+            {
+                int oldFilterSize = Convert.ToInt32(label.Text);
+                int newFilterSize = Math.Abs(KeyPadHelper.SetLabelIntegerData(label));
+
+                CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = newFilterSize;
+                CaliperParamChanged?.Invoke("Caliper Param", label.Name.Replace("lbl", ""), oldFilterSize, newFilterSize);
+            }
         }
 
         private void lblEdgeThresholdValue_Click(object sender, EventArgs e)
         {
-            int edgeThreshold = KeyPadHelper.SetLabelIntegerData((Label)sender);
-            CurrentParam.CaliperTool.RunParams.ContrastThreshold = edgeThreshold;
+            if (sender is Label label)
+            {
+                int oldEdgeThreshold = Convert.ToInt32(label.Text);
+                int newEdgeThreshold = Math.Abs(KeyPadHelper.SetLabelIntegerData(label));
+
+                CurrentParam.CaliperTool.RunParams.ContrastThreshold = newEdgeThreshold;
+                CaliperParamChanged?.Invoke("Caliper Param", label.Name.Replace("lbl",""), oldEdgeThreshold, newEdgeThreshold);
+            }
         }
 
         public void UpdateData(VisionProCaliperParam caliperParam)
