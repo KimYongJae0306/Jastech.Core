@@ -127,6 +127,12 @@
     <Compile Include="Controls\StyledCalender.Designer.cs">
       <DependentUpon>StyledCalender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TaskProgressControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TaskProgressControl.Designer.cs">
+      <DependentUpon>TaskProgressControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrendControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PixelValueGraphControl.resx">
       <DependentUpon>PixelValueGraphControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TaskProgressControl.resx">
+      <DependentUpon>TaskProgressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TrendControl.resx">
       <DependentUpon>TrendControl.cs</DependentUpon>
@@ -444,6 +453,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Up_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadingCircle_Green.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadingCircle_Green_br2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

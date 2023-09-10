@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Jastech.Framework.Winform.Controls;
 
 namespace Jastech.Framework.Winform.Forms
 {
@@ -15,6 +16,11 @@ namespace Jastech.Framework.Winform.Forms
         public ProgressForm()
         {
             InitializeComponent();
+        }
+
+        private void ProgressForm_Load(object sender, EventArgs e)
+        {
+            pnlTaskDisplayArea.Controls.Add(new TaskProgressControl());
         }
     }
 }
