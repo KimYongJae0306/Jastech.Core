@@ -32,16 +32,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public bool IsRightResultImageView { get; set; } = true;
         #endregion
 
-        #region 델리게이트
-        public delegate void UpdateImage(bool isResult);
-        #endregion
-
-        #region 이벤트
-        public UpdateImage UpdateLeftImage;
-
-        public UpdateImage UpdateRightImage;
-        #endregion
-
         #region 생성자
         public CogInspAlignDisplayControl()
         {
