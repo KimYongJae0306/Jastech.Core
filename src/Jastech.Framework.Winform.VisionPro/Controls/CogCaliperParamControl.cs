@@ -63,13 +63,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (old0Polarity != new0Polarity)
             {
-                CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
-
-                lblDarkToLight.BackColor = _selectedColor;
-                lblLightToDark.BackColor = _nonSelectedColor;
-
+                CurrentParam.CaliperTool.RunParams.Edge0Polarity = new0Polarity;
                 ParamTrackingLogger.AddChangeHistory("Caliper Param", "Edge0Polarity", old0Polarity, new0Polarity);
             }
+
+            lblDarkToLight.BackColor = _selectedColor;
+            lblLightToDark.BackColor = _nonSelectedColor;
         }
 
         private void lblLightToDark_Click(object sender, EventArgs e)
@@ -79,13 +78,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (old0Polarity != new0Polarity)
             {
-                CurrentParam.CaliperTool.RunParams.Edge0Polarity = CogCaliperPolarityConstants.LightToDark;
-
-                lblDarkToLight.BackColor = _nonSelectedColor;
-                lblLightToDark.BackColor = _selectedColor;
-
+                CurrentParam.CaliperTool.RunParams.Edge0Polarity = new0Polarity;
                 ParamTrackingLogger.AddChangeHistory("Caliper Param", "Edge0Polarity", old0Polarity, new0Polarity);
             }
+
+            lblDarkToLight.BackColor = _nonSelectedColor;
+            lblLightToDark.BackColor = _selectedColor;
         }
 
         private void lblFilterSizeValue_Click(object sender, EventArgs e)
