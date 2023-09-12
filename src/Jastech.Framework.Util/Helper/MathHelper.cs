@@ -96,16 +96,11 @@ namespace Jastech.Framework.Util.Helper
             return deltaY / deltaX;
         }
 
-        public static T GetFloorDecimal<T>(T value, int decimalPlaces) where T : struct, IConvertible
+        public static double GetFloorDecimal(double value, int decimalPlaces)
         {
-            if (typeof(T) == typeof(double) || typeof(T) == typeof(float))
-            {
-                double factor = Math.Pow(10, decimalPlaces);
-                double result = Math.Floor(Convert.ToDouble(value) * factor) / factor;
-                return (T)Convert.ChangeType(result, typeof(T));
-            }
-            else
-                throw new ArgumentException($"{typeof(T)} is not Decimal type.");
+            double factor = Math.Pow(10, decimalPlaces);
+            double result = (int)(value * factor) / factor;
+            return result;
         }
 
         public static double GetSampleStandardDeviation(List<double> valueList, double mean)
