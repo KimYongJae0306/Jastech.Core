@@ -28,44 +28,109 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tplLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.lblStep = new System.Windows.Forms.Label();
+            this.lblTaskName = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.pbxLoading = new System.Windows.Forms.PictureBox();
+            this.tplLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLoading)).BeginInit();
             this.SuspendLayout();
             // 
-            // timer1
+            // tplLayout
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.tplLayout.ColumnCount = 2;
+            this.tplLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tplLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tplLayout.Controls.Add(this.lblStep, 0, 3);
+            this.tplLayout.Controls.Add(this.lblTaskName, 0, 0);
+            this.tplLayout.Controls.Add(this.progressBar, 0, 2);
+            this.tplLayout.Controls.Add(this.pbxLoading, 1, 1);
+            this.tplLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tplLayout.Location = new System.Drawing.Point(0, 0);
+            this.tplLayout.Name = "tplLayout";
+            this.tplLayout.RowCount = 4;
+            this.tplLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tplLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tplLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tplLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tplLayout.Size = new System.Drawing.Size(540, 90);
+            this.tplLayout.TabIndex = 1;
             // 
-            // pictureBox1
+            // lblStep
             // 
-            this.pictureBox1.Image = global::Jastech.Framework.Winform.Properties.Resources.LoadingCircle_Green_br2;
-            this.pictureBox1.Location = new System.Drawing.Point(40, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.lblStep.AutoSize = true;
+            this.tplLayout.SetColumnSpan(this.lblStep, 2);
+            this.lblStep.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStep.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblStep.ForeColor = System.Drawing.Color.White;
+            this.lblStep.Location = new System.Drawing.Point(3, 75);
+            this.lblStep.Name = "lblStep";
+            this.lblStep.Size = new System.Drawing.Size(534, 15);
+            this.lblStep.TabIndex = 5;
+            this.lblStep.Text = "step";
+            this.lblStep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTaskName
+            // 
+            this.lblTaskName.AutoSize = true;
+            this.tplLayout.SetColumnSpan(this.lblTaskName, 2);
+            this.lblTaskName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTaskName.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTaskName.ForeColor = System.Drawing.Color.White;
+            this.lblTaskName.Location = new System.Drawing.Point(3, 0);
+            this.lblTaskName.Name = "lblTaskName";
+            this.lblTaskName.Size = new System.Drawing.Size(534, 40);
+            this.lblTaskName.TabIndex = 3;
+            this.lblTaskName.Text = "TaskName";
+            this.lblTaskName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // progressBar
+            // 
+            this.tplLayout.SetColumnSpan(this.progressBar, 2);
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar.Location = new System.Drawing.Point(3, 63);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(534, 9);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 1;
+            // 
+            // pbxLoading
+            // 
+            this.pbxLoading.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxLoading.Image = global::Jastech.Framework.Winform.Properties.Resources.loading_processing;
+            this.pbxLoading.InitialImage = null;
+            this.pbxLoading.Location = new System.Drawing.Point(523, 43);
+            this.pbxLoading.Name = "pbxLoading";
+            this.pbxLoading.Size = new System.Drawing.Size(14, 14);
+            this.pbxLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLoading.TabIndex = 0;
+            this.pbxLoading.TabStop = false;
             // 
             // TaskProgressControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
-            this.Controls.Add(this.pictureBox1);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.tplLayout);
             this.Name = "TaskProgressControl";
-            this.Size = new System.Drawing.Size(544, 74);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Size = new System.Drawing.Size(540, 90);
+            this.Load += new System.EventHandler(this.TaskProgressControl_Load);
+            this.tplLayout.ResumeLayout(false);
+            this.tplLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLoading)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pbxLoading;
+        private System.Windows.Forms.TableLayoutPanel tplLayout;
+        private System.Windows.Forms.Label lblTaskName;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label lblStep;
     }
 }

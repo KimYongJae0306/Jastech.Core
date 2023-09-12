@@ -1,50 +1,94 @@
-﻿using System;
+﻿using Jastech.Framework.Winform.Properties;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jastech.Framework.Winform.Properties;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class TaskProgressControl : UserControl
     {
-        private FrameDimension _dimension;
-        private int _gifFrame;
-        private List<int> frames = new List<int>();
-        private Image checkImage = Resources.Check_Ani_64;
+        private string TaskName { get; set; }
+        private int TimeOut { get; set; }
+
+        private Task _task;
+        private CancellationTokenSource _cancellation = new CancellationTokenSource();
+        private Stopwatch _stopwatch;
+
+        public event RecieveProgressMessageEventHandler RecieveTaskProgressMessage;
+        public delegate void RecieveProgressMessageEventHandler(string message);
 
         public TaskProgressControl()
         {
             InitializeComponent();
-
-            _dimension = new FrameDimension(checkImage.FrameDimensionsList.FirstOrDefault());
-            _gifFrame = checkImage.GetFrameCount(_dimension);
-
-            frames.Add(0);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void TaskProgressControl_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = checkImage;
-            pictureBox1.Paint += PictureBox1_Paint;
-            ImageAnimator.Animate(checkImage, OnFrameChanged);
-            timer1.Enabled = false;
+            RunTask();
         }
 
-        private void PictureBox1_Paint(object sender, PaintEventArgs e)
+        public void CreateTask(string taskName, IEnumerator<string> steps, int timeOut)
         {
-            e.Graphics.DrawImage(checkImage, Point.Empty);
-        }
+            lblTaskName.Text = taskName;
+            TimeOut = timeOut;
 
-        private void OnFrameChanged(object sender, EventArgs e)
+            _task = new Task(() =>
+            {
+                while (steps.MoveNext())
+                {
+                    RecieveTaskProgressMessage?.Invoke($"{taskName} : {steps.Current}");
+                    BeginInvoke(new Action(() => lblStep.Text = steps.Current));
+                }
+            }, _cancellation.Token);
+        }
+        
+        private void RunTask()
         {
+            _task?.Start();
+            _stopwatch = Stopwatch.StartNew();
+
+            Task.Run(() =>
+            {
+                while(_task.Status == TaskStatus.Running && _stopwatch.ElapsedMilliseconds <= TimeOut)
+                {
+                    int newValue = (int)((double)_stopwatch.ElapsedMilliseconds / TimeOut * progressBar.Maximum) % progressBar.Maximum;
+                    if (progressBar.Value != newValue)
+                        BeginInvoke(new Action(() => progressBar.Value = newValue));
+                }
+
+                if(_task.Status == TaskStatus.RanToCompletion)
+                {
+                    RecieveTaskProgressMessage?.Invoke($"Task {TaskName} complete. time elapsed : {_stopwatch.ElapsedMilliseconds:F2}ms");
+                    BeginInvoke(new Action(() =>
+                    {
+                        pbxLoading.Image = Resources.loading_complete;
+                        progressBar.Value = progressBar.Maximum;
+                    }));
+                }
+                else if (_task.Status == TaskStatus.Faulted)
+                {
+                    RecieveTaskProgressMessage?.Invoke($"Task {TaskName} error occurred. time elapsed : {_stopwatch.ElapsedMilliseconds:F2}ms");
+                    BeginInvoke(new Action(() => pbxLoading.Image = Resources.Warning));
+                }
+                else if (_task.Status == TaskStatus.Canceled)
+                {
+                    RecieveTaskProgressMessage?.Invoke($"Task {TaskName} canceled. time elapsed : {_stopwatch.ElapsedMilliseconds:F2}ms");
+                    BeginInvoke(new Action(() => pbxLoading.Image = Resources.Warning));
+                }
+                else if (_stopwatch.ElapsedMilliseconds > TimeOut)
+                { 
+                    RecieveTaskProgressMessage?.Invoke($"Task {TaskName} timed out. time elapsed : {_stopwatch.ElapsedMilliseconds:F2}ms");
+                    BeginInvoke(new Action(() => pbxLoading.Image = Resources.Warning));
+                }
+                else
+                {
+                    RecieveTaskProgressMessage?.Invoke($"Task {TaskName} {_task.Status} unhandled. time elapsed : {_stopwatch.ElapsedMilliseconds:F2}ms");
+                    BeginInvoke(new Action(() => pbxLoading.Image = Resources.Warning));
+                }
+            }, _cancellation.Token);
         }
     }
 }

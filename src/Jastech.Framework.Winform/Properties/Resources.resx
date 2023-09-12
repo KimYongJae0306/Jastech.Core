@@ -274,10 +274,10 @@
   <data name="Panning_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Panning_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LoadingCircle_Green1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoadingCircle_Green.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_complete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading_complete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LoadingCircle_Green_br2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoadingCircle_Green_br2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loading_processing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading_processing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

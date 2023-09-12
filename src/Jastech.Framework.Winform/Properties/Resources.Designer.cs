@@ -323,9 +323,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap LoadingCircle_Green_br2 {
+        internal static System.Drawing.Bitmap loading_complete {
             get {
-                object obj = ResourceManager.GetObject("LoadingCircle_Green_br2", resourceCulture);
+                object obj = ResourceManager.GetObject("loading_complete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +333,9 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap LoadingCircle_Green1 {
+        internal static System.Drawing.Bitmap loading_processing {
             get {
-                object obj = ResourceManager.GetObject("LoadingCircle_Green1", resourceCulture);
+                object obj = ResourceManager.GetObject("loading_processing", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
