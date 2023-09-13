@@ -10,17 +10,25 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
     public class VisionProPatternMatchingParam : PatternMatching
     {
+        #region 속성
         [JsonIgnore]
         private CogPMAlignTool PMTool { get; set; }
+        #endregion
 
+        #region 이벤트
+        [JsonIgnore]
+        public ChangedTrainedDelegate ChangedTrained;
+        #endregion
+
+        #region 델리게이트
+        public delegate void ChangedTrainedDelegate(bool isTrained);
+        #endregion
+
+        #region 메서드
         public CogPMAlignTool GetTool()
         {
             return PMTool;
         }
-
-        public ChangedTrainedDelegate ChangedTrained;
-
-        public delegate void ChangedTrainedDelegate(bool isTrained);
 
         public void SetTrainRegion(CogRectangle roi)
         {
@@ -37,7 +45,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         private void TrainRegion_Changed(object sender, CogChangedEventArgs e)
         {
-            if(sender is CogPMAlignPattern tool)
+            if (sender is CogPMAlignPattern tool)
             {
                 ChangedTrained?.Invoke(tool.Trained);
             }
@@ -115,7 +123,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
             PMTool.Pattern.Changed -= TrainRegion_Changed;
             PMTool.Pattern.Changed += TrainRegion_Changed;
-   
+
             return PMTool.Pattern.GetTrainedPatternImage();
         }
 
@@ -238,7 +246,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            if(PMTool != null)
+            if (PMTool != null)
             {
                 if (PMTool.Pattern.TrainImage != null)
                 {
@@ -266,8 +274,9 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
                     PMTool.Results.Dispose();
                 PMTool.Dispose();
             }
-            
+
             PMTool = null;
         }
+        #endregion
     }
 }
