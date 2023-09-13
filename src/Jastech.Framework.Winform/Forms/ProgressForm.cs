@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -29,6 +30,8 @@ namespace Jastech.Framework.Winform.Forms
         private Task RunCheckingTask { get; set; }
 
         private string SubjectName { get; set; }
+
+        private bool RunSuccessfully { get; set; } = false;
         #endregion
 
         #region 이벤트
@@ -47,7 +50,11 @@ namespace Jastech.Framework.Winform.Forms
         #region 메서드
         private void ProgressForm_Load(object sender, EventArgs e)
         {
-            RunChecker();
+            if (TrackingTask == null || RunCheckingTask == null)
+                Close();
+
+            TrackingTask.Start();
+            RunCheckingTask.Start();
         }
 
         private void ProgressForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -56,25 +63,38 @@ namespace Jastech.Framework.Winform.Forms
             ControlDisplayHelper.DisposeChildControls(this);
         }
 
-        public void RunTask<T>(string subjectName, Func<T> func)
+        public void SetRunTask(string subjectName, Func<bool> func)
         {
             SubjectName = subjectName;
-            TrackingTask = Task.Run(func, _cancellation.Token);
-            Logger.Write(LogType.System, $"Run task {SubjectName}.");
-        }
-
-        public void RunTask(string subjectName, Action action)
-        {
-            SubjectName = subjectName;
-            TrackingTask = Task.Run(action, _cancellation.Token);
-
-            Logger.Write(LogType.System, $"Run task {SubjectName}.");
-        }
-
-        private void RunChecker()
-        {
-            RunCheckingTask = Task.Run(async () =>
+            TrackingTask = new Task(() =>
             {
+                RunSuccessfully = func();
+            }, _cancellation.Token);
+            SetRunCheckingTask();
+
+            Logger.Write(LogType.System, $"Run task {SubjectName}.");
+        }
+
+        public void SetRunTask(string subjectName, Action action)
+        {
+            SubjectName = subjectName;
+            TrackingTask = new Task(() =>
+            {
+                action();
+                RunSuccessfully = true;
+            }, _cancellation.Token);
+            SetRunCheckingTask();
+
+            Logger.Write(LogType.System, $"Run task {SubjectName}.");
+        }
+
+        private void SetRunCheckingTask()
+        {
+            RunCheckingTask = new Task(async () =>
+            {
+                while (TrackingTask.Status == TaskStatus.WaitingToRun)
+                    await Task.Delay(100);
+
                 var loopString = GetWaitMessage();
                 while (TrackingTask.Status == TaskStatus.Running && _cancellation.IsCancellationRequested == false)
                 {
@@ -101,14 +121,14 @@ namespace Jastech.Framework.Winform.Forms
                     }));
                     Logger.Write(LogType.System, $"Task {SubjectName} cencelled.");
                 }
-                else if (TrackingTask.Status != TaskStatus.RanToCompletion)
+                else if (RunSuccessfully == false)
                 {
                     BeginInvoke(new Action(() =>
                     {
-                        lblProgress.Text = $"{SubjectName} error occurred.";
+                        lblProgress.Text = $"{SubjectName} failed.";
                         pbxLoading.Image = Resources.Warning;
                     }));
-                    Logger.Write(LogType.System, $"Task {SubjectName} error occurred.");
+                    Logger.Write(LogType.System, $"Task {SubjectName} failed.");
                 }
                 else
                 {
@@ -122,6 +142,23 @@ namespace Jastech.Framework.Winform.Forms
                     Logger.Write(LogType.System, $"Task {SubjectName} completed.");
                 }
             }, _cancellation.Token);
+        }
+
+        private async void btnCancel_Click(object sender, EventArgs e)
+        {
+            bool isRunCancelled = TrackingTask?.Status == TaskStatus.Running;
+
+            _cancellation.Cancel();
+            StopInnerLoop?.Invoke();
+
+            RunCheckingTask?.Wait();
+            TrackingTask?.Wait();
+
+            if (isRunCancelled)
+            {
+                new MessageConfirmForm { Message = $"{SubjectName} cancelled." }.ShowDialog();
+                Logger.Write(LogType.System, $"Task {SubjectName} cancelled by user.");
+            }
         }
 
         private IEnumerator<string> GetWaitMessage()
@@ -141,23 +178,6 @@ namespace Jastech.Framework.Winform.Forms
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
                 Location = new Point(Left - (_mousePoint.X - e.X), Top - (_mousePoint.Y - e.Y));
-        }
-
-        private async void btnCancel_Click(object sender, EventArgs e)
-        {
-            bool isRunningStop = TrackingTask.Status == TaskStatus.Running;
-
-            _cancellation.Cancel();
-            StopInnerLoop?.Invoke();
-
-            RunCheckingTask?.Wait();
-            TrackingTask?.Wait();
-
-            if (isRunningStop)
-            {
-                new MessageConfirmForm { Message = $"{SubjectName} cancelled." }.ShowDialog();
-                Logger.Write(LogType.System, $"Task {SubjectName} cancelled by user.");
-            }
         }
         #endregion
     }
