@@ -1,4 +1,5 @@
-﻿using Jastech.Framework.Util.Helper;
+﻿using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Helper;
 using Jastech.Framework.Winform.Properties;
 using System;
@@ -21,23 +22,31 @@ namespace Jastech.Framework.Winform.Forms
         #region 필드
         private Point _mousePoint = Point.Empty;
 
+        private IEnumerator<string> _waitMessages = GetWaitMessage();
+
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
+
+        private readonly Queue<(string name, Task behavior, StopLoopEventHandler stopLoop)> taskQueue = new Queue<(string, Task, StopLoopEventHandler)>();
+
+        private int taskCount;
         #endregion
 
         #region 속성
         private Task TrackingTask { get; set; }
 
-        private Task RunCheckingTask { get; set; }
+        private Task CheckingTask { get; set; }
 
         private string SubjectName { get; set; }
 
-        private bool RunSuccessfully { get; set; } = false;
+        private RunStatus Status { get; set; } = RunStatus.Ready;
         #endregion
 
         #region 이벤트
         public event StopLoopEventHandler StopInnerLoop;
 
         public delegate void StopLoopEventHandler();
+
+        public delegate bool AxisHomingEventHandler(AxisName axisName);
         #endregion
 
         #region 생성자
@@ -50,118 +59,178 @@ namespace Jastech.Framework.Winform.Forms
         #region 메서드
         private void ProgressForm_Load(object sender, EventArgs e)
         {
-            if (TrackingTask == null || RunCheckingTask == null)
-                Close();
+        }
 
+        public void StartTask()
+        {
+            btnConfirm.Text = "Cancel";
+            pbxLoading.Image = Resources.loading_processing;    // Task, Thread에서 호출하지 말 것
+            Status = RunStatus.Running;
+
+            var currentTask = taskQueue.Dequeue();
+            SubjectName = currentTask.name;
+            TrackingTask = currentTask.behavior;
+            StopInnerLoop = currentTask.stopLoop;
+
+            SetRunCheckingTask();
+            CheckingTask.Start();
             TrackingTask.Start();
-            RunCheckingTask.Start();
+
+            Logger.Write(LogType.System, $"Run task {SubjectName}.");
+        }
+
+        public async void StartAllTasks()
+        {
+            taskCount = taskQueue.Count;
+            while (taskQueue.Count != 0 )
+            {
+                if (Status == RunStatus.Ready)
+                    StartTask();
+                await Task.Delay(200);
+            }
+        }
+
+        private void ProgressForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            taskQueue.Clear();
+            CheckAlert();
         }
 
         private void ProgressForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            _cancellation.Dispose();
+            _waitMessages.Dispose();
+            TrackingTask?.Dispose();
+            CheckingTask?.Dispose();
             ControlDisplayHelper.DisposeDisplay(pbxLoading);
             ControlDisplayHelper.DisposeChildControls(this);
         }
 
-        public void SetRunTask(string subjectName, Func<bool> func)
+        public void Add(string subjectName, Action action, StopLoopEventHandler stopLoopEvent)
         {
-            SubjectName = subjectName;
-            TrackingTask = new Task(() =>
-            {
-                RunSuccessfully = func();
-            }, _cancellation.Token);
-            SetRunCheckingTask();
+            (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
 
-            Logger.Write(LogType.System, $"Run task {SubjectName}.");
-        }
-
-        public void SetRunTask(string subjectName, Action action)
-        {
-            SubjectName = subjectName;
-            TrackingTask = new Task(() =>
+            newTask.name = subjectName;
+            newTask.behavior = new Task(() =>
             {
                 action();
-                RunSuccessfully = true;
+                Status = RunStatus.Complete;
             }, _cancellation.Token);
-            SetRunCheckingTask();
+            newTask.stopLoop = stopLoopEvent;
 
-            Logger.Write(LogType.System, $"Run task {SubjectName}.");
+            taskQueue.Enqueue(newTask);
+        }
+
+        public void Add(string subjectName, Func<bool> func, StopLoopEventHandler stopLoopEvent)
+        {
+            (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
+
+            newTask.name = subjectName;
+            newTask.behavior = new Task(() =>
+            {
+                if (func() == true)
+                    Status = RunStatus.Complete;
+                else
+                    Status = RunStatus.Failed;
+            }, _cancellation.Token);
+            newTask.stopLoop = stopLoopEvent;
+
+            taskQueue.Enqueue(newTask);
+        }
+
+        public void Add(string subjectName, AxisHomingEventHandler homingEvent, AxisName homingAxis, StopLoopEventHandler stopLoopEvent)
+        {
+            (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
+
+            newTask.name = subjectName;
+            newTask.behavior = new Task(() =>
+            {
+                if (homingEvent?.Invoke(homingAxis) == true)
+                    Status = RunStatus.Complete;
+                else
+                    Status = RunStatus.Failed;
+            }, _cancellation.Token);
+            newTask.stopLoop = stopLoopEvent;
+
+            taskQueue.Enqueue(newTask);
         }
 
         private void SetRunCheckingTask()
         {
-            RunCheckingTask = new Task(async () =>
+            CheckingTask = new Task(async () =>
             {
-                while (TrackingTask.Status == TaskStatus.WaitingToRun)
-                    await Task.Delay(100);
-
-                var loopString = GetWaitMessage();
-                while (TrackingTask.Status == TaskStatus.Running && _cancellation.IsCancellationRequested == false)
+                while (Status == RunStatus.Ready || Status == RunStatus.Running)
                 {
-                    if(loopString.MoveNext() == false)
-                    {
-                        loopString = GetWaitMessage();
-                        loopString.MoveNext();
-                    }
-                    BeginInvoke(new Action(() =>
-                    {
-                        lblProgress.Text = $"Now {SubjectName} in progress.";
-                        lblWaitMessage.Text = loopString.Current;
-                    }));
+                    if (_cancellation.IsCancellationRequested == true)
+                        Status = RunStatus.Cancelled;
+                    else if (Status == RunStatus.Running)
+                        ShowWaitMessages();
+
                     await Task.Delay(200);
                 }
 
-                BeginInvoke(new Action(() => lblWaitMessage.Text = string.Empty));
-                if (_cancellation.IsCancellationRequested == true)
-                {
-                    BeginInvoke(new Action(() =>
-                    {
-                        lblProgress.Text = $"{SubjectName} cancelled.";
-                        pbxLoading.Image = Resources.Warning;
-                    }));
-                    Logger.Write(LogType.System, $"Task {SubjectName} cencelled.");
-                }
-                else if (RunSuccessfully == false)
-                {
-                    BeginInvoke(new Action(() =>
-                    {
-                        lblProgress.Text = $"{SubjectName} failed.";
-                        pbxLoading.Image = Resources.Warning;
-                    }));
-                    Logger.Write(LogType.System, $"Task {SubjectName} failed.");
-                }
-                else
-                {
-                    BeginInvoke(new Action(() =>
-                    {
-                        lblProgress.Text = $"{SubjectName} completed.";
-                        pbxLoading.Image = Resources.loading_complete;
-                        lblWaitMessage.Text = string.Empty;
-                        btnConfirm.Text = "OK";
-                    }));
-                    Logger.Write(LogType.System, $"Task {SubjectName} completed.");
-                }
+                ShowResult();
+                Status = RunStatus.Ready;
             }, _cancellation.Token);
         }
 
-        private async void btnCancel_Click(object sender, EventArgs e)
+        private void ShowWaitMessages()
         {
-            bool isRunCancelled = TrackingTask?.Status == TaskStatus.Running;
+            if (Visible == false)
+                return;
 
-            _cancellation.Cancel();
-            StopInnerLoop?.Invoke();
-
-            RunCheckingTask?.Wait();
-            TrackingTask?.Wait();
-
-            if (isRunCancelled)
+            if (_waitMessages.MoveNext() == false)
             {
-                new MessageConfirmForm { Message = $"{SubjectName} cancelled." }.ShowDialog();
-                Logger.Write(LogType.System, $"Task {SubjectName} cancelled by user.");
+                _waitMessages = GetWaitMessage();
+                _waitMessages.MoveNext();
+            }
+
+            BeginInvoke(new Action(() =>
+            {
+                lblProgress.Text = $"Now {SubjectName} in progress ({taskCount}/{taskCount - taskQueue.Count})";
+                lblWaitMessage.Text = _waitMessages.Current;
+            }));
+        }
+
+        private void ShowResult()
+        {
+            if (Visible == false)
+                return;
+
+            string resultMessage = $"{SubjectName} {Status}";
+            Bitmap resultImage = Status == RunStatus.Complete ? Resources.loading_complete : Resources.Warning;
+            BeginInvoke(new Action(() =>
+            {
+                lblProgress.Text = resultMessage;
+                pbxLoading.Image = resultImage;
+                lblWaitMessage.Text = string.Empty;
+                btnConfirm.Text = "OK";
+            }));
+            Logger.Write(LogType.System, $"Task {resultMessage}");
+        }
+
+        private void CheckAlert()
+        {
+            if (Status == RunStatus.Failed || Status == RunStatus.Cancelled)
+            {
+                string message = $"{SubjectName} {Status}";
+                var alert = new MessageConfirmForm { Message = message };
+                Logger.Write(LogType.System, message);
+
+                alert.ShowDialog();
             }
         }
 
-        private IEnumerator<string> GetWaitMessage()
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            _cancellation.Cancel();
+            StopInnerLoop?.Invoke();
+
+            CheckingTask?.Wait();
+            TrackingTask?.Wait();
+        }
+
+        private static IEnumerator<string> GetWaitMessage()
         {
             yield return $"Please wait a moment.";
             yield return $"Please wait a moment..";
@@ -180,5 +249,14 @@ namespace Jastech.Framework.Winform.Forms
                 Location = new Point(Left - (_mousePoint.X - e.X), Top - (_mousePoint.Y - e.Y));
         }
         #endregion
+
+        private enum RunStatus
+        {
+            Ready,
+            Running,
+            Complete,
+            Failed,
+            Cancelled,
+        }
     }
 }

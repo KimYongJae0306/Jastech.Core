@@ -69,16 +69,15 @@
             // 
             this.lblProgress.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblProgress.ForeColor = System.Drawing.Color.White;
-            this.lblProgress.Location = new System.Drawing.Point(87, 202);
+            this.lblProgress.Location = new System.Drawing.Point(-4, 202);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(412, 36);
+            this.lblProgress.Size = new System.Drawing.Size(588, 36);
             this.lblProgress.TabIndex = 3;
             this.lblProgress.Text = "In progress";
             this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbxLoading
             // 
-            this.pbxLoading.Image = global::Jastech.Framework.Winform.Properties.Resources.loading_processing;
             this.pbxLoading.Location = new System.Drawing.Point(266, 122);
             this.pbxLoading.Name = "pbxLoading";
             this.pbxLoading.Size = new System.Drawing.Size(55, 55);
@@ -117,6 +116,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgressForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProgressForm_FormClosed);
             this.Load += new System.EventHandler(this.ProgressForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLoading)).EndInit();
