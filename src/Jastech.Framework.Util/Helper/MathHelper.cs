@@ -103,6 +103,13 @@ namespace Jastech.Framework.Util.Helper
             return result;
         }
 
+        public static double GetFloorDecimal(string value, int decimalPlaces)
+        {
+            double dValue = Convert.ToDouble(value);
+
+            return GetFloorDecimal(dValue, decimalPlaces);
+        }
+
         public static double GetSampleStandardDeviation(List<double> valueList, double mean)
         {
             double squaredDifferencesSum = valueList.Sum(value => Math.Pow(value - mean, 2));
