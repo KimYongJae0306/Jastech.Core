@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitleBar = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
             this.pbxLoading = new System.Windows.Forms.PictureBox();
@@ -36,17 +36,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxLoading)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitleBar
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(584, 48);
-            this.label1.TabIndex = 1;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Topbar_MouseDown);
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Topbar_MouseMove);
+            this.lblTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.lblTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitleBar.ForeColor = System.Drawing.Color.White;
+            this.lblTitleBar.Location = new System.Drawing.Point(0, 0);
+            this.lblTitleBar.Name = "lblTitleBar";
+            this.lblTitleBar.Size = new System.Drawing.Size(584, 48);
+            this.lblTitleBar.TabIndex = 1;
+            this.lblTitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Topbar_MouseDown);
+            this.lblTitleBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Topbar_MouseMove);
             // 
             // btnConfirm
             // 
@@ -106,7 +107,7 @@
             this.Controls.Add(this.lblWaitMessage);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnConfirm);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitleBar);
             this.Controls.Add(this.pbxLoading);
             this.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -127,7 +128,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbxLoading;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitleBar;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Label lblWaitMessage;

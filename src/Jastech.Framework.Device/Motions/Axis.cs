@@ -99,8 +99,8 @@ namespace Jastech.Framework.Device.Motions
 
         public bool StartHome()
         {
-            IsHomeFound = Motion.StartHome(AxisNo);
-            return IsHomeFound;
+            IsHomeFound = false;
+            return Motion.StartHome(AxisNo);
         }
 
         public string GetCurrentMotionStatus()
@@ -121,6 +121,11 @@ namespace Jastech.Framework.Device.Motions
         public bool IsPositiveLimit()
         {
             return Motion.IsPositiveLimit(AxisNo);
+        }
+
+        public bool IsMoving()
+        {
+            return Motion.IsMoving(AxisNo);
         }
         #endregion
     }

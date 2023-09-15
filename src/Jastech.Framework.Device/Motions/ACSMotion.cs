@@ -130,13 +130,18 @@ namespace Jastech.Framework.Device.Motions
 
         public override void StopMove(int axisNo)
         {
+            if (GetBufferRunningState(axisNo) == true)
+                Api.StopBuffer((ProgramBuffer)axisNo);
             Api.Kill((ACS.SPiiPlusNET.Axis)axisNo);
         }
 
         public override bool IsMoving(int axisNo)
         {
             var state = Api.GetMotorState((ACS.SPiiPlusNET.Axis)axisNo);
-            return Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE);
+            bool isBufferRunning = GetBufferRunningState(axisNo);
+            bool isAxisMoving = Convert.ToBoolean(state & MotorStates.ACSC_MST_MOVE);
+
+            return isBufferRunning || isAxisMoving;
         }
 
         public override void JogMove(int axisNo, Direction direction)
@@ -391,7 +396,6 @@ namespace Jastech.Framework.Device.Motions
 
             ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
             Api.RunBuffer((ProgramBuffer)axis, null);
-           // Api.GetAxisState
             return true;
         }
 
@@ -401,6 +405,16 @@ namespace Jastech.Framework.Device.Motions
                 return;
 
             Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
+        }
+
+        private bool GetBufferRunningState(int axisNo)
+        {
+            if (!Api.IsConnected)
+                return false;
+
+            var state = Api.GetProgramState((ProgramBuffer)axisNo);
+
+            return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
         #endregion
     }
