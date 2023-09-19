@@ -170,8 +170,7 @@ namespace Jastech.Framework.Winform.Forms
                     await Task.Delay(200);
                 }
 
-                ShowResult();
-                Status = RunStatus.Ready;
+                await ShowResult();
             }, _cancellation.Token);
         }
 
@@ -188,13 +187,13 @@ namespace Jastech.Framework.Winform.Forms
 
             BeginInvoke(new Action(() =>
             {
-                lblTitleBar.Text = $" Sequence({taskCount - taskQueue.Count} out of {taskCount})";
+                lblTitleBar.Text = $" Sequence ({taskCount - taskQueue.Count} out of {taskCount})";
                 lblProgress.Text = $"Now {SubjectName} in progress";
                 lblWaitMessage.Text = _waitMessages.Current;
             }));
         }
 
-        private void ShowResult()
+        private async Task ShowResult()
         {
             if (Visible == false)
                 return;
@@ -209,6 +208,11 @@ namespace Jastech.Framework.Winform.Forms
                 btnConfirm.Text = "OK";
             }));
             Logger.Write(LogType.System, $"Task {resultMessage}");
+
+            if (Status == RunStatus.Complete)
+                Status = RunStatus.Ready;
+
+            await Task.Delay(200);
         }
 
         private void CheckAlert()
