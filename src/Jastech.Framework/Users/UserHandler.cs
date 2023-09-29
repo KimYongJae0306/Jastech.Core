@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Jastech.Framework.Users
 {
-    public class UserHanlder
+    public class UserHandler
     {
         [JsonProperty]
         public List<User> UserList { get; set; } = new List<User>();
@@ -54,7 +54,7 @@ namespace Jastech.Framework.Users
         {
             if (File.Exists(filePath))
             {
-                UserHanlder temp = new UserHanlder();
+                UserHandler temp = new UserHandler();
                 JsonConvertHelper.LoadToExistingTarget(filePath, this);
             }
         }
@@ -66,9 +66,9 @@ namespace Jastech.Framework.Users
                 UserList.Remove(maker);
         }
 
-        public UserHanlder DeepCopy()
+        public UserHandler DeepCopy()
         {
-            return JsonConvertHelper.DeepCopy(this) as UserHanlder;
+            return JsonConvertHelper.DeepCopy(this) as UserHandler;
         }
     }
 }

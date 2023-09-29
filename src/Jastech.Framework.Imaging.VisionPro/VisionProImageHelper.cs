@@ -28,12 +28,22 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static ICogImage Load(string fileName)
         {
-            CogImageFile cogImageFile = new CogImageFile();
+            ICogImage image;
 
-            cogImageFile.Open(fileName, CogImageFileModeConstants.Read);
-
-            ICogImage image = cogImageFile[0];
-            cogImageFile.Close();
+            if (fileName.ToLower().Contains(".jpeg") == false)
+            {
+                CogImageFile cogImageFile = new CogImageFile();
+                cogImageFile.Open(fileName, CogImageFileModeConstants.Read);
+                image = cogImageFile[0];
+                cogImageFile.Close();
+            }
+            else
+            {
+                CogImageFileJPEG cogImageFileJPEG = new CogImageFileJPEG();
+                cogImageFileJPEG.Open(fileName, CogImageFileModeConstants.Read);
+                image = cogImageFileJPEG[0];
+                cogImageFileJPEG.Close();
+            }
 
             return image;
         }

@@ -10,7 +10,7 @@ namespace Jastech.Framework.Winform.Forms
         #region 속성
         public User CurrentUser { get; set; }
 
-        public UserHanlder UserHandler { get; set; }
+        public UserHandler UserHandler { get; set; }
         #endregion
 
         #region 이벤트
