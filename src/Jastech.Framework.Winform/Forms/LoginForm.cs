@@ -45,17 +45,17 @@ namespace Jastech.Framework.Winform.Forms
 
             if (type == AuthorityType.None)
             {
-                lblOperator.ForeColor = Color.Blue;
+                lblOperator.ForeColor = Color.DodgerBlue;
                 txtPasword.Enabled = false;
             }
             else if (type == AuthorityType.Engineer)
             {
-                lblEngineer.ForeColor = Color.Blue;
+                lblEngineer.ForeColor = Color.DodgerBlue;
                 txtPasword.Enabled = true;
             }
             else if (type == AuthorityType.Maker)
             {
-                lblMaker.ForeColor = Color.Blue;
+                lblMaker.ForeColor = Color.DodgerBlue;
                 txtPasword.Enabled = true;
             }
         }

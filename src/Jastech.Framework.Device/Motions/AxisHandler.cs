@@ -116,16 +116,32 @@ namespace Jastech.Framework.Device.Motions
 
                     while (true)
                     {
-                        if(HomeTaskCancel.IsCancellationRequested)
+                        if (HomeTaskCancel.IsCancellationRequested)
                         {
                             StopMove();
                             return;
                         }
+
                         if (HomeCompleted(homeAxisList))
                             break;
 
                         Thread.Sleep(300);
                     }
+
+                    // 작업 중
+                    //do
+                    //{
+                    //    if (HomeTaskCancel.IsCancellationRequested)
+                    //    {
+                    //        StopMove();
+                    //        return;
+                    //    }
+
+                    //    if (HomeCompleted(homeAxisList))
+                    //        break;
+
+                    //    Thread.Sleep(300);
+                    //} while (true);
                 }
             }
         }

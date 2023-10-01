@@ -52,12 +52,14 @@ namespace Jastech.Framework.Device.Motions
 
         public void TurnOnServo()
         {
-            Motion.TurnOnServo(AxisNo, true);
+            if (Motion.IsEnable(AxisNo) == false)
+                Motion.TurnOnServo(AxisNo, true);
         }
 
         public void TurnOffServo()
         {
-            Motion.TurnOnServo(AxisNo, false);
+            if (Motion.IsEnable(AxisNo) == true)
+                Motion.TurnOnServo(AxisNo, false);
         }
 
         public void JogMove(Direction direction)

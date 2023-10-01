@@ -67,8 +67,11 @@ namespace Jastech.Framework.Device.Plcs.Melsec
 
         private void Data_Received(byte[] packet)
         {
-            MelsecParser.Parse(packet, out byte[] data);
-            OnPlcReceived(data);
+            if (MelsecParser.MessageType == MessageType.Read)
+            {
+                MelsecParser.Parse(packet, out byte[] data);
+                OnPlcReceived(data);
+            }
         }
 
         public override void Write(string address, byte[] value)
