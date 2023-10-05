@@ -27,19 +27,17 @@ namespace Jastech.Framework.Winform.Forms
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
-        private readonly Queue<(string name, Task behavior, StopLoopEventHandler stopLoop)> taskQueue = new Queue<(string, Task, StopLoopEventHandler)>();
-
-        private int taskCount;
+        private readonly List<(string name, Task behavior, StopLoopEventHandler stopLoop)> taskList = new List<(string, Task, StopLoopEventHandler)>();
         #endregion
 
         #region 속성
-        private Task TrackingTask { get; set; }
-
         private Task CheckingTask { get; set; }
 
         private string SubjectName { get; set; }
 
         private RunStatus Status { get; set; } = RunStatus.Ready;
+
+        private RunMode Mode { get; set; } = RunMode.Sequential;
         #endregion
 
         #region 이벤트
@@ -55,45 +53,75 @@ namespace Jastech.Framework.Winform.Forms
         {
             InitializeComponent();
         }
+
+        public ProgressForm(string subjectName, RunMode mode = RunMode.Sequential)
+        {
+            InitializeComponent();
+
+            SubjectName = subjectName;
+            Mode = mode;
+        }
         #endregion
 
         #region 메서드
         private void ProgressForm_Load(object sender, EventArgs e)
         {
+            StartAllTasks();
+            Focus();
         }
 
-        public void StartTask()
+        public void InitializeRunStatus()
         {
-            btnConfirm.Text = "Cancel";
-            pbxLoading.Image = Resources.loading_processing;    // Task, Thread에서 호출하지 말 것
+            BeginInvoke(new Action(() =>
+            {
+                btnConfirm.Text = "Cancel";
+                pbxLoading.Image = Resources.loading_processing;
+            }));
             Status = RunStatus.Running;
-
-            var currentTask = taskQueue.Dequeue();
-            SubjectName = currentTask.name;
-            TrackingTask = currentTask.behavior;
-            StopInnerLoop = currentTask.stopLoop;
 
             SetRunCheckingTask();
             CheckingTask.Start();
-            TrackingTask.Start();
-
-            Logger.Write(LogType.System, $"Run task {SubjectName}.");
         }
 
-        public async void StartAllTasks()
+        private async void StartAllTasks()
         {
-            taskCount = taskQueue.Count;
-            while (taskQueue.Count != 0 )
+            if (Mode == RunMode.Sequential)
             {
-                if (Status == RunStatus.Ready)
-                    StartTask();
-                await Task.Delay(200);
+                foreach(var task in taskList)
+                {
+                    while (Status != RunStatus.Ready)
+                    {
+                        if (_cancellation.IsCancellationRequested == true)
+                            return;
+                        await Task.Delay(100);
+                    }
+
+                    InitializeRunStatus();
+                    Logger.Write(LogType.System, $"Run task {SubjectName = task.name}.");
+
+                    task.behavior.Start();
+                    await task.behavior;
+                    await ShowResult();
+                }
             }
+            else if (Mode == RunMode.Batch)
+            {
+                InitializeRunStatus();
+                Logger.Write(LogType.System, $"Run task {SubjectName}.");
+
+                taskList.ForEach(task => task.behavior.Start());
+                await Task.WhenAll(taskList.Select(task => task.behavior));
+                await ShowResult();
+            }
+
+            if (pbxLoading.Image == Resources.loading_complete)
+                btnConfirm.DialogResult = DialogResult.OK;
+            else
+                btnConfirm.DialogResult = DialogResult.Cancel;
         }
 
         private void ProgressForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            taskQueue.Clear();
             CheckAlert();
         }
 
@@ -101,13 +129,12 @@ namespace Jastech.Framework.Winform.Forms
         {
             _cancellation.Dispose();
             _waitMessages.Dispose();
-            TrackingTask?.Dispose();
             CheckingTask?.Dispose();
             ControlDisplayHelper.DisposeDisplay(pbxLoading);
             ControlDisplayHelper.DisposeChildControls(this);
         }
 
-        public void Add(string subjectName, Action action, StopLoopEventHandler stopLoopEvent)
+        public void Add(string subjectName, Action action, StopLoopEventHandler stopLoopEvent = null)
         {
             (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
 
@@ -119,10 +146,10 @@ namespace Jastech.Framework.Winform.Forms
             }, _cancellation.Token);
             newTask.stopLoop = stopLoopEvent;
 
-            taskQueue.Enqueue(newTask);
+            taskList.Add(newTask);
         }
 
-        public void Add(string subjectName, Func<bool> func, StopLoopEventHandler stopLoopEvent)
+        public void Add(string subjectName, Func<bool> func, StopLoopEventHandler stopLoopEvent = null)
         {
             (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
 
@@ -136,10 +163,10 @@ namespace Jastech.Framework.Winform.Forms
             }, _cancellation.Token);
             newTask.stopLoop = stopLoopEvent;
 
-            taskQueue.Enqueue(newTask);
+            taskList.Add(newTask);
         }
 
-        public void Add(string subjectName, AxisHomingEventHandler homingEvent, AxisName homingAxis, StopLoopEventHandler stopLoopEvent)
+        public void Add(string subjectName, AxisHomingEventHandler homingEvent, AxisName homingAxis, StopLoopEventHandler stopLoopEvent = null)
         {
             (string name, Task behavior, StopLoopEventHandler stopLoop) newTask;
 
@@ -153,24 +180,39 @@ namespace Jastech.Framework.Winform.Forms
             }, _cancellation.Token);
             newTask.stopLoop = stopLoopEvent;
 
-            taskQueue.Enqueue(newTask);
+            taskList.Add(newTask);
         }
 
         private void SetRunCheckingTask()
         {
             CheckingTask = new Task(async () =>
             {
-                while (Status == RunStatus.Ready || Status == RunStatus.Running)
+                if (Mode == RunMode.Sequential)
                 {
-                    if (_cancellation.IsCancellationRequested == true)
-                        Status = RunStatus.Cancelled;
-                    else if (Status == RunStatus.Running)
-                        ShowWaitMessages();
+                    while (Status == RunStatus.Ready || Status == RunStatus.Running)
+                    {
+                        if (_cancellation.IsCancellationRequested == true)
+                            Status = RunStatus.Cancelled;
+                        else if (Status == RunStatus.Running)
+                            ShowWaitMessages();
 
-                    await Task.Delay(200);
+                        await Task.Delay(100);
+                    }
                 }
+                else if (Mode == RunMode.Batch)
+                {
+                    while (Status == RunStatus.Running || taskList.Count != taskList.Count(task => task.behavior.Status == TaskStatus.Running))
+                    {
+                        if (_cancellation.IsCancellationRequested == true)
+                            Status = RunStatus.Cancelled;
+                        else if (Status == RunStatus.Complete)
+                            Status = RunStatus.Running;
+                        else if (Status == RunStatus.Running)
+                            ShowWaitMessages();
 
-                await ShowResult();
+                        await Task.Delay(100);
+                    }
+                }
             }, _cancellation.Token);
         }
 
@@ -187,7 +229,7 @@ namespace Jastech.Framework.Winform.Forms
 
             BeginInvoke(new Action(() =>
             {
-                lblTitleBar.Text = $" Sequence ({taskCount - taskQueue.Count} out of {taskCount})";
+                lblTitleBar.Text = $" {Mode} ({taskList.Count(task => task.behavior.Status == TaskStatus.RanToCompletion)} out of {taskList.Count})";
                 lblProgress.Text = $"Now {SubjectName} in progress";
                 lblWaitMessage.Text = _waitMessages.Current;
             }));
@@ -202,6 +244,7 @@ namespace Jastech.Framework.Winform.Forms
             Bitmap resultImage = Status == RunStatus.Complete ? Resources.loading_complete : Resources.Warning;
             BeginInvoke(new Action(() =>
             {
+                lblTitleBar.Text = $" {Mode} ({taskList.Count(task => task.behavior.Status == TaskStatus.RanToCompletion)} out of {taskList.Count})";
                 lblProgress.Text = resultMessage;
                 pbxLoading.Image = resultImage;
                 lblWaitMessage.Text = string.Empty;
@@ -212,7 +255,7 @@ namespace Jastech.Framework.Winform.Forms
             if (Status == RunStatus.Complete)
                 Status = RunStatus.Ready;
 
-            await Task.Delay(200);
+            await Task.Delay(500);
         }
 
         private void CheckAlert()
@@ -230,10 +273,10 @@ namespace Jastech.Framework.Winform.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             _cancellation.Cancel();
-            StopInnerLoop?.Invoke();
-
             CheckingTask?.Wait();
-            TrackingTask?.Wait();
+
+            taskList.ForEach(task => task.stopLoop?.Invoke());
+            //taskList.Where(task => task.behavior.Status == TaskStatus.).ForEach(task => task.behavior?.Wait());
         }
 
         private static IEnumerator<string> GetWaitMessage()
@@ -263,6 +306,12 @@ namespace Jastech.Framework.Winform.Forms
             Complete,
             Failed,
             Cancelled,
+        }
+
+        public enum RunMode
+        {
+            Sequential,
+            Batch,
         }
     }
 }
