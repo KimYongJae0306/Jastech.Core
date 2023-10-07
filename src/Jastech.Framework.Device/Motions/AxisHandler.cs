@@ -65,7 +65,7 @@ namespace Jastech.Framework.Device.Motions
 
         public void StopMove()
         {
-            foreach (Axis axis in AxisList)
+            foreach (Axis axis in AxisList.Where(axis => axis.AxisNo > 0))
                 axis.StopMove();
         }
 

@@ -3,6 +3,7 @@ using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
@@ -69,6 +70,22 @@ namespace Jastech.Framework.Device.Motions
         public override bool Initialize()
         {
             base.Initialize();
+
+            try
+            {
+                if (Process.GetProcesses().Any(p => p.ProcessName.Contains("ACSCSRV")) == false)
+                {
+                    Process.Start(@"C:\Program Files (x86)\ACS Motion Control\SPiiPlus ADK Suite v2.60\User Mode Driver\ACSCSRV.exe");
+                    Thread.Sleep(1000);
+                }
+            }
+            catch
+            {
+                string message = "Failed to running ACS user-mode driver.\r\nNeed to verify excution path or SPiiPlus version.";
+                Console.WriteLine(message);
+                Logger.Write(LogType.System, message);
+                return false;
+            }
 
             if (Api != null && Api.IsConnected)
                 return false;

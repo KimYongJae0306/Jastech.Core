@@ -129,11 +129,11 @@ namespace Jastech.Framework.Winform.Forms
 
         private AuthorityType GetSelectedUserType()
         {
-            if (lblOperator.ForeColor == Color.Blue)
+            if (lblOperator.ForeColor != Color.White)
                 return AuthorityType.None;
-            if (lblEngineer.ForeColor == Color.Blue)
+            if (lblEngineer.ForeColor != Color.White)
                 return AuthorityType.Engineer;
-            if (lblMaker.ForeColor == Color.Blue)
+            if (lblMaker.ForeColor != Color.White)
                 return AuthorityType.Maker;
 
             return AuthorityType.None;
