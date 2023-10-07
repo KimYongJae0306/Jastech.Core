@@ -193,7 +193,6 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(40, 722);
             this.tableLayoutPanel4.TabIndex = 1;
-            this.tableLayoutPanel4.Visible = false;
             // 
             // button3
             // 

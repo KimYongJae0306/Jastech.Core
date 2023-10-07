@@ -76,7 +76,7 @@ namespace Jastech.Framework.Device.LAFCtrl
         public double ResolutionAxisZ { get; set; } = 10000.0;      // 1=0.1um, 10=1um 100 =10um 1000=100um 10000=1mm 
 
         [JsonProperty]
-        public double HomePosition_mm { get; set; } = 0.02;
+        public double HomePosition_mm { get; set; } = 0.025;
 
         [JsonProperty]
         public int MaxSppedAxisZ { get; set; } = 20;            // Hz

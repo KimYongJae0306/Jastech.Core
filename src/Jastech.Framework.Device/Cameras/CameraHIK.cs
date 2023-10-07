@@ -182,7 +182,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void SetExposureTime(double value)
         {
-            float expose = (float)(value * 1000.0F);
+            float expose = (float)(value);
             int nRet = _camera.MV_CC_SetFloatValue_NET("ExposureTime", expose);
             if (nRet != MyCamera.MV_OK)
             {

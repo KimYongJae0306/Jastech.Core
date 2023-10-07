@@ -92,6 +92,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogDisplayControl_Load(object sender, EventArgs e)
         {
             cogDisplayStatusBar.Display = cogDisplay;
+            btnFileOpen.Visible = false;
+            btnFitZoom.Visible = false;
+            btnPanning.Visible = false;
+            btnCustomCrossLine.Visible = false;
+            btnPointToLine.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
         }
 
         public void SetImage(ICogImage cogImage)
@@ -158,7 +165,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             int calcWidth = (int)(cogDisplay.DisplayRectangle.Width / cogDisplay.Zoom);
             int calcHeight = (int)(cogDisplay.DisplayRectangle.Height / cogDisplay.Zoom);
 
-            if (calcWidth == 0 || calcHeight == 0)
+            if (calcWidth <= 0 || calcHeight <= 0)
                 return null;
 
             rect.X = calcX;
