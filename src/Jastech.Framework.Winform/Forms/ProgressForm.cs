@@ -38,6 +38,10 @@ namespace Jastech.Framework.Winform.Forms
         private RunStatus Status { get; set; } = RunStatus.Ready;
 
         private RunMode Mode { get; set; } = RunMode.Sequential;
+
+        private bool AutoConfirm { get; set; } = false;
+
+        public bool IsSuccess { get; set; } = false;
         #endregion
 
         #region 이벤트
@@ -54,12 +58,13 @@ namespace Jastech.Framework.Winform.Forms
             InitializeComponent();
         }
 
-        public ProgressForm(string subjectName, RunMode mode = RunMode.Sequential)
+        public ProgressForm(string subjectName, RunMode mode = RunMode.Sequential, bool autoConfirm = false)
         {
             InitializeComponent();
 
             SubjectName = subjectName;
             Mode = mode;
+            AutoConfirm = autoConfirm;
         }
         #endregion
 
@@ -67,6 +72,7 @@ namespace Jastech.Framework.Winform.Forms
         private void ProgressForm_Load(object sender, EventArgs e)
         {
             StartAllTasks();
+            SetTopLevel(true);
             Focus();
         }
 
@@ -87,7 +93,7 @@ namespace Jastech.Framework.Winform.Forms
         {
             if (Mode == RunMode.Sequential)
             {
-                foreach(var task in taskList)
+                foreach (var task in taskList)
                 {
                     while (Status != RunStatus.Ready)
                     {
@@ -114,10 +120,8 @@ namespace Jastech.Framework.Winform.Forms
                 await ShowResult();
             }
 
-            if (pbxLoading.Image == Resources.loading_complete)
-                btnConfirm.DialogResult = DialogResult.OK;
-            else
-                btnConfirm.DialogResult = DialogResult.Cancel;
+            if (IsSuccess && AutoConfirm)
+                Close();
         }
 
         private void ProgressForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -189,11 +193,11 @@ namespace Jastech.Framework.Winform.Forms
             {
                 if (Mode == RunMode.Sequential)
                 {
-                    while (Status == RunStatus.Ready || Status == RunStatus.Running)
+                    while (Status == RunStatus.Running)
                     {
                         if (_cancellation.IsCancellationRequested == true)
                             Status = RunStatus.Cancelled;
-                        else if (Status == RunStatus.Running)
+                        else
                             ShowWaitMessages();
 
                         await Task.Delay(100);
@@ -201,13 +205,11 @@ namespace Jastech.Framework.Winform.Forms
                 }
                 else if (Mode == RunMode.Batch)
                 {
-                    while (Status == RunStatus.Running || taskList.Count != taskList.Count(task => task.behavior.Status == TaskStatus.Running))
+                    while (taskList.Count != taskList.Count(task => task.behavior.Status == TaskStatus.RanToCompletion))
                     {
                         if (_cancellation.IsCancellationRequested == true)
                             Status = RunStatus.Cancelled;
-                        else if (Status == RunStatus.Complete)
-                            Status = RunStatus.Running;
-                        else if (Status == RunStatus.Running)
+                        else
                             ShowWaitMessages();
 
                         await Task.Delay(100);
@@ -218,7 +220,7 @@ namespace Jastech.Framework.Winform.Forms
 
         private void ShowWaitMessages()
         {
-            if (Visible == false)
+            if (Created == false)
                 return;
 
             if (_waitMessages.MoveNext() == false)
@@ -237,11 +239,12 @@ namespace Jastech.Framework.Winform.Forms
 
         private async Task ShowResult()
         {
-            if (Visible == false)
+            if (Created == false)
                 return;
 
             string resultMessage = $"{SubjectName} {Status}";
-            Bitmap resultImage = Status == RunStatus.Complete ? Resources.loading_complete : Resources.Warning;
+            IsSuccess = Status == RunStatus.Complete;
+            Bitmap resultImage = IsSuccess ? Resources.loading_complete : Resources.Warning;
             BeginInvoke(new Action(() =>
             {
                 lblTitleBar.Text = $" {Mode} ({taskList.Count(task => task.behavior.Status == TaskStatus.RanToCompletion)} out of {taskList.Count})";
@@ -276,7 +279,6 @@ namespace Jastech.Framework.Winform.Forms
             CheckingTask?.Wait();
 
             taskList.ForEach(task => task.stopLoop?.Invoke());
-            //taskList.Where(task => task.behavior.Status == TaskStatus.).ForEach(task => task.behavior?.Wait());
         }
 
         private static IEnumerator<string> GetWaitMessage()
