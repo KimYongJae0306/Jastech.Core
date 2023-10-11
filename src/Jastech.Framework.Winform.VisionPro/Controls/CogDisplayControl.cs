@@ -65,6 +65,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public FontFamily TextFontFamily { get; set; } = new FontFamily("Malgun Gothic"); // Malgun Gothic : 맑은 고딕
 
         public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
+
+        public int ImageWidth{ get; set; } = 0;
+
+        public int ImageHeight { get; set; } = 0;
         #endregion
 
         #region 이벤트
@@ -108,6 +112,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 cogDisplay.Image = null;
             else
                 cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
+
+            SetImageSize(cogDisplay.Image.Width, cogDisplay.Image.Height);
+        }
+
+        public void SetImageSize(int imageWidth, int imageHeight)
+        {
+            ImageWidth = imageWidth;
+            ImageHeight = imageHeight;
         }
 
         public void DisposeImage()
@@ -134,18 +146,18 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.Image = null;
         }
         
-        public int ImageWidth()
+        public int GetImageWidth()
         {
             if (cogDisplay.Image != null)
-                return cogDisplay.Image.Width;
+                return ImageWidth;
 
             return 0;
         }
 
-        public int ImageHeight()
+        public int GetImageHeight()
         {
             if (cogDisplay.Image != null)
-                return cogDisplay.Image.Height;
+                return ImageHeight;
 
             return 0;
         }
@@ -281,8 +293,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
 
-            cogDisplay.PanX = cogDisplay.Image.Width / 2 - point.X;
-            cogDisplay.PanY = cogDisplay.Image.Height / 2 - point.Y;
+            cogDisplay.PanX = ImageWidth / 2 - point.X;
+            cogDisplay.PanY = ImageHeight / 2 - point.Y;
         }
 
         private void btnCustomCrossLine_Click(object sender, EventArgs e)
@@ -442,11 +454,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogSegment.Color = CogColorConstants.Green;
 
             //가로
-            cogSegment.SetStartEnd(0, cogDisplay.Image.Height / 2, cogDisplay.Image.Width, cogDisplay.Image.Height / 2);
+            cogSegment.SetStartEnd(0, ImageHeight / 2, ImageWidth, ImageHeight / 2);
             cogDisplay.StaticGraphics.Add(cogSegment, groupName);
 
             //세로
-            cogSegment.SetStartEnd(cogDisplay.Image.Width / 2, 0, cogDisplay.Image.Width / 2, cogDisplay.Image.Height);
+            cogSegment.SetStartEnd(ImageWidth / 2, 0, ImageWidth / 2, ImageHeight);
             cogDisplay.StaticGraphics.Add(cogSegment, groupName);
 
             cogSegment.Dispose();
@@ -472,10 +484,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogSegment.GraphicDOFEnable = CogLineSegmentDOFConstants.All;
             cogSegment.Color = CogColorConstants.Magenta;
 
-            cogSegment.SetStartEnd(0, calcY, cogDisplay.Image.Width, calcY);
+            cogSegment.SetStartEnd(0, calcY, ImageWidth, calcY);
             cogDisplay.StaticGraphics.Add(cogSegment, groupName);
 
-            cogSegment.SetStartEnd(calcX, 0, calcX, cogDisplay.Image.Height);
+            cogSegment.SetStartEnd(calcX, 0, calcX, ImageHeight);
             cogDisplay.StaticGraphics.Add(cogSegment, groupName);
 
             cogSegment.Dispose();
@@ -706,8 +718,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             _updateViewRect = true;
             if(cogDisplay.Image != null)
             {
-                double panPointX = (double)cogDisplay.Image.Width * ratio;
-                panPointX = (cogDisplay.Image.Width / 2) - panPointX;
+                double panPointX = (double)ImageWidth * ratio;
+                panPointX = (ImageWidth / 2) - panPointX;
                 cogDisplay.PanX = panPointX;
 
                 UpdateViewRect();
@@ -850,8 +862,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             CogGraphicLabel cogLabel = new CogGraphicLabel();
             int intervalY = 20;
-            double scaleX = ((double)cogDisplay.Width / cogDisplay.Image.Width);
-            float fontSize = (float)((cogDisplay.Image.Width / TextFontSize) * scaleX);
+            double scaleX = ((double)cogDisplay.Width / ImageWidth);
+            float fontSize = (float)((ImageWidth / TextFontSize) * scaleX);
             double fontPitch = (fontSize / cogDisplay.Zoom);
 
             cogLabel.Text = text;
