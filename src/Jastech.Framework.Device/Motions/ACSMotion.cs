@@ -11,7 +11,6 @@ namespace Jastech.Framework.Device.Motions
 {
     public partial class ACSMotion : Motion
     {
-
         #region 필드
         private const int _bufferCount = 8;
 
