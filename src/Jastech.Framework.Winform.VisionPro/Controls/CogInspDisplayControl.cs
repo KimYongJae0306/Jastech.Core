@@ -223,6 +223,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         }
         #endregion
     }
+
     public enum CogContextItemName
     {
         Pointer = 0,                          // Pointer

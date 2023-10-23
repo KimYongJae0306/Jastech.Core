@@ -57,7 +57,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (IsLeftResultImageView == false)
             {
-                //UpdateLeftImage?.Invoke(IsLeftResultImageView);
                 UpdateLeftDisplay(cogImage);
             }
             else
@@ -83,13 +82,25 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         DrawLineLeftDisplay(lineSegment);
                 }
 
+                if(collect.Count > 0)
+                    cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
                 {
-                    cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
-                    var gg = cogLeftDisplay.Zoom;
                     cogLeftDisplay.Zoom = 0.25;
                     cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                     cogLeftDisplay.PanY = (cogImage.Height / 2) - (centerPoint.Y);// + cogLeftDisplay.Height;
+                }
+                else
+                {
+                    if(shapeList.Count > 0)
+                    {
+                        cogLeftDisplay.Zoom = 0.25;
+                        PointF markCenterPoint = GetMarkCenterPoint(shapeList);
+
+                        cogLeftDisplay.PanX = (cogImage.Width / 2) - markCenterPoint.X;
+                        cogLeftDisplay.PanY = (cogImage.Height / 2) - markCenterPoint.Y;
+                    }
                 }
             }
         }
@@ -200,13 +211,25 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         DrawLineRightDisplay(lineSegment);
                 }
 
-                cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+                if(collect.Count > 0)
+                    cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
+
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
                 {
                     cogRightDisplay.Zoom = 0.25;
-                    cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
                     cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                     cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
+                }
+                else
+                {
+                    if(shapeList.Count > 0)
+                    {
+                        cogRightDisplay.Zoom = 0.25;
+                        PointF markCenterPoint = GetMarkCenterPoint(shapeList);
+
+                        cogRightDisplay.PanX = (cogImage.Width / 2) - markCenterPoint.X;
+                        cogRightDisplay.PanY = (cogImage.Height / 2) - markCenterPoint.Y;
+                    }
                 }
             }
         }
@@ -400,6 +423,38 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.Enabled = isEnable;
             cogCenterDisplay.Enabled = isEnable;
             cogRightDisplay.Enabled = isEnable;
+        }
+
+        public PointF GetMarkCenterPoint(List<CogCompositeShape> cogCompositeShapeList)
+        {
+            List<PointF> tempPointList = new List<PointF>();
+            foreach (var cogCompositeShape in cogCompositeShapeList)
+            {
+                foreach (var shape in cogCompositeShape.Shapes)
+                {
+                    if (shape is CogPointMarker marker)
+                        tempPointList.Add(new PointF((float)marker.X, (float)marker.Y));
+
+                    if (shape is CogRectangleAffine affine)
+                        tempPointList.Add(new PointF((float)affine.CenterX, (float)affine.CenterY));
+                }
+            }
+
+            if (tempPointList.Count() > 0)
+            {
+                float minX = tempPointList.Select(point => point.X).Min();
+                float maxX = tempPointList.Select(point => point.X).Max();
+
+                float minY = tempPointList.Select(point => point.Y).Min();
+                float maxY = tempPointList.Select(point => point.Y).Max();
+
+                float width = Math.Abs(maxX - minX) / 2.0f;
+                float height = Math.Abs(maxY - minY) / 2.0f;
+
+                return new PointF(minX + width, minY + height);
+            }
+            else
+                return new PointF(0, 0);
         }
         #endregion
     }
