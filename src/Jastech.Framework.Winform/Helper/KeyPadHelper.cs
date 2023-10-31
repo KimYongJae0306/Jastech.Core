@@ -8,17 +8,26 @@ namespace Jastech.Framework.Winform.Helper
     {
         public static int SetLabelIntegerData(Control control)
         {
-            double prevData = 0;
+            int prevData = 0;
             if (control.Text != "")
-                prevData = Convert.ToDouble(control.Text);
+                prevData = Convert.ToInt32(control.Text);
 
             KeyPadForm keyPadForm = new KeyPadForm();
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            int inputData = Convert.ToInt32(keyPadForm.PadValue);
+            int inputData = 0;
 
-            control.Text = inputData.ToString();
+            try
+            {
+                inputData = Convert.ToInt32(keyPadForm.PadValue);
+                control.Text = inputData.ToString();
+            }
+            catch (Exception)
+            {
+                inputData = prevData;
+                control.Text = inputData.ToString();
+            }
 
             return inputData;
         }
@@ -33,10 +42,19 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            double inputData = keyPadForm.PadValue;
+            double inputData = 0.0;
 
-            control.Text = inputData.ToString();
-
+            try
+            {
+                inputData = Convert.ToDouble(keyPadForm.PadValue);
+                control.Text = inputData.ToString();
+            }
+            catch (Exception)
+            {
+                inputData = prevData;
+                control.Text = inputData.ToString();
+            }
+            
             return inputData;
         }
 
@@ -50,9 +68,18 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            float inputData = Convert.ToSingle(keyPadForm.PadValue);
+            float inputData = 0.0f;
 
-            control.Text = inputData.ToString();
+            try
+            {
+                inputData = Convert.ToSingle(keyPadForm.PadValue);
+                control.Text = inputData.ToString();
+            }
+            catch (Exception)
+            {
+                inputData = prevData;
+                control.Text = inputData.ToString();
+            }
 
             return inputData;
         }
