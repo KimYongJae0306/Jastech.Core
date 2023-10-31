@@ -16,18 +16,8 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            int inputData = 0;
-
-            try
-            {
-                inputData = Convert.ToInt32(keyPadForm.PadValue);
-                control.Text = inputData.ToString();
-            }
-            catch (Exception)
-            {
-                inputData = prevData;
-                control.Text = inputData.ToString();
-            }
+            int inputData = Convert.ToInt32(keyPadForm.PadValue);
+            control.Text = inputData.ToString();
 
             return inputData;
         }
@@ -42,18 +32,8 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            double inputData = 0.0;
-
-            try
-            {
-                inputData = Convert.ToDouble(keyPadForm.PadValue);
-                control.Text = inputData.ToString();
-            }
-            catch (Exception)
-            {
-                inputData = prevData;
-                control.Text = inputData.ToString();
-            }
+            double inputData = Convert.ToDouble(keyPadForm.PadValue);
+            control.Text = inputData.ToString();
             
             return inputData;
         }
@@ -68,18 +48,8 @@ namespace Jastech.Framework.Winform.Helper
             keyPadForm.PreviousValue = prevData;
             keyPadForm.ShowDialog();
 
-            float inputData = 0.0f;
-
-            try
-            {
-                inputData = Convert.ToSingle(keyPadForm.PadValue);
-                control.Text = inputData.ToString();
-            }
-            catch (Exception)
-            {
-                inputData = prevData;
-                control.Text = inputData.ToString();
-            }
+            float inputData =  Convert.ToSingle(keyPadForm.PadValue);
+            control.Text = inputData.ToString();
 
             return inputData;
         }
