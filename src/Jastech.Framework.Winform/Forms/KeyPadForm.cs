@@ -59,10 +59,14 @@ namespace Jastech.Framework.Winform.Forms
             if (lblTextMessage.Text == "")
                 lblTextMessage.Text = "0";
 
-            PadValue = Convert.ToDouble(lblTextMessage.Text);
-
-            this.DialogResult = DialogResult.OK;
-            Close();
+            if (double.TryParse(lblTextMessage.Text, out double parsedValue) == false)
+                new MessageConfirmForm { Message = "Input must be a number" }.ShowDialog();
+            else
+            {
+                PadValue = parsedValue;
+                this.DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void btnCanel_Click(object sender, EventArgs e)
