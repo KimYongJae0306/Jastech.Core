@@ -59,14 +59,18 @@ namespace Jastech.Framework.Winform.Forms
             if (lblTextMessage.Text == "")
                 lblTextMessage.Text = "0";
 
-            if (double.TryParse(lblTextMessage.Text, out double parsedValue) == false)
-                new MessageConfirmForm { Message = "Input must be a number" }.ShowDialog();
-            else
+            if (double.TryParse(lblTextMessage.Text, out double value) == false)
             {
-                PadValue = parsedValue;
-                this.DialogResult = DialogResult.OK;
-                Close();
+                MessageConfirmForm confirmForm = new MessageConfirmForm();
+                confirmForm.Message = "Please check input data format.";
+                confirmForm.ShowDialog();
+                return;
             }
+            else
+                PadValue = value;
+
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCanel_Click(object sender, EventArgs e)
