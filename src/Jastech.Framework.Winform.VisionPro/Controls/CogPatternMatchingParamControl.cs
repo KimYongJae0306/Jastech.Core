@@ -15,7 +15,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
     public partial class CogPatternMatchingParamControl : UserControl
     {
         #region 필드
-        private VisionProPatternMatchingParam CurrentParam; 
+        private VisionProPatternMatchingParam CurrentParam;
         #endregion
 
         #region 이벤트
