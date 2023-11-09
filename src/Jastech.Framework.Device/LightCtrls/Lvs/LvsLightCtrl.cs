@@ -11,8 +11,6 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
     {
         #region 속성
         public ILvsParser Parser { get; set; }
-
-        private ManualResetEvent DataReceivedEvent { get; set; } = new ManualResetEvent(false);
         #endregion
 
         #region 생성자
@@ -34,9 +32,8 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
                 }
             }
             Communition.Received += Communition_Received;
-            base.Initialize();  // Serial Initalize
 
-            return true;
+            return base.Initialize();// Communition Initalize
         }
 
         public override bool IsConnected()
@@ -54,6 +51,19 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
             Communition.Received -= Communition_Received;
             return base.Release();
         }
+
+        public override bool TurnOn()
+        {
+            // Lvs 전체 On/off만 하는 통신 프로토콜이 존재 하지 않음
+            return true;
+        }
+
+        public override bool TurnOn(int channel)
+        {
+            // Lvs 조명 컨트롤러는 Channel로만 On하는 통신 프로토콜이 존재 하지 않음
+            return true;
+        }
+
 
         public override bool TurnOff()
         {
@@ -93,8 +103,6 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
 
         public bool SendSelectChannel(int channel)
         {
-            //DataReceivedEvent.Reset();
-
             byte channelBit = new byte();
             channelBit += (byte)Math.Pow(2, channel - 1);
 
@@ -110,14 +118,10 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
                 Communition.Send(sendData);
             }
             return true;
-            //return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
         }
 
         public bool SendLightPacket(int channel, int level)
         {
-           // DataReceivedEvent.Reset();
-
-            byte[] dataArray = new byte[4];
             Parser.OpMode = 0x00;                    // [OPMode] Write : 0x00, Read : 0x01
             Parser.DataLength = 0x01;                    // [DataLength]
             Parser.Address = 0x28;                    // [Address] Step Value Register : 0x28
@@ -129,7 +133,6 @@ namespace Jastech.Framework.Device.LightCtrls.Lvs
                 Communition.Send(sendData);
             }
             return true;
-            //return DataReceivedEvent.WaitOne(PacketResponseTimeMs);
         }
         #endregion
     }
