@@ -59,7 +59,15 @@ namespace Jastech.Framework.Winform.Forms
             if (lblTextMessage.Text == "")
                 lblTextMessage.Text = "0";
 
-            PadValue = Convert.ToDouble(lblTextMessage.Text);
+            if (double.TryParse(lblTextMessage.Text, out double value) == false)
+            {
+                MessageConfirmForm confirmForm = new MessageConfirmForm();
+                confirmForm.Message = "Please check input data format.";
+                confirmForm.ShowDialog();
+                return;
+            }
+            else
+                PadValue = value;
 
             this.DialogResult = DialogResult.OK;
             Close();

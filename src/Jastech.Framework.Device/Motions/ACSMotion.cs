@@ -432,6 +432,16 @@ namespace Jastech.Framework.Device.Motions
 
             return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
+
+        public double ReadRealVariable(string variableName) => Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
+
+        public void WriteRealVariable(string variableName, double value) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE);
+
+        public void ApplyLafParameters(ACSBufferNumber buffer, string switchVariableName)
+        {
+            WriteRealVariable(switchVariableName, 0);
+            Api.RunBuffer((ProgramBuffer)buffer, null);
+        }
         #endregion
     }
 

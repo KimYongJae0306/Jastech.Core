@@ -137,20 +137,20 @@ namespace Jastech.Framework.Imaging.VisionPro
             return offset;
         }
 
-        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect)
+        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect, double offsetX = 0, double offsetY = 0)
         {
             List<double> xPointList = new List<double>();
 
-            xPointList.Add(affineRect.CornerOriginX);
-            xPointList.Add(affineRect.CornerXX);
-            xPointList.Add(affineRect.CornerYX);
-            xPointList.Add(affineRect.CornerOppositeX);
+            xPointList.Add(affineRect.CornerOriginX + offsetX);
+            xPointList.Add(affineRect.CornerXX + offsetX);
+            xPointList.Add(affineRect.CornerYX + offsetX);
+            xPointList.Add(affineRect.CornerOppositeX + offsetX);
 
             List<double> yPointList = new List<double>();
-            yPointList.Add(affineRect.CornerOriginY);
-            yPointList.Add(affineRect.CornerXY);
-            yPointList.Add(affineRect.CornerYY);
-            yPointList.Add(affineRect.CornerOppositeY);
+            yPointList.Add(affineRect.CornerOriginY + offsetY);
+            yPointList.Add(affineRect.CornerXY + offsetY);
+            yPointList.Add(affineRect.CornerYY + offsetY);
+            yPointList.Add(affineRect.CornerOppositeY + offsetY);
 
             double minimumX = xPointList.Min();
             double minimumY = yPointList.Min();

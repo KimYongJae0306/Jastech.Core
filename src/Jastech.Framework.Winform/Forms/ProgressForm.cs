@@ -72,8 +72,6 @@ namespace Jastech.Framework.Winform.Forms
         private void ProgressForm_Load(object sender, EventArgs e)
         {
             StartAllTasks();
-            SetTopLevel(true);
-            Focus();
         }
 
         public void InitializeRunStatus()
@@ -120,6 +118,7 @@ namespace Jastech.Framework.Winform.Forms
                 await ShowResult();
             }
 
+            Focus();
             if (IsSuccess && AutoConfirm)
                 Close();
         }
@@ -234,6 +233,7 @@ namespace Jastech.Framework.Winform.Forms
                 lblTitleBar.Text = $" {Mode} ({taskList.Count(task => task.behavior.Status == TaskStatus.RanToCompletion)} out of {taskList.Count})";
                 lblProgress.Text = $"Now {SubjectName} in progress";
                 lblWaitMessage.Text = _waitMessages.Current;
+                Focus();
             }));
         }
 
@@ -279,6 +279,8 @@ namespace Jastech.Framework.Winform.Forms
             CheckingTask?.Wait();
 
             taskList.ForEach(task => task.stopLoop?.Invoke());
+
+            Close();
         }
 
         private static IEnumerator<string> GetWaitMessage()
