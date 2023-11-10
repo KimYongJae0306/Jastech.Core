@@ -28,6 +28,8 @@ namespace Jastech.Framework.Winform.Forms
         #region 메서드
         private void WarningMessageForm_Load(object sender, EventArgs e)
         {
+            CheckTimer.Start();
+
             UpdateData();
             Focus();
         }

@@ -225,7 +225,6 @@
             // 
             // CheckTimer
             // 
-            this.CheckTimer.Enabled = true;
             this.CheckTimer.Interval = 500;
             this.CheckTimer.Tick += new System.EventHandler(this.CheckTimer_Tick);
             // 
