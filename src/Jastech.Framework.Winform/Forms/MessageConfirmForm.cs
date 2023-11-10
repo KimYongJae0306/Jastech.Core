@@ -34,6 +34,8 @@ namespace Jastech.Framework.Winform.Forms
 
         private void lblConfirm_Click(object sender, EventArgs e)
         {
+            CheckTimer.Stop();
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -61,6 +63,12 @@ namespace Jastech.Framework.Winform.Forms
             {
                 Location = new Point(this.Left - (_mousePoint.X - e.X), this.Top - (_mousePoint.Y - e.Y));
             }
+        }
+
+        private void CheckTimer_Tick(object sender, EventArgs e)
+        {
+            TopMost = true;
+            Invalidate();
         }
         #endregion
     }
