@@ -42,7 +42,6 @@
             this.imageIcon = new System.Windows.Forms.PictureBox();
             this.lblMessageText = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.CheckTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -223,11 +222,6 @@
             this.panel1.Size = new System.Drawing.Size(631, 315);
             this.panel1.TabIndex = 3;
             // 
-            // CheckTimer
-            // 
-            this.CheckTimer.Interval = 500;
-            this.CheckTimer.Tick += new System.EventHandler(this.CheckTimer_Tick);
-            // 
             // MessageConfirmForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -269,6 +263,5 @@
         private System.Windows.Forms.Label lblOK;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Timer CheckTimer;
     }
 }
