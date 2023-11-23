@@ -271,6 +271,7 @@ namespace Jastech.Framework.Util.Helper
         Seq,
         Error,
         Parameter,
+        GUI,
     }
 
     public enum ErrorType
