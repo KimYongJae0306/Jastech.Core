@@ -31,9 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlText = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.lblGrayLevel = new System.Windows.Forms.Label();
             this.pbxDisplay = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteFigure = new System.Windows.Forms.Button();
@@ -47,8 +49,10 @@
             this.menuROIMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFitZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSaveImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblGrayPoint = new System.Windows.Forms.Label();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.pnlText.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDisplay)).BeginInit();
@@ -76,7 +80,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pnlText, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.pnlDisplay, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(40, 0);
@@ -89,14 +93,27 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(655, 484);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // pnlText
+            // 
+            this.pnlText.Controls.Add(this.tableLayoutPanel2);
+            this.pnlText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlText.Location = new System.Drawing.Point(0, 454);
+            this.pnlText.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlText.Name = "pnlText";
+            this.pnlText.Size = new System.Drawing.Size(655, 30);
+            this.pnlText.TabIndex = 2;
+            // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 500F));
-            this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblGrayPoint, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblGrayLevel, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 454);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -104,14 +121,18 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(655, 30);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // panel2
+            // label1
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(158, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(494, 26);
-            this.panel2.TabIndex = 2;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(555, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Gray :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pnlDisplay
             // 
@@ -122,6 +143,19 @@
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Size = new System.Drawing.Size(655, 454);
             this.pnlDisplay.TabIndex = 2;
+            // 
+            // lblGrayLevel
+            // 
+            this.lblGrayLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGrayLevel.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrayLevel.ForeColor = System.Drawing.Color.White;
+            this.lblGrayLevel.Location = new System.Drawing.Point(605, 0);
+            this.lblGrayLevel.Margin = new System.Windows.Forms.Padding(0);
+            this.lblGrayLevel.Name = "lblGrayLevel";
+            this.lblGrayLevel.Size = new System.Drawing.Size(50, 30);
+            this.lblGrayLevel.TabIndex = 1;
+            this.lblGrayLevel.Text = "255";
+            this.lblGrayLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbxDisplay
             // 
@@ -173,6 +207,7 @@
             this.btnDeleteFigure.Name = "btnDeleteFigure";
             this.btnDeleteFigure.Size = new System.Drawing.Size(40, 40);
             this.btnDeleteFigure.TabIndex = 4;
+            this.btnDeleteFigure.TabStop = false;
             this.btnDeleteFigure.UseVisualStyleBackColor = false;
             this.btnDeleteFigure.Click += new System.EventHandler(this.btnDeleteFigure_Click);
             // 
@@ -187,6 +222,7 @@
             this.btnFitZoom.Name = "btnFitZoom";
             this.btnFitZoom.Size = new System.Drawing.Size(40, 40);
             this.btnFitZoom.TabIndex = 3;
+            this.btnFitZoom.TabStop = false;
             this.btnFitZoom.UseVisualStyleBackColor = false;
             this.btnFitZoom.Click += new System.EventHandler(this.btnFitZoom_Click);
             // 
@@ -201,6 +237,7 @@
             this.btnDrawLine.Name = "btnDrawLine";
             this.btnDrawLine.Size = new System.Drawing.Size(40, 40);
             this.btnDrawLine.TabIndex = 2;
+            this.btnDrawLine.TabStop = false;
             this.btnDrawLine.UseVisualStyleBackColor = false;
             this.btnDrawLine.Click += new System.EventHandler(this.btnDrawLine_Click);
             // 
@@ -216,6 +253,7 @@
             this.btnDrawNone.Name = "btnDrawNone";
             this.btnDrawNone.Size = new System.Drawing.Size(40, 40);
             this.btnDrawNone.TabIndex = 1;
+            this.btnDrawNone.TabStop = false;
             this.btnDrawNone.UseVisualStyleBackColor = false;
             this.btnDrawNone.Click += new System.EventHandler(this.btnDrawNone_Click);
             // 
@@ -229,6 +267,7 @@
             this.btnPanning.Name = "btnPanning";
             this.btnPanning.Size = new System.Drawing.Size(40, 40);
             this.btnPanning.TabIndex = 3;
+            this.btnPanning.TabStop = false;
             this.btnPanning.UseVisualStyleBackColor = false;
             this.btnPanning.Click += new System.EventHandler(this.btnPanning_Click);
             // 
@@ -241,43 +280,56 @@
             this.menuFitZoom,
             this.menuSaveImage});
             this.ctxDisplayMode.Name = "contextMenuStrip";
-            this.ctxDisplayMode.Size = new System.Drawing.Size(181, 136);
+            this.ctxDisplayMode.Size = new System.Drawing.Size(137, 114);
             this.ctxDisplayMode.Opening += new System.ComponentModel.CancelEventHandler(this.ctxDisplayMode_Opening);
             // 
             // menuPointerMode
             // 
             this.menuPointerMode.Name = "menuPointerMode";
-            this.menuPointerMode.Size = new System.Drawing.Size(180, 22);
+            this.menuPointerMode.Size = new System.Drawing.Size(136, 22);
             this.menuPointerMode.Text = "Pointer";
             this.menuPointerMode.Click += new System.EventHandler(this.menuPointerMode_Click);
             // 
             // menuPanningMode
             // 
             this.menuPanningMode.Name = "menuPanningMode";
-            this.menuPanningMode.Size = new System.Drawing.Size(180, 22);
+            this.menuPanningMode.Size = new System.Drawing.Size(136, 22);
             this.menuPanningMode.Text = "Panning";
             this.menuPanningMode.Click += new System.EventHandler(this.menuPanningMode_Click);
             // 
             // menuROIMode
             // 
             this.menuROIMode.Name = "menuROIMode";
-            this.menuROIMode.Size = new System.Drawing.Size(180, 22);
+            this.menuROIMode.Size = new System.Drawing.Size(136, 22);
             this.menuROIMode.Text = "ROI";
             this.menuROIMode.Click += new System.EventHandler(this.menuROIMode_Click);
             // 
             // menuFitZoom
             // 
             this.menuFitZoom.Name = "menuFitZoom";
-            this.menuFitZoom.Size = new System.Drawing.Size(180, 22);
+            this.menuFitZoom.Size = new System.Drawing.Size(136, 22);
             this.menuFitZoom.Text = "FitZoom";
             this.menuFitZoom.Click += new System.EventHandler(this.menuFitZoom_Click);
             // 
             // menuSaveImage
             // 
             this.menuSaveImage.Name = "menuSaveImage";
-            this.menuSaveImage.Size = new System.Drawing.Size(180, 22);
+            this.menuSaveImage.Size = new System.Drawing.Size(136, 22);
             this.menuSaveImage.Text = "Save Image";
             this.menuSaveImage.Click += new System.EventHandler(this.menuSaveImage_Click);
+            // 
+            // lblGrayPoint
+            // 
+            this.lblGrayPoint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGrayPoint.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrayPoint.ForeColor = System.Drawing.Color.White;
+            this.lblGrayPoint.Location = new System.Drawing.Point(0, 0);
+            this.lblGrayPoint.Margin = new System.Windows.Forms.Padding(0);
+            this.lblGrayPoint.Name = "lblGrayPoint";
+            this.lblGrayPoint.Size = new System.Drawing.Size(555, 30);
+            this.lblGrayPoint.TabIndex = 1;
+            this.lblGrayPoint.Text = "(0,0)";
+            this.lblGrayPoint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DrawBoxControl
             // 
@@ -291,6 +343,7 @@
             this.Load += new System.EventHandler(this.DrawBoxControl_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.pnlText.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.pnlDisplay.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxDisplay)).EndInit();
@@ -305,7 +358,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlText;
         private System.Windows.Forms.Panel pnlDisplay;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button btnDrawNone;
@@ -320,5 +373,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuFitZoom;
         private System.Windows.Forms.Button btnDeleteFigure;
         private System.Windows.Forms.ToolStripMenuItem menuSaveImage;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblGrayLevel;
+        private System.Windows.Forms.Label lblGrayPoint;
     }
 }

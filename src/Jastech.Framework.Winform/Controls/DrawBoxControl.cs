@@ -29,7 +29,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private double OffsetY { get; set; } = 0.0;
 
-        public DisplayMode DisplayMode { get; private set; } = DisplayMode.None;
+        public DisplayMode DisplayMode { get; set; } = DisplayMode.None;
+
+        public bool UseGrayLevel { get; set; } = false;
 
         public Bitmap OrgImage { get; set; } = null;
 
@@ -40,6 +42,8 @@ namespace Jastech.Framework.Winform.Controls
         private Figure SelectedFigure { get; set; } = null;
 
         private PointF PanningStartPoint { get; set; }
+
+        public Color ViewColor { get; set; } = Color.FromArgb(52, 52, 52);
         #endregion
 
         #region 이벤트
@@ -67,8 +71,11 @@ namespace Jastech.Framework.Winform.Controls
             _selectedColor = Color.FromArgb(104, 104, 104);
             _nonSelectedColor = Color.FromArgb(52, 52, 52);
 
-            DisplayMode = DisplayMode.None;
+            pnlText.Visible = UseGrayLevel;
+
             UpdateDisplayModeUI(DisplayMode);
+
+            pbxDisplay.BackColor = ViewColor;
             pbxDisplay.MouseWheel += PbxDisplay_MouseWheel;
         }
 
@@ -87,7 +94,7 @@ namespace Jastech.Framework.Winform.Controls
             pbxDisplay.Invalidate();
         }
 
-        private void FitZoom()
+        public void FitZoom()
         {
             if (OrgImage != null)
             {
@@ -167,6 +174,16 @@ namespace Jastech.Framework.Winform.Controls
             double calcY = (e.Y / ZoomScale) - OffsetY;
             PointF calcPoint = new PointF((float)calcX, (float)calcY);
 
+            if (UseGrayLevel)
+            {
+                if (OrgImage != null)
+                {
+                    var value = ImageHelper.GetGrayLevel(OrgImage, calcPoint);
+                    lblGrayPoint.Text = string.Format("({0},{1})", (int)calcX, (int)calcY);
+                    lblGrayLevel.Text = value.ToString();
+                }
+            }
+
             if (e.Button == MouseButtons.Left)
             {
                 if (DisplayMode == DisplayMode.Drawing)
@@ -238,8 +255,6 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                //g.DrawImage(pbxDisplay.Image, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
-                //OrgImage.
                 g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
 
                 int trackResize = (int)(6.0 / ZoomScale);
@@ -275,14 +290,12 @@ namespace Jastech.Framework.Winform.Controls
         private void btnDrawNone_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.None;
-            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 
         private void btnDrawLine_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Drawing;
-            this.Cursor = Cursors.Default;
             UpdateDisplayModeUI(DisplayMode);
         }
 
@@ -292,14 +305,12 @@ namespace Jastech.Framework.Winform.Controls
             UpdateDisplayModeUI(DisplayMode);
             TempFigure = null;
             FigureManager.ClearFigureSelected();
-
             Refresh();
         }
 
         private void btnPanning_Click(object sender, EventArgs e)
         {
             DisplayMode = DisplayMode.Panning;
-            this.Cursor = Cursors.Hand;
             UpdateDisplayModeUI(DisplayMode);
         }
 
@@ -393,11 +404,20 @@ namespace Jastech.Framework.Winform.Controls
             btnDrawLine.BackColor = _nonSelectedColor;
 
             if (mode == DisplayMode.None)
+            {
                 btnDrawNone.BackColor = _selectedColor;
+                this.Cursor = Cursors.Default;
+            }
             else if (mode == DisplayMode.Panning)
+            {
                 btnPanning.BackColor = _selectedColor;
+                this.Cursor = Cursors.Hand;
+            }
             else if (mode == DisplayMode.Drawing)
+            {
                 btnDrawLine.BackColor = _selectedColor;
+                this.Cursor = Cursors.Default;
+            }
         }
 
         public void DisposeImage()
