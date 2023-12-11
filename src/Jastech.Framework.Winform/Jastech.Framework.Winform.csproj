@@ -75,6 +75,12 @@
     <Compile Include="Controls\DoubleBufferedPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\HistogramControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HistogramControl.Designer.cs">
+      <DependentUpon>HistogramControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
