@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.Controls
 {
-    partial class LiveViewPanel
+    partial class ImageViewerControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,35 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlLiveView = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // pnlLiveView
-            // 
-            this.pnlLiveView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLiveView.Location = new System.Drawing.Point(0, 0);
-            this.pnlLiveView.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlLiveView.Name = "pnlLiveView";
-            this.pnlLiveView.Size = new System.Drawing.Size(679, 427);
-            this.pnlLiveView.TabIndex = 0;
-            // 
-            // LiveViewPanel
+            // ImageViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.Controls.Add(this.pnlLiveView);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "LiveViewPanel";
-            this.Size = new System.Drawing.Size(679, 427);
-            this.Load += new System.EventHandler(this.LiveViewPanel_Load);
+            this.Name = "ImageViewerControl";
+            this.Size = new System.Drawing.Size(250, 250);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlLiveView;
     }
 }
