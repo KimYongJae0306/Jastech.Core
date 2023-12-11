@@ -75,23 +75,17 @@
     <Compile Include="Controls\DoubleBufferedPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\HistogramControl.cs">
+    <Compile Include="Controls\ImageViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\HistogramControl.Designer.cs">
-      <DependentUpon>HistogramControl.cs</DependentUpon>
+    <Compile Include="Controls\ImageViewerControl.Designer.cs">
+      <DependentUpon>ImageViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LAFJogControl.Designer.cs">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LiveViewPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LiveViewPanel.Designer.cs">
-      <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DrawBoxControl.cs">
       <SubType>UserControl</SubType>
@@ -204,11 +198,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ImageViewerControl.resx">
+      <DependentUpon>ImageViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LiveViewPanel.resx">
-      <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
