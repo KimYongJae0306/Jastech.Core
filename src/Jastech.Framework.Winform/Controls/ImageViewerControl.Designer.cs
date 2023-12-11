@@ -28,20 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tlpImageViewer = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlView = new System.Windows.Forms.Panel();
+            this.pnlPreview = new System.Windows.Forms.Panel();
+            this.tlpImageViewer.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tlpImageViewer
+            // 
+            this.tlpImageViewer.ColumnCount = 1;
+            this.tlpImageViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpImageViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpImageViewer.Controls.Add(this.pnlPreview, 0, 1);
+            this.tlpImageViewer.Controls.Add(this.pnlView, 0, 0);
+            this.tlpImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpImageViewer.Location = new System.Drawing.Point(0, 0);
+            this.tlpImageViewer.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpImageViewer.Name = "tlpImageViewer";
+            this.tlpImageViewer.RowCount = 2;
+            this.tlpImageViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlpImageViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpImageViewer.Size = new System.Drawing.Size(500, 500);
+            this.tlpImageViewer.TabIndex = 0;
+            // 
+            // pnlView
+            // 
+            this.pnlView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlView.Location = new System.Drawing.Point(0, 0);
+            this.pnlView.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlView.Name = "pnlView";
+            this.pnlView.Size = new System.Drawing.Size(500, 400);
+            this.pnlView.TabIndex = 0;
+            // 
+            // pnlPreview
+            // 
+            this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPreview.Location = new System.Drawing.Point(0, 400);
+            this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlPreview.Name = "pnlPreview";
+            this.pnlPreview.Size = new System.Drawing.Size(500, 100);
+            this.pnlPreview.TabIndex = 1;
             // 
             // ImageViewerControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.Controls.Add(this.tlpImageViewer);
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "ImageViewerControl";
-            this.Size = new System.Drawing.Size(250, 250);
+            this.Size = new System.Drawing.Size(500, 500);
+            this.tlpImageViewer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tlpImageViewer;
+        private System.Windows.Forms.Panel pnlPreview;
+        private System.Windows.Forms.Panel pnlView;
     }
 }
