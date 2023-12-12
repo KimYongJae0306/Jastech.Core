@@ -53,6 +53,7 @@
             // 
             // pnlPreview
             // 
+            this.pnlPreview.AutoScroll = true;
             this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPreview.Location = new System.Drawing.Point(0, 400);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
