@@ -35,6 +35,8 @@ namespace Jastech.Framework.Winform.Controls
 
         public Bitmap OrgImage { get; set; } = null;
 
+        private TextureBrush BitmapBrush { get; set; } = null;
+
         private FigureManager FigureManager { get; set; } = new FigureManager();
 
         private Figure TempFigure { get; set; }
@@ -89,6 +91,13 @@ namespace Jastech.Framework.Winform.Controls
                     OrgImage = null;
                 }
                 OrgImage = bmp;
+
+                if (BitmapBrush != null)
+                {
+                    BitmapBrush.Dispose();
+                    BitmapBrush = null;
+                }
+                BitmapBrush = new TextureBrush(OrgImage);
             }
             
             pbxDisplay.Invalidate();
@@ -124,8 +133,8 @@ namespace Jastech.Framework.Winform.Controls
             ZoomScale += (e.Delta / 1000.0);
             if (ZoomScale > 10)
                 ZoomScale = 10;
-            if (ZoomScale < 0.05)
-                ZoomScale = 0.05;
+            if (ZoomScale < 0.01)
+                ZoomScale = 0.01;
 
             OffsetX = (e.X / ZoomScale) - imageX;
             OffsetY = (e.Y / ZoomScale) - imageY;
@@ -255,7 +264,8 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
+                //g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));  내부 오버헤드 때문에 많이 느림
+                g.FillRectangle(BitmapBrush, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)

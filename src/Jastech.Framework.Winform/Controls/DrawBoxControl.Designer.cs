@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlDisplay = new System.Windows.Forms.Panel();
             this.lblGrayLevel = new System.Windows.Forms.Label();
-            this.pbxDisplay = new System.Windows.Forms.PictureBox();
+            this.pbxDisplay = new DoubleBufferedPicturebox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteFigure = new System.Windows.Forms.Button();
             this.btnFitZoom = new System.Windows.Forms.Button();
@@ -364,7 +364,7 @@
         private System.Windows.Forms.Button btnDrawNone;
         private System.Windows.Forms.Button btnDrawLine;
         private System.Windows.Forms.Button btnPanning;
-        private System.Windows.Forms.PictureBox pbxDisplay;
+        private DoubleBufferedPicturebox pbxDisplay;
         private System.Windows.Forms.ContextMenuStrip ctxDisplayMode;
         private System.Windows.Forms.ToolStripMenuItem menuPointerMode;
         private System.Windows.Forms.ToolStripMenuItem menuPanningMode;
