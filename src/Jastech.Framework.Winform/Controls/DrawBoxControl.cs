@@ -90,6 +90,7 @@ namespace Jastech.Framework.Winform.Controls
                     OrgImage.Dispose();
                     OrgImage = null;
                 }
+
                 OrgImage = bmp;
 
                 if (BitmapBrush != null)
@@ -97,6 +98,7 @@ namespace Jastech.Framework.Winform.Controls
                     BitmapBrush.Dispose();
                     BitmapBrush = null;
                 }
+
                 BitmapBrush = new TextureBrush(OrgImage);
             }
             
@@ -294,7 +296,6 @@ namespace Jastech.Framework.Winform.Controls
                     }
                 }
             }
-               
         }
 
         private void btnDrawNone_Click(object sender, EventArgs e)
