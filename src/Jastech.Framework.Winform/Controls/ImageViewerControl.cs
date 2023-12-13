@@ -49,6 +49,8 @@ namespace Jastech.Framework.Winform.Controls
             ImageInfoList = imageInfoList;
 
             InitializeUI();
+
+            ImagePreviewControlList[0].SetSelectImage();
         }
 
         public void AddControl()
@@ -70,7 +72,6 @@ namespace Jastech.Framework.Winform.Controls
             foreach (ImageInfo imageInfo in ImageInfoList)
             {
                 ImagePreviewControl imagePreviewControl = new ImagePreviewControl();
-                //imagePreviewControl.Dock = DockStyle.Fill;
                 imagePreviewControl.SelectedImageEventHandler += ImagePreviewControl_SelectedImageEventHandler;
                 imagePreviewControl.Size = new Size(controlWidth, (int)(pnlPreview.Height));
                 imagePreviewControl.Location = point;
