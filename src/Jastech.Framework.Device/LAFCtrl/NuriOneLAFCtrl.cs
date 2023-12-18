@@ -283,16 +283,16 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public override void SetMotionPositiveLimit(double value)
         {
-            //double positiveLimit = value * ResolutionAxisZ;
-            //string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, positiveLimit.ToString());
-            //Send(command);
+            double positiveLimit = value * ResolutionAxisZ;
+            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_PLUS, positiveLimit.ToString());
+            Send(command);
         }
 
         public override void SetMotionNegativeLimit(double value)
         {
-            //double negativeLimit = value * ResolutionAxisZ;
-            //string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, negativeLimit.ToString());
-            //Send(command);
+            double negativeLimit = value * ResolutionAxisZ;
+            string command = MakeSetCommand(CMD_WRITE_MOTION_LIMIT_MINUS, negativeLimit.ToString());
+            Send(command);
         }
 
         public override void SetVroOnOff(bool isOn)
@@ -306,6 +306,18 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             string value = start.ToString() + " " + width.ToString();
             string command = MakeSetCommand(CMD_Y_WINDOW, value.ToString());
+            Send(command);
+        }
+
+        public override void SetLowerReturndB(double value)
+        {
+            string command = MakeSetCommand(CMD_MIN_RETURN_DB, value.ToString());
+            Send(command);
+        }
+
+        public override void SetUpperReturndB(double value)
+        {
+            string command = MakeSetCommand(CMD_MAX_RETURN_DB, value.ToString());
             Send(command);
         }
 
@@ -372,6 +384,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         const string CMD_WRITE_ACCELDECEL = "uc motionacctcms";                         // SET Motion Acceleration/Deceleration
         const string CMD_VRO = "uc vro";                                                // SET VRO
         const string CMD_Y_WINDOW = "uc ywindow";                                       // SET Y Window "start width"
+        const string CMD_MIN_RETURN_DB = "uc minretdb";                                 // SET Lower Return dB
+        const string CMD_MAX_RETURN_DB = "uc maxretdb";                                 // SET Upper Return dB
 
         const int AF_SENSOR_PORT_RES_WAIT = 200;
         #endregion

@@ -70,7 +70,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void UpdateData(VisionProPatternMatchingParam matchingParam)
         {
-            if(CurrentParam != null)
+            if (CurrentParam != null)
             {
                 CurrentParam.Score = Convert.ToDouble(nupdnMatchScore.Value);
                 CurrentParam.MaxAngle = Convert.ToDouble(nupdnMaxAngle.Value);
@@ -78,9 +78,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             nupdnMatchScore.Value = (decimal)matchingParam.Score;
             nupdnMaxAngle.Value = (decimal)matchingParam.MaxAngle;
+
             CurrentParam = matchingParam;
 
-            if(CurrentParam.ChangedTrained == null)
+            if (CurrentParam.ChangedTrained == null)
                 CurrentParam.ChangedTrained += Tool_ChangedTrained;
 
             CurrentParam.GetOrigin().Changed += CogPatternMatchingParamControl_Changed;
@@ -104,7 +105,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void CogPatternMatchingParamControl_Changed(object sender, CogChangedEventArgs e)
         {
-            if(CurrentParam != null)
+            if (CurrentParam != null)
                 CurrentParam.GetOrigin().Rotation = 0;
         }
 
@@ -116,7 +117,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void Tool_ChangedTrained(bool isTrained)
         {
-            if(isTrained == false)
+            if (isTrained == false)
                 DisposePatternDisplay();
         }
 
@@ -189,7 +190,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         var maskingImage = form.GetCurrentParam().GetTrainImageMask();
-                        if(maskingImage != null)
+                        if (maskingImage != null)
                         {
                             CurrentParam.TrainImageMask(maskingImage);
                             CurrentParam.GetTool().Pattern.Train();
