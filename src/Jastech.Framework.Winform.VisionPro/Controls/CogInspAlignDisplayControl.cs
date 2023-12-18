@@ -56,9 +56,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 return;
 
             if (IsLeftResultImageView == false)
-            {
                 UpdateLeftDisplay(cogImage);
-            }
             else
             {
                 cogLeftDisplay.Image = cogImage;
@@ -82,7 +80,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         DrawLineLeftDisplay(lineSegment);
                 }
 
-                if(collect.Count > 0)
+                if (collect.Count > 0)
                     cogLeftDisplay.InteractiveGraphics.AddList(collect, "Result", false);
 
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
@@ -93,7 +91,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 }
                 else
                 {
-                    if(shapeList.Count > 0)
+                    if (shapeList.Count > 0)
                     {
                         cogLeftDisplay.Zoom = 0.25;
                         PointF markCenterPoint = GetMarkCenterPoint(shapeList);
@@ -211,7 +209,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         DrawLineRightDisplay(lineSegment);
                 }
 
-                if(collect.Count > 0)
+                if (collect.Count > 0)
                     cogRightDisplay.InteractiveGraphics.AddList(collect, "Result", false);
 
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
@@ -222,7 +220,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 }
                 else
                 {
-                    if(shapeList.Count > 0)
+                    if (shapeList.Count > 0)
                     {
                         cogRightDisplay.Zoom = 0.25;
                         PointF markCenterPoint = GetMarkCenterPoint(shapeList);
