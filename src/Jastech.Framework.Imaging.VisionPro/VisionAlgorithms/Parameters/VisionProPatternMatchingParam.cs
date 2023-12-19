@@ -31,6 +31,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             return PMTool;
         }
 
+        public void SetTool(CogPMAlignTool cogPMAlignTool)
+        {
+            Dispose();
+            PMTool = cogPMAlignTool;
+        }
+
         public void SetTrainRegion(CogRectangle roi)
         {
             if (PMTool == null)
@@ -253,39 +259,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
         public void Dispose()
         {
-            if (PMTool != null)
-            {
-                if (PMTool.Pattern.TrainImage != null)
-                {
-                    if (PMTool.Pattern.TrainImage is CogImage8Grey grey)
-                        grey.Dispose();
-                    if (PMTool.Pattern.TrainImage is CogImage24PlanarColor color)
-                        color.Dispose();
-                }
-
-                PMTool.Pattern.TrainImage = null;
-                PMTool.Pattern.Dispose();
-                PMTool.Pattern = null;
-
-                if (PMTool.InputImage != null)
-                {
-                    if (PMTool.InputImage is CogImage8Grey grey)
-                        grey.Dispose();
-                    if (PMTool.InputImage is CogImage24PlanarColor color)
-                        color.Dispose();
-                }
-
-                PMTool.InputImage = null;
-                PMTool.RunParams.Dispose();
-                PMTool.RunParams = null;
-
-                if (PMTool.Results != null)
-                    PMTool.Results.Dispose();
-
-                PMTool.Dispose();
-            }
-
-            PMTool = null;
+            VisionProHelper.DisposeTool(PMTool);
         }
         #endregion
     }

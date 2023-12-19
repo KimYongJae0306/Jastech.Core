@@ -42,6 +42,7 @@
             this.nupdnMatchScore = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblEditMark = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogPatternDisplay)).BeginInit();
@@ -133,6 +134,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblEditMark);
             this.panel2.Controls.Add(this.lblClear);
             this.panel2.Controls.Add(this.lblTest);
             this.panel2.Controls.Add(this.nupdnMaxAngle);
@@ -232,6 +234,19 @@
             this.label2.Text = "Score [%]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblEditMark
+            // 
+            this.lblEditMark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEditMark.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblEditMark.ForeColor = System.Drawing.Color.White;
+            this.lblEditMark.Location = new System.Drawing.Point(16, 103);
+            this.lblEditMark.Name = "lblEditMark";
+            this.lblEditMark.Size = new System.Drawing.Size(192, 40);
+            this.lblEditMark.TabIndex = 23;
+            this.lblEditMark.Text = "Edit";
+            this.lblEditMark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblEditMark.Click += new System.EventHandler(this.lblEditMark_Click);
+            // 
             // CogPatternMatchingParamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -264,5 +279,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Label lblClear;
+        private System.Windows.Forms.Label lblEditMark;
     }
 }

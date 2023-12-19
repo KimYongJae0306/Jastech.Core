@@ -251,5 +251,27 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             MarkParamChanged?.Invoke(CurrentParam.Name, "MarkScore", oldScore, newScore);
         }
         #endregion
+
+        private void lblEditMark_Click(object sender, EventArgs e)
+        {
+
+            //for (int i = 0; i < 100; i++)
+            {
+                var currentTool = CurrentParam.GetTool();
+
+                CogAlignEditForm form = new CogAlignEditForm();
+                form.PMTool = new CogPMAlignTool(currentTool);
+                form.CogPMAlignToolChanged = (CogPMAlignTool cogPMAlignTool) =>
+                {
+                    CurrentParam.SetTool(cogPMAlignTool);
+                };
+                form.ShowDialog();
+
+                //form.Close();
+                UpdateData(CurrentParam);
+
+            }
+            
+        }
     }
 }

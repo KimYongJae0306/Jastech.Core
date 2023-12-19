@@ -1,5 +1,6 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Blob;
+using Cognex.VisionPro.PMAlign;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
@@ -14,6 +15,43 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
             blobTool.Run();
 
             blobTool.Dispose();
+        }
+
+        public static void DisposeTool(CogPMAlignTool tool)
+        {
+            if (tool != null)
+            {
+                if (tool.Pattern.TrainImage != null)
+                {
+                    if (tool.Pattern.TrainImage is CogImage8Grey grey)
+                        grey.Dispose();
+                    if (tool.Pattern.TrainImage is CogImage24PlanarColor color)
+                        color.Dispose();
+                }
+
+                tool.Pattern.TrainImage = null;
+                tool.Pattern.Dispose();
+                tool.Pattern = null;
+
+                if (tool.InputImage != null)
+                {
+                    if (tool.InputImage is CogImage8Grey grey)
+                        grey.Dispose();
+                    if (tool.InputImage is CogImage24PlanarColor color)
+                        color.Dispose();
+                }
+
+                tool.InputImage = null;
+                tool.RunParams.Dispose();
+                tool.RunParams = null;
+
+                if (tool.Results != null)
+                    tool.Results.Dispose();
+
+                tool.Dispose();
+            }
+
+            tool = null;
         }
     }
 }
