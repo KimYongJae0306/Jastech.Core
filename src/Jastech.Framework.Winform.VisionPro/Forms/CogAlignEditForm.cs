@@ -34,7 +34,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
         private void CogAlignEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             MessageYesNoForm messageConfirm = new MessageYesNoForm();
-            messageConfirm.Message = "Do you want to Save Tool?";
+            messageConfirm.Message = "Do you want to Apply AlignTool?";
 
             if (messageConfirm.ShowDialog() == DialogResult.Yes)
             {
