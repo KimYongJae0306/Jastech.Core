@@ -161,13 +161,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public bool IsBusy { get; set; }
 
-<<<<<<< HEAD
-        public double RetValue { get; set; }
-=======
         public bool NeedHomming { get; set; } = true;
 
         public double ReturndB { get; set; }
->>>>>>> 4fab201763b773d2df32fcc518fc5fb2295676a8
+
         #endregion
     }
 }
