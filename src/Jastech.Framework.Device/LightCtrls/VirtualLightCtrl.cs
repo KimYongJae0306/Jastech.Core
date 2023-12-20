@@ -39,6 +39,16 @@
         {
             return true;
         }
+
+        public override bool TurnOn()
+        {
+            return true;
+        }
+
+        public override bool TurnOn(int channel)
+        {
+            return true;
+        }
         #endregion
     }
 }

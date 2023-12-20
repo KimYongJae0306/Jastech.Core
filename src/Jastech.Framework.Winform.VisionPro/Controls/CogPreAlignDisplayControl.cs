@@ -47,8 +47,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogLeftDisplay.StaticGraphics.Clear();
             cogLeftDisplay.InteractiveGraphics.Clear();
 
+            if (shapes == null)
+                return;
+
             foreach (var item in shapes)
-                cogLeftDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+            {
+                if (item != null)
+                    cogLeftDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+            }
 
             cogLeftDisplay.Fit();
         }
@@ -68,7 +74,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 return;
 
             foreach (var item in shapes)
-                cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+            {
+                if(item != null)
+                    cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+            }
 
             cogRightDisplay.Fit();
         }

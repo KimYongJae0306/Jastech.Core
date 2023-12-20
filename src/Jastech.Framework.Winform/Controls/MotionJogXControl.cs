@@ -1,4 +1,5 @@
 ﻿using Jastech.Framework.Device.Motions;
+using Jastech.Framework.Util.Helper;
 using Jastech.Framework.Winform.Forms;
 using System;
 using System.Windows.Forms;
@@ -38,6 +39,8 @@ namespace Jastech.Framework.Winform.Controls
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CW);
+
+            Logger.Write(LogType.GUI, "Clicked X Left");
         }
 
         private void btnJogLeftX_MouseDown(object sender, MouseEventArgs e)
@@ -47,6 +50,8 @@ namespace Jastech.Framework.Winform.Controls
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CW);
+
+            Logger.Write(LogType.GUI, "Clicked X Left");
         }
 
         private void btnJogLeftX_MouseUp(object sender, MouseEventArgs e)
@@ -64,7 +69,10 @@ namespace Jastech.Framework.Winform.Controls
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
+
+            Logger.Write(LogType.GUI, "Clicked X Right");
         }
+
         private void btnJogRightX_MouseDown(object sender, MouseEventArgs e)
         {
             if (JogMode == JogMode.Increase)
@@ -72,6 +80,8 @@ namespace Jastech.Framework.Winform.Controls
 
             Axis axis = AxisHandler.GetAxis(AxisName.X);
             MoveJog(axis, Direction.CCW);
+
+            Logger.Write(LogType.GUI, "Clicked X Right");
         }
 
         private void btnJogRightX_MouseUp(object sender, MouseEventArgs e)

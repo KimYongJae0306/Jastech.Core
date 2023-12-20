@@ -1,8 +1,10 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 
 namespace Jastech.Framework.Util.Helper
 {
@@ -129,6 +131,25 @@ namespace Jastech.Framework.Util.Helper
             double standardDeviation = Math.Sqrt(squaredDifferencesMean);
 
             return standardDeviation;
+        }
+
+        public static byte[] GetDerivedArray(byte[] valueArray, int order, bool exceptFirstElement = false)
+        {
+            for (int iter = 0; iter < order; iter++)
+            {
+                byte[] tempArray = (byte[])valueArray.Clone();
+                for (int index = 0; index < valueArray.Length; index++)
+                {
+                    if (exceptFirstElement == true && index != 0)
+                        valueArray[index] = (byte)(tempArray[index] - tempArray[index - 1]);
+                    else if (exceptFirstElement == false && index != valueArray.Length - 1)
+                        valueArray[index] = (byte)(tempArray[index + 1] - tempArray[index]);
+                    else
+                        valueArray[index] = 0;
+                }
+            }
+
+            return valueArray;
         }
     }
 }

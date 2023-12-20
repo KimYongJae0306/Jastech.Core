@@ -93,5 +93,15 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             
         }
+
+        public override void SetLowerReturndB(double value)
+        {
+            
+        }
+
+        public override void SetUpperReturndB(double value)
+        {
+            
+        }
     }
 }

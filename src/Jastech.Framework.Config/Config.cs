@@ -12,10 +12,10 @@ namespace Jastech.Framework.Config
             string fileName = $"{GetType().Name}.cfg";
             string fullPath = Path.Combine(configDir, fileName);
             string dirPath = Path.GetDirectoryName(fullPath);
+
             if (!Directory.Exists(dirPath))
-            {
                 Directory.CreateDirectory(dirPath);
-            }
+
             JsonConvertHelper.Save(fullPath, this);
         }
 
@@ -28,6 +28,7 @@ namespace Jastech.Framework.Config
                 Save(configDir);
                 return;
             }
+
             JsonConvertHelper.LoadToExistingTarget(path, this);
         }
 

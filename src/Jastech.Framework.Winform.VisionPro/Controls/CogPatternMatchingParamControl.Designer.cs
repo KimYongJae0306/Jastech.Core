@@ -42,6 +42,7 @@
             this.nupdnMatchScore = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblEditMark = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogPatternDisplay)).BeginInit();
@@ -133,6 +134,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblEditMark);
             this.panel2.Controls.Add(this.lblClear);
             this.panel2.Controls.Add(this.lblTest);
             this.panel2.Controls.Add(this.nupdnMaxAngle);
@@ -151,7 +153,7 @@
             this.lblClear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblClear.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblClear.ForeColor = System.Drawing.Color.White;
-            this.lblClear.Location = new System.Drawing.Point(16, 177);
+            this.lblClear.Location = new System.Drawing.Point(16, 331);
             this.lblClear.Name = "lblClear";
             this.lblClear.Size = new System.Drawing.Size(192, 40);
             this.lblClear.TabIndex = 22;
@@ -164,7 +166,7 @@
             this.lblTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTest.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblTest.ForeColor = System.Drawing.Color.White;
-            this.lblTest.Location = new System.Drawing.Point(16, 125);
+            this.lblTest.Location = new System.Drawing.Point(16, 279);
             this.lblTest.Name = "lblTest";
             this.lblTest.Size = new System.Drawing.Size(192, 40);
             this.lblTest.TabIndex = 21;
@@ -177,7 +179,7 @@
             this.nupdnMaxAngle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.nupdnMaxAngle.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.nupdnMaxAngle.ForeColor = System.Drawing.Color.White;
-            this.nupdnMaxAngle.Location = new System.Drawing.Point(128, 63);
+            this.nupdnMaxAngle.Location = new System.Drawing.Point(128, 60);
             this.nupdnMaxAngle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMaxAngle.Maximum = new decimal(new int[] {
             180,
@@ -200,7 +202,7 @@
             this.nupdnMatchScore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.nupdnMatchScore.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.nupdnMatchScore.ForeColor = System.Drawing.Color.White;
-            this.nupdnMatchScore.Location = new System.Drawing.Point(128, 25);
+            this.nupdnMatchScore.Location = new System.Drawing.Point(128, 21);
             this.nupdnMatchScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nupdnMatchScore.Name = "nupdnMatchScore";
             this.nupdnMatchScore.ReadOnly = true;
@@ -231,6 +233,19 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Score [%]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblEditMark
+            // 
+            this.lblEditMark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEditMark.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblEditMark.ForeColor = System.Drawing.Color.White;
+            this.lblEditMark.Location = new System.Drawing.Point(16, 103);
+            this.lblEditMark.Name = "lblEditMark";
+            this.lblEditMark.Size = new System.Drawing.Size(192, 40);
+            this.lblEditMark.TabIndex = 23;
+            this.lblEditMark.Text = "Edit";
+            this.lblEditMark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblEditMark.Click += new System.EventHandler(this.lblEditMark_Click);
             // 
             // CogPatternMatchingParamControl
             // 
@@ -264,5 +279,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Label lblClear;
+        private System.Windows.Forms.Label lblEditMark;
     }
 }

@@ -111,5 +111,44 @@ namespace Jastech.Framework.Imaging.Helper
 
             return new Rectangle(minX, minY, Math.Abs(maxX - minX), Math.Abs(maxY - minY));
         }
+
+        public static byte GetGrayLevel(Bitmap bmp, int x, int y)
+        {
+            byte value = 0;
+            if (bmp.PixelFormat != PixelFormat.Format8bppIndexed)
+                return value;
+
+            if (x < 0 || x > bmp.Width - 1)
+                return value;
+
+            if (y < 0 || y > bmp.Height - 1)
+                return value;
+
+
+            byte[] dataArray = new byte[bmp.Width];
+            unsafe
+            {
+                BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+                IntPtr ptrData = bmpData.Scan0;
+                int stride = bmpData.Stride;
+                byte* data = (byte*)(void*)ptrData;
+
+                int index = y * stride + x;
+
+                if(index >= 0)
+                    value = data[index];
+
+                bmp.UnlockBits(bmpData);
+            }
+            return value;
+        }
+
+        public static byte GetGrayLevel(Bitmap bmp, PointF point)
+        {
+            int x = (int)point.X;
+            int y = (int)point.Y;
+
+            return GetGrayLevel(bmp, x, y);
+        }
     }
 }

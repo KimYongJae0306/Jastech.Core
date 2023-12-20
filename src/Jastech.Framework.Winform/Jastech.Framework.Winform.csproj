@@ -50,10 +50,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ATTWrapperd">
-      <HintPath>..\..\..\Jastech.Library\Macron\Debug\ATTWrapperd.dll</HintPath>
-    </Reference>
-    <Reference Include="Cognex.VisionPro.Core, Version=71.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -79,17 +75,23 @@
     <Compile Include="Controls\DoubleBufferedPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ImagePreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImagePreviewControl.Designer.cs">
+      <DependentUpon>ImagePreviewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageViewerControl.Designer.cs">
+      <DependentUpon>ImageViewerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LAFJogControl.Designer.cs">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LiveViewPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LiveViewPanel.Designer.cs">
-      <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DrawBoxControl.cs">
       <SubType>UserControl</SubType>
@@ -202,11 +204,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ImagePreviewControl.resx">
+      <DependentUpon>ImagePreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ImageViewerControl.resx">
+      <DependentUpon>ImageViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LiveViewPanel.resx">
-      <DependentUpon>LiveViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
@@ -285,10 +290,6 @@
     <ProjectReference Include="..\Jastech.Framework.Device\Jastech.Framework.Device.csproj">
       <Project>{F43DDCCA-E65C-4131-B789-DB4109E91B68}</Project>
       <Name>Jastech.Framework.Device</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Jastech.Framework.Imaging.VisionPro\Jastech.Framework.Imaging.VisionPro.csproj">
-      <Project>{22EE7B1A-E7B2-4547-94DD-4E85BDB56956}</Project>
-      <Name>Jastech.Framework.Imaging.VisionPro</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jastech.Framework.Imaging\Jastech.Framework.Imaging.csproj">
       <Project>{2380DA0F-851A-4430-9A43-E7B2DEEE29F2}</Project>

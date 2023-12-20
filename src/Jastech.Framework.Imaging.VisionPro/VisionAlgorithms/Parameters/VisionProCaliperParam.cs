@@ -10,6 +10,14 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool { LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None };
 
+        public double GetContrastThreshold()
+        {
+            if (CaliperTool == null)
+                return 0;
+
+            return CaliperTool.RunParams.ContrastThreshold;
+        }
+
         public void SetInputImage(ICogImage image)
         {
             if (CaliperTool == null)
