@@ -158,6 +158,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         public bool IsPositiveLimit { get; set; }
 
         public bool IsBusy { get; set; }
+
+        public double RetValue { get; set; }
         #endregion
     }
 }
