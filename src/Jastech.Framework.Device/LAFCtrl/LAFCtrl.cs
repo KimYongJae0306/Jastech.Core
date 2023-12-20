@@ -164,7 +164,6 @@ namespace Jastech.Framework.Device.LAFCtrl
         public bool NeedHomming { get; set; } = true;
 
         public double ReturndB { get; set; }
-
         #endregion
     }
 }
