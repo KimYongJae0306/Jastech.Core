@@ -1,6 +1,7 @@
 ﻿using ACS.SPiiPlusNET;
 using Jastech.Framework.Util.Helper;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -440,6 +441,15 @@ namespace Jastech.Framework.Device.Motions
         public void ApplyLafParameters(ACSBufferNumber buffer, string switchVariableName)
         {
             WriteRealVariable(switchVariableName, 0);
+            Api.RunBuffer((ProgramBuffer)buffer, null);
+        }
+
+        public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value)
+        {
+            if (!Api.IsConnected)
+                return;
+
+            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE);
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
         #endregion
