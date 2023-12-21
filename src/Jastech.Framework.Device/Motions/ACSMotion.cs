@@ -436,7 +436,7 @@ namespace Jastech.Framework.Device.Motions
 
         public double ReadRealVariable(string variableName) => Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
 
-        public void WriteRealVariable(string variableName, double value) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE);
+        public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
 
         public void ApplyLafParameters(ACSBufferNumber buffer, string switchVariableName)
         {
@@ -444,12 +444,17 @@ namespace Jastech.Framework.Device.Motions
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
 
-        public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value)
+        public void RunBuffer(ACSBufferNumber buffer)
+        {
+            Api.RunBuffer((ProgramBuffer)buffer, null);
+        }
+
+        public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value, int startIndex, int endIndex)
         {
             if (!Api.IsConnected)
                 return;
 
-            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE);
+            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, startIndex, endIndex);
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
         #endregion
