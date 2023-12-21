@@ -228,6 +228,17 @@ namespace Jastech.Framework.Imaging.Helper
             return null;
         }
 
+        public static float[] GetHistogram(Mat srcMat, Mat maskMat)
+        {
+            DenseHistogram hist = new DenseHistogram(256, new RangeF(0, 256));
+
+            var grayImages = new Image<Gray, byte>[] { srcMat.ToImage<Gray, byte>() };
+            var maskImage = maskMat?.ToImage<Gray, byte>();
+            hist.Calculate(grayImages, false, maskImage);
+
+            return hist.GetBinValues();
+        }
+
         public enum ColorChannel
         {
             B, G, R

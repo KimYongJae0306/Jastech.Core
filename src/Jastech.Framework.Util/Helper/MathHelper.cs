@@ -135,21 +135,41 @@ namespace Jastech.Framework.Util.Helper
 
         public static byte[] GetDerivedArray(byte[] valueArray, int order, bool exceptFirstElement = false)
         {
+            byte[] result = new byte[valueArray.Length];
             for (int iter = 0; iter < order; iter++)
             {
                 byte[] tempArray = (byte[])valueArray.Clone();
                 for (int index = 0; index < valueArray.Length; index++)
                 {
                     if (exceptFirstElement == true && index != 0)
-                        valueArray[index] = (byte)(tempArray[index] - tempArray[index - 1]);
+                        result[index] = (byte)(tempArray[index] - tempArray[index - 1]);
                     else if (exceptFirstElement == false && index != valueArray.Length - 1)
-                        valueArray[index] = (byte)(tempArray[index + 1] - tempArray[index]);
+                        result[index] = (byte)(tempArray[index + 1] - tempArray[index]);
                     else
-                        valueArray[index] = 0;
+                        result[index] = 0;
                 }
             }
 
-            return valueArray;
+            return result;
+        }
+
+        public static float[] GetMovingAverage(float[] data, int scale)
+        {
+            float[] result = new float[data.Length];
+
+            for (int index = 0; index < data.Length; index++)
+            {
+                int start = Math.Max(0, index - scale / 2);
+                int end = Math.Min(data.Length - 1, index + scale / 2);
+
+                float sum = 0;
+                for (int j = start; j <= end; j++)
+                    sum += data[j];
+
+                result[index] = sum / (end - start + 1);
+            }
+
+            return result;
         }
     }
 }

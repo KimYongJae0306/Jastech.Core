@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Jastech.Framework.Imaging.Helper
 {
@@ -149,6 +150,24 @@ namespace Jastech.Framework.Imaging.Helper
             int y = (int)point.Y;
 
             return GetGrayLevel(bmp, x, y);
+        }
+
+        public static byte[] GetByteArrayFromBitmap(Bitmap bmp)
+        {
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, bmp.PixelFormat);
+            try
+            {
+                int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
+                byte[] byteArray = new byte[bytes];
+
+                Marshal.Copy(bmpData.Scan0, byteArray, 0, bytes);
+
+                return byteArray;
+            }
+            finally
+            {
+                bmp.UnlockBits(bmpData);
+            }
         }
     }
 }
