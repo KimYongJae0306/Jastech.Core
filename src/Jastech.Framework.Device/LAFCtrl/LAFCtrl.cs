@@ -56,6 +56,10 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public abstract void SetYWindow(int start, int width);
 
+        public abstract void SetLowerReturndB(double value);
+
+        public abstract void SetUpperReturndB(double value);
+
         protected void OnLAFReceived(byte[] data)
         {
             DataReceived?.Invoke(Name, data);
@@ -147,8 +151,6 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         public bool IsTrackingOn { get; set; }
 
-        public string Name { get; set; }
-
         public int CenterofGravity { get; set; }
 
         public double MPosPulse { get; set; }
@@ -160,6 +162,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         public bool IsBusy { get; set; }
 
         public bool NeedHomming { get; set; } = true;
+
+        public double ReturndB { get; set; }
         #endregion
     }
 }

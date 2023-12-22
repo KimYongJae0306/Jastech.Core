@@ -53,8 +53,6 @@ namespace Jastech.Framework.Algorithms.Akkon.Results
         #endregion
     }
     
-
-
     public class LeadResult
     {
         public int Id { get; set; }

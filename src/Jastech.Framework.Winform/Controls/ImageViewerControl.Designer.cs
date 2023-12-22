@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.tlpImageViewer = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlView = new System.Windows.Forms.Panel();
             this.pnlPreview = new System.Windows.Forms.Panel();
+            this.pnlView = new System.Windows.Forms.Panel();
             this.tlpImageViewer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,16 @@
             this.tlpImageViewer.Size = new System.Drawing.Size(500, 500);
             this.tlpImageViewer.TabIndex = 0;
             // 
+            // pnlPreview
+            // 
+            this.pnlPreview.AutoScroll = true;
+            this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPreview.Location = new System.Drawing.Point(0, 400);
+            this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlPreview.Name = "pnlPreview";
+            this.pnlPreview.Size = new System.Drawing.Size(500, 100);
+            this.pnlPreview.TabIndex = 1;
+            // 
             // pnlView
             // 
             this.pnlView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -59,15 +69,6 @@
             this.pnlView.Name = "pnlView";
             this.pnlView.Size = new System.Drawing.Size(500, 400);
             this.pnlView.TabIndex = 0;
-            // 
-            // pnlPreview
-            // 
-            this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPreview.Location = new System.Drawing.Point(0, 400);
-            this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.Size = new System.Drawing.Size(500, 100);
-            this.pnlPreview.TabIndex = 1;
             // 
             // ImageViewerControl
             // 
@@ -78,6 +79,7 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold);
             this.Name = "ImageViewerControl";
             this.Size = new System.Drawing.Size(500, 500);
+            this.Load += new System.EventHandler(this.ImageViewerControl_Load);
             this.tlpImageViewer.ResumeLayout(false);
             this.ResumeLayout(false);
 

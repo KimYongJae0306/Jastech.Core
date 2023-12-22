@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Exceptions;
 using Cognex.VisionPro.PMAlign;
 using Jastech.Framework.Imaging.VisionAlgorithms.Parameters;
 using Jastech.Framework.Util.Helper;
@@ -30,6 +31,12 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             return PMTool;
         }
 
+        public void SetTool(CogPMAlignTool cogPMAlignTool)
+        {
+            Dispose();
+            PMTool = cogPMAlignTool;
+        }
+
         public void SetTrainRegion(CogRectangle roi)
         {
             if (PMTool == null)
@@ -46,9 +53,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         private void TrainRegion_Changed(object sender, CogChangedEventArgs e)
         {
             if (sender is CogPMAlignPattern tool)
-            {
                 ChangedTrained?.Invoke(tool.Trained);
-            }
         }
 
         public ICogRegion GetTrainRegion()
@@ -219,10 +224,23 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (PMTool == null)
             {
                 PMTool = new CogPMAlignTool();
+
+                // 추가
+                PMTool.Pattern.IgnorePolarity = true;
+                PMTool.Pattern.GrainLimitAutoSelect = true;
+
                 PMTool.RunParams.RunAlgorithm = CogPMAlignRunAlgorithmConstants.PatQuick;
                 PMTool.RunParams.AcceptThreshold = 0.1;
                 PMTool.RunParams.ApproximateNumberToFind = 1;
                 PMTool.RunParams.ScoreUsingClutter = false;
+
+                // 추가
+                PMTool.RunParams.ZoneScale.Low = 0.9;
+                PMTool.RunParams.ZoneScale.High = 1.0;
+                PMTool.RunParams.ZoneScale.Overlap = 1.4;
+                PMTool.RunParams.GrainLimitsUsePattern = false;
+                PMTool.RunParams.GrainLimitFine = 1;
+                PMTool.RunParams.GrainLimitCoarse = 2;
             }
 
             VisionProFileHelper.SaveTool<CogPMAlignTool>(path, PMTool);
@@ -234,48 +252,14 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             string path = Path.Combine(dirPath, fileName);
 
             if (File.Exists(path))
-            {
                 PMTool = VisionProFileHelper.LoadTool(path) as CogPMAlignTool;
-                //PMTool.Pattern.Origin.
-            }
             else
-            {
                 SaveTool(dirPath);
-            }
         }
 
         public void Dispose()
         {
-            if (PMTool != null)
-            {
-                if (PMTool.Pattern.TrainImage != null)
-                {
-                    if (PMTool.Pattern.TrainImage is CogImage8Grey grey)
-                        grey.Dispose();
-                    if (PMTool.Pattern.TrainImage is CogImage24PlanarColor color)
-                        color.Dispose();
-                }
-                PMTool.Pattern.TrainImage = null;
-                PMTool.Pattern.Dispose();
-                PMTool.Pattern = null;
-
-                if (PMTool.InputImage != null)
-                {
-                    if (PMTool.InputImage is CogImage8Grey grey)
-                        grey.Dispose();
-                    if (PMTool.InputImage is CogImage24PlanarColor color)
-                        color.Dispose();
-                }
-
-                PMTool.InputImage = null;
-                PMTool.RunParams.Dispose();
-                PMTool.RunParams = null;
-                if (PMTool.Results != null)
-                    PMTool.Results.Dispose();
-                PMTool.Dispose();
-            }
-
-            PMTool = null;
+            VisionProHelper.DisposeTool(PMTool);
         }
         #endregion
     }

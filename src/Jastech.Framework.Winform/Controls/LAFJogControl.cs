@@ -1,6 +1,8 @@
 ﻿using Jastech.Framework.Device.LAFCtrl;
+using Jastech.Framework.Util.Helper;
 using System;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static Jastech.Framework.Device.Motions.AxisMovingParam;
 
 namespace Jastech.Framework.Winform.Controls
@@ -30,6 +32,7 @@ namespace Jastech.Framework.Winform.Controls
             if (JogMode == JogMode.Increase)
                 return;
 
+            Logger.Write(LogType.GUI, $"Clicked Z Up - Device Name : {SelectedLafCtrl.Name}");
             MoveJog(Direction.CCW);
         }
 
@@ -38,6 +41,7 @@ namespace Jastech.Framework.Winform.Controls
             if (JogMode == JogMode.Jog)
                 return;
 
+            Logger.Write(LogType.GUI, $"Clicked Z Up - Device Name : {SelectedLafCtrl.Name}");
             SelectedLafCtrl?.SetMotionRelativeMove(Direction.CCW, MoveAmount);
         }
 
@@ -54,6 +58,7 @@ namespace Jastech.Framework.Winform.Controls
             if (JogMode == JogMode.Increase)
                 return;
 
+            Logger.Write(LogType.GUI, $"Clicked Z Down - Device Name : {SelectedLafCtrl.Name}");
             MoveJog(Direction.CW);
         }
 
@@ -62,6 +67,7 @@ namespace Jastech.Framework.Winform.Controls
             if (JogMode == JogMode.Jog)
                 return;
 
+            Logger.Write(LogType.GUI, $"Clicked Z Down - Device Name : {SelectedLafCtrl.Name}");
             SelectedLafCtrl?.SetMotionRelativeMove(Direction.CW, MoveAmount);
         }
 

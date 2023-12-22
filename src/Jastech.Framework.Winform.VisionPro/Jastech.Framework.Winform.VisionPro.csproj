@@ -264,6 +264,12 @@
     <Compile Include="Controls\CogTeachingDisplayControl.Designer.cs">
       <DependentUpon>CogTeachingDisplayControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CogAlignEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CogAlignEditForm.Designer.cs">
+      <DependentUpon>CogAlignEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CogAlignMaskingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CogTeachingDisplayControl.resx">
       <DependentUpon>CogTeachingDisplayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CogAlignEditForm.resx">
+      <DependentUpon>CogAlignEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CogAlignMaskingForm.resx">
       <DependentUpon>CogAlignMaskingForm.cs</DependentUpon>
