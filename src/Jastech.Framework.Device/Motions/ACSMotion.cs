@@ -434,6 +434,16 @@ namespace Jastech.Framework.Device.Motions
             return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
 
+        private bool GetBufferRunningState(ProgramBuffer programBuffer)
+        {
+            if (!Api.IsConnected)
+                return false;
+
+            var state = Api.GetProgramState(programBuffer);
+
+            return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
+        }
+
         public double ReadRealVariable(string variableName) => Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
 
         public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
@@ -446,6 +456,8 @@ namespace Jastech.Framework.Device.Motions
 
         public void RunBuffer(ACSBufferNumber buffer)
         {
+            if (GetBufferRunningState((ProgramBuffer)buffer) == true)
+                Api.StopBuffer((ProgramBuffer)buffer);
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
 
@@ -454,7 +466,7 @@ namespace Jastech.Framework.Device.Motions
             if (!Api.IsConnected)
                 return;
 
-            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, startIndex, endIndex);
+            Api.WriteVariable(value, variableName, (ProgramBuffer)buffer, startIndex, endIndex);
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
         #endregion
