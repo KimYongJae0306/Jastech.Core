@@ -33,8 +33,8 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
-        [JsonProperty]
-        public ACSBufferNumber TriggerBuffer { get; set; }
+        //[JsonProperty]
+        //public ACSBufferNumber TriggerBuffer { get; set; }
 
         [JsonIgnore]
         public Api Api { get; set; } = null;
@@ -416,13 +416,13 @@ namespace Jastech.Framework.Device.Motions
             return true;
         }
 
-        private void SetTriggerMode(ACSBufferNumber triggerBuffer)
-        {
-            if (!Api.IsConnected)
-                return;
+        //private void SetTriggerMode(ACSBufferNumber triggerBuffer)
+        //{
+        //    if (!Api.IsConnected)
+        //        return;
 
-            Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
-        }
+        //    Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
+        //}
 
         private bool GetBufferRunningState(int axisNo)
         {
@@ -434,9 +434,20 @@ namespace Jastech.Framework.Device.Motions
             return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
 
-        public double ReadRealVariable(string variableName) => Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
+        public double ReadRealVariable(string variableName)
+        {
+            if (!Api.IsConnected)
+                return 0.0;
 
-        public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
+            return Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
+        }
+
+        public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1)
+        {
+            if (!Api.IsConnected)
+                return;
+            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
+        }
 
         public void ApplyLafParameters(ACSBufferNumber buffer, string switchVariableName)
         {
@@ -449,14 +460,14 @@ namespace Jastech.Framework.Device.Motions
             Api.RunBuffer((ProgramBuffer)buffer, null);
         }
 
-        public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value, int startIndex, int endIndex)
-        {
-            if (!Api.IsConnected)
-                return;
+        //public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value, int startIndex, int endIndex)
+        //{
+        //    if (!Api.IsConnected)
+        //        return;
 
-            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, startIndex, endIndex);
-            Api.RunBuffer((ProgramBuffer)buffer, null);
-        }
+        //    Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, startIndex, endIndex);
+        //    Api.RunBuffer((ProgramBuffer)buffer, null);
+        //}
         #endregion
     }
 
@@ -465,7 +476,7 @@ namespace Jastech.Framework.Device.Motions
         Homing_Unit1 = 0,
         Homing_Unit2 = 1,
         Buffer2 = 2,
-        Buffer3 = 3,    
+        Buffer3 = 3,
         CameraTrigger_Unit1 = 4,
         CameraTrigger_Unit2 = 5,
         LAFTrigger_Unit1 = 6,
