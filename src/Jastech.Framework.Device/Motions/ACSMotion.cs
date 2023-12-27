@@ -442,15 +442,21 @@ namespace Jastech.Framework.Device.Motions
         {
             if (!Api.IsConnected)
                 return;
+
             Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
         }
 
         public void RunBuffer(int index)
         {
             if (GetBufferRunningState((ProgramBuffer)index) == true)
-                Api.StopBuffer((ProgramBuffer)index);
+                StopBuffer(index);
 
             Api.RunBuffer((ProgramBuffer)index, null);
+        }
+
+        public void StopBuffer(int index)
+        {
+            Api.StopBuffer((ProgramBuffer)index);
         }
         #endregion
     }

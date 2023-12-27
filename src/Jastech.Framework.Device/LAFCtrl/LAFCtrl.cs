@@ -7,6 +7,7 @@ namespace Jastech.Framework.Device.LAFCtrl
     public abstract partial class LAFCtrl : IDevice, IDisposable
     {
         #region 속성
+        [JsonIgnore]
         public LAFStatus Status { get; set; } = new LAFStatus();
         #endregion
 
