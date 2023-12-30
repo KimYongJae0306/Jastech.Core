@@ -137,7 +137,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             return offset;
         }
 
-        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect, double offsetX = 0, double offsetY = 0)
+        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect, double offsetX = 0.0, double offsetY = 0.0)
         {
             List<double> xPointList = new List<double>();
 

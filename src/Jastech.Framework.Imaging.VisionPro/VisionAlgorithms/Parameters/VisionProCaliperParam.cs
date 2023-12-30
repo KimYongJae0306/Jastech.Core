@@ -13,7 +13,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         public double GetContrastThreshold()
         {
             if (CaliperTool == null)
-                return 0;
+                return 0.0;
 
             return CaliperTool.RunParams.ContrastThreshold;
         }
