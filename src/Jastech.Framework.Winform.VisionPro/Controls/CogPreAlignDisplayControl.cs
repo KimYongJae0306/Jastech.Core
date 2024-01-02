@@ -38,59 +38,71 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         #region 메서드
         public void UpdateLeftDisplay(ICogImage cogImage, List<CogCompositeShape> shapes)
         {
-            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-
-            if (cogLeftDisplay.Image != null)
-                cogLeftDisplay.Image = null;
-
-            cogLeftDisplay.Image = cogImage;
-            cogLeftDisplay.StaticGraphics.Clear();
-            cogLeftDisplay.InteractiveGraphics.Clear();
-
-            if (shapes == null)
-                return;
-
-            foreach (var item in shapes)
+            lock(cogLeftDisplay)
             {
-                if (item != null)
-                    cogLeftDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
-            }
+                CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
 
-            cogLeftDisplay.Fit();
+                if (cogLeftDisplay.Image != null)
+                    cogLeftDisplay.Image = null;
+
+                cogLeftDisplay.Image = cogImage;
+                cogLeftDisplay.StaticGraphics.Clear();
+                cogLeftDisplay.InteractiveGraphics.Clear();
+
+                if (shapes == null)
+                    return;
+
+                foreach (var item in shapes)
+                {
+                    if (item != null)
+                        cogLeftDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+                }
+
+                cogLeftDisplay.Fit();
+            }
         }
 
         public void UpdateRightDisplay(ICogImage cogImage, List<CogCompositeShape> shapes)
         {
-            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
-            if (cogRightDisplay.Image != null)
-                cogRightDisplay.Image = null;
-
-            cogRightDisplay.Image = cogImage;
-
-            cogRightDisplay.StaticGraphics.Clear();
-            cogRightDisplay.InteractiveGraphics.Clear();
-
-            if (shapes == null)
-                return;
-
-            foreach (var item in shapes)
+            lock(cogRightDisplay)
             {
-                if(item != null)
-                    cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
-            }
+                CogDisplayHelper.DisposeDisplay(cogRightDisplay);
+                if (cogRightDisplay.Image != null)
+                    cogRightDisplay.Image = null;
 
-            cogRightDisplay.Fit();
+                cogRightDisplay.Image = cogImage;
+
+                cogRightDisplay.StaticGraphics.Clear();
+                cogRightDisplay.InteractiveGraphics.Clear();
+
+                if (shapes == null)
+                    return;
+
+                foreach (var item in shapes)
+                {
+                    if (item != null)
+                        cogRightDisplay.StaticGraphics.Add(item as ICogGraphic, "Result");
+                }
+
+                cogRightDisplay.Fit();
+            }
         }
 
         public void ClearImage()
         {
-            CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
-            cogLeftDisplay.InteractiveGraphics.Clear();
-            cogLeftDisplay.Image = null;
+            lock(cogLeftDisplay)
+            {
+                CogDisplayHelper.DisposeDisplay(cogLeftDisplay);
+                cogLeftDisplay.InteractiveGraphics.Clear();
+                cogLeftDisplay.Image = null;
+            }
 
-            CogDisplayHelper.DisposeDisplay(cogRightDisplay);
-            cogRightDisplay.InteractiveGraphics.Clear();
-            cogRightDisplay.Image = null;
+            lock (cogRightDisplay)
+            {
+                CogDisplayHelper.DisposeDisplay(cogRightDisplay);
+                cogRightDisplay.InteractiveGraphics.Clear();
+                cogRightDisplay.Image = null;
+            }
         }
         #endregion
     }
