@@ -107,13 +107,17 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetImage(ICogImage cogImage)
         {
-            CogDisplayHelper.DisposeDisplay(cogDisplay);
-            if (cogImage == null)
-                cogDisplay.Image = null;
-            else
-                cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
-
-            SetImageSize(cogDisplay.Image.Width, cogDisplay.Image.Height);
+            lock(cogDisplay)
+            {
+                CogDisplayHelper.DisposeDisplay(cogDisplay);
+                if (cogImage == null)
+                    cogDisplay.Image = null;
+                else
+                {
+                    cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
+                    SetImageSize(cogImage.Width, cogImage.Height);
+                }
+            }
         }
 
         public void SetImageSize(int imageWidth, int imageHeight)
@@ -124,8 +128,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void DisposeImage()
         {
-            CogDisplayHelper.DisposeDisplay(cogDisplay);
-            cogDisplay.Image = null;
+            lock(cogDisplay)
+            {
+                CogDisplayHelper.DisposeDisplay(cogDisplay);
+                cogDisplay.Image = null;
+            }
         }
 
         public void SetImagePosition(double panX, double panY, double zoom)
@@ -142,24 +149,21 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void ClearImage()
         {
-            CogDisplayHelper.DisposeDisplay(cogDisplay);
-            cogDisplay.Image = null;
+            lock(cogDisplay)
+            {
+                CogDisplayHelper.DisposeDisplay(cogDisplay);
+                cogDisplay.Image = null;
+            }
         }
         
         public int GetImageWidth()
         {
-            if (cogDisplay.Image != null)
-                return ImageWidth;
-
-            return 0;
+            return ImageWidth;
         }
 
         public int GetImageHeight()
         {
-            if (cogDisplay.Image != null)
-                return ImageHeight;
-
-            return 0;
+            return ImageHeight;
         }
 
         public double GetZoomValue()
