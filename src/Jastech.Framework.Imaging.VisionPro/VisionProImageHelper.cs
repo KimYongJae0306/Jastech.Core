@@ -82,6 +82,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static byte[] GetWidthDataArray(CogImage8Grey image, int index)
         {
+            if (image == null)
+                return null;
+
             byte[] dataArray = new byte[image.Width];
             unsafe
             {
@@ -103,6 +106,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static byte[] GetByteArray(CogImage8Grey image)
         {
+            if (image == null)
+                return null;
+
             unsafe
             {
                 var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
@@ -119,6 +125,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static IntPtr GetIntptr(CogImage8Grey image, out int stride)
         {
+            if (image == null)
+                return null;
+
             unsafe
             {
                 var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
@@ -131,6 +140,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
         {
+            if (orgImage == null)
+                return null;
+
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
             byte[] mapArray = new byte[256];
 
@@ -168,6 +180,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int minThreshold, int maxThreshold, int maxValue, bool isInvert = false)
         {
+            if (orgImage == null)
+                return null;
+
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
             byte[] mapArray = new byte[256];
 
