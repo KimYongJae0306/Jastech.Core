@@ -125,9 +125,6 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static IntPtr GetIntptr(CogImage8Grey image, out int stride)
         {
-            if (image == null)
-                return null;
-
             unsafe
             {
                 var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
