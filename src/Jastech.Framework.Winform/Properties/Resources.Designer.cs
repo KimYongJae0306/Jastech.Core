@@ -203,6 +203,26 @@ namespace Jastech.Framework.Winform.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap CenterCross_White {
+            get {
+                object obj = ResourceManager.GetObject("CenterCross_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap CenterCrossFixed_White {
+            get {
+                object obj = ResourceManager.GetObject("CenterCrossFixed_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Copy {
             get {
                 object obj = ResourceManager.GetObject("Copy", resourceCulture);
@@ -356,6 +376,16 @@ namespace Jastech.Framework.Winform.Properties {
         internal static System.Drawing.Bitmap Maker_White {
             get {
                 object obj = ResourceManager.GetObject("Maker_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Measure_White {
+            get {
+                object obj = ResourceManager.GetObject("Measure_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

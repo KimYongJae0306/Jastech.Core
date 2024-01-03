@@ -31,6 +31,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             // 이벤트 등록(중요)
             CogDisplay.DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
+            CogDisplay.ImageChanged += SetThumbnailImage;
             CogThumbnail.UpdateRectEventHandler += CogDisplay.UpdateViewRect;
 
             CogDisplay.DeleteEventHandler += DeleteEventHandler;

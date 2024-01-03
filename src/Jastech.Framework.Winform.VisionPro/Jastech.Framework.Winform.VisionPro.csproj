@@ -385,5 +385,38 @@
   <ItemGroup>
     <None Include="Resources\Reload.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterCross_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterCrossFixed_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fit_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Measure_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PictureFolder2_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Horizontal_Expand_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Horizontal_Focus_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Vertical_Expand_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caret_Vertical_Focus_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Panning_White.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

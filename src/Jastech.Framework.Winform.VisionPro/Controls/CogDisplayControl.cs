@@ -33,12 +33,31 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             Complete,
         }
 
+        [Flags]
+        public enum DisplayFunction
+        {
+            None = 0,
+            FileOpen = 1,
+            FitZoom = 2,
+            Panning = 4,
+            FixedCenterLine = 8,
+            CrossLine = 16,
+            PointToPoint = 32,
+
+            ClearAll = 4096,
+
+            //기능 확인 필요
+            PointToLine = 64,
+            Unknown = 128,
+            Diameter = 256,
+        }
+
         #region 필드
         private bool _updateViewRect { get; set; } = false;
 
-        private Color _nonSelectedColor { get; set; } = SystemColors.Control;
+        private Color _nonSelectedColor { get; set; } = Color.FromArgb(52, 52, 52);
 
-        private Color _selectedColor { get; set; } = Color.DarkSeaGreen;
+        private Color _selectedColor { get; set; } = Color.DarkGray;
 
         private bool IsPanning { get; set; } = false;
 
@@ -77,12 +96,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public event EventHandler DeleteEventHandler;
 
         public event MoveImageDelegate MoveImageEventHandler;
+
+        public event ImageChangedHandler ImageChanged;
         #endregion
 
         #region 델리게이트
         public delegate void DrawViewRectDelegate(CogRectangle viewRect);
 
         public delegate void MoveImageDelegate(double panX, double panY, double zoom);
+
+        public delegate void ImageChangedHandler(ICogImage newImage);
         #endregion
  
         #region 생성자
@@ -96,13 +119,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void CogDisplayControl_Load(object sender, EventArgs e)
         {
             cogDisplayStatusBar.Display = cogDisplay;
-            btnFileOpen.Visible = false;
-            btnFitZoom.Visible = false;
-            btnPanning.Visible = false;
-            btnCustomCrossLine.Visible = false;
-            btnPointToLine.Visible = false;
-            button2.Visible = false;
-            button3.Visible = false;
+            SetFunctionsVisible(DisplayFunction.FileOpen | DisplayFunction.FitZoom | DisplayFunction.Panning | DisplayFunction.ClearAll |
+                                DisplayFunction.CrossLine | DisplayFunction.FixedCenterLine | DisplayFunction.PointToPoint);
         }
 
         public void SetImage(ICogImage cogImage)
@@ -117,6 +135,29 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     cogDisplay.Image = cogImage.CopyBase(CogImageCopyModeConstants.CopyPixels);
                     SetImageSize(cogImage.Width, cogImage.Height);
                 }
+            }
+        }
+
+        public void SetFunctionsVisible(DisplayFunction functions)
+        {
+            btnFileOpen.Visible = functions.HasFlag(DisplayFunction.FileOpen);
+            btnFitZoom.Visible = functions.HasFlag(DisplayFunction.FitZoom);
+            btnPanning.Visible = functions.HasFlag(DisplayFunction.Panning);
+            btnCrossLine.Visible = functions.HasFlag(DisplayFunction.FixedCenterLine);
+            btnCustomCrossLine.Visible = functions.HasFlag(DisplayFunction.CrossLine);
+            btnPointToPoint.Visible = functions.HasFlag(DisplayFunction.PointToPoint);
+
+            btnClearAll.Visible = functions.HasFlag(DisplayFunction.ClearAll);
+
+            // 구현 후 추가 필요
+            btnPointToLine.Visible = functions.HasFlag(DisplayFunction.PointToLine);
+            button2.Visible = functions.HasFlag(DisplayFunction.Unknown);
+            button3.Visible = functions.HasFlag(DisplayFunction.Diameter);
+
+            for (int index = 0, count = 0; index < tlpFunctionButtons.Controls.Count; index++)
+            {
+                if (tlpFunctionButtons.Controls[index] is Button btn && btn.Visible)
+                    tlpFunctionButtons.SetRow(btn, count++);
             }
         }
 
@@ -204,8 +245,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                ICogImage cogImage = VisionProImageHelper.Load(dialog.FileName);
+                cogDisplay.Image = VisionProImageHelper.Load(dialog.FileName);      // TODO : FileOpen 시 상위 Preview는 갱신하지 않음 확인 중
+                ImageChanged?.Invoke(cogDisplay.Image);
                 _displayMode = DisplayMode.None;
+                SetImageSize(cogDisplay.Image.Width, cogDisplay.Image.Height);
+                ClearGraphic();
+                ClearSelect();
             }
         }
 
@@ -328,14 +373,16 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
 
-            ClearSelect();
-
+            string groupName = DisplayMode.PointToPoint.ToString();
             if (btnPointToPoint.BackColor == _selectedColor)
             {
                 DeleteStaticGraphics("Tracking");
                 btnPointToPoint.BackColor = _nonSelectedColor;
                 _stepPointToPoint = StepPointToPoint.Start;
                 _displayMode = DisplayMode.None;
+
+                if (IsContainGroupNameInStaticGraphics(groupName))
+                    cogDisplay.StaticGraphics.Remove(groupName);
             }
             else
             {
@@ -378,10 +425,10 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     DeleteStaticGraphics("Tracking");
 
                     DrawToolList.Add(TrackingCogDistanceTool);
-                    SetStaticGraphics(DrawToolList.Count.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
+                    SetStaticGraphics(DisplayMode.PointToPoint.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
 
                     Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
-                    DrawText(DrawToolList.Count.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
+                    DrawText(DisplayMode.PointToPoint.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
 
                     _stepPointToPoint = StepPointToPoint.Start;
                 }
@@ -669,8 +716,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private void ClearSelect()
         {
-            btnPointToPoint.BackColor = _nonSelectedColor;
-            btnPointToLine.BackColor = _nonSelectedColor;
+            foreach (var control in tlpFunctionButtons.Controls)
+            {
+                if (control is Button btn)
+                    btn.BackColor = _nonSelectedColor;
+            }
         }
 
         private void cogDisplay_Changed(object sender, CogChangedEventArgs e)
@@ -756,9 +806,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                         cogRectangle.Color = color;
                 }
             }
-
-            //matchingResultData.ResultGraphics.Color = color;
-            //matchingResultData.ResultGraphics.DragColor = color;
    
             resultGraphic.Add(matchingResultData.ResultGraphics);
             SetInteractiveGraphics(groupName, resultGraphic);
@@ -901,6 +948,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             cogDisplay.ContextMenuStrip.Items.Clear();
             if (menuItems != null)
                 cogDisplay.ContextMenuStrip.Items.AddRange(menuItems);
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            _displayMode = DisplayMode.None;
+            ClearGraphic();
+            ClearSelect();
         }
         #endregion
     }
