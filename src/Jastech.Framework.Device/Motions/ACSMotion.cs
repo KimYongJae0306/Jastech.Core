@@ -458,6 +458,12 @@ namespace Jastech.Framework.Device.Motions
         {
             Api.StopBuffer((ProgramBuffer)index);
         }
+
+        public void CompileBuffer(int index)
+        {
+            if (GetBufferRunningState((ProgramBuffer)index) == true)
+                Api.CompileBuffer((ProgramBuffer)index);
+        }
         #endregion
     }
 
