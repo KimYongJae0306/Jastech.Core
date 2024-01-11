@@ -257,6 +257,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             cogRightDisplay.StaticGraphics.Add(cogLine, "line");
         }
+
         public void DrawLine(CogLine cogLine)
         {
             cogLeftDisplay.StaticGraphics.Add(cogLine, "line");
