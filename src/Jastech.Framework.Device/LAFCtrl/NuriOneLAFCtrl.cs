@@ -171,6 +171,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             SetMotionMaxSpeed(MaxSppedAxisZ);
             SetAccDec(AccDec);
+            SetVroOnOff(YWindowOnOff ? false : true);         //off로 해놓고 설정해야함.
+            SetYWindow(YWindowStart, YWindowWidth);
         }
 
         public override void SetMotionMaxSpeed(double velocity)
