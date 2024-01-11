@@ -51,7 +51,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void SetImage(ICogImage image)
         {
             CogDisplay.SetImage(image);
-            //CogThumbnail.SetThumbnailImage(image, null);
         }
 
         public void SetThumbnailImage(ICogImage image)
