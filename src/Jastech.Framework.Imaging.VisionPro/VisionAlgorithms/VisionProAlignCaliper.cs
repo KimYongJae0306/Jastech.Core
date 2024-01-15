@@ -3,18 +3,19 @@ using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System.Collections.Generic;
+using static Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProCaliperParam;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
     public class CogAlignCaliper : VisionProCaliper
     {
-        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount, bool isPanel)
+        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount, CaliperSearchDirection searchDirecton, bool isPanel)
         {
             List<VisionProCaliperResult> resultList = new List<VisionProCaliperResult>();
 
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
 
-            var rectList = VisionProShapeHelper.DivideRegion(rect, leadCount);
+            var rectList = VisionProShapeHelper.DivideRegion(rect, leadCount, searchDirecton);
             if (rectList == null)
                 return resultList;
 
