@@ -111,8 +111,11 @@ namespace Jastech.Framework.Device.LAFCtrl
                     int index = temp.IndexOf(text);
                     int startIndex = index + text.Length;
                     int size = text.Length - startIndex;
-                    string valueString = temp.Substring(startIndex, 2).Trim();
-                    IsLaserOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                    if(size > 0)
+                    {
+                        string valueString = temp.Substring(startIndex, 2).Trim();
+                        IsLaserOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                    }
                 }
 
                 if (temp.Contains("MLLAF3:uc motiontrack"))
