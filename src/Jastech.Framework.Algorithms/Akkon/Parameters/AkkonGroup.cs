@@ -23,10 +23,10 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
         public double Threshold { get; set; } = 100;
 
         [JsonProperty]
-        public double Pitch { get; set; } = 47.0;  //um
+        public double Pitch { get; set; } = 46.0;  //um
 
         [JsonProperty]
-        public double Width { get; set; } = 18.0;// um
+        public double Width { get; set; } = 28.0;// um
 
         [JsonProperty]
         public double Height { get; set; } = 100.0;// um

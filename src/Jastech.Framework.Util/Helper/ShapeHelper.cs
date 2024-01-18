@@ -9,7 +9,7 @@ namespace Jastech.Framework.Util.Helper
 {
     public static class ShapeHelper
     {
-        public static Rectangle GetVaildRectangle(Rectangle inputRect, int imageWidht, int imageHeight)
+        public static Rectangle GetValidRectangle(Rectangle inputRect, int imageWidht, int imageHeight)
         {
             Rectangle rectangle = new Rectangle();
 
