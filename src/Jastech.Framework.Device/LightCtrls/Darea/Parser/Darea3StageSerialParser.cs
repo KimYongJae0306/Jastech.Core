@@ -3,29 +3,30 @@ using System.Text;
 
 namespace Jastech.Framework.Device.LightCtrls.Darea.Parser
 {
-	internal class Darea3StageSerialParser : IDareaParser
+    internal enum DareaSendCommand
+    {
+        RESET, // Reset alarm
+        PWW,   // Set On/Off state to entire channel
+        PWR,   // Get On/Off state from entire channel
+        CDW,   // Set light value to single channel 
+        CDR,   // Get light value from single channel 
+        ADW,   // Set light value to entire channel 
+        OSW,   // Set offset light value to each channel
+        OSR,   // Get offset light value from each channel
+        LTR,   // Get temperature
+        ALR    // Get alarm number
+    }
+    internal enum DareaReceieveCommand   // Require suffix "\r\n"
+    {
+        RPW, // return value of PWR => RPW:{powerState}\r\n
+        RLV, // return value of CDR => RLV{channel}:{lightValue}\r\n
+        ROS, // return value of OSR => ROS:{offsetCh1}{offsetCh2}{offestCh3}\r\n
+        RET, // return value of LTR => RET:{temperature}\r\n
+        ERR  // return value of ALR => ERR:{alarmInfo}\r\n
+    }
+
+    internal class Darea3StageSerialParser : IDareaParser
 	{
-		private enum DareaSendCommand
-		{
-			RESET, // Reset alarm
-			PWW,   // Set On/Off state to entire channel
-			PWR,   // Get On/Off state from entire channel
-			CDW,   // Set light value to single channel 
-			CDR,   // Get light value from single channel 
-			ADW,   // Set light value to entire channel 
-			OSW,   // Set offset light value to each channel
-			OSR,   // Get offset light value from each channel
-			LTR,   // Get temperature
-			ALR    // Get alarm number
-		}
-		private enum DareaReceieveCommand   // Require suffix "\r\n"
-		{
-			RPW, // return value of PWR => RPW:{powerState}\r\n
-			RLV, // return value of CDR => RLV{channel}:{lightValue}\r\n
-			ROS, // return value of OSR => ROS:{offsetCh1}{offsetCh2}{offestCh3}\r\n
-			RET, // return value of LTR => RET:{temperature}\r\n
-			ERR  // return value of ALR => ERR:{alarmInfo}\r\n
-		}
 
 		public string Command { get; set; }
 		public int Channel { get; set; }    // TODO : 뭐가 제일 내부 조명 채널인지 확인할 것
