@@ -75,9 +75,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         private double Distance { get; set; }
 
-        public double PixelResolution { get; set; } = 1.0;
+        public float PixelResolution { get; set; } = 1.0F;
 
         private CogDistancePointPointTool TrackingCogDistanceTool = new CogDistancePointPointTool();
+
+        private CogDistancePointPointTool TempTrackingCogDistanceTool = new CogDistancePointPointTool();
 
         private List<CogToolBase> DrawToolList = new List<CogToolBase>();
 
@@ -417,7 +419,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 {
                     EndPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
 
-                    Distance = VisionProMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length;
+                    Distance = VisionProMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length * PixelResolution;
                     _stepPointToPoint = StepPointToPoint.Measure;
                 }
                 else if (_stepPointToPoint == StepPointToPoint.Measure)
@@ -427,7 +429,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                     DrawToolList.Add(TrackingCogDistanceTool);
                     SetStaticGraphics(DisplayMode.PointToPoint.ToString(), TrackingCogDistanceTool.CreateLastRunRecord());
 
-                    Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
                     DrawText(DisplayMode.PointToPoint.ToString(), mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
 
                     _stepPointToPoint = StepPointToPoint.Start;
@@ -445,39 +446,37 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogDisplay.Image == null)
                 return;
 
+            PointF mappingPoint = MappingPoint(e.X, e.Y);
+
             if (_displayMode == DisplayMode.PointToPoint)
             {
-                if (_stepPointToPoint == StepPointToPoint.End || _stepPointToPoint == StepPointToPoint.Measure)
+                if (_stepPointToPoint == StepPointToPoint.End)
                 {
-                    PointF mappingPoint = MappingPoint(e.X, e.Y);
-
                     TrackingCogDistanceTool.StartX = StartPoint.X;
                     TrackingCogDistanceTool.StartY = StartPoint.Y;
 
-                    if (_stepPointToPoint == StepPointToPoint.End)
-                    {
-                        TrackingCogDistanceTool.EndX = mappingPoint.X;
-                        TrackingCogDistanceTool.EndY = mappingPoint.Y;
-                    }
-                    else if (_stepPointToPoint == StepPointToPoint.Measure)
-                    {
-                        TrackingCogDistanceTool.EndX = EndPoint.X;
-                        TrackingCogDistanceTool.EndY = EndPoint.Y;
-                    }
+                    TrackingCogDistanceTool.EndX = mappingPoint.X;
+                    TrackingCogDistanceTool.EndY = mappingPoint.Y;
+
+                    Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length * PixelResolution;
                     TrackingCogDistanceTool.Run();
 
                     string groupName = "Tracking";
                     if (IsContainGroupNameInStaticGraphics(groupName))
                         cogDisplay.StaticGraphics.Remove(groupName);
-
                     SetStaticGraphics(groupName, TrackingCogDistanceTool.CreateLastRunRecord());
 
-                    Distance = VisionProMathHelper.GetDistance(StartPoint, mappingPoint, PixelResolution).Length;
-                    DrawText(groupName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
+                    string textName = "Text";
+                    if (IsContainGroupNameInStaticGraphics(textName))
+                        cogDisplay.StaticGraphics.Remove(textName);
+                    DrawText(textName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
                 }
                 else if (_stepPointToPoint == StepPointToPoint.Measure)
                 {
-
+                    string textName = "Text";
+                    if (IsContainGroupNameInStaticGraphics(textName))
+                        cogDisplay.StaticGraphics.Remove(textName);
+                    DrawText(textName, mappingPoint.X, mappingPoint.Y - 10, Distance.ToString("00.00"));
                 }
             }
 

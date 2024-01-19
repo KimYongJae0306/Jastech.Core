@@ -11,6 +11,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private CogDisplayControl CogDisplay { get; set; }
 
         private CogThumbnailControl CogThumbnail { get; set; }
+
+        public float PixelResolution { get; set; } = 1.0F;
         #endregion
 
         #region 이벤트
@@ -40,6 +42,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void AddControls()
         {
             CogDisplay = new CogDisplayControl();
+            CogDisplay.PixelResolution = PixelResolution;
             CogDisplay.Dock = DockStyle.Fill;
             pnlDisplay.Controls.Add(CogDisplay);
 
