@@ -37,7 +37,11 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
         {
             if(Communition.GetType() == typeof(SerialPortComm))
             {
-                Protocol = new EmptyProtocol();
+                if (Parser.GetType() == typeof(Darea3StageSerialParser))
+                {
+                }
+                else
+                    Protocol = new EmptyProtocol();
             }
             Communition.Received += Communition_Received;
 

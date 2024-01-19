@@ -56,7 +56,7 @@ namespace Jastech.Framework.Device.LightCtrls
             }
         }
 
-        public LightCtrl DeeCopy()
+        public LightCtrl DeepCopy()
         {
             return JsonConvertHelper.DeepCopy(this) as LightCtrl;
         }
