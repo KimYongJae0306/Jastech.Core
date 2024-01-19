@@ -138,19 +138,19 @@ namespace Jastech.Framework.Util.Helper
 
         private static string GetDebugPath()
         {
-            string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + "Debug.log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            string logPath = string.Format(@"{0}\{1}\log_{2:0000}{3:00}{4:00}_" + "Debug.log", _logDir, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             return logPath;
         }
 
         private static string GetLogPath(LogType logType)
         {
-            string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + logType.ToString() + ".log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            string logPath = string.Format(@"{0}\{1}\log_{2:0000}{3:00}{4:00}_" + logType.ToString() + ".log", _logDir, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             return logPath;
         }
 
         private static string GetErrorLogPath(ErrorType logType)
         {
-            string logPath = string.Format(@"{0}\{1:00}\{2:00}\log_{3:0000}{4:00}{5:00}_" + "Error" + ".log", _logDir, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            string logPath = string.Format(@"{0}\{1}\log_{2:0000}{3:00}{4:00}_" + "Error" + ".log", _logDir, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             return logPath;
         }
 
