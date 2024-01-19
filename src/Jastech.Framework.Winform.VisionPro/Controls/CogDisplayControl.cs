@@ -419,7 +419,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 {
                     EndPoint = new Point((int)mappingPoint.X, (int)mappingPoint.Y);
 
-                    Distance = VisionProMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length * PixelResolution;
+                    //Distance = VisionProMathHelper.GetDistance(StartPoint, EndPoint, PixelResolution).Length * PixelResolution;
                     _stepPointToPoint = StepPointToPoint.Measure;
                 }
                 else if (_stepPointToPoint == StepPointToPoint.Measure)
