@@ -108,7 +108,6 @@
     <Compile Include="LAFCtrl\NuriOneLAFCtrl.cs" />
     <Compile Include="LAFCtrl\NuriOne\NuriOneParser.cs" />
     <Compile Include="LAFCtrl\VirtualLAFCtrl.cs" />
-    <Compile Include="LightCtrls\Darea\Darea3StageLightCtrl.cs" />
     <Compile Include="LightCtrls\Darea\DareaLightCtrl.cs" />
     <Compile Include="LightCtrls\Darea\Parser\Darea3StageSerialParser.cs" />
     <Compile Include="LightCtrls\Darea\Parser\DareaSerialParser.cs" />
