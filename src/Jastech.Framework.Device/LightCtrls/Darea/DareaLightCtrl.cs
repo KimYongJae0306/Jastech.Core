@@ -11,17 +11,8 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
 {
     public class DareaLightCtrl : LightCtrl
     {
-        #region 필드
-        #endregion
-
         #region 속성
         public IDareaParser Parser { get; set; }
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
         #endregion
 
         #region 생성자
@@ -87,7 +78,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
             if (Parser is Darea3StageSerialParser darea3StageParser)
             {
                 darea3StageParser.Command = $"{DareaSendCommand.PWW}";
-                darea3StageParser.Channel = channel;    // 채널 자릿수에 맞게 넣어야함 범위 : (0b0000 ~ 0b0111), 2번채널만 On 0b0010
+                darea3StageParser.Channel = channel;    // 채널 자릿수에 맞게 넣어야함 범위 : (0b0000 ~ 0b0111), ex) 2번채널만 On 0b0010
                 darea3StageParser.Serialize(out byte[] serializedData);
                 sendData = serializedData;
             }
@@ -160,8 +151,20 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
             Parser.Serialize(out byte[] serializedData);
             if (Protocol.GetType() == typeof(EmptyProtocol))
                 return Communition.Send(serializedData);
-            else if(Protocol.MakePacket(serializedData, out byte[] sendData))
-                    return Communition.Send(sendData);
+            else if (Protocol.MakePacket(serializedData, out byte[] sendData))
+                return Communition.Send(sendData);
+
+            return false;
+        }
+
+        public bool ResetController()
+        {
+            if (Parser is Darea3StageSerialParser darea3StageParser)
+            {
+                darea3StageParser.Command = $"{DareaSendCommand.RESET}";
+                darea3StageParser.Serialize(out byte[] serializedData);
+                return Communition.Send(serializedData);
+            }
 
             return false;
         }
