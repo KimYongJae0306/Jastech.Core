@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jastech.Framework.Config;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -61,6 +62,27 @@ namespace Jastech.Framework.Winform.Forms
             {
                 Location = new Point(this.Left - (_mousePoint.X - e.X), this.Top - (_mousePoint.Y - e.Y));
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            Keys key = keyData & ~(Keys.Shift | Keys.Control);
+
+            switch (key)
+            {
+                case Keys.Enter:
+                case Keys.Space:
+                case Keys.Escape:
+                    if ((keyData) != 0)
+                    {
+                        DialogResult = DialogResult.OK;
+                        Close();
+                        return true;
+                    }
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
     }
