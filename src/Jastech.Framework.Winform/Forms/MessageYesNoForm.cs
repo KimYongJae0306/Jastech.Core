@@ -80,7 +80,7 @@ namespace Jastech.Framework.Winform.Forms
                 case Keys.Space:
                     if ((keyData) != 0)
                     {
-                        DialogResult = DialogResult.OK;
+                        DialogResult = DialogResult.Yes;
                         Close();
                         return true;
                     }
