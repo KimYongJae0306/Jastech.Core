@@ -30,6 +30,7 @@ namespace Jastech.Framework.Winform.Forms
         private void WarningMessageForm_Load(object sender, EventArgs e)
         {
             UpdateData();
+            SetTopLevel(true);
             Focus();
         }
 
