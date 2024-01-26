@@ -48,9 +48,11 @@ namespace Jastech.Framework.Winform.Controls
 
             ImageInfoList = imageInfoList;
 
-            InitializeUI();
-
-            ImagePreviewControlList[0].SetSelectImage();
+            if (ImageInfoList.Count > 0)
+            {
+                InitializeUI();
+                ImagePreviewControlList[0].SetSelectImage();
+            }
         }
 
         public void AddControl()
