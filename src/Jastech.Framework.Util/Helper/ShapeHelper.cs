@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +31,54 @@ namespace Jastech.Framework.Util.Helper
             }
 
             return rectangle;
+        }
+
+        public static Point GetRotate45(Point inputTensor)
+        {
+            Point resultTesnor = new Point();
+
+            if (inputTensor.X == -1 && inputTensor.Y == -1)
+            {
+                resultTesnor.X = 0;
+                resultTesnor.Y = -1;
+            }
+            else if (inputTensor.X == 0 && inputTensor.Y == -1)
+            {
+                resultTesnor.X = 1;
+                resultTesnor.Y = -1;
+            }
+            else if (inputTensor.X == 1 && inputTensor.Y == -1)
+            {
+                resultTesnor.X = 1;
+                resultTesnor.Y = 0;
+            }
+            else if (inputTensor.X == 1 && inputTensor.Y == 0)
+            {
+                resultTesnor.X = 1;
+                resultTesnor.Y = 1;
+            }
+            else if (inputTensor.X == 1 && inputTensor.Y == 1)
+            {
+                resultTesnor.X = 0;
+                resultTesnor.Y = 1;
+            }
+            else if (inputTensor.X == 0 && inputTensor.Y == 1)
+            {
+                resultTesnor.X = -1;
+                resultTesnor.Y = 1;
+            }
+            else if (inputTensor.X == -1 && inputTensor.Y == 1)
+            {
+                resultTesnor.X = -1;
+                resultTesnor.Y = 0;
+            }
+            else if (inputTensor.X == -1 && inputTensor.Y == 0)
+            {
+                resultTesnor.X = -1;
+                resultTesnor.Y = -1;
+            }
+            
+            return resultTesnor;
         }
     }
 }
