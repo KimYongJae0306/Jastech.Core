@@ -100,7 +100,7 @@ namespace Jastech.Framework.Comm
 
         public bool Connect()
         {
-            if(SocketCommType == SocketCommType.Tcp)
+            if (SocketCommType == SocketCommType.Tcp)
             {
                 Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
                 {
@@ -109,7 +109,7 @@ namespace Jastech.Framework.Comm
                     ReceiveBufferSize = BufferLength,
                 };
             }
-           else if(SocketCommType == SocketCommType.Udp)
+           else if (SocketCommType == SocketCommType.Udp)
             {
                 Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 Socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), LocalPort));

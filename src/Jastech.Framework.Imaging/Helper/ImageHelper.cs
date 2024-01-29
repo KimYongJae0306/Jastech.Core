@@ -57,9 +57,9 @@ namespace Jastech.Framework.Imaging.Helper
 
                     if (points[i].X < 0 || points[i].X > bmp.Width)
                         dataArray[i] = 0;
-                    else if(points[i].Y < 0 || points[i].Y > bmp.Height)
+                    else if (points[i].Y < 0 || points[i].Y > bmp.Height)
                         dataArray[i] = 0;
-                    else if(index < 0 || index > imageBufferSize)
+                    else if (index < 0 || index > imageBufferSize)
                         dataArray[i] = 0;
                     else
                         dataArray[i] = data[index];
@@ -80,7 +80,7 @@ namespace Jastech.Framework.Imaging.Helper
             for (int i = 0; i < dataArray.Length; i++)
             {
                 int data = dataArray[i];
-                if(findedStartEdge == false)
+                if (findedStartEdge == false)
                 {
                     if (data == edgeValue)
                     {
@@ -90,7 +90,7 @@ namespace Jastech.Framework.Imaging.Helper
                 }
                 else
                 {
-                    if(prevValue != data)
+                    if (prevValue != data)
                     {
                         findedStartEdge = false;
                         edgePointList.Add(i);
@@ -135,7 +135,7 @@ namespace Jastech.Framework.Imaging.Helper
 
                 int index = y * stride + x;
 
-                if(index >= 0)
+                if (index >= 0)
                     value = data[index];
 
                 bmp.UnlockBits(bmpData);

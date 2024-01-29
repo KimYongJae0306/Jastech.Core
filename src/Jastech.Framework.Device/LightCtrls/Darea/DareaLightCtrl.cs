@@ -26,7 +26,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
         #region 메서드
         public override bool Initialize()
         {
-            if(Communition.GetType() == typeof(SerialPortComm))
+            if (Communition.GetType() == typeof(SerialPortComm))
             {
                 if (Parser is Darea3StageSerialParser)
                     Protocol = new EmptyProtocol();

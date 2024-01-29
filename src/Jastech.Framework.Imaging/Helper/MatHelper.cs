@@ -22,7 +22,7 @@ namespace Jastech.Framework.Imaging.Helper
         // stride 개념 적용할 경우 사용
         public static Mat IntPtrToMat(IntPtr intPtr, int width, int height, int numberOfChannels)
         {
-            if(numberOfChannels == 1)
+            if (numberOfChannels == 1)
             {
                 byte[] byteArray = new byte[width * height];
                 Marshal.Copy(intPtr, byteArray, 0, byteArray.Length);

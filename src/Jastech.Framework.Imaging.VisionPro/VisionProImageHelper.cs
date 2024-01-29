@@ -14,12 +14,12 @@ namespace Jastech.Framework.Imaging.VisionPro
     {
         public static void Dispose(ref ICogImage cogImage)
         {
-            if(cogImage is CogImage8Grey grey)
+            if (cogImage is CogImage8Grey grey)
             {
                 grey.Dispose();
                 grey = null;
             }
-            if(cogImage is CogImage24PlanarColor color)
+            if (cogImage is CogImage24PlanarColor color)
             {
                 color.Dispose();
                 color = null;
@@ -341,7 +341,7 @@ namespace Jastech.Framework.Imaging.VisionPro
                     }
                 }
             }
-            else if(colorFormat == ColorFormat.RGB24)
+            else if (colorFormat == ColorFormat.RGB24)
             {
                 var dataSize = width * height;
 

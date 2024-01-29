@@ -480,18 +480,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 }
             }
 
-            if(cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
-            {
+            if (cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
                 MoveImageEventHandler?.Invoke(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
-            }
         }
 
         private void cogDisplay_MouseUp(object sender, MouseEventArgs e)
         {
             if (cogDisplay.MouseMode == CogDisplayMouseModeConstants.Pan && e.Button == MouseButtons.Left)
-            {
                 MoveImageEventHandler?.Invoke(cogDisplay.PanX, cogDisplay.PanY, cogDisplay.Zoom);
-            }
         }
 
         private void DrawCrossLine()
@@ -655,8 +651,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void SetInteractiveGraphics(string groupName, CogGraphicInteractiveCollection collection)
         {
-            //cogDisplay.InteractiveGraphics.Clear();
-            //if(collection is ICogGraphicInteractive cogGraphic)
             cogDisplay.InteractiveGraphics.AddList(collection, groupName, false);
         }
 
@@ -762,14 +756,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void UpdateViewRect()
         {
             CogRectangle viewRect = GetViewRectangle();
-            if(viewRect != null)
+            if (viewRect != null)
                 DrawViewRectEventHandler?.Invoke(viewRect);
         }
 
         public void UpdateViewRect(CogRectangle rect, double ratio)
         {
             _updateViewRect = true;
-            if(cogDisplay.Image != null)
+            if (cogDisplay.Image != null)
             {
                 double panPointX = (double)ImageWidth * ratio;
                 panPointX = (ImageWidth / 2) - panPointX;
@@ -795,7 +789,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 color = CogColorConstants.Red;
                 foreach (var shape in matchingResultData.ResultGraphics.Shapes)
                 {
-                    if(shape is CogPointMarker pointMarker)
+                    if (shape is CogPointMarker pointMarker)
                         pointMarker.Color = color;
 
                     if (shape is CogRectangleAffine cogRectangleAffine)
@@ -866,13 +860,11 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             {
                 if (item == null)
                     continue;
-                if(item.MaxCaliperMatch.ResultGraphics != null)
+                if (item.MaxCaliperMatch.ResultGraphics != null)
                     resultGraphic.Add(item.MaxCaliperMatch.ResultGraphics);
             }
                 
-            
             SetInteractiveGraphics(groupName, resultGraphic);
-
             DrawResultLabel("Result :" + alignResult.Judgement.ToString(), 0);
         }
 

@@ -52,7 +52,7 @@ namespace Jastech.Framework.Device.Motions
 
         public Axis GetAxis(AxisName name)
         {
-            if(AxisList.Where(x => x.Name == name.ToString()).Count() > 0)
+            if (AxisList.Where(x => x.Name == name.ToString()).Count() > 0)
                 return AxisList.Where(x => x.Name == name.ToString()).First();
         
             return null;
@@ -73,16 +73,13 @@ namespace Jastech.Framework.Device.Motions
         {
             foreach (Axis axis in AxisList)
             {
-                if(bOnOff)
+                if (bOnOff)
                     axis.TurnOnServo();
                 else
                     axis.TurnOffServo();
             }
         }
 
-        //public bool WaitHomeMove()
-        //{
-        //}
 
         public bool StartHomeMove()
         {

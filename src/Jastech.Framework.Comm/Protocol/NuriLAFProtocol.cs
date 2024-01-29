@@ -24,7 +24,7 @@ namespace Jastech.Framework.Comm.Protocol
             {
                 if (requestData.Contains("uc rep"))
                     RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
-                else if(requestData.Contains("uc"))
+                else if (requestData.Contains("uc"))
                 {
                     RequestDataArray = requestData.Split(' '); // 공백으로 메세지 자르기
                 }

@@ -40,7 +40,7 @@ namespace Jastech.Framework.Comm.Protocol
             if (startIndex < 0)
             {
                 int errorEndIndex = packetMsg.IndexOf(errorCmd);
-                if(errorEndIndex < 0)
+                if (errorEndIndex < 0)
                     return false;
                 else
                 {

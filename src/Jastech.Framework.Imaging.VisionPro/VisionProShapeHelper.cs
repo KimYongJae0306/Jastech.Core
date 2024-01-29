@@ -53,7 +53,7 @@ namespace Jastech.Framework.Imaging.VisionPro
                 divideRegion.CenterX = centerX + dX;
                 divideRegion.CenterY = centerY + dY;
 
-                if(searchDirection == CaliperSearchDirection.InsideToOutside)
+                if (searchDirection == CaliperSearchDirection.InsideToOutside)
                 {
                     if (index % 2 == 0) //좌측부분 ROI
                         divideRegion.Rotation = divideRegion.Rotation - 3.14;

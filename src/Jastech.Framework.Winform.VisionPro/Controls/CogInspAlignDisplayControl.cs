@@ -188,10 +188,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogImage == null)
                 return;
 
-            if(IsRightResultImageView == false)
-            {
+            if (IsRightResultImageView == false)
                 UpdateRightDisplay(cogImage);
-            }
             else
             {
                 cogRightDisplay.Image = cogImage;

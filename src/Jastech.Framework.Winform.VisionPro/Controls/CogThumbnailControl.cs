@@ -126,12 +126,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             if (rect == null)
                 return;
-            
-            //if(rect != null)
-            //{
-            //    if (Equals(rect, _prevViewRectangle))
-            //        return;
-            //}
  
             rect.Color = CogColorConstants.Yellow;
             rect.LineWidthInScreenPixels = 2;
@@ -139,17 +133,13 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             rect.GraphicDOFEnable = CogRectangleDOFConstants.Position;
             rect.Changed += ViewRect_Changed;
 
-            //cogThumbnailDisplay.StaticGraphics.Clear();
-            //cogThumbnailDisplay.InteractiveGraphics.Clear();
-
             string groupName = "ViewRect";
-            if(IsContainGroupNameInInteractiveGraphics(groupName))
+            if (IsContainGroupNameInInteractiveGraphics(groupName))
                 cogThumbnailDisplay.InteractiveGraphics.Remove(groupName);
 
             AddGraphics(groupName, rect);
             PrevViewRectangle = rect;
         }
-
 
         private bool IsContainGroupNameInInteractiveGraphics(string groupName)
         {

@@ -97,7 +97,7 @@ namespace Jastech.Framework.Device.Motions
                 if (OpenSerialPort())
                     return true;
             }
-            else if(ConnectType == ACSConnectType.Ethernet)
+            else if (ConnectType == ACSConnectType.Ethernet)
             {
                 if (ConectEthernet())
                     return true;

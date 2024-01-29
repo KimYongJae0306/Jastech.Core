@@ -40,7 +40,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
         {
             VisionProBlobParam param = new VisionProBlobParam();
             param.Name = Name;
-            if(BlobTool != null)
+            if (BlobTool != null)
                 param.BlobTool = new CogBlobTool(BlobTool);
 
             return param;

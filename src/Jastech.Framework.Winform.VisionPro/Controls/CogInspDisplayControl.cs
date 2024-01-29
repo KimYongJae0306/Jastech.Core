@@ -56,7 +56,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public void Enable(bool isEnable)
         {
-            if(this.InvokeRequired)
+            if (this.InvokeRequired)
             {
                 EnableDele callback = Enable;
                 BeginInvoke(callback, isEnable);
@@ -103,7 +103,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             _updateViewRect = true;
 
-            if(cogDisplay.Image != null)
+            if (cogDisplay.Image != null)
             {
                 double panPointX = (double)cogDisplay.Image.Width * ratio;
                 double calcPanPointX = (cogDisplay.Image.Width / 2) - panPointX;

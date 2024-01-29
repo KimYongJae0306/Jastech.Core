@@ -219,7 +219,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public override void GrabOnce()
         {
-            if(LastGrabImage == MIL.M_NULL)
+            if (LastGrabImage == MIL.M_NULL)
             {
                 LastGrabImage = _grabImageBuffer[0];
             }
@@ -274,7 +274,7 @@ namespace Jastech.Framework.Device.Cameras
         public override void Stop()
         {
             _isGrabbing = false;
-            if(_isContinuousGrab)
+            if (_isContinuousGrab)
                 MIL.MdigHalt(DigitizerId);
             else
                 MIL.MdigProcess(DigitizerId, _grabImageBuffer, BufferPoolCount, MIL.M_STOP, MIL.M_DEFAULT, _processingFunctionPtr, GCHandle.ToIntPtr(_thisHandle));
@@ -534,7 +534,7 @@ namespace Jastech.Framework.Device.Cameras
                 StringBuilder valueString = new StringBuilder();
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
 
-                if(valueString.ToString() != "Area")
+                if (valueString.ToString() != "Area")
                     MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "Area");
             }
             else
@@ -542,7 +542,7 @@ namespace Jastech.Framework.Device.Cameras
                 StringBuilder valueString = new StringBuilder();
                 MIL.MdigInquireFeature(DigitizerId, MIL.M_FEATURE_VALUE + MIL.M_TYPE_STRING, "OperationMode", MIL.M_TYPE_STRING, valueString);
 
-                if(valueString.ToString() != "TDI")
+                if (valueString.ToString() != "TDI")
                     MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
             }
         }

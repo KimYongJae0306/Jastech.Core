@@ -405,7 +405,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private byte[] GetDataArray(Bitmap image, Figure figure)
         {
-            if(figure is LineDirectionFigure lineFigure)
+            if (figure is LineDirectionFigure lineFigure)
             {
                 byte[] data = ImageHelper.GetDataArray(image, lineFigure.DrawPoints.ToList());
                 return data;
@@ -453,11 +453,11 @@ namespace Jastech.Framework.Winform.Controls
 
         public void DisposeImage()
         {
-           if(pbxDisplay.Image != null)
+           if (pbxDisplay.Image != null)
             {
                 pbxDisplay.Image.Dispose();
                 pbxDisplay.Image = null;
-            }
+           }
         }
 
         private void menuSaveImage_Click(object sender, EventArgs e)

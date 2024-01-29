@@ -10,6 +10,8 @@ namespace Jastech.Framework.Util
 
         public double DiffAngle { get; private set; } = 0.0;
 
+        public double MarkDistanceRatio { get; private set; } = 0.0;
+
         CoordinateData ReferenceData = null;
 
         CoordinateData TargetData = null;
@@ -66,16 +68,31 @@ namespace Jastech.Framework.Util
             return DiffAngle;
         }
 
+        private void SetMarkDistanceRatio()
+        {
+            MarkDistanceRatio = TargetData.GetMarkToMarkDistance() / ReferenceData.GetMarkToMarkDistance();
+        }
+
+        private double GetMarkDistanceRatio()
+        {
+            return MarkDistanceRatio;
+        }
+
         public void ExecuteCoordinate()
         {
             SetOffsetPoint();
             SetDiffAngle();
+            SetMarkDistanceRatio();
         }
 
         public PointF GetCoordinate(PointF inputPoint)
         {
             var diffAngle = GetDiffAngle();
             var offsetPoint = GetOffsetPoint();
+            var markDistanceRatio = GetMarkDistanceRatio();
+
+            // Test for ratio
+            //markDistanceRatio = 1.0;
 
             if (diffAngle == 0.0 && offsetPoint == null)
                 return inputPoint;
@@ -83,7 +100,7 @@ namespace Jastech.Framework.Util
             var targetCenterPoint = TargetData.GetCenterPoint();
             var referenceCenterPoint = ReferenceData.GetCenterPoint();
 
-            return MathHelper.GetCoordinate(targetCenterPoint, diffAngle, offsetPoint, inputPoint);
+            return MathHelper.GetCoordinate(targetCenterPoint, diffAngle, offsetPoint, inputPoint/*, markDistanceRatio*/);
         }
     }
 
@@ -92,6 +109,8 @@ namespace Jastech.Framework.Util
         public PointF LeftPoint { get; private set; }
 
         public PointF RightPoint { get; private set; }
+
+        public double MarkToMarkDistance { get; private set; }
 
         public void SetPoint(PointF leftPoint, PointF rightPoint)
         {
@@ -107,6 +126,11 @@ namespace Jastech.Framework.Util
         public double GetRadian()
         {
             return MathHelper.GetRadian(LeftPoint, RightPoint);
+        }
+
+        public double GetMarkToMarkDistance()
+        {
+            return MathHelper.GetDistance(LeftPoint, RightPoint);
         }
 
         //public CoordinateData DeepCopy()

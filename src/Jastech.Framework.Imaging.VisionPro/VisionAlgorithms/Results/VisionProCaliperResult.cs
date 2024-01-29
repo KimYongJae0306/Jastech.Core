@@ -49,7 +49,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results
         {
             VisionProCaliperResult result = new VisionProCaliperResult();
             result.TactTime = TactTime;
-            if(CaliperMatchList.Count > 0)
+            if (CaliperMatchList.Count > 0)
                 result.CaliperMatchList = CaliperMatchList?.Select(x => x.DeepCopy()).ToList();
             return result;
         }
