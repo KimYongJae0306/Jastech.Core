@@ -33,52 +33,208 @@ namespace Jastech.Framework.Util.Helper
             return rectangle;
         }
 
-        public static Point GetRotate45(Point inputTensor)
+        public static Point RotateCW45(Point inputPoint)
         {
-            Point resultTesnor = new Point();
+            Point resultPoint = new Point();
 
-            if (inputTensor.X == -1 && inputTensor.Y == -1)
+            if (inputPoint.X == -1 && inputPoint.Y == -1)
             {
-                resultTesnor.X = 0;
-                resultTesnor.Y = -1;
+                resultPoint.X = 0;
+                resultPoint.Y = -1;
             }
-            else if (inputTensor.X == 0 && inputTensor.Y == -1)
+            else if (inputPoint.X == 0 && inputPoint.Y == -1)
             {
-                resultTesnor.X = 1;
-                resultTesnor.Y = -1;
+                resultPoint.X = 1;
+                resultPoint.Y = -1;
             }
-            else if (inputTensor.X == 1 && inputTensor.Y == -1)
+            else if (inputPoint.X == 1 && inputPoint.Y == -1)
             {
-                resultTesnor.X = 1;
-                resultTesnor.Y = 0;
+                resultPoint.X = 1;
+                resultPoint.Y = 0;
             }
-            else if (inputTensor.X == 1 && inputTensor.Y == 0)
+            else if (inputPoint.X == 1 && inputPoint.Y == 0)
             {
-                resultTesnor.X = 1;
-                resultTesnor.Y = 1;
+                resultPoint.X = 1;
+                resultPoint.Y = 1;
             }
-            else if (inputTensor.X == 1 && inputTensor.Y == 1)
+            else if (inputPoint.X == 1 && inputPoint.Y == 1)
             {
-                resultTesnor.X = 0;
-                resultTesnor.Y = 1;
+                resultPoint.X = 0;
+                resultPoint.Y = 1;
             }
-            else if (inputTensor.X == 0 && inputTensor.Y == 1)
+            else if (inputPoint.X == 0 && inputPoint.Y == 1)
             {
-                resultTesnor.X = -1;
-                resultTesnor.Y = 1;
+                resultPoint.X = -1;
+                resultPoint.Y = 1;
             }
-            else if (inputTensor.X == -1 && inputTensor.Y == 1)
+            else if (inputPoint.X == -1 && inputPoint.Y == 1)
             {
-                resultTesnor.X = -1;
-                resultTesnor.Y = 0;
+                resultPoint.X = -1;
+                resultPoint.Y = 0;
             }
-            else if (inputTensor.X == -1 && inputTensor.Y == 0)
+            else if (inputPoint.X == -1 && inputPoint.Y == 0)
             {
-                resultTesnor.X = -1;
-                resultTesnor.Y = -1;
+                resultPoint.X = -1;
+                resultPoint.Y = -1;
             }
-            
-            return resultTesnor;
+
+            return resultPoint;
+        }
+
+        public static Point RotateCW90(Point inputPoint)
+        {
+            Point resultPoint = new Point();
+
+            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == -1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 0;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == 1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 0;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = -1;
+            }
+
+            return resultPoint;
+        }
+
+        public static Point RotateCCW45(Point inputPoint)
+        {
+            Point resultPoint = new Point();
+
+            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 0;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 0;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == -1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = -1;
+            }
+
+            return resultPoint;
+        }
+
+        public static Point RotateCCW90(Point inputPoint)
+        {
+            Point resultPoint = new Point();
+
+            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == -1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = 0;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 1)
+            {
+                resultPoint.X = 1;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == 0)
+            {
+                resultPoint.X = 0;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 1 && inputPoint.Y == -1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = -1;
+            }
+            else if (inputPoint.X == 0 && inputPoint.Y == -1)
+            {
+                resultPoint.X = -1;
+                resultPoint.Y = 0;
+            }
+
+            return resultPoint;
+        }
+
+        public static Rectangle DetectEdge(byte[] imageData, int width, int height, Point startPos, int threshold1, int threshold2)
+        {
+            Rectangle resultRect = new Rectangle();
+
+            Point StartVector = new Point(1, 0);
+            Point NextVector = new Point();
+
+
+
+            return resultRect;
         }
     }
 }
