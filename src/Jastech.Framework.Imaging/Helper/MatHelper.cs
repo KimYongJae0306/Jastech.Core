@@ -76,59 +76,6 @@ namespace Jastech.Framework.Imaging.Helper
             return boundMatOrigin;
         }
 
-        public static Mat CropRoi(Mat mat, RotatedRect roi, bool interpolation = true)
-        {
-            // TODO: 조준형: 회전이 거의 없는 검사객체는 아래 주석을 해제하여 성능을 올릴 수 있음.
-            //if (Math.Abs(roi.Angle) < 0.25)
-            //    return CvRoi(image, roi.MinAreaRect());
-
-            Rectangle boundRect = roi.MinAreaRect();
-            int padLeft = 0 - boundRect.X;
-            int padTop = 0 - boundRect.Y;
-            int padRight = (boundRect.X + boundRect.Width) - mat.Width;
-            int padBottom = (boundRect.Y + boundRect.Height) - mat.Height;
-            Rectangle nonPadRect = new Rectangle(
-                boundRect.X + (padLeft > 0 ? padLeft : 0),
-                boundRect.Y + (padTop > 0 ? padTop : 0),
-                boundRect.Width - (padRight > 0 ? padRight : 0) - (padLeft > 0 ? padLeft : 0),
-                boundRect.Height - (padBottom > 0 ? padBottom : 0) - (padTop > 0 ? padTop : 0));
-
-            Mat boundMatOrigin = new Mat(mat, nonPadRect);
-            if (padLeft > 0 || padTop > 0 || padRight > 0 || padBottom > 0)
-            {
-                CvInvoke.CopyMakeBorder(boundMatOrigin, boundMatOrigin,
-                    padTop > 0 ? padTop : 0,
-                    padBottom > 0 ? padBottom : 0,
-                    padLeft > 0 ? padLeft : 0,
-                    padRight > 0 ? padRight : 0,
-                    BorderType.Constant, new MCvScalar(0));
-            }
-            //if (boundRect.X < 0 || boundRect.Y < 0 || boundRect.X >= image.Width || boundRect.Y >= image.Height ||
-            //    boundRect.X + boundRect.Width >= image.Width || boundRect.Y + boundRect.Height >= image.Height)
-            //{
-            //    return new Mat(image, new Rectangle(0, 0, 1, 1));
-            //}
-
-            Mat boundMat = new Mat();
-            boundMatOrigin.CopyTo(boundMat);
-            boundMatOrigin.Dispose();
-            roi.Center.X -= boundRect.X;
-            roi.Center.Y -= boundRect.Y;
-
-            Mat trMat = new Mat(), rotatedMat = new Mat(), croppedMat = new Mat();
-            float angle = roi.Angle;
-            Size roiSize = Size.Round(roi.Size);
-            CvInvoke.GetRotationMatrix2D(roi.Center, angle, 1, trMat);
-            CvInvoke.WarpAffine(boundMat, rotatedMat, trMat, boundMat.Size, interpolation ? Inter.Linear : Inter.Nearest);
-            boundMat.Dispose();
-
-            // TODO: 조준형: 회전 중심이 이게 맞을지 모르겠다.
-            CvInvoke.GetRectSubPix(rotatedMat, roiSize, new PointF(roi.Center.X - 0.5f, roi.Center.Y - 0.5f), croppedMat);
-            rotatedMat.Dispose();
-
-            return croppedMat;
-        }
-
         public static Mat Resize(Mat sourceMat, double resizeRatio)
         {
             Mat resizeMat = new Mat();
