@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.Controls
 {
-    partial class ConstantDefectMapControl
+    partial class CompactDefectMapControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -33,34 +33,34 @@
             // 
             // pnlMapArea
             // 
-            this.pnlMapArea.AutoScroll = true;
-            this.pnlMapArea.AutoSize = true;
             this.pnlMapArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMapArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMapArea.Location = new System.Drawing.Point(0, 0);
             this.pnlMapArea.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMapArea.Name = "pnlMapArea";
             this.pnlMapArea.Size = new System.Drawing.Size(206, 293);
-            this.pnlMapArea.TabIndex = 1;
+            this.pnlMapArea.TabIndex = 2;
             this.pnlMapArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMapArea_Paint);
+            this.pnlMapArea.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMapArea_MouseClick);
             // 
-            // ConstantDefectMapControl
+            // CompactDefectMapControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.pnlMapArea);
             this.DoubleBuffered = true;
-            this.Name = "ConstantDefectMapControl";
+            this.Name = "CompactDefectMapControl";
             this.Size = new System.Drawing.Size(206, 293);
-            this.Load += new System.EventHandler(this.ConstantDefectMapControl_Load);
+            this.Load += new System.EventHandler(this.CompactDefectMapControl_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
+
         private DoubleBufferedPanel pnlMapArea;
     }
 }

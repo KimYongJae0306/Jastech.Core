@@ -1,6 +1,6 @@
 ﻿namespace Jastech.Framework.Winform.Controls
 {
-    partial class DefectPointControl
+    partial class DefectShapeControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -30,15 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // DefectPointControl
+            // DefectShapeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Transparent;
             this.DoubleBuffered = true;
-            this.Name = "DefectPointControl";
-            this.Size = new System.Drawing.Size(8, 8);
-            this.Load += new System.EventHandler(this.DefectPoint_Load);
+            this.Name = "DefectShapeControl";
+            this.Size = new System.Drawing.Size(6, 6);
             this.Click += new System.EventHandler(this.DefectPoint_Click);
             this.ResumeLayout(false);
 

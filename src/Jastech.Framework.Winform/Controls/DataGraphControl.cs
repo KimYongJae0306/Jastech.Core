@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.Controls
@@ -186,12 +187,37 @@ namespace Jastech.Framework.Winform.Controls
             float intervalY = (float)_drawChartRect.Height / AxisYMaxValue;
             List<PointF> points = new List<PointF>();
 
-            for (int i = 0; i < _data.Length; i++)
+            if (intervalX < 1)
             {
-                float x = _drawChartRect.Left + (intervalX * i);
-                float y = _drawChartRect.Bottom - (intervalY * _data[i]);
-
-                points.Add(new PointF(x, y));
+                float intervalX3 = intervalX/3;
+                int chunkSize = (int)Math.Ceiling(_data.Length / _drawChartRect.Width);
+                for (int startPosition = 0; startPosition < _data.Length; startPosition += chunkSize)
+                {
+                    var dataChunk = _data.Skip(startPosition).Take(chunkSize).ToList();
+                    //points.Add(new PointF
+                    //{
+                    //    X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 0),
+                    //    Y = _drawChartRect.Bottom - (intervalY * dataChunk.Min()),
+                    //});
+                    points.Add(new PointF
+                    {
+                        X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 1),
+                        Y = _drawChartRect.Bottom - (intervalY * dataChunk.Average()),
+                    });
+                    //points.Add(new PointF
+                    //{
+                    //    X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 2),
+                    //    Y = _drawChartRect.Bottom - (intervalY * dataChunk.Max()),
+                    //});
+                }
+            }
+            else
+            {
+                points = _data.Select((value, index) => new PointF
+                {
+                    X = _drawChartRect.Left + (intervalX * index),
+                    Y = _drawChartRect.Bottom - (intervalY * value),
+                }).ToList();
             }
             g.DrawLines(DataPen, points.ToArray());
         }

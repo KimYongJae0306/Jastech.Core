@@ -1,40 +1,32 @@
-﻿using System;
+﻿using Jastech.Framework.Structure;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
+using static Jastech.Framework.Structure.DefectDefine;
 
 namespace Jastech.Framework.Winform.Controls
 {
     public partial class ConstantDefectMapControl : UserControl
     {
-
         #region 필드
         private RectangleF DisplayArea;
         #endregion
 
         #region 속성
-        public readonly List<DefectPointControl> _defectPoints = new List<DefectPointControl>();
+        public readonly List<DefectInfo> _defectInfos = new List<DefectInfo>();
 
-        public float LastPosition
-        {
-            get
-            {
-                if (_defectPoints.Count > 0)
-                    return (float)_defectPoints.Max(df => df.Coord.Y);
-                else
-                    return 0;
-            }
-        }
-
-        public double PixelResolution_um = 0.35;
+        public double PixelResolution_um = 43;
         #endregion
 
         #region 이벤트
+        public SelectedDefectChangedHandler SelectedDefectChanged;
+        #endregion    
+
+        #region
+        public delegate void SelectedDefectChangedHandler(int index);
         #endregion
 
         #region 생성자
@@ -47,77 +39,84 @@ namespace Jastech.Framework.Winform.Controls
         #region 메서드
         private void ConstantDefectMapControl_Load(object sender, EventArgs e)
         {
-            DisplayArea = new RectangleF(new PointF(pnlMapArea.Left + 40, pnlMapArea.Top + 20), new SizeF(pnlMapArea.Width - 60, pnlMapArea.Height - 60));
+            DisplayArea = GetDisplayArea();
+            pnlMapArea.MouseWheel += PnlMapArea_MouseWheel;
         }
 
-        //public void AddDefect(defectInfo defectInfo)
-        //{
-        //    //x , y , color, defectType, 
-        //    // core -> defectInfo=> x, y, Color
-        //    // app.core = appdefectinfo : defectinfo
-        //    {
-        //        // app.core, Defectype, 
-        //    }
-
-        //    // app.core 
-        //    // defectInfo 2 
-        //}
+        private void PnlMapArea_MouseWheel(object sender, MouseEventArgs e)
+        {
+            Invalidate();
+        }
 
         public void Clear()
         {
-            _defectPoints.Clear();
+            _defectInfos.Clear();
             pnlMapArea.Controls.Clear();
             Invalidate();
         }
 
-        public void AddCoordinates(DefectPointControl[] defectPoints, float ws)
+        public void AddCoordinates(DefectInfo[] defectInfos)
         {
-
-            int pnlHeight = pnlMapArea.Height;
-
-
             pnlMapArea.SuspendLayout();
-
-            for (int i = 0; i < defectPoints.Length; i++)
-                defectPoints[i].Location = GetScaledLocation(defectPoints[i].Coord, pnlMapArea.Width, pnlMapArea.AutoScrollPosition.Y);
-            //_defectPoints.AddRange(defectPoints);
-
-            pnlMapArea.Controls.AddRange(defectPoints);
-            pnlMapArea.VerticalScroll.Value = pnlMapArea.VerticalScroll.Maximum;
-            pnlMapArea.ResumeLayout(true);
+            _defectInfos.AddRange(defectInfos);     //test code
+            var location = new Point(0, (int)defectInfos.Last().GetFeatureValue(FeatureTypes.Y) - 1);
+            pnlMapArea.Controls.Add(new Control { Location = location });
         }
 
-        Pen testpen = new Pen(Color.White) { DashStyle = DashStyle.Dash, Width = 0.3f };
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
+        private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 40, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 60, pnlMapArea.DisplayRectangle.Height - 70));
 
-            e.Graphics.TranslateTransform(pnlMapArea.AutoScrollPosition.X, pnlMapArea.AutoScrollPosition.Y);
-            for (int height = 0; height < pnlMapArea.DisplayRectangle.Height; height += 100)
-            {
-                int drawingHeight = height + (int)DisplayArea.Top;
-                e.Graphics.DrawLine(testpen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
-                e.Graphics.DrawString($"{height}", Font, Brushes.White, new PointF(0, drawingHeight - Font.Size / 2));
-            }
-
-            var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top, (int)DisplayArea.Width, pnlMapArea.DisplayRectangle.Height);
-            e.Graphics.DrawRectangle(Pens.White, dispRect);
-        }
-
-        private Point GetScaledLocation(PointF coordinates, float ImageMaxWidth /*추후 모델에서 가져올 것*/, int autoScrollY) => new Point
+        private Point GetScaledLocation(PointF coordinates, float ImageMaxWidth /*추후 모델에서 가져올 것*/) => new Point
         {
             X = Convert.ToInt32(DisplayArea.Left + coordinates.X * ((DisplayArea.Width - 9f) / ImageMaxWidth) + 1f),
-            Y = Convert.ToInt32(DisplayArea.Top + coordinates.Y + autoScrollY),
+            Y = Convert.ToInt32(DisplayArea.Top + coordinates.Y + pnlMapArea.AutoScrollPosition.Y),
         };
-        #endregion
+
+        private void DrawDefectShape(Graphics g, DefectInfo defectInfo)
+        {
+            var width = defectInfo.GetFeatureValue(FeatureTypes.Width);
+            var height = defectInfo.GetFeatureValue(FeatureTypes.Height);
+            var X = defectInfo.GetFeatureValue(FeatureTypes.X);
+            var Y = defectInfo.GetFeatureValue(FeatureTypes.Y);
+            var coord = GetScaledLocation(new PointF(X, Y), 160000);
+
+            if (width < 10 && height < 10)
+            {
+                var brush = new SolidBrush(Color.Red);
+                var sizeLength = Math.Max(width, height);
+                var area = new RectangleF(coord.X + width / 2, coord.Y + height / 2, sizeLength, sizeLength);
+                g.FillEllipse(brush, area);
+            }
+            else if ((width < 10 || height < 10) && (Math.Max(width, height) / Math.Min(width, height) > 20))
+            {
+                var pen = new Pen(Color.Red, 3);
+                if (width > height)
+                    g.DrawLine(pen, new Point(coord.X, coord.Y), new Point(width, coord.Y));
+                else
+                    g.DrawLine(pen, new Point(coord.X, coord.Y), new Point(coord.X, height));
+            }
+            else
+            {
+                var pen = new Pen(Color.Red);
+                var area = new Rectangle(coord.X, coord.Y, width - 1, height - 1);
+                g.DrawRectangle(pen, area);
+            }
+        }
 
         private void pnlMapArea_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.TranslateTransform(pnlMapArea.AutoScrollPosition.X, pnlMapArea.AutoScrollPosition.Y);
-            for (int height = 0; height < pnlMapArea.DisplayRectangle.Height; height += 100)
+
+            foreach (var defectInfo in _defectInfos)
+                DrawDefectShape(e.Graphics, defectInfo);
+            
+            // Drawing Grid and Length
+            double maximumHeight = pnlMapArea.DisplayRectangle.Height - DisplayArea.Top;
+            maximumHeight = Math.Ceiling(maximumHeight / 100) * 100;
+            for (int height = 0; height <= maximumHeight; height += 100)
             {
                 int drawingHeight = height + (int)DisplayArea.Top;
-                e.Graphics.DrawLine(testpen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
+                var dashPen = new Pen(Color.White) { DashStyle = DashStyle.Dash, Width = 0.3f };
+                e.Graphics.DrawLine(dashPen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
                 e.Graphics.DrawString($"{height}", Font, Brushes.White, new PointF(0, drawingHeight - Font.Size / 2));
             }
 
@@ -125,5 +124,17 @@ namespace Jastech.Framework.Winform.Controls
             e.Graphics.DrawRectangle(Pens.White, dispRect);
             pnlMapArea.ResumeLayout(true);
         }
+
+        private void OnSelectedDefectChanged(int selectedIndex)
+        {
+            SelectedDefectChanged?.Invoke(selectedIndex);
+
+            foreach(var control in pnlMapArea.Controls)
+            {
+                if (control is DefectShapeControl defectPointControl)
+                    defectPointControl.IsSelected = defectPointControl.Index == selectedIndex;
+            }
+        }
+        #endregion
     }
 }
