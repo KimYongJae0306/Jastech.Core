@@ -37,23 +37,24 @@
             this.cogDisplayStatusBar = new Cognex.VisionPro.CogDisplayStatusBarV2();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.tlpFunctionButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnFileOpen = new System.Windows.Forms.Button();
             this.btnFitZoom = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnPanning = new System.Windows.Forms.Button();
-            this.btnPointToLine = new System.Windows.Forms.Button();
-            this.btnPointToPoint = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
             this.btnCrossLine = new System.Windows.Forms.Button();
             this.btnCustomCrossLine = new System.Windows.Forms.Button();
+            this.btnPointToPoint = new System.Windows.Forms.Button();
+            this.btnPointToLine = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cogDisplay)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
+            this.tlpFunctionButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // cogDisplay
@@ -151,7 +152,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tlpFunctionButtons, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -161,146 +162,199 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(781, 722);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // tableLayoutPanel4
+            // tlpFunctionButtons
             // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.button3, 0, 8);
-            this.tableLayoutPanel4.Controls.Add(this.btnFileOpen, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btnFitZoom, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.button2, 0, 7);
-            this.tableLayoutPanel4.Controls.Add(this.btnPanning, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.btnPointToLine, 0, 6);
-            this.tableLayoutPanel4.Controls.Add(this.btnPointToPoint, 0, 5);
-            this.tableLayoutPanel4.Controls.Add(this.btnCrossLine, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.btnCustomCrossLine, 0, 4);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 12;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(40, 722);
-            this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(0, 496);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 63);
-            this.button3.TabIndex = 8;
-            this.button3.UseVisualStyleBackColor = true;
+            this.tlpFunctionButtons.ColumnCount = 1;
+            this.tlpFunctionButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFunctionButtons.Controls.Add(this.btnFileOpen, 0, 0);
+            this.tlpFunctionButtons.Controls.Add(this.btnFitZoom, 0, 1);
+            this.tlpFunctionButtons.Controls.Add(this.btnPanning, 0, 2);
+            this.tlpFunctionButtons.Controls.Add(this.btnClearAll, 0, 3);
+            this.tlpFunctionButtons.Controls.Add(this.btnCrossLine, 0, 4);
+            this.tlpFunctionButtons.Controls.Add(this.btnCustomCrossLine, 0, 5);
+            this.tlpFunctionButtons.Controls.Add(this.btnPointToPoint, 0, 6);
+            this.tlpFunctionButtons.Controls.Add(this.btnPointToLine, 0, 7);
+            this.tlpFunctionButtons.Controls.Add(this.button2, 0, 8);
+            this.tlpFunctionButtons.Controls.Add(this.button3, 0, 9);
+            this.tlpFunctionButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpFunctionButtons.Location = new System.Drawing.Point(0, 0);
+            this.tlpFunctionButtons.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpFunctionButtons.Name = "tlpFunctionButtons";
+            this.tlpFunctionButtons.RowCount = 13;
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFunctionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFunctionButtons.Size = new System.Drawing.Size(40, 722);
+            this.tlpFunctionButtons.TabIndex = 1;
             // 
             // btnFileOpen
             // 
+            this.btnFileOpen.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.PictureFolder2_White;
+            this.btnFileOpen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFileOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFileOpen.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.FileOpen;
+            this.btnFileOpen.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnFileOpen.FlatAppearance.BorderSize = 2;
+            this.btnFileOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFileOpen.Location = new System.Drawing.Point(0, 0);
             this.btnFileOpen.Margin = new System.Windows.Forms.Padding(0);
             this.btnFileOpen.Name = "btnFileOpen";
-            this.btnFileOpen.Size = new System.Drawing.Size(40, 62);
+            this.btnFileOpen.Size = new System.Drawing.Size(40, 40);
             this.btnFileOpen.TabIndex = 1;
             this.btnFileOpen.UseVisualStyleBackColor = true;
             this.btnFileOpen.Click += new System.EventHandler(this.btnFileOpen_Click);
             // 
             // btnFitZoom
             // 
+            this.btnFitZoom.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Fit_White;
+            this.btnFitZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFitZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFitZoom.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.FitZoom;
-            this.btnFitZoom.Location = new System.Drawing.Point(0, 62);
+            this.btnFitZoom.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnFitZoom.FlatAppearance.BorderSize = 2;
+            this.btnFitZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFitZoom.Location = new System.Drawing.Point(0, 40);
             this.btnFitZoom.Margin = new System.Windows.Forms.Padding(0);
             this.btnFitZoom.Name = "btnFitZoom";
-            this.btnFitZoom.Size = new System.Drawing.Size(40, 62);
+            this.btnFitZoom.Size = new System.Drawing.Size(40, 40);
             this.btnFitZoom.TabIndex = 2;
             this.btnFitZoom.UseVisualStyleBackColor = true;
             this.btnFitZoom.Click += new System.EventHandler(this.btnFitZoom_Click);
             // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(0, 434);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 62);
-            this.button2.TabIndex = 7;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // btnPanning
             // 
-            this.btnPanning.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPanning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnPanning.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Panning_White;
+            this.btnPanning.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPanning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPanning.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Panning;
-            this.btnPanning.Location = new System.Drawing.Point(0, 124);
+            this.btnPanning.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPanning.FlatAppearance.BorderSize = 2;
+            this.btnPanning.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPanning.Location = new System.Drawing.Point(0, 80);
             this.btnPanning.Margin = new System.Windows.Forms.Padding(0);
             this.btnPanning.Name = "btnPanning";
-            this.btnPanning.Size = new System.Drawing.Size(40, 62);
+            this.btnPanning.Size = new System.Drawing.Size(40, 40);
             this.btnPanning.TabIndex = 3;
             this.btnPanning.UseVisualStyleBackColor = false;
             this.btnPanning.Click += new System.EventHandler(this.btnPanning_Click);
             // 
-            // btnPointToLine
+            // btnClearAll
             // 
-            this.btnPointToLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnPointToLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPointToLine.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Arrows;
-            this.btnPointToLine.Location = new System.Drawing.Point(0, 372);
-            this.btnPointToLine.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPointToLine.Name = "btnPointToLine";
-            this.btnPointToLine.Size = new System.Drawing.Size(40, 62);
-            this.btnPointToLine.TabIndex = 6;
-            this.btnPointToLine.UseVisualStyleBackColor = true;
-            this.btnPointToLine.Click += new System.EventHandler(this.btnPointToLine_Click);
-            // 
-            // btnPointToPoint
-            // 
-            this.btnPointToPoint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPointToPoint.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.PointToPoint;
-            this.btnPointToPoint.Location = new System.Drawing.Point(0, 310);
-            this.btnPointToPoint.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPointToPoint.Name = "btnPointToPoint";
-            this.btnPointToPoint.Size = new System.Drawing.Size(40, 62);
-            this.btnPointToPoint.TabIndex = 5;
-            this.btnPointToPoint.UseVisualStyleBackColor = true;
-            this.btnPointToPoint.Click += new System.EventHandler(this.btnPointToPoint_Click);
+            this.btnClearAll.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Delete_White;
+            this.btnClearAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnClearAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearAll.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnClearAll.FlatAppearance.BorderSize = 2;
+            this.btnClearAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearAll.Location = new System.Drawing.Point(0, 120);
+            this.btnClearAll.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(40, 40);
+            this.btnClearAll.TabIndex = 9;
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // btnCrossLine
             // 
+            this.btnCrossLine.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.CenterCrossFixed_White;
+            this.btnCrossLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCrossLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCrossLine.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.CrossLine;
-            this.btnCrossLine.Location = new System.Drawing.Point(0, 186);
+            this.btnCrossLine.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCrossLine.FlatAppearance.BorderSize = 2;
+            this.btnCrossLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrossLine.Location = new System.Drawing.Point(0, 160);
             this.btnCrossLine.Margin = new System.Windows.Forms.Padding(0);
             this.btnCrossLine.Name = "btnCrossLine";
-            this.btnCrossLine.Size = new System.Drawing.Size(40, 62);
+            this.btnCrossLine.Size = new System.Drawing.Size(40, 40);
             this.btnCrossLine.TabIndex = 3;
             this.btnCrossLine.UseVisualStyleBackColor = true;
             this.btnCrossLine.Click += new System.EventHandler(this.btnCrossLine_Click);
             // 
             // btnCustomCrossLine
             // 
+            this.btnCustomCrossLine.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.CenterCross_White;
+            this.btnCustomCrossLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCustomCrossLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCustomCrossLine.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomCrossLine.Image")));
-            this.btnCustomCrossLine.Location = new System.Drawing.Point(0, 248);
+            this.btnCustomCrossLine.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCustomCrossLine.FlatAppearance.BorderSize = 2;
+            this.btnCustomCrossLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomCrossLine.Location = new System.Drawing.Point(0, 200);
             this.btnCustomCrossLine.Margin = new System.Windows.Forms.Padding(0);
             this.btnCustomCrossLine.Name = "btnCustomCrossLine";
-            this.btnCustomCrossLine.Size = new System.Drawing.Size(40, 62);
+            this.btnCustomCrossLine.Size = new System.Drawing.Size(40, 40);
             this.btnCustomCrossLine.TabIndex = 4;
             this.btnCustomCrossLine.UseVisualStyleBackColor = true;
             this.btnCustomCrossLine.Click += new System.EventHandler(this.btnCustomCrossLine_Click);
+            // 
+            // btnPointToPoint
+            // 
+            this.btnPointToPoint.BackgroundImage = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Measure_White;
+            this.btnPointToPoint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPointToPoint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPointToPoint.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPointToPoint.FlatAppearance.BorderSize = 2;
+            this.btnPointToPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPointToPoint.Location = new System.Drawing.Point(0, 240);
+            this.btnPointToPoint.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPointToPoint.Name = "btnPointToPoint";
+            this.btnPointToPoint.Size = new System.Drawing.Size(40, 40);
+            this.btnPointToPoint.TabIndex = 5;
+            this.btnPointToPoint.UseVisualStyleBackColor = true;
+            this.btnPointToPoint.Click += new System.EventHandler(this.btnPointToPoint_Click);
+            // 
+            // btnPointToLine
+            // 
+            this.btnPointToLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPointToLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPointToLine.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPointToLine.FlatAppearance.BorderSize = 2;
+            this.btnPointToLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPointToLine.Image = global::Jastech.Framework.Winform.VisionPro.Properties.Resources.Arrows;
+            this.btnPointToLine.Location = new System.Drawing.Point(0, 280);
+            this.btnPointToLine.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPointToLine.Name = "btnPointToLine";
+            this.btnPointToLine.Size = new System.Drawing.Size(40, 40);
+            this.btnPointToLine.TabIndex = 6;
+            this.btnPointToLine.UseVisualStyleBackColor = true;
+            this.btnPointToLine.Click += new System.EventHandler(this.btnPointToLine_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderSize = 2;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(0, 320);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 40);
+            this.button2.TabIndex = 7;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 2;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(0, 360);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(40, 40);
+            this.button3.TabIndex = 8;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // CogDisplayControl
             // 
@@ -317,7 +371,7 @@
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tlpFunctionButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -331,7 +385,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tlpFunctionButtons;
         private System.Windows.Forms.Button btnFitZoom;
         private System.Windows.Forms.Button btnPanning;
         private System.Windows.Forms.Button btnCrossLine;
@@ -341,5 +395,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnFileOpen;
+        private System.Windows.Forms.Button btnClearAll;
     }
 }

@@ -280,4 +280,13 @@
   <data name="loading_processing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading_processing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CenterCrossFixed_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CenterCrossFixed_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CenterCross_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CenterCross_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Measure_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Measure_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

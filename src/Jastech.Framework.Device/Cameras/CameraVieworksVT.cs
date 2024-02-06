@@ -79,7 +79,7 @@ namespace Jastech.Framework.Device.Cameras
      
         public override bool Release()
         {
-            if(SerialPortComm != null)
+            if (SerialPortComm != null)
             {
                 SerialPortComm.Received -= SerialPortComm_Received;
                 SerialPortComm.Disconnect();

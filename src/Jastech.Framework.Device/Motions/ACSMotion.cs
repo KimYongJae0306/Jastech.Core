@@ -33,8 +33,8 @@ namespace Jastech.Framework.Device.Motions
         [JsonProperty]
         public string IpAddress { get; set; }
 
-        [JsonProperty]
-        public ACSBufferNumber TriggerBuffer { get; set; }
+        //[JsonProperty]
+        //public ACSBufferNumber TriggerBuffer { get; set; }
 
         [JsonIgnore]
         public Api Api { get; set; } = null;
@@ -95,18 +95,12 @@ namespace Jastech.Framework.Device.Motions
             if (ConnectType == ACSConnectType.Serial)
             {
                 if (OpenSerialPort())
-                {
-                    SetTriggerMode(TriggerBuffer);
                     return true;
-                }
             }
-            else if(ConnectType == ACSConnectType.Ethernet)
+            else if (ConnectType == ACSConnectType.Ethernet)
             {
                 if (ConectEthernet())
-                {
-                    SetTriggerMode(TriggerBuffer);
                     return true;
-                }
             }
 
             return false;
@@ -408,20 +402,13 @@ namespace Jastech.Framework.Device.Motions
 
         private bool Home(int axisNo)
         {
+            // AxisNo로 되어 있지만, Buffer Index를 입력해줘야함
             if (!Api.IsConnected)
                 return false;
 
             ACS.SPiiPlusNET.Axis axis = (ACS.SPiiPlusNET.Axis)axisNo;
             Api.RunBuffer((ProgramBuffer)axis, null);
             return true;
-        }
-
-        private void SetTriggerMode(ACSBufferNumber triggerBuffer)
-        {
-            if (!Api.IsConnected)
-                return;
-
-            Api.RunBuffer((ProgramBuffer)triggerBuffer, null);
         }
 
         private bool GetBufferRunningState(int axisNo)
@@ -434,42 +421,52 @@ namespace Jastech.Framework.Device.Motions
             return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
 
-        public double ReadRealVariable(string variableName) => Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
-
-        public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1) => Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
-
-        public void ApplyLafParameters(ACSBufferNumber buffer, string switchVariableName)
+        public double ReadRealVariable(string variableName)
         {
-            WriteRealVariable(switchVariableName, 0);
-            Api.RunBuffer((ProgramBuffer)buffer, null);
+            if (!Api.IsConnected)
+                return 0.0;
+
+            return Convert.ToDouble(Api.ReadVariableAsScalar(variableName, ProgramBuffer.ACSC_NONE));
+        }
+        private bool GetBufferRunningState(ProgramBuffer programBuffer)
+        {
+            if (!Api.IsConnected)
+                return false;
+
+            var state = Api.GetProgramState(programBuffer);
+
+            return Convert.ToBoolean(state & ProgramStates.ACSC_PST_RUN);
         }
 
-        public void RunBuffer(ACSBufferNumber buffer)
-        {
-            Api.RunBuffer((ProgramBuffer)buffer, null);
-        }
-
-        public void SetLafTrigger(ACSBufferNumber buffer, string variableName, string value, int startIndex, int endIndex)
+        public void WriteRealVariable(string variableName, double value, int from1 = -1, int to1 = -1, int from2 = -1, int to2 = -1)
         {
             if (!Api.IsConnected)
                 return;
 
-            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, startIndex, endIndex);
-            Api.RunBuffer((ProgramBuffer)buffer, null);
+            Api.WriteVariable(value, variableName, ProgramBuffer.ACSC_NONE, from1, to1, from2, to2);
+        }
+
+        public void RunBuffer(int index)
+        {
+            if (GetBufferRunningState((ProgramBuffer)index) == true)
+                StopBuffer(index);
+
+            Api.RunBuffer((ProgramBuffer)index, null);
+        }
+
+        public void StopBuffer(int index)
+        {
+            Api.StopBuffer((ProgramBuffer)index);
+        }
+
+        public void CompileBuffer(int index)
+        {
+            if (GetBufferRunningState((ProgramBuffer)index) == true)
+                StopBuffer(index);
+
+            Api.CompileBuffer((ProgramBuffer)index);
         }
         #endregion
-    }
-
-    public enum ACSBufferNumber
-    {
-        Homing_Unit1 = 0,
-        Homing_Unit2 = 1,
-        Buffer2 = 2,
-        Buffer3 = 3,    
-        CameraTrigger_Unit1 = 4,
-        CameraTrigger_Unit2 = 5,
-        LAFTrigger_Unit1 = 6,
-        LAFTrigger_Unit2 = 7,
     }
 
     public enum ACSConnectType

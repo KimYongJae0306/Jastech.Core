@@ -55,11 +55,12 @@ namespace Jastech.Framework.Winform.Data
                 fixedPoint.X = ViewRect.X;
                 fixedPoint.Y = ViewRect.Y + ViewRect.Height;
             }
-            else if(trackPos == TrackPosType.InSide)
+            else if (trackPos == TrackPosType.InSide)
             {
                 fixedPoint.X = ViewRect.X;
                 fixedPoint.Y = ViewRect.Y;
             }
+
             return fixedPoint;
         }
 
@@ -109,7 +110,7 @@ namespace Jastech.Framework.Winform.Data
         {
             g.DrawRectangle(new Pen(Color.Yellow, 2), Rectangle.Round(ViewRect));
 
-            if(IsSelected)
+            if (IsSelected)
             {
                 if (TrackRectangleList.Count > 0)
                     g.FillRectangles(Brushes.White, TrackRectangleList.ToArray());
@@ -156,7 +157,7 @@ namespace Jastech.Framework.Winform.Data
             if (RightBottomTrackRect.Contains(pt))
                 return TrackPosType.RightBottom;
 
-            if(ViewRect.Contains(pt))
+            if (ViewRect.Contains(pt))
                 return TrackPosType.InSide;
 
             return TrackPosType.None;

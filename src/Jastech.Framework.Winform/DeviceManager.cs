@@ -135,22 +135,26 @@ namespace Jastech.Framework.Winform
             if (milCameraList.Count > 0)
             {
                 var maxSystemNum = milCameraList.Select(x => x.SystemNum).Max();
-                List<CameraMil>[] sortCameraList = new List<CameraMil>[maxSystemNum + 1];
+                List<CameraMil>[] sortSystemList = new List<CameraMil>[maxSystemNum + 1];
 
                 foreach (var milCamera in milCameraList)
                 {
-                    if (sortCameraList[milCamera.SystemNum] == null)
-                        sortCameraList[milCamera.SystemNum] = new List<CameraMil>();
+                    if (sortSystemList[milCamera.SystemNum] == null)
+                        sortSystemList[milCamera.SystemNum] = new List<CameraMil>();
 
-                    sortCameraList[milCamera.SystemNum].Add(milCamera);
+                    sortSystemList[milCamera.SystemNum].Add(milCamera);
                 }
 
+                List<CameraMil> sortCameraList = new List<CameraMil>();
+                foreach (var milCamera in sortSystemList)
+                {
+                    foreach (var camera in milCamera)
+                    {
+                        sortCameraList.Add(camera);
+                    }
+                }
+                sortCameraList.Sort((f1, f2) => f1.DigitizerNum.CompareTo(f2.DigitizerNum));
                 foreach (var milCamera in sortCameraList)
-                {
-                    milCamera.Sort((f1, f2) => f1.SystemNum.CompareTo(f2.DigitizerNum));
-                }
-
-                foreach (var milCamera in milCameraList)
                 {
                     milCamera.Release();
                 }

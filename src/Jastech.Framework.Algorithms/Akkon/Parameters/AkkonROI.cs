@@ -177,5 +177,16 @@ namespace Jastech.Framework.Algorithms.Akkon.Parameters
 
             return maxY;
         }
+
+        public bool CheckValidRoi()
+        {
+            if (GetBoundRectF().Width == 0 || GetBoundRectF().Height == 0)
+                return false;
+
+            if (GetBoundRect().Width == 0 || GetBoundRect().Height == 0)
+                return false;
+
+            return true;
+        }
     }
 }

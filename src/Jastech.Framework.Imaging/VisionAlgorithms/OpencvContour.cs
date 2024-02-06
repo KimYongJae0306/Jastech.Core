@@ -32,7 +32,7 @@ namespace Jastech.Framework.Imaging.VisionAlgorithms
 
                     //Features
                     double area = CvInvoke.ContourArea(contour);
-                    if(area > 0)
+                    if (area > 0)
                     {
                         Moments moments = CvInvoke.Moments(contour);
                         Rectangle rect = CvInvoke.BoundingRectangle(contour);

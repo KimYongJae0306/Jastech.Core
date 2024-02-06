@@ -28,7 +28,7 @@ namespace Jastech.Framework.Device.Plcs.Melsec
             if (Communication == null)
                 return false;
 
-            if(Communication.GetType() == typeof(SocketComm))
+            if (Communication.GetType() == typeof(SocketComm))
             {
                 if (MelsecParser.GetType() == typeof(MelsecBinaryParser))
                 {

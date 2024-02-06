@@ -515,5 +515,14 @@
   <ItemGroup>
     <None Include="Resources\loading_processing.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterCross_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterCrossFixed_White.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Measure_White.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -68,12 +68,13 @@ namespace Jastech.Framework.Winform.Data
         {
             foreach (var figure in FigureList)
             {
-               if(figure.GetCursors(point) is Cursor cursor)
-                {
+               if (figure.GetCursors(point) is Cursor cursor)
+               {
                     if (cursor != Cursors.Default)
                         return cursor;
-                }
+               }
             }
+
             return Cursors.Default;
         }
 

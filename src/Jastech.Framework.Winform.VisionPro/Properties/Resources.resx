@@ -124,11 +124,32 @@
   <data name="Cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Caret_Horizontal_Expand_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Caret_Horizontal_Expand_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Caret_Horizontal_Focus_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Caret_Horizontal_Focus_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Caret_Vertical_Expand_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Caret_Vertical_Expand_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Caret_Vertical_Focus_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Caret_Vertical_Focus_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CenterCrossFixed_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CenterCrossFixed_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CenterCross_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CenterCross_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CrossLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CrossLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CrossLineCustom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CrossLineCustom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Diameter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Diameter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,8 +160,20 @@
   <data name="FitZoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FitZoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Fit_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fit_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Measure_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Measure_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Panning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Panning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panning_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Panning_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PictureFolder2_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PictureFolder2_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PointToPoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PointToPoint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

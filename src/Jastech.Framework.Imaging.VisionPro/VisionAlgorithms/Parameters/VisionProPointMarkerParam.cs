@@ -27,33 +27,21 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             if (PointMarker == null)
                 return null;
 
-            //double x = 0.0;
-            //double y = 0.0;
-            //double rotation = 0.0;
-            //int size = 0;
-
-            //var tqtqwte = PointMarker.X;
-            //var wqerqw = PointMarker.Y;
-
-            //PointMarker.GetCenterRotationSize(out x, out y, out rotation, out size);
-            //CogTransform2DLinear aa = new CogTransform2DLinear();
-            //aa.TranslationX = x;
-            //aa.TranslationY = y;,
-
             return PointMarker.GetParentFromChildTransform() as CogTransform2DLinear;
         }
 
         public void SetOriginPoint(double x, double y, int size = 100, double rotation = 0)
         {
-            if(PointMarker != null)
-                PointMarker.Changed -= PointMarker_Changed;
+            if (PointMarker == null)
+            {
+                PointMarker = new CogPointMarker();
+                PointMarker.Changed += PointMarker_Changed;
+            }
 
-            PointMarker = new CogPointMarker();
             PointMarker.Interactive = true;
             PointMarker.GraphicDOFEnable = CogPointMarkerDOFConstants.All;
             PointMarker.GraphicType = CogPointMarkerGraphicTypeConstants.Cross;
             PointMarker.SetCenterRotationSize(x, y, rotation, size);
-            PointMarker.Changed += PointMarker_Changed;
         }
 
         private void PointMarker_Changed(object sender, CogChangedEventArgs e)
@@ -70,6 +58,11 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             collect.Add(PointMarker);
 
             return collect;
+        }
+
+        public void Dispose()
+        {
+            PointMarker?.Dispose();
         }
     }
 }

@@ -37,6 +37,10 @@ namespace Jastech.Framework.Winform.Controls
 
         public Bitmap OrgImage { get; set; } = null;
 
+        private int ImageWidth { get; set; } = 0;
+
+        private int ImageHeight { get; set; } = 0;
+
         private TextureBrush BitmapBrush { get; set; } = null;
 
         private FigureManager FigureManager { get; set; } = new FigureManager();
@@ -48,6 +52,8 @@ namespace Jastech.Framework.Winform.Controls
         private PointF PanningStartPoint { get; set; }
 
         public Color ViewColor { get; set; } = Color.FromArgb(52, 52, 52);
+
+        private DoubleBufferedPicturebox pbxDisplay { get; set; } = null;
         #endregion
 
         #region 이벤트
@@ -71,22 +77,36 @@ namespace Jastech.Framework.Winform.Controls
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
             this.UpdateStyles();
-            
+
+            pbxDisplay = new DoubleBufferedPicturebox();
+            pbxDisplay.BackColor = ViewColor;
+            pbxDisplay.MouseWheel += PbxDisplay_MouseWheel;
+            pbxDisplay.Paint += pbxDisplay_Paint;
+            pbxDisplay.DoubleClick += pbxDisplay_DoubleClick;
+            pbxDisplay.MouseDown += pbxDisplay_MouseDown;
+            pbxDisplay.MouseMove += pbxDisplay_MouseMove;
+            pbxDisplay.MouseUp += pbxDisplay_MouseUp;
+            pbxDisplay.Dock = DockStyle.Fill;
+            pnlDisplay.Controls.Add(pbxDisplay);
+
             _selectedColor = Color.FromArgb(104, 104, 104);
             _nonSelectedColor = Color.FromArgb(52, 52, 52);
 
             pnlText.Visible = UseGrayLevel;
 
             UpdateDisplayModeUI(DisplayMode);
-
-            pbxDisplay.BackColor = ViewColor;
-            pbxDisplay.MouseWheel += PbxDisplay_MouseWheel;
         }
 
         public void SetImage(Bitmap bmp)
         {
             lock(_lock)
             {
+                if (bmp == null)
+                {
+                    ImageWidth = 0;
+                    ImageHeight = 0;
+                    return;
+                }
                 if (OrgImage != null)
                 {
                     OrgImage.Dispose();
@@ -94,6 +114,8 @@ namespace Jastech.Framework.Winform.Controls
                 }
 
                 OrgImage = bmp;
+                ImageWidth = bmp.Width;
+                ImageHeight = bmp.Height;
 
                 if (isUpdatingBitmapBrush)
                 {
@@ -129,14 +151,14 @@ namespace Jastech.Framework.Winform.Controls
             if (OrgImage != null)
             {
                 if (pbxDisplay.Width > pbxDisplay.Height)
-                    ZoomScale = (double)pbxDisplay.Width / OrgImage.Width;
+                    ZoomScale = (double)pbxDisplay.Width / ImageWidth;
                 else
-                    ZoomScale = (double)pbxDisplay.Height / OrgImage.Height;
+                    ZoomScale = (double)pbxDisplay.Height / ImageHeight;
 
-                double calcWidth = OrgImage.Width * ZoomScale;
+                double calcWidth = ImageWidth * ZoomScale;
                 double valueX = (pbxDisplay.Width / 2.0) - (calcWidth / 2.0);
 
-                double calcHeight = OrgImage.Height * ZoomScale;
+                double calcHeight = ImageHeight * ZoomScale;
                 double valueY = (pbxDisplay.Height / 2.0) - (calcHeight / 2.0);
 
                 OffsetX = (valueX / ZoomScale);
@@ -292,11 +314,9 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                //g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));  내부 오버헤드 때문에 많이 느림
                 if (BitmapBrush == null)
                     BitmapBrush = new TextureBrush(OrgImage);
-
-                g.FillRectangle(BitmapBrush, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
+                g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)
@@ -309,7 +329,6 @@ namespace Jastech.Framework.Winform.Controls
 
                 if (TempFigure != null)
                 {
-                    // TempFigure.TrackRectWidth = 
                     TempFigure.TrackRectSize =trackResize;
                     TempFigure.Draw(g);
                 }
@@ -414,7 +433,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private byte[] GetDataArray(Bitmap image, Figure figure)
         {
-            if(figure is LineDirectionFigure lineFigure)
+            if (figure is LineDirectionFigure lineFigure)
             {
                 byte[] data = ImageHelper.GetDataArray(image, lineFigure.DrawPoints.ToList());
                 return data;
@@ -462,11 +481,11 @@ namespace Jastech.Framework.Winform.Controls
 
         public void DisposeImage()
         {
-           if(pbxDisplay.Image != null)
+           if (pbxDisplay.Image != null)
             {
                 pbxDisplay.Image.Dispose();
                 pbxDisplay.Image = null;
-            }
+           }
         }
 
         private void menuSaveImage_Click(object sender, EventArgs e)

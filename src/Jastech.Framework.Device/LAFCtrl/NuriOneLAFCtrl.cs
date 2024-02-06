@@ -111,8 +111,11 @@ namespace Jastech.Framework.Device.LAFCtrl
                     int index = temp.IndexOf(text);
                     int startIndex = index + text.Length;
                     int size = text.Length - startIndex;
-                    string valueString = temp.Substring(startIndex, 2).Trim();
-                    IsLaserOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                    if (size > 0)
+                    {
+                        string valueString = temp.Substring(startIndex, 2).Trim();
+                        IsLaserOn = Convert.ToInt16(valueString) == 1 ? true : false;
+                    }
                 }
 
                 if (temp.Contains("MLLAF3:uc motiontrack"))
@@ -140,12 +143,9 @@ namespace Jastech.Framework.Device.LAFCtrl
                     }
                     
                 }
-                if(temp.Contains("uc motionrefpos"))
-                {
-                }
+
             }
 
-            //ResponseReceivedEvent.Set();
             IsGetMessageOn = false;
         }
 
@@ -171,6 +171,8 @@ namespace Jastech.Framework.Device.LAFCtrl
         {
             SetMotionMaxSpeed(MaxSppedAxisZ);
             SetAccDec(AccDec);
+            SetVroOnOff(YWindowOnOff ? false : true);         //off로 해놓고 설정해야함.
+            SetYWindow(YWindowStart, YWindowWidth);
         }
 
         public override void SetMotionMaxSpeed(double velocity)

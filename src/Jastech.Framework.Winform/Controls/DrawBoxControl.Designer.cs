@@ -366,7 +366,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel pnlText;
         private System.Windows.Forms.Panel pnlDisplay;
-        private DoubleBufferedPicturebox pbxDisplay;
         private System.Windows.Forms.ContextMenuStrip ctxDisplayMode;
         private System.Windows.Forms.ToolStripMenuItem menuPointerMode;
         private System.Windows.Forms.ToolStripMenuItem menuPanningMode;

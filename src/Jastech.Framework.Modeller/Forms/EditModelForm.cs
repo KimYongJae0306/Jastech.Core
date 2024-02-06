@@ -55,12 +55,11 @@ namespace Jastech.Framework.Modeller.Forms
                 }
                 isEdit = true;
             }
-            if(PrevDescription != txtDescription.Text)
-            {
-                isEdit = true;
-            }
 
-            if(isEdit)
+            if (PrevDescription != txtDescription.Text)
+                isEdit = true;
+
+            if (isEdit)
             {
                 InspModel inspModel = new InspModel
                 {

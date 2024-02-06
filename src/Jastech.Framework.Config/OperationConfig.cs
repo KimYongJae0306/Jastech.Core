@@ -28,7 +28,7 @@ namespace Jastech.Framework.Config
         public bool SaveImageNG { get; set; } = true;
 
         [JsonProperty]
-        public ImageExtension ExtensionOKImage { get; set; } = ImageExtension.Jpg;
+        public ImageExtension ExtensionOKImage { get; set; } = ImageExtension.Bmp;
 
         [JsonProperty]
         public ImageExtension ExtensionNGImage { get; set; } = ImageExtension.Bmp;

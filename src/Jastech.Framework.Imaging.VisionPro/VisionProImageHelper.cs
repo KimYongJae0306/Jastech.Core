@@ -14,12 +14,12 @@ namespace Jastech.Framework.Imaging.VisionPro
     {
         public static void Dispose(ref ICogImage cogImage)
         {
-            if(cogImage is CogImage8Grey grey)
+            if (cogImage is CogImage8Grey grey)
             {
                 grey.Dispose();
                 grey = null;
             }
-            if(cogImage is CogImage24PlanarColor color)
+            if (cogImage is CogImage24PlanarColor color)
             {
                 color.Dispose();
                 color = null;
@@ -50,32 +50,41 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static void Save(ICogImage image, string fileName)
         {
-            string extension = Path.GetExtension(fileName);
-            if (extension == ".bmp")
+            if (image == null)
+                return;
+
+            lock(image)
             {
-                CogImageFileBMP bmp = new CogImageFileBMP();
-                bmp.Open(fileName, CogImageFileModeConstants.Write);
-                bmp.Append(image);
-                bmp.Close();
-            }
-            else if(extension == ".jpg" || extension == ".jpeg")
-            {
-                CogImageFileJPEG jpg = new CogImageFileJPEG();
-                jpg.Open(fileName, CogImageFileModeConstants.Write);
-                jpg.Append(image);
-                jpg.Close();
-            }
-            else if(extension == ".png")
-            {
-                CogImageFilePNG png = new CogImageFilePNG();
-                png.Open(fileName, CogImageFileModeConstants.Write);
-                png.Append(image);
-                png.Close();
+                string extension = Path.GetExtension(fileName);
+                if (extension == ".bmp")
+                {
+                    CogImageFileBMP bmp = new CogImageFileBMP();
+                    bmp.Open(fileName, CogImageFileModeConstants.Write);
+                    bmp.Append(image);
+                    bmp.Close();
+                }
+                else if (extension == ".jpg" || extension == ".jpeg")
+                {
+                    CogImageFileJPEG jpg = new CogImageFileJPEG();
+                    jpg.Open(fileName, CogImageFileModeConstants.Write);
+                    jpg.Append(image);
+                    jpg.Close();
+                }
+                else if (extension == ".png")
+                {
+                    CogImageFilePNG png = new CogImageFilePNG();
+                    png.Open(fileName, CogImageFileModeConstants.Write);
+                    png.Append(image);
+                    png.Close();
+                }
             }
         }
 
         public static byte[] GetWidthDataArray(CogImage8Grey image, int index)
         {
+            if (image == null)
+                return null;
+
             byte[] dataArray = new byte[image.Width];
             unsafe
             {
@@ -97,6 +106,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static byte[] GetByteArray(CogImage8Grey image)
         {
+            if (image == null)
+                return null;
+
             unsafe
             {
                 var cogPixelData = image.Get8GreyPixelMemory(CogImageDataModeConstants.Read, 0, 0, image.Width, image.Height);
@@ -125,6 +137,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int threshold, int maxValue, bool isInvert = false)
         {
+            if (orgImage == null)
+                return null;
+
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
             byte[] mapArray = new byte[256];
 
@@ -162,6 +177,9 @@ namespace Jastech.Framework.Imaging.VisionPro
 
         public static CogImage8Grey Threshold(CogImage8Grey orgImage, int minThreshold, int maxThreshold, int maxValue, bool isInvert = false)
         {
+            if (orgImage == null)
+                return null;
+
             CogIPOneImageTool imageTool = new CogIPOneImageTool();
             byte[] mapArray = new byte[256];
 
@@ -309,34 +327,21 @@ namespace Jastech.Framework.Imaging.VisionPro
             if (colorFormat == ColorFormat.Gray)
             {
                 CogImage8Root root = new CogImage8Root();
-
+                TestClass test = new TestClass();
                 unsafe
                 {
                     fixed(byte* dataPtr = data)
                     {
 
-                        root.Initialize(width, height, (IntPtr)dataPtr, width, null);
+                        root.Initialize(width, height, (IntPtr)dataPtr, width, test);
                         var cogImage = new CogImage8Grey();
                         cogImage.SetRoot(root);
                         
                         return cogImage;
                     }
                 }
-              
-
-                //var dataSize = width * height;
-                //var buffer = new SafeMalloc(dataSize);
-
-                //Marshal.Copy(data, 0, buffer, dataSize);
-
-                //CogImage8Root root = new CogImage8Root();
-
-                //root.Initialize(width, height, buffer, width, buffer);
-                //var cogImage = new CogImage8Grey();
-                //cogImage.SetRoot(root);
-                //return cogImage;
             }
-            else if(colorFormat == ColorFormat.RGB24)
+            else if (colorFormat == ColorFormat.RGB24)
             {
                 var dataSize = width * height;
 
@@ -428,6 +433,14 @@ namespace Jastech.Framework.Imaging.VisionPro
 
             CogImage8Grey outputImage = imageConvertTool.OutputImage as CogImage8Grey;
             return outputImage;
+        }
+    }
+
+    public class TestClass : IDisposable
+    {
+        public void Dispose()
+        {
+            Console.WriteLine("Dispose");
         }
     }
 }

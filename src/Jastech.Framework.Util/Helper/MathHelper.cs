@@ -50,8 +50,9 @@ namespace Jastech.Framework.Util.Helper
             return offset;
         }
 
-        public static PointF GetCoordinate(PointF centerPoint, double diffAngle, PointF offset, PointF inputPoint)
+        public static PointF GetCoordinate(PointF centerPoint, double diffAngle, PointF offset, PointF inputPoint, double ratio = 1.0)
         {
+            //diffAngle = 0;
             PointF outputPoint = new PointF();
 
             PointF tempPoint = new PointF();
@@ -63,10 +64,13 @@ namespace Jastech.Framework.Util.Helper
             //inputPoint.X += offset.X;
             //inputPoint.Y += offset.Y;
 
-            double offsetRadian = DegToRad(diffAngle);// 센터, 옵셋, 각도, 출력
+            double offsetRadian = DegToRad(diffAngle);// 센터, 옵셋, 각도 출력
 
             var coordinateX = (tempPoint.X * Math.Cos(offsetRadian)) - (tempPoint.Y * Math.Sin(offsetRadian));
             var coordinateY = (tempPoint.X * Math.Sin(offsetRadian)) + (tempPoint.Y * Math.Cos(offsetRadian));
+
+            coordinateX = coordinateX * ratio;
+            coordinateY = coordinateY * ratio;
 
             outputPoint.X = (float)coordinateX + centerPoint.X;
             outputPoint.Y = ((float)coordinateY * -1.0F) + centerPoint.Y;

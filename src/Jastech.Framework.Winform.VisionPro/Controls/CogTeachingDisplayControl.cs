@@ -11,6 +11,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private CogDisplayControl CogDisplay { get; set; }
 
         private CogThumbnailControl CogThumbnail { get; set; }
+
+        public float PixelResolution { get; set; } = 1.0F;
         #endregion
 
         #region 이벤트
@@ -31,6 +33,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
             // 이벤트 등록(중요)
             CogDisplay.DrawViewRectEventHandler += CogThumbnail.DrawViewRect;
+            CogDisplay.ImageChanged += SetThumbnailImage;
             CogThumbnail.UpdateRectEventHandler += CogDisplay.UpdateViewRect;
 
             CogDisplay.DeleteEventHandler += DeleteEventHandler;
@@ -39,6 +42,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         private void AddControls()
         {
             CogDisplay = new CogDisplayControl();
+            CogDisplay.PixelResolution = PixelResolution;
             CogDisplay.Dock = DockStyle.Fill;
             pnlDisplay.Controls.Add(CogDisplay);
 
@@ -50,7 +54,6 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         public void SetImage(ICogImage image)
         {
             CogDisplay.SetImage(image);
-            //CogThumbnail.SetThumbnailImage(image, null);
         }
 
         public void SetThumbnailImage(ICogImage image)

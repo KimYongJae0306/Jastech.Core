@@ -16,9 +16,9 @@ namespace Jastech.Framework.Imaging.VisionPro
             double centerX = (startPoint.X + endPoint.X) / 2.0;
             double centerY = (startPoint.Y + endPoint.Y) / 2.0;
             result.CenterPoint = new PointF((float)centerX, (float)centerY);
-            result.DistanceX = Math.Abs(endPoint.X - startPoint.X) * resolution;
-            result.DistanceY = Math.Abs(endPoint.Y - startPoint.Y) * resolution;
-            result.Length = (Math.Sqrt(Math.Pow(result.DistanceX, 2) + Math.Pow(result.DistanceY, 2))) * resolution;
+            result.DistanceX = Math.Abs(endPoint.X - startPoint.X);// * resolution;
+            result.DistanceY = Math.Abs(endPoint.Y - startPoint.Y);// * resolution;
+            result.Length = (Math.Sqrt(Math.Pow(result.DistanceX, 2) + Math.Pow(result.DistanceY, 2)));// * resolution;
             result.Degree = CogMisc.RadToDeg(Math.Atan(result.DistanceY / result.DistanceX));
 
             return result;

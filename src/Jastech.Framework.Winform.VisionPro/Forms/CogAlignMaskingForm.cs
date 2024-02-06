@@ -60,7 +60,7 @@ namespace Jastech.Framework.Winform.VisionPro.Forms
 
         private void lblReset_Click(object sender, EventArgs e)
         {
-            if(CurrentParam != null)
+            if (CurrentParam != null)
                 CurrentParam.Dispose();
 
             Initialize(OriginParam);

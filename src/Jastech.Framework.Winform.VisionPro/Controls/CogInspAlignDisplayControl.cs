@@ -27,6 +27,12 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
         public float TextFontSize { get; set; } = 35.0f; //화면을 이거를 기준으로 등분함.. 값이 작을수록 글자가 커진다
 
+        public double LeftDisplayZoomRatio { get; set; } = 0.25;
+
+        public double RightDisplayZoomRatio { get; set; } = 0.25;
+
+        public double CenterDisplayZoomRatio { get; set; } = 0.5;
+
         public bool IsLeftResultImageView { get; set; } = true;
 
         public bool IsRightResultImageView { get; set; } = true;
@@ -85,7 +91,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
                 {
-                    cogLeftDisplay.Zoom = 0.25;
+                    cogLeftDisplay.Zoom = LeftDisplayZoomRatio;
                     cogLeftDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                     cogLeftDisplay.PanY = (cogImage.Height / 2) - (centerPoint.Y);// + cogLeftDisplay.Height;
                 }
@@ -93,7 +99,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 {
                     if (shapeList.Count > 0)
                     {
-                        cogLeftDisplay.Zoom = 0.25;
+                        cogLeftDisplay.Zoom = LeftDisplayZoomRatio;
                         PointF markCenterPoint = GetMarkCenterPoint(shapeList);
 
                         cogLeftDisplay.PanX = (cogImage.Width / 2) - markCenterPoint.X;
@@ -182,10 +188,8 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             if (cogImage == null)
                 return;
 
-            if(IsRightResultImageView == false)
-            {
+            if (IsRightResultImageView == false)
                 UpdateRightDisplay(cogImage);
-            }
             else
             {
                 cogRightDisplay.Image = cogImage;
@@ -214,7 +218,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
 
                 if (centerPoint.X != 0 && centerPoint.Y != 0)
                 {
-                    cogRightDisplay.Zoom = 0.25;
+                    cogRightDisplay.Zoom = RightDisplayZoomRatio;
                     cogRightDisplay.PanX = (cogImage.Width / 2) - centerPoint.X;
                     cogRightDisplay.PanY = (cogImage.Height / 2) - centerPoint.Y;
                 }
@@ -222,7 +226,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 {
                     if (shapeList.Count > 0)
                     {
-                        cogRightDisplay.Zoom = 0.25;
+                        cogRightDisplay.Zoom = RightDisplayZoomRatio;
                         PointF markCenterPoint = GetMarkCenterPoint(shapeList);
 
                         cogRightDisplay.PanX = (cogImage.Width / 2) - markCenterPoint.X;
@@ -251,6 +255,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
         {
             cogRightDisplay.StaticGraphics.Add(cogLine, "line");
         }
+
         public void DrawLine(CogLine cogLine)
         {
             cogLeftDisplay.StaticGraphics.Add(cogLine, "line");
@@ -264,7 +269,7 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
             }
             else
             {
-                cogCenterDisplay.Zoom = 0.5;
+                cogCenterDisplay.Zoom = CenterDisplayZoomRatio;
                 cogCenterDisplay.Image = cogImage;//.CopyBase(CogImageCopyModeConstants.CopyPixels);
                 cogCenterDisplay.PanX = (cogImage.Width / 2) - cogCenterDisplay.Image.Width / 2;
                 cogCenterDisplay.PanY = (cogImage.Height / 2) - cogCenterDisplay.Image.Height / 2;

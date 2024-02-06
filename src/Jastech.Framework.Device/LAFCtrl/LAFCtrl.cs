@@ -7,6 +7,7 @@ namespace Jastech.Framework.Device.LAFCtrl
     public abstract partial class LAFCtrl : IDevice, IDisposable
     {
         #region 속성
+        [JsonIgnore]
         public LAFStatus Status { get; set; } = new LAFStatus();
         #endregion
 
@@ -87,6 +88,15 @@ namespace Jastech.Framework.Device.LAFCtrl
 
         [JsonProperty]
         public int AccDec { get; set; } = 15;            // Hz
+
+        [JsonProperty]
+        public bool YWindowOnOff { get; set; } = false;
+
+        [JsonProperty]
+        public int YWindowStart { get; set; } = 200;
+
+        [JsonProperty]
+        public int YWindowWidth { get; set; } = 80;
         #endregion
 
         #region 메서드

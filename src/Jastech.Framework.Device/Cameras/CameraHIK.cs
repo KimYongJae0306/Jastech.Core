@@ -93,7 +93,7 @@ namespace Jastech.Framework.Device.Cameras
                 Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register image callback failed. Name : {0}", Name));
                 return false;
             }
-
+            
             return true;
         }
 

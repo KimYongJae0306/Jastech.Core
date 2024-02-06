@@ -3,18 +3,19 @@ using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Results;
 using System.Collections.Generic;
+using static Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProCaliperParam;
 
 namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
 {
     public class CogAlignCaliper : VisionProCaliper
     {
-        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount, bool isPanel)
+        public List<VisionProCaliperResult> RunAlignX(ICogImage image, VisionProCaliperParam caliperParam, int leadCount, CaliperSearchDirection searchDirecton, bool isPanel)
         {
             List<VisionProCaliperResult> resultList = new List<VisionProCaliperResult>();
 
             CogRectangleAffine rect = caliperParam.CaliperTool.Region;
 
-            var rectList = VisionProShapeHelper.DivideRegion(rect, leadCount);
+            var rectList = VisionProShapeHelper.DivideRegion(rect, leadCount, searchDirecton);
             if (rectList == null)
                 return resultList;
 
@@ -27,29 +28,17 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms
                 caliperParam.CaliperTool.Region = rectList[leadIndex];
                 caliperParam.CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None;
 
-                if(isPanel)
+                if (isPanel)
                 {
-                    //if (leadIndex % 2 == 0)
-                    //{
-                    //    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
-                    //    var scorerPosition = new CogCaliperScorerPosition();
-                    //    scorerPosition.Enabled = true;
-                    //    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
+                    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
+                    var scorerPosition = new CogCaliperScorerPosition();
+                    scorerPosition.Enabled = true;
 
-                    //}
-                    //else
-                    {
-                        caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Clear();
-                        var scorerPosition = new CogCaliperScorerPosition();
-                        scorerPosition.Enabled = true;
-
-                        var scorerPositionNeg = new CogCaliperScorerPositionNeg();
-                        scorerPositionNeg.Enabled = true;
-                        //scorerPosition.SetXYParameters(0, -100, -10000, 1, 0.1);
-                        scorerPosition.SetXYParameters(0, 0, 10000, 1, 0.1);
-                        caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
-                        caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPositionNeg);
-                    }
+                    var scorerPositionNeg = new CogCaliperScorerPositionNeg();
+                    scorerPositionNeg.Enabled = true;
+                    scorerPosition.SetXYParameters(0, 0, 10000, 1, 0.1);
+                    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPosition);
+                    caliperParam.CaliperTool.RunParams.SingleEdgeScorers.Add(scorerPositionNeg);
                 }
 
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();

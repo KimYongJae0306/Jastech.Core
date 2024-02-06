@@ -42,7 +42,7 @@ namespace Jastech.Framework.Structure.Helper
             {
                 string editDir = Path.Combine(modelPath, editModel.Name);
 
-                if(prevDir != editDir)
+                if (prevDir != editDir)
                     Directory.Move(prevDir, editDir);
 
                 // model 정보 변경

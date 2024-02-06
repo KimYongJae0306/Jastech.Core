@@ -300,9 +300,9 @@ namespace Jastech.Framework.Algorithms.Akkon
             foreach (var blob in leadResult.BlobList)
             {
                 count++;
-                if(UseOverCount)
+                if (UseOverCount)
                 {
-                    if(LeadAkkonShapeMaxCount <= count)
+                    if (LeadAkkonShapeMaxCount <= count)
                         break;
                 }
 
@@ -539,7 +539,7 @@ namespace Jastech.Framework.Algorithms.Akkon
 
             Mat cropWorldMat = null;
 
-            if(resizeRatio == 1.0)
+            if (resizeRatio == 1.0)
             {
                 cropWorldMat = MatHelper.CropRoi(orgMat, worldRect);
                 ResizeMat = orgMat;
@@ -560,7 +560,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             bool lastCrop = false;
             for (int i = 0; i < maxSliceCount; i++)
             {
-                if(lastCrop)
+                if (lastCrop)
                     break;
 
                 if (cropWorldMat.Width < startX + sliceWidth)
@@ -689,7 +689,7 @@ namespace Jastech.Framework.Algorithms.Akkon
         private List<AkkonROI> GetResizeROI(List<AkkonROI> orgRoiList, double resizeRatio)
         {
 
-            if(resizeRatio == 1.0)
+            if (resizeRatio == 1.0)
             {
                 return orgRoiList.Select(x => x.DeepCopy()).ToList();
             }
@@ -776,7 +776,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                 lowThres = result.Item1;
                 highThres = result.Item2;
             }
-            else if(mode == AkkonThMode.White)
+            else if (mode == AkkonThMode.White)
             {
                 highThres = (int)(meanScalar.V0 + sigmaScalar.V0 * imagingParam.Weight);
                 lowThres = 0;
@@ -1275,13 +1275,13 @@ namespace Jastech.Framework.Algorithms.Akkon
                     byte* pEnhLine = (byte*)(enhMat.DataPointer + (y + enhMat.Step));
                     if (defectType == 0)
                     {
-                        if(pEnhLine[ptCom.X] > 130)
+                        if (pEnhLine[ptCom.X] > 130)
                         {
                             bottom = y;
                             break;
                         }
                     }
-                    else if(defectType == 1)
+                    else if (defectType == 1)
                     {
                         if (pEnhLine[ptCom.X] < 126)
                         {

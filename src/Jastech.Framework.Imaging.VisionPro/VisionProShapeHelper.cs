@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters.VisionProCaliperParam;
 
 namespace Jastech.Framework.Imaging.VisionPro
 {
@@ -28,7 +29,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             return roi;
         }
 
-        public static List<CogRectangleAffine> DivideRegion(CogRectangleAffine orgRect, int leadCount)
+        public static List<CogRectangleAffine> DivideRegion(CogRectangleAffine orgRect, int leadCount, CaliperSearchDirection searchDirection)
         {
             if (leadCount <= 0)
                 return null;
@@ -46,44 +47,28 @@ namespace Jastech.Framework.Imaging.VisionPro
                 CogRectangleAffine divideRegion = new CogRectangleAffine(orgRect);
 
                 double dX = (interval * index) * Math.Cos(orgRect.Rotation);
-                double dY = (interval * index) * Math.Sin(orgRect.Rotation);//orgRect.Rotation;
-
-                //double dX = orgRect.SideXLength / leadCount * leadIndex * System.Math.Cos(orgRect.Rotation);
-                //double dY = orgRect.SideXLength / leadCount * leadIndex * orgRect.Rotation;
+                double dY = (interval * index) * Math.Sin(orgRect.Rotation);
 
                 divideRegion.SideXLength = interval;
                 divideRegion.CenterX = centerX + dX;
                 divideRegion.CenterY = centerY + dY;
 
-                if (index % 2 == 0) //좌측부분 ROI
-                    divideRegion.Rotation = divideRegion.Rotation - 3.14;
+                if (searchDirection == CaliperSearchDirection.InsideToOutside)
+                {
+                    if (index % 2 == 0) //좌측부분 ROI
+                        divideRegion.Rotation = divideRegion.Rotation - 3.14;
+                }
+                else
+                {
+                    if (index % 2 == 1) //좌측부분 ROI
+                        divideRegion.Rotation = divideRegion.Rotation - 3.14;
+                }
                 divideRegion.CenterX = centerX + (interval * index);
                 divideRegion.CenterY = centerY;
 
                 divideRegionList.Add(divideRegion);
             }
-
-            //tool.Region.CornerXY
-            //double dNewX = (orgRect.CenterX - orgRect.SideXLength / 2)/* + (orgRect.SideXLength / totalCount)*/;
-            //double dNewY = orgRect.CenterY;
-
-            //for (int leadIndex = 0; leadIndex < totalCount; leadIndex++)
-            //{
-            //    CogRectangleAffine divideRegion = new CogRectangleAffine(orgRect);
-
-            //    double dX = (orgRect.SideXLength / totalCount) * leadIndex * System.Math.Cos(orgRect.Rotation);
-            //    double dY = orgRect.SideXLength / totalCount * leadIndex * System.Math.Sin(orgRect.Rotation);//orgRect.Rotation;
-
-            //    //double dX = orgRect.SideXLength / leadCount * leadIndex * System.Math.Cos(orgRect.Rotation);
-            //    //double dY = orgRect.SideXLength / leadCount * leadIndex * orgRect.Rotation;
-
-            //    divideRegion.SideXLength = divideRegion.SideXLength / totalCount;
-            //    divideRegion.CenterX = dNewX + dX;
-            //    divideRegion.CenterY = dNewY + dY;
-
-            //    divideRegionList.Add(divideRegion);
-            //}
-
+           
             return divideRegionList;
         }
 
@@ -137,7 +122,7 @@ namespace Jastech.Framework.Imaging.VisionPro
             return offset;
         }
 
-        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect, double offsetX = 0, double offsetY = 0)
+        public static Rectangle ConvertAffineRectToRect(CogRectangleAffine affineRect, double offsetX = 0.0, double offsetY = 0.0)
         {
             List<double> xPointList = new List<double>();
 

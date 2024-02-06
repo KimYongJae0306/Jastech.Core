@@ -7,13 +7,16 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 {
     public class VisionProCaliperParam
     {
+        #region 속성
         [JsonIgnore]
         public CogCaliperTool CaliperTool { get; set; } = new CogCaliperTool { LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.None };
+        #endregion
 
+        #region 메서드
         public double GetContrastThreshold()
         {
             if (CaliperTool == null)
-                return 0;
+                return 0.0;
 
             return CaliperTool.RunParams.ContrastThreshold;
         }
@@ -59,7 +62,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
 
             CaliperTool.CurrentRecordEnable = constants;
             CaliperTool.LastRunRecordDiagEnable = CogCaliperLastRunRecordDiagConstants.All;
-            
+
             return CaliperTool.CreateCurrentRecord();
         }
 
@@ -76,7 +79,7 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
             CaliperTool.InputImage = null;
 
             param.CaliperTool = new CogCaliperTool(CaliperTool);
-            
+
             return param;
         }
 
@@ -118,6 +121,13 @@ namespace Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters
                 CaliperTool.Results.Dispose();
             CaliperTool?.Dispose();
             CaliperTool = null;
+        }
+        #endregion
+
+        public enum CaliperSearchDirection
+        {
+            InsideToOutside,
+            OutsideToInside,
         }
     }
 }

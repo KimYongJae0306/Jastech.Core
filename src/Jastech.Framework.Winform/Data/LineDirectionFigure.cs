@@ -64,22 +64,18 @@ namespace Jastech.Framework.Winform.Data
             }
             else
             {
-
                 if (CurrentTrackPos == TrackPosType.Start)
-                {
                     DrawPoints = GetPointListOfLine(MouseMovePoint, FixedPoint);
-                }
                 else if (CurrentTrackPos == TrackPosType.End)
-                {
                     DrawPoints = GetPointListOfLine(FixedPoint, MouseMovePoint);
-                }
                 else if (CurrentTrackPos == TrackPosType.InSide)
                 {
-                    if(IsFirstMove)
+                    if (IsFirstMove)
                     {
                         IsFirstMove = false;
                         PrevMovePoint = MouseMovePoint;
                     }
+
                     float moveX = PrevMovePoint.X - MouseMovePoint.X;
                     float moveY = PrevMovePoint.Y - MouseMovePoint.Y;
                  
@@ -93,6 +89,7 @@ namespace Jastech.Framework.Winform.Data
 
                         movePoints.Add(newPoint);
                     }
+
                     PrevMovePoint = MouseMovePoint;
 
                     DrawPoints.Clear();
@@ -101,7 +98,7 @@ namespace Jastech.Framework.Winform.Data
 
                 TrackRectangleList.Clear();
 
-                if(DrawPoints.Count() > 0)
+                if (DrawPoints.Count() > 0)
                 {
                     var firstPoint = DrawPoints.First();
                     var endPoint = DrawPoints.Last();
@@ -183,10 +180,8 @@ namespace Jastech.Framework.Winform.Data
             AdjustableArrowCap bigArrow = new AdjustableArrowCap(arrayCapSize, arrayCapSize);
             pen.CustomEndCap = bigArrow;
 
-            if(DrawPoints.Count > 1)
-            {
+            if (DrawPoints.Count > 1)
                 g.DrawLines(pen, DrawPoints.ToArray());
-            }
 
             if (IsSelected)
             {
