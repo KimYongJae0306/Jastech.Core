@@ -59,7 +59,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void DrawDefectShape(Graphics g, ElectrodeDefectInfo defectInfo)
         {
-            var coord = GetScaledLocation(defectInfo.GetCoord(), 160000);
+            var coord = GetScaledLocation(defectInfo.GetCoord(), 16383);
 
             var color = Colors[defectInfo.DefectType];
             var brush = new SolidBrush(color);
@@ -132,9 +132,5 @@ namespace Jastech.Framework.Winform.Controls
             }
         }
         #endregion
-
-        private void pnlMapArea_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
     }
 }
