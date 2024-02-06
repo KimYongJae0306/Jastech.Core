@@ -15,6 +15,7 @@ namespace Jastech.Framework.Winform.Controls
     {
         #region 필드
         private RectangleF DisplayArea;
+        private DoubleBufferedPanel pnlMapArea = new DoubleBufferedPanel { Dock = DockStyle.Fill };
         #endregion
 
         #region 속성
@@ -46,6 +47,8 @@ namespace Jastech.Framework.Winform.Controls
         private void CompactDefectMapControl_Load(object sender, EventArgs e)
         {
             DisplayArea = GetDisplayArea();
+            pnlMapArea.Paint += pnlMapArea_Paint;
+            Controls.Add(pnlMapArea);
         }
 
         public void Clear()
@@ -55,7 +58,7 @@ namespace Jastech.Framework.Winform.Controls
             Invalidate();
         }
 
-        private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 50, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 90, pnlMapArea.DisplayRectangle.Height - 60));
+        private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 70, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 90, pnlMapArea.DisplayRectangle.Height - 60));
 
         private void DrawDefectShape(Graphics g, DefectInfo defectInfo)
         {
@@ -112,24 +115,18 @@ namespace Jastech.Framework.Winform.Controls
                 int drawingHeight = (int)(count * (DisplayArea.Height / 10)) + (int)DisplayArea.Top;
                 var dashPen = new Pen(Color.White) { DashStyle = DashStyle.Dash, Width = 0.3f };
                 e.Graphics.DrawLine(dashPen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
-                e.Graphics.DrawString($"{((maximumHeight - (count * gridMargin)) * PixelResolution) / 1000:N2}m", Font, Brushes.White, new PointF(0, drawingHeight - Font.Size / 2));
+                Font stringFont = new Font(Font.FontFamily, 13, FontStyle.Bold);
+                e.Graphics.DrawString($"{((maximumHeight - (count * gridMargin)) * PixelResolution) / 1000:N2}m", stringFont, Brushes.White, new PointF(5, drawingHeight - Font.Size / 2));
             }
 
-            var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top - 15, (int)DisplayArea.Width, (int)DisplayArea.Height + 30);
-            e.Graphics.DrawRectangle(Pens.White, dispRect);
+            //var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top - 15, (int)DisplayArea.Width, (int)DisplayArea.Height + 30);
+            //e.Graphics.DrawRectangle(Pens.White, dispRect);
+            Pen sideLinePen = new Pen(Color.Cornsilk, 10);
+            sideLinePen.StartCap = LineCap.ArrowAnchor;
+            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Left, 0), new Point((int)DisplayArea.Left, Height));
+            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Right, 0), new Point((int)DisplayArea.Right, Height));
 
             pnlMapArea.ResumeLayout(true);
-        }
-
-        private void OnSelectedDefectChanged(int selectedIndex)
-        {
-            SelectedDefectChanged?.Invoke(selectedIndex);
-
-            foreach (var control in pnlMapArea.Controls)
-            {
-                if (control is DefectShapeControl defectPointControl)
-                    defectPointControl.IsSelected = defectPointControl.Index == selectedIndex;
-            }
         }
         #endregion
     }

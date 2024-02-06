@@ -28,19 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlMapArea = new Jastech.Framework.Winform.Controls.DoubleBufferedPanel();
             this.SuspendLayout();
-            // 
-            // pnlMapArea
-            // 
-            this.pnlMapArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlMapArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMapArea.Location = new System.Drawing.Point(0, 0);
-            this.pnlMapArea.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlMapArea.Name = "pnlMapArea";
-            this.pnlMapArea.Size = new System.Drawing.Size(206, 293);
-            this.pnlMapArea.TabIndex = 2;
-            this.pnlMapArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMapArea_Paint);
             // 
             // CompactDefectMapControl
             // 
@@ -48,18 +36,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Controls.Add(this.pnlMapArea);
             this.DoubleBuffered = true;
             this.Name = "CompactDefectMapControl";
-            this.Size = new System.Drawing.Size(206, 293);
+            this.Size = new System.Drawing.Size(210, 297);
             this.Load += new System.EventHandler(this.CompactDefectMapControl_Load);
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private DoubleBufferedPanel pnlMapArea;
     }
 }

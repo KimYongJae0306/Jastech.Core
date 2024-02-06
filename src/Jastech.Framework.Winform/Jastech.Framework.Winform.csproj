@@ -81,12 +81,6 @@
     <Compile Include="Controls\DefectInfoContainerControl.Designer.cs">
       <DependentUpon>DefectInfoContainerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DefectShapeControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DefectShapeControl.Designer.cs">
-      <DependentUpon>DefectShapeControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DoubleBufferedDatagridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -236,9 +230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DefectInfoContainerControl.resx">
       <DependentUpon>DefectInfoContainerControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DefectShapeControl.resx">
-      <DependentUpon>DefectShapeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImagePreviewControl.resx">
       <DependentUpon>ImagePreviewControl.cs</DependentUpon>

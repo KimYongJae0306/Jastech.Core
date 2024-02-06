@@ -21,7 +21,7 @@ namespace Jastech.Framework.Winform.Controls
 
         public object _lock = new object();
 
-        private bool _isUpdatingBitmapBrush = true;
+        private bool _isInteractive = true;
 
         private HatchBrush _backGroundBrush = new HatchBrush(HatchStyle.DiagonalCross, Color.FromArgb(27, 27, 27));
         #endregion
@@ -119,7 +119,7 @@ namespace Jastech.Framework.Winform.Controls
                 ImageWidth = bmp.Width;
                 ImageHeight = bmp.Height;
 
-                if (_isUpdatingBitmapBrush)
+                if (_isInteractive)
                 {
                     if (BitmapBrush != null)
                     {
@@ -132,11 +132,12 @@ namespace Jastech.Framework.Winform.Controls
             }
             
             pbxDisplay.Invalidate();
+            pbxDisplay.Image = OrgImage;
         }
 
         public void EnableBitmapBrush(bool enable)
         {
-            _isUpdatingBitmapBrush = enable;   // 연속되는 SetImage 시 비활성화 필요
+            _isInteractive = enable;   // 연속되는 SetImage 시 비활성화 필요
             if (enable == true)
                 BitmapBrush = new TextureBrush(OrgImage);
 
@@ -156,6 +157,9 @@ namespace Jastech.Framework.Winform.Controls
 
         public void FitZoom()
         {
+            if (_isInteractive == false)
+                return;
+
             if (OrgImage != null)
             {
                 if (pbxDisplay.Width > pbxDisplay.Height)
@@ -178,6 +182,9 @@ namespace Jastech.Framework.Winform.Controls
 
         private void PbxDisplay_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (_isInteractive == false)
+                return;
+
             double imageX = e.X / ZoomScale - OffsetX;
             double imageY = e.Y / ZoomScale - OffsetY;
 
@@ -322,10 +329,8 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                if (_isUpdatingBitmapBrush)
+                if (_isInteractive)
                     g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
-                else
-                    pbxDisplay.Image = OrgImage;
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)
@@ -490,7 +495,7 @@ namespace Jastech.Framework.Winform.Controls
 
         public void DisposeImage()
         {
-           if (pbxDisplay.Image != null)
+           if (pbxDisplay?.Image != null)
             {
                 pbxDisplay.Image.Dispose();
                 pbxDisplay.Image = null;
