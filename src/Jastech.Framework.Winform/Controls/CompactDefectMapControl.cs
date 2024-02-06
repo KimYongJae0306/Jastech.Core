@@ -22,7 +22,7 @@ namespace Jastech.Framework.Winform.Controls
 
         public float maximumY { get; set; } = 50000; // TODO: Resolution 참고하여 Meter 단위로 환산, Model에서 가져올 것
 
-        public readonly List<ElectrodeDefectInfo> _defectInfos = new List<ElectrodeDefectInfo>();
+        public readonly List<DefectInfo> _defectInfos = new List<DefectInfo>();
 
         public double PixelResolution = 20; // TODO : Config에서 가져올 것
         #endregion
@@ -57,7 +57,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 50, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 90, pnlMapArea.DisplayRectangle.Height - 60));
 
-        private void DrawDefectShape(Graphics g, ElectrodeDefectInfo defectInfo)
+        private void DrawDefectShape(Graphics g, DefectInfo defectInfo)
         {
             var coord = GetScaledLocation(defectInfo.GetCoord(), 16383);
 
@@ -69,12 +69,12 @@ namespace Jastech.Framework.Winform.Controls
             g.FillEllipse(brush, area);
         }
 
-        public void AddCoordinates(ElectrodeDefectInfo[] defectInfos)
+        public void AddCoordinates(DefectInfo[] defectInfos)
         {
             pnlMapArea.SuspendLayout();
 
             _defectInfos.AddRange(defectInfos);     //test code
-            foreach (ElectrodeDefectInfo defectInfo in defectInfos)
+            foreach (DefectInfo defectInfo in defectInfos)
             {
                 var defectCoord = defectInfo.GetCoord();
                 var defectSize = defectInfo.GetSize();

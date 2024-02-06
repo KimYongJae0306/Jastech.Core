@@ -69,12 +69,6 @@
     <Compile Include="Controls\CompactDefectMapControl.Designer.cs">
       <DependentUpon>CompactDefectMapControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ConstantDefectMapControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ConstantDefectMapControl.Designer.cs">
-      <DependentUpon>ConstantDefectMapControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataGraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -248,9 +242,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\CompactDefectMapControl.resx">
       <DependentUpon>CompactDefectMapControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ConstantDefectMapControl.resx">
-      <DependentUpon>ConstantDefectMapControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataGraphControl.resx">
       <DependentUpon>DataGraphControl.cs</DependentUpon>
