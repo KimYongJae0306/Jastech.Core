@@ -37,45 +37,48 @@ namespace Jastech.Framework.Util.Helper
         {
             Point resultPoint = new Point();
 
-            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            if (inputPoint != null)
             {
-                resultPoint.X = 0;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == -1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == -1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == 1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = -1;
+                if (inputPoint.X == -1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = -1;
+                }
             }
 
             return resultPoint;
@@ -85,45 +88,48 @@ namespace Jastech.Framework.Util.Helper
         {
             Point resultPoint = new Point();
 
-            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            if (inputPoint != null)
             {
-                resultPoint.X = 1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == -1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == -1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == 1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = -1;
+                if (inputPoint.X == -1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = -1;
+                }
             }
 
             return resultPoint;
@@ -133,45 +139,48 @@ namespace Jastech.Framework.Util.Helper
         {
             Point resultPoint = new Point();
 
-            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            if (inputPoint != null)
             {
-                resultPoint.X = -1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == -1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == 1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == -1)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == -1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = -1;
+                if (inputPoint.X == -1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = -1;
+                }
             }
 
             return resultPoint;
@@ -181,45 +190,91 @@ namespace Jastech.Framework.Util.Helper
         {
             Point resultPoint = new Point();
 
-            if (inputPoint.X == -1 && inputPoint.Y == -1)
+            if (inputPoint != null)
             {
-                resultPoint.X = -1;
-                resultPoint.Y = 1;
+                if (inputPoint.X == -1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == -1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = 0;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 1)
+                {
+                    resultPoint.X = 1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == 0)
+                {
+                    resultPoint.X = 0;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 1 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = -1;
+                }
+                else if (inputPoint.X == 0 && inputPoint.Y == -1)
+                {
+                    resultPoint.X = -1;
+                    resultPoint.Y = 0;
+                }
             }
-            else if (inputPoint.X == -1 && inputPoint.Y == 0)
+
+            return resultPoint;
+        }
+
+        public static byte[] FillBound(byte[] imageData, int width, int height, int value)
+        {
+            byte[] resultImageData = new byte[imageData.Length];
+
+            for (int x = 0; x < width; x++)
             {
-                resultPoint.X = 0;
-                resultPoint.Y = 1;
+                imageData[0 * width + x] = (byte)value;
+                imageData[(height - 1) * width + x] = (byte)value;
             }
-            else if (inputPoint.X == -1 && inputPoint.Y == 1)
+
+            for (int y = 0; y < height; y++)
             {
-                resultPoint.X = 1;
-                resultPoint.Y = 1;
+                imageData[y * width] = (byte)value;
+                imageData[y * width + (width - 1)] = (byte)value;
             }
-            else if (inputPoint.X == 0 && inputPoint.Y == 1)
+
+            return resultImageData;
+        }
+
+        public static Point GetThresholdPoint(byte[] imageData, int width, int height, Point startPoint, int lowThreshold, int highThreshold)
+        {
+            Point resultPoint = new Point();
+
+            var x = startPoint.X;
+            var y = startPoint.Y;
+
+            for (y = 0; y < height; y++)
             {
-                resultPoint.X = 1;
-                resultPoint.Y = 0;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 1)
-            {
-                resultPoint.X = 1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == 0)
-            {
-                resultPoint.X = 0;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 1 && inputPoint.Y == -1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = -1;
-            }
-            else if (inputPoint.X == 0 && inputPoint.Y == -1)
-            {
-                resultPoint.X = -1;
-                resultPoint.Y = 0;
+                for (x = 0; x < width; x++)
+                {
+                    int value = imageData[y * width + x];
+
+                    if (value >= lowThreshold && value <= highThreshold)
+                    {
+                        resultPoint.X = x;
+                        resultPoint.Y = y;
+                    }
+                }
             }
 
             return resultPoint;
@@ -231,8 +286,6 @@ namespace Jastech.Framework.Util.Helper
 
             Point StartVector = new Point(1, 0);
             Point NextVector = new Point();
-
-
 
             return resultRect;
         }
