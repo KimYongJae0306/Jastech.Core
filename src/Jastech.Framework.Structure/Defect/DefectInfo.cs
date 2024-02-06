@@ -7,7 +7,6 @@ namespace Jastech.Framework.Structure.Defect
 {
     public abstract class DefectInfo
     {
-
         #region 필드
         private readonly Dictionary<FeatureTypes, object> _defectFeatures = new Dictionary<FeatureTypes, object>();
 
@@ -15,20 +14,6 @@ namespace Jastech.Framework.Structure.Defect
         #endregion
 
         #region 속성
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
-        #endregion
-
-        #region 메서드
-        #endregion
-
         public int Index { get; set; }
 
         public DateTime InspectionTime { get; set; }
@@ -40,7 +25,9 @@ namespace Jastech.Framework.Structure.Defect
         public string Judgement { get; set; }
 
         public DefectTypes DefectType { get; set; }
+        #endregion
 
+        #region 메서드
         public abstract PointF GetCoord();
 
         public abstract SizeF GetSize();
@@ -62,26 +49,12 @@ namespace Jastech.Framework.Structure.Defect
         {
             _defectFeatureDatatypes[featureType] = value;
         }
+        #endregion
     }
 
     public static class DefectDefine
     {
-        public static dynamic ConvertFeature(object value, Type type)
-        {
-            dynamic result = null;
-            try
-            {
-                result = Convert.ChangeType(value, type);
-            }
-            catch (InvalidCastException)
-            {
-                Console.WriteLine($"GetFeatureValue({value}, {type}) => Trying Invalid Cast, Check the datatype");
-                return false;
-            }
-
-            return result;
-        }
-
+        #region 필드
         public static Dictionary<DefectTypes, Color> Colors = new Dictionary<DefectTypes, Color>
         {
             { DefectTypes.Undefined, Color.Red },
@@ -93,7 +66,9 @@ namespace Jastech.Framework.Structure.Defect
             { DefectTypes.Drag, Color.Lime},
             { DefectTypes.Mismatch, Color.Red},
         };
+        #endregion
 
+        #region 열거자
         public enum FeatureTypes
         {
             X,                      // X좌표
@@ -169,5 +144,24 @@ namespace Jastech.Framework.Structure.Defect
             //Press,              // 압착 이상
             //Wrinkle,            // 주름
         }
+        #endregion
+
+        #region 메서드
+        public static dynamic ConvertFeature(object value, Type type)
+        {
+            dynamic result = null;
+            try
+            {
+                result = Convert.ChangeType(value, type);
+            }
+            catch (InvalidCastException)
+            {
+                Console.WriteLine($"GetFeatureValue({value}, {type}) => Trying Invalid Cast, Check the datatype");
+                return false;
+            }
+
+            return result;
+        }
+        #endregion
     }
 }
