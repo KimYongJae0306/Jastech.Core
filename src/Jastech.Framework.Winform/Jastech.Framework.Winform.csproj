@@ -230,7 +230,6 @@
     <Compile Include="Controls\MotionParameterVariableControl.Designer.cs">
       <DependentUpon>MotionParameterVariableControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ControlDisplayHelper.cs" />
     <Compile Include="Helper\ControlHelper.cs" />
     <Compile Include="Helper\KeyPadHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

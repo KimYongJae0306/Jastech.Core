@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.Helper
@@ -22,6 +20,31 @@ namespace Jastech.Framework.Winform.Helper
             }
 
             return controlList.ToArray();
+        }
+
+        public static void DisposeDisplay<T>(T control) where T : Control
+        {
+            if (control != null)
+            {
+                var property = control.GetType().GetProperty("Image");
+                if (property != null)
+                {
+                    var image = (Image)property.GetValue(control);
+                    image?.Dispose();
+                }
+            }
+        }
+
+        public static void DisposeChildControls<T>(T control) where T : Control
+        {
+            // ControlCollection RAM 누수 방지
+            foreach (var childControl in control.Controls)
+            {
+                if (childControl is IDisposable disposableControl)
+                    disposableControl.Dispose();
+            }
+            if (control is IDisposable)
+                control.Dispose();
         }
     }
 }

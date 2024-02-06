@@ -133,8 +133,8 @@ namespace Jastech.Framework.Winform.Forms
             _cancellation.Dispose();
             _waitMessages.Dispose();
             CheckingTask?.Dispose();
-            ControlDisplayHelper.DisposeDisplay(pbxLoading);
-            ControlDisplayHelper.DisposeChildControls(this);
+            ControlHelper.DisposeDisplay(pbxLoading);
+            ControlHelper.DisposeChildControls(this);
         }
 
         public void Add(string subjectName, Action action, StopLoopEventHandler stopLoopEvent = null)
