@@ -41,7 +41,6 @@
             this.pnlMapArea.Size = new System.Drawing.Size(206, 293);
             this.pnlMapArea.TabIndex = 2;
             this.pnlMapArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMapArea_Paint);
-            this.pnlMapArea.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMapArea_MouseClick);
             // 
             // CompactDefectMapControl
             // 
