@@ -43,7 +43,6 @@
             this.menuROIMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFitZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSaveImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbxDisplay = new Jastech.Framework.Winform.Controls.DoubleBufferedPicturebox();
             this.btnPanning = new System.Windows.Forms.Button();
             this.btnDrawNone = new System.Windows.Forms.Button();
             this.btnDrawLine = new System.Windows.Forms.Button();
@@ -56,7 +55,6 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             this.ctxDisplayMode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxDisplay)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,7 +165,6 @@
             // pnlDisplay
             // 
             this.pnlDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.pnlDisplay.Controls.Add(this.pbxDisplay);
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.Location = new System.Drawing.Point(0, 0);
             this.pnlDisplay.Margin = new System.Windows.Forms.Padding(0);
@@ -221,22 +218,6 @@
             this.menuSaveImage.Size = new System.Drawing.Size(136, 22);
             this.menuSaveImage.Text = "Save Image";
             this.menuSaveImage.Click += new System.EventHandler(this.menuSaveImage_Click);
-            // 
-            // pbxDisplay
-            // 
-            this.pbxDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.pbxDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxDisplay.Location = new System.Drawing.Point(0, 0);
-            this.pbxDisplay.Name = "pbxDisplay";
-            this.pbxDisplay.Size = new System.Drawing.Size(655, 454);
-            this.pbxDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxDisplay.TabIndex = 0;
-            this.pbxDisplay.TabStop = false;
-            this.pbxDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxDisplay_Paint);
-            this.pbxDisplay.DoubleClick += new System.EventHandler(this.pbxDisplay_DoubleClick);
-            this.pbxDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbxDisplay_MouseDown);
-            this.pbxDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbxDisplay_MouseMove);
-            this.pbxDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbxDisplay_MouseUp);
             // 
             // btnPanning
             // 
@@ -353,7 +334,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.pnlDisplay.ResumeLayout(false);
             this.ctxDisplayMode.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxDisplay)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 

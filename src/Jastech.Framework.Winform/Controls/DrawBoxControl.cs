@@ -21,6 +21,8 @@ namespace Jastech.Framework.Winform.Controls
 
         public object _lock = new object();
 
+        private bool _isUpdatingBitmapBrush = true;
+
         private HatchBrush _backGroundBrush = new HatchBrush(HatchStyle.DiagonalCross, Color.FromArgb(27, 27, 27));
         #endregion
 
@@ -117,7 +119,7 @@ namespace Jastech.Framework.Winform.Controls
                 ImageWidth = bmp.Width;
                 ImageHeight = bmp.Height;
 
-                if (isUpdatingBitmapBrush)
+                if (_isUpdatingBitmapBrush)
                 {
                     if (BitmapBrush != null)
                     {
@@ -132,8 +134,14 @@ namespace Jastech.Framework.Winform.Controls
             pbxDisplay.Invalidate();
         }
 
-        private bool isUpdatingBitmapBrush = true;
-        public void EnableBitmapBrush(bool enable) => isUpdatingBitmapBrush = enable;   // 연속되는 SetImage 시 비활성화 필요
+        public void EnableBitmapBrush(bool enable)
+        {
+            _isUpdatingBitmapBrush = enable;   // 연속되는 SetImage 시 비활성화 필요
+            if (enable == true)
+                BitmapBrush = new TextureBrush(OrgImage);
+
+            Invalidate();
+        }
 
         public void DisableFunctionButtons()
         {
@@ -314,9 +322,10 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                if (BitmapBrush == null)
-                    BitmapBrush = new TextureBrush(OrgImage);
-                g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
+                if (_isUpdatingBitmapBrush)
+                    g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
+                else
+                    pbxDisplay.Image = OrgImage;
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)
