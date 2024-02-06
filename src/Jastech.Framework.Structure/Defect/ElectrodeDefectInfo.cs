@@ -92,6 +92,7 @@ namespace Jastech.Framework.Structure.Defect
             { DefectTypes.Drag, Color.Lime},
             { DefectTypes.Mismatch, Color.Red},
         };
+
         public enum FeatureTypes
         {
             X,                      // X좌표
