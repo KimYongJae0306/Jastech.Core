@@ -129,12 +129,6 @@
     <Compile Include="Controls\DrawBoxControl.Designer.cs">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MeasureDataViewerControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MeasureDataViewerControl.Designer.cs">
-      <DependentUpon>MeasureDataViewerControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MotionJogXControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,12 +158,6 @@
     </Compile>
     <Compile Include="Controls\StyledCalender.Designer.cs">
       <DependentUpon>StyledCalender.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TrendControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TrendControl.Designer.cs">
-      <DependentUpon>TrendControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Figure.cs" />
     <Compile Include="Data\FigureManager.cs" />
@@ -267,9 +255,6 @@
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MeasureDataViewerControl.resx">
-      <DependentUpon>MeasureDataViewerControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionJogXControl.resx">
       <DependentUpon>MotionJogXControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,9 +266,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PixelValueGraphControl.resx">
       <DependentUpon>PixelValueGraphControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TrendControl.resx">
-      <DependentUpon>TrendControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyBoardForm.resx">
       <DependentUpon>KeyBoardForm.cs</DependentUpon>
