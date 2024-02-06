@@ -1,11 +1,11 @@
-﻿using Jastech.Framework.Structure;
+﻿using Jastech.Framework.Structure.Defect;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using static Jastech.Framework.Structure.DefectDefine;
+using static Jastech.Framework.Structure.Defect.DefectDefine;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -16,16 +16,16 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        public readonly List<DefectInfo> _defectInfos = new List<DefectInfo>();
+        public readonly List<ElectrodeDefectInfo> _defectInfos = new List<ElectrodeDefectInfo>();
 
         public double PixelResolution_um = 43;
         #endregion
 
         #region 이벤트
-        public SelectedDefectChangedHandler SelectedDefectChanged;
+        public SelectedDefectChangedHandler SelectedControlChanged;
         #endregion    
 
-        #region
+        #region 대리자
         public delegate void SelectedDefectChangedHandler(int index);
         #endregion
 
@@ -55,7 +55,7 @@ namespace Jastech.Framework.Winform.Controls
             Invalidate();
         }
 
-        public void AddCoordinates(DefectInfo[] defectInfos)
+        public void AddCoordinates(ElectrodeDefectInfo[] defectInfos)
         {
             pnlMapArea.SuspendLayout();
             _defectInfos.AddRange(defectInfos);     //test code
@@ -71,7 +71,7 @@ namespace Jastech.Framework.Winform.Controls
             Y = Convert.ToInt32(DisplayArea.Top + coordinates.Y + pnlMapArea.AutoScrollPosition.Y),
         };
 
-        private void DrawDefectShape(Graphics g, DefectInfo defectInfo)
+        private void DrawDefectShape(Graphics g, ElectrodeDefectInfo defectInfo)
         {
             var width = defectInfo.GetFeatureValue(FeatureTypes.Width);
             var height = defectInfo.GetFeatureValue(FeatureTypes.Height);
@@ -97,8 +97,8 @@ namespace Jastech.Framework.Winform.Controls
             else
             {
                 var pen = new Pen(Color.Red);
-                var area = new Rectangle(coord.X, coord.Y, width - 1, height - 1);
-                g.DrawRectangle(pen, area);
+                var area = new RectangleF(coord.X, coord.Y, width - 1, height - 1);
+                g.DrawRectangles(pen, new RectangleF[] { area });
             }
         }
 
@@ -127,7 +127,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void OnSelectedDefectChanged(int selectedIndex)
         {
-            SelectedDefectChanged?.Invoke(selectedIndex);
+            SelectedControlChanged?.Invoke(selectedIndex);
 
             foreach(var control in pnlMapArea.Controls)
             {

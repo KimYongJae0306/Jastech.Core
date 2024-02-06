@@ -1,4 +1,4 @@
-﻿using Jastech.Framework.Structure;
+﻿using Jastech.Framework.Structure.Defect;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using static Jastech.Framework.Structure.DefectDefine;
+using static Jastech.Framework.Structure.Defect.DefectDefine;
 
 namespace Jastech.Framework.Winform.Controls
 {
@@ -18,11 +18,13 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 속성
-        private float maximumY { get; set; } = 50;
+        public int maximumMeter = 600;
 
-        public readonly List<DefectInfo> _defectInfos = new List<DefectInfo>();
+        public float maximumY { get; set; } = 50000; // TODO: Resolution 참고하여 Meter 단위로 환산, Model에서 가져올 것
 
-        public double PixelResolution = 20;
+        public readonly List<ElectrodeDefectInfo> _defectInfos = new List<ElectrodeDefectInfo>();
+
+        public double PixelResolution = 20; // TODO : Config에서 가져올 것
         #endregion
 
         #region 이벤트
@@ -53,50 +55,26 @@ namespace Jastech.Framework.Winform.Controls
             Invalidate();
         }
 
-        private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 80, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 100, pnlMapArea.DisplayRectangle.Height - 60));
+        private RectangleF GetDisplayArea() => new RectangleF(new PointF(pnlMapArea.Left + 50, pnlMapArea.Top + 20), new SizeF(pnlMapArea.DisplayRectangle.Width - 90, pnlMapArea.DisplayRectangle.Height - 60));
 
-        private void DrawDefectShape(Graphics g, DefectInfo defectInfo)
+        private void DrawDefectShape(Graphics g, ElectrodeDefectInfo defectInfo)
         {
-            var width = defectInfo.GetFeatureValue(FeatureTypes.Width);
-            var height = defectInfo.GetFeatureValue(FeatureTypes.Height);
-            var X = defectInfo.GetFeatureValue(FeatureTypes.X);
-            var Y = defectInfo.GetFeatureValue(FeatureTypes.Y);
-            var coord = GetScaledLocation(new PointF(X, Y), 160000);
+            var coord = GetScaledLocation(defectInfo.GetCoord(), 160000);
 
-            var brush = new SolidBrush(Color.Red);
-            var area = new RectangleF(coord.X, coord.Y, 1.5f, 1.5f);
+            var color = Colors[defectInfo.DefectType];
+            var brush = new SolidBrush(color);
+            var area = new RectangleF(coord.X, coord.Y - 3.5f, 7, 7);
+
+            g.DrawString($"{defectInfo.DefectType}", Font, new SolidBrush(Color.Crimson), new PointF(coord.X + 4.5f, coord.Y + 4.5f));
             g.FillEllipse(brush, area);
-
-            //if (width < 10 && height < 10)
-            //{
-            //    var brush = new SolidBrush(Color.Red);
-            //    var sizeLength = Math.Max(width, height) - 1;
-            //    var area = new RectangleF(coord.X, coord.Y, sizeLength, sizeLength);
-            //    g.FillEllipse(brush, area);
-            //}
-            //else if ((width < 10 || height < 10) && (Math.Max(width, height) / Math.Min(width, height) > 20))
-            //{
-            //    var pen = new Pen(Color.Red, 3);
-            //    pen.MiterLimit = 100;
-            //    if (width > height)
-            //        g.DrawLine(pen, new Point(coord.X, coord.Y), new Point(width, coord.Y));
-            //    else
-            //        g.DrawLine(pen, new Point(coord.X, coord.Y), new Point(coord.X, height));
-            //}
-            //else
-            //{
-            //    var pen = new Pen(Color.Red, 1.3f);
-            //    var area = new Rectangle(coord.X, coord.Y, width - 1, height - 1);
-            //    g.DrawRectangle(pen, area);
-            //}
         }
 
-        public void AddCoordinates(DefectInfo[] defectInfos)
+        public void AddCoordinates(ElectrodeDefectInfo[] defectInfos)
         {
             pnlMapArea.SuspendLayout();
 
             _defectInfos.AddRange(defectInfos);     //test code
-            foreach (DefectInfo defectInfo in defectInfos)
+            foreach (ElectrodeDefectInfo defectInfo in defectInfos)
             {
                 var defectCoord = defectInfo.GetCoord();
                 var defectSize = defectInfo.GetSize();
@@ -134,17 +112,11 @@ namespace Jastech.Framework.Winform.Controls
                 int drawingHeight = (int)(count * (DisplayArea.Height / 10)) + (int)DisplayArea.Top;
                 var dashPen = new Pen(Color.White) { DashStyle = DashStyle.Dash, Width = 0.3f };
                 e.Graphics.DrawLine(dashPen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
-                e.Graphics.DrawString($"{(maximumHeight - (count * gridMargin)) * PixelResolution:N3}mm", Font, Brushes.White, new PointF(0, drawingHeight - Font.Size / 2));
+                e.Graphics.DrawString($"{((maximumHeight - (count * gridMargin)) * PixelResolution) / 1000:N2}m", Font, Brushes.White, new PointF(0, drawingHeight - Font.Size / 2));
             }
 
-            var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top, (int)DisplayArea.Width, (int)DisplayArea.Height);
+            var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top - 15, (int)DisplayArea.Width, (int)DisplayArea.Height + 30);
             e.Graphics.DrawRectangle(Pens.White, dispRect);
-
-            if (_defectInfos.Count > 0)
-            {
-                var lastDfsCoord = _defectInfos.Last().GetCoord();
-                e.Graphics.DrawString($"{lastDfsCoord.X}, {lastDfsCoord.Y}", Font, Brushes.Red, GetScaledLocation(lastDfsCoord, 160000));
-            }
 
             pnlMapArea.ResumeLayout(true);
         }

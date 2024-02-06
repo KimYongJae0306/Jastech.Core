@@ -20,6 +20,8 @@ namespace Jastech.Framework.Winform.Controls
         private Color _nonSelectedColor = new Color();
 
         public object _lock = new object();
+
+        private HatchBrush _backGroundBrush = new HatchBrush(HatchStyle.DiagonalCross, Color.FromArgb(27, 27, 27));
         #endregion
 
         #region 속성
@@ -93,23 +95,40 @@ namespace Jastech.Framework.Winform.Controls
 
                 OrgImage = bmp;
 
-                if (BitmapBrush != null)
+                if (isUpdatingBitmapBrush)
                 {
-                    BitmapBrush.Dispose();
-                    BitmapBrush = null;
-                }
+                    if (BitmapBrush != null)
+                    {
+                        BitmapBrush.Dispose();
+                        BitmapBrush = null;
+                    }
 
-                BitmapBrush = new TextureBrush(OrgImage);
+                    BitmapBrush = new TextureBrush(OrgImage);
+                }
             }
             
             pbxDisplay.Invalidate();
+        }
+
+        private bool isUpdatingBitmapBrush = true;
+        public void EnableBitmapBrush(bool enable) => isUpdatingBitmapBrush = enable;   // 연속되는 SetImage 시 비활성화 필요
+
+        public void DisableFunctionButtons()
+        {
+            tableLayoutPanel3.Controls.Remove(tableLayoutPanel4);
+            tableLayoutPanel3.ColumnStyles.RemoveAt(0);
+            tableLayoutPanel3.ColumnCount--;
+
+            tableLayoutPanel1.Controls.Remove(pnlText);
+            tableLayoutPanel1.RowStyles.RemoveAt(1);
+            tableLayoutPanel1.RowCount--;
         }
 
         public void FitZoom()
         {
             if (OrgImage != null)
             {
-                if (pbxDisplay.Width < pbxDisplay.Height)
+                if (pbxDisplay.Width > pbxDisplay.Height)
                     ZoomScale = (double)pbxDisplay.Width / OrgImage.Width;
                 else
                     ZoomScale = (double)pbxDisplay.Height / OrgImage.Height;
@@ -132,7 +151,13 @@ namespace Jastech.Framework.Winform.Controls
             double imageX = e.X / ZoomScale - OffsetX;
             double imageY = e.Y / ZoomScale - OffsetY;
 
-            ZoomScale += (e.Delta / 1000.0);
+            if (ZoomScale > Math.Abs(e.Delta / 500.0))
+                ZoomScale += e.Delta / 1000.0;
+            else if (ZoomScale > Math.Abs(e.Delta / 1000.0))
+                ZoomScale += e.Delta / 10000.0;
+            else
+                ZoomScale += e.Delta / 20000.0;
+
             if (ZoomScale > 10)
                 ZoomScale = 10;
             if (ZoomScale < 0.01)
@@ -260,6 +285,7 @@ namespace Jastech.Framework.Winform.Controls
                 Graphics g = e.Graphics;
                 Color color = Color.FromArgb(52, 52, 52);
                 g.Clear(color);
+                g.FillRectangle(_backGroundBrush, 0, 0, Width, Height);
 
                 Matrix matrix = new Matrix();
                 matrix.Translate((float)OffsetX, (float)OffsetY);
@@ -267,6 +293,9 @@ namespace Jastech.Framework.Winform.Controls
                 g.Transform = matrix;
 
                 //g.DrawImage(OrgImage, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));  내부 오버헤드 때문에 많이 느림
+                if (BitmapBrush == null)
+                    BitmapBrush = new TextureBrush(OrgImage);
+
                 g.FillRectangle(BitmapBrush, new Rectangle(0, 0, OrgImage.Width, OrgImage.Height));
 
                 int trackResize = (int)(6.0 / ZoomScale);

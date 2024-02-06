@@ -78,7 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefectInfo.cs" />
+    <Compile Include="Defect\ElectrodeDefectInfo.cs" />
+    <Compile Include="Defect\IDefectInfo.cs" />
     <Compile Include="Helper\ModelFileHelper.cs" />
     <Compile Include="InspModel.cs" />
     <Compile Include="Service\InspModelService.cs" />

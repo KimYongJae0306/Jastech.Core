@@ -81,6 +81,12 @@
     <Compile Include="Controls\DataGraphControl.Designer.cs">
       <DependentUpon>DataGraphControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DefectInfoContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DefectInfoContainerControl.Designer.cs">
+      <DependentUpon>DefectInfoContainerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DefectShapeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -111,6 +117,12 @@
     <Compile Include="Controls\ImageViewerControl.Designer.cs">
       <DependentUpon>ImageViewerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DefectInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DefectInfoControl.Designer.cs">
+      <DependentUpon>DefectInfoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LAFJogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +134,12 @@
     </Compile>
     <Compile Include="Controls\DrawBoxControl.Designer.cs">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MeasureDataViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MeasureDataViewerControl.Designer.cs">
+      <DependentUpon>MeasureDataViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MotionJogXControl.cs">
       <SubType>UserControl</SubType>
@@ -237,6 +255,9 @@
     <EmbeddedResource Include="Controls\DataGraphControl.resx">
       <DependentUpon>DataGraphControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DefectInfoContainerControl.resx">
+      <DependentUpon>DefectInfoContainerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DefectShapeControl.resx">
       <DependentUpon>DefectShapeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,11 +267,17 @@
     <EmbeddedResource Include="Controls\ImageViewerControl.resx">
       <DependentUpon>ImageViewerControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DefectInfoControl.resx">
+      <DependentUpon>DefectInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LAFJogControl.resx">
       <DependentUpon>LAFJogControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DrawBoxControl.resx">
       <DependentUpon>DrawBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MeasureDataViewerControl.resx">
+      <DependentUpon>MeasureDataViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MotionJogXControl.resx">
       <DependentUpon>MotionJogXControl.cs</DependentUpon>
