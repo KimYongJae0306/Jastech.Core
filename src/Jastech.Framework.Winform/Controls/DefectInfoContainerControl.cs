@@ -26,7 +26,7 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        public void AddDefectInfo(ElectrodeDefectInfo defectInfo)
+        public void AddDefectInfo(DefectInfo defectInfo)
         {
             DefectInfoControl defectInfoControl = new DefectInfoControl();
             defectInfoControl.SetDefectInfo(defectInfo);

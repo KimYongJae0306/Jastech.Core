@@ -1,86 +1,60 @@
-﻿using Emgu.CV.Structure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using static Jastech.Framework.Structure.Defect.DefectDefine;
 
 namespace Jastech.Framework.Structure.Defect
 {
-    public class ElectrodeDefectInfo : IDefectInfo
+    public abstract class DefectInfo
     {
         #region 필드
+        private readonly Dictionary<FeatureTypes, object> _defectFeatures = new Dictionary<FeatureTypes, object>();
+
+        private readonly Dictionary<FeatureTypes, Type> _defectFeatureDatatypes = new Dictionary<FeatureTypes, Type>();
         #endregion
 
         #region 속성
         public int Index { get; set; }
 
+        public DateTime InspectionTime { get; set; }
+
+        public string CameraName { get; set; }
+
         public int DefectLevel { get; set; }
-
-        public int Lane { get; set; }
-
-        public string CamDirection { get; set; }
 
         public string Judgement { get; set; }
 
         public DefectTypes DefectType { get; set; }
-
-        public SizeF Size => GetSize();
-
-        public PointF Coord => GetCoord();
-
-        private Dictionary<FeatureTypes, object> DefectFeatures { get; set; } = new Dictionary<FeatureTypes, object>();
-
-        private Dictionary<FeatureTypes, Type> DefectFeatureDatatypes { get; set; } = new Dictionary<FeatureTypes, Type>();
-        #endregion
-
-        #region 이벤트
-        #endregion
-
-        #region 델리게이트
-        #endregion
-
-        #region 생성자
         #endregion
 
         #region 메서드
-        public dynamic GetFeatureValue(FeatureTypes featureType)
+        public abstract PointF GetCoord();
+
+        public abstract SizeF GetSize();
+
+        public virtual dynamic GetFeatureValue(FeatureTypes featureType)
         {
-            var result = ConvertFeature(DefectFeatures[featureType], DefectFeatureDatatypes[featureType]);
+            var result = ConvertFeature(_defectFeatures[featureType], _defectFeatureDatatypes[featureType]);
             if (result is bool && result == false)
                 return null;
             return result;
         }
 
-        public PointF GetCoord() => new PointF(GetFeatureValue(FeatureTypes.X), GetFeatureValue(FeatureTypes.Y));
+        public virtual void SetFeatureValue(FeatureTypes featureType, object value)
+        {
+            _defectFeatures[featureType] = value;
+        }
 
-        public SizeF GetSize() => new SizeF(GetFeatureValue(FeatureTypes.Width), GetFeatureValue(FeatureTypes.Height));
-
-        public void SetFeatureValue(FeatureTypes featureType, object value) => DefectFeatures[featureType] = value;
-
-        public void SetFeatureDataType(FeatureTypes featureType, Type value) => DefectFeatureDatatypes[featureType] = value;
+        public virtual void SetFeatureDataType(FeatureTypes featureType, Type value)
+        {
+            _defectFeatureDatatypes[featureType] = value;
+        }
         #endregion
     }
 
     public static class DefectDefine
     {
-        public static dynamic ConvertFeature(object value, Type type)
-        {
-            dynamic result = null;
-            try
-            {
-                result = Convert.ChangeType(value, type);
-            }
-            catch (InvalidCastException)
-            {
-                Console.WriteLine($"GetFeatureValue({value}, {type}) => Trying Invalid Cast, Check the datatype");
-                return false;
-            }
-
-            return result;
-        }
-
+        #region 필드
         public static Dictionary<DefectTypes, Color> Colors = new Dictionary<DefectTypes, Color>
         {
             { DefectTypes.Undefined, Color.Red },
@@ -92,7 +66,9 @@ namespace Jastech.Framework.Structure.Defect
             { DefectTypes.Drag, Color.Lime},
             { DefectTypes.Mismatch, Color.Red},
         };
+        #endregion
 
+        #region 열거자
         public enum FeatureTypes
         {
             X,                      // X좌표
@@ -119,10 +95,15 @@ namespace Jastech.Framework.Structure.Defect
 
             LocalImagePath,
         }
-
         public enum DefectTypes
         {
             Undefined,
+            PinHole,
+            Crater,
+            Dent,
+            Island,
+            Drag,
+            Mismatch,
 
             //// 흑,백계 (Pixel)
             //DarkLine,           // 흑선
@@ -162,13 +143,25 @@ namespace Jastech.Framework.Structure.Defect
             //Pattern,            // 무늬
             //Press,              // 압착 이상
             //Wrinkle,            // 주름
-
-            PinHole,
-            Crater,
-            Dent,
-            Island,
-            Drag,
-            Mismatch,
         }
+        #endregion
+
+        #region 메서드
+        public static dynamic ConvertFeature(object value, Type type)
+        {
+            dynamic result = null;
+            try
+            {
+                result = Convert.ChangeType(value, type);
+            }
+            catch (InvalidCastException)
+            {
+                Console.WriteLine($"GetFeatureValue({value}, {type}) => Trying Invalid Cast, Check the datatype");
+                return false;
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

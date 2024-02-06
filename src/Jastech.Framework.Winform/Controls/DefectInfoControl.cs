@@ -11,7 +11,7 @@ namespace Jastech.Framework.Winform.Controls
     public partial class DefectInfoControl : UserControl
     {
         #region 속성
-        ElectrodeDefectInfo DefectInfo { get; set; }
+        DefectInfo @DefectInfo { get; set; }
         #endregion
 
         #region 이벤트
@@ -30,10 +30,10 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        public void SetDefectInfo(ElectrodeDefectInfo defectInfo)
+        public void SetDefectInfo(DefectInfo defectInfo)
         {
             DefectInfo = defectInfo;
-            lblCamDirection.Text = $"{DefectInfo.CamDirection}Cam";
+            lblCamDirection.Text = $"{DefectInfo.CameraName}Cam";
             lblDefectType.Text = $"{DefectInfo.DefectType}";
             lblDefectType.ForeColor = Colors[DefectInfo.DefectType];
             lblDefectInfo.Text = $"{DefectInfo.GetCoord()}\r\n{DefectInfo.GetSize()}";
