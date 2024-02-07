@@ -11,11 +11,11 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 이벤트
-        public event SelectedIndexChangedEvent SelectedDefectChangedHandler;
+        public event SelectedIndexChangedHandler SelectedDefectChanged;
         #endregion
 
         #region 델리게이트
-        public delegate void SelectedIndexChangedEvent(int index);
+        public delegate void SelectedIndexChangedHandler(int index);
         #endregion
 
         #region 생성자
@@ -71,7 +71,7 @@ namespace Jastech.Framework.Winform.Controls
 
         public void SelectedControlIndexChanged(int index)
         {
-            SelectedDefectChangedHandler?.Invoke(index);
+            SelectedDefectChanged?.Invoke(index);
         }
         #endregion
     }

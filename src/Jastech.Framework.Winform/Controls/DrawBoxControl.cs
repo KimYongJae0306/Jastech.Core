@@ -99,7 +99,7 @@ namespace Jastech.Framework.Winform.Controls
             UpdateDisplayModeUI(DisplayMode);
         }
 
-        public void SetImage(Bitmap bmp)
+        public void SetImage(Bitmap bmp, bool dataDispose = true)
         {
             lock(_lock)
             {
@@ -109,7 +109,7 @@ namespace Jastech.Framework.Winform.Controls
                     ImageHeight = 0;
                     return;
                 }
-                if (OrgImage != null)
+                if (dataDispose == true && OrgImage != null)
                 {
                     OrgImage.Dispose();
                     OrgImage = null;
@@ -132,10 +132,9 @@ namespace Jastech.Framework.Winform.Controls
             }
             
             pbxDisplay.Invalidate();
-            pbxDisplay.Image = OrgImage;
         }
 
-        public void EnableBitmapBrush(bool enable)
+        public void EnableInteractive(bool enable)
         {
             _isInteractive = enable;   // 연속되는 SetImage 시 비활성화 필요
             if (enable == true)
@@ -157,9 +156,6 @@ namespace Jastech.Framework.Winform.Controls
 
         public void FitZoom()
         {
-            if (_isInteractive == false)
-                return;
-
             if (OrgImage != null)
             {
                 if (pbxDisplay.Width > pbxDisplay.Height)
@@ -331,6 +327,8 @@ namespace Jastech.Framework.Winform.Controls
 
                 if (_isInteractive)
                     g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
+                else
+                    g.DrawImage(OrgImage, new Rectangle(0, 0, ImageWidth, ImageHeight));
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)

@@ -84,6 +84,7 @@ namespace Jastech.Framework.Winform.Controls
                 if (defectCoord.Y + defectSize.Height > maximumY)
                     maximumY = defectCoord.Y + defectSize.Height;
             }
+            pnlMapArea.Invalidate();
         }
 
         private PointF GetScaledLocation(PointF coordinates, float ImageMaxWidth /*추후 모델에서 가져올 것*/) => new PointF
@@ -113,18 +114,25 @@ namespace Jastech.Framework.Winform.Controls
             for (int count = 0; count <= 10; count++)
             {
                 int drawingHeight = (int)(count * (DisplayArea.Height / 10)) + (int)DisplayArea.Top;
-                var dashPen = new Pen(Color.White) { DashStyle = DashStyle.Dash, Width = 0.3f };
+                var dashPen = new Pen(Color.FromArgb(208, 208, 208))
+                {
+                    DashStyle = DashStyle.Dash,
+                    Width = 0.3f
+                };
                 e.Graphics.DrawLine(dashPen, new Point((int)DisplayArea.Left, drawingHeight), new Point((int)DisplayArea.Left + (int)DisplayArea.Width, drawingHeight));
-                Font stringFont = new Font(Font.FontFamily, 13, FontStyle.Bold);
+                Font stringFont = new Font(Font.FontFamily, 9, FontStyle.Bold);
                 e.Graphics.DrawString($"{((maximumHeight - (count * gridMargin)) * PixelResolution) / 1000:N2}m", stringFont, Brushes.White, new PointF(5, drawingHeight - Font.Size / 2));
             }
 
             //var dispRect = new Rectangle((int)DisplayArea.Left, (int)DisplayArea.Top - 15, (int)DisplayArea.Width, (int)DisplayArea.Height + 30);
             //e.Graphics.DrawRectangle(Pens.White, dispRect);
-            Pen sideLinePen = new Pen(Color.Cornsilk, 10);
-            sideLinePen.StartCap = LineCap.ArrowAnchor;
-            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Left, 0), new Point((int)DisplayArea.Left, Height));
-            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Right, 0), new Point((int)DisplayArea.Right, Height));
+            Pen sideLinePen = new Pen(Color.FromArgb(208,208,208))
+            {
+                Width = 5,
+                StartCap = LineCap.ArrowAnchor
+            };
+            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Left, 5), new Point((int)DisplayArea.Left, Height));
+            e.Graphics.DrawLine(sideLinePen, new Point((int)DisplayArea.Right, 5), new Point((int)DisplayArea.Right, Height));
 
             pnlMapArea.ResumeLayout(true);
         }

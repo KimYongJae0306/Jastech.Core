@@ -15,11 +15,11 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 이벤트
-        public event ControlClickedEvent ControlClickedHandler;
+        public event ControlClickedHandler ControlClicked;
         #endregion
 
         #region 델리게이트
-        public delegate void ControlClickedEvent(int index);
+        public delegate void ControlClickedHandler(int index);
         #endregion
 
         #region 생성자
@@ -45,7 +45,7 @@ namespace Jastech.Framework.Winform.Controls
 
         private void ClickControlEvent(object sender, EventArgs e)
         {
-            ControlClickedHandler?.Invoke(DefectInfo.Index);
+            ControlClicked?.Invoke(DefectInfo.Index);
         }
         #endregion
     }
