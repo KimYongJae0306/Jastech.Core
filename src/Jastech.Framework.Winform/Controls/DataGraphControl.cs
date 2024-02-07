@@ -1,8 +1,12 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Jastech.Framework.Winform.Controls
@@ -16,30 +20,24 @@ namespace Jastech.Framework.Winform.Controls
 
         private float _axisYInterval = 50;
 
+        private Pen _dashPen = new Pen(Color.White) { DashPattern = new float[] { 5, 5 } };
 
-        private float[] _data { get; set; } = null;
+        private Dictionary<string, List<float>> _data { get; set; }
+        private Dictionary<string, (int index, Color color)> _legends { get; set; }
         #endregion 필드
 
         #region 속성
-        public DoubleBufferedPanel pnlDrawChart = null;
+        private DoubleBufferedPanel pnlDrawChart = null;
 
-        public int DefaultMaxAxisX { get; set; } = 100;
+        private float AxisXMinValue { get; set; } = 0;
 
-        public int MaxAxisY { get; set; } = 255;
+        private float AxisXMaxValue { get; set; } = 1;
 
-        public int NumAxisX { get; set; } = 4;
+        private float AxisYMinValue { get; set; } = 0;
 
-        public int NumAxisY { get; set; } = 4;
+        private float AxisYMaxValue { get; set; } = 1;
 
-        public Pen DataPen { get; set; } = new Pen(Color.Blue);
-
-        public float AxisXMinValue { get; set; } = 0;
-
-        public float AxisXMaxValue { get; set; } = 255;
-
-        public float AxisYMinValue { get; set; } = 0;
-
-        public float AxisYMaxValue { get; set; } = 255;
+        private float AxisYAvgValue => (AxisYMaxValue + AxisYMinValue) / 2;
 
         private string AxisXCaption = "[Pixel]";
 
@@ -54,19 +52,17 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        private void PixelValueGraphControl_Load(object sender, EventArgs e)
+        private void DataGraphControl_Load(object sender, EventArgs e)
         {
-            pnlDrawChart = new DoubleBufferedPanel();
-            pnlChart.Controls.Add(pnlDrawChart);
-            pnlDrawChart.Dock = DockStyle.Fill;
-            pnlDrawChart.Paint += DoubleBuffering_Paint;
         }
+
         private void DoubleBuffering_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
 
             UpdateDataInfo();
             UpdateDrawInfo();
+            DrawLegends(e.Graphics);
             DrawBaseLineX(e.Graphics);
             DrawBaseLineY(e.Graphics);
             e.Graphics.DrawRectangle(new Pen(Color.White), Rectangle.Round(_drawChartRect));
@@ -89,137 +85,154 @@ namespace Jastech.Framework.Winform.Controls
         {
             float x = _axisXInterval;
             float y = _axisYInterval;
-            float width = this.Width - (x * 2.0f);
+            float width = this.Width - (x * 1.8f);
             float height = this.Height - (y * 2.0f);
             _drawChartRect = new RectangleF(x, y, width, height);
         }
 
         private void UpdateDataInfo()
         {
-            if (_data == null)
-                return;
-            if (_data.Count() > 0)
+            var counts = new List<int>();
+            var yMaxValues = new List<float>();
+            var yMinValues = new List<float>();
+            foreach (var datas in _data.Values)
             {
-                AxisXMinValue = 0;
-                AxisXMaxValue = _data.Count();
-                AxisYMinValue = _data.Min();
-                AxisYMaxValue = _data.Max();
+                if (datas.Count() > 0)
+                {
+                    counts.Add(datas.Count());
+                    yMinValues.Add(datas.Min());
+                    yMaxValues.Add(datas.Max());
+                }
+            }
+            AxisXMinValue = 0;
+            if (counts.Count > 0) AxisXMaxValue = counts.Max();
+            if (yMinValues.Count > 0) AxisYMinValue = yMinValues.Min();
+            if (yMaxValues.Count > 0) AxisYMaxValue = yMaxValues.Max();
+        }
+
+        private void DrawLegends(Graphics g)
+        {
+            Rectangle roundRect = Rectangle.Round(_drawChartRect);
+            Point legendCoord = new Point(roundRect.Right - (roundRect.Width / 15), roundRect.Y + 5);
+            Size legendSize = new Size(roundRect.Width / 10, roundRect.Height / 3);
+            Rectangle legendRect = new Rectangle(legendCoord, legendSize);
+
+            foreach(var data in _data)
+            {
+                var legendName = data.Key;
+                var legendProperty = _legends[legendName];
+                var legendBrush = new SolidBrush(legendProperty.color);
+                g.FillRectangle(legendBrush, legendRect.X + 5, legendRect.Y + (legendProperty.index * 15) + 5, 5, 5);
+                g.DrawString(legendName, Font, legendBrush, legendRect.X + 20, legendRect.Y + (legendProperty.index * 15));
             }
         }
 
         private void DrawBaseLineX(Graphics g)
         {
             Rectangle roundRect = Rectangle.Round(_drawChartRect);
-            float intervalX = _drawChartRect.Width / NumAxisX;
-            float intervalValue = 0;
-
-            if (_data == null)
-                intervalValue = ((float)DefaultMaxAxisX / NumAxisX);
-            else
-                intervalValue = ((float)_data.Length / NumAxisX);
 
             Font font = GetFontStyle(10, FontStyle.Bold);
-            
-            PointF pointX = new PointF(roundRect.Right, roundRect.Bottom + 20);
-            g.DrawString(AxisXCaption, font, Brushes.White, pointX);
+            PointF captionLocation = new PointF(roundRect.Right, roundRect.Bottom + 20);
+            g.DrawString(AxisXCaption, font, Brushes.White, captionLocation);
 
-            float[] dashValues = { 5, 5 };
-            Pen dashPen = new Pen(Color.White);
-            dashPen.DashPattern = dashValues;
-
-            for (int i = 0; i <= NumAxisX; i++)
+            float gridCount = 5;
+            float gridMargin = _drawChartRect.Width / gridCount;
+            float intervalValue = (float)AxisXMaxValue / gridCount;
+            for (int i = 0; i <= gridCount; i++)
             {
-                int x = (int)(roundRect.Left + (intervalX * i));
+                int x = (int)(roundRect.Left + (gridMargin * i));
                 int y1 = roundRect.Top;
                 int y2 = roundRect.Bottom;
 
-                g.DrawLine(dashPen, new Point(x, y1), new Point(x, y2));
+                g.DrawLine(_dashPen, new Point(x, y1), new Point(x, y2));
 
-                int value = (int)(intervalValue * i);
-                string valueString = value.ToString();
+                string valueString = $"{intervalValue * i:F0}";
                 SizeF textSize = g.MeasureString(valueString, font);
-                g.DrawString(value.ToString(), font, Brushes.White, new PointF(x - textSize.Width / 2, y2));
+                g.DrawString(valueString, font, Brushes.White, new PointF(x - textSize.Width / 2, y2));
             }
         }
 
         private void DrawBaseLineY(Graphics g)
         {
-            NumAxisY = (int)(Math.Log(AxisYMaxValue, 2) / Math.Sqrt(2));
-
             Rectangle roundRect = Rectangle.Round(_drawChartRect);
-            float intervalY = (float)_drawChartRect.Height / NumAxisY;
-            float intervalValue = (float)(Math.Abs(AxisYMinValue) + Math.Abs(AxisYMaxValue)) / NumAxisY;
-
             Font font = GetFontStyle(10, FontStyle.Bold);
-            SizeF axisXStringSize = g.MeasureString(AxisYCaption, font);
-            PointF pointX = new PointF(roundRect.Left - axisXStringSize.Width, roundRect.Top - axisXStringSize.Height - 10);
-            g.DrawString(AxisYCaption, font, Brushes.White, pointX);
+            SizeF captionStringSize = g.MeasureString(AxisYCaption, font);
+            PointF captionLocation = new PointF(roundRect.Left - captionStringSize.Width, roundRect.Top - captionStringSize.Height - 10);
+            g.DrawString(AxisYCaption, font, Brushes.White, captionLocation);
 
-            float[] dashValues = { 5, 5 };
-            Pen dashPen = new Pen(Color.White);
-            dashPen.DashPattern = dashValues;
-
-            float gridInterval = AxisYMinValue;
-            for (int i = 0; i <= NumAxisY; i++)
+            float gridCount = (int)(Math.Log(AxisYMaxValue, 2) / Math.Sqrt(2));
+            float gridMargin = (float)_drawChartRect.Height / gridCount;
+            float intervalValue = (float)Math.Abs(AxisYMaxValue) / gridCount;
+            for (int i = 0; i <= gridCount; i++)
             {
                 int x1 = roundRect.Left;
                 int x2 = roundRect.Right;
-                int y = (int)(roundRect.Bottom - (intervalY * i));
+                int y = (int)(roundRect.Bottom - (gridMargin * i));
 
-                g.DrawLine(dashPen, new Point(x1, y), new Point(x2, y));
+                g.DrawLine(_dashPen, new Point(x1, y), new Point(x2, y));
 
-                string valueString = $"{gridInterval:F0}";
+                string valueString = $"{intervalValue * i:F0}";
                 SizeF textSize = g.MeasureString(valueString, font);
                 g.DrawString(valueString, font, Brushes.White, new PointF(x1 - textSize.Width, y - textSize.Height / 2));
-                gridInterval += intervalValue;
             }
         }
 
         private void DrawData(Graphics g)
         {
-            if (_data == null)
-                return;
-
-            if (_data.Length <= 1)
-                return;
-
-            float intervalX = (float)_drawChartRect.Width / _data.Length;
-            float intervalY = (float)_drawChartRect.Height / AxisYMaxValue;
-            List<PointF> points = new List<PointF>();
-
-            if (intervalX < 1)
+            foreach(var dataPair in _data)
             {
-                float intervalX3 = intervalX/3;
-                int chunkSize = (int)Math.Ceiling(_data.Length / _drawChartRect.Width);
-                for (int startPosition = 0; startPosition < _data.Length; startPosition += chunkSize)
+                var datas = dataPair.Value;
+
+                if (datas.Count <= 1)
+                    continue;
+
+                float marginX = (float)_drawChartRect.Width / datas.Count;
+                float marginY = (float)_drawChartRect.Height / AxisYMaxValue;
+                List<PointF> points = new List<PointF>();
+
+                if (marginX < 1)
                 {
-                    var dataChunk = _data.Skip(startPosition).Take(chunkSize).ToList();
-                    //points.Add(new PointF
-                    //{
-                    //    X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 0),
-                    //    Y = _drawChartRect.Bottom - (intervalY * dataChunk.Min()),
-                    //});
-                    points.Add(new PointF
+                    int chunkSize = (int)Math.Ceiling(datas.Count / _drawChartRect.Width);
+                    for (int startPosition = 0; startPosition < datas.Count; startPosition += chunkSize)
                     {
-                        X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 1),
-                        Y = _drawChartRect.Bottom - (intervalY * dataChunk.Average()),
-                    });
-                    //points.Add(new PointF
-                    //{
-                    //    X = _drawChartRect.Left + (intervalX * startPosition) + (intervalX3 * 2),
-                    //    Y = _drawChartRect.Bottom - (intervalY * dataChunk.Max()),
-                    //});
+                        var dataChunk = datas.Skip(startPosition).Take(chunkSize).ToList();
+                        var dataAvg = dataChunk.Average();
+                        var dataMax = dataChunk.Max();
+                        var dataMin = dataChunk.Min();
+                        var higher = Math.Abs(dataMax - dataAvg);
+                        var lower = Math.Abs(dataAvg - dataMin);
+
+                        if (higher > lower)
+                            points.Add(new PointF
+                            {
+                                X = _drawChartRect.Left + (marginX * startPosition),
+                                Y = _drawChartRect.Bottom - (marginY * dataMax),
+                            });
+                        else if (higher < lower)
+                            points.Add(new PointF
+                            {
+                                X = _drawChartRect.Left + (marginX * startPosition),
+                                Y = _drawChartRect.Bottom - (marginY * dataMin),
+                            });
+                        else
+                            points.Add(new PointF
+                            {
+                                X = _drawChartRect.Left + (marginX * startPosition),
+                                Y = _drawChartRect.Bottom - (marginY * dataAvg),
+                            });
+                    }
                 }
-            }
-            else
-            {
-                points = _data.Select((value, index) => new PointF
+                else
                 {
-                    X = _drawChartRect.Left + (intervalX * index),
-                    Y = _drawChartRect.Bottom - (intervalY * value),
-                }).ToList();
+                    points = datas.Select((value, index) => new PointF
+                    {
+                        X = _drawChartRect.Left + (marginX * index),
+                        Y = _drawChartRect.Bottom - (marginY * value),
+                    }).ToList();
+                }
+
+                g.DrawLines(GetLegendPen(dataPair.Key), points.ToArray());
             }
-            g.DrawLines(DataPen, points.ToArray());
         }
 
         private Font GetFontStyle(int fontSize, FontStyle fontStyle)
@@ -229,21 +242,60 @@ namespace Jastech.Framework.Winform.Controls
             return font;
         }
 
-        public void SetData(float[] data)
+        public void Initialize()
         {
-            _data = data;
-            pnlDrawChart.Refresh();
+            pnlDrawChart = new DoubleBufferedPanel();
+            pnlChart.Controls.Add(pnlDrawChart);
+            pnlDrawChart.Dock = DockStyle.Fill;
+            pnlDrawChart.Paint += DoubleBuffering_Paint;
+            _data = new Dictionary<string, List<float>>();
+            _legends = new Dictionary<string, (int index, Color color)>();
+
+            AxisXMinValue = 0;
+            AxisXMaxValue = 1000;
+            AxisYMinValue = 0;
+            AxisYMaxValue = 100;
+        }
+
+        public void AddLegend(string legend, int index, Color color)
+        {
+            _data[legend] = new List<float>();
+            _legends[legend] = (index, color);
+        }
+
+        public Pen GetLegendPen(string key)
+        {
+            if (_legends.ContainsKey(key))
+                return new Pen(_legends[key].color);
+            else
+                return new Pen(Color.Black);
+        }
+
+        public void AddData(string legend, float data, bool requirInvalidate = false)
+        {
+            _data[legend].Add(data);
+            if (requirInvalidate)
+                pnlDrawChart?.Invalidate();
+        }
+
+        public void Clear(bool dataOnly = true)
+        {
+            if (dataOnly != false)
+            {
+                foreach (var valueList in _data.Values)
+                    valueList.Clear();
+            }
+            else
+            {
+                _legends.Clear();
+                _data.Clear();
+            }
         }
 
         public void SetCaption(string captionAxisX, string captionAxisY)
         {
             AxisXCaption = $"[{captionAxisX}]";
             AxisYCaption = $"[{captionAxisY}]";
-        }
-
-        public void SetPenColor(Color color)
-        {
-            DataPen.Color = color;
         }
 
         private void PixelValueGraphControl_SizeChanged(object sender, EventArgs e)

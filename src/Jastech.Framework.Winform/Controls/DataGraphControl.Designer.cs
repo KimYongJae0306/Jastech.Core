@@ -33,20 +33,21 @@
             // 
             // pnlChart
             // 
+            this.pnlChart.BackColor = System.Drawing.Color.Black;
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChart.Location = new System.Drawing.Point(0, 0);
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(678, 369);
             this.pnlChart.TabIndex = 0;
             // 
-            // PixelValueGraphControl
+            // DataGraphControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlChart);
-            this.Name = "PixelValueGraphControl";
+            this.Name = "DataGraphControl";
             this.Size = new System.Drawing.Size(678, 369);
-            this.Load += new System.EventHandler(this.PixelValueGraphControl_Load);
+            this.Load += new System.EventHandler(this.DataGraphControl_Load);
             this.SizeChanged += new System.EventHandler(this.PixelValueGraphControl_SizeChanged);
             this.ResumeLayout(false);
 
