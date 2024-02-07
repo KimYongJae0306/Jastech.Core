@@ -89,9 +89,7 @@ namespace Jastech.Framework.Winform.Controls
         private void ImagePreviewControl_SelectedImageEventHandler(ImageInfo imageInfo)
         {
             ImagePreviewControlList.ForEach(x => x.ClearSelectedColor());
-
-            Bitmap cloneBitmap = new Bitmap(imageInfo.OriginBitmap);
-            DrawBoxControl?.SetImage(cloneBitmap);
+            DrawBoxControl?.SetImage(imageInfo.OriginBitmap);
         }
 
         private void ClearImageInfoList()

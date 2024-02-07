@@ -64,7 +64,6 @@ namespace Jastech.Framework.Winform.Controls
         public void SetSelectImage()
         {
             SelectedImageEventHandler?.Invoke(ImageInfo);
-
             SetSelectedColor();
         }
 
@@ -124,15 +123,5 @@ namespace Jastech.Framework.Winform.Controls
             OriginBitmap = null;
             ImagePath = string.Empty;
         }
-
-        //public void SetImageInfo(ImageInfo imageInfo)
-        //{
-        //    if (OriginBitmap == null)
-        //    {
-        //        OriginBitmap = new Bitmap(imageInfo.OriginBitmap);
-        //        ImagePath = imageInfo.ImagePath;
-        //        ImageName = imageInfo.ImageName;
-        //    }
-        //}
     }
 }
