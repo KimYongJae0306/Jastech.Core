@@ -119,16 +119,8 @@ namespace Jastech.Framework.Winform.Controls
                 ImageWidth = bmp.Width;
                 ImageHeight = bmp.Height;
 
-                if (_isInteractive)
-                {
-                    if (BitmapBrush != null)
-                    {
-                        BitmapBrush.Dispose();
-                        BitmapBrush = null;
-                    }
-
+                if (_isInteractive || BitmapBrush == null)
                     BitmapBrush = new TextureBrush(OrgImage);
-                }
             }
             
             pbxDisplay.Invalidate();
