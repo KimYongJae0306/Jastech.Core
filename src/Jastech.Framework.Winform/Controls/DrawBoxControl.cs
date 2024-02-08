@@ -132,7 +132,7 @@ namespace Jastech.Framework.Winform.Controls
             if (enable == true)
                 BitmapBrush = new TextureBrush(OrgImage);
 
-            Invalidate();
+            pbxDisplay.Invalidate();
         }
 
         public void DisableFunctionButtons()

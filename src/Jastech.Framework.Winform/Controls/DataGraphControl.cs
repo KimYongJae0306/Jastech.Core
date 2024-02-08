@@ -22,20 +22,19 @@ namespace Jastech.Framework.Winform.Controls
 
         private Pen _dashPen = new Pen(Color.White) { DashPattern = new float[] { 5, 5 } };
 
-        private Dictionary<string, List<float>> _data { get; set; }
-        private Dictionary<string, (int index, Color color)> _legends { get; set; }
+        private Dictionary<string, (int index, Color color, List<float> values)> _dataCollection { get; set; }
         #endregion 필드
 
         #region 속성
         private DoubleBufferedPanel pnlDrawChart = null;
 
-        private float AxisXMinValue { get; set; } = 0;
-
-        private float AxisXMaxValue { get; set; } = 1;
+        private float AxisXMaxValue { get; set; } = 1000;
 
         private float AxisYMinValue { get; set; } = 0;
 
-        private float AxisYMaxValue { get; set; } = 1;
+        private float AxisYMaxValue { get; set; } = 0;
+
+        private float AxisYChartMax { get; set; } = 100;
 
         private float AxisYAvgValue => (AxisYMaxValue + AxisYMinValue) / 2;
 
@@ -95,19 +94,20 @@ namespace Jastech.Framework.Winform.Controls
             var counts = new List<int>();
             var yMaxValues = new List<float>();
             var yMinValues = new List<float>();
-            foreach (var datas in _data.Values)
+            foreach (var (_, _, values) in _dataCollection.Values)
             {
-                if (datas.Count() > 0)
+                if (values.Count() > 0)
                 {
-                    counts.Add(datas.Count());
-                    yMinValues.Add(datas.Min());
-                    yMaxValues.Add(datas.Max());
+                    counts.Add(values.Count());
+                    yMinValues.Add(values.Min());
+                    yMaxValues.Add(values.Max());
                 }
             }
-            AxisXMinValue = 0;
+
             if (counts.Count > 0) AxisXMaxValue = counts.Max();
             if (yMinValues.Count > 0) AxisYMinValue = yMinValues.Min();
             if (yMaxValues.Count > 0) AxisYMaxValue = yMaxValues.Max();
+            AxisYChartMax = AxisYMinValue + AxisYMaxValue;
         }
 
         private void DrawLegends(Graphics g)
@@ -117,13 +117,12 @@ namespace Jastech.Framework.Winform.Controls
             Size legendSize = new Size(roundRect.Width / 10, roundRect.Height / 3);
             Rectangle legendRect = new Rectangle(legendCoord, legendSize);
 
-            foreach(var data in _data)
+            foreach(var data in _dataCollection)
             {
-                var legendName = data.Key;
-                var legendProperty = _legends[legendName];
-                var legendBrush = new SolidBrush(legendProperty.color);
-                g.FillRectangle(legendBrush, legendRect.X + 5, legendRect.Y + (legendProperty.index * 15) + 5, 5, 5);
-                g.DrawString(legendName, Font, legendBrush, legendRect.X + 20, legendRect.Y + (legendProperty.index * 15));
+                var (index, color, _) = data.Value;
+                var legendBrush = new SolidBrush(color);
+                g.FillRectangle(legendBrush, legendRect.X + 5, legendRect.Y + (index * 15) + 5, 5, 5);
+                g.DrawString(data.Key, Font, legendBrush, legendRect.X + 20, legendRect.Y + (index * 15));
             }
         }
 
@@ -160,9 +159,9 @@ namespace Jastech.Framework.Winform.Controls
             PointF captionLocation = new PointF(roundRect.Left - captionStringSize.Width, roundRect.Top - captionStringSize.Height - 10);
             g.DrawString(AxisYCaption, font, Brushes.White, captionLocation);
 
-            float gridCount = (int)(Math.Log(AxisYMaxValue, 2) / Math.Sqrt(2));
+            float gridCount = (int)(Math.Log(AxisYChartMax, 2) / Math.Sqrt(2));
             float gridMargin = (float)_drawChartRect.Height / gridCount;
-            float intervalValue = (float)Math.Abs(AxisYMaxValue) / gridCount;
+            float intervalValue = (float)Math.Abs(AxisYChartMax) / gridCount;
             for (int i = 0; i <= gridCount; i++)
             {
                 int x1 = roundRect.Left;
@@ -179,23 +178,23 @@ namespace Jastech.Framework.Winform.Controls
 
         private void DrawData(Graphics g)
         {
-            foreach(var dataPair in _data)
+            foreach(var data in _dataCollection)
             {
-                var datas = dataPair.Value;
+                var (_, color, values) = data.Value;
 
-                if (datas.Count <= 1)
+                if (values.Count <= 1)
                     continue;
 
-                float marginX = (float)_drawChartRect.Width / datas.Count;
-                float marginY = (float)_drawChartRect.Height / AxisYMaxValue;
+                float marginX = (float)_drawChartRect.Width / values.Count;
+                float marginY = (float)_drawChartRect.Height / AxisYChartMax;
                 List<PointF> points = new List<PointF>();
 
                 if (marginX < 1)
                 {
-                    int chunkSize = (int)Math.Ceiling(datas.Count / _drawChartRect.Width);
-                    for (int startPosition = 0; startPosition < datas.Count; startPosition += chunkSize)
+                    int chunkSize = (int)Math.Ceiling(values.Count / _drawChartRect.Width);
+                    for (int startPosition = 0; startPosition < values.Count; startPosition += chunkSize)
                     {
-                        var dataChunk = datas.Skip(startPosition).Take(chunkSize).ToList();
+                        var dataChunk = values.Skip(startPosition).Take(chunkSize).ToList();
                         var dataAvg = dataChunk.Average();
                         var dataMax = dataChunk.Max();
                         var dataMin = dataChunk.Min();
@@ -224,14 +223,14 @@ namespace Jastech.Framework.Winform.Controls
                 }
                 else
                 {
-                    points = datas.Select((value, index) => new PointF
+                    points = values.Select((value, index) => new PointF
                     {
                         X = _drawChartRect.Left + (marginX * index),
                         Y = _drawChartRect.Bottom - (marginY * value),
                     }).ToList();
                 }
 
-                g.DrawLines(GetLegendPen(dataPair.Key), points.ToArray());
+                g.DrawLines(new Pen(color), points.ToArray());
             }
         }
 
@@ -248,47 +247,34 @@ namespace Jastech.Framework.Winform.Controls
             pnlChart.Controls.Add(pnlDrawChart);
             pnlDrawChart.Dock = DockStyle.Fill;
             pnlDrawChart.Paint += DoubleBuffering_Paint;
-            _data = new Dictionary<string, List<float>>();
-            _legends = new Dictionary<string, (int index, Color color)>();
+            _dataCollection = new Dictionary<string, (int index, Color color, List<float> values)>();
 
-            AxisXMinValue = 0;
             AxisXMaxValue = 1000;
             AxisYMinValue = 0;
-            AxisYMaxValue = 100;
+            AxisYMaxValue = 0;
+            AxisYChartMax = 100;
         }
 
-        public void AddLegend(string legend, int index, Color color)
+        public void AddLegend(string name, int index, Color color)
         {
-            _data[legend] = new List<float>();
-            _legends[legend] = (index, color);
+            _dataCollection[name] = (index, color, new List<float>());
         }
 
-        public Pen GetLegendPen(string key)
+        public void AddData(string name, float data, bool requirInvalidate = false)
         {
-            if (_legends.ContainsKey(key))
-                return new Pen(_legends[key].color);
-            else
-                return new Pen(Color.Black);
-        }
-
-        public void AddData(string legend, float data, bool requirInvalidate = false)
-        {
-            _data[legend].Add(data);
+            _dataCollection[name].values.Add(data);
             if (requirInvalidate)
                 pnlDrawChart?.Invalidate();
         }
 
         public void Clear(bool dataOnly = true)
         {
-            if (dataOnly != false)
-            {
-                foreach (var valueList in _data.Values)
-                    valueList.Clear();
-            }
+            if (dataOnly == false)
+                _dataCollection.Clear();
             else
             {
-                _legends.Clear();
-                _data.Clear();
+                foreach (var (_, _, values) in _dataCollection.Values)
+                    values.Clear();
             }
         }
 
