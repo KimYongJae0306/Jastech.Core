@@ -122,8 +122,8 @@ namespace Jastech.Framework.Winform.Controls
                 if (_isInteractive || BitmapBrush == null)
                     BitmapBrush = new TextureBrush(OrgImage);
             }
-            
-            pbxDisplay.Invalidate();
+
+            FitZoom();
         }
 
         public void EnableInteractive(bool enable)
