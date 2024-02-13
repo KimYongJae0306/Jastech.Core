@@ -23,6 +23,7 @@ namespace Jastech.Framework.Device.Cameras
         [JsonProperty]
         public string SerialNo { get; set; }
 
+        [JsonIgnore]
         public byte[] LastImageData { get; set; } = null;
 
         private UInt32 PayLoadSize { get; set; }
