@@ -122,8 +122,8 @@ namespace Jastech.Framework.Winform.Controls
                 if (_isInteractive || BitmapBrush == null)
                     BitmapBrush = new TextureBrush(OrgImage);
             }
-            
-            pbxDisplay.Invalidate();
+
+            pbxDisplay_Paint(pbxDisplay, new PaintEventArgs(pbxDisplay.CreateGraphics(), pbxDisplay.ClientRectangle));
         }
 
         public void EnableInteractive(bool enable)
@@ -333,7 +333,7 @@ namespace Jastech.Framework.Winform.Controls
 
                 if (TempFigure != null)
                 {
-                    TempFigure.TrackRectSize =trackResize;
+                    TempFigure.TrackRectSize = trackResize;
                     TempFigure.Draw(g);
                 }
 
