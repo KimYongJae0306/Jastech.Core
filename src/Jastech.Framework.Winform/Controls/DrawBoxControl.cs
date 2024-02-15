@@ -152,7 +152,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             if (OrgImage != null)
             {
-                if (pbxDisplay.Width > pbxDisplay.Height)
+                if (ImageWidth > ImageHeight)
                     ZoomScale = (double)pbxDisplay.Width / ImageWidth;
                 else
                     ZoomScale = (double)pbxDisplay.Height / ImageHeight;
