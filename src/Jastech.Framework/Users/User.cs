@@ -40,7 +40,7 @@ namespace Jastech.Framework.Users
 
     public enum AuthorityType
     {
-        None, // DefaultType 이므로 1개만 생성해야한다.
+        Operator, // DefaultType 이므로 1개만 생성해야한다.
         Engineer,
         Maker,
     }

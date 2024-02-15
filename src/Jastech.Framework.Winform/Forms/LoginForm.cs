@@ -46,7 +46,7 @@ namespace Jastech.Framework.Winform.Forms
             lblEngineer.ForeColor = Color.White;
             lblMaker.ForeColor = Color.White;
 
-            if (type == AuthorityType.None)
+            if (type == AuthorityType.Operator)
             {
                 lblOperator.ForeColor = Color.DodgerBlue;
                 txtPasword.Enabled = false;
@@ -75,7 +75,7 @@ namespace Jastech.Framework.Winform.Forms
 
         private void lblOperator_Click(object sender, EventArgs e)
         {
-            UpdateUI(AuthorityType.None);
+            UpdateUI(AuthorityType.Operator);
         }
 
         private void lblEngineer_Click(object sender, EventArgs e)
@@ -91,7 +91,7 @@ namespace Jastech.Framework.Winform.Forms
         private void lblApply_Click(object sender, EventArgs e)
         {
             var curType = GetSelectedUserType();
-            if (curType != AuthorityType.None)
+            if (curType != AuthorityType.Operator)
             {
                 string password = txtPasword.Text;
                 if (CheckPassword(curType, password))
@@ -108,7 +108,7 @@ namespace Jastech.Framework.Winform.Forms
             }
             else
             {
-                CurrentUser = UserHandler.GetUser(AuthorityType.None);
+                CurrentUser = UserHandler.GetUser(AuthorityType.Operator);
             }
             MessageConfirmForm form2 = new MessageConfirmForm();
             form2.Message = "Changed User.";
@@ -133,13 +133,13 @@ namespace Jastech.Framework.Winform.Forms
         private AuthorityType GetSelectedUserType()
         {
             if (lblOperator.ForeColor != Color.White)
-                return AuthorityType.None;
+                return AuthorityType.Operator;
             if (lblEngineer.ForeColor != Color.White)
                 return AuthorityType.Engineer;
             if (lblMaker.ForeColor != Color.White)
                 return AuthorityType.Maker;
 
-            return AuthorityType.None;
+            return AuthorityType.Operator;
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
