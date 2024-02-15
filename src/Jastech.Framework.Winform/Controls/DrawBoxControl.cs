@@ -3,6 +3,7 @@ using Jastech.Framework.Winform.Data;
 using Jastech.Framework.Winform.Forms;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -21,12 +22,25 @@ namespace Jastech.Framework.Winform.Controls
 
         public object _lock = new object();
 
-        private bool _isInteractive = true;
-
         private HatchBrush _backGroundBrush = new HatchBrush(HatchStyle.DiagonalCross, Color.FromArgb(27, 27, 27));
         #endregion
 
         #region 속성
+        private bool _enableBrush = false;
+        public bool EnableBrush
+        {
+            get
+            {
+                return _enableBrush;
+            }
+            set
+            {
+                if (value == true)
+                    BitmapBrush = new TextureBrush((Bitmap)OrgImage.Clone());
+                _enableBrush = value;
+            }
+        }
+
         private double ZoomScale { get; set; } = 1.0;
 
         private double OffsetX { get; set; } = 0.0;
@@ -118,21 +132,10 @@ namespace Jastech.Framework.Winform.Controls
                 OrgImage = bmp;
                 ImageWidth = bmp.Width;
                 ImageHeight = bmp.Height;
-
-                if (_isInteractive || BitmapBrush == null)
-                    BitmapBrush = new TextureBrush(OrgImage);
             }
 
-            pbxDisplay_Paint(pbxDisplay, new PaintEventArgs(pbxDisplay.CreateGraphics(), pbxDisplay.ClientRectangle));
-        }
-
-        public void EnableInteractive(bool enable)
-        {
-            _isInteractive = enable;   // 연속되는 SetImage 시 비활성화 필요
-            if (enable == true)
-                BitmapBrush = new TextureBrush(OrgImage);
-
-            pbxDisplay.Invalidate();
+            Invalidate();
+            //Invoke(new Action(Refresh));
         }
 
         public void DisableFunctionButtons()
@@ -170,9 +173,6 @@ namespace Jastech.Framework.Winform.Controls
 
         private void PbxDisplay_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (_isInteractive == false)
-                return;
-
             double imageX = e.X / ZoomScale - OffsetX;
             double imageY = e.Y / ZoomScale - OffsetY;
 
@@ -317,10 +317,14 @@ namespace Jastech.Framework.Winform.Controls
                 matrix.Scale((float)ZoomScale, (float)ZoomScale, MatrixOrder.Append);
                 g.Transform = matrix;
 
-                if (_isInteractive)
-                    g.FillRectangle(BitmapBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
+                Rectangle drawRect = new Rectangle(0, 0, ImageWidth, ImageHeight);
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                if (EnableBrush)
+                    g.FillRectangle(BitmapBrush, drawRect);
                 else
-                    g.DrawImage(OrgImage, new Rectangle(0, 0, ImageWidth, ImageHeight));
+                    g.DrawImage(OrgImage, drawRect);
+
+                var tt = stopwatch.ElapsedMilliseconds;
 
                 int trackResize = (int)(6.0 / ZoomScale);
                 if (trackResize > 50)
