@@ -134,8 +134,7 @@ namespace Jastech.Framework.Winform.Controls
                 ImageHeight = bmp.Height;
             }
 
-            Invalidate();
-            //Invoke(new Action(Refresh));
+            pbxDisplay.Invalidate();
         }
 
         public void DisableFunctionButtons()
