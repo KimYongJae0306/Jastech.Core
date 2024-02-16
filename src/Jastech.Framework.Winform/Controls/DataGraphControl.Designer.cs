@@ -47,7 +47,6 @@
             this.Controls.Add(this.pnlChart);
             this.Name = "DataGraphControl";
             this.Size = new System.Drawing.Size(678, 369);
-            this.Load += new System.EventHandler(this.DataGraphControl_Load);
             this.SizeChanged += new System.EventHandler(this.PixelValueGraphControl_SizeChanged);
             this.ResumeLayout(false);
 

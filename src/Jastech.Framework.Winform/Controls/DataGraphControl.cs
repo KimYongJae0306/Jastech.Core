@@ -16,7 +16,7 @@ namespace Jastech.Framework.Winform.Controls
         #region 필드
         private RectangleF _drawChartRect { get; set; }
 
-        private float _axisXInterval = 120;//X축 offset
+        private float _axisXInterval = 50;//X축 offset
 
         private float _axisYInterval = 50;
 
@@ -51,10 +51,6 @@ namespace Jastech.Framework.Winform.Controls
         #endregion
 
         #region 메서드
-        private void DataGraphControl_Load(object sender, EventArgs e)
-        {
-        }
-
         private void DoubleBuffering_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -84,7 +80,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             float x = _axisXInterval;
             float y = _axisYInterval;
-            float width = this.Width - (x * 1.8f);
+            float width = this.Width - (x * 3f);
             float height = this.Height - (y * 2.0f);
             _drawChartRect = new RectangleF(x, y, width, height);
         }
@@ -96,11 +92,12 @@ namespace Jastech.Framework.Winform.Controls
             var yMinValues = new List<float>();
             foreach (var (_, _, values) in _dataCollection.Values)
             {
-                if (values.Count() > 0)
+                List<float> copiedList = new List<float>(values);
+                if (copiedList.Count() > 0)
                 {
-                    counts.Add(values.Count());
-                    yMinValues.Add(values.Min());
-                    yMaxValues.Add(values.Max());
+                    counts.Add(copiedList.Count());
+                    yMinValues.Add(copiedList.Min());
+                    yMaxValues.Add(copiedList.Max());
                 }
             }
 
@@ -113,16 +110,15 @@ namespace Jastech.Framework.Winform.Controls
         private void DrawLegends(Graphics g)
         {
             Rectangle roundRect = Rectangle.Round(_drawChartRect);
-            Point legendCoord = new Point(roundRect.Right - (roundRect.Width / 15), roundRect.Y + 5);
-            Size legendSize = new Size(roundRect.Width / 10, roundRect.Height / 3);
-            Rectangle legendRect = new Rectangle(legendCoord, legendSize);
 
+            var longestString = _dataCollection.Keys.OrderByDescending(k => k.Length).First();
+            var stringSize = g.MeasureString(longestString, Font);
             foreach(var data in _dataCollection)
             {
                 var (index, color, _) = data.Value;
                 var legendBrush = new SolidBrush(color);
-                g.FillRectangle(legendBrush, legendRect.X + 5, legendRect.Y + (index * 15) + 5, 5, 5);
-                g.DrawString(data.Key, Font, legendBrush, legendRect.X + 20, legendRect.Y + (index * 15));
+                g.FillRectangle(legendBrush, roundRect.Right - stringSize.Width - 10, roundRect.Top + (index * 15) + 10, 5, 5);
+                g.DrawString(data.Key, Font, legendBrush, roundRect.Right - stringSize.Width, roundRect.Top + (index * 15) + 3);
             }
         }
 
@@ -181,20 +177,21 @@ namespace Jastech.Framework.Winform.Controls
             foreach(var data in _dataCollection)
             {
                 var (_, color, values) = data.Value;
+                List<float> copiedList = new List<float>(values);
 
-                if (values.Count <= 1)
+                if (copiedList.Count <= 1)
                     continue;
 
-                float marginX = (float)_drawChartRect.Width / values.Count;
+                float marginX = (float)_drawChartRect.Width / copiedList.Count;
                 float marginY = (float)_drawChartRect.Height / AxisYChartMax;
                 List<PointF> points = new List<PointF>();
 
                 if (marginX < 1)
                 {
-                    int chunkSize = (int)Math.Ceiling(values.Count / _drawChartRect.Width);
-                    for (int startPosition = 0; startPosition < values.Count; startPosition += chunkSize)
+                    int chunkSize = (int)Math.Ceiling(copiedList.Count / _drawChartRect.Width);
+                    for (int startPosition = 0; startPosition < copiedList.Count; startPosition += chunkSize)
                     {
-                        var dataChunk = values.Skip(startPosition).Take(chunkSize).ToList();
+                        var dataChunk = copiedList.Skip(startPosition).Take(chunkSize).ToList();
                         var dataAvg = dataChunk.Average();
                         var dataMax = dataChunk.Max();
                         var dataMin = dataChunk.Min();
@@ -223,7 +220,7 @@ namespace Jastech.Framework.Winform.Controls
                 }
                 else
                 {
-                    points = values.Select((value, index) => new PointF
+                    points = copiedList.Select((value, index) => new PointF
                     {
                         X = _drawChartRect.Left + (marginX * index),
                         Y = _drawChartRect.Bottom - (marginY * value),
@@ -263,6 +260,13 @@ namespace Jastech.Framework.Winform.Controls
         public void AddData(string name, float data, bool requirInvalidate = false)
         {
             _dataCollection[name].values.Add(data);
+            if (requirInvalidate)
+                pnlDrawChart?.Invalidate();
+        }
+
+        public void AddData(int index, float data, bool requirInvalidate = false)
+        {
+            _dataCollection.ElementAt(index).Value.values.Add(data);
             if (requirInvalidate)
                 pnlDrawChart?.Invalidate();
         }
