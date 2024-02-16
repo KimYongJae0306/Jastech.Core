@@ -37,25 +37,24 @@
             this.lblGrayLevel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDeleteFigure = new System.Windows.Forms.Button();
+            this.btnFitZoom = new System.Windows.Forms.Button();
+            this.btnDrawLine = new System.Windows.Forms.Button();
+            this.btnDrawNone = new System.Windows.Forms.Button();
+            this.btnPanning = new System.Windows.Forms.Button();
             this.ctxDisplayMode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuPointerMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPanningMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuROIMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFitZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSaveImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnPanning = new System.Windows.Forms.Button();
-            this.btnDrawNone = new System.Windows.Forms.Button();
-            this.btnDrawLine = new System.Windows.Forms.Button();
-            this.btnFitZoom = new System.Windows.Forms.Button();
-            this.btnDeleteFigure = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlText.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.pnlDisplay.SuspendLayout();
-            this.ctxDisplayMode.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.ctxDisplayMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel3
@@ -172,128 +171,6 @@
             this.pnlDisplay.Size = new System.Drawing.Size(655, 454);
             this.pnlDisplay.TabIndex = 2;
             // 
-            // ctxDisplayMode
-            // 
-            this.ctxDisplayMode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuPointerMode,
-            this.menuPanningMode,
-            this.menuROIMode,
-            this.menuFitZoom,
-            this.menuSaveImage});
-            this.ctxDisplayMode.Name = "contextMenuStrip";
-            this.ctxDisplayMode.Size = new System.Drawing.Size(137, 114);
-            this.ctxDisplayMode.Opening += new System.ComponentModel.CancelEventHandler(this.ctxDisplayMode_Opening);
-            // 
-            // menuPointerMode
-            // 
-            this.menuPointerMode.Name = "menuPointerMode";
-            this.menuPointerMode.Size = new System.Drawing.Size(136, 22);
-            this.menuPointerMode.Text = "Pointer";
-            this.menuPointerMode.Click += new System.EventHandler(this.menuPointerMode_Click);
-            // 
-            // menuPanningMode
-            // 
-            this.menuPanningMode.Name = "menuPanningMode";
-            this.menuPanningMode.Size = new System.Drawing.Size(136, 22);
-            this.menuPanningMode.Text = "Panning";
-            this.menuPanningMode.Click += new System.EventHandler(this.menuPanningMode_Click);
-            // 
-            // menuROIMode
-            // 
-            this.menuROIMode.Name = "menuROIMode";
-            this.menuROIMode.Size = new System.Drawing.Size(136, 22);
-            this.menuROIMode.Text = "ROI";
-            this.menuROIMode.Click += new System.EventHandler(this.menuROIMode_Click);
-            // 
-            // menuFitZoom
-            // 
-            this.menuFitZoom.Name = "menuFitZoom";
-            this.menuFitZoom.Size = new System.Drawing.Size(136, 22);
-            this.menuFitZoom.Text = "FitZoom";
-            this.menuFitZoom.Click += new System.EventHandler(this.menuFitZoom_Click);
-            // 
-            // menuSaveImage
-            // 
-            this.menuSaveImage.Name = "menuSaveImage";
-            this.menuSaveImage.Size = new System.Drawing.Size(136, 22);
-            this.menuSaveImage.Text = "Save Image";
-            this.menuSaveImage.Click += new System.EventHandler(this.menuSaveImage_Click);
-            // 
-            // btnPanning
-            // 
-            this.btnPanning.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Panning_White;
-            this.btnPanning.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPanning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPanning.Location = new System.Drawing.Point(0, 40);
-            this.btnPanning.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPanning.Name = "btnPanning";
-            this.btnPanning.Size = new System.Drawing.Size(40, 40);
-            this.btnPanning.TabIndex = 3;
-            this.btnPanning.TabStop = false;
-            this.btnPanning.UseVisualStyleBackColor = false;
-            this.btnPanning.Click += new System.EventHandler(this.btnPanning_Click);
-            // 
-            // btnDrawNone
-            // 
-            this.btnDrawNone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnDrawNone.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Pointer_White;
-            this.btnDrawNone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDrawNone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDrawNone.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnDrawNone.Location = new System.Drawing.Point(0, 0);
-            this.btnDrawNone.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDrawNone.Name = "btnDrawNone";
-            this.btnDrawNone.Size = new System.Drawing.Size(40, 40);
-            this.btnDrawNone.TabIndex = 1;
-            this.btnDrawNone.TabStop = false;
-            this.btnDrawNone.UseVisualStyleBackColor = false;
-            this.btnDrawNone.Click += new System.EventHandler(this.btnDrawNone_Click);
-            // 
-            // btnDrawLine
-            // 
-            this.btnDrawLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnDrawLine.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Line_arrow_White;
-            this.btnDrawLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDrawLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDrawLine.Location = new System.Drawing.Point(0, 80);
-            this.btnDrawLine.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDrawLine.Name = "btnDrawLine";
-            this.btnDrawLine.Size = new System.Drawing.Size(40, 40);
-            this.btnDrawLine.TabIndex = 2;
-            this.btnDrawLine.TabStop = false;
-            this.btnDrawLine.UseVisualStyleBackColor = false;
-            this.btnDrawLine.Click += new System.EventHandler(this.btnDrawLine_Click);
-            // 
-            // btnFitZoom
-            // 
-            this.btnFitZoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnFitZoom.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Fit_White;
-            this.btnFitZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFitZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFitZoom.Location = new System.Drawing.Point(0, 120);
-            this.btnFitZoom.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFitZoom.Name = "btnFitZoom";
-            this.btnFitZoom.Size = new System.Drawing.Size(40, 40);
-            this.btnFitZoom.TabIndex = 3;
-            this.btnFitZoom.TabStop = false;
-            this.btnFitZoom.UseVisualStyleBackColor = false;
-            this.btnFitZoom.Click += new System.EventHandler(this.btnFitZoom_Click);
-            // 
-            // btnDeleteFigure
-            // 
-            this.btnDeleteFigure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.btnDeleteFigure.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Delete_White;
-            this.btnDeleteFigure.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteFigure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteFigure.Location = new System.Drawing.Point(0, 160);
-            this.btnDeleteFigure.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDeleteFigure.Name = "btnDeleteFigure";
-            this.btnDeleteFigure.Size = new System.Drawing.Size(40, 40);
-            this.btnDeleteFigure.TabIndex = 4;
-            this.btnDeleteFigure.TabStop = false;
-            this.btnDeleteFigure.UseVisualStyleBackColor = false;
-            this.btnDeleteFigure.Click += new System.EventHandler(this.btnDeleteFigure_Click);
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
@@ -318,6 +195,128 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(40, 484);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
+            // btnDeleteFigure
+            // 
+            this.btnDeleteFigure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnDeleteFigure.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Delete_White;
+            this.btnDeleteFigure.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteFigure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteFigure.Location = new System.Drawing.Point(0, 160);
+            this.btnDeleteFigure.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDeleteFigure.Name = "btnDeleteFigure";
+            this.btnDeleteFigure.Size = new System.Drawing.Size(40, 40);
+            this.btnDeleteFigure.TabIndex = 4;
+            this.btnDeleteFigure.TabStop = false;
+            this.btnDeleteFigure.UseVisualStyleBackColor = false;
+            this.btnDeleteFigure.Click += new System.EventHandler(this.btnDeleteFigure_Click);
+            // 
+            // btnFitZoom
+            // 
+            this.btnFitZoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnFitZoom.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Fit_White;
+            this.btnFitZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFitZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFitZoom.Location = new System.Drawing.Point(0, 120);
+            this.btnFitZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFitZoom.Name = "btnFitZoom";
+            this.btnFitZoom.Size = new System.Drawing.Size(40, 40);
+            this.btnFitZoom.TabIndex = 3;
+            this.btnFitZoom.TabStop = false;
+            this.btnFitZoom.UseVisualStyleBackColor = false;
+            this.btnFitZoom.Click += new System.EventHandler(this.btnFitZoom_Click);
+            // 
+            // btnDrawLine
+            // 
+            this.btnDrawLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnDrawLine.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Line_arrow_White;
+            this.btnDrawLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDrawLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDrawLine.Location = new System.Drawing.Point(0, 80);
+            this.btnDrawLine.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDrawLine.Name = "btnDrawLine";
+            this.btnDrawLine.Size = new System.Drawing.Size(40, 40);
+            this.btnDrawLine.TabIndex = 2;
+            this.btnDrawLine.TabStop = false;
+            this.btnDrawLine.UseVisualStyleBackColor = false;
+            this.btnDrawLine.Click += new System.EventHandler(this.btnDrawLine_Click);
+            // 
+            // btnDrawNone
+            // 
+            this.btnDrawNone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnDrawNone.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Pointer_White;
+            this.btnDrawNone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDrawNone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDrawNone.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.btnDrawNone.Location = new System.Drawing.Point(0, 0);
+            this.btnDrawNone.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDrawNone.Name = "btnDrawNone";
+            this.btnDrawNone.Size = new System.Drawing.Size(40, 40);
+            this.btnDrawNone.TabIndex = 1;
+            this.btnDrawNone.TabStop = false;
+            this.btnDrawNone.UseVisualStyleBackColor = false;
+            this.btnDrawNone.Click += new System.EventHandler(this.btnDrawNone_Click);
+            // 
+            // btnPanning
+            // 
+            this.btnPanning.BackgroundImage = global::Jastech.Framework.Winform.Properties.Resources.Panning_White;
+            this.btnPanning.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPanning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPanning.Location = new System.Drawing.Point(0, 40);
+            this.btnPanning.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPanning.Name = "btnPanning";
+            this.btnPanning.Size = new System.Drawing.Size(40, 40);
+            this.btnPanning.TabIndex = 3;
+            this.btnPanning.TabStop = false;
+            this.btnPanning.UseVisualStyleBackColor = false;
+            this.btnPanning.Click += new System.EventHandler(this.btnPanning_Click);
+            // 
+            // ctxDisplayMode
+            // 
+            this.ctxDisplayMode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPointerMode,
+            this.menuPanningMode,
+            this.menuROIMode,
+            this.menuFitZoom,
+            this.menuSaveImage});
+            this.ctxDisplayMode.Name = "contextMenuStrip";
+            this.ctxDisplayMode.Size = new System.Drawing.Size(181, 136);
+            this.ctxDisplayMode.Opening += new System.ComponentModel.CancelEventHandler(this.ctxDisplayMode_Opening);
+            // 
+            // menuPointerMode
+            // 
+            this.menuPointerMode.Name = "menuPointerMode";
+            this.menuPointerMode.Size = new System.Drawing.Size(180, 22);
+            this.menuPointerMode.Text = "Pointer";
+            this.menuPointerMode.Click += new System.EventHandler(this.menuPointerMode_Click);
+            // 
+            // menuPanningMode
+            // 
+            this.menuPanningMode.Name = "menuPanningMode";
+            this.menuPanningMode.Size = new System.Drawing.Size(180, 22);
+            this.menuPanningMode.Text = "Panning";
+            this.menuPanningMode.Click += new System.EventHandler(this.menuPanningMode_Click);
+            // 
+            // menuROIMode
+            // 
+            this.menuROIMode.Name = "menuROIMode";
+            this.menuROIMode.Size = new System.Drawing.Size(180, 22);
+            this.menuROIMode.Text = "ROI";
+            this.menuROIMode.Click += new System.EventHandler(this.menuROIMode_Click);
+            // 
+            // menuFitZoom
+            // 
+            this.menuFitZoom.Name = "menuFitZoom";
+            this.menuFitZoom.Size = new System.Drawing.Size(180, 22);
+            this.menuFitZoom.Text = "FitZoom";
+            this.menuFitZoom.Click += new System.EventHandler(this.menuFitZoom_Click);
+            // 
+            // menuSaveImage
+            // 
+            this.menuSaveImage.Name = "menuSaveImage";
+            this.menuSaveImage.Size = new System.Drawing.Size(180, 22);
+            this.menuSaveImage.Text = "Save Image";
+            this.menuSaveImage.Click += new System.EventHandler(this.menuSaveImage_Click);
+            // 
             // DrawBoxControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -332,9 +331,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlText.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.pnlDisplay.ResumeLayout(false);
-            this.ctxDisplayMode.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.ctxDisplayMode.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
