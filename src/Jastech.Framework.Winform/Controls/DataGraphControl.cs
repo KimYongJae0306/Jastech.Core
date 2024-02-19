@@ -22,6 +22,8 @@ namespace Jastech.Framework.Winform.Controls
 
         private Pen _dashPen = new Pen(Color.White) { DashPattern = new float[] { 5, 5 } };
 
+        private float _rightMargin = 0;
+
         private Dictionary<string, (int index, Color color, List<float> values)> _dataCollection { get; set; }
         #endregion 필드
 
@@ -55,6 +57,7 @@ namespace Jastech.Framework.Winform.Controls
         {
             e.Graphics.Clear(this.BackColor);
 
+            UpdateMargin(e.Graphics);
             UpdateDataInfo();
             UpdateDrawInfo();
             DrawLegends(e.Graphics);
@@ -71,16 +74,17 @@ namespace Jastech.Framework.Winform.Controls
             string maxString = string.Format("Max : {0}", Math.Round(AxisYMaxValue, 2));
             string minString = string.Format("Min : {0}", Math.Round(AxisYMinValue, 2));
 
-            Font font = GetFontStyle(10, FontStyle.Bold);
-            g.DrawString(maxString, font, Brushes.White, new PointF(_drawChartRect.Right + 10, _drawChartRect.Top));
-            g.DrawString(minString, font, Brushes.White, new PointF(_drawChartRect.Right + 10, _drawChartRect.Top + 20));
+            var offset = new Point(10, -20);
+            g.DrawString(maxString, Font, Brushes.White, new PointF(_drawChartRect.Right + offset.X, _drawChartRect.Bottom + (offset.Y * 2)));
+            g.DrawString(minString, Font, Brushes.White, new PointF(_drawChartRect.Right + offset.X, _drawChartRect.Bottom + offset.Y));
         }
 
         private void UpdateDrawInfo()
         {
             float x = _axisXInterval;
             float y = _axisYInterval;
-            float width = this.Width - (x * 3f);
+
+            float width = this.Width - x - _rightMargin;
             float height = this.Height - (y * 2.0f);
             _drawChartRect = new RectangleF(x, y, width, height);
         }
@@ -107,18 +111,27 @@ namespace Jastech.Framework.Winform.Controls
             AxisYChartMax = AxisYMinValue + AxisYMaxValue;
         }
 
+        private void UpdateMargin(Graphics g)
+        {
+            var longestID = _dataCollection.Keys.OrderByDescending(id => id.Length).First();
+            var captionStringSize = g.MeasureString(AxisYCaption, Font);
+            _rightMargin = Math.Max(_rightMargin, g.MeasureString($"■ {longestID.ToUpper()}", Font).Width);
+            _rightMargin = Math.Max(_rightMargin, captionStringSize.Width);
+        }
+
         private void DrawLegends(Graphics g)
         {
-            Rectangle roundRect = Rectangle.Round(_drawChartRect);
-
-            var longestString = _dataCollection.Keys.OrderByDescending(k => k.Length).First();
-            var stringSize = g.MeasureString(longestString, Font);
-            foreach(var data in _dataCollection)
+            var dataOffset = new Point(10, 20);
+            var stringOffset = 3;
+            var ellipseOffset = 10;
+            foreach (var data in _dataCollection)
             {
                 var (index, color, _) = data.Value;
                 var legendBrush = new SolidBrush(color);
-                g.FillRectangle(legendBrush, roundRect.Right - stringSize.Width - 10, roundRect.Top + (index * 15) + 10, 5, 5);
-                g.DrawString(data.Key, Font, legendBrush, roundRect.Right - stringSize.Width, roundRect.Top + (index * 15) + 3);
+                var ellipseArea = new RectangleF(_drawChartRect.Right + dataOffset.X, _drawChartRect.Top + (index * dataOffset.Y) + ellipseOffset, 5, 5);
+                var stringLocation = new PointF(_drawChartRect.Right + dataOffset.X * 2, _drawChartRect.Top + (index * dataOffset.Y) + stringOffset);
+                g.FillRectangle(legendBrush, ellipseArea);
+                g.DrawString(data.Key, Font, legendBrush, stringLocation);
             }
         }
 
@@ -250,6 +263,7 @@ namespace Jastech.Framework.Winform.Controls
             AxisYMinValue = 0;
             AxisYMaxValue = 0;
             AxisYChartMax = 100;
+            _rightMargin = 0;
         }
 
         public void AddLegend(string name, int index, Color color)

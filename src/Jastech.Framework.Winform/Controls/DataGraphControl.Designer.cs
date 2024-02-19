@@ -33,7 +33,7 @@
             // 
             // pnlChart
             // 
-            this.pnlChart.BackColor = System.Drawing.Color.Black;
+            this.pnlChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChart.Location = new System.Drawing.Point(0, 0);
             this.pnlChart.Name = "pnlChart";
