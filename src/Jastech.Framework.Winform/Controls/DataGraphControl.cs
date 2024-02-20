@@ -24,6 +24,8 @@ namespace Jastech.Framework.Winform.Controls
 
         private float _rightMargin = 0;
 
+        private object _lock = new object();
+
         private Dictionary<string, (int index, Color color, List<float> values)> _dataCollection { get; set; }
         #endregion 필드
 
@@ -94,14 +96,17 @@ namespace Jastech.Framework.Winform.Controls
             var counts = new List<int>();
             var yMaxValues = new List<float>();
             var yMinValues = new List<float>();
-            foreach (var (_, _, values) in _dataCollection.Values)
+            lock(_lock)
             {
-                List<float> copiedList = new List<float>(values);
-                if (copiedList.Count() > 0)
+                foreach (var (_, _, values) in _dataCollection.Values)
                 {
-                    counts.Add(copiedList.Count());
-                    yMinValues.Add(copiedList.Min());
-                    yMaxValues.Add(copiedList.Max());
+                    List<float> copiedList = new List<float>(values);
+                    if (copiedList.Count() > 0)
+                    {
+                        counts.Add(copiedList.Count());
+                        yMinValues.Add(copiedList.Min());
+                        yMaxValues.Add(copiedList.Max());
+                    }
                 }
             }
 
