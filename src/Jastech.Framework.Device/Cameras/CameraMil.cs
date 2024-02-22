@@ -80,7 +80,7 @@ namespace Jastech.Framework.Device.Cameras
 
         #region 생성자
         public CameraMil(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType)
-          : base(name, imageWidth, imageHeight, colorFormat, sensorType)
+            : base(name, imageWidth, imageHeight, colorFormat, sensorType)
         {
         }
         #endregion
