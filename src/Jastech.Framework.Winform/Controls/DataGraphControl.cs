@@ -58,6 +58,7 @@ namespace Jastech.Framework.Winform.Controls
         private void DoubleBuffering_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             UpdateMargin(e.Graphics);
             UpdateDataInfo();
@@ -100,19 +101,22 @@ namespace Jastech.Framework.Winform.Controls
             {
                 foreach (var (_, _, values) in _dataCollection.Values)
                 {
-                    List<float> copiedList = new List<float>(values);
-                    if (copiedList.Count() > 0)
+                    float[] copiedArray = values.ToArray();
+                    if (copiedArray.Count() > 0)
                     {
-                        counts.Add(copiedList.Count());
-                        yMinValues.Add(copiedList.Min());
-                        yMaxValues.Add(copiedList.Max());
+                        counts.Add(copiedArray.Count());
+                        yMinValues.Add(copiedArray.Min());
+                        yMaxValues.Add(copiedArray.Max());
                     }
                 }
             }
 
-            if (counts.Count > 0) AxisXMaxValue = counts.Max();
-            if (yMinValues.Count > 0) AxisYMinValue = yMinValues.Min();
-            if (yMaxValues.Count > 0) AxisYMaxValue = yMaxValues.Max();
+            if (counts.Count > 0)
+                AxisXMaxValue = counts.Max();
+            if (yMinValues.Count > 0)
+                AxisYMinValue = yMinValues.Min();
+            if (yMaxValues.Count > 0)
+                AxisYMaxValue = yMaxValues.Max();
             AxisYChartMax = AxisYMinValue + AxisYMaxValue;
         }
 
@@ -160,8 +164,9 @@ namespace Jastech.Framework.Winform.Controls
                 g.DrawLine(_dashPen, new Point(x, y1), new Point(x, y2));
 
                 string valueString = $"{intervalValue * i:F0}";
-                SizeF textSize = g.MeasureString(valueString, font);
-                g.DrawString(valueString, font, Brushes.White, new PointF(x - textSize.Width / 2, y2));
+                var textSize = g.MeasureString(valueString, font);
+                var textLocation = new PointF(x - textSize.Width / 2, y2);
+                g.DrawString(valueString, font, Brushes.White, textLocation);
             }
         }
 
@@ -169,8 +174,8 @@ namespace Jastech.Framework.Winform.Controls
         {
             Rectangle roundRect = Rectangle.Round(_drawChartRect);
             Font font = GetFontStyle(10, FontStyle.Bold);
-            SizeF captionStringSize = g.MeasureString(AxisYCaption, font);
-            PointF captionLocation = new PointF(roundRect.Left - captionStringSize.Width, roundRect.Top - captionStringSize.Height - 10);
+            var captionStringSize = g.MeasureString(AxisYCaption, font);
+            var captionLocation = new PointF(roundRect.Left - captionStringSize.Width, roundRect.Top - captionStringSize.Height - 10);
             g.DrawString(AxisYCaption, font, Brushes.White, captionLocation);
 
             float gridCount = (int)(Math.Log(AxisYChartMax, 2) / Math.Sqrt(2));
@@ -185,8 +190,9 @@ namespace Jastech.Framework.Winform.Controls
                 g.DrawLine(_dashPen, new Point(x1, y), new Point(x2, y));
 
                 string valueString = $"{intervalValue * i:F0}";
-                SizeF textSize = g.MeasureString(valueString, font);
-                g.DrawString(valueString, font, Brushes.White, new PointF(x1 - textSize.Width, y - textSize.Height / 2));
+                var textSize = g.MeasureString(valueString, font);
+                var textLocation = new PointF(x1 - textSize.Width, y - textSize.Height / 2);
+                g.DrawString(valueString, font, Brushes.White, textLocation);
             }
         }
 
