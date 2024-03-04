@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Jastech.Framework.Algorithms.Akkon
 {
@@ -33,103 +34,129 @@ namespace Jastech.Framework.Algorithms.Akkon
 
         public List<AkkonLeadResult> Run(Mat mat, List<AkkonROI> roiList, AkkonAlgoritmParam parameters, float resolution_um, ref Judgement tabJudgement)
         {
-            roiList =  roiList.OrderBy(x => x.LeftTopX).ToList();
-
-            bool isTabNG = false;
-            Stopwatch sw = new Stopwatch();
-            sw.Restart();
-
-            List<AkkonLeadResult> leadResultList = new List<AkkonLeadResult>();
-            var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
-            float calcReslution_um = resolution_um / parameters.ImageFilterParam.ResizeRatio;
-
-            int max = 4;// Environment.ProcessorCount / 4;
-            ParallelOptions options = new ParallelOptions
+            try
             {
-                MaxDegreeOfParallelism = max,
-            };
-            //Parallel.For(0, AkkonSliceList.Count(), options, i =>
-            Parallel.For(0, AkkonSliceList.Count(), i =>
-            //for (int i = 0; i < AkkonSliceList.Count(); i++)
-            {
-                var slice = AkkonSliceList[i];
-                slice.Id = i;
+                roiList = roiList.OrderBy(x => x.LeftTopX).ToList();
 
-                Mat enhanceMat = null;
-                var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
+                bool isTabNG = false;
+                Stopwatch sw = new Stopwatch();
+                sw.Restart();
 
-                if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
-                    enhanceMat = EnhanceY(slice.Image, currentImageFilter);
-                else
-                    enhanceMat = EnhanceX(slice.Image, currentImageFilter);
+                List<AkkonLeadResult> leadResultList = new List<AkkonLeadResult>();
+                var AkkonSliceList = PrepareInspect(mat, roiList, 2048, parameters.ImageFilterParam.ResizeRatio);
+                Logger.Write(LogType.Inspection, "Prepared Akkon Inspection.");
+                float calcReslution_um = resolution_um / parameters.ImageFilterParam.ResizeRatio;
 
-                Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
-
-                int lowThres = 0;
-                int highThres = 255;
-                CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
-                Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
-
-                foreach (var roi in slice.CalcAkkonROIs)
+                int max = 4;// Environment.ProcessorCount / 4;
+                ParallelOptions options = new ParallelOptions
                 {
-                    Rectangle boundRect = roi.GetBoundRect();
+                    MaxDegreeOfParallelism = max,
+                };
 
-                    Mat roiThresMat = new Mat(thresMat, boundRect);
-                    Mat oneLeadMask = MakeMaskImage(new Size(boundRect.Width, boundRect.Height), roi, boundRect.X, boundRect.Y);
-                    Mat oneLeadMat = new Mat();
+                //Parallel.For(0, AkkonSliceList.Count(), options, i =>
+                Parallel.For(0, AkkonSliceList.Count(), i =>
+                //for (int i = 0; i < AkkonSliceList.Count(); i++)
+                {
+                    var slice = AkkonSliceList[i];
+                    slice.Id = i;
 
-                    CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
+                    Mat enhanceMat = null;
+                    var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
 
-                    AkkonLeadResult leadResult = new AkkonLeadResult();
-                    leadResult.Id = roi.Index;
-                    leadResult.Roi = roi.DeepCopy();
-                    leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
-                    leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
-                    leadResult.Offset.X = boundRect.X;
-                    leadResult.Offset.Y = boundRect.Y;
-                    leadResult.Slope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
-
-                    double calcHalfWidth = (mat.Width * parameters.ImageFilterParam.ResizeRatio) / 2.0;
-                    if (leadResult.Offset.ToWorldX < calcHalfWidth)
-                        leadResult.ContainPos = LeadContainPos.Left;
-                    else
-                        leadResult.ContainPos = LeadContainPos.Right;
-
-                    Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
-
-                    var blobList = OpencvContour.Run(oneLeadMat);
-                    FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
-
-                    leadResult.BlobList.AddRange(blobList);
-                    ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
-                 
-                    lock (_lock)
+                    if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
                     {
-                        if (leadResult.Judgement != Judgement.OK)
-                            isTabNG = true;
-
-                        leadResultList.Add(leadResult);
+                        enhanceMat = EnhanceY(slice.Image, currentImageFilter);
+                        Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Enhance Y.");
+                    }
+                    else
+                    {
+                        enhanceMat = EnhanceX(slice.Image, currentImageFilter);
+                        Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Enhance X.");
                     }
 
-                    enhanceCropMat.Dispose();
-                    roiThresMat.Dispose();
-                    oneLeadMask.Dispose();
-                    oneLeadMat.Dispose();
-                }
-                enhanceMat?.Dispose();
-                maskMat?.Dispose();
-                thresMat?.Dispose();
-            //}
-            });
+                    Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
+                    Logger.Write(LogType.Inspection, $"Make [Slice Index : {slice.Id}] Mask Image.");
 
-            if (isTabNG)
-                tabJudgement = Judgement.NG;
-            else
-                tabJudgement = Judgement.OK;
+                    int lowThres = 0;
+                    int highThres = 255;
+                    CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
 
-            sw.Stop();
-            Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
-            return leadResultList.OrderBy(x => x.Id).ToList();
+                    Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
+                    Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Threshold.");
+
+                    foreach (var roi in slice.CalcAkkonROIs)
+                    {
+                        Rectangle boundRect = roi.GetBoundRect();
+
+                        Mat roiThresMat = new Mat(thresMat, boundRect);
+                        Mat oneLeadMask = MakeMaskImage(new Size(boundRect.Width, boundRect.Height), roi, boundRect.X, boundRect.Y);
+                        Logger.Write(LogType.Inspection, $"Make [Bound Rectangle Index : {roi.Index}] Mask Image.");
+                        Mat oneLeadMat = new Mat();
+
+                        CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
+
+                        AkkonLeadResult leadResult = new AkkonLeadResult();
+                        leadResult.Id = roi.Index;
+                        leadResult.Roi = roi.DeepCopy();
+                        leadResult.Offset.ToWorldX = slice.StartPoint.X + slice.WorldRect.X;
+                        leadResult.Offset.ToWorldY = slice.StartPoint.Y + slice.WorldRect.Y;
+                        leadResult.Offset.X = boundRect.X;
+                        leadResult.Offset.Y = boundRect.Y;
+                        leadResult.Slope = MathHelper.GetSlope(roi.GetRightTopPoint(), roi.GetRightBottomPoint());
+
+                        double calcHalfWidth = (mat.Width * parameters.ImageFilterParam.ResizeRatio) / 2.0;
+                        if (leadResult.Offset.ToWorldX < calcHalfWidth)
+                            leadResult.ContainPos = LeadContainPos.Left;
+                        else
+                            leadResult.ContainPos = LeadContainPos.Right;
+
+                        Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
+                        Logger.Write(LogType.Inspection, $"Make [Bound Rectangle Index : {roi.Index}] Crop.");
+
+                        var blobList = OpencvContour.Run(oneLeadMat);
+                        Logger.Write(LogType.Inspection, $"Completed [Bound Rectangle Index : {roi.Index}] Contour.");
+
+                        FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
+                        Logger.Write(LogType.Inspection, $"Find [Bound Rectangle Index : {roi.Index}] Shadow Point.");
+
+                        leadResult.BlobList.AddRange(blobList);
+                        CalcJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
+
+                        lock (_lock)
+                        {
+                            if (leadResult.Judgement != Judgement.OK)
+                                isTabNG = true;
+
+                            leadResultList.Add(leadResult);
+                        }
+
+                        enhanceCropMat.Dispose();
+                        roiThresMat.Dispose();
+                        oneLeadMask.Dispose();
+                        oneLeadMat.Dispose();
+                    }
+                    enhanceMat?.Dispose();
+                    maskMat?.Dispose();
+                    thresMat?.Dispose();
+                    //}
+                });
+
+                if (isTabNG)
+                    tabJudgement = Judgement.NG;
+                else
+                    tabJudgement = Judgement.OK;
+
+                Logger.Write(LogType.Inspection, "Completed Akkon Algorithm.");
+
+                sw.Stop();
+                Console.WriteLine("Akkon Inspection : " + sw.ElapsedMilliseconds.ToString());
+                return leadResultList.OrderBy(x => x.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                Logger.Write(LogType.Inspection, e.Message);
+                return new List<AkkonLeadResult>();
+            }
         }
 
         public List<AkkonLeadResult> RunForDebug(ref AkkonSlice slice, AkkonAlgoritmParam parameters, float resolution_um)
@@ -182,10 +209,10 @@ namespace Jastech.Framework.Algorithms.Akkon
                 Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
 
                 var blobList = OpencvContour.Run(oneLeadMat);
-                FindShadowPoint(enhanceCropMat, oneLeadMat,ref blobList, boundRect);
+                FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
 
                 leadResult.BlobList.AddRange(blobList);
-                ClacJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
+                CalcJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
 
                 leadResultList.Add(leadResult);
 
@@ -277,7 +304,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             }
         }
 
-        public void ClacJudgement(Mat dataMat, Mat maskMat, ref AkkonLeadResult leadResult, AkkonAlgoritmParam param, float resolution_um)
+        public void CalcJudgement(Mat dataMat, Mat maskMat, ref AkkonLeadResult leadResult, AkkonAlgoritmParam param, float resolution_um)
         {
             PixelInfo minYInfo = new PixelInfo();
             PixelInfo maxYInfo = new PixelInfo();
@@ -1257,7 +1284,7 @@ namespace Jastech.Framework.Algorithms.Akkon
             return (1.0 / (Math.Sqrt(Math.PI * 2) * sigma * sigma * sigma) * (t - 1.0) * Math.Exp(t / -2.0));
         }
 
-        private unsafe void FindShadowPoint(Mat enhMat, Mat binMat,ref List<BlobPos> blobList, Rectangle rcOneLead)
+        private unsafe void FindShadowPoint(Mat enhMat, Mat binMat, ref List<BlobPos> blobList, Rectangle rcOneLead)
         {
             int nSearchOffset = 4;
 
@@ -1290,6 +1317,7 @@ namespace Jastech.Framework.Algorithms.Akkon
                         }
                     }
                 }
+
                 int nHeight = (int)Math.Min(10, rcBlob.Height * 1.5);
                 nHeight = Math.Max(5, nHeight);
                 int nLimit = Math.Min(bottom + nHeight, rcOneLead.Y + rcOneLead.Height);

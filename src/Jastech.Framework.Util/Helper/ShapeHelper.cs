@@ -11,7 +11,21 @@ namespace Jastech.Framework.Util.Helper
 {
     public static class ShapeHelper
     {
-        public static Rectangle GetValidRectangle(Rectangle inputRect, int imageWidht, int imageHeight)
+        public static bool CheckValidRectangle(Rectangle inputRect, int width, int height)
+        {
+            if (inputRect == null)
+                return false;
+
+            if (inputRect.Left < 0 || inputRect.Right > width)
+                return false;
+
+            if (inputRect.Top < 0 || inputRect.Bottom > height)
+                return false;
+
+            return true;
+        }
+
+        public static Rectangle GetValidRectangle(Rectangle inputRect, int imageWidth, int imageHeight)
         {
             Rectangle rectangle = new Rectangle();
 
@@ -23,8 +37,8 @@ namespace Jastech.Framework.Util.Helper
                 if (inputRect.Y < 0)
                     rectangle.Y = 0;
 
-                if (inputRect.Right > imageWidht)
-                    rectangle.Width = imageWidht - inputRect.X;
+                if (inputRect.Right > imageWidth)
+                    rectangle.Width = imageWidth - inputRect.X;
 
                 if (inputRect.Bottom > imageHeight)
                     rectangle.Height = imageHeight - inputRect.Y;

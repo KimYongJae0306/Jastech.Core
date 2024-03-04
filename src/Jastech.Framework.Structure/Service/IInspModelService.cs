@@ -4,6 +4,8 @@
     {
         #region 속성
         InspModel CurrentInspModel { get; set; }
+
+        void AddModelData(InspModel inspModel);
         #endregion
 
         #region 메서드
