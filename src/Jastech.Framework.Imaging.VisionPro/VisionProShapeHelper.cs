@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Caliper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,6 +12,69 @@ namespace Jastech.Framework.Imaging.VisionPro
 {
     public static class VisionProShapeHelper
     {
+        public static CogPolygon GetBoundingPolygon(CogImage8Grey cogImage, CogFindCircleTool cogFindCircleTool)
+        {
+            CogPolygon boundingPolygon = new CogPolygon();
+
+            var pointList = GetPolygonPoints(cogFindCircleTool);
+
+            for (int pointIndex = 0; pointIndex < pointList.Count; pointIndex++)
+                boundingPolygon.AddVertex(pointList[pointIndex].X, pointList[pointIndex].Y, pointIndex);
+
+            return boundingPolygon;
+        }
+
+        private static List<PointF> GetPolygonPoints(CogFindCircleTool cogFindCircleTool)
+        {
+            List<PointF> points = new List<PointF>();
+
+            double toolStartX = cogFindCircleTool.RunParams.ExpectedCircularArc.StartX;
+            double toolStartY = cogFindCircleTool.RunParams.ExpectedCircularArc.StartY;
+            double toolEndX = cogFindCircleTool.RunParams.ExpectedCircularArc.EndX;
+            double toolEndY = cogFindCircleTool.RunParams.ExpectedCircularArc.EndY;
+
+            double radius = cogFindCircleTool.RunParams.ExpectedCircularArc.Radius;
+            double caliperLength = cogFindCircleTool.RunParams.CaliperSearchLength / 2;
+
+            double angleStartTheta = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleStart;
+            double angleEndTheta = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleStart + cogFindCircleTool.RunParams.ExpectedCircularArc.AngleSpan;
+
+            double leftTopX = toolEndX + (radius + caliperLength) * Math.Cos(angleEndTheta);
+            double leftTopY = toolEndY + (radius + caliperLength) * Math.Sin(angleEndTheta);
+            PointF leftTop = new PointF(Convert.ToSingle(leftTopX), Convert.ToSingle(leftTopY));
+            points.Add(leftTop);
+
+            double leftBottomX = toolEndX - (radius - caliperLength) * Math.Cos(angleEndTheta);
+            double leftBottomY = toolEndY - (radius - caliperLength) * Math.Sin(angleEndTheta);
+            PointF leftBottom = new PointF(Convert.ToSingle(leftBottomX), Convert.ToSingle(leftBottomY));
+            points.Add(leftBottom);
+
+            double rightBottomX = toolStartX - (radius - caliperLength) * Math.Cos(angleStartTheta);
+            double rightBottomY = toolStartY - (radius - caliperLength) * Math.Sin(angleStartTheta);
+            PointF rightBottom = new PointF(Convert.ToSingle(rightBottomX), Convert.ToSingle(rightBottomY));
+            points.Add(rightBottom);
+
+            double rightTopX = toolStartX + (radius + caliperLength) * Math.Cos(angleStartTheta);
+            double rightTopY = toolStartY + (radius + caliperLength) * Math.Sin(angleStartTheta);
+            PointF rightTop = new PointF(Convert.ToSingle(rightTopX), Convert.ToSingle(rightTopY));
+            points.Add(rightTop);
+
+            return points;
+        }
+
+        public static CogRectangleAffine GetBoundingRectangle(CogFindLineTool cogFindLineTool)
+        {
+            CogRectangleAffine cogRectangleAffine = new CogRectangleAffine();
+
+            cogRectangleAffine.CenterX = cogFindLineTool.RunParams.ExpectedLineSegment.MidpointX;
+            cogRectangleAffine.CenterY = cogFindLineTool.RunParams.ExpectedLineSegment.MidpointY;
+            cogRectangleAffine.Rotation = cogFindLineTool.RunParams.ExpectedLineSegment.Rotation; // + CogMisc.DegToRad(90);
+            cogRectangleAffine.SideXLength = cogFindLineTool.RunParams.ExpectedLineSegment.Length;
+            cogRectangleAffine.SideYLength = cogFindLineTool.RunParams.CaliperSearchLength;
+
+            return cogRectangleAffine;
+        }
+
         public static CogRectangleAffine ConvertToCogRectAffine(PointF leftTop, PointF rightTop, PointF leftBottom)
         {
             CogRectangleAffine cogRectAffine = new CogRectangleAffine();
