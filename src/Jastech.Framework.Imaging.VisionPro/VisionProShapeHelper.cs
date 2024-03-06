@@ -28,36 +28,40 @@ namespace Jastech.Framework.Imaging.VisionPro
         {
             List<PointF> points = new List<PointF>();
 
-            double toolStartX = cogFindCircleTool.RunParams.ExpectedCircularArc.StartX;
-            double toolStartY = cogFindCircleTool.RunParams.ExpectedCircularArc.StartY;
-            double toolEndX = cogFindCircleTool.RunParams.ExpectedCircularArc.EndX;
-            double toolEndY = cogFindCircleTool.RunParams.ExpectedCircularArc.EndY;
-
+            double centerX = cogFindCircleTool.RunParams.ExpectedCircularArc.CenterX;
+            double centerY = cogFindCircleTool.RunParams.ExpectedCircularArc.CenterY;
             double radius = cogFindCircleTool.RunParams.ExpectedCircularArc.Radius;
             double caliperLength = cogFindCircleTool.RunParams.CaliperSearchLength / 2;
-
             double angleStartTheta = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleStart;
-            double angleEndTheta = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleStart + cogFindCircleTool.RunParams.ExpectedCircularArc.AngleSpan;
+            double angleSpan = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleSpan;
 
-            double leftTopX = toolEndX + (radius + caliperLength) * Math.Cos(angleEndTheta);
-            double leftTopY = toolEndY + (radius + caliperLength) * Math.Sin(angleEndTheta);
-            PointF leftTop = new PointF(Convert.ToSingle(leftTopX), Convert.ToSingle(leftTopY));
-            points.Add(leftTop);
+            int caliperCount = cogFindCircleTool.RunParams.NumCalipers + 2;     // 두개 더
+            double perRadian = angleSpan / caliperCount;
 
-            double leftBottomX = toolEndX - (radius - caliperLength) * Math.Cos(angleEndTheta);
-            double leftBottomY = toolEndY - (radius - caliperLength) * Math.Sin(angleEndTheta);
-            PointF leftBottom = new PointF(Convert.ToSingle(leftBottomX), Convert.ToSingle(leftBottomY));
-            points.Add(leftBottom);
+            // 상단
+            for (int index = 0; index < caliperCount + 1; index++)      // caliperCount + 1 : Caliper 끝 단 영역 확보를 위해 +1
+            {
+                double upperX = centerX + (radius + caliperLength) * Math.Cos(angleStartTheta + perRadian * index);
+                double upperY = centerY + (radius + caliperLength) * Math.Sin(angleStartTheta + perRadian * index);
 
-            double rightBottomX = toolStartX - (radius - caliperLength) * Math.Cos(angleStartTheta);
-            double rightBottomY = toolStartY - (radius - caliperLength) * Math.Sin(angleStartTheta);
-            PointF rightBottom = new PointF(Convert.ToSingle(rightBottomX), Convert.ToSingle(rightBottomY));
-            points.Add(rightBottom);
+                points.Add(new PointF(Convert.ToSingle(upperX), Convert.ToSingle(upperY)));
+            }
 
-            double rightTopX = toolStartX + (radius + caliperLength) * Math.Cos(angleStartTheta);
-            double rightTopY = toolStartY + (radius + caliperLength) * Math.Sin(angleStartTheta);
-            PointF rightTop = new PointF(Convert.ToSingle(rightTopX), Convert.ToSingle(rightTopY));
-            points.Add(rightTop);
+            // 하단
+            List<PointF> temp = new List<PointF>();
+            for (int index = 0; index < caliperCount + 1; index++)
+            {
+                double lowerX = centerX + (radius - caliperLength) * Math.Cos(angleStartTheta + perRadian * index);
+                double lowerY = centerY + (radius - caliperLength) * Math.Sin(angleStartTheta + perRadian * index);
+
+                temp.Add(new PointF(Convert.ToSingle(lowerX), Convert.ToSingle(lowerY)));
+            }
+
+            // 하단 뒤집어서
+            temp.Reverse();
+
+            // Add
+            points.AddRange(temp);
 
             return points;
         }
