@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Caliper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,6 +12,73 @@ namespace Jastech.Framework.Imaging.VisionPro
 {
     public static class VisionProShapeHelper
     {
+        public static CogPolygon GetBoundingPolygon(CogImage8Grey cogImage, CogFindCircleTool cogFindCircleTool)
+        {
+            CogPolygon boundingPolygon = new CogPolygon();
+
+            var pointList = GetPolygonPoints(cogFindCircleTool);
+
+            for (int pointIndex = 0; pointIndex < pointList.Count; pointIndex++)
+                boundingPolygon.AddVertex(pointList[pointIndex].X, pointList[pointIndex].Y, pointIndex);
+
+            return boundingPolygon;
+        }
+
+        private static List<PointF> GetPolygonPoints(CogFindCircleTool cogFindCircleTool)
+        {
+            List<PointF> points = new List<PointF>();
+
+            double centerX = cogFindCircleTool.RunParams.ExpectedCircularArc.CenterX;
+            double centerY = cogFindCircleTool.RunParams.ExpectedCircularArc.CenterY;
+            double radius = cogFindCircleTool.RunParams.ExpectedCircularArc.Radius;
+            double caliperLength = cogFindCircleTool.RunParams.CaliperSearchLength / 2;
+            double angleStartTheta = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleStart;
+            double angleSpan = cogFindCircleTool.RunParams.ExpectedCircularArc.AngleSpan;
+
+            int caliperCount = cogFindCircleTool.RunParams.NumCalipers + 2;     // 두개 더
+            double perRadian = angleSpan / caliperCount;
+
+            // 상단
+            for (int index = 0; index < caliperCount + 1; index++)      // caliperCount + 1 : Caliper 끝 단 영역 확보를 위해 +1
+            {
+                double upperX = centerX + (radius + caliperLength) * Math.Cos(angleStartTheta + perRadian * index);
+                double upperY = centerY + (radius + caliperLength) * Math.Sin(angleStartTheta + perRadian * index);
+
+                points.Add(new PointF(Convert.ToSingle(upperX), Convert.ToSingle(upperY)));
+            }
+
+            // 하단
+            List<PointF> temp = new List<PointF>();
+            for (int index = 0; index < caliperCount + 1; index++)
+            {
+                double lowerX = centerX + (radius - caliperLength) * Math.Cos(angleStartTheta + perRadian * index);
+                double lowerY = centerY + (radius - caliperLength) * Math.Sin(angleStartTheta + perRadian * index);
+
+                temp.Add(new PointF(Convert.ToSingle(lowerX), Convert.ToSingle(lowerY)));
+            }
+
+            // 하단 뒤집어서
+            temp.Reverse();
+
+            // Add
+            points.AddRange(temp);
+
+            return points;
+        }
+
+        public static CogRectangleAffine GetBoundingRectangle(CogFindLineTool cogFindLineTool)
+        {
+            CogRectangleAffine cogRectangleAffine = new CogRectangleAffine();
+
+            cogRectangleAffine.CenterX = cogFindLineTool.RunParams.ExpectedLineSegment.MidpointX;
+            cogRectangleAffine.CenterY = cogFindLineTool.RunParams.ExpectedLineSegment.MidpointY;
+            cogRectangleAffine.Rotation = cogFindLineTool.RunParams.ExpectedLineSegment.Rotation; // + CogMisc.DegToRad(90);
+            cogRectangleAffine.SideXLength = cogFindLineTool.RunParams.ExpectedLineSegment.Length;
+            cogRectangleAffine.SideYLength = cogFindLineTool.RunParams.CaliperSearchLength;
+
+            return cogRectangleAffine;
+        }
+
         public static CogRectangleAffine ConvertToCogRectAffine(PointF leftTop, PointF rightTop, PointF leftBottom)
         {
             CogRectangleAffine cogRectAffine = new CogRectangleAffine();
