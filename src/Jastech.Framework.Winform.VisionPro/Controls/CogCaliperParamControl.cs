@@ -2,6 +2,7 @@
 using Cognex.VisionPro.Caliper;
 using Jastech.Framework.Imaging.VisionPro.VisionAlgorithms.Parameters;
 using Jastech.Framework.Util.Helper;
+using Jastech.Framework.Winform.Forms;
 using Jastech.Framework.Winform.Helper;
 using System;
 using System.Drawing;
@@ -93,6 +94,14 @@ namespace Jastech.Framework.Winform.VisionPro.Controls
                 int oldFilterSize = Convert.ToInt32(label.Text);
                 int newFilterSize = Math.Abs(KeyPadHelper.SetLabelIntegerData(label));
 
+                if (newFilterSize < 1)
+                {
+                    MessageConfirmForm form = new MessageConfirmForm();
+                    form.Message = "You cannot enter a value less than 1. Enter an integer.";
+                    form.ShowDialog();
+                    label.Text = oldFilterSize.ToString();
+                    return;
+                }
                 CurrentParam.CaliperTool.RunParams.FilterHalfSizeInPixels = newFilterSize;
                 CaliperParamChanged?.Invoke("Caliper Param", label.Name.Replace("lbl", ""), oldFilterSize, newFilterSize);
             }
