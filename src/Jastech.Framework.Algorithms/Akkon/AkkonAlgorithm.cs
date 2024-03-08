@@ -64,25 +64,17 @@ namespace Jastech.Framework.Algorithms.Akkon
                     var currentImageFilter = parameters.ImageFilterParam.GetCurrentFilter();
 
                     if (parameters.ImageFilterParam.FilterDir == AkkonFilterDir.Vertical)
-                    {
                         enhanceMat = EnhanceY(slice.Image, currentImageFilter);
-                        Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Enhance Y.");
-                    }
                     else
-                    {
                         enhanceMat = EnhanceX(slice.Image, currentImageFilter);
-                        Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Enhance X.");
-                    }
 
                     Mat maskMat = MakeMaskImage(slice.Image, slice.CalcAkkonROIs);
-                    Logger.Write(LogType.Inspection, $"Make [Slice Index : {slice.Id}] Mask Image.");
 
                     int lowThres = 0;
                     int highThres = 255;
                     CalcThreadholdLowHigh(enhanceMat, maskMat, parameters.ImageFilterParam, out lowThres, out highThres);
 
                     Mat thresMat = Threshold(enhanceMat, maskMat, lowThres, highThres);
-                    Logger.Write(LogType.Inspection, $"Completed [Slice Index : {slice.Id}] Threshold.");
 
                     foreach (var roi in slice.CalcAkkonROIs)
                     {
@@ -90,7 +82,6 @@ namespace Jastech.Framework.Algorithms.Akkon
 
                         Mat roiThresMat = new Mat(thresMat, boundRect);
                         Mat oneLeadMask = MakeMaskImage(new Size(boundRect.Width, boundRect.Height), roi, boundRect.X, boundRect.Y);
-                        Logger.Write(LogType.Inspection, $"Make [Bound Rectangle Index : {roi.Index}] Mask Image.");
                         Mat oneLeadMat = new Mat();
 
                         CvInvoke.BitwiseAnd(oneLeadMask, roiThresMat, oneLeadMat);
@@ -111,13 +102,9 @@ namespace Jastech.Framework.Algorithms.Akkon
                             leadResult.ContainPos = LeadContainPos.Right;
 
                         Mat enhanceCropMat = MatHelper.CropRoi(enhanceMat, boundRect);
-                        Logger.Write(LogType.Inspection, $"Make [Bound Rectangle Index : {roi.Index}] Crop.");
 
                         var blobList = OpencvContour.Run(oneLeadMat);
-                        Logger.Write(LogType.Inspection, $"Completed [Bound Rectangle Index : {roi.Index}] Contour.");
-
                         FindShadowPoint(enhanceCropMat, oneLeadMat, ref blobList, boundRect);
-                        Logger.Write(LogType.Inspection, $"Find [Bound Rectangle Index : {roi.Index}] Shadow Point.");
 
                         leadResult.BlobList.AddRange(blobList);
                         CalcJudgement(enhanceCropMat, oneLeadMask, ref leadResult, parameters, calcReslution_um);
