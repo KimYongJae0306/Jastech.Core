@@ -3,9 +3,11 @@ using Jastech.Framework.Util.Helper;
 using MvCamCtrl.NET;
 using Newtonsoft.Json;
 using System;
+using System.CodeDom;
 using System.ComponentModel.Composition.Primitives;
 using System.Runtime.InteropServices;
 using System.Threading;
+using static MvCamCtrl.NET.MyCamera;
 
 namespace Jastech.Framework.Device.Cameras
 {
@@ -110,9 +112,11 @@ namespace Jastech.Framework.Device.Cameras
 
                 LastImageData = temp;
             }
+
             ImageGrabbedCallback();
             OnceGrabEvent.Set();
         }
+
         public override bool Release()
         {
             base.Release();
@@ -276,9 +280,19 @@ namespace Jastech.Framework.Device.Cameras
 
             // Trigger Mode
             if (TriggerMode == TriggerMode.Software)
-                result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
+            {
+                MV_CAM_TRIGGER_MODE currentTriggerMode = (MV_CAM_TRIGGER_MODE)GetEnumValue("TriggerMode").nCurValue;
+
+                if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF)
+                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
+            }
             else if (TriggerMode == TriggerMode.Hardware)
-                result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
+            {
+                MV_CAM_TRIGGER_MODE currentTriggerMode = (MV_CAM_TRIGGER_MODE)GetEnumValue("TriggerMode").nCurValue;
+
+                if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON)
+                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
+            }
 
             if (result != MyCamera.MV_OK)
             {
@@ -288,7 +302,10 @@ namespace Jastech.Framework.Device.Cameras
 
             // Trigger Source
             TriggerSource = 7;
-            result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)TriggerSource);
+
+            MV_CAM_TRIGGER_SOURCE currentTriggerSource = (MV_CAM_TRIGGER_SOURCE)GetEnumValue("TriggerSource").nCurValue;
+            if (currentTriggerSource != (MV_CAM_TRIGGER_SOURCE)TriggerSource)
+                result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)TriggerSource);
 
             if (result != MyCamera.MV_OK)
             {
@@ -421,6 +438,11 @@ namespace Jastech.Framework.Device.Cameras
 
         private bool SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE type)
         {
+            var getValue = (MV_CAM_ACQUISITION_MODE)GetEnumValue("AcquisitionMode").nCurValue;
+
+            if (type == getValue)
+                return true;
+
             int result = _camera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)type);
             if (result != 0)
             {
@@ -428,6 +450,15 @@ namespace Jastech.Framework.Device.Cameras
                 return false;
             }
             return true;
+        }
+
+        private MyCamera.MVCC_ENUMVALUE GetEnumValue(string enumString)
+        {
+            MyCamera.MVCC_ENUMVALUE getValue = new MyCamera.MVCC_ENUMVALUE();
+
+            _camera.MV_CC_GetEnumValue_NET(enumString, ref getValue);
+
+            return getValue;
         }
 
         public uint GetPayLoadSize()
