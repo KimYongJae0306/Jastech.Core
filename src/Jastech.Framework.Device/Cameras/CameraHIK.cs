@@ -285,6 +285,8 @@ namespace Jastech.Framework.Device.Cameras
 
                 if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF)
                     result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
+                else
+                    Logger.Error(ErrorType.Camera, $"Already Set Trigger Mode : {TriggerMode}");
             }
             else if (TriggerMode == TriggerMode.Hardware)
             {
@@ -292,6 +294,8 @@ namespace Jastech.Framework.Device.Cameras
 
                 if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON)
                     result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
+                else
+                    Logger.Error(ErrorType.Camera, $"Already Set Trigger Mode : {TriggerMode}");
             }
 
             if (result != MyCamera.MV_OK)
@@ -306,6 +310,8 @@ namespace Jastech.Framework.Device.Cameras
             MV_CAM_TRIGGER_SOURCE currentTriggerSource = (MV_CAM_TRIGGER_SOURCE)GetEnumValue("TriggerSource").nCurValue;
             if (currentTriggerSource != (MV_CAM_TRIGGER_SOURCE)TriggerSource)
                 result = _camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)TriggerSource);
+            else
+                Logger.Error(ErrorType.Camera, $"Already Set Trigger Source : {TriggerSource}");
 
             if (result != MyCamera.MV_OK)
             {
@@ -440,15 +446,18 @@ namespace Jastech.Framework.Device.Cameras
         {
             var getValue = (MV_CAM_ACQUISITION_MODE)GetEnumValue("AcquisitionMode").nCurValue;
 
-            if (type == getValue)
-                return true;
-
-            int result = _camera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)type);
-            if (result != 0)
+            if (type != getValue)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Acquisition Mode set failed. Name : {0}", Name));
-                return false;
+                int result = _camera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)type);
+                if (result != 0)
+                {
+                    Logger.Error(ErrorType.Camera, string.Format("HIK Camera Acquisition Mode set failed. Name : {0}", Name));
+                    return false;
+                }
             }
+            else
+                Logger.Error(ErrorType.Camera, $"Already Set SetAcquisitionMode Mode : {type}");
+
             return true;
         }
 
