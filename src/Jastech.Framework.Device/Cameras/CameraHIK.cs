@@ -39,6 +39,8 @@ namespace Jastech.Framework.Device.Cameras
         private MyCamera.MVCC_INTVALUE IntValueParam = new MyCamera.MVCC_INTVALUE();
 
         private MyCamera.cbOutputExdelegate ImageCallback;
+
+        private MyCamera.cbExceptiondelegate ExceptionCallback;
         #endregion
 
         #region 이벤트
@@ -96,7 +98,16 @@ namespace Jastech.Framework.Device.Cameras
                 Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register image callback failed. Name : {0}", Name));
                 return false;
             }
-            
+
+            // Register Disconnect Callback
+            ExceptionCallback = new cbExceptiondelegate(DisconnectCallback);
+            int exception = _camera.MV_CC_RegisterExceptionCallBack_NET(ExceptionCallback, IntPtr.Zero);
+            if (MyCamera.MV_OK != exception)
+            {
+                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register exception callback failed. Name : {0}", Name));
+                return false;
+            }
+
             return true;
         }
 
@@ -115,6 +126,12 @@ namespace Jastech.Framework.Device.Cameras
 
             ImageGrabbedCallback();
             OnceGrabEvent.Set();
+        }
+
+        private void DisconnectCallback(uint message, IntPtr pData)
+        {
+            if (message == MyCamera.MV_EXCEPTION_DEV_DISCONNECT)
+                Logger.Error(ErrorType.Camera, "MV_EXCEPTION_DEV_DISCONNECT");
         }
 
         public override bool Release()
