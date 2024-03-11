@@ -81,7 +81,7 @@ namespace Jastech.Framework.Device.Cameras
                 return false;
             }
 
-            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
+            SetAcquisitionMode(MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
 
             ActiveTriggerCommand();
 
@@ -93,18 +93,20 @@ namespace Jastech.Framework.Device.Cameras
             //Register Callback
             ImageCallback = new MyCamera.cbOutputExdelegate(OnImageGrabbed);
             int result = _camera.MV_CC_RegisterImageCallBackEx_NET(ImageCallback, IntPtr.Zero);
-            if (MyCamera.MV_OK != result)
+            if (MV_OK != result)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register image callback failed. Name : {0}", Name));
+                var errorMessage = GetErrorMessage($"HIK Camera Register image callback failed. Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return false;
             }
 
             // Register Disconnect Callback
             ExceptionCallback = new cbExceptiondelegate(DisconnectCallback);
             int exception = _camera.MV_CC_RegisterExceptionCallBack_NET(ExceptionCallback, IntPtr.Zero);
-            if (MyCamera.MV_OK != exception)
+            if (MV_OK != exception)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Register exception callback failed. Name : {0}", Name));
+                var errorMessage = GetErrorMessage($"HIK Camera Register exception callback failed. Name : {Name}", exception);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return false;
             }
 
@@ -130,7 +132,7 @@ namespace Jastech.Framework.Device.Cameras
 
         private void DisconnectCallback(uint message, IntPtr pData)
         {
-            if (message == MyCamera.MV_EXCEPTION_DEV_DISCONNECT)
+            if (message == MV_EXCEPTION_DEV_DISCONNECT)
             {
                 Logger.Error(ErrorType.Camera, "MV_EXCEPTION_DEV_DISCONNECT");
 
@@ -158,7 +160,7 @@ namespace Jastech.Framework.Device.Cameras
 
         public override byte[] GetGrabbedImage()
         {
-            lock(_lock)
+            lock (_lock)
             {
                 if (LastImageData != null)
                     return LastImageData;
@@ -173,7 +175,7 @@ namespace Jastech.Framework.Device.Cameras
             OnceGrabEvent.Reset();
 
             _isGrabbing = true;
-            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_SINGLE);
+            SetAcquisitionMode(MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_SINGLE);
             _camera.MV_CC_StartGrabbing_NET();
 
             OnceGrabEvent.WaitOne(OnceGrabResponseTimeMs);
@@ -182,24 +184,25 @@ namespace Jastech.Framework.Device.Cameras
         public override void GrabMulti(int grabCount)
         {
             _isGrabbing = true;
-            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
+            SetAcquisitionMode(MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_MUTLI);
             _camera.MV_CC_StartGrabbing_NET();
         }
 
         public override void GrabContinous()
         {
             _isGrabbing = true;
-            SetAcquisitionMode(MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
+            SetAcquisitionMode(MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
             _camera.MV_CC_StartGrabbing_NET();
         }
 
         public override void Stop()
         {
             _isGrabbing = false;
-            int nRet = _camera.MV_CC_StopGrabbing_NET();
-            if (MyCamera.MV_OK != nRet)
+            int result = _camera.MV_CC_StopGrabbing_NET();
+            if (MV_OK != result)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Stop Grab failed. Name : {0}", Name));
+                var errorMessage = GetErrorMessage($"HIK Camera Stop Grab failed. Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return;
             }
         }
@@ -212,10 +215,11 @@ namespace Jastech.Framework.Device.Cameras
         public override void SetExposureTime(double value)
         {
             float expose = (float)(value);
-            int nRet = _camera.MV_CC_SetFloatValue_NET("ExposureTime", expose);
-            if (nRet != MyCamera.MV_OK)
+            int result = _camera.MV_CC_SetFloatValue_NET("ExposureTime", expose);
+            if (result != MV_OK)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetExposureTime failed({0}). Name : {1}", expose, Name));
+                var errorMessage = GetErrorMessage($"HIK Camera SetExposureTime failed({expose}). Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return;
             }
         }
@@ -231,10 +235,11 @@ namespace Jastech.Framework.Device.Cameras
         public override void SetReverseX(bool reverse)
         {
             //MVS 연결 후 작성 예정
-            int nRet = _camera.MV_CC_SetBoolValue_NET("ReverseX", reverse);
-            if (nRet != MyCamera.MV_OK)
+            int result = _camera.MV_CC_SetBoolValue_NET("ReverseX", reverse);
+            if (result != MV_OK)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Reverse failed({0}). Name : {1}", reverse, Name));
+                var errorMessage = GetErrorMessage($"HIK Camera Reverse failed({reverse}). Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return;
             }
         }
@@ -300,15 +305,15 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public void ActiveTriggerCommand()
         {
-            int result = MyCamera.MV_OK;
+            int result = MV_OK;
 
             // Trigger Mode
             if (TriggerMode == TriggerMode.Software)
             {
                 MV_CAM_TRIGGER_MODE currentTriggerMode = (MV_CAM_TRIGGER_MODE)GetEnumValue("TriggerMode").nCurValue;
 
-                if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF)
-                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
+                if (currentTriggerMode != MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF)
+                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
                 else
                     Logger.Error(ErrorType.Camera, $"Already Set Trigger Mode : {TriggerMode}");
             }
@@ -316,15 +321,16 @@ namespace Jastech.Framework.Device.Cameras
             {
                 MV_CAM_TRIGGER_MODE currentTriggerMode = (MV_CAM_TRIGGER_MODE)GetEnumValue("TriggerMode").nCurValue;
 
-                if (currentTriggerMode != MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON)
-                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
+                if (currentTriggerMode != MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON)
+                    result = _camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
                 else
                     Logger.Error(ErrorType.Camera, $"Already Set Trigger Mode : {TriggerMode}");
             }
 
-            if (result != MyCamera.MV_OK)
+            if (result != MV_OK)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera SetTriggerMode failed({0}). Name : {1}", TriggerMode.ToString(), Name));
+                var errorMessage = GetErrorMessage($"HIK Camera SetTriggerMode failed({TriggerMode}). Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return;
             }
 
@@ -337,14 +343,15 @@ namespace Jastech.Framework.Device.Cameras
             else
                 Logger.Error(ErrorType.Camera, $"Already Set Trigger Source : {TriggerSource}");
 
-            if (result != MyCamera.MV_OK)
+            if (result != MV_OK)
             {
                 MyCamera.MV_CAM_TRIGGER_SOURCE source = (MyCamera.MV_CAM_TRIGGER_SOURCE)TriggerSource;
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera TriggerSource set failed({0}). Name : {1}", source.ToString(), Name));
+                var errorMessage = GetErrorMessage($"HIK Camera TriggerSource set failed({source}). Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
                 return;
             }
         }
-       
+
         public void SetTriggerMode(TriggerMode triggerMode)
         {
             TriggerMode = triggerMode;
@@ -367,12 +374,12 @@ namespace Jastech.Framework.Device.Cameras
     {
         public bool FindDevice()
         {
-            int result = MyCamera.MV_OK;
+            int result = MV_OK;
 
             // 현재 연결된 Camera 정보 가져오기
             var currentDeviceList = new MyCamera.MV_CC_DEVICE_INFO_LIST();
-            result = MyCamera.MV_CC_EnumDevices_NET(MyCamera.MV_GIGE_DEVICE | MyCamera.MV_USB_DEVICE, ref currentDeviceList);
-            if (result != MyCamera.MV_OK)
+            result = MV_CC_EnumDevices_NET(MV_GIGE_DEVICE | MV_USB_DEVICE, ref currentDeviceList);
+            if (result != MV_OK)
                 return false;
 
             // 연결된 Camera 중 설정된 Serial 값과 동일한 정보 축출
@@ -380,7 +387,7 @@ namespace Jastech.Framework.Device.Cameras
             {
                 MyCamera.MV_CC_DEVICE_INFO deviceInfo = (MyCamera.MV_CC_DEVICE_INFO)Marshal.PtrToStructure(currentDeviceList.pDeviceInfo[i], typeof(MyCamera.MV_CC_DEVICE_INFO));
 
-                if (deviceInfo.nTLayerType == MyCamera.MV_GIGE_DEVICE)
+                if (deviceInfo.nTLayerType == MV_GIGE_DEVICE)
                 {
                     if (GetGigESerialNumber(deviceInfo) == SerialNo)
                     {
@@ -388,7 +395,7 @@ namespace Jastech.Framework.Device.Cameras
                         return true;
                     }
                 }
-                else if (deviceInfo.nTLayerType == MyCamera.MV_USB_DEVICE)
+                else if (deviceInfo.nTLayerType == MV_USB_DEVICE)
                 {
                     if (GetUSBSerialNumber(deviceInfo) == SerialNo)
                     {
@@ -402,16 +409,16 @@ namespace Jastech.Framework.Device.Cameras
 
         public bool OpenDevice()
         {
-            int result = MyCamera.MV_OK;
+            int result = MV_OK;
 
             // 축출된 정보로 객체 생성
             result = _camera.MV_CC_CreateDevice_NET(ref SelectedDeviceInfo);
-            if (MyCamera.MV_OK != result)
+            if (MV_OK != result)
                 return false;
 
             //카메라 오픈이 안됬을 경우 재시도한다.
             result = _camera.MV_CC_OpenDevice_NET();
-            if (MyCamera.MV_OK != result)
+            if (MV_OK != result)
             {
                 ReConnectTry(tryCount: 30, sleepTime: 2000);
             }
@@ -424,22 +431,23 @@ namespace Jastech.Framework.Device.Cameras
 
         public bool SetGigEGevSCPSPacketSize()
         {
-            int result = MyCamera.MV_OK;
-            if (SelectedDeviceInfo.nTLayerType == MyCamera.MV_GIGE_DEVICE)
+            int result = MV_OK;
+            if (SelectedDeviceInfo.nTLayerType == MV_GIGE_DEVICE)
             {
                 int packetSize = _camera.MV_CC_GetOptimalPacketSize_NET();
                 if (packetSize > 0)
                 {
                     result = _camera.MV_CC_SetIntValue_NET("GevSCPSPacketSize", (uint)packetSize);
-                    if (result != MyCamera.MV_OK)
+                    if (result != MV_OK)
                     {
-                        Logger.Error(ErrorType.Camera, string.Format("HIK Camera Set Packet Size failed. Name : {0}", Name));
+                        var errorMessage = GetErrorMessage($"HIK Camera Set Packet Size failed. Name : {Name}", result);
+                        Logger.Error(ErrorType.Camera, errorMessage);
                         return false;
                     }
                 }
                 else
                 {
-                    Logger.Error(ErrorType.Camera, string.Format("HIK Camera Get Packet Size failed. Name : {0}", Name));
+                    Logger.Error(ErrorType.Camera, $"HIK Camera Get Packet Size failed. Name : {Name}");
                     return false;
                 }
             }
@@ -448,9 +456,9 @@ namespace Jastech.Framework.Device.Cameras
 
         private string GetGigESerialNumber(MyCamera.MV_CC_DEVICE_INFO stDevInfo)
         {
-            if (MyCamera.MV_GIGE_DEVICE == stDevInfo.nTLayerType)
+            if (MV_GIGE_DEVICE == stDevInfo.nTLayerType)
             {
-                MyCamera.MV_GIGE_DEVICE_INFO stGigeDeviceInfo = (MyCamera.MV_GIGE_DEVICE_INFO)MyCamera.ByteToStruct(stDevInfo.SpecialInfo.stGigEInfo, typeof(MyCamera.MV_GIGE_DEVICE_INFO));
+                MyCamera.MV_GIGE_DEVICE_INFO stGigeDeviceInfo = (MyCamera.MV_GIGE_DEVICE_INFO)ByteToStruct(stDevInfo.SpecialInfo.stGigEInfo, typeof(MyCamera.MV_GIGE_DEVICE_INFO));
                 return stGigeDeviceInfo.chSerialNumber;
             }
             return "";
@@ -458,9 +466,9 @@ namespace Jastech.Framework.Device.Cameras
 
         private string GetUSBSerialNumber(MyCamera.MV_CC_DEVICE_INFO stDevInfo)
         {
-            if (MyCamera.MV_GIGE_DEVICE == stDevInfo.nTLayerType)
+            if (MV_GIGE_DEVICE == stDevInfo.nTLayerType)
             {
-                MyCamera.MV_USB3_DEVICE_INFO usbDeviceInfo = (MyCamera.MV_USB3_DEVICE_INFO)MyCamera.ByteToStruct(stDevInfo.SpecialInfo.stUsb3VInfo, typeof(MyCamera.MV_USB3_DEVICE_INFO));
+                MyCamera.MV_USB3_DEVICE_INFO usbDeviceInfo = (MyCamera.MV_USB3_DEVICE_INFO)ByteToStruct(stDevInfo.SpecialInfo.stUsb3VInfo, typeof(MyCamera.MV_USB3_DEVICE_INFO));
                 return usbDeviceInfo.chSerialNumber;
             }
             return "";
@@ -475,7 +483,8 @@ namespace Jastech.Framework.Device.Cameras
                 int result = _camera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)type);
                 if (result != 0)
                 {
-                    Logger.Error(ErrorType.Camera, string.Format("HIK Camera Acquisition Mode set failed. Name : {0}", Name));
+                    var errorMessage = GetErrorMessage($"HIK Camera Acquisition Mode set failed. Name : {Name}", result);
+                    Logger.Error(ErrorType.Camera, errorMessage);
                     return false;
                 }
             }
@@ -497,9 +506,10 @@ namespace Jastech.Framework.Device.Cameras
         public uint GetPayLoadSize()
         {
             int result = _camera.MV_CC_GetIntValue_NET("PayloadSize", ref IntValueParam);
-            if (MyCamera.MV_OK != result)
+            if (MV_OK != result)
             {
-                Logger.Error(ErrorType.Camera, string.Format("HIK Camera Get PayloadSize failed. Name : {0}", Name));
+                var errorMessage = GetErrorMessage($"HIK Camera Get PayloadSize failed. Name : {Name}", result);
+                Logger.Error(ErrorType.Camera, errorMessage);
             }
 
             return IntValueParam.nCurValue;
@@ -509,23 +519,23 @@ namespace Jastech.Framework.Device.Cameras
 
         private void ReConnectTry(int tryCount = 30, int sleepTime = 2000)
         {
-            int nRet = MyCamera.MV_OK;
+            int result = MV_OK;
             _camera.MV_CC_CloseDevice_NET();
             _camera.MV_CC_DestroyDevice_NET();
 
-            nRet = _camera.MV_CC_CreateDevice_NET(ref SelectedDeviceInfo);
-            if (MyCamera.MV_OK != nRet)
-                throw new Exception(ErrorMessage("Device Create Fail!", nRet));
+            result = _camera.MV_CC_CreateDevice_NET(ref SelectedDeviceInfo);
+            if (MV_OK != result)
+                throw new Exception(GetErrorMessage($"Device Create Fail!", result));
 
             int reTry = 0;
             while (true)
             {
                 Thread.Sleep(sleepTime);
-                nRet = _camera.MV_CC_OpenDevice_NET();
-                if (MyCamera.MV_OK != nRet)
+                result = _camera.MV_CC_OpenDevice_NET();
+                if (MV_OK != result)
                 {
                     if (tryCount < reTry++)
-                        throw new Exception(ErrorMessage("Device Create Fail!", nRet));
+                        throw new Exception(GetErrorMessage($"Device Create Fail!", result));
                     else
                         Logger.Error(ErrorType.Camera, $"HIK Camera Open Error. ReConnectTry...{reTry}");
                 }
@@ -534,62 +544,62 @@ namespace Jastech.Framework.Device.Cameras
             }
         }
 
-        private string ErrorMessage(string csMessage, int nErrorNum)
+        private string GetErrorMessage(string problem, int errorCode)
         {
-            var errorMsg = nErrorNum == 0 ? csMessage : csMessage + ": Error =" + String.Format("{0:X}", nErrorNum);
-            switch (nErrorNum)
+            var errorMessage = errorCode == MV_OK ? problem : $"{problem}, ErrorCode : {errorCode:X2}";
+            switch (errorCode)
             {
-                case MyCamera.MV_E_HANDLE:
-                    errorMsg += " Error or invalid handle ";
+                case MV_E_HANDLE:
+                    errorMessage = $"{errorMessage}, Detail : Error or invalid handle";
                     break;
-                case MyCamera.MV_E_SUPPORT:
-                    errorMsg += " Not supported function ";
+                case MV_E_SUPPORT:
+                    errorMessage = $"{errorMessage}, Detail : Not supported function";
                     break;
-                case MyCamera.MV_E_BUFOVER:
-                    errorMsg += " Cache is full ";
+                case MV_E_BUFOVER:
+                    errorMessage = $"{errorMessage}, Detail : Cache is full ";
                     break;
-                case MyCamera.MV_E_CALLORDER:
-                    errorMsg += " Function calling order error ";
+                case MV_E_CALLORDER:
+                    errorMessage = $"{errorMessage}, Detail : Function calling order error";
                     break;
-                case MyCamera.MV_E_PARAMETER:
-                    errorMsg += " Incorrect parameter ";
+                case MV_E_PARAMETER:
+                    errorMessage = $"{errorMessage}, Detail : Incorrect parameter";
                     break;
-                case MyCamera.MV_E_RESOURCE:
-                    errorMsg += " Applying resource failed ";
+                case MV_E_RESOURCE:
+                    errorMessage = $"{errorMessage}, Detail : Applying resource failed";
                     break;
-                case MyCamera.MV_E_NODATA:
-                    errorMsg += " No data ";
+                case MV_E_NODATA:
+                    errorMessage = $"{errorMessage}, Detail : No data";
                     break;
-                case MyCamera.MV_E_PRECONDITION:
-                    errorMsg += " Precondition error, or running environment changed ";
+                case MV_E_PRECONDITION:
+                    errorMessage = $"{errorMessage}, Detail : Precondition error, or running environment changed";
                     break;
-                case MyCamera.MV_E_VERSION:
-                    errorMsg += " Version mismatches ";
+                case MV_E_VERSION:
+                    errorMessage = $"{errorMessage}, Detail : Version mismatches";
                     break;
-                case MyCamera.MV_E_NOENOUGH_BUF:
-                    errorMsg += " Insufficient memory ";
+                case MV_E_NOENOUGH_BUF:
+                    errorMessage = $"{errorMessage}, Detail : Insufficient memory";
                     break;
-                case MyCamera.MV_E_UNKNOW:
-                    errorMsg += " Unknown error ";
+                case MV_E_UNKNOW:
+                    errorMessage = $"{errorMessage}, Detail : Unknown error";
                     break;
-                case MyCamera.MV_E_GC_GENERIC:
-                    errorMsg += " General error ";
+                case MV_E_GC_GENERIC:
+                    errorMessage = $"{errorMessage}, Detail : General error";
                     break;
-                case MyCamera.MV_E_GC_ACCESS:
-                    errorMsg += " Node accessing condition error ";
+                case MV_E_GC_ACCESS:
+                    errorMessage = $"{errorMessage}, Detail : Node accessing condition error";
                     break;
-                case MyCamera.MV_E_ACCESS_DENIED:
-                    errorMsg += " No permission ";
+                case MV_E_ACCESS_DENIED:
+                    errorMessage = $"{errorMessage}, Detail : No permission";
                     break;
-                case MyCamera.MV_E_BUSY:
-                    errorMsg += " Device is busy, or network disconnected ";
+                case MV_E_BUSY:
+                    errorMessage = $"{errorMessage}, Detail : Device is busy, or network disconnected";
                     break;
-                case MyCamera.MV_E_NETER:
-                    errorMsg += " Network error ";
+                case MV_E_NETER:
+                    errorMessage = $"{errorMessage}, Detail : Network error";
                     break;
             }
 
-            return errorMsg;
+            return errorMessage;
         }
         #endregion
     }
