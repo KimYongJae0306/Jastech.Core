@@ -540,59 +540,56 @@ namespace Jastech.Framework.Device.Cameras
 
         private string GetErrorMessage(string problem, int errorCode)
         {
-            var errorMessage = errorCode == MV_OK ? problem : $"{problem}, ErrorCode : {errorCode:X2}, ErrorDetail : ";
+            var errorMessage = errorCode == MV_OK ? problem : $"{problem}, ErrorCode : {errorCode:X2}";
             switch (errorCode)
             {
                 case MV_E_HANDLE:
-                    errorMessage += "Error or invalid handle";
+                    errorMessage = $"{errorMessage}, Detail : Error or invalid handle";
                     break;
                 case MV_E_SUPPORT:
-                    errorMessage += "Not supported function";
+                    errorMessage = $"{errorMessage}, Detail : Not supported function";
                     break;
                 case MV_E_BUFOVER:
-                    errorMessage += "Cache is full ";
+                    errorMessage = $"{errorMessage}, Detail : Cache is full ";
                     break;
                 case MV_E_CALLORDER:
-                    errorMessage += "Function calling order error";
+                    errorMessage = $"{errorMessage}, Detail : Function calling order error";
                     break;
                 case MV_E_PARAMETER:
-                    errorMessage += "Incorrect parameter";
+                    errorMessage = $"{errorMessage}, Detail : Incorrect parameter";
                     break;
                 case MV_E_RESOURCE:
-                    errorMessage += "Applying resource failed";
+                    errorMessage = $"{errorMessage}, Detail : Applying resource failed";
                     break;
                 case MV_E_NODATA:
-                    errorMessage += "No data";
+                    errorMessage = $"{errorMessage}, Detail : No data";
                     break;
                 case MV_E_PRECONDITION:
-                    errorMessage += "Precondition error, or running environment changed";
+                    errorMessage = $"{errorMessage}, Detail : Precondition error, or running environment changed";
                     break;
                 case MV_E_VERSION:
-                    errorMessage += "Version mismatches";
+                    errorMessage = $"{errorMessage}, Detail : Version mismatches";
                     break;
                 case MV_E_NOENOUGH_BUF:
-                    errorMessage += "Insufficient memory";
+                    errorMessage = $"{errorMessage}, Detail : Insufficient memory";
                     break;
                 case MV_E_UNKNOW:
-                    errorMessage += "Unknown error";
+                    errorMessage = $"{errorMessage}, Detail : Unknown error";
                     break;
                 case MV_E_GC_GENERIC:
-                    errorMessage += "General error";
+                    errorMessage = $"{errorMessage}, Detail : General error";
                     break;
                 case MV_E_GC_ACCESS:
-                    errorMessage += "Node accessing condition error";
+                    errorMessage = $"{errorMessage}, Detail : Node accessing condition error";
                     break;
                 case MV_E_ACCESS_DENIED:
-                    errorMessage += "No permission";
+                    errorMessage = $"{errorMessage}, Detail : No permission";
                     break;
                 case MV_E_BUSY:
-                    errorMessage += "Device is busy, or network disconnected";
+                    errorMessage = $"{errorMessage}, Detail : Device is busy, or network disconnected";
                     break;
                 case MV_E_NETER:
-                    errorMessage += "Network error";
-                    break;
-                default:
-                    errorMessage += "Not implemented";
+                    errorMessage = $"{errorMessage}, Detail : Network error";
                     break;
             }
 
