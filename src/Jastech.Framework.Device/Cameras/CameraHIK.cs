@@ -131,7 +131,14 @@ namespace Jastech.Framework.Device.Cameras
         private void DisconnectCallback(uint message, IntPtr pData)
         {
             if (message == MyCamera.MV_EXCEPTION_DEV_DISCONNECT)
+            {
                 Logger.Error(ErrorType.Camera, "MV_EXCEPTION_DEV_DISCONNECT");
+
+                Release();
+                Thread.Sleep(100);
+
+                Initialize();
+            }
         }
 
         public override bool Release()
