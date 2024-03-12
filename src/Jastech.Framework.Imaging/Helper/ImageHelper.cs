@@ -169,5 +169,47 @@ namespace Jastech.Framework.Imaging.Helper
                 bmp.UnlockBits(bmpData);
             }
         }
+
+        public static Bitmap ConvertToGrayscale(Bitmap bitmap, double redScale = 0.299, double greenScale = 0.114, double blueScale = 0.587)
+        {
+            if (bitmap.PixelFormat == PixelFormat.Format8bppIndexed)
+                return bitmap;
+
+            Bitmap grayscaleBitmap = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format8bppIndexed);
+
+            ColorPalette palette = grayscaleBitmap.Palette;
+            for (int i = 0; i < 256; i++)
+                palette.Entries[i] = Color.FromArgb(i, i, i);
+            grayscaleBitmap.Palette = palette;
+
+            Rectangle rect = new Rectangle(0, 0, grayscaleBitmap.Width, grayscaleBitmap.Height);
+            BitmapData grayscaleData = grayscaleBitmap.LockBits(rect, ImageLockMode.WriteOnly, grayscaleBitmap.PixelFormat);
+            BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            unsafe
+            {
+                byte* grayImageData = (byte*)grayscaleData.Scan0;
+                byte* originImageData = (byte*)bitmapData.Scan0;
+
+                int grayStride = grayscaleData.Stride;
+                int originStride = bitmapData.Stride;
+
+                for (int y = 0; y < grayscaleBitmap.Height; y++)
+                {
+                    for (int x = 0; x < grayscaleBitmap.Width; x++)
+                    {
+                        byte grayscaleValue = (byte)((originImageData[y * originStride + x * 3] * redScale) +
+                                                     (originImageData[y * originStride + x * 3 + 1] * greenScale) +
+                                                     (originImageData[y * originStride + x * 3 + 2] * blueScale));
+
+                        grayImageData[y * grayStride + x] = grayscaleValue;
+                    }
+                }
+            }
+
+            grayscaleBitmap.UnlockBits(grayscaleData);
+            bitmap.UnlockBits(bitmapData);
+
+            return grayscaleBitmap;
+        }
     }
 }
