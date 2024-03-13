@@ -16,10 +16,10 @@ namespace Jastech.Framework.Util.Helper
             if (inputRect == null)
                 return false;
 
-            if (inputRect.Left < 0 || inputRect.Right > width)
+            if (inputRect.Left < 0 || inputRect.Right - inputRect.Left > width)
                 return false;
 
-            if (inputRect.Top < 0 || inputRect.Bottom > height)
+            if (inputRect.Top < 0 || inputRect.Bottom - inputRect.Top > height)
                 return false;
 
             return true;

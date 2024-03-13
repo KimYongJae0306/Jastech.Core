@@ -170,10 +170,14 @@ namespace Jastech.Framework.Imaging.Helper
             }
         }
 
-        public static Bitmap ConvertToGrayscale(Bitmap bitmap, double redScale = 0.299, double greenScale = 0.114, double blueScale = 0.587)
+        public static Bitmap ConvertRGB24ToGrayscale(Bitmap bitmap, double redScale = 0.299, double greenScale = 0.114, double blueScale = 0.587)
         {
+            if (bitmap == null)
+                return bitmap;
             if (bitmap.PixelFormat == PixelFormat.Format8bppIndexed)
                 return bitmap;
+            if (bitmap.PixelFormat != PixelFormat.Format24bppRgb)
+                return null;
 
             Bitmap grayscaleBitmap = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format8bppIndexed);
 
@@ -210,6 +214,46 @@ namespace Jastech.Framework.Imaging.Helper
             bitmap.UnlockBits(bitmapData);
 
             return grayscaleBitmap;
+        }
+
+        public static Bitmap ConvertGrayscaleToRGB24(Bitmap bitmap)
+        {
+            if (bitmap == null)
+                return bitmap;
+            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+                return bitmap;
+            if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
+                return null;
+
+            Bitmap rgbBitmap = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
+
+            Rectangle rect = new Rectangle(0, 0, rgbBitmap.Width, rgbBitmap.Height);
+            BitmapData rgbData = rgbBitmap.LockBits(rect, ImageLockMode.WriteOnly, rgbBitmap.PixelFormat);
+            BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            unsafe
+            {
+                byte* rgbImageData = (byte*)rgbData.Scan0;
+                byte* originImageData = (byte*)bitmapData.Scan0;
+
+                int rgbStride = rgbData.Stride;
+                int originStride = bitmapData.Stride;
+
+                for (int y = 0; y < rgbBitmap.Height; y++)
+                {
+                    for (int x = 0; x < rgbBitmap.Width; x++)
+                    {
+                        byte grayscaleValue = (byte)originImageData[y * originStride + x];
+                        rgbImageData[y * rgbStride + x*3] = grayscaleValue;
+                        rgbImageData[y * rgbStride + x*3+1] = grayscaleValue;
+                        rgbImageData[y * rgbStride + x*3+2] = grayscaleValue;
+                    }
+                }
+            }
+
+            rgbBitmap.UnlockBits(rgbData);
+            bitmap.UnlockBits(bitmapData);
+
+            return rgbBitmap;
         }
     }
 }
