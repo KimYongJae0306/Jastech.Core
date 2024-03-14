@@ -13,6 +13,8 @@ namespace Jastech.Framework.Winform.Controls
 
         public int DefaultMaxAxisX { get; set; } = 100;
 
+        public int MinAxisY { get; set; } = 0;
+
         public int MaxAxisY { get; set; } = 255;
 
         public int NumAxisX { get; set; } = 4;
@@ -27,7 +29,9 @@ namespace Jastech.Framework.Winform.Controls
 
         public Pen GridPen { get; set; } = new Pen(Color.White);
 
-        public byte[] Data { get; set; } = null;
+        public Pen DataPen { get; set; } = new Pen(Color.Blue);
+
+        public int[] Data { get; set; } = null;
         #endregion
 
         #region 생성자
@@ -125,7 +129,9 @@ namespace Jastech.Framework.Winform.Controls
         {
             Rectangle roundRect = Rectangle.Round(_drawChartRect);
             float intervalY = _drawChartRect.Height / NumAxisY;
-            float intervalValue = ((float)MaxAxisY / NumAxisY);
+            int[] valueRange = MinAxisY >= 0 ?
+                Enumerable.Range(0, NumAxisY + 1).Select(value => value * byte.MaxValue / NumAxisY).ToArray() :
+                Enumerable.Range(-NumAxisY / 2, NumAxisY + 1).Select(value => value * byte.MaxValue / NumAxisY).ToArray();
 
             Font font = GetFontStyle(10, FontStyle.Bold);
             string axisXString = "[Value]";
@@ -145,7 +151,7 @@ namespace Jastech.Framework.Winform.Controls
 
                 g.DrawLine(dashPen, new Point(x1, y), new Point(x2, y));
 
-                int value = (int)(intervalValue * i);
+                int value = valueRange[i];
                 string valueString = value.ToString();
                 SizeF textSize = g.MeasureString(valueString, font);
                 g.DrawString(value.ToString(), font, Brushes.White, new PointF(x1 - textSize.Width, y - textSize.Height / 2));
@@ -162,17 +168,22 @@ namespace Jastech.Framework.Winform.Controls
 
             float intervalX = ((float)_drawChartRect.Width / Data.Length);
             float intervalY = ((float)_drawChartRect.Height / MaxAxisY);
+            float offsetY = 0;
+            if ( MinAxisY < 0)
+            {
+                intervalY /= 2;
+                offsetY = (float)_drawChartRect.Height / 2;
+            }
             List<PointF> points = new List<PointF>();
 
             for (int i = 0; i < Data.Length; i++)
             {
                 float x = _drawChartRect.Left + (intervalX * i);
-                float y = _drawChartRect.Bottom - (intervalY * Data[i]);
+                float y = _drawChartRect.Bottom - (intervalY * Data[i]) - offsetY;
 
                 points.Add(new PointF(x, y));
             }
-            Pen pen = new Pen(Color.Blue);
-            g.DrawLines(pen, points.ToArray());
+            g.DrawLines(DataPen, points.ToArray());
         }
 
         private Font GetFontStyle(int fontSize, FontStyle fontStyle)
@@ -184,7 +195,17 @@ namespace Jastech.Framework.Winform.Controls
 
         public void SetData(byte[] data)
         {
-            Data = data;
+            MinAxisY = byte.MinValue;
+            MaxAxisY = byte.MaxValue;
+            Data = data.Select(value => (int)value).ToArray();
+            pnlDrawChart.Refresh();
+        }
+
+        public void SetData(sbyte[] data)
+        {
+            MinAxisY = sbyte.MinValue;
+            MaxAxisY = sbyte.MaxValue;
+            Data = data.Select(value => (int)value).ToArray();
             pnlDrawChart.Refresh();
         }
 

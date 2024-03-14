@@ -27,24 +27,21 @@ namespace Jastech.Framework.Util.Helper
 
         public static Rectangle GetValidRectangle(Rectangle inputRect, int imageWidth, int imageHeight)
         {
-            Rectangle rectangle = new Rectangle();
+            Rectangle validRect = inputRect;
 
-            if (inputRect != null)
-            {
-                if (inputRect.X < 0)
-                    rectangle.X = 0;
+            if (validRect.X < 0)
+                validRect.X = 0;
 
-                if (inputRect.Y < 0)
-                    rectangle.Y = 0;
+            if (validRect.Y < 0)
+                validRect.Y = 0;
 
-                if (inputRect.Right > imageWidth)
-                    rectangle.Width = imageWidth - inputRect.X;
+            if (validRect.Right > imageWidth)
+                validRect.Width = imageWidth - validRect.X;
 
-                if (inputRect.Bottom > imageHeight)
-                    rectangle.Height = imageHeight - inputRect.Y;
-            }
+            if (validRect.Bottom > imageHeight)
+                validRect.Height = imageHeight - validRect.Y;
 
-            return rectangle;
+            return validRect;
         }
 
         public static Point RotateCW45(Point inputPoint)
