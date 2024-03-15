@@ -168,9 +168,9 @@ namespace Jastech.Framework.Util.Helper
             {
                 if (DateTime.Now - item.StartTime >= new TimeSpan(0, durationMinute, 0))
                     item.Kill();
-            }
 
-            System.Threading.Thread.Sleep(20);
+                System.Threading.Thread.Sleep(20);
+            }
         }
     }
 }
