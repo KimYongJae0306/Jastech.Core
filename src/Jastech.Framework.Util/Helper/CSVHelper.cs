@@ -272,9 +272,9 @@ namespace Jastech.Framework.Util.Helper
             {
                 if (item.MainWindowTitle.Contains(fileName))
                     item.Kill();
-            }
 
-            System.Threading.Thread.Sleep(20);
+                System.Threading.Thread.Sleep(20);
+            }
         }
         #endregion
     }
