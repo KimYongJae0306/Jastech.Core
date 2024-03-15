@@ -101,6 +101,11 @@ namespace Jastech.Framework.Winform.Controls
             ImagePreviewControlList.Clear();
             pnlPreview.Controls.Clear();
         }
+
+        public void SetInternalImage(Bitmap image)
+        {
+            DrawBoxControl.SetImage(image, true);
+        }
         #endregion
     }
 }

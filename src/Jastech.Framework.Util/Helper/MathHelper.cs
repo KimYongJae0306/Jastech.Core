@@ -146,11 +146,34 @@ namespace Jastech.Framework.Util.Helper
                 for (int index = 0; index < valueArray.Length; index++)
                 {
                     if (exceptFirstElement == true && index != 0)
-                        result[index] = (byte)(tempArray[index] - tempArray[index - 1]);
+                        result[index] = (byte)Math.Abs(tempArray[index - 1] - tempArray[index]);
                     else if (exceptFirstElement == false && index != valueArray.Length - 1)
-                        result[index] = (byte)(tempArray[index + 1] - tempArray[index]);
+                        result[index] = (byte)Math.Abs(tempArray[index + 1] - tempArray[index]);
                     else
                         result[index] = 0;
+                }
+            }
+
+            return result;
+        }
+
+        public static sbyte[] GetDerivedArray(sbyte[] valueArray, int order, int elementDistance = 0, bool unsigned = false, bool exceptFirstElement = false)
+        {
+            sbyte[] result = new sbyte[valueArray.Length];
+            for (int iter = 0; iter < order; iter++)
+            {
+                sbyte[] tempArray = (sbyte[])valueArray.Clone();
+                for (int index = elementDistance; index < valueArray.Length - elementDistance; index++)
+                {
+                    sbyte data;
+                    if (exceptFirstElement == true && index != 0)
+                        data = (sbyte)(tempArray[index] - tempArray[index - 1]);
+                    else if (exceptFirstElement == false && index != valueArray.Length - 1)
+                        data = (sbyte)(tempArray[index + 1] - tempArray[index]);
+                    else
+                        data = 0;
+
+                    result[index] = unsigned ? Math.Abs(data) : data;
                 }
             }
 
