@@ -58,23 +58,28 @@ namespace Jastech.Framework.Device.LightCtrls.Darea.Parser
 					ValidateRange(nameof(Value), Value, min: 0b000, max: 0b111);
 					data = Encoding.ASCII.GetBytes(GenerateCommandWithValue());
 					break;
+
 				case DareaSendCommand.CDW:
 					ValidateRange(nameof(Channel), Channel, min: 1, max: 3);
 					ValidateRange(nameof(Value), Value, min: byte.MinValue, max: byte.MaxValue);
 					data = Encoding.ASCII.GetBytes(GenerateCommandWithChannelAndValue());
 					break;
+
 				case DareaSendCommand.CDR:
 					ValidateRange(nameof(Channel), Channel, min: 1, max: 3);
 					data = Encoding.ASCII.GetBytes(GenerateCommandWithChannel());
 					break;
+
 				case DareaSendCommand.ADW:
 					ValidateRange(nameof(Value), Value, min: byte.MinValue, max: byte.MaxValue);
 					data = Encoding.ASCII.GetBytes(GenerateCommandWithValue());
 					break;
+
 				case DareaSendCommand.OSW:
 					ValidateOffsets();
 					data = Encoding.ASCII.GetBytes(GenerateCommandWithOffsets());
 					break;
+
 				case DareaSendCommand.RESET:
 				case DareaSendCommand.PWR:
 				case DareaSendCommand.OSR:
@@ -82,6 +87,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea.Parser
 				case DareaSendCommand.ALR:
 					data = Encoding.ASCII.GetBytes(GenerateCommonCommand());
 					break;
+
 				default:
 					throw new ArgumentException($"Invalid arguments on Darea3StageParser.Serialize(). Command : {Command}");
 			}
@@ -151,15 +157,20 @@ namespace Jastech.Framework.Device.LightCtrls.Darea.Parser
             if (value < min || value > max)
                 Console.WriteLine($"Invalid arguments on Darea3StageParser.Serialize(). {paramName} range ({min} ~ {max})");
         }
+
         private void ValidateOffsets()
         {
             if (Offsets.Length != 3)
                 Console.WriteLine("Invalid arguments on Darea3StageParser.Serialize(). Require offset values of all 3 channels");
         }
         private string GenerateCommonCommand() => $"[{Command}#";
+
         private string GenerateCommandWithValue() => $"[{Command},{Value}#";
+
         private string GenerateCommandWithChannel() => $"[{Command}{Channel}#";
+
         private string GenerateCommandWithChannelAndValue() => $"[{Command}{Channel},{Value}#";
+
         private string GenerateCommandWithOffsets() => $"]{Command},{Offsets[0]}{Offsets[1]}{Offsets[2]}#";
 
         //수신부

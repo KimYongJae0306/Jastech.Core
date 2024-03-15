@@ -161,5 +161,16 @@ namespace Jastech.Framework.Util.Helper
 
             return directoryList;
         }
+
+        public static void KillProcess(string processName, int durationMinute = 30)
+        {
+            foreach (var item in System.Diagnostics.Process.GetProcessesByName(processName))
+            {
+                if (DateTime.Now - item.StartTime >= new TimeSpan(0, durationMinute, 0))
+                    item.Kill();
+            }
+
+            System.Threading.Thread.Sleep(20);
+        }
     }
 }
