@@ -162,7 +162,7 @@ namespace Jastech.Framework.Util.Helper
             return directoryList;
         }
 
-        public static void KillProcess(string processName, int durationMinute = 30)
+        public static void KillViewerProcess(string processName, int durationMinute = 30)
         {
             foreach (var item in System.Diagnostics.Process.GetProcessesByName(processName))
             {
