@@ -300,17 +300,5 @@ namespace Jastech.Framework.Util.Helper
 
             return resultRect;
         }
-
-        public static Rectangle ExpandRetangle(Rectangle inputRect, int sizeX, int sizeY, int imageWidth, int imageHeight)
-        {
-            Rectangle outputRect = new Rectangle();
-
-            outputRect.X = inputRect.X - sizeX;
-            outputRect.Y = inputRect.Y - sizeY;
-            outputRect.Width = inputRect.Width + sizeX * 2;
-            outputRect.Height = inputRect.Height + sizeY * 2;
-
-            return GetValidRectangle(outputRect, imageWidth, imageHeight);
-        }
     }
 }
