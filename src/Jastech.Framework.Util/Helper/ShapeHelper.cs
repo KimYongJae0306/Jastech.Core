@@ -291,14 +291,135 @@ namespace Jastech.Framework.Util.Helper
             return resultPoint;
         }
 
-        public static Rectangle DetectEdge(byte[] imageData, int width, int height, Point startPos, int threshold1, int threshold2)
+        public static List<Point> GetPointListBetweenThresholdRange(byte[] imageData, int width, int height, Point startPoint, int lowThreshold, int highThreshold)
         {
-            Rectangle resultRect = new Rectangle();
+            List<Point> resultPointList = new List<Point>();
+            
+            for (int y = startPoint.Y; y < height; y++)
+            {
+                for (int x = startPoint.X; x < width; x++)
+                {
+                    int value = imageData[y * width + x];
 
-            Point StartVector = new Point(1, 0);
-            Point NextVector = new Point();
+                    if (value >= lowThreshold && value <= highThreshold)
+                        resultPointList.Add(new Point(x, y));
+                }
+            }
 
-            return resultRect;
+            return resultPointList;
+        }
+
+        public static Rectangle DetectEdge(byte[] imageData, int width, int height, Point startPos, int lowThreshold, int highThreshold)
+        {
+            Rectangle resultRect = new Rectangle(width, height, -width, -height);
+            int rotationCount = 0;
+
+            Point startVector = new Point(1, 0);
+            Point nextVector = RotateCCW90(startVector);
+            Point currentPoint = startPos;
+
+            while (true)
+            {
+                int x = startPos.X + nextVector.X;
+                int y = startPos.Y + nextVector.Y;
+
+                if (x < 0 || y < 0)
+                    return resultRect;
+
+                int value = imageData[y * width + x];
+
+                if (value >= lowThreshold && value <= highThreshold)
+                {
+                    currentPoint.X += nextVector.X;
+                    currentPoint.Y += nextVector.Y;
+
+                    if (currentPoint.X < resultRect.X)
+                    {
+                        resultRect.X = currentPoint.X;
+                        resultRect.Width = resultRect.Right - resultRect.X;
+                    }
+
+                    if (currentPoint.X > resultRect.Right)
+                        resultRect.Width = currentPoint.X - resultRect.X;
+
+                    if (currentPoint.Y < resultRect.Y)
+                    {
+                        resultRect.Y = currentPoint.Y;
+                        resultRect.Height = resultRect.Bottom - resultRect.Y;
+                    }
+
+                    if (currentPoint.Y > resultRect.Bottom)
+                        resultRect.Height = currentPoint.Y - resultRect.Y;
+
+                    if (currentPoint.X == startPos.X && currentPoint.Y == startPos.Y)
+                        return resultRect;
+
+                    nextVector = RotateCCW90(nextVector);
+                    rotationCount = 0;
+                }
+                else
+                {
+                    nextVector = RotateCW45(nextVector);
+                    rotationCount++;
+
+                    if (rotationCount >= 7)
+                    {
+                        imageData[currentPoint.Y * width + currentPoint.X] = 0;
+                        resultRect.X = currentPoint.X;
+                        resultRect.Y = currentPoint.Y;
+                        resultRect.Width = 0;
+                        resultRect.Height = 0;
+
+                        return resultRect;
+                    }
+                }
+            }
+        }
+
+        public static byte[] FillValueWithCount(byte[] imageData, int width, int height, int fillValue, int lowThreshold, int highThreshold, out int fillCount)
+        {
+            fillCount = 0;
+
+            byte[] returnData = new byte[width * height];
+
+            for (int vertical = 0; vertical < height; vertical++)
+            {
+                for (int horizontal = 0; horizontal < width; horizontal++)
+                {
+                    int value = imageData[vertical * width + horizontal];
+
+                    if (value >= lowThreshold && value <= highThreshold)
+                    {
+                        fillCount++;
+                        imageData[vertical * width + horizontal] = (byte)fillValue;
+                    }
+                }
+            }
+
+            return returnData;
+        }
+
+        public static byte[] FillValueWithCount(byte[] imageData, Rectangle inputRect, int fillValue, int lowThreshold, int highThreshold, out int fillCount)
+        {
+            fillCount = 0;
+
+            byte[] returnData = new byte[inputRect.Width * inputRect.Height];
+
+            for (int vertical = inputRect.Top; vertical < inputRect.Bottom; vertical++)
+            {
+                for (int horizontal = inputRect.Left; horizontal < inputRect.Right; horizontal++)
+                {
+                    int value = imageData[vertical * inputRect.Width + horizontal];
+
+                    if (value >= lowThreshold && value <= highThreshold)
+                    {
+                        fillCount++;
+                        imageData[vertical * inputRect.Width + horizontal] = (byte)fillValue;
+                    }
+                }
+            }
+
+            return returnData;
         }
     }
 }
