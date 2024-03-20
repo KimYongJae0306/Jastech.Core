@@ -95,7 +95,7 @@ namespace Jastech.Framework.Winform.Controls
 
                 Bitmap bmp = ImageInfo.OriginBitmap;
                 Rectangle rect = new Rectangle(0, 0, pbxDisplay.Width, pbxDisplay.Height);
-                g.DrawImage(bmp, rect);
+                //g.DrawImage(bmp, rect);
             }
         }
 
