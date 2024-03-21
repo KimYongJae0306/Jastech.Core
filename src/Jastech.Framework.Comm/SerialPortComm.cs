@@ -129,6 +129,9 @@ namespace Jastech.Framework.Comm
             if (Protocol == null)
                 return false;
 
+            if (data == null)
+                return false;
+
             SerialPort.Write(data, 0, data.Length);
             return true;
         }

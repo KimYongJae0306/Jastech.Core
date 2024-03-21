@@ -65,8 +65,8 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
             }
             else if (Parser is DareaSerialParser)
             {
-                string message = "AP11";
-                sendData = Encoding.UTF8.GetBytes(message);
+                for (int channel = 1; channel <= TotalChannelCount; channel++)
+                    TurnOn(channel);
             }
 
             return Communition.Send(sendData);
@@ -90,7 +90,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
                 message += "1";
                 sendData = Encoding.UTF8.GetBytes(message);
             }
-
+            
             return Communition.Send(sendData);
         }
 
@@ -104,8 +104,8 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
             }
             else if (Parser is DareaSerialParser)
             {
-                string message = "AP00";
-                sendData = Encoding.UTF8.GetBytes(message);
+                for (int channel = 1; channel <= TotalChannelCount; channel++)
+                    TurnOff(channel);
             }
 
             return Communition.Send(sendData);
@@ -136,7 +136,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
         public override bool TurnOn(LightValue lightValue)
         {
             bool result = true;
-            for (int channel = 0; channel < TotalChannelCount; channel++)
+            for (int channel = 1; channel <= TotalChannelCount; channel++)
             {
                 result |= TurnOn(channel, lightValue.Get(channel));
             }
@@ -149,6 +149,7 @@ namespace Jastech.Framework.Device.LightCtrls.Darea
             Parser.Value = level;
 
             Parser.Serialize(out byte[] serializedData);
+
             if (Protocol.GetType() == typeof(EmptyProtocol))
                 return Communition.Send(serializedData);
             else if (Protocol.MakePacket(serializedData, out byte[] sendData))

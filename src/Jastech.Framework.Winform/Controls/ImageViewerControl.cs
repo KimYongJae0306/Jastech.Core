@@ -105,6 +105,7 @@ namespace Jastech.Framework.Winform.Controls
         public void SetInternalImage(Bitmap image)
         {
             DrawBoxControl.SetImage(image, true);
+            DrawBoxControl.EnableBrush = true;
         }
         #endregion
     }
