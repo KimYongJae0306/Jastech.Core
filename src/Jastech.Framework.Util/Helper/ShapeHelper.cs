@@ -421,5 +421,16 @@ namespace Jastech.Framework.Util.Helper
 
             return returnData;
         }
+
+        public static byte[] FillValue(byte[] data, int dataWidth, Rectangle inputRect, int fillValue)
+        {
+            for (int h = inputRect.Top; h < inputRect.Bottom; h++)
+            {
+                for (int w = inputRect.Left; w < inputRect.Right; w++)
+                    data[h * dataWidth + w] = (byte)fillValue;
+            }
+
+            return data;
+        }
     }
 }
