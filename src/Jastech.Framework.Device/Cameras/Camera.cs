@@ -194,20 +194,20 @@ namespace Jastech.Framework.Device.Cameras
 
     public enum CameraType
     {
+        /// <summary>Maxrox CXP-4k Rapixo</summary>
         VT_4K5X_H200,
+        /// <summary>Maxrox CXP-6k Rapixo</summary>
         VT_6K3_5X_H160,
+        /// <summary>Teledyne Dalsa CameraLink-16K Linescan</summary>
+        LA_HM_16K07A_00_R,
+        /// <summary>Teledyne Dalsa CIS-800mm 900dpi LineScan</summary>
+        AX_FM_08B12H_00,
     }
 
     public enum TriggerMode
     {
         Software,
         Hardware,
-    }
-
-    public enum MilCxpTriggerSource
-    {
-        Lin0 = 0,
-        Cxp = 1,
     }
 
     public enum OperationMode

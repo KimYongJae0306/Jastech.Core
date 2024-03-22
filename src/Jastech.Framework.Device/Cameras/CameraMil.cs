@@ -507,12 +507,15 @@ namespace Jastech.Framework.Device.Cameras
 
     public partial class CameraMil : ICameraTDIavailable
     {
+        #region 속성
         public TDIOperationMode TDIOperationMode { get; set; }
 
         public TDIDirectionType TDIDirection { get; set; }
 
         public int TDIStages { get; set; }
+        #endregion
 
+        #region 메서드
         public void SetTDIScanDriection(TDIDirectionType direction)
         {
             StringBuilder valueString = new StringBuilder();
@@ -546,11 +549,18 @@ namespace Jastech.Framework.Device.Cameras
                     MIL.MdigControlFeature(DigitizerId, MIL.M_FEATURE_VALUE, "OperationMode", MIL.M_TYPE_STRING, "TDI");
             }
         }
+        #endregion
     }
 
     public enum MilTriggerSignalType
     {
         TL_Trigger,
+    }
+
+    public enum MilCxpTriggerSource
+    {
+        Lin0 = 0,
+        Cxp = 1,
     }
 
     public enum MILIoSourceType

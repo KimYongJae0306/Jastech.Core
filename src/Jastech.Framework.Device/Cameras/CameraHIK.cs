@@ -359,19 +359,10 @@ namespace Jastech.Framework.Device.Cameras
         }
         #endregion
     }
-    public enum HIKTriggerSourceType
-    {
-        MV_TRIGGER_SOURCE_LINE0 = 0,
-        MV_TRIGGER_SOURCE_LINE1 = 1,
-        MV_TRIGGER_SOURCE_LINE2 = 2,
-        MV_TRIGGER_SOURCE_LINE3 = 3,
-        MV_TRIGGER_SOURCE_COUNTER0 = 4,
-        MV_TRIGGER_SOURCE_SOFTWARE = 7,
-        MV_TRIGGER_SOURCE_FrequencyConverter = 8
-    }
 
     public partial class CameraHIK
     {
+        #region 메서드
         public bool FindDevice()
         {
             int result = MV_OK;
@@ -515,8 +506,6 @@ namespace Jastech.Framework.Device.Cameras
             return IntValueParam.nCurValue;
         }
 
-        #region 메서드
-
         private void ReConnectTry(int tryCount = 30, int sleepTime = 2000)
         {
             int result = MV_OK;
@@ -602,5 +591,15 @@ namespace Jastech.Framework.Device.Cameras
             return errorMessage;
         }
         #endregion
+    }
+    public enum HIKTriggerSourceType
+    {
+        MV_TRIGGER_SOURCE_LINE0 = 0,
+        MV_TRIGGER_SOURCE_LINE1 = 1,
+        MV_TRIGGER_SOURCE_LINE2 = 2,
+        MV_TRIGGER_SOURCE_LINE3 = 3,
+        MV_TRIGGER_SOURCE_COUNTER0 = 4,
+        MV_TRIGGER_SOURCE_SOFTWARE = 7,
+        MV_TRIGGER_SOURCE_FrequencyConverter = 8
     }
 }

@@ -72,6 +72,9 @@
     <Reference Include="ACS.SPiiPlusNET">
       <HintPath>..\..\..\Jastech.Library\ACS\ACS.SPiiPlusNET.dll</HintPath>
     </Reference>
+    <Reference Include="DALSA.SaperaLT.SapClassBasic">
+      <HintPath>..\..\..\Jastech.Library\TeledyneDalsa\Sapera\DALSA.SaperaLT.SapClassBasic.dll</HintPath>
+    </Reference>
     <Reference Include="Matrox.MatroxImagingLibrary">
       <HintPath>..\..\..\Jastech.Library\Matrox\Matrox.MatroxImagingLibrary.dll</HintPath>
     </Reference>

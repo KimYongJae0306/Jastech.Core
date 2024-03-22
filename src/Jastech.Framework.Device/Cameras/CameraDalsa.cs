@@ -6,11 +6,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DALSA.SaperaLT.SapClassBasic;
+using ACS.SPiiPlusNET;
+using System.Runtime.InteropServices;
+using Jastech.Framework.Imaging.Helper;
+using System.Drawing;
+using Emgu.CV.Reg;
+using System.IO;
 
 namespace Jastech.Framework.Device.Cameras
 {
     public partial class CameraDalsa : Camera, ICameraTriggerable
     {
+        #region 필드
+        private const int Timeout = 300;
+
+        private SapAcquisition _acquisition;
+
+        private SapAcqDevice _acquisitionDevice;
+
+        private SapBuffer _buffer;
+
+        private SapTransfer _transfer;
+
+        private byte[] LastImageData;
+        #endregion
+
+        #region 속성
+        [JsonProperty]
+        public string CameraServerName { get; set; }
+
+        [JsonProperty]
+        public CameraType CcfFile { get; set; }
+
+        [JsonProperty]
+        public int AcquisitionIndex { get; set; }
+
+        [JsonProperty]
+        public int DeviceIndex { get; set; }
+        #endregion
+
         #region 생성자
         public CameraDalsa(string name, int imageWidth, int imageHeight, ColorFormat colorFormat, SensorType sensorType) 
             : base(name, imageWidth, imageHeight, colorFormat, sensorType)
@@ -19,94 +54,234 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
 
         #region 메서드
+        public override bool Initialize()
+        {
+            SapLocation cameraLinkAcquisitionLocation = new SapLocation(CameraServerName, AcquisitionIndex);
+
+            _acquisition = new SapAcquisition(cameraLinkAcquisitionLocation, GetCcfFile(CcfFile));
+            _acquisition.EventType = SapAcquisition.AcqEventType.EndOfFrame;
+            if (CcfFile == CameraType.LA_HM_16K07A_00_R)
+                _acquisition.SetParameter(SapAcquisition.Prm.SYNC, SapAcquisition.Val.SYNC_COMP_SYNC, true);
+
+            SapLocation deviceLocation = new SapLocation(CameraServerName, DeviceIndex);
+            _acquisitionDevice = new SapAcqDevice(deviceLocation, false);
+
+            _buffer = new SapBuffer(1, _acquisition, SapBuffer.MemoryType.ScatterGather);
+            _buffer.Width = ImageWidth;
+            _buffer.Height = ImageHeight;
+            _buffer.PixelDepth = ImageChannel;
+            _buffer.Format = SapFormat.Mono8;
+
+            _transfer = new SapAcqToBuf(_acquisition, _buffer);
+            _transfer.XferNotify += TransferNotify;
+
+            LastImageData = new byte[ImageWidth * ImageHeight * ImageChannel];
+
+            bool createSuccess = _acquisition.Create() && _acquisitionDevice.Create() && _buffer.Create() && _transfer.Create();
+            return createSuccess;
+        }
+
+        private void TransferNotify(object sender, SapXferNotifyEventArgs e)       // TODO : 느리면 Unsafe 테스트
+        {
+            _buffer.GetAddress(out IntPtr rawImageAddress);
+            Marshal.Copy(rawImageAddress, LastImageData, 0, LastImageData.Length);
+        }
+
+        private void UnsafeTransferNotify(object sender, SapXferNotifyEventArgs e)
+        {
+            unsafe
+            {
+                _buffer.GetAddress(out IntPtr rawImageAddress);
+                byte* nativeAddress = (byte*)rawImageAddress.ToPointer();
+
+                fixed (byte* imageDataPtr = LastImageData)
+                {
+                    for (int index = 0; index < LastImageData.Length; index++)
+                        imageDataPtr[index] = nativeAddress[index];
+                }
+            }
+        }
+
+        public static string GetCcfFile(CameraType cameraType)
+        {
+            string filePath = "";
+
+            if (cameraType == CameraType.LA_HM_16K07A_00_R ||
+                cameraType == CameraType.AX_FM_08B12H_00)
+                filePath = Path.Combine(Environment.CurrentDirectory, $"{cameraType}.ccf");
+
+            if (File.Exists(filePath) == false)
+                return "";
+
+            return filePath;
+        }
+
+
         public override int GetAnalogGain()
         {
-            throw new NotImplementedException();
+            int featureValue = -1;
+            string featureName = "TODO";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.GetFeatureValue(featureName, out featureValue);
+            else
+                throw new Exception($"{featureName} is not exist.");
+            return featureValue;
         }
 
         public override double GetDigitalGain()
         {
-            throw new NotImplementedException();
+            double featureValue = -1;
+            string featureName = "Gain";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.GetFeatureValue(featureName, out featureValue);
+            else
+                throw new Exception($"{featureName} is not exist.");
+            return featureValue;
         }
 
         public override double GetExposureTime()
         {
-            throw new NotImplementedException();
-        }
+            double featureValue = -1;
+            string featureName = "ExposureTime";
 
-        public override byte[] GetGrabbedImage()
-        {
-            throw new NotImplementedException();
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.GetFeatureValue(featureName, out featureValue);
+            else
+                throw new Exception($"{featureName} is not exist.");
+            return featureValue;
         }
 
         public override int GetImageWidth()
         {
-            throw new NotImplementedException();
+            int featureValue = -1;
+            string featureName = "Width";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.GetFeatureValue(featureName, out featureValue);
+            else
+                throw new Exception($"{featureName} is not exist.");
+            return featureValue;
         }
 
         public override int GetOffsetX()
         {
-            throw new NotImplementedException();
+            int featureValue = -1;
+            string featureName = "TODO";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.GetFeatureValue(featureName, out featureValue);
+            else
+                throw new Exception($"{featureName} is not exist.");
+            return featureValue;
+        }
+
+        public override byte[] GetGrabbedImage()
+        {
+            return LastImageData;
         }
 
         public override void GrabContinous()
         {
-            throw new NotImplementedException();
+            if (_transfer.Grabbing == false)
+                _transfer.Grab();
         }
 
         public override void GrabMulti(int grabCount)
         {
-            throw new NotImplementedException();
+            Stop();
+            _transfer.Snap(grabCount);
         }
 
         public override void GrabOnce()
         {
-            throw new NotImplementedException();
+            Stop();
+            _transfer.Snap();
         }
 
         public override bool IsGrabbing()
         {
-            throw new NotImplementedException();
+            return _transfer.Grabbing;
         }
 
         public override void SetAnalogGain(int value)
         {
-            throw new NotImplementedException();
+            string featureName = "TODO";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void SetDigitalGain(double value)
         {
-            throw new NotImplementedException();
+            string featureName = "Gain";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void SetExposureTime(double value)
         {
-            throw new NotImplementedException();
-        }
+            string featureName = "ExposureTime";
 
-        public override void SetImageHeight(int value)
-        {
-            throw new NotImplementedException();
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void SetImageWidth(int value)
         {
-            throw new NotImplementedException();
+            string featureName = "Width";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
+        }
+
+        public override void SetImageHeight(int value)
+        {
+            string featureName = "Height";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void SetOffsetX(int value)
         {
-            throw new NotImplementedException();
+            string featureName = "TODO";
+
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, value);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void SetReverseX(bool reverse)
         {
-            throw new NotImplementedException();
+            string featureName = "ReverseX";
+            if (_acquisitionDevice.IsFeatureAvailable(featureName))
+                _acquisitionDevice.SetFeatureValue(featureName, reverse);
+            else
+                throw new Exception($"{featureName} is not exist.");
         }
 
         public override void Stop()
         {
-            throw new NotImplementedException();
+            if (_transfer.Grabbing)
+            {
+                _transfer.Freeze();
+                if (_transfer.Wait(Timeout) == false)
+                    _transfer.Abort();
+            }
         }
         #endregion
     }
@@ -130,7 +305,15 @@ namespace Jastech.Framework.Device.Cameras
         #region 메서드
         public void ActiveTriggerCommand()
         {
+            if (TriggerMode == TriggerMode.Software)
+                _acquisitionDevice.SetFeatureValue("TriggerMode", 0);
+            else
+            {
+                _acquisitionDevice.SetFeatureValue("TriggerMode", 1);
 
+                //DalsaTriggerSourceType source = (DalsaTriggerSourceType)TriggerSource;
+                _acquisitionDevice.SetFeatureValue("TriggerSource", TriggerSource);
+            }
         }
 
         public void SetTriggerMode(TriggerMode triggerMode)
@@ -169,13 +352,48 @@ namespace Jastech.Framework.Device.Cameras
         #endregion
     }
 
+    public partial class CameraDalsa : ICameraTDIavailable
+    {
+        #region 속성
+        public TDIOperationMode TDIOperationMode { get; set; }
+
+        public TDIDirectionType TDIDirection { get; set; }
+
+        public int TDIStages { get; set; }
+        #endregion
+
+        #region 메서드
+        public void SetTDIOperationMode(TDIOperationMode mode)
+        {
+            if (mode == TDIOperationMode.TDI)
+                _acquisitionDevice.SetFeatureValue("DeviceScanType", "LineScan");
+            else if (mode == TDIOperationMode.Area)
+                _acquisitionDevice.SetFeatureValue("DeviceScanType", "AreaScan");
+        }
+
+        public void SetTDIScanDriection(TDIDirectionType direction)
+        {
+            if (direction == TDIDirectionType.Forward || direction == TDIDirectionType.Reverse)
+                _acquisitionDevice.SetFeatureValue("sensorScanDirection", $"{direction}");
+        }
+        #endregion
+    }
+
     public enum DalsaTriggerSignalType
     {
+        // TODO : CamExpert에서 확인 후 필요 시 추가
         None,
+    }
+
+    public enum DalsaTriggerSourceType
+    {
+        // TODO : CamExpert에서 확인 후 필요 시 추가
+        CC1,
     }
 
     public enum DalsaIoSourceType
     {
+        // TODO : CamExpert에서 확인 후 필요 시 추가
         None,
     }
 }
