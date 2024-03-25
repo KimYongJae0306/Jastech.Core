@@ -99,6 +99,7 @@ namespace Jastech.Framework.Util.Helper
         {
             Point resultPoint = new Point();
 
+            
             if (inputPoint != null)
             {
                 if (inputPoint.X == -1 && inputPoint.Y == -1)
@@ -431,6 +432,148 @@ namespace Jastech.Framework.Util.Helper
             }
 
             return data;
+        }
+
+        public static int GetAverageLevel(byte[] imageData, int buffWidth, Rectangle rectangle)
+        {
+            List<int> datas = new List<int>();
+
+            for (int h = rectangle.Top; h < rectangle.Bottom; h++)
+            {
+                for (int w = rectangle.Left; w < rectangle.Right; w++)
+                    datas.Add(imageData[h * buffWidth + w]);
+            }
+
+            if (datas.Count <= 0)
+                return 0;
+
+            return (int)datas.Average();
+        }
+
+        public static int GetAverageLevel(byte[] imageData, int buffWidth, Rectangle rectangle, int samplingRate)
+        {
+            int stepX = rectangle.Width / samplingRate;
+            int stepY = rectangle.Height / samplingRate;
+
+            if (stepX < 1)
+                stepX = 1;
+
+            if (stepY < 1)
+                stepY = 1;
+
+            List<int> datas = new List<int>();
+
+            for (int h = rectangle.Top; h < rectangle.Bottom; h += stepY)
+            {
+                for (int w = rectangle.Left; w < rectangle.Right; w += stepX)
+                    datas.Add(imageData[h * buffWidth + w]);
+            }
+
+            if (datas.Count <= 0)
+                return 0;
+
+            return (int)datas.Average();
+        }
+
+        public static int GetAverageLevel(byte[] imageData, int buffWidth, int buffHeight, int samplingRate = 100)
+        {
+            int stepX = buffWidth / samplingRate;
+            int stepY = buffHeight / samplingRate;
+
+            if (stepX < 1)
+                stepX = 1;
+
+            if (stepY < 1)
+                stepY = 1;
+
+            List<int> datas = new List<int>();
+
+            for (int h = 0; h < buffHeight; h += stepY)
+            {
+                for (int w = 0; w < buffWidth; w += stepX)
+                    datas.Add(imageData[h * buffWidth + w]);
+            }
+
+            if (datas.Count <= 0)
+                return 0;
+
+            return (int)datas.Average();
+        }
+
+        public static double[] GetSmooth1D(double[] buffer, int bufferLength, int start, int end, int margin = 100)
+        {
+            int step = 2 * margin / 10;
+
+            if (step < 1)
+                step = 1;
+
+            double[] workBuff = new double[bufferLength];
+            double sum = 0;
+            int count = 0;
+
+            Array.Copy(buffer, 0, workBuff, 0, bufferLength);
+
+            for (int i = start; i < end; i++)
+            {
+                for (int j = -margin; j <= margin; j += step)
+                {
+                    int x = i + j;
+
+                    if (x >= bufferLength || x < 0)
+                        continue;
+
+                    sum += workBuff[x];
+                    count++;
+                }
+
+                if (count < 1)
+                    count = 1;
+
+                buffer[i] = sum / count;
+            }
+
+            return buffer;
+        }
+
+        public static byte[] Smooth1D_Median(byte[] buffer, int imageWidth, int start, int end, int margin, int sampling = 20)
+        {
+            byte[] originBuff = new byte[imageWidth];
+            byte[] marginBuff = new byte[margin];
+
+            int marginCenter = margin / 2;
+            int step = margin / sampling;
+
+            Array.Copy(buffer, originBuff, imageWidth);
+
+            for (int i = start; i < end; i++)
+            {
+                int x1 = i - marginCenter;
+                int x2 = x1 + margin;
+
+                if (x1 < start)
+                {
+                    x1 = start;
+                    x2 = x1 + margin;
+                }
+                else if (x2 > imageWidth)
+                {
+                    x1 = x2 - margin;
+                    x2 = end;
+                }
+
+                int count = 0;
+
+                for (int j = x1; j < x2; j += step)
+                {
+                    marginBuff[count] = originBuff[j];
+                    count++;
+                }
+
+                Array.Sort(marginBuff, 0, count);
+                buffer[i] = marginBuff[count / 2];
+            }
+
+            return buffer;
         }
     }
 }
