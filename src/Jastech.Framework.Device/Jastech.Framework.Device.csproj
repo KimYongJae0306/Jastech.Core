@@ -72,8 +72,9 @@
     <Reference Include="ACS.SPiiPlusNET">
       <HintPath>..\..\..\Jastech.Library\ACS\ACS.SPiiPlusNET.dll</HintPath>
     </Reference>
-    <Reference Include="DALSA.SaperaLT.SapClassBasic">
-      <HintPath>..\..\..\Jastech.Library\TeledyneDalsa\Sapera\DALSA.SaperaLT.SapClassBasic.dll</HintPath>
+    <Reference Include="DALSA.SaperaLT.SapClassBasic, Version=8.72.0.2243, Culture=neutral, PublicKeyToken=4d8604101dcb6b58, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Jastech.Library\Sapera\DALSA.SaperaLT.SapClassBasic.dll</HintPath>
     </Reference>
     <Reference Include="Matrox.MatroxImagingLibrary">
       <HintPath>..\..\..\Jastech.Library\Matrox\Matrox.MatroxImagingLibrary.dll</HintPath>
